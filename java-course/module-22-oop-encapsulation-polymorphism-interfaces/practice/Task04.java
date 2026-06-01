@@ -1,0 +1,36 @@
+/**
+ * Задача 04 — Модуль 22: Композиция (HAS-A)
+ *
+ * ЗАДАНИЕ:
+ *   Смоделируйте композицию: класс Car ВЛАДЕЕТ объектом Engine.
+ *   1. Класс Engine с методами start() и stop().
+ *   2. Класс Car создаёт Engine внутри себя (private final Engine).
+ *      Методы Car.start()/stop() делегируют вызовы двигателю и
+ *      добавляют своё сообщение.
+ *   3. В main создайте Car и заведите/заглушите её.
+ *
+ * ОЖИДАЕМЫЙ ВЫВОД (пример):
+ *   Двигатель запущен
+ *   Машина поехала
+ *   Двигатель заглушен
+ *   Машина остановилась
+ *
+ * ПОДСКАЗКА:
+ *   В композиции часть (Engine) создаётся самим целым (Car) и
+ *   не существует отдельно.
+ */
+public class Task04 {
+    public static void main(String[] args) {
+        // Создайте Car, вызовите start() и stop()
+    }
+}
+
+class Engine {
+    void start() { System.out.println("Двигатель запущен"); }
+    void stop()  { System.out.println("Двигатель заглушен"); }
+}
+
+class Car {
+    // TODO: private final Engine engine = new Engine();
+    //       методы start() и stop() с делегированием
+}
