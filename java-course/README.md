@@ -102,6 +102,8 @@ java Task01
 
 Курс расширяется продвинутыми темами вплоть до production-ready Spring Boot. Модули 29–53 — Core/БД/Hibernate. Модули **54–66 — углублённый Spring-трек с полноценной практикой** (теория + 7 задач каждый): инструменты сборки, HTTP, JSON, ручной HTTP-сервер, Spring Core и Spring Boot. Прежние theory-only заглушки 54–56 заменены этой детализированной дорожкой.
 
+> **Часть 3 (модули 67–92)** — углублённые Spring REST/MVC, Spring Data JPA и Hibernate Deep Dive. Полный план — в разделе ниже [«Часть 3»](#-часть-3-углублённый-spring--data--hibernate-модули-6792).
+
 > **Статус генерации** (обновляется по ходу): ⬜ — не начат, ⏳ — в работе, ✅ — готов.
 
 | #  | Модуль | Тип | Внешние зависимости | Статус |
@@ -141,9 +143,9 @@ java Task01
 | 61 | `module-61-spring-core-advanced` | практика | Spring Context | ✅ |
 | 62 | `module-62-spring-core-configuration` | практика | Spring Context | ✅ |
 | 63 | `module-63-spring-core-events-aop` | практика | Spring Context + AspectJ | ✅ |
-| 64 | `module-64-spring-boot-intro` | практика | Spring Boot Starter | ⬜ |
-| 65 | `module-65-spring-boot-web-config` | практика | Spring Boot Starter Web | ⬜ |
-| 66 | `module-66-spring-boot-devops` | практика | Spring Boot Actuator + Test | ⬜ |
+| 64 | `module-64-spring-boot-intro` | практика | Spring Boot Starter | ✅ |
+| 65 | `module-65-spring-boot-web-config` | практика | Spring Boot Starter Web | ✅ |
+| 66 | `module-66-spring-boot-devops` | практика | Spring Boot Actuator + Test | ✅ |
 
 **Порядок генерации (батчи по 5, с проверкой между ними):**
 Батч 7 → 29–33 · Батч 8 → 34–38 · Батч 9 → 39–43 (все теория) · Батч 10 → 44–48 · Батч 11 → 49–53 · Батч 12 → 54–58 · Батч 13 → 59–63 (Spring Core) · Батч 14 → 64–66 (Spring Boot).
@@ -156,15 +158,73 @@ java Task01
 
 ---
 
+## 🧩 Часть 3: углублённый Spring / Data / Hibernate (модули 67–92)
+
+Профессиональный блок, доводящий курс до уровня разработчика Spring Boot. Каждый модуль — **теория + 7 практических задач**. Практика развивает два сквозных проекта:
+
+- **Task Tracker API** — для REST-части (67–76): задачи, статусы, исполнители.
+- **shop-data-jpa** — для Data/Hibernate-части (77–92): товары, категории, заказы, клиенты.
+
+Технологии: REST-модули — `spring-boot-starter-web`, Jackson, Bean Validation; Data/Hibernate — `spring-boot-starter-data-jpa`, **H2** (in-memory), Flyway, опционально Testcontainers. Конкретные зависимости указаны в шапке каждой задачи. Bare-`javac` для Spring/JPA-задач НЕ компилируется (deps на classpath нет) — это ожидаемо; запуск в IDE/Gradle.
+
+> **Статус генерации:** ⬜ — не начат, ⏳ — в работе, ✅ — готов.
+
+### Spring REST & MVC (67–76)
+
+| #  | Модуль | Тема | Статус |
+|----|--------|------|--------|
+| 67 | `module-67-spring-rest-http-backend` | HTTP глазами backend-разработчика | ✅ |
+| 68 | `module-68-spring-rest-design` | REST как стиль проектирования API: URI, ресурсы, методы | ✅ |
+| 69 | `module-69-spring-rest-controllers` | Spring MVC: обработка запроса, источники данных, конвертация тела | ✅ |
+| 70 | `module-70-spring-rest-dto-json` | DTO, Jackson, JSON, generics, форма ответа | ✅ |
+| 71 | `module-71-spring-rest-validation` | Bean Validation, кастомная валидация, ответ об ошибке | ✅ |
+| 72 | `module-72-spring-rest-error-handling` | ProblemDetail (RFC 7807), `@ControllerAdvice`, единый контракт ошибок | ✅ |
+| 73 | `module-73-spring-rest-collections` | Коллекции, пагинация, сортировка, фильтрация | ✅ |
+| 74 | `module-74-spring-rest-crud-file` | CRUD и не-CRUD операции, загрузка/выгрузка файлов | ✅ |
+| 75 | `module-75-spring-rest-config-openapi` | Конфигурация, эволюция/версионирование API, OpenAPI/Swagger | ✅ |
+| 76 | `module-76-spring-rest-testing` | `@WebMvcTest`, MockMvc, интеграционное тестирование | ✅ |
+
+### Spring Data JPA (77–84)
+
+| #  | Модуль | Тема | Статус |
+|----|--------|------|--------|
+| 77 | `module-77-spring-data-jpa-intro` | Слой persistence: JDBC → JPA → Hibernate → Spring Data JPA | ✅ |
+| 78 | `module-78-spring-data-jpa-entity` | Entity, ключи, маппинг полей, `@Embeddable` | ✅ |
+| 79 | `module-79-spring-data-jpa-repository` | Repository, derived queries, `Page`/`Slice` | ✅ |
+| 80 | `module-80-spring-data-jpa-advanced` | JPQL, `@Query`, проекции, native queries, Specification | ✅ |
+| 81 | `module-81-spring-data-jpa-transactions` | `@Transactional`, propagation, isolation, persistence context | ✅ |
+| 82 | `module-82-spring-data-jpa-lazy-loading` | Lazy loading, N+1, `JOIN FETCH`, `EntityGraph` | ⬜ |
+| 83 | `module-83-spring-data-jpa-testing` | `@DataJpaTest`, H2, обзор Testcontainers | ⬜ |
+| 84 | `module-84-spring-data-jpa-migrations` | Flyway, оптимистичная блокировка, аудит | ⬜ |
+
+### Hibernate Deep Dive (85–92)
+
+| #  | Модуль | Тема | Статус |
+|----|--------|------|--------|
+| 85 | `module-85-hibernate-deep-dive-lifecycle` | Жизненный цикл, dirty checking, flush, detached | ⬜ |
+| 86 | `module-86-hibernate-deep-dive-fetching` | Lazy loading, N+1, `JOIN FETCH`, `EntityGraph`, проекции | ⬜ |
+| 87 | `module-87-hibernate-deep-dive-querying` | HQL, Criteria API, native SQL, owning side, каскады | ⬜ |
+| 88 | `module-88-hibernate-deep-dive-modeling` | `equals`/`hashCode`, Embeddables, value objects, идентификаторы | ⬜ |
+| 89 | `module-89-hibernate-deep-dive-inheritance` | Наследование, `@DynamicUpdate`, ограничения схемы, транзакции | ⬜ |
+| 90 | `module-90-hibernate-deep-dive-locking` | Оптимистичная/пессимистичная блокировка, soft delete, Envers | ⬜ |
+| 91 | `module-91-hibernate-deep-dive-performance` | JDBC batching, bulk operations, read-only, кэширование | ⬜ |
+| 92 | `module-92-hibernate-deep-dive-diagnostics` | SQL-диагностика, анти-паттерны, тестирование, финальный аудит | ⬜ |
+
+**Порядок генерации (батчи, с проверкой и вопросом пользователю между ними):**
+Батч 15 → 67–71 · Батч 16 → 72–76 · Батч 17 → 77–81 · Батч 18 → 82–84 · Батч 19 → 85–89 · Батч 20 → 90–92.
+
+---
+
 ## 📐 Руководство по созданию модулей (для продолжения генерации)
 
 > Этот раздел — инструкция для будущих сессий. Курс расширяется и дальше (план — 120+ модулей). Соблюдайте принципы ниже, чтобы новые модули были единообразны.
 
-### 🔖 ТОЧКА ВОЗОБНОВЛЕНИЯ (пауза 2026-06-02)
+### 🔖 ТОЧКА ВОЗОБНОВЛЕНИЯ (обновлено 2026-06-02)
 
-**Сделано:** модули **01–63** (61 практический + теория-онли). Трек 54–66: ✅ 54–63 готовы.
-**Следующий шаг — Батч 14 (модули 64–66, Spring Boot)** — единственное, что осталось по текущему ТЗ. Детали ниже.
-**Правило процесса:** перед запуском батча СПРОСИТЬ у пользователя разрешение (он следит за токенами) — затем генерировать 3 модуля параллельными агентами (по образцу батчей 12–13), проверить структуру, обновить статусы здесь и в памяти.
+**Сделано:** модули **01–81** (трек 54–66 закрыт; Часть 3: ✅ 67–76 REST, ✅ 77–81 Spring Data JPA ч.1).
+**Идёт Часть 3 (67–92):** Spring REST/MVC ✅ + Spring Data JPA (77–84, осталось 82–84) + Hibernate Deep Dive (85–92). План и статусы — в разделе [«Часть 3»](#-часть-3-углублённый-spring--data--hibernate-модули-6792) выше.
+**Следующий шаг — Батч 18 (модули 82–84, Spring Data JPA часть 2: lazy-loading, testing, migrations).** Затем 19→85–89, 20→90–92. Сквозной проект Data-части — `shop-data-jpa` (H2).
+**Правило процесса:** перед запуском батча СПРОСИТЬ у пользователя разрешение (он следит за токенами) — затем генерировать модули (по 5, либо 3 в коротких батчах), проверить структуру, обновить статусы здесь и в памяти. Сквозные проекты: Task Tracker API (REST), shop-data-jpa (Data/Hibernate).
 
 ### Что осталось доделать (на момент паузы)
 - ✅ **Батч 11 (49–53)** — JDBC + Hibernate. JDBC (49–50) проверены компиляцией; Hibernate (51–53) — реалистичные шаблоны с deps.
