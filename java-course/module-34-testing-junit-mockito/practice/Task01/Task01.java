@@ -15,6 +15,7 @@
  *   UserRepository repo = mock(UserRepository.class);
  *   when(repo.findName(1)).thenReturn("Иван");
  */
+
 import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.*;
@@ -25,15 +26,4 @@ public class Task01 {
     void testGreet() {
         // Создайте мок, настройте when/thenReturn, проверьте результат
     }
-}
-
-// Классы под тестом (готовы)
-interface UserRepository {
-    String findName(long id);
-}
-
-class UserService {
-    private final UserRepository repo;
-    UserService(UserRepository repo) { this.repo = repo; }
-    String greet(long id) { return "Привет, " + repo.findName(id); }
 }

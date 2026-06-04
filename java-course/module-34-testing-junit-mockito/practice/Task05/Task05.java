@@ -15,6 +15,7 @@
  *   LogEntry saved = captor.getValue();
  *   assertEquals("admin", saved.user);
  */
+
 import org.junit.jupiter.api.Test;
 import org.mockito.ArgumentCaptor;
 import static org.junit.jupiter.api.Assertions.*;
@@ -25,22 +26,5 @@ public class Task05 {
     @Test
     void testAuditCapturesLogEntry() {
         // Перехватите аргумент save через ArgumentCaptor и проверьте поля
-    }
-}
-
-// Классы под тестом (готовы)
-class LogEntry {
-    String user;
-    String message;
-    LogEntry(String user, String message) { this.user = user; this.message = message; }
-}
-
-interface LogRepository { void save(LogEntry entry); }
-
-class AuditService {
-    private final LogRepository repo;
-    AuditService(LogRepository repo) { this.repo = repo; }
-    void action(String user) {
-        repo.save(new LogEntry(user, "Выполнено действие пользователем " + user));
     }
 }

@@ -18,6 +18,7 @@
  *       LoggerFactory.getLogger(ИмяКласса.class);
  *   В паттерне logback %logger покажет источник.
  */
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -25,12 +26,4 @@ public class Task05 {
     public static void main(String[] args) {
         // Вызовите методы PaymentService и InventoryService
     }
-}
-
-class PaymentService {
-    // TODO: свой логгер + метод pay(double amount) с логированием
-}
-
-class InventoryService {
-    // TODO: свой логгер + метод reduce(String product) с логированием
 }

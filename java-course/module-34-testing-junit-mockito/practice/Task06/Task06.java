@@ -21,6 +21,7 @@
  *       assertEquals(expected, service.finalPrice(1, percent), 0.001);
  *   }
  */
+
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
 import static org.junit.jupiter.api.Assertions.*;
@@ -30,16 +31,4 @@ public class Task06 {
 
     // TODO: параметризованный тест с моком priceRepository
 
-}
-
-// Классы под тестом (готовы)
-interface PriceRepository { double getPrice(long productId); }
-
-class DiscountService {
-    private final PriceRepository repo;
-    DiscountService(PriceRepository repo) { this.repo = repo; }
-    double finalPrice(long productId, int discountPercent) {
-        double base = repo.getPrice(productId);
-        return base * (1 - discountPercent / 100.0);
-    }
 }

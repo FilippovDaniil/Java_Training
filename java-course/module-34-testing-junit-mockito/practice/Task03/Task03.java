@@ -16,6 +16,7 @@
  *   @ExtendWith(MockitoExtension.class)
  *   public class Task03 { @Mock PaymentGateway g; @InjectMocks OrderService s; ... }
  */
+
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
@@ -24,7 +25,6 @@ import org.mockito.junit.jupiter.MockitoExtension;
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.*;
 
-@ExtendWith(MockitoExtension.class)
 public class Task03 {
 
     @Mock PaymentGateway gateway;
@@ -36,13 +36,4 @@ public class Task03 {
     }
 
     // TODO: тест на неуспешную оплату
-}
-
-// Классы под тестом (готовы)
-interface PaymentGateway { boolean charge(double amount); }
-
-class OrderService {
-    private final PaymentGateway gateway;
-    OrderService(PaymentGateway gateway) { this.gateway = gateway; }
-    boolean placeOrder(double amount) { return gateway.charge(amount); }
 }

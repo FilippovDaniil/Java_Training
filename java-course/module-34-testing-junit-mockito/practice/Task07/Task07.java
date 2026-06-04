@@ -25,6 +25,7 @@
  *   Комбинируйте when/thenReturn (задать сценарий), verify/never
  *   (проверить взаимодействия) и ArgumentCaptor (проверить аргументы).
  */
+
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.ArgumentCaptor;
@@ -34,7 +35,6 @@ import org.mockito.junit.jupiter.MockitoExtension;
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.*;
 
-@ExtendWith(MockitoExtension.class)
 public class Task07 {
 
     @Mock Inventory inventory;
@@ -45,36 +45,4 @@ public class Task07 {
 
     // TODO: напишите тесты для всех сценариев из задания
 
-}
-
-// Классы под тестом (готовы)
-interface Inventory {
-    boolean inStock(String product);
-    void reduce(String product);
-}
-interface PaymentGateway { boolean charge(double amount); }
-interface Notifier { void notify(String message); }
-
-class OrderService {
-    private final Inventory inventory;
-    private final PaymentGateway gateway;
-    private final Notifier notifier;
-
-    OrderService(Inventory inventory, PaymentGateway gateway, Notifier notifier) {
-        this.inventory = inventory;
-        this.gateway = gateway;
-        this.notifier = notifier;
-    }
-
-    boolean order(String product, double price) {
-        if (!inventory.inStock(product)) {
-            return false;
-        }
-        if (!gateway.charge(price)) {
-            return false;
-        }
-        inventory.reduce(product);
-        notifier.notify("Заказ оформлен: " + product);
-        return true;
-    }
 }

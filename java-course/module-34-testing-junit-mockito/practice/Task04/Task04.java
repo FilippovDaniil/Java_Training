@@ -15,6 +15,7 @@
  *   assertEquals("", loader.loadSafe());
  *   when(api.fetch()).thenReturn("данные"); — для счастливого пути.
  */
+
 import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.*;
@@ -27,19 +28,4 @@ public class Task04 {
     }
 
     // TODO: тест счастливого пути (thenReturn)
-}
-
-// Классы под тестом (готовы)
-interface RemoteApi { String fetch(); }
-
-class DataLoader {
-    private final RemoteApi api;
-    DataLoader(RemoteApi api) { this.api = api; }
-    String loadSafe() {
-        try {
-            return api.fetch();
-        } catch (RuntimeException e) {
-            return "";
-        }
-    }
 }
