@@ -1,0 +1,31 @@
+/**
+ * Задача 04 — Модуль 101: AssertJ — текучие проверки
+ *
+ * ТРЕБУЮТСЯ ЗАВИСИМОСТИ: spring-boot-starter-test (AssertJ).
+ *
+ * Это ТЕСТ-КЛАСС (без main). Запуск в IDE (▶) или ./gradlew test.
+ *
+ * ЗАДАНИЕ:
+ *   Используя AssertJ (assertThat(...)), напишите проверки над задачами (Task04 готов):
+ *     1) title_chain(): assertThat("Кофе").isNotNull().startsWith("Ко").hasSize(4).
+ *     2) list_contents(): для List.of(a,b,c) — assertThat(list).hasSize(3)
+ *          .contains(b).containsExactly(a,b,c).
+ *     3) extracting_titles(): assertThat(tasks).extracting("title")
+ *          .containsExactly("Кофе","Чай").
+ *     4) throws_assertj(): assertThatThrownBy(() -> { throw new IllegalStateException("done"); })
+ *          .isInstanceOf(IllegalStateException.class).hasMessageContaining("done").
+ *   Статические импорты AssertJ добавлены.
+ *
+ * ЦЕЛЬ: освоить читаемые цепочки AssertJ — основной стиль проверок в курсе.
+ *
+ * ВАЖНО: импорт именно org.assertj.core.api.Assertions.* (не Hamcrest!).
+ *
+ * ПОДСКАЗКА: extracting("title") достаёт поле из каждого элемента коллекции.
+ */
+
+import org.junit.jupiter.api.Test;
+import java.util.List;
+import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThatThrownBy;
+
+record Task04(Long id, String title) {}
