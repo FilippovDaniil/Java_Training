@@ -17,14 +17,11 @@
  * ПОДСКАЗКА:
  *   В case пишите имя без префикса: case RED:
  */
+
 public class Task02 {
     public static void main(String[] args) {
         // Вызовите action для RED, YELLOW, GREEN
     }
 
     // TODO: метод action(TrafficLight light)
-}
-
-enum TrafficLight {
-    RED, YELLOW, GREEN
 }

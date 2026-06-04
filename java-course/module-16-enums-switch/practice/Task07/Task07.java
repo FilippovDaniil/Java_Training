@@ -25,14 +25,11 @@
  *   Используйте switch по статусу в методе next().
  *   Для canCancel можно использовать ||: current == NEW || current == PAID.
  */
+
 public class Task07 {
     public static void main(String[] args) {
         // Проведите заказ по стадиям и проверьте возможность отмены
     }
 
     // TODO: методы next(OrderStatus) и canCancel(OrderStatus)
-}
-
-enum OrderStatus {
-    NEW, PAID, SHIPPED, DELIVERED, CANCELLED
 }

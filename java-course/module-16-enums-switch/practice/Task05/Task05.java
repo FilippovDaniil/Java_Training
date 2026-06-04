@@ -16,6 +16,7 @@
  *   Level.valueOf(s) бросает IllegalArgumentException при отсутствии.
  *   Оберните вызов в try-catch (исключения — тема модуля 17).
  */
+
 import java.util.Scanner;
 
 public class Task05 {
@@ -26,8 +27,4 @@ public class Task05 {
 
         scanner.close();
     }
-}
-
-enum Level {
-    LOW, MEDIUM, HIGH
 }

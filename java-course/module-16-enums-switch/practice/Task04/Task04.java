@@ -17,14 +17,9 @@
  *   int apply(int a, int b) { switch(this) { case PLUS: return a+b; ... } }
  *   Внутри метода enum доступно ключевое слово this — текущая константа.
  */
+
 public class Task04 {
     public static void main(String[] args) {
         // Примените каждую операцию к 12 и 4
     }
-}
-
-enum Operation {
-    PLUS, MINUS, MULTIPLY, DIVIDE;
-
-    // TODO: метод int apply(int a, int b)
 }

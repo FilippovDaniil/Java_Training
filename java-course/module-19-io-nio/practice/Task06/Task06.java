@@ -18,15 +18,10 @@
  *   Coffee c = new SugarDecorator(new MilkDecorator(new SimpleCoffee()));
  *   Декоратор хранит ссылку на оборачиваемый Coffee и делегирует ему вызов.
  */
+
+// TODO: SimpleCoffee, MilkDecorator, SugarDecorator
 public class Task06 {
     public static void main(String[] args) {
         // Соберите кофе из декораторов и выведите описание + стоимость
     }
 }
-
-interface Coffee {
-    String description();
-    double cost();
-}
-
-// TODO: SimpleCoffee, MilkDecorator, SugarDecorator

@@ -20,20 +20,9 @@
  *   enum Coin { PENNY(1), ...; private final int value;
  *               Coin(int value){this.value=value;} int getValue(){...} }
  */
+
 public class Task03 {
     public static void main(String[] args) {
         // Переберите Coin.values(), выведите номиналы и сумму
     }
-}
-
-enum Coin {
-    PENNY(1), NICKEL(5), DIME(10), QUARTER(25);
-
-    private final int value;
-
-    Coin(int value) {
-        this.value = value;
-    }
-
-    // TODO: геттер getValue()
 }

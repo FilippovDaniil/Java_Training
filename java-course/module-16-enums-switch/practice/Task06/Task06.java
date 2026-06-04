@@ -19,16 +19,9 @@
  *   enum Logger { INSTANCE; private int count; public void log(String m){...} }
  *   Это потокобезопасный Singleton, гарантированный JVM.
  */
+
 public class Task06 {
     public static void main(String[] args) {
         // Вызовите Logger.INSTANCE.log(...) несколько раз
     }
-}
-
-enum Logger {
-    INSTANCE;
-
-    private int count = 0;
-
-    // TODO: метод log(String message)
 }
