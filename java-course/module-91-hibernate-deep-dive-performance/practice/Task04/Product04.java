@@ -9,6 +9,7 @@ class Product04 {
     private int price;
     protected Product04() {}
     public Product04(String name, int price) { this.name = name; this.price = price; }
+    public Long getId() { return id; }
     public int getPrice() { return price; }
     public void setPrice(int price) { this.price = price; }
 }
