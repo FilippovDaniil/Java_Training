@@ -16,17 +16,10 @@
  *   Обращение к методу через null приводит к NullPointerException.
  *   Защита: if (student != null) { ... }
  */
+
 public class Task03 {
     public static void main(String[] args) {
         Student student = null;
         // Ваш код здесь
-    }
-}
-
-class Student {
-    String name;
-
-    void printInfo() {
-        System.out.println("Студент: " + name);
     }
 }

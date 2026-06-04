@@ -13,16 +13,9 @@
  * ПОДСКАЗКА:
  *   Внутри метода обращайтесь к полю brand напрямую (или через this.brand).
  */
+
 public class Task02 {
     public static void main(String[] args) {
         // Создайте объекты Car и вызовите start()
-    }
-}
-
-class Car {
-    String brand;
-
-    void start() {
-        // TODO: выведите сообщение о запуске
     }
 }

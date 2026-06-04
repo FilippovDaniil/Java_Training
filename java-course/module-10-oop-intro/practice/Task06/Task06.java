@@ -17,20 +17,9 @@
  *   Shape[] shapes = { new Circle(), new Square() };
  *   Это первый шаг к полиморфизму (подробнее — модуль 22).
  */
+
 public class Task06 {
     public static void main(String[] args) {
         // Создайте массив Shape с разными фигурами и выведите их имена
     }
-}
-
-class Shape {
-    String name;
-}
-
-class Circle /* extends Shape */ {
-    // TODO: наследовать Shape, добавить поле radius
-}
-
-class Square /* extends Shape */ {
-    // TODO: наследовать Shape, добавить поле side
 }

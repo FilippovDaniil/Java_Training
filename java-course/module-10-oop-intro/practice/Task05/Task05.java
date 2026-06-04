@@ -19,24 +19,9 @@
  *   class Dog extends Animal { ... } — потомок получает поле name
  *   и метод eat() автоматически.
  */
+
 public class Task05 {
     public static void main(String[] args) {
         // Создайте Dog и Cat, задайте имена, вызовите методы
     }
-}
-
-class Animal {
-    String name;
-
-    void eat() {
-        System.out.println(name + " ест");
-    }
-}
-
-class Dog /* extends Animal */ {
-    // TODO: наследовать Animal и добавить метод bark()
-}
-
-class Cat /* extends Animal */ {
-    // TODO: наследовать Animal и добавить метод meow()
 }

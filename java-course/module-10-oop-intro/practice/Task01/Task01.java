@@ -11,13 +11,9 @@
  * ПОДСКАЗКА:
  *   Book b = new Book(); b.title = "..."; обращение к полю через точку.
  */
+
 public class Task01 {
     public static void main(String[] args) {
         // Создайте объект Book, заполните поля и выведите их
     }
-}
-
-class Book {
-    String title;
-    int pages;
 }

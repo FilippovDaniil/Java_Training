@@ -17,13 +17,9 @@
  *   Массив объектов изначально содержит null — не забудьте создать
  *   каждый объект через new.
  */
+
 public class Task04 {
     public static void main(String[] args) {
         // Создайте и заполните массив Product, выведите товары и сумму
     }
-}
-
-class Product {
-    String name;
-    double price;
 }

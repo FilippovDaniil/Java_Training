@@ -29,23 +29,10 @@
  *   Объект потомка можно хранить в переменной/массиве типа Animal.
  *   Поля name и age наследуются всеми потомками.
  */
+
+// TODO: объявите классы Lion, Elephant, Monkey, наследующие Animal
 public class Task07 {
     public static void main(String[] args) {
         // Создайте массив Animal[] и обработайте его
     }
 }
-
-class Animal {
-    String name;
-    int age;
-
-    void describe() {
-        System.out.println(name + ", возраст " + age);
-    }
-
-    void makeSound() {
-        System.out.println(name + " издаёт звук");
-    }
-}
-
-// TODO: объявите классы Lion, Elephant, Monkey, наследующие Animal
