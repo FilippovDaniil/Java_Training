@@ -16,15 +16,9 @@
  * ПОДСКАЗКА:
  *   Вызов this(...) должен быть ПЕРВОЙ строкой конструктора.
  */
+
 public class Task02 {
     public static void main(String[] args) {
         // Создайте Rectangle(3,4) и Rectangle(5), выведите площади
     }
-}
-
-class Rectangle {
-    int width;
-    int height;
-
-    // TODO: два конструктора и метод area()
 }

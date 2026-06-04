@@ -24,6 +24,7 @@
  *   - перед обращением к list.get(index) проверяйте границы;
  *   - помните о «ловушке» nextInt()/nextLine() (см. модуль 03).
  */
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
@@ -35,15 +36,5 @@ public class Task07 {
         // Ваш код здесь (меню в цикле)
 
         scanner.close();
-    }
-}
-
-class TodoItem {
-    String title;
-    boolean done;
-
-    TodoItem(String title) {
-        this.title = title;
-        this.done = false;
     }
 }

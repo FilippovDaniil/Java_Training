@@ -17,22 +17,11 @@
  *   Используйте java.util.Objects: Objects.hash(title, year)
  *   и title.equals(other.title). == сравнивает ссылки.
  */
+
 import java.util.Objects;
 
 public class Task05 {
     public static void main(String[] args) {
         // Создайте книги и сравните их
     }
-}
-
-class Book {
-    String title;
-    int year;
-
-    Book(String title, int year) {
-        this.title = title;
-        this.year = year;
-    }
-
-    // TODO: переопределите equals() и hashCode()
 }

@@ -18,15 +18,9 @@
  * ПОДСКАЗКА:
  *   totalGames — static (общее), score — обычное (своё у каждого объекта).
  */
+
 public class Task04 {
     public static void main(String[] args) {
         // Создайте 2 игры, добавьте очки, выведите счёт и Game.totalGames
     }
-}
-
-class Game {
-    static int totalGames = 0;
-    int score = 0;
-
-    // TODO: конструктор (totalGames++) и метод addPoints(int p)
 }

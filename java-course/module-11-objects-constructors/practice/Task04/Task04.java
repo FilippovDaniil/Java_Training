@@ -13,22 +13,9 @@
  *   @Override public String toString() { return "..."; }
  *   println автоматически вызывает toString().
  */
+
 public class Task04 {
     public static void main(String[] args) {
         // Создайте Movie и выведите его
     }
-}
-
-class Movie {
-    String title;
-    String director;
-    int year;
-
-    Movie(String title, String director, int year) {
-        this.title = title;
-        this.director = director;
-        this.year = year;
-    }
-
-    // TODO: переопределите toString()
 }

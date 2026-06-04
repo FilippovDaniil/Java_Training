@@ -27,12 +27,9 @@
  *   Баланс нельзя менять напрямую — только через deposit/withdraw.
  *   В этом и смысл инкапсуляции: класс сам следит за корректностью.
  */
+
 public class Task07 {
     public static void main(String[] args) {
         // Создайте BankAccount и продемонстрируйте операции
     }
-}
-
-class BankAccount {
-    // TODO: private поля, конструктор, геттеры, deposit, withdraw, toString
 }

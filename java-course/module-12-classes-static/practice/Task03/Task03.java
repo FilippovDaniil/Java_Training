@@ -16,13 +16,10 @@
  *   static final double GRAVITY = 9.81;
  *   Имена констант — БОЛЬШИМИ_БУКВАМИ.
  */
+
 public class Task03 {
     public static void main(String[] args) {
         int t = 3;
         // Используйте константы Physics для расчётов
     }
-}
-
-class Physics {
-    // TODO: static final константы SPEED_OF_LIGHT и GRAVITY
 }

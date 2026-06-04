@@ -16,12 +16,9 @@
  * ПОДСКАЗКА:
  *   Вызов: MathUtils.max(3, 9) — без new.
  */
+
 public class Task02 {
     public static void main(String[] args) {
         // Вызовите статические методы MathUtils
     }
-}
-
-class MathUtils {
-    // TODO: статические методы max, min, isEven
 }

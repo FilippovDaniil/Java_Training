@@ -13,15 +13,9 @@
  * ПОДСКАЗКА:
  *   Point(int x, int y) { this.x = x; this.y = y; }
  */
+
 public class Task01 {
     public static void main(String[] args) {
         // Создайте объекты Point через конструктор и выведите их
     }
-}
-
-class Point {
-    int x;
-    int y;
-
-    // TODO: добавьте конструктор Point(int x, int y)
 }

@@ -15,15 +15,9 @@
  * ПОДСКАЗКА:
  *   private int age; public int getAge() {...} public void setAge(int age){...}
  */
+
 public class Task03 {
     public static void main(String[] args) {
         // Создайте Person, попробуйте задать корректный и некорректный возраст
     }
-}
-
-class Person {
-    private String name;
-    private int age;
-
-    // TODO: геттеры/сеттеры; в setAge — валидация 0..120
 }

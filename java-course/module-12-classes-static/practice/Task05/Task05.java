@@ -19,14 +19,9 @@
  * ПОДСКАЗКА:
  *   static { ... } — статический блок; { ... } — блок экземпляра.
  */
+
 public class Task05 {
     public static void main(String[] args) {
         // Создайте 2 объекта AppConfig, затем выведите AppConfig.version
     }
-}
-
-class AppConfig {
-    static String version;
-
-    // TODO: статический блок и блок инициализации экземпляра
 }

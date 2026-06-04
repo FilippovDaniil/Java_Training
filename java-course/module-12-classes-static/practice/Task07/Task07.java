@@ -25,13 +25,9 @@
  *   Идея авто-ID: this.id = nextId; nextId++;
  *   Счётчик общий для класса (static), ID — индивидуальный (instance).
  */
+
 public class Task07 {
     public static void main(String[] args) {
         // Создайте сотрудников и выведите их + общее количество
     }
-}
-
-class Employee {
-    // TODO: static nextId; private поля id, name, salary;
-    //       конструктор с авто-ID; геттеры; toString; static getTotalEmployees()
 }

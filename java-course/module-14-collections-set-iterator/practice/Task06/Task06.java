@@ -18,6 +18,7 @@
  * ПОДСКАЗКА:
  *   Objects.hash(name, country) для hashCode.
  */
+
 import java.util.HashSet;
 import java.util.Objects;
 import java.util.Set;
@@ -26,16 +27,4 @@ public class Task06 {
     public static void main(String[] args) {
         // Создайте HashSet<City>, добавьте города с дубликатом, выведите размер
     }
-}
-
-class City {
-    String name;
-    String country;
-
-    City(String name, String country) {
-        this.name = name;
-        this.country = country;
-    }
-
-    // TODO: переопределите equals() и hashCode()
 }

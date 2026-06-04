@@ -19,12 +19,9 @@
  *   Это закрепление всего модуля: конструктор + инкапсуляция +
  *   валидация + toString.
  */
+
 public class Task06 {
     public static void main(String[] args) {
         // Создайте студентов и продемонстрируйте работу класса
     }
-}
-
-class Student {
-    // TODO: private поля, конструктор, геттеры, сеттер gpa с валидацией, toString
 }

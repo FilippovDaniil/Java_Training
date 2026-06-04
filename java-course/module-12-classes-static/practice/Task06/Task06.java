@@ -14,19 +14,9 @@
  *   Computer.Processor p = new Computer.Processor();
  *   Статический вложенный класс создаётся через имя внешнего класса.
  */
+
 public class Task06 {
     public static void main(String[] args) {
         // Создайте Computer.Processor и выведите его данные
-    }
-}
-
-class Computer {
-    String brand;
-
-    static class Processor {
-        String model;
-        int cores;
-
-        // TODO: метод info()
     }
 }

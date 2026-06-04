@@ -19,21 +19,12 @@
  *   List<Product> items = new ArrayList<>();
  *   items.add(new Product("Молоко", 80.0));
  */
+
 import java.util.ArrayList;
 import java.util.List;
 
 public class Task05 {
     public static void main(String[] args) {
         // Создайте список Product и обработайте его
-    }
-}
-
-class Product {
-    String name;
-    double price;
-
-    Product(String name, double price) {
-        this.name = name;
-        this.price = price;
     }
 }

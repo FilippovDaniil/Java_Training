@@ -14,13 +14,9 @@
  *   static int count = 0; в конструкторе count++.
  *   Обращение: User.count (через имя класса).
  */
+
 public class Task01 {
     public static void main(String[] args) {
         // Создайте несколько User и выведите User.count
     }
-}
-
-class User {
-    String name;
-    // TODO: статическое поле count и конструктор, увеличивающий его
 }
