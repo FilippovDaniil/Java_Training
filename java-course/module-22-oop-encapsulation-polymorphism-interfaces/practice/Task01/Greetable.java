@@ -1,0 +1,3 @@
+interface Greetable {
+    void greet();
+}
