@@ -229,11 +229,11 @@ java Task01
 
 | #  | Модуль | Тема | Статус |
 |----|--------|------|--------|
-| 93 | `module-93-spring-security-intro` | Зачем нужен, что меняется после starter-security, filter chain | ⬜ |
-| 94 | `module-94-spring-security-inmemory` | In-memory users, `PasswordEncoder`, form login, CSRF basics | ⬜ |
-| 95 | `module-95-spring-security-session-cors` | Session-based security, HTTP Basic, CORS, cookies, file upload | ⬜ |
-| 96 | `module-96-spring-security-db-users` | DB-backed users, `CustomUserDetailsService`, регистрация | ⬜ |
-| 97 | `module-97-spring-security-authorization` | Request-level и method security, ownership-based access | ⬜ |
+| 93 | `module-93-spring-security-intro` | Зачем нужен, что меняется после starter-security, filter chain | ✅ |
+| 94 | `module-94-spring-security-inmemory` | In-memory users, `PasswordEncoder`, form login, CSRF basics | ✅ |
+| 95 | `module-95-spring-security-session-cors` | Session-based security, HTTP Basic, CORS, cookies, file upload | ✅ |
+| 96 | `module-96-spring-security-db-users` | DB-backed users, `CustomUserDetailsService`, регистрация | ✅ |
+| 97 | `module-97-spring-security-authorization` | Request-level и method security, ownership-based access | ✅ |
 | 98 | `module-98-spring-security-jwt` | Переход к stateless, JWT basics, выдача и валидация | ⬜ |
 | 99 | `module-99-spring-security-custom-jwt-filter` | Custom JWT filter, built-in Bearer support, тестирование | ⬜ |
 | 100 | `module-100-spring-security-testing` | MockMvc security tests, CSRF/JWT, hardening, audit | ⬜ |
@@ -288,8 +288,8 @@ java Task01
 ### 🔖 ТОЧКА ВОЗОБНОВЛЕНИЯ (обновлено 2026-06-04)
 
 **Сделано:** модули **01–92** (Часть 1: 01–28, Часть 2: 29–66, **Часть 3 ЗАВЕРШЕНА: 67–92** — REST, Spring Data JPA, Hibernate Deep Dive).
-**Получено новое ТЗ (2026-06-04): Часть 4 (модули 93–118)** — Spring Security, Spring Test, Docker. Полный план, таблицы статусов и порядок батчей — в разделе [«Часть 4»](#-часть-4-security--test--docker--production-ready-модули-93118) выше. Генерация ещё НЕ начиналась (все 93–118 = ⬜).
-**🟢 СЛЕДУЮЩИЙ ШАГ — Батч 21 (модули 93–97, Spring Security ч.1: intro, in-memory, session/CORS, db-users, authorization).** Затем 22→98–100, 23→101–105, 24→106–110, 25→111–115, 26→116–118.
+**Часть 4 (модули 93–118)** — Spring Security, Spring Test, Docker. Полный план, таблицы статусов и порядок батчей — в разделе [«Часть 4»](#-часть-4-security--test--docker--production-ready-модули-93118) выше. **Готово: ✅ 93–97 (Spring Security ч.1).**
+**🟢 СЛЕДУЮЩИЙ ШАГ — Батч 22 (модули 98–100, Spring Security ч.2: JWT basics, custom JWT filter, security testing).** Затем 23→101–105, 24→106–110, 25→111–115, 26→116–118. Для JWT — библиотека `io.jsonwebtoken:jjwt` (0.12.x).
 **Сквозной проект Части 4 — Task Tracker API** (продолжение REST 67–76) + аутентификация + тесты + Docker. Зависимости/форматы задач (jjwt, Testcontainers, Docker-носители) — в разделе «Зависимости и форматы задач Части 4». Правило процесса прежнее: перед батчем СПРОСИТЬ разрешение (пользователь следит за токенами).
 **Правило процесса:** перед запуском батча СПРОСИТЬ у пользователя разрешение (он следит за токенами) — затем генерировать модули (по 5, либо 3 в коротких батчах), проверить структуру, обновить статусы здесь и в памяти. Сквозные проекты: Task Tracker API (REST), shop-data-jpa (Data/Hibernate).
 
