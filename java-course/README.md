@@ -206,9 +206,9 @@ java Task01
 | 87 | `module-87-hibernate-deep-dive-querying` | HQL, Criteria API, native SQL, owning side, каскады | ✅ |
 | 88 | `module-88-hibernate-deep-dive-modeling` | `equals`/`hashCode`, Embeddables, value objects, идентификаторы | ✅ |
 | 89 | `module-89-hibernate-deep-dive-inheritance` | Наследование, `@DynamicUpdate`, ограничения схемы, транзакции | ✅ |
-| 90 | `module-90-hibernate-deep-dive-locking` | Оптимистичная/пессимистичная блокировка, soft delete, Envers | ⬜ |
-| 91 | `module-91-hibernate-deep-dive-performance` | JDBC batching, bulk operations, read-only, кэширование | ⬜ |
-| 92 | `module-92-hibernate-deep-dive-diagnostics` | SQL-диагностика, анти-паттерны, тестирование, финальный аудит | ⬜ |
+| 90 | `module-90-hibernate-deep-dive-locking` | Оптимистичная/пессимистичная блокировка, soft delete, Envers | ✅ |
+| 91 | `module-91-hibernate-deep-dive-performance` | JDBC batching, bulk operations, read-only, кэширование | ✅ |
+| 92 | `module-92-hibernate-deep-dive-diagnostics` | SQL-диагностика, анти-паттерны, тестирование, финальный аудит | ✅ |
 
 **Порядок генерации (батчи, с проверкой и вопросом пользователю между ними):**
 Батч 15 → 67–71 · Батч 16 → 72–76 · Батч 17 → 77–81 · Батч 18 → 82–84 · Батч 19 → 85–89 · Батч 20 → 90–92.
@@ -221,9 +221,9 @@ java Task01
 
 ### 🔖 ТОЧКА ВОЗОБНОВЛЕНИЯ (обновлено 2026-06-04)
 
-**Сделано:** модули **01–89** (трек 54–66 закрыт; Часть 3: ✅ 67–76 REST, ✅ 77–84 Spring Data JPA, ✅ 85–89 Hibernate Deep Dive ч.1).
-**Идёт Часть 3 (67–92):** Spring REST/MVC ✅ + Spring Data JPA 77–84 ✅ + Hibernate Deep Dive 85–92 (осталось 90–92). План и статусы — в разделе [«Часть 3»](#-часть-3-углублённый-spring--data--hibernate-модули-6792) выше.
-**Следующий шаг — Батч 20 (модули 90–92, Hibernate Deep Dive ч.2: locking, performance, diagnostics) — ФИНАЛ Части 3.** Сквозной проект Data-части — `shop-data-jpa` (H2). Hibernate-модули 85–92 работают через `EntityManager`/HQL напрямую (не Spring Data), bare-javac не верифицируются (deps — норма).
+**Сделано:** модули **01–92** (трек 54–66 закрыт; **Часть 3 ЗАВЕРШЕНА: ✅ 67–76 REST, ✅ 77–84 Spring Data JPA, ✅ 85–92 Hibernate Deep Dive**).
+**Часть 3 (67–92) ПОЛНОСТЬЮ ГОТОВА.** Persistence-трек пройден целиком: JDBC → JPA → Hibernate → Spring Data JPA → Hibernate под капотом (lifecycle, fetching, querying, modeling, inheritance, locking, performance, diagnostics).
+**Следующий шаг — по ТЗ пользователя (новый блок).** Курс охватывает модули 01–92. Hibernate-модули 85–92 работают через `EntityManager`/HQL напрямую (не Spring Data), bare-javac не верифицируются (deps — норма). Сквозной проект Data-части — `shop-data-jpa` (H2).
 **Правило процесса:** перед запуском батча СПРОСИТЬ у пользователя разрешение (он следит за токенами) — затем генерировать модули (по 5, либо 3 в коротких батчах), проверить структуру, обновить статусы здесь и в памяти. Сквозные проекты: Task Tracker API (REST), shop-data-jpa (Data/Hibernate).
 
 ### Что осталось доделать (на момент паузы)
