@@ -242,11 +242,11 @@ java Task01
 
 | #  | Модуль | Тема | Статус |
 |----|--------|------|--------|
-| 101 | `module-101-spring-test-basics` | JUnit 5, AssertJ, Hamcrest, JSONassert, Mockito | ⬜ |
-| 102 | `module-102-spring-test-unit` | Unit-тесты бизнес-логики без Spring-контекста | ⬜ |
-| 103 | `module-103-spring-test-config` | Test profiles, properties, управляемая конфигурация | ⬜ |
-| 104 | `module-104-spring-test-webmvc` | `@WebMvcTest`, MockMvc, MockMvcTester, JSON tests | ⬜ |
-| 105 | `module-105-spring-test-controller-scenarios` | Validation, error handling, pagination, file upload | ⬜ |
+| 101 | `module-101-spring-test-basics` | JUnit 5, AssertJ, Hamcrest, JSONassert, Mockito | ✅ |
+| 102 | `module-102-spring-test-unit` | Unit-тесты бизнес-логики без Spring-контекста | ✅ |
+| 103 | `module-103-spring-test-config` | Test profiles, properties, управляемая конфигурация | ✅ |
+| 104 | `module-104-spring-test-webmvc` | `@WebMvcTest`, MockMvc, MockMvcTester, JSON tests | ✅ |
+| 105 | `module-105-spring-test-controller-scenarios` | Validation, error handling, pagination, file upload | ✅ |
 | 106 | `module-106-spring-test-datajpa` | `@DataJpaTest`, TestEntityManager, flush, queries | ⬜ |
 | 107 | `module-107-spring-test-entity-relationships` | Lazy loading, конкурентные сценарии, Flyway, `@Sql` | ⬜ |
 | 108 | `module-108-spring-test-full-context` | `@SpringBootTest`, MockMvc, RestTestClient | ⬜ |
@@ -289,7 +289,8 @@ java Task01
 
 **Сделано:** модули **01–92** (Часть 1: 01–28, Часть 2: 29–66, **Часть 3 ЗАВЕРШЕНА: 67–92** — REST, Spring Data JPA, Hibernate Deep Dive).
 **Часть 4 (модули 93–118)** — Spring Security, Spring Test, Docker. Полный план, таблицы статусов и порядок батчей — в разделе [«Часть 4»](#-часть-4-security--test--docker--production-ready-модули-93118) выше. **Готово: ✅ 93–100 — БЛОК SPRING SECURITY ЗАВЕРШЁН (основы, DB-users, авторизация, JWT-выдача, custom-фильтр, тестирование).**
-**🟢 СЛЕДУЮЩИЙ ШАГ — Батч 23 → модули 101–105 (Spring Test ч.1):** 101 basics (JUnit5/AssertJ/Hamcrest/JSONassert/Mockito), 102 unit (без контекста), 103 config (profiles/properties), 104 webmvc (`@WebMvcTest`/MockMvc/JSON), 105 controller-scenarios (validation/error/pagination/upload). Затем 24→106–110, 25→111–115, 26→116–118. Тест-модули — тест-классы БЕЗ `main` (стиль 34/76/83). Детали — в [[java-course-progress]] (память).
+**Готово также: ✅ 101–105 (Spring Test ч.1 — инструменты, unit, конфигурация, web-слой, сценарии).**
+**🟢 СЛЕДУЮЩИЙ ШАГ — Батч 24 → модули 106–110 (Spring Test ч.2):** 106 datajpa (`@DataJpaTest`/TestEntityManager/flush/queries), 107 entity-relationships (lazy/конкурентность/Flyway/`@Sql`), 108 full-context (`@SpringBootTest`/MockMvc/RestTestClient), 109 integration (Testcontainers/PostgreSQL/regression), 110 security-async (security-тесты/внешние интеграции/async/REST Docs). Затем 25→111–115, 26→116–118 (Docker). Тест-модули — тест-классы БЕЗ `main`. Детали — в [[java-course-progress]] (память).
 **Сквозной проект Части 4 — Task Tracker API** (продолжение REST 67–76) + аутентификация + тесты + Docker. Зависимости/форматы задач (jjwt, Testcontainers, Docker-носители) — в разделе «Зависимости и форматы задач Части 4». Правило процесса прежнее: перед батчем СПРОСИТЬ разрешение (пользователь следит за токенами).
 **Правило процесса:** перед запуском батча СПРОСИТЬ у пользователя разрешение (он следит за токенами) — затем генерировать модули (по 5, либо 3 в коротких батчах), проверить структуру, обновить статусы здесь и в памяти. Сквозные проекты: Task Tracker API (REST), shop-data-jpa (Data/Hibernate).
 
