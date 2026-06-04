@@ -223,7 +223,7 @@ java Task01
 
 **Сквозной проект Части 4:** **Task Tracker API** (продолжение REST-блока 67–76) — добавляем аутентификацию, полное покрытие тестами и упаковку в Docker. Предметная область: задачи, статусы, исполнители, пользователи/роли.
 
-> **Статус генерации:** ⬜ — не начат, ⏳ — в работе, ✅ — готов. **Spring Security (93–100) и Spring Test (101–110) — ЗАВЕРШЕНЫ.** Следующий — Батч 25 (111–115, Docker ч.1).
+> **Статус генерации:** ⬜ — не начат, ⏳ — в работе, ✅ — готов. **Spring Security (93–100), Spring Test (101–110) и Docker ч.1 (111–115) — ЗАВЕРШЕНЫ.** Остался Батч 26 (116–118, Docker ч.2) — финал курса.
 
 ### Spring Security (93–100)
 
@@ -257,11 +257,11 @@ java Task01
 
 | #  | Модуль | Тема | Статус |
 |----|--------|------|--------|
-| 111 | `module-111-docker-basics` | Контейнерное мышление, Docker CLI, первый контейнер | ⬜ |
-| 112 | `module-112-docker-dockerfile` | Dockerfile, слои, кэш, multi-stage build | ⬜ |
-| 113 | `module-113-docker-spring-boot-image` | Layered images, Buildpacks, `bootBuildImage` | ⬜ |
-| 114 | `module-114-docker-configuration` | Externalized config, profiles, volumes, логи | ⬜ |
-| 115 | `module-115-docker-compose` | Compose: app + PostgreSQL, startup order, readiness | ⬜ |
+| 111 | `module-111-docker-basics` | Контейнерное мышление, Docker CLI, первый контейнер | ✅ |
+| 112 | `module-112-docker-dockerfile` | Dockerfile, слои, кэш, multi-stage build | ✅ |
+| 113 | `module-113-docker-spring-boot-image` | Layered images, Buildpacks, `bootBuildImage` | ✅ |
+| 114 | `module-114-docker-configuration` | Externalized config, profiles, volumes, логи | ✅ |
+| 115 | `module-115-docker-compose` | Compose: app + PostgreSQL, startup order, readiness | ✅ |
 | 116 | `module-116-docker-compose-extended` | +Redis, +RabbitMQ, developer workflow, troubleshooting | ⬜ |
 | 117 | `module-117-docker-jvm-tuning` | JVM под memory/CPU limits, image hygiene, non-root | ⬜ |
 | 118 | `module-118-docker-final-template` | Финальный reusable template, production-ready образ | ⬜ |
@@ -289,8 +289,8 @@ java Task01
 
 **Сделано:** модули **01–92** (Часть 1: 01–28, Часть 2: 29–66, **Часть 3 ЗАВЕРШЕНА: 67–92** — REST, Spring Data JPA, Hibernate Deep Dive).
 **Часть 4 (модули 93–118)** — Spring Security, Spring Test, Docker. Полный план, таблицы статусов и порядок батчей — в разделе [«Часть 4»](#-часть-4-security--test--docker--production-ready-модули-93118) выше. **Готово: ✅ 93–100 — БЛОК SPRING SECURITY ЗАВЕРШЁН (основы, DB-users, авторизация, JWT-выдача, custom-фильтр, тестирование).**
-**Готово также: ✅ 101–110 — БЛОК SPRING TEST ЗАВЕРШЁН** (ч.1 инструменты/unit/конфиг/web/сценарии; ч.2 datajpa/связи/полный контекст/Testcontainers/security+async+REST Docs).
-**🟢 СЛЕДУЮЩИЙ ШАГ — Батч 25 → модули 111–115 (Docker ч.1):** 111 basics (контейнерное мышление/CLI), 112 dockerfile (слои/кэш/multi-stage), 113 spring-boot-image (layered/Buildpacks/`bootBuildImage`), 114 configuration (externalized config/profiles/volumes), 115 compose (app+PostgreSQL/startup order/readiness). Затем 26→116–118. **Docker-модули — задачи-НОСИТЕЛИ артефактов** (`.java` с text-блоком Dockerfile/compose/yml + `println`, суть в JavaDoc); **компилируются bare-javac** (dep-free, JDK 17 text-блоки). Детали — в [[java-course-progress]] (память).
+**Готово также: ✅ 101–110 (Spring Test) и ✅ 111–115 (Docker ч.1 — basics/dockerfile/spring-boot-image/configuration/compose).**
+**🟢 СЛЕДУЮЩИЙ ШАГ — Батч 26 → модули 116–118 (Docker ч.2, ФИНАЛ КУРСА):** 116 compose-extended (+Redis/+RabbitMQ, override-файлы, dev-workflow, troubleshooting), 117 jvm-tuning (JVM под memory/CPU limits, image hygiene, non-root), 118 final-template (reusable production-ready образ/compose). **Docker-задачи — НОСИТЕЛИ артефактов**, компилируются bare-javac. После 118 курс полностью завершён. Детали — в [[java-course-progress]] (память).
 **Сквозной проект Части 4 — Task Tracker API** (продолжение REST 67–76) + аутентификация + тесты + Docker. Зависимости/форматы задач (jjwt, Testcontainers, Docker-носители) — в разделе «Зависимости и форматы задач Части 4». Правило процесса прежнее: перед батчем СПРОСИТЬ разрешение (пользователь следит за токенами).
 **Правило процесса:** перед запуском батча СПРОСИТЬ у пользователя разрешение (он следит за токенами) — затем генерировать модули (по 5, либо 3 в коротких батчах), проверить структуру, обновить статусы здесь и в памяти. Сквозные проекты: Task Tracker API (REST), shop-data-jpa (Data/Hibernate).
 
