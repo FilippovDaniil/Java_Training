@@ -193,9 +193,9 @@ java Task01
 | 79 | `module-79-spring-data-jpa-repository` | Repository, derived queries, `Page`/`Slice` | ✅ |
 | 80 | `module-80-spring-data-jpa-advanced` | JPQL, `@Query`, проекции, native queries, Specification | ✅ |
 | 81 | `module-81-spring-data-jpa-transactions` | `@Transactional`, propagation, isolation, persistence context | ✅ |
-| 82 | `module-82-spring-data-jpa-lazy-loading` | Lazy loading, N+1, `JOIN FETCH`, `EntityGraph` | ⬜ |
-| 83 | `module-83-spring-data-jpa-testing` | `@DataJpaTest`, H2, обзор Testcontainers | ⬜ |
-| 84 | `module-84-spring-data-jpa-migrations` | Flyway, оптимистичная блокировка, аудит | ⬜ |
+| 82 | `module-82-spring-data-jpa-lazy-loading` | Lazy loading, N+1, `JOIN FETCH`, `EntityGraph` | ✅ |
+| 83 | `module-83-spring-data-jpa-testing` | `@DataJpaTest`, H2, обзор Testcontainers | ✅ |
+| 84 | `module-84-spring-data-jpa-migrations` | Flyway, оптимистичная блокировка, аудит | ✅ |
 
 ### Hibernate Deep Dive (85–92)
 
@@ -219,11 +219,11 @@ java Task01
 
 > Этот раздел — инструкция для будущих сессий. Курс расширяется и дальше (план — 120+ модулей). Соблюдайте принципы ниже, чтобы новые модули были единообразны.
 
-### 🔖 ТОЧКА ВОЗОБНОВЛЕНИЯ (обновлено 2026-06-02)
+### 🔖 ТОЧКА ВОЗОБНОВЛЕНИЯ (обновлено 2026-06-04)
 
-**Сделано:** модули **01–81** (трек 54–66 закрыт; Часть 3: ✅ 67–76 REST, ✅ 77–81 Spring Data JPA ч.1).
-**Идёт Часть 3 (67–92):** Spring REST/MVC ✅ + Spring Data JPA (77–84, осталось 82–84) + Hibernate Deep Dive (85–92). План и статусы — в разделе [«Часть 3»](#-часть-3-углублённый-spring--data--hibernate-модули-6792) выше.
-**Следующий шаг — Батч 18 (модули 82–84, Spring Data JPA часть 2: lazy-loading, testing, migrations).** Затем 19→85–89, 20→90–92. Сквозной проект Data-части — `shop-data-jpa` (H2).
+**Сделано:** модули **01–84** (трек 54–66 закрыт; Часть 3: ✅ 67–76 REST, ✅ 77–84 Spring Data JPA — БЛОК ЗАКРЫТ).
+**Идёт Часть 3 (67–92):** Spring REST/MVC ✅ + Spring Data JPA 77–84 ✅ + Hibernate Deep Dive (85–92, осталось). План и статусы — в разделе [«Часть 3»](#-часть-3-углублённый-spring--data--hibernate-модули-6792) выше.
+**Следующий шаг — Батч 19 (модули 85–89, Hibernate Deep Dive: lifecycle, fetching, querying, modeling, inheritance).** Затем 20→90–92. Сквозной проект Data-части — `shop-data-jpa` (H2).
 **Правило процесса:** перед запуском батча СПРОСИТЬ у пользователя разрешение (он следит за токенами) — затем генерировать модули (по 5, либо 3 в коротких батчах), проверить структуру, обновить статусы здесь и в памяти. Сквозные проекты: Task Tracker API (REST), shop-data-jpa (Data/Hibernate).
 
 ### Что осталось доделать (на момент паузы)
