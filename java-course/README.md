@@ -103,6 +103,8 @@ java Task01
 Курс расширяется продвинутыми темами вплоть до production-ready Spring Boot. Модули 29–53 — Core/БД/Hibernate. Модули **54–66 — углублённый Spring-трек с полноценной практикой** (теория + 7 задач каждый): инструменты сборки, HTTP, JSON, ручной HTTP-сервер, Spring Core и Spring Boot. Прежние theory-only заглушки 54–56 заменены этой детализированной дорожкой.
 
 > **Часть 3 (модули 67–92)** — углублённые Spring REST/MVC, Spring Data JPA и Hibernate Deep Dive. Полный план — в разделе ниже [«Часть 3»](#-часть-3-углублённый-spring--data--hibernate-модули-6792).
+>
+> **Часть 4 (модули 93–118)** — production-ready: Spring Security, тестирование Spring Boot, Docker. Полный план — в разделе ниже [«Часть 4»](#-часть-4-security--test--docker--production-ready-модули-93118).
 
 > **Статус генерации** (обновляется по ходу): ⬜ — не начат, ⏳ — в работе, ✅ — готов.
 
@@ -215,15 +217,80 @@ java Task01
 
 ---
 
+## 🏁 Часть 4: Security / Test / Docker — production-ready (модули 93–118)
+
+Завершающая часть курса. Доводит проект до production-ready микросервиса: **Spring Security** (аутентификация/авторизация, JWT), **тестирование Spring Boot** (от unit до Testcontainers) и **контейнеризация Docker**. Каждый модуль — **теория + 7 практических задач**.
+
+**Сквозной проект Части 4:** **Task Tracker API** (продолжение REST-блока 67–76) — добавляем аутентификацию, полное покрытие тестами и упаковку в Docker. Предметная область: задачи, статусы, исполнители, пользователи/роли.
+
+> **Статус генерации:** ⬜ — не начат, ⏳ — в работе, ✅ — готов. (Все ⬜ — генерация ещё не начиналась.)
+
+### Spring Security (93–100)
+
+| #  | Модуль | Тема | Статус |
+|----|--------|------|--------|
+| 93 | `module-93-spring-security-intro` | Зачем нужен, что меняется после starter-security, filter chain | ⬜ |
+| 94 | `module-94-spring-security-inmemory` | In-memory users, `PasswordEncoder`, form login, CSRF basics | ⬜ |
+| 95 | `module-95-spring-security-session-cors` | Session-based security, HTTP Basic, CORS, cookies, file upload | ⬜ |
+| 96 | `module-96-spring-security-db-users` | DB-backed users, `CustomUserDetailsService`, регистрация | ⬜ |
+| 97 | `module-97-spring-security-authorization` | Request-level и method security, ownership-based access | ⬜ |
+| 98 | `module-98-spring-security-jwt` | Переход к stateless, JWT basics, выдача и валидация | ⬜ |
+| 99 | `module-99-spring-security-custom-jwt-filter` | Custom JWT filter, built-in Bearer support, тестирование | ⬜ |
+| 100 | `module-100-spring-security-testing` | MockMvc security tests, CSRF/JWT, hardening, audit | ⬜ |
+
+### Spring Test (101–110)
+
+| #  | Модуль | Тема | Статус |
+|----|--------|------|--------|
+| 101 | `module-101-spring-test-basics` | JUnit 5, AssertJ, Hamcrest, JSONassert, Mockito | ⬜ |
+| 102 | `module-102-spring-test-unit` | Unit-тесты бизнес-логики без Spring-контекста | ⬜ |
+| 103 | `module-103-spring-test-config` | Test profiles, properties, управляемая конфигурация | ⬜ |
+| 104 | `module-104-spring-test-webmvc` | `@WebMvcTest`, MockMvc, MockMvcTester, JSON tests | ⬜ |
+| 105 | `module-105-spring-test-controller-scenarios` | Validation, error handling, pagination, file upload | ⬜ |
+| 106 | `module-106-spring-test-datajpa` | `@DataJpaTest`, TestEntityManager, flush, queries | ⬜ |
+| 107 | `module-107-spring-test-entity-relationships` | Lazy loading, конкурентные сценарии, Flyway, `@Sql` | ⬜ |
+| 108 | `module-108-spring-test-full-context` | `@SpringBootTest`, MockMvc, RestTestClient | ⬜ |
+| 109 | `module-109-spring-test-integration` | Testcontainers, PostgreSQL, regression suite | ⬜ |
+| 110 | `module-110-spring-test-security-async` | Security-тесты, внешние интеграции, async, REST Docs | ⬜ |
+
+### Docker for Spring (111–118)
+
+| #  | Модуль | Тема | Статус |
+|----|--------|------|--------|
+| 111 | `module-111-docker-basics` | Контейнерное мышление, Docker CLI, первый контейнер | ⬜ |
+| 112 | `module-112-docker-dockerfile` | Dockerfile, слои, кэш, multi-stage build | ⬜ |
+| 113 | `module-113-docker-spring-boot-image` | Layered images, Buildpacks, `bootBuildImage` | ⬜ |
+| 114 | `module-114-docker-configuration` | Externalized config, profiles, volumes, логи | ⬜ |
+| 115 | `module-115-docker-compose` | Compose: app + PostgreSQL, startup order, readiness | ⬜ |
+| 116 | `module-116-docker-compose-extended` | +Redis, +RabbitMQ, developer workflow, troubleshooting | ⬜ |
+| 117 | `module-117-docker-jvm-tuning` | JVM под memory/CPU limits, image hygiene, non-root | ⬜ |
+| 118 | `module-118-docker-final-template` | Финальный reusable template, production-ready образ | ⬜ |
+
+### Порядок генерации (батчи 21–26, с вопросом пользователю между ними)
+
+`Батч 21 → 93–97` (Spring Security ч.1) · `Батч 22 → 98–100` (Spring Security ч.2) · `Батч 23 → 101–105` (Spring Test ч.1) · `Батч 24 → 106–110` (Spring Test ч.2) · `Батч 25 → 111–115` (Docker ч.1) · `Батч 26 → 116–118` (Docker ч.2).
+
+### Зависимости и форматы задач Части 4
+
+- **Spring Security (93–100):** `spring-boot-starter-security`, `com.h2database:h2`, JWT — `io.jsonwebtoken:jjwt-api/jjwt-impl/jjwt-jackson` (jjwt 0.12.x). Реалистичные импорты `org.springframework.security.*` + «ТРЕБУЮТСЯ ЗАВИСИМОСТИ» в шапке; bare-javac **не верифицируется** (норма). Конфиг — `SecurityFilterChain` бин (lambda-DSL, Spring Security 6.x: `authorizeHttpRequests`, `csrf`, `sessionManagement`).
+- **Spring Test (101–110):** `spring-boot-starter-test` (JUnit 5 + AssertJ + Mockito + JSONassert + Hamcrest), для интеграции — `org.testcontainers:postgresql` + `org.testcontainers:junit-jupiter`, REST Docs — `spring-restdocs-mockmvc`. Задачи — **тест-классы БЕЗ `main`** (стиль модулей 34/76/83): `@Test` с `// TODO`, класс-под-тестом дан готовым. bare-javac не верифицируется.
+- **Docker (111–118):** практические задачи — **носители артефактов** (стиль SQL/Flyway-карьеров, модули 44–48/84): `TaskNN.java` с text-блоком, несущим `Dockerfile` / `docker-compose.yml` / `application.yml` / команды CLI + `System.out.println`, суть задания — в JavaDoc-шапке. **Компилируются bare-javac** (dep-free, JDK 17 text-блоки — проверять!). Так convention «7×TaskNN.java» сохраняется, а студент пишет реальные Docker-артефакты по образцу.
+- **Принцип Spring Security (важно для тестов):** ловушки `@WebMvcTest` + Spring Security описаны в глобальном `~/.claude/CLAUDE.md` (не `@MockBean JwtAuthenticationFilter` — `doFilter` final; мокировать зависимости фильтра; `@AutoConfigureMockMvc(addFilters=false)` для публичных эндпоинтов; `excludeAutoConfiguration = UserDetailsServiceAutoConfiguration` при конфликте бинов). Применять при генерации модулей 99/100/110.
+
+После 118 учебный проект полностью покрывает путь **от основ Java до production-ready микросервиса** на Spring Boot с безопасностью, тестами и контейнеризацией (для Junior/Middle Java-разработчиков).
+
+---
+
 ## 📐 Руководство по созданию модулей (для продолжения генерации)
 
 > Этот раздел — инструкция для будущих сессий. Курс расширяется и дальше (план — 120+ модулей). Соблюдайте принципы ниже, чтобы новые модули были единообразны.
 
 ### 🔖 ТОЧКА ВОЗОБНОВЛЕНИЯ (обновлено 2026-06-04)
 
-**Сделано:** модули **01–92** (трек 54–66 закрыт; **Часть 3 ЗАВЕРШЕНА: ✅ 67–76 REST, ✅ 77–84 Spring Data JPA, ✅ 85–92 Hibernate Deep Dive**).
-**Часть 3 (67–92) ПОЛНОСТЬЮ ГОТОВА.** Persistence-трек пройден целиком: JDBC → JPA → Hibernate → Spring Data JPA → Hibernate под капотом (lifecycle, fetching, querying, modeling, inheritance, locking, performance, diagnostics).
-**Следующий шаг — по ТЗ пользователя (новый блок).** Курс охватывает модули 01–92. Hibernate-модули 85–92 работают через `EntityManager`/HQL напрямую (не Spring Data), bare-javac не верифицируются (deps — норма). Сквозной проект Data-части — `shop-data-jpa` (H2).
+**Сделано:** модули **01–92** (Часть 1: 01–28, Часть 2: 29–66, **Часть 3 ЗАВЕРШЕНА: 67–92** — REST, Spring Data JPA, Hibernate Deep Dive).
+**Получено новое ТЗ (2026-06-04): Часть 4 (модули 93–118)** — Spring Security, Spring Test, Docker. Полный план, таблицы статусов и порядок батчей — в разделе [«Часть 4»](#-часть-4-security--test--docker--production-ready-модули-93118) выше. Генерация ещё НЕ начиналась (все 93–118 = ⬜).
+**🟢 СЛЕДУЮЩИЙ ШАГ — Батч 21 (модули 93–97, Spring Security ч.1: intro, in-memory, session/CORS, db-users, authorization).** Затем 22→98–100, 23→101–105, 24→106–110, 25→111–115, 26→116–118.
+**Сквозной проект Части 4 — Task Tracker API** (продолжение REST 67–76) + аутентификация + тесты + Docker. Зависимости/форматы задач (jjwt, Testcontainers, Docker-носители) — в разделе «Зависимости и форматы задач Части 4». Правило процесса прежнее: перед батчем СПРОСИТЬ разрешение (пользователь следит за токенами).
 **Правило процесса:** перед запуском батча СПРОСИТЬ у пользователя разрешение (он следит за токенами) — затем генерировать модули (по 5, либо 3 в коротких батчах), проверить структуру, обновить статусы здесь и в памяти. Сквозные проекты: Task Tracker API (REST), shop-data-jpa (Data/Hibernate).
 
 ### Что осталось доделать (на момент паузы)
