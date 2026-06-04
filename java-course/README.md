@@ -223,7 +223,7 @@ java Task01
 
 **Сквозной проект Части 4:** **Task Tracker API** (продолжение REST-блока 67–76) — добавляем аутентификацию, полное покрытие тестами и упаковку в Docker. Предметная область: задачи, статусы, исполнители, пользователи/роли.
 
-> **Статус генерации:** ⬜ — не начат, ⏳ — в работе, ✅ — готов. **Spring Security (93–100), Spring Test (101–110) и Docker ч.1 (111–115) — ЗАВЕРШЕНЫ.** Остался Батч 26 (116–118, Docker ч.2) — финал курса.
+> **Статус генерации:** ✅ **ЧАСТЬ 4 (93–118) ПОЛНОСТЬЮ ЗАВЕРШЕНА** — Spring Security (93–100), Spring Test (101–110), Docker (111–118). **🎉 ВЕСЬ КУРС (модули 01–118) ЗАВЕРШЁН.**
 
 ### Spring Security (93–100)
 
@@ -262,9 +262,9 @@ java Task01
 | 113 | `module-113-docker-spring-boot-image` | Layered images, Buildpacks, `bootBuildImage` | ✅ |
 | 114 | `module-114-docker-configuration` | Externalized config, profiles, volumes, логи | ✅ |
 | 115 | `module-115-docker-compose` | Compose: app + PostgreSQL, startup order, readiness | ✅ |
-| 116 | `module-116-docker-compose-extended` | +Redis, +RabbitMQ, developer workflow, troubleshooting | ⬜ |
-| 117 | `module-117-docker-jvm-tuning` | JVM под memory/CPU limits, image hygiene, non-root | ⬜ |
-| 118 | `module-118-docker-final-template` | Финальный reusable template, production-ready образ | ⬜ |
+| 116 | `module-116-docker-compose-extended` | +Redis, +RabbitMQ, developer workflow, troubleshooting | ✅ |
+| 117 | `module-117-docker-jvm-tuning` | JVM под memory/CPU limits, image hygiene, non-root | ✅ |
+| 118 | `module-118-docker-final-template` | Финальный reusable template, production-ready образ | ✅ |
 
 ### Порядок генерации (батчи 21–26, с вопросом пользователю между ними)
 
@@ -289,8 +289,7 @@ java Task01
 
 **Сделано:** модули **01–92** (Часть 1: 01–28, Часть 2: 29–66, **Часть 3 ЗАВЕРШЕНА: 67–92** — REST, Spring Data JPA, Hibernate Deep Dive).
 **Часть 4 (модули 93–118)** — Spring Security, Spring Test, Docker. Полный план, таблицы статусов и порядок батчей — в разделе [«Часть 4»](#-часть-4-security--test--docker--production-ready-модули-93118) выше. **Готово: ✅ 93–100 — БЛОК SPRING SECURITY ЗАВЕРШЁН (основы, DB-users, авторизация, JWT-выдача, custom-фильтр, тестирование).**
-**Готово также: ✅ 101–110 (Spring Test) и ✅ 111–115 (Docker ч.1 — basics/dockerfile/spring-boot-image/configuration/compose).**
-**🟢 СЛЕДУЮЩИЙ ШАГ — Батч 26 → модули 116–118 (Docker ч.2, ФИНАЛ КУРСА):** 116 compose-extended (+Redis/+RabbitMQ, override-файлы, dev-workflow, troubleshooting), 117 jvm-tuning (JVM под memory/CPU limits, image hygiene, non-root), 118 final-template (reusable production-ready образ/compose). **Docker-задачи — НОСИТЕЛИ артефактов**, компилируются bare-javac. После 118 курс полностью завершён. Детали — в [[java-course-progress]] (память).
+**🎉 ВЕСЬ КУРС ЗАВЕРШЁН — модули 01–118.** Часть 4 закрыта целиком: Security (93–100), Spring Test (101–110), Docker (111–118 — basics/dockerfile/spring-boot-image/configuration/compose/compose-extended/jvm-tuning/final-template). Все Docker-задачи (носители артефактов) компилируются bare-javac. Сквозной Task Tracker API прошёл путь REST → Data JPA → Security/JWT → тесты → Docker. Дальнейшее развитие (вне курса): Kubernetes/Helm (см. `rancher.md`), CI/CD, мониторинг. Детали — в [[java-course-progress]] (память).
 **Сквозной проект Части 4 — Task Tracker API** (продолжение REST 67–76) + аутентификация + тесты + Docker. Зависимости/форматы задач (jjwt, Testcontainers, Docker-носители) — в разделе «Зависимости и форматы задач Части 4». Правило процесса прежнее: перед батчем СПРОСИТЬ разрешение (пользователь следит за токенами).
 **Правило процесса:** перед запуском батча СПРОСИТЬ у пользователя разрешение (он следит за токенами) — затем генерировать модули (по 5, либо 3 в коротких батчах), проверить структуру, обновить статусы здесь и в памяти. Сквозные проекты: Task Tracker API (REST), shop-data-jpa (Data/Hibernate).
 
