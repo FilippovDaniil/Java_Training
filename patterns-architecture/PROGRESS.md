@@ -4,7 +4,7 @@
 
 **Легенда:** ⬜ не начато · 🟡 в работе · ✅ готово (theory.md + все задачи) · 🔍 прошло проверку батча
 
-**На текущий момент:** Батчи 1–6 (темы 01–21) готовы и прошли проверку компиляцией. Темы 22–26 ещё не генерировались.
+**На текущий момент:** 🎉 **РАЗДЕЛ ЗАВЕРШЁН** — все 26 тем готовы и прошли проверку компиляцией (182 задачи, 843 .java, 0 ошибок). Весь путь: принципы ООП/SOLID → паттерны GoF → архитектурные стили (GRASP, Layered, DI/IoC, Hexagonal) → DDD/ES-CQRS/Saga → антипаттерны/микросервисы/messaging/арх-тесты → capstone (рефакторинг legacy, OPS+BAM). Дальше — только расширение по запросу пользователя.
 
 ---
 
@@ -20,7 +20,7 @@
 | 4 | 10–13 | Поведенческие паттерны | 🔍 |
 | 5 | 14–17 | GRASP, Layered, DI/IoC, Hexagonal | 🔍 |
 | 6 | 18–21 | DDD (strategic/tactical), ES/CQRS, Saga | 🔍 |
-| 7 | 22–26 | Антипаттерны → стили → capstone | ⬜ |
+| 7 | 22–26 | Антипаттерны → стили → capstone | 🔍 |
 
 > Перед каждым батчем — подтверждение пользователя (контроль токенов).
 
@@ -51,11 +51,11 @@
 | 19 | Tactical DDD | `module-19-ddd-tactical` | ✅ | ✅ 7/7 | 🔍 |
 | 20 | Event Sourcing, CQRS | `module-20-event-sourcing-cqrs` | ✅ | ✅ 7/7 | 🔍 |
 | 21 | Saga | `module-21-saga-distributed-transactions` | ✅ | ✅ 7/7 | 🔍 |
-| 22 | Антипаттерны | `module-22-antipatterns` | ⬜ | ⬜ 0/7 | ⬜ |
-| 23 | Microservices vs Monolith | `module-23-microservices-vs-monolith` | ⬜ | ⬜ 0/7 | ⬜ |
-| 24 | Асинхронные архитектуры (Kafka) | `module-24-messaging-event-driven-kafka` | ⬜ | ⬜ 0/7 | ⬜ |
-| 25 | Тестирование архитектуры (ArchUnit) | `module-25-architecture-testing-archunit` | ⬜ | ⬜ 0/7 | ⬜ |
-| 26 | Рефакторинг legacy (capstone) | `module-26-legacy-refactoring-capstone` | ⬜ | ⬜ 0/7 | ⬜ |
+| 22 | Антипаттерны | `module-22-antipatterns` | ✅ | ✅ 7/7 | 🔍 |
+| 23 | Microservices vs Monolith | `module-23-microservices-vs-monolith` | ✅ | ✅ 7/7 | 🔍 |
+| 24 | Асинхронные архитектуры (Kafka) | `module-24-messaging-event-driven-kafka` | ✅ | ✅ 7/7 | 🔍 |
+| 25 | Тестирование архитектуры (ArchUnit) | `module-25-architecture-testing-archunit` | ✅ | ✅ 7/7 | 🔍 |
+| 26 | Рефакторинг legacy (capstone) | `module-26-legacy-refactoring-capstone` | ✅ | ✅ 7/7 | 🔍 |
 
 ---
 
@@ -67,4 +67,5 @@
 - **2026-06-09 — Батч 4 (темы 10–13):** поведенческие паттерны — Strategy/Command, Observer/CoR, State/Template Method, Iterator/Visitor. По каждой теме `theory.md` + 7 задач-каркасов (28 задач; module-10/Task02 — single-file демонстрация Strategy через лямбду). Развитие: OPS (10/07 — редактирование заказа командами с undo + стратегия скидки; 12/07 — State жизненного цикла заказа + Template Method пайплайна), BAM (11/07 — CoR валидации транзакций + Observer уведомлений; 13/07 — Iterator истории транзакций + Visitor отчёта). Проверка: все 28 задач компилируются (157 .java, 0 ошибок).
 - **2026-06-09 — Батч 5, часть 1 (темы 14–15):** архитектурные принципы — GRASP (Information Expert, Creator, Low Coupling, High Cohesion, Controller, Pure Fabrication) и Layered/MVC/Clean. По каждой теме `theory.md` + 7 задач-каркасов (14 задач). Развитие: OPS (14/07 — оформление заказа по GRASP: Controller→Service→Repository + Information Expert + Pure Fabrication), BAM (15/07 — слоистый банковский модуль Presentation→Business→Persistence + DTO). Темы чистого Java (проверка `javac`). Проверка: все 14 задач компилируются (63 .java, 0 ошибок).
 - **2026-06-09 — Батч 5, часть 2 (темы 16–17):** DI/IoC и Hexagonal — ЗАВЕРШАЕТ Батч 5. По каждой теме `theory.md` + 7 задач-каркасов (14 задач). Тема 16: ручной DI (constructor/setter injection), свой IoC-контейнер (Map рецептов), Service Locator (антипаттерн), тестируемость через двойники. Тема 17: входные/выходные порты, адаптеры, полный гексагон, замена адаптеров, тестирование ядра fake-адаптером. Решено держать чистым Java (Spring упомянут в теории как «настоящий» контейнер) — весь раздел остаётся проверяемым `javac`. Развитие: OPS (16/07 — сборка Controller→Service→Repository контейнером), BAM (17/07 — перевод в гексагоне: driving-адаптер→TransferUseCase→ядро→AccountRepository→driven-адаптер). Проверка: все 14 задач компилируются (75 .java, 0 ошибок).
+- **2026-06-09 — Батч 7 (темы 22–26) — РАЗДЕЛ ЗАВЕРШЁН:** антипаттерны (Anemic/God Object/Primitive Obsession/Feature Envy/Long Parameter List + рефактор), Microservices vs Monolith (модули/контракты/границы/sync-vs-async/модульный монолит), Messaging/Event-Driven (очередь/pub-sub/идемпотентность/DLQ/retry), Architecture testing (hand-rolled проверки слоёв/циклов/именования/доступа/гексагона вместо ArchUnit), Legacy capstone (Strangler/Toggle/Parallel Run/Branch by Abstraction/ACL/seam + финальный рефактор god→гексагон, OPS+BAM). По каждой теме theory.md + 7 задач (35 задач). Чистый Java. Проверка: все 35 задач компилируются (124 .java, 0 ошибок). **ИТОГ РАЗДЕЛА: 26/26 тем, 182 задачи, 843 .java, всё компилируется `javac -encoding UTF-8`.**
 - **2026-06-09 — Батч 6 (темы 18–21):** DDD и распределённые транзакции. Тема 18 (Strategic DDD: Value Object, Entity, Aggregate, Bounded Context/Ubiquitous Language), 19 (Tactical DDD: Repository, Domain Service, Factory, Domain Events + dispatcher), 20 (Event Sourcing: replay/append; CQRS: read/write модели, проекции, command handler + event store), 21 (Saga: шаги+компенсации, оркестрация с откатом, хореография через EventBus, boolean-откат, идемпотентность). По каждой теме `theory.md` + 7 задач-каркасов (28 задач; события — Java records). Развитие: OPS (18/07 агрегат Order + Money VO; 20/07 заказ как поток событий + проекция), BAM (19/07 Account-агрегат + Repository + Domain Service + события; 21/07 saga перевода debit→credit + компенсация). Чистый Java. Проверка: все 28 задач компилируются (116 .java, 0 ошибок).
