@@ -4,7 +4,7 @@
 
 **Легенда:** ⬜ не начато · 🟡 в работе · ✅ готово (theory.md + все задачи) · 🔍 прошло проверку батча
 
-**На текущий момент:** Батчи 1–3 (темы 01–09) готовы и прошли проверку компиляцией. Темы 10–26 ещё не генерировались.
+**На текущий момент:** Батчи 1–4 (темы 01–13) готовы и прошли проверку компиляцией. Темы 14–26 ещё не генерировались.
 
 ---
 
@@ -17,7 +17,7 @@
 | 1 | 01–03 | Основы проектирования (ООП, SOLID) | 🔍 |
 | 2 | 04–06 | Порождающие паттерны | 🔍 |
 | 3 | 07–09 | Структурные паттерны | 🔍 |
-| 4 | 10–13 | Поведенческие паттерны | ⬜ |
+| 4 | 10–13 | Поведенческие паттерны | 🔍 |
 | 5 | 14–17 | GRASP, Layered, DI/IoC, Hexagonal | ⬜ |
 | 6 | 18–21 | DDD (strategic/tactical), ES/CQRS, Saga | ⬜ |
 | 7 | 22–26 | Антипаттерны → стили → capstone | ⬜ |
@@ -39,10 +39,10 @@
 | 07 | Adapter, Decorator | `module-07-adapter-decorator` | ✅ | ✅ 7/7 | 🔍 |
 | 08 | Proxy, Facade | `module-08-proxy-facade` | ✅ | ✅ 7/7 | 🔍 |
 | 09 | Composite, Bridge | `module-09-composite-bridge` | ✅ | ✅ 7/7 | 🔍 |
-| 10 | Strategy, Command | `module-10-strategy-command` | ⬜ | ⬜ 0/7 | ⬜ |
-| 11 | Observer, Chain of Responsibility | `module-11-observer-chain-of-responsibility` | ⬜ | ⬜ 0/7 | ⬜ |
-| 12 | State, Template Method | `module-12-state-template-method` | ⬜ | ⬜ 0/7 | ⬜ |
-| 13 | Iterator, Visitor | `module-13-iterator-visitor` | ⬜ | ⬜ 0/7 | ⬜ |
+| 10 | Strategy, Command | `module-10-strategy-command` | ✅ | ✅ 7/7 | 🔍 |
+| 11 | Observer, Chain of Responsibility | `module-11-observer-chain-of-responsibility` | ✅ | ✅ 7/7 | 🔍 |
+| 12 | State, Template Method | `module-12-state-template-method` | ✅ | ✅ 7/7 | 🔍 |
+| 13 | Iterator, Visitor | `module-13-iterator-visitor` | ✅ | ✅ 7/7 | 🔍 |
 | 14 | GRASP | `module-14-grasp` | ⬜ | ⬜ 0/7 | ⬜ |
 | 15 | Layered (MVC, Clean) | `module-15-layered-mvc-clean` | ⬜ | ⬜ 0/7 | ⬜ |
 | 16 | DI и IoC | `module-16-dependency-injection-ioc` | ⬜ | ⬜ 0/7 | ⬜ |
@@ -64,3 +64,4 @@
 - **2026-06-09 — Батч 1 (темы 01–03):** ООП-принципы, SOLID SRP/OCP, SOLID LSP/ISP/DIP. По каждой теме — `theory.md` + 7 задач (каркасы без решений). Запущены сквозные проекты: OPS (тема 01/07 — каталог товаров; тема 02/07 — расчёт заказа) и BAM (тема 03/07 — перевод между счетами). Проверка: все 21 задача компилируются (`javac -encoding UTF-8`, 98 .java-файлов, 0 ошибок).
 - **2026-06-09 — Батч 2 (темы 04–06):** порождающие паттерны — Singleton/Factory Method, Abstract Factory/Builder, Prototype/Object Pool. По каждой теме `theory.md` + 7 задач-каркасов. Развитие сквозных проектов: OPS (04/07 — нумерация+фабрика заказов; 06/07 — шаблоны заказов + пул шлюзов), BAM (05/07 — продуктовые семьи Retail/Corporate + Builder выписки). Проверка: все 21 задача компилируются (97 .java, 0 ошибок).
 - **2026-06-09 — Батч 3 (темы 07–09):** структурные паттерны — Adapter/Decorator, Proxy/Facade, Composite/Bridge. По каждой теме `theory.md` + 7 задач-каркасов. Развитие сквозных проектов: BAM (07/07 — импорт транзакций Adapter + аудит Decorator; 09/07 — портфель счетов Composite + формат выписки Bridge), OPS (08/07 — Facade оформления + кеширующий Proxy каталога). Проверка: все 21 задача компилируются (113 .java, 0 ошибок).
+- **2026-06-09 — Батч 4 (темы 10–13):** поведенческие паттерны — Strategy/Command, Observer/CoR, State/Template Method, Iterator/Visitor. По каждой теме `theory.md` + 7 задач-каркасов (28 задач; module-10/Task02 — single-file демонстрация Strategy через лямбду). Развитие: OPS (10/07 — редактирование заказа командами с undo + стратегия скидки; 12/07 — State жизненного цикла заказа + Template Method пайплайна), BAM (11/07 — CoR валидации транзакций + Observer уведомлений; 13/07 — Iterator истории транзакций + Visitor отчёта). Проверка: все 28 задач компилируются (157 .java, 0 ошибок).
