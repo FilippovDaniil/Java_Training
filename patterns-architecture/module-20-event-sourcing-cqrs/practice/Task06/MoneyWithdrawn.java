@@ -1,0 +1,2 @@
+record MoneyWithdrawn(long amount) {
+}

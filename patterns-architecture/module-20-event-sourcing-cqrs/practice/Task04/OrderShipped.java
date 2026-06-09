@@ -1,0 +1,2 @@
+record OrderShipped(String orderId) {
+}

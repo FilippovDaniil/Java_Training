@@ -1,0 +1,2 @@
+record OrderPlaced(String orderId) {
+}
