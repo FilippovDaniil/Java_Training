@@ -1,0 +1,3 @@
+interface Sauce {
+    String describe();
+}

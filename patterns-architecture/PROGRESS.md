@@ -4,7 +4,7 @@
 
 **Легенда:** ⬜ не начато · 🟡 в работе · ✅ готово (theory.md + все задачи) · 🔍 прошло проверку батча
 
-**На текущий момент:** Батч 1 (темы 01–03) готов и прошёл проверку компиляцией. Темы 04–26 ещё не генерировались.
+**На текущий момент:** Батчи 1–2 (темы 01–06) готовы и прошли проверку компиляцией. Темы 07–26 ещё не генерировались.
 
 ---
 
@@ -15,7 +15,7 @@
 | Батч | Темы | Часть | Статус |
 |------|------|-------|--------|
 | 1 | 01–03 | Основы проектирования (ООП, SOLID) | 🔍 |
-| 2 | 04–06 | Порождающие паттерны | ⬜ |
+| 2 | 04–06 | Порождающие паттерны | 🔍 |
 | 3 | 07–09 | Структурные паттерны | ⬜ |
 | 4 | 10–13 | Поведенческие паттерны | ⬜ |
 | 5 | 14–17 | GRASP, Layered, DI/IoC, Hexagonal | ⬜ |
@@ -33,9 +33,9 @@
 | 01 | Принципы ООП | `module-01-oop-principles` | ✅ | ✅ 7/7 | 🔍 |
 | 02 | SOLID: SRP, OCP | `module-02-solid-srp-ocp` | ✅ | ✅ 7/7 | 🔍 |
 | 03 | SOLID: LSP, ISP, DIP | `module-03-solid-lsp-isp-dip` | ✅ | ✅ 7/7 | 🔍 |
-| 04 | Singleton, Factory Method | `module-04-singleton-factory-method` | ⬜ | ⬜ 0/7 | ⬜ |
-| 05 | Abstract Factory, Builder | `module-05-abstract-factory-builder` | ⬜ | ⬜ 0/7 | ⬜ |
-| 06 | Prototype, Object Pool | `module-06-prototype-pool` | ⬜ | ⬜ 0/7 | ⬜ |
+| 04 | Singleton, Factory Method | `module-04-singleton-factory-method` | ✅ | ✅ 7/7 | 🔍 |
+| 05 | Abstract Factory, Builder | `module-05-abstract-factory-builder` | ✅ | ✅ 7/7 | 🔍 |
+| 06 | Prototype, Object Pool | `module-06-prototype-pool` | ✅ | ✅ 7/7 | 🔍 |
 | 07 | Adapter, Decorator | `module-07-adapter-decorator` | ⬜ | ⬜ 0/7 | ⬜ |
 | 08 | Proxy, Facade | `module-08-proxy-facade` | ⬜ | ⬜ 0/7 | ⬜ |
 | 09 | Composite, Bridge | `module-09-composite-bridge` | ⬜ | ⬜ 0/7 | ⬜ |
@@ -62,3 +62,4 @@
 ## Журнал
 
 - **2026-06-09 — Батч 1 (темы 01–03):** ООП-принципы, SOLID SRP/OCP, SOLID LSP/ISP/DIP. По каждой теме — `theory.md` + 7 задач (каркасы без решений). Запущены сквозные проекты: OPS (тема 01/07 — каталог товаров; тема 02/07 — расчёт заказа) и BAM (тема 03/07 — перевод между счетами). Проверка: все 21 задача компилируются (`javac -encoding UTF-8`, 98 .java-файлов, 0 ошибок).
+- **2026-06-09 — Батч 2 (темы 04–06):** порождающие паттерны — Singleton/Factory Method, Abstract Factory/Builder, Prototype/Object Pool. По каждой теме `theory.md` + 7 задач-каркасов. Развитие сквозных проектов: OPS (04/07 — нумерация+фабрика заказов; 06/07 — шаблоны заказов + пул шлюзов), BAM (05/07 — продуктовые семьи Retail/Corporate + Builder выписки). Проверка: все 21 задача компилируются (97 .java, 0 ошибок).
