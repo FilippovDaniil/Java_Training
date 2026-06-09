@@ -4,7 +4,7 @@
 
 **Легенда:** ⬜ не начато · 🟡 в работе · ✅ готово (theory.md + все задачи) · 🔍 прошло проверку батча
 
-**На текущий момент:** Батчи 1–4 (темы 01–13) готовы; Батч 5 начат — темы 14–15 готовы и проверены, темы 16–17 ещё не генерировались. Темы 18–26 ещё не начаты.
+**На текущий момент:** Батчи 1–5 (темы 01–17) готовы и прошли проверку компиляцией. Темы 18–26 ещё не генерировались.
 
 ---
 
@@ -18,7 +18,7 @@
 | 2 | 04–06 | Порождающие паттерны | 🔍 |
 | 3 | 07–09 | Структурные паттерны | 🔍 |
 | 4 | 10–13 | Поведенческие паттерны | 🔍 |
-| 5 | 14–17 | GRASP, Layered, DI/IoC, Hexagonal | 🟡 (14–15 ✅, 16–17 ⬜) |
+| 5 | 14–17 | GRASP, Layered, DI/IoC, Hexagonal | 🔍 |
 | 6 | 18–21 | DDD (strategic/tactical), ES/CQRS, Saga | ⬜ |
 | 7 | 22–26 | Антипаттерны → стили → capstone | ⬜ |
 
@@ -45,8 +45,8 @@
 | 13 | Iterator, Visitor | `module-13-iterator-visitor` | ✅ | ✅ 7/7 | 🔍 |
 | 14 | GRASP | `module-14-grasp` | ✅ | ✅ 7/7 | 🔍 |
 | 15 | Layered (MVC, Clean) | `module-15-layered-mvc-clean` | ✅ | ✅ 7/7 | 🔍 |
-| 16 | DI и IoC | `module-16-dependency-injection-ioc` | ⬜ | ⬜ 0/7 | ⬜ |
-| 17 | Hexagonal (Ports & Adapters) | `module-17-hexagonal-ports-adapters` | ⬜ | ⬜ 0/7 | ⬜ |
+| 16 | DI и IoC | `module-16-dependency-injection-ioc` | ✅ | ✅ 7/7 | 🔍 |
+| 17 | Hexagonal (Ports & Adapters) | `module-17-hexagonal-ports-adapters` | ✅ | ✅ 7/7 | 🔍 |
 | 18 | Strategic DDD | `module-18-ddd-strategic` | ⬜ | ⬜ 0/7 | ⬜ |
 | 19 | Tactical DDD | `module-19-ddd-tactical` | ⬜ | ⬜ 0/7 | ⬜ |
 | 20 | Event Sourcing, CQRS | `module-20-event-sourcing-cqrs` | ⬜ | ⬜ 0/7 | ⬜ |
@@ -65,4 +65,5 @@
 - **2026-06-09 — Батч 2 (темы 04–06):** порождающие паттерны — Singleton/Factory Method, Abstract Factory/Builder, Prototype/Object Pool. По каждой теме `theory.md` + 7 задач-каркасов. Развитие сквозных проектов: OPS (04/07 — нумерация+фабрика заказов; 06/07 — шаблоны заказов + пул шлюзов), BAM (05/07 — продуктовые семьи Retail/Corporate + Builder выписки). Проверка: все 21 задача компилируются (97 .java, 0 ошибок).
 - **2026-06-09 — Батч 3 (темы 07–09):** структурные паттерны — Adapter/Decorator, Proxy/Facade, Composite/Bridge. По каждой теме `theory.md` + 7 задач-каркасов. Развитие сквозных проектов: BAM (07/07 — импорт транзакций Adapter + аудит Decorator; 09/07 — портфель счетов Composite + формат выписки Bridge), OPS (08/07 — Facade оформления + кеширующий Proxy каталога). Проверка: все 21 задача компилируются (113 .java, 0 ошибок).
 - **2026-06-09 — Батч 4 (темы 10–13):** поведенческие паттерны — Strategy/Command, Observer/CoR, State/Template Method, Iterator/Visitor. По каждой теме `theory.md` + 7 задач-каркасов (28 задач; module-10/Task02 — single-file демонстрация Strategy через лямбду). Развитие: OPS (10/07 — редактирование заказа командами с undo + стратегия скидки; 12/07 — State жизненного цикла заказа + Template Method пайплайна), BAM (11/07 — CoR валидации транзакций + Observer уведомлений; 13/07 — Iterator истории транзакций + Visitor отчёта). Проверка: все 28 задач компилируются (157 .java, 0 ошибок).
-- **2026-06-09 — Батч 5, часть 1 (темы 14–15):** архитектурные принципы — GRASP (Information Expert, Creator, Low Coupling, High Cohesion, Controller, Pure Fabrication) и Layered/MVC/Clean. По каждой теме `theory.md` + 7 задач-каркасов (14 задач). Развитие: OPS (14/07 — оформление заказа по GRASP: Controller→Service→Repository + Information Expert + Pure Fabrication), BAM (15/07 — слоистый банковский модуль Presentation→Business→Persistence + DTO). Темы чистого Java (проверка `javac`). Проверка: все 14 задач компилируются (63 .java, 0 ошибок). Темы 16–17 (DI/IoC, Hexagonal) — в следующей порции.
+- **2026-06-09 — Батч 5, часть 1 (темы 14–15):** архитектурные принципы — GRASP (Information Expert, Creator, Low Coupling, High Cohesion, Controller, Pure Fabrication) и Layered/MVC/Clean. По каждой теме `theory.md` + 7 задач-каркасов (14 задач). Развитие: OPS (14/07 — оформление заказа по GRASP: Controller→Service→Repository + Information Expert + Pure Fabrication), BAM (15/07 — слоистый банковский модуль Presentation→Business→Persistence + DTO). Темы чистого Java (проверка `javac`). Проверка: все 14 задач компилируются (63 .java, 0 ошибок).
+- **2026-06-09 — Батч 5, часть 2 (темы 16–17):** DI/IoC и Hexagonal — ЗАВЕРШАЕТ Батч 5. По каждой теме `theory.md` + 7 задач-каркасов (14 задач). Тема 16: ручной DI (constructor/setter injection), свой IoC-контейнер (Map рецептов), Service Locator (антипаттерн), тестируемость через двойники. Тема 17: входные/выходные порты, адаптеры, полный гексагон, замена адаптеров, тестирование ядра fake-адаптером. Решено держать чистым Java (Spring упомянут в теории как «настоящий» контейнер) — весь раздел остаётся проверяемым `javac`. Развитие: OPS (16/07 — сборка Controller→Service→Repository контейнером), BAM (17/07 — перевод в гексагоне: driving-адаптер→TransferUseCase→ядро→AccountRepository→driven-адаптер). Проверка: все 14 задач компилируются (75 .java, 0 ошибок).
