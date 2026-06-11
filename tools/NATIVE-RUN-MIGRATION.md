@@ -74,17 +74,16 @@ python tools/migrate_inplace.py --course java-course --from 2 --to 20 --apply
 - [x] **B8** patterns-architecture 01–13 — 103 rename, 465 pkg, compile clean
 - [x] **B9** patterns-architecture 14–26 — 104 rename, 378 pkg, compile clean. ✅ patterns-architecture ПОЛНОСТЬЮ
 - [x] **B10** algorithms-course 01–25 — 67 rename, 218 pkg, compile clean. ✅ algorithms-course ПОЛНОСТЬЮ. 🎉 ВСЕ 3 КУРСА мигрированы
-- [ ] **B11** Финал: доки + `run.ps1` поиск + JDK 21 в build.gradle (см. §8)
+- [x] **B11** Финал — toolchain 21, доки (390 ссылок), run.ps1 OK, clean compile 0 структурных (см. §8)
 
-## 8. Финал (B11)
+## 8. Финал (B11) — ВЫПОЛНЕНО
 
-- [ ] Пин JDK 21 в `build.gradle` (toolchain) — чтобы IDE/консоль всегда совпадали.
-- [ ] Добавить в deps `spring-boot-starter-oauth2-resource-server` (m99 Task06 импортирует `org.springframework.security.oauth2.jwt/jose`) — проверить, что jar есть в офлайн-кеше.
-- [ ] `run.ps1`: расширить поиск (пути уже не `module-*`, а `mNN_*`).
-- [ ] Доки на новые пути: `README.md` (корень + курсы), `*/PROGRESS.md`,
-      `LEARNING-METHODOLOGY.md`, память (`MEMORY.md` и связанные).
-- [ ] Снести `tools/External Tools.xml`/`migrate_inplace.py`? — нет, оставить как инструменты.
-- [ ] Финальный `gradlew compileJava` по всем трём курсам.
+- [x] Пин JDK 21 в `build.gradle` (`java.toolchain.languageVersion = 21`) — clean compile прошёл, Gradle нашёл toolchain.
+- [x] Доки: `tools/fix_doc_links.py` переписал 390 ссылок `module-NN-*` → `mNN_*` в `java-course/README.md`, `patterns-architecture/README.md` + `PROGRESS.md`, `algorithms-course/README.md` + `PROGRESS.md`. Корневой `README.md` и `LEARNING-METHODOLOGY.md` — 0 ссылок (не трогали).
+- [x] `run.ps1`: поиск резолвит `mNN_*` пути (проверено на m24).
+- [x] Финальный `gradlew clean compileJava` — exit 0, **0 структурных ошибок** по всем 3 курсам.
+- [ ] **ОСТАЁТСЯ (online):** `m99_…/practice/Task06.java` импортирует `org.springframework.security.oauth2.jwt/jose` — нужен dep `spring-security-oauth2-jose`/`spring-boot-starter-oauth2-resource-server`. Не добавлено: BOM 3.4.1 хочет 6.4.x, в офлайн-кеше только 6.2.4 → добавить при наличии сети. 1 задача из ~2986.
+- [ ] (опц.) Прозаические упоминания `module-NN` внутри `theory.md` (~390) — не критично, можно прогнать тем же `fix_doc_links.py` при желании.
 
 ## 9. Откат
 

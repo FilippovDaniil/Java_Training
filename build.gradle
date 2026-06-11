@@ -5,6 +5,15 @@ plugins {
 group = 'training'
 version = '1.0-SNAPSHOT'
 
+// Pin JDK 21 so the IDE and CLI always agree. IntelliJ 2025.2 mis-resolves the
+// standard library on JDK 25 (red System.out.println) — 21 (LTS) is fully
+// supported. Set IDE: Gradle JVM = 21 and Project SDK = 21.
+java {
+    toolchain {
+        languageVersion = JavaLanguageVersion.of(21)
+    }
+}
+
 repositories {
     mavenCentral()
 }

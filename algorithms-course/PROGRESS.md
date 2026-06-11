@@ -29,31 +29,31 @@
 
 | #  | Тема | Каталог | theory.md | Задачи | Проверка |
 |----|------|---------|-----------|--------|----------|
-| 01 | Анализ сложности (Big O) | `module-01-complexity-big-o` | ✅ | ✅ 7/7 | 🔍 |
-| 02 | Массивы | `module-02-arrays` | ✅ | ✅ 7/7 | 🔍 |
-| 03 | Связные списки | `module-03-linked-lists` | ✅ | ✅ 7/7 | 🔍 |
-| 04 | Стек и очередь | `module-04-stack-queue` | ✅ | ✅ 7/7 | 🔍 |
-| 05 | Рекурсия и итерация | `module-05-recursion-iteration` | ✅ | ✅ 7/7 | 🔍 |
-| 06 | Линейный и бинарный поиск | `module-06-search-linear-binary` | ✅ | ✅ 7/7 | 🔍 |
-| 07 | Простые сортировки | `module-07-simple-sorts` | ✅ | ✅ 7/7 | 🔍 |
-| 08 | Сортировка слиянием | `module-08-merge-sort` | ✅ | ✅ 7/7 | 🔍 |
-| 09 | Быстрая сортировка | `module-09-quick-sort` | ✅ | ✅ 7/7 | 🔍 |
-| 10 | Counting / Radix Sort | `module-10-counting-radix-sort` | ✅ | ✅ 7/7 | 🔍 |
-| 11 | Поиск подстроки | `module-11-substring-search` | ✅ | ✅ 7/7 | 🔍 |
-| 12 | Двоичные деревья поиска (BST) | `module-12-binary-search-tree` | ✅ | ✅ 7/7 | 🔍 |
-| 13 | Сбалансированные деревья (AVL) | `module-13-balanced-trees-avl` | ✅ | ✅ 7/7 | 🔍 |
-| 14 | Хеш-таблицы | `module-14-hash-tables` | ✅ | ✅ 7/7 | 🔍 |
-| 15 | Куча (Priority Queue) | `module-15-heap-priority-queue` | ✅ | ✅ 7/7 | 🔍 |
-| 16 | BitSet и DSU (Union-Find) | `module-16-bitset-disjoint-set-union` | ✅ | ✅ 7/7 | 🔍 |
-| 17 | Представление графов | `module-17-graph-representation` | ✅ | ✅ 7/7 | 🔍 |
-| 18 | Обход графов: BFS и DFS | `module-18-graph-traversal-bfs-dfs` | ✅ | ✅ 7/7 | 🔍 |
-| 19 | Кратчайшие пути (Дейкстра, Беллман-Форд) | `module-19-shortest-paths-dijkstra-bellman-ford` | ✅ | ✅ 7/7 | 🔍 |
-| 20 | Минимальное остовное дерево (Прим, Крускал) | `module-20-mst-prim-kruskal` | ✅ | ✅ 7/7 | 🔍 |
-| 21 | Алгоритмы на DAG | `module-21-dag-topological-sort` | ✅ | ✅ 7/7 | 🔍 |
-| 22 | Введение в DP | `module-22-dynamic-programming-intro` | ✅ | ✅ 7/7 | 🔍 |
-| 23 | DP на подотрезках и многомерное | `module-23-dp-intervals-2d` | ✅ | ✅ 7/7 | 🔍 |
-| 24 | Строки: Trie, Ахо-Корасик | `module-24-strings-trie-aho-corasick` | ✅ | ✅ 7/7 | 🔍 |
-| 25 | Сжатие данных (Хаффман, LZW) | `module-25-compression-huffman-lzw` | ✅ | ✅ 7/7 | 🔍 |
+| 01 | Анализ сложности (Big O) | `m01_complexity_big_o` | ✅ | ✅ 7/7 | 🔍 |
+| 02 | Массивы | `m02_arrays` | ✅ | ✅ 7/7 | 🔍 |
+| 03 | Связные списки | `m03_linked_lists` | ✅ | ✅ 7/7 | 🔍 |
+| 04 | Стек и очередь | `m04_stack_queue` | ✅ | ✅ 7/7 | 🔍 |
+| 05 | Рекурсия и итерация | `m05_recursion_iteration` | ✅ | ✅ 7/7 | 🔍 |
+| 06 | Линейный и бинарный поиск | `m06_search_linear_binary` | ✅ | ✅ 7/7 | 🔍 |
+| 07 | Простые сортировки | `m07_simple_sorts` | ✅ | ✅ 7/7 | 🔍 |
+| 08 | Сортировка слиянием | `m08_merge_sort` | ✅ | ✅ 7/7 | 🔍 |
+| 09 | Быстрая сортировка | `m09_quick_sort` | ✅ | ✅ 7/7 | 🔍 |
+| 10 | Counting / Radix Sort | `m10_counting_radix_sort` | ✅ | ✅ 7/7 | 🔍 |
+| 11 | Поиск подстроки | `m11_substring_search` | ✅ | ✅ 7/7 | 🔍 |
+| 12 | Двоичные деревья поиска (BST) | `m12_binary_search_tree` | ✅ | ✅ 7/7 | 🔍 |
+| 13 | Сбалансированные деревья (AVL) | `m13_balanced_trees_avl` | ✅ | ✅ 7/7 | 🔍 |
+| 14 | Хеш-таблицы | `m14_hash_tables` | ✅ | ✅ 7/7 | 🔍 |
+| 15 | Куча (Priority Queue) | `m15_heap_priority_queue` | ✅ | ✅ 7/7 | 🔍 |
+| 16 | BitSet и DSU (Union-Find) | `m16_bitset_disjoint_set_union` | ✅ | ✅ 7/7 | 🔍 |
+| 17 | Представление графов | `m17_graph_representation` | ✅ | ✅ 7/7 | 🔍 |
+| 18 | Обход графов: BFS и DFS | `m18_graph_traversal_bfs_dfs` | ✅ | ✅ 7/7 | 🔍 |
+| 19 | Кратчайшие пути (Дейкстра, Беллман-Форд) | `m19_shortest_paths_dijkstra_bellman_ford` | ✅ | ✅ 7/7 | 🔍 |
+| 20 | Минимальное остовное дерево (Прим, Крускал) | `m20_mst_prim_kruskal` | ✅ | ✅ 7/7 | 🔍 |
+| 21 | Алгоритмы на DAG | `m21_dag_topological_sort` | ✅ | ✅ 7/7 | 🔍 |
+| 22 | Введение в DP | `m22_dynamic_programming_intro` | ✅ | ✅ 7/7 | 🔍 |
+| 23 | DP на подотрезках и многомерное | `m23_dp_intervals_2d` | ✅ | ✅ 7/7 | 🔍 |
+| 24 | Строки: Trie, Ахо-Корасик | `m24_strings_trie_aho_corasick` | ✅ | ✅ 7/7 | 🔍 |
+| 25 | Сжатие данных (Хаффман, LZW) | `m25_compression_huffman_lzw` | ✅ | ✅ 7/7 | 🔍 |
 
 ---
 

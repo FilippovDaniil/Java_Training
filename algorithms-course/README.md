@@ -96,51 +96,51 @@ java TaskNN
 
 | #  | Тема | Содержание | Data-Cruncher (07) | Каталог |
 |----|------|-----------|--------------------|---------|
-| 01 | Анализ сложности (Big O, Θ, Ω) | O(1)/O(n)/O(n²)/O(log n), память, сложность рекурсии (Master Theorem упрощённо) | ComplexityAnalyzer | [`module-01-complexity-big-o`](module-01-complexity-big-o/theory.md) |
-| 02 | Массивы | статические/динамические, `System.arraycopy`, амортизация `ArrayList` | загрузка CSV + rotate | [`module-02-arrays`](module-02-arrays/theory.md) |
-| 03 | Связные списки | одно-/двусвязный, вставка/удаление, черепаха-заяц, цикл Флойда | LRU-кэш | [`module-03-linked-lists`](module-03-linked-lists/theory.md) |
-| 04 | Стек и очередь | LIFO/FIFO, `ArrayDeque`, сбалансированность скобок, MinStack, circular buffer | очередь задач + RPN | [`module-04-stack-queue`](module-04-stack-queue/theory.md) |
-| 05 | Рекурсия и итерация | стек вызовов, хвостовая рекурсия, мемоизация, бэктрекинг | генератор комбинаций | [`module-05-recursion-iteration`](module-05-recursion-iteration/theory.md) |
-| 06 | Линейный и бинарный поиск | O(n) vs O(log n), границы вставки, rotated array, sqrt бинпоиском | поиск по ключу + бенчмарк | [`module-06-search-linear-binary`](module-06-search-linear-binary/theory.md) |
+| 01 | Анализ сложности (Big O, Θ, Ω) | O(1)/O(n)/O(n²)/O(log n), память, сложность рекурсии (Master Theorem упрощённо) | ComplexityAnalyzer | [`m01_complexity_big_o`](m01_complexity_big_o/theory.md) |
+| 02 | Массивы | статические/динамические, `System.arraycopy`, амортизация `ArrayList` | загрузка CSV + rotate | [`m02_arrays`](m02_arrays/theory.md) |
+| 03 | Связные списки | одно-/двусвязный, вставка/удаление, черепаха-заяц, цикл Флойда | LRU-кэш | [`m03_linked_lists`](m03_linked_lists/theory.md) |
+| 04 | Стек и очередь | LIFO/FIFO, `ArrayDeque`, сбалансированность скобок, MinStack, circular buffer | очередь задач + RPN | [`m04_stack_queue`](m04_stack_queue/theory.md) |
+| 05 | Рекурсия и итерация | стек вызовов, хвостовая рекурсия, мемоизация, бэктрекинг | генератор комбинаций | [`m05_recursion_iteration`](m05_recursion_iteration/theory.md) |
+| 06 | Линейный и бинарный поиск | O(n) vs O(log n), границы вставки, rotated array, sqrt бинпоиском | поиск по ключу + бенчмарк | [`m06_search_linear_binary`](m06_search_linear_binary/theory.md) |
 
 ### Часть 2 — Сортировки и более сложный поиск (07–11)
 
 | #  | Тема | Содержание | Data-Cruncher (07) | Каталог |
 |----|------|-----------|--------------------|---------|
-| 07 | Простые сортировки | пузырёк, выбором, вставками; стабильность, адаптивность | выбор сортировки по n | [`module-07-simple-sorts`](module-07-simple-sorts/theory.md) |
-| 08 | Сортировка слиянием | разделяй-и-властвуй, O(n log n), инверсии, merge для списка | merge как основной метод | [`module-08-merge-sort`](module-08-merge-sort/theory.md) |
-| 09 | Быстрая сортировка | Ломуто vs Хоар, median-of-three, рандомизация, Quick Select | медиана и квантили | [`module-09-quick-sort`](module-09-quick-sort/theory.md) |
-| 10 | Counting / Radix Sort | линейные сортировки, O(n+k), LSD radix, стабильность | целочисленная сортировка по диапазону | [`module-10-counting-radix-sort`](module-10-counting-radix-sort/theory.md) |
-| 11 | Поиск подстроки | наивный, КМП (префикс-функция), Бойер-Мур (стоп-символы) | поиск паттернов в текстах | [`module-11-substring-search`](module-11-substring-search/theory.md) |
+| 07 | Простые сортировки | пузырёк, выбором, вставками; стабильность, адаптивность | выбор сортировки по n | [`m07_simple_sorts`](m07_simple_sorts/theory.md) |
+| 08 | Сортировка слиянием | разделяй-и-властвуй, O(n log n), инверсии, merge для списка | merge как основной метод | [`m08_merge_sort`](m08_merge_sort/theory.md) |
+| 09 | Быстрая сортировка | Ломуто vs Хоар, median-of-three, рандомизация, Quick Select | медиана и квантили | [`m09_quick_sort`](m09_quick_sort/theory.md) |
+| 10 | Counting / Radix Sort | линейные сортировки, O(n+k), LSD radix, стабильность | целочисленная сортировка по диапазону | [`m10_counting_radix_sort`](m10_counting_radix_sort/theory.md) |
+| 11 | Поиск подстроки | наивный, КМП (префикс-функция), Бойер-Мур (стоп-символы) | поиск паттернов в текстах | [`m11_substring_search`](m11_substring_search/theory.md) |
 
 ### Часть 3 — Деревья, хеш-таблицы, кучи (12–16)
 
 | #  | Тема | Содержание | Data-Cruncher (07) | Каталог |
 |----|------|-----------|--------------------|---------|
-| 12 | Двоичные деревья поиска (BST) | вставка/поиск/удаление, обходы (pre/in/post/level-order) | индексация через BST | [`module-12-binary-search-tree`](module-12-binary-search-tree/theory.md) |
-| 13 | Сбалансированные деревья | AVL (фактор баланса, вращения LL/RR/LR/RL), обзор RB-деревьев | замена BST на AVL | [`module-13-balanced-trees-avl`](module-13-balanced-trees-avl/theory.md) |
-| 14 | Хеш-таблицы | хеширование, цепочки vs открытая адресация, рехеширование | индекс на хеш-таблице | [`module-14-hash-tables`](module-14-hash-tables/theory.md) |
-| 15 | Куча (Priority Queue) | min/max-heap, siftUp/siftDown, heapify за O(n), heapsort | приоритетная очередь задач | [`module-15-heap-priority-queue`](module-15-heap-priority-queue/theory.md) |
-| 16 | BitSet и DSU (Union-Find) | битовые массивы, непересекающиеся множества, сжатие пути/ранг | BitSet-уникальность + DSU-кластеры | [`module-16-bitset-disjoint-set-union`](module-16-bitset-disjoint-set-union/theory.md) |
+| 12 | Двоичные деревья поиска (BST) | вставка/поиск/удаление, обходы (pre/in/post/level-order) | индексация через BST | [`m12_binary_search_tree`](m12_binary_search_tree/theory.md) |
+| 13 | Сбалансированные деревья | AVL (фактор баланса, вращения LL/RR/LR/RL), обзор RB-деревьев | замена BST на AVL | [`m13_balanced_trees_avl`](m13_balanced_trees_avl/theory.md) |
+| 14 | Хеш-таблицы | хеширование, цепочки vs открытая адресация, рехеширование | индекс на хеш-таблице | [`m14_hash_tables`](m14_hash_tables/theory.md) |
+| 15 | Куча (Priority Queue) | min/max-heap, siftUp/siftDown, heapify за O(n), heapsort | приоритетная очередь задач | [`m15_heap_priority_queue`](m15_heap_priority_queue/theory.md) |
+| 16 | BitSet и DSU (Union-Find) | битовые массивы, непересекающиеся множества, сжатие пути/ранг | BitSet-уникальность + DSU-кластеры | [`m16_bitset_disjoint_set_union`](m16_bitset_disjoint_set_union/theory.md) |
 
 ### Часть 4 — Графы и алгоритмы на графах (17–21)
 
 | #  | Тема | Содержание | Data-Cruncher (07) | Каталог |
 |----|------|-----------|--------------------|---------|
-| 17 | Представление графов | матрица vs список смежности, взвешенные графы, двудольность | загрузка графа дорог | [`module-17-graph-representation`](module-17-graph-representation/theory.md) |
-| 18 | Обход графов: BFS и DFS | рекурсивный/итеративный, компоненты, циклы, топосортировка | связность + кратчайший путь | [`module-18-graph-traversal-bfs-dfs`](module-18-graph-traversal-bfs-dfs/theory.md) |
-| 19 | Кратчайшие пути | Дейкстра (PQ), Беллман-Форд, отрицательные циклы | навигация с весами | [`module-19-shortest-paths-dijkstra-bellman-ford`](module-19-shortest-paths-dijkstra-bellman-ford/theory.md) |
-| 20 | Минимальное остовное дерево | Прим (куча), Крускал (DSU) | оптимальная сеть связи | [`module-20-mst-prim-kruskal`](module-20-mst-prim-kruskal/theory.md) |
-| 21 | Алгоритмы на DAG | топосортировка (Кан), longest path, критический путь | планировщик задач с зависимостями | [`module-21-dag-topological-sort`](module-21-dag-topological-sort/theory.md) |
+| 17 | Представление графов | матрица vs список смежности, взвешенные графы, двудольность | загрузка графа дорог | [`m17_graph_representation`](m17_graph_representation/theory.md) |
+| 18 | Обход графов: BFS и DFS | рекурсивный/итеративный, компоненты, циклы, топосортировка | связность + кратчайший путь | [`m18_graph_traversal_bfs_dfs`](m18_graph_traversal_bfs_dfs/theory.md) |
+| 19 | Кратчайшие пути | Дейкстра (PQ), Беллман-Форд, отрицательные циклы | навигация с весами | [`m19_shortest_paths_dijkstra_bellman_ford`](m19_shortest_paths_dijkstra_bellman_ford/theory.md) |
+| 20 | Минимальное остовное дерево | Прим (куча), Крускал (DSU) | оптимальная сеть связи | [`m20_mst_prim_kruskal`](m20_mst_prim_kruskal/theory.md) |
+| 21 | Алгоритмы на DAG | топосортировка (Кан), longest path, критический путь | планировщик задач с зависимостями | [`m21_dag_topological_sort`](m21_dag_topological_sort/theory.md) |
 
 ### Часть 5 — Продвинутые темы: DP, строки, сжатие (22–25)
 
 | #  | Тема | Содержание | Data-Cruncher (07) | Каталог |
 |----|------|-----------|--------------------|---------|
-| 22 | Введение в DP | перекрывающиеся подзадачи, мемоизация vs табуляция, рюкзак, Левенштейн | рюкзак + схожесть строк | [`module-22-dynamic-programming-intro`](module-22-dynamic-programming-intro/theory.md) |
-| 23 | DP на подотрезках и многомерное | LIS (O(n²)/O(n log n)), цепочка матриц, палиндромы, сетка с препятствиями | LIS + палиндромы | [`module-23-dp-intervals-2d`](module-23-dp-intervals-2d/theory.md) |
-| 24 | Строки: Trie, Ахо-Корасик | бор, автодополнение, суффиксные ссылки, поиск множества паттернов | запрещённые слова + автодополнение | [`module-24-strings-trie-aho-corasick`](module-24-strings-trie-aho-corasick/theory.md) |
-| 25 | Сжатие данных | Хаффман (жадный), кодирование/декодирование, LZW | **финал:** сжатие/распаковка экспорта | [`module-25-compression-huffman-lzw`](module-25-compression-huffman-lzw/theory.md) |
+| 22 | Введение в DP | перекрывающиеся подзадачи, мемоизация vs табуляция, рюкзак, Левенштейн | рюкзак + схожесть строк | [`m22_dynamic_programming_intro`](m22_dynamic_programming_intro/theory.md) |
+| 23 | DP на подотрезках и многомерное | LIS (O(n²)/O(n log n)), цепочка матриц, палиндромы, сетка с препятствиями | LIS + палиндромы | [`m23_dp_intervals_2d`](m23_dp_intervals_2d/theory.md) |
+| 24 | Строки: Trie, Ахо-Корасик | бор, автодополнение, суффиксные ссылки, поиск множества паттернов | запрещённые слова + автодополнение | [`m24_strings_trie_aho_corasick`](m24_strings_trie_aho_corasick/theory.md) |
+| 25 | Сжатие данных | Хаффман (жадный), кодирование/декодирование, LZW | **финал:** сжатие/распаковка экспорта | [`m25_compression_huffman_lzw`](m25_compression_huffman_lzw/theory.md) |
 
 ---
 

@@ -56,139 +56,139 @@ java TaskNN
 
 | #  | Тема | Каталог |
 |----|------|---------|
-| 01 | Вводное занятие. Первая программа | [`module-01-intro-first-program`](module-01-intro-first-program/theory.md) |
-| 02 | Переменные, типы `int` и `String` | [`module-02-variables-int-string`](module-02-variables-int-string/theory.md) |
-| 03 | Типы данных и ввод с клавиатуры. IDEA | [`module-03-types-keyboard-input-idea`](module-03-types-keyboard-input-idea/theory.md) |
-| 04 | Условный оператор (`if`, `switch`, тернарный) | [`module-04-conditionals`](module-04-conditionals/theory.md) |
-| 05 | Циклы (`while`, `for`, `do-while`, `break`, `continue`) | [`module-05-loops`](module-05-loops/theory.md) |
-| 06 | Одномерные массивы | [`module-06-arrays`](module-06-arrays/theory.md) |
-| 07 | Многомерные массивы | [`module-07-multidimensional-arrays`](module-07-multidimensional-arrays/theory.md) |
-| 08 | Методы: параметры, возврат, рекурсия | [`module-08-methods`](module-08-methods/theory.md) |
-| 09 | Строки (`String`, `StringBuilder`, `String.format`) | [`module-09-strings`](module-09-strings/theory.md) |
-| 10 | Знакомство с ООП (примитивы, ссылки, `null`) | [`module-10-oop-intro`](module-10-oop-intro/theory.md) |
-| 11 | Объекты, конструкторы, инкапсуляция, `equals`/`hashCode` | [`module-11-objects-constructors`](module-11-objects-constructors/theory.md) |
-| 12 | Классы и `static`, вложенные классы | [`module-12-classes-static`](module-12-classes-static/theory.md) |
-| 13 | Списки и Generics (`ArrayList`, обёртки) | [`module-13-lists-generics`](module-13-lists-generics/theory.md) |
-| 14 | `Set`, `HashSet`, итератор, `for-each` | [`module-14-collections-set-iterator`](module-14-collections-set-iterator/theory.md) |
-| 15 | `Map`, `HashMap`, `Collections` | [`module-15-map-collections-framework`](module-15-map-collections-framework/theory.md) |
-| 16 | Перечисления (`Enum`) и `switch` | [`module-16-enums-switch`](module-16-enums-switch/theory.md) |
-| 17 | Исключения (`try-catch`, иерархия, `finally`) | [`module-17-exceptions`](module-17-exceptions/theory.md) |
-| 18 | Потоки ввода-вывода (`InputStream`, `Reader`) | [`module-18-io-streams`](module-18-io-streams/theory.md) |
-| 19 | `java.nio` (`Path`, `Files`), паттерн Decorator | [`module-19-io-nio`](module-19-io-nio/theory.md) |
-| 20 | Дата и время (`java.time`) | [`module-20-date-time`](module-20-date-time/theory.md) |
-| 21 | Основы Git | [`module-21-git`](module-21-git/theory.md) |
-| 22 | ООП: инкапсуляция, полиморфизм, интерфейсы | [`module-22-oop-encapsulation-polymorphism-interfaces`](module-22-oop-encapsulation-polymorphism-interfaces/theory.md) |
-| 23 | ООП: перегрузка, переопределение, абстракция | [`module-23-oop-overloading-overriding-abstract`](module-23-oop-overloading-overriding-abstract/theory.md) |
-| 24 | Stream API и лямбда-выражения | [`module-24-stream-api-lambda`](module-24-stream-api-lambda/theory.md) |
-| 25 | Многопоточность (`Thread`, `ExecutorService`) | [`module-25-multithreading-concurrency`](module-25-multithreading-concurrency/theory.md) |
-| 26 | Reflection API и аннотации | [`module-26-reflection-annotations`](module-26-reflection-annotations/theory.md) |
-| 27 | Основы Maven (`pom.xml`, lifecycle) | [`module-27-maven`](module-27-maven/theory.md) |
-| 28 | Модульное тестирование с JUnit | [`module-28-junit`](module-28-junit/theory.md) |
+| 01 | Вводное занятие. Первая программа | [`m01_intro_first_program`](m01_intro_first_program/theory.md) |
+| 02 | Переменные, типы `int` и `String` | [`m02_variables_int_string`](m02_variables_int_string/theory.md) |
+| 03 | Типы данных и ввод с клавиатуры. IDEA | [`m03_types_keyboard_input_idea`](m03_types_keyboard_input_idea/theory.md) |
+| 04 | Условный оператор (`if`, `switch`, тернарный) | [`m04_conditionals`](m04_conditionals/theory.md) |
+| 05 | Циклы (`while`, `for`, `do-while`, `break`, `continue`) | [`m05_loops`](m05_loops/theory.md) |
+| 06 | Одномерные массивы | [`m06_arrays`](m06_arrays/theory.md) |
+| 07 | Многомерные массивы | [`m07_multidimensional_arrays`](m07_multidimensional_arrays/theory.md) |
+| 08 | Методы: параметры, возврат, рекурсия | [`m08_methods`](m08_methods/theory.md) |
+| 09 | Строки (`String`, `StringBuilder`, `String.format`) | [`m09_strings`](m09_strings/theory.md) |
+| 10 | Знакомство с ООП (примитивы, ссылки, `null`) | [`m10_oop_intro`](m10_oop_intro/theory.md) |
+| 11 | Объекты, конструкторы, инкапсуляция, `equals`/`hashCode` | [`m11_objects_constructors`](m11_objects_constructors/theory.md) |
+| 12 | Классы и `static`, вложенные классы | [`m12_classes_static`](m12_classes_static/theory.md) |
+| 13 | Списки и Generics (`ArrayList`, обёртки) | [`m13_lists_generics`](m13_lists_generics/theory.md) |
+| 14 | `Set`, `HashSet`, итератор, `for-each` | [`m14_collections_set_iterator`](m14_collections_set_iterator/theory.md) |
+| 15 | `Map`, `HashMap`, `Collections` | [`m15_map_collections_framework`](m15_map_collections_framework/theory.md) |
+| 16 | Перечисления (`Enum`) и `switch` | [`m16_enums_switch`](m16_enums_switch/theory.md) |
+| 17 | Исключения (`try-catch`, иерархия, `finally`) | [`m17_exceptions`](m17_exceptions/theory.md) |
+| 18 | Потоки ввода-вывода (`InputStream`, `Reader`) | [`m18_io_streams`](m18_io_streams/theory.md) |
+| 19 | `java.nio` (`Path`, `Files`), паттерн Decorator | [`m19_io_nio`](m19_io_nio/theory.md) |
+| 20 | Дата и время (`java.time`) | [`m20_date_time`](m20_date_time/theory.md) |
+| 21 | Основы Git | [`m21_git`](m21_git/theory.md) |
+| 22 | ООП: инкапсуляция, полиморфизм, интерфейсы | [`m22_oop_encapsulation_polymorphism_interfaces`](m22_oop_encapsulation_polymorphism_interfaces/theory.md) |
+| 23 | ООП: перегрузка, переопределение, абстракция | [`m23_oop_overloading_overriding_abstract`](m23_oop_overloading_overriding_abstract/theory.md) |
+| 24 | Stream API и лямбда-выражения | [`m24_stream_api_lambda`](m24_stream_api_lambda/theory.md) |
+| 25 | Многопоточность (`Thread`, `ExecutorService`) | [`m25_multithreading_concurrency`](m25_multithreading_concurrency/theory.md) |
+| 26 | Reflection API и аннотации | [`m26_reflection_annotations`](m26_reflection_annotations/theory.md) |
+| 27 | Основы Maven (`pom.xml`, lifecycle) | [`m27_maven`](m27_maven/theory.md) |
+| 28 | Модульное тестирование с JUnit | [`m28_junit`](m28_junit/theory.md) |
 
 ### Часть 2 — Инструменты, БД, Spring (29–66)
 
 | #  | Тема | Каталог |
 |----|------|---------|
-| 29 | GC и типы ссылок (`java.lang.ref`) | [`module-29-gc-reference-types`](module-29-gc-reference-types/theory.md) |
-| 30 | Паттерны проектирования | [`module-30-design-patterns`](module-30-design-patterns/theory.md) |
-| 31 | Методологии разработки *(теория)* | [`module-31-dev-methodologies`](module-31-dev-methodologies/theory.md) |
-| 32 | Maven: многомодульность, профили, плагины | [`module-32-maven-multimodule`](module-32-maven-multimodule/theory.md) |
-| 33 | Guava и Apache Commons | [`module-33-guava-apache-commons`](module-33-guava-apache-commons/theory.md) |
-| 34 | Тестирование: JUnit 5 + Mockito | [`module-34-testing-junit-mockito`](module-34-testing-junit-mockito/theory.md) |
-| 35 | Логирование (SLF4J / Logback) | [`module-35-logging`](module-35-logging/theory.md) |
-| 36 | Основы сетей *(теория)* | [`module-36-network-basics`](module-36-network-basics/theory.md) |
-| 37 | Архитектура ПО *(теория)* | [`module-37-software-architecture`](module-37-software-architecture/theory.md) |
-| 38 | Протокол HTTP (`java.net.http`) | [`module-38-http-protocol`](module-38-http-protocol/theory.md) |
-| 39 | Сервлеты *(теория)* | [`module-39-servlets`](module-39-servlets/theory.md) |
-| 40 | Контейнеры сервлетов *(теория)* | [`module-40-servlet-containers`](module-40-servlet-containers/theory.md) |
-| 41 | MVC и JSP *(теория)* | [`module-41-mvc-jsp`](module-41-mvc-jsp/theory.md) |
-| 42 | Веб-сервисы *(теория)* | [`module-42-web-services`](module-42-web-services/theory.md) |
-| 43 | HTML и CSS *(теория)* | [`module-43-html-css`](module-43-html-css/theory.md) |
-| 44 | Введение в БД (SQL) | [`module-44-databases-intro`](module-44-databases-intro/theory.md) |
-| 45 | SQL DML | [`module-45-sql-dml`](module-45-sql-dml/theory.md) |
-| 46 | SQL-запросы | [`module-46-sql-queries`](module-46-sql-queries/theory.md) |
-| 47 | Транзакции | [`module-47-transactions`](module-47-transactions/theory.md) |
-| 48 | Проектирование БД | [`module-48-database-design`](module-48-database-design/theory.md) |
-| 49 | JDBC, ч.1 | [`module-49-jdbc-1`](module-49-jdbc-1/theory.md) |
-| 50 | JDBC, ч.2 | [`module-50-jdbc-2`](module-50-jdbc-2/theory.md) |
-| 51 | Hibernate ORM | [`module-51-hibernate-orm`](module-51-hibernate-orm/theory.md) |
-| 52 | Hibernate: связи | [`module-52-hibernate-relationships`](module-52-hibernate-relationships/theory.md) |
-| 53 | Hibernate: наследование | [`module-53-hibernate-inheritance`](module-53-hibernate-inheritance/theory.md) |
-| 54 | Gradle | [`module-54-gradle-build-tools`](module-54-gradle-build-tools/theory.md) |
-| 55 | HTTP basics (`java.net.http`) | [`module-55-http-basics`](module-55-http-basics/theory.md) |
-| 56 | JSON, Jackson, DTO | [`module-56-json-jackson-dto`](module-56-json-jackson-dto/theory.md) |
-| 57 | Java HTTP Client | [`module-57-java-http-client`](module-57-java-http-client/theory.md) |
-| 58 | Ручной HTTP-сервер (JDK) | [`module-58-jdk-httpserver`](module-58-jdk-httpserver/theory.md) |
-| 59 | Spring Core: IoC / DI | [`module-59-spring-core-intro`](module-59-spring-core-intro/theory.md) |
-| 60 | Spring Core: бины, стереотипы | [`module-60-spring-core-beans`](module-60-spring-core-beans/theory.md) |
-| 61 | Spring Core: Qualifier, scopes, lifecycle | [`module-61-spring-core-advanced`](module-61-spring-core-advanced/theory.md) |
-| 62 | Spring Core: конфигурация, профили | [`module-62-spring-core-configuration`](module-62-spring-core-configuration/theory.md) |
-| 63 | Spring Core: события и AOP | [`module-63-spring-core-events-aop`](module-63-spring-core-events-aop/theory.md) |
-| 64 | Spring Boot: введение | [`module-64-spring-boot-intro`](module-64-spring-boot-intro/theory.md) |
-| 65 | Spring Boot: web + конфигурация | [`module-65-spring-boot-web-config`](module-65-spring-boot-web-config/theory.md) |
-| 66 | Spring Boot: Actuator, тесты, упаковка | [`module-66-spring-boot-devops`](module-66-spring-boot-devops/theory.md) |
+| 29 | GC и типы ссылок (`java.lang.ref`) | [`m29_gc_reference_types`](m29_gc_reference_types/theory.md) |
+| 30 | Паттерны проектирования | [`m30_design_patterns`](m30_design_patterns/theory.md) |
+| 31 | Методологии разработки *(теория)* | [`m31_dev_methodologies`](m31_dev_methodologies/theory.md) |
+| 32 | Maven: многомодульность, профили, плагины | [`m32_maven_multimodule`](m32_maven_multimodule/theory.md) |
+| 33 | Guava и Apache Commons | [`m33_guava_apache_commons`](m33_guava_apache_commons/theory.md) |
+| 34 | Тестирование: JUnit 5 + Mockito | [`m34_testing_junit_mockito`](m34_testing_junit_mockito/theory.md) |
+| 35 | Логирование (SLF4J / Logback) | [`m35_logging`](m35_logging/theory.md) |
+| 36 | Основы сетей *(теория)* | [`m36_network_basics`](m36_network_basics/theory.md) |
+| 37 | Архитектура ПО *(теория)* | [`m37_software_architecture`](m37_software_architecture/theory.md) |
+| 38 | Протокол HTTP (`java.net.http`) | [`m38_http_protocol`](m38_http_protocol/theory.md) |
+| 39 | Сервлеты *(теория)* | [`m39_servlets`](m39_servlets/theory.md) |
+| 40 | Контейнеры сервлетов *(теория)* | [`m40_servlet_containers`](m40_servlet_containers/theory.md) |
+| 41 | MVC и JSP *(теория)* | [`m41_mvc_jsp`](m41_mvc_jsp/theory.md) |
+| 42 | Веб-сервисы *(теория)* | [`m42_web_services`](m42_web_services/theory.md) |
+| 43 | HTML и CSS *(теория)* | [`m43_html_css`](m43_html_css/theory.md) |
+| 44 | Введение в БД (SQL) | [`m44_databases_intro`](m44_databases_intro/theory.md) |
+| 45 | SQL DML | [`m45_sql_dml`](m45_sql_dml/theory.md) |
+| 46 | SQL-запросы | [`m46_sql_queries`](m46_sql_queries/theory.md) |
+| 47 | Транзакции | [`m47_transactions`](m47_transactions/theory.md) |
+| 48 | Проектирование БД | [`m48_database_design`](m48_database_design/theory.md) |
+| 49 | JDBC, ч.1 | [`m49_jdbc_1`](m49_jdbc_1/theory.md) |
+| 50 | JDBC, ч.2 | [`m50_jdbc_2`](m50_jdbc_2/theory.md) |
+| 51 | Hibernate ORM | [`m51_hibernate_orm`](m51_hibernate_orm/theory.md) |
+| 52 | Hibernate: связи | [`m52_hibernate_relationships`](m52_hibernate_relationships/theory.md) |
+| 53 | Hibernate: наследование | [`m53_hibernate_inheritance`](m53_hibernate_inheritance/theory.md) |
+| 54 | Gradle | [`m54_gradle_build_tools`](m54_gradle_build_tools/theory.md) |
+| 55 | HTTP basics (`java.net.http`) | [`m55_http_basics`](m55_http_basics/theory.md) |
+| 56 | JSON, Jackson, DTO | [`m56_json_jackson_dto`](m56_json_jackson_dto/theory.md) |
+| 57 | Java HTTP Client | [`m57_java_http_client`](m57_java_http_client/theory.md) |
+| 58 | Ручной HTTP-сервер (JDK) | [`m58_jdk_httpserver`](m58_jdk_httpserver/theory.md) |
+| 59 | Spring Core: IoC / DI | [`m59_spring_core_intro`](m59_spring_core_intro/theory.md) |
+| 60 | Spring Core: бины, стереотипы | [`m60_spring_core_beans`](m60_spring_core_beans/theory.md) |
+| 61 | Spring Core: Qualifier, scopes, lifecycle | [`m61_spring_core_advanced`](m61_spring_core_advanced/theory.md) |
+| 62 | Spring Core: конфигурация, профили | [`m62_spring_core_configuration`](m62_spring_core_configuration/theory.md) |
+| 63 | Spring Core: события и AOP | [`m63_spring_core_events_aop`](m63_spring_core_events_aop/theory.md) |
+| 64 | Spring Boot: введение | [`m64_spring_boot_intro`](m64_spring_boot_intro/theory.md) |
+| 65 | Spring Boot: web + конфигурация | [`m65_spring_boot_web_config`](m65_spring_boot_web_config/theory.md) |
+| 66 | Spring Boot: Actuator, тесты, упаковка | [`m66_spring_boot_devops`](m66_spring_boot_devops/theory.md) |
 
 ### Часть 3 — Spring REST, Data JPA, Hibernate Deep Dive (67–92)
 
 | #  | Тема | Каталог |
 |----|------|---------|
-| 67 | HTTP глазами backend-разработчика | [`module-67-spring-rest-http-backend`](module-67-spring-rest-http-backend/theory.md) |
-| 68 | REST как стиль проектирования API: URI, ресурсы, методы | [`module-68-spring-rest-design`](module-68-spring-rest-design/theory.md) |
-| 69 | Spring MVC: обработка запроса, конвертация тела | [`module-69-spring-rest-controllers`](module-69-spring-rest-controllers/theory.md) |
-| 70 | DTO, Jackson, JSON, форма ответа | [`module-70-spring-rest-dto-json`](module-70-spring-rest-dto-json/theory.md) |
-| 71 | Bean Validation, кастомная валидация, ответ об ошибке | [`module-71-spring-rest-validation`](module-71-spring-rest-validation/theory.md) |
-| 72 | ProblemDetail (RFC 7807), `@ControllerAdvice` | [`module-72-spring-rest-error-handling`](module-72-spring-rest-error-handling/theory.md) |
-| 73 | Коллекции, пагинация, сортировка, фильтрация | [`module-73-spring-rest-collections`](module-73-spring-rest-collections/theory.md) |
-| 74 | CRUD и не-CRUD, загрузка/выгрузка файлов | [`module-74-spring-rest-crud-file`](module-74-spring-rest-crud-file/theory.md) |
-| 75 | Конфигурация, версионирование API, OpenAPI/Swagger | [`module-75-spring-rest-config-openapi`](module-75-spring-rest-config-openapi/theory.md) |
-| 76 | `@WebMvcTest`, MockMvc, интеграционное тестирование | [`module-76-spring-rest-testing`](module-76-spring-rest-testing/theory.md) |
-| 77 | Persistence: JDBC → JPA → Hibernate → Spring Data JPA | [`module-77-spring-data-jpa-intro`](module-77-spring-data-jpa-intro/theory.md) |
-| 78 | Entity, ключи, маппинг полей, `@Embeddable` | [`module-78-spring-data-jpa-entity`](module-78-spring-data-jpa-entity/theory.md) |
-| 79 | Repository, derived queries, `Page`/`Slice` | [`module-79-spring-data-jpa-repository`](module-79-spring-data-jpa-repository/theory.md) |
-| 80 | JPQL, `@Query`, проекции, native queries, Specification | [`module-80-spring-data-jpa-advanced`](module-80-spring-data-jpa-advanced/theory.md) |
-| 81 | `@Transactional`, propagation, isolation, контекст | [`module-81-spring-data-jpa-transactions`](module-81-spring-data-jpa-transactions/theory.md) |
-| 82 | Lazy loading, N+1, `JOIN FETCH`, `EntityGraph` | [`module-82-spring-data-jpa-lazy-loading`](module-82-spring-data-jpa-lazy-loading/theory.md) |
-| 83 | `@DataJpaTest`, H2, обзор Testcontainers | [`module-83-spring-data-jpa-testing`](module-83-spring-data-jpa-testing/theory.md) |
-| 84 | Flyway, оптимистичная блокировка, аудит | [`module-84-spring-data-jpa-migrations`](module-84-spring-data-jpa-migrations/theory.md) |
-| 85 | Hibernate: жизненный цикл, dirty checking, flush | [`module-85-hibernate-deep-dive-lifecycle`](module-85-hibernate-deep-dive-lifecycle/theory.md) |
-| 86 | Hibernate: fetching, N+1, `JOIN FETCH`, проекции | [`module-86-hibernate-deep-dive-fetching`](module-86-hibernate-deep-dive-fetching/theory.md) |
-| 87 | Hibernate: HQL, Criteria, native SQL, каскады | [`module-87-hibernate-deep-dive-querying`](module-87-hibernate-deep-dive-querying/theory.md) |
-| 88 | Hibernate: `equals`/`hashCode`, value objects, ключи | [`module-88-hibernate-deep-dive-modeling`](module-88-hibernate-deep-dive-modeling/theory.md) |
-| 89 | Hibernate: наследование, `@DynamicUpdate` | [`module-89-hibernate-deep-dive-inheritance`](module-89-hibernate-deep-dive-inheritance/theory.md) |
-| 90 | Hibernate: блокировки, soft delete, Envers | [`module-90-hibernate-deep-dive-locking`](module-90-hibernate-deep-dive-locking/theory.md) |
-| 91 | Hibernate: batching, bulk, read-only, кэширование | [`module-91-hibernate-deep-dive-performance`](module-91-hibernate-deep-dive-performance/theory.md) |
-| 92 | Hibernate: SQL-диагностика, анти-паттерны, аудит | [`module-92-hibernate-deep-dive-diagnostics`](module-92-hibernate-deep-dive-diagnostics/theory.md) |
+| 67 | HTTP глазами backend-разработчика | [`m67_spring_rest_http_backend`](m67_spring_rest_http_backend/theory.md) |
+| 68 | REST как стиль проектирования API: URI, ресурсы, методы | [`m68_spring_rest_design`](m68_spring_rest_design/theory.md) |
+| 69 | Spring MVC: обработка запроса, конвертация тела | [`m69_spring_rest_controllers`](m69_spring_rest_controllers/theory.md) |
+| 70 | DTO, Jackson, JSON, форма ответа | [`m70_spring_rest_dto_json`](m70_spring_rest_dto_json/theory.md) |
+| 71 | Bean Validation, кастомная валидация, ответ об ошибке | [`m71_spring_rest_validation`](m71_spring_rest_validation/theory.md) |
+| 72 | ProblemDetail (RFC 7807), `@ControllerAdvice` | [`m72_spring_rest_error_handling`](m72_spring_rest_error_handling/theory.md) |
+| 73 | Коллекции, пагинация, сортировка, фильтрация | [`m73_spring_rest_collections`](m73_spring_rest_collections/theory.md) |
+| 74 | CRUD и не-CRUD, загрузка/выгрузка файлов | [`m74_spring_rest_crud_file`](m74_spring_rest_crud_file/theory.md) |
+| 75 | Конфигурация, версионирование API, OpenAPI/Swagger | [`m75_spring_rest_config_openapi`](m75_spring_rest_config_openapi/theory.md) |
+| 76 | `@WebMvcTest`, MockMvc, интеграционное тестирование | [`m76_spring_rest_testing`](m76_spring_rest_testing/theory.md) |
+| 77 | Persistence: JDBC → JPA → Hibernate → Spring Data JPA | [`m77_spring_data_jpa_intro`](m77_spring_data_jpa_intro/theory.md) |
+| 78 | Entity, ключи, маппинг полей, `@Embeddable` | [`m78_spring_data_jpa_entity`](m78_spring_data_jpa_entity/theory.md) |
+| 79 | Repository, derived queries, `Page`/`Slice` | [`m79_spring_data_jpa_repository`](m79_spring_data_jpa_repository/theory.md) |
+| 80 | JPQL, `@Query`, проекции, native queries, Specification | [`m80_spring_data_jpa_advanced`](m80_spring_data_jpa_advanced/theory.md) |
+| 81 | `@Transactional`, propagation, isolation, контекст | [`m81_spring_data_jpa_transactions`](m81_spring_data_jpa_transactions/theory.md) |
+| 82 | Lazy loading, N+1, `JOIN FETCH`, `EntityGraph` | [`m82_spring_data_jpa_lazy_loading`](m82_spring_data_jpa_lazy_loading/theory.md) |
+| 83 | `@DataJpaTest`, H2, обзор Testcontainers | [`m83_spring_data_jpa_testing`](m83_spring_data_jpa_testing/theory.md) |
+| 84 | Flyway, оптимистичная блокировка, аудит | [`m84_spring_data_jpa_migrations`](m84_spring_data_jpa_migrations/theory.md) |
+| 85 | Hibernate: жизненный цикл, dirty checking, flush | [`m85_hibernate_deep_dive_lifecycle`](m85_hibernate_deep_dive_lifecycle/theory.md) |
+| 86 | Hibernate: fetching, N+1, `JOIN FETCH`, проекции | [`m86_hibernate_deep_dive_fetching`](m86_hibernate_deep_dive_fetching/theory.md) |
+| 87 | Hibernate: HQL, Criteria, native SQL, каскады | [`m87_hibernate_deep_dive_querying`](m87_hibernate_deep_dive_querying/theory.md) |
+| 88 | Hibernate: `equals`/`hashCode`, value objects, ключи | [`m88_hibernate_deep_dive_modeling`](m88_hibernate_deep_dive_modeling/theory.md) |
+| 89 | Hibernate: наследование, `@DynamicUpdate` | [`m89_hibernate_deep_dive_inheritance`](m89_hibernate_deep_dive_inheritance/theory.md) |
+| 90 | Hibernate: блокировки, soft delete, Envers | [`m90_hibernate_deep_dive_locking`](m90_hibernate_deep_dive_locking/theory.md) |
+| 91 | Hibernate: batching, bulk, read-only, кэширование | [`m91_hibernate_deep_dive_performance`](m91_hibernate_deep_dive_performance/theory.md) |
+| 92 | Hibernate: SQL-диагностика, анти-паттерны, аудит | [`m92_hibernate_deep_dive_diagnostics`](m92_hibernate_deep_dive_diagnostics/theory.md) |
 
 ### Часть 4 — Security, Test, Docker (93–118)
 
 | #  | Тема | Каталог |
 |----|------|---------|
-| 93 | Spring Security: зачем нужен, filter chain | [`module-93-spring-security-intro`](module-93-spring-security-intro/theory.md) |
-| 94 | In-memory users, `PasswordEncoder`, form login, CSRF | [`module-94-spring-security-inmemory`](module-94-spring-security-inmemory/theory.md) |
-| 95 | Session-based security, HTTP Basic, CORS, cookies | [`module-95-spring-security-session-cors`](module-95-spring-security-session-cors/theory.md) |
-| 96 | DB-backed users, `CustomUserDetailsService`, регистрация | [`module-96-spring-security-db-users`](module-96-spring-security-db-users/theory.md) |
-| 97 | Request-level и method security, ownership | [`module-97-spring-security-authorization`](module-97-spring-security-authorization/theory.md) |
-| 98 | Stateless, JWT: выдача и валидация | [`module-98-spring-security-jwt`](module-98-spring-security-jwt/theory.md) |
-| 99 | Custom JWT filter, встроенный Bearer support | [`module-99-spring-security-custom-jwt-filter`](module-99-spring-security-custom-jwt-filter/theory.md) |
-| 100 | MockMvc security tests, CSRF/JWT, hardening, audit | [`module-100-spring-security-testing`](module-100-spring-security-testing/theory.md) |
-| 101 | JUnit 5, AssertJ, Hamcrest, JSONassert, Mockito | [`module-101-spring-test-basics`](module-101-spring-test-basics/theory.md) |
-| 102 | Unit-тесты бизнес-логики без Spring-контекста | [`module-102-spring-test-unit`](module-102-spring-test-unit/theory.md) |
-| 103 | Test profiles, properties, управляемая конфигурация | [`module-103-spring-test-config`](module-103-spring-test-config/theory.md) |
-| 104 | `@WebMvcTest`, MockMvc, MockMvcTester, JSON tests | [`module-104-spring-test-webmvc`](module-104-spring-test-webmvc/theory.md) |
-| 105 | Validation, error handling, pagination, file upload | [`module-105-spring-test-controller-scenarios`](module-105-spring-test-controller-scenarios/theory.md) |
-| 106 | `@DataJpaTest`, TestEntityManager, flush, queries | [`module-106-spring-test-datajpa`](module-106-spring-test-datajpa/theory.md) |
-| 107 | Lazy loading, конкурентность, Flyway, `@Sql` | [`module-107-spring-test-entity-relationships`](module-107-spring-test-entity-relationships/theory.md) |
-| 108 | `@SpringBootTest`, MockMvc, RestTestClient | [`module-108-spring-test-full-context`](module-108-spring-test-full-context/theory.md) |
-| 109 | Testcontainers, PostgreSQL, regression suite | [`module-109-spring-test-integration`](module-109-spring-test-integration/theory.md) |
-| 110 | Security-тесты, внешние интеграции, async, REST Docs | [`module-110-spring-test-security-async`](module-110-spring-test-security-async/theory.md) |
-| 111 | Контейнерное мышление, Docker CLI, первый контейнер | [`module-111-docker-basics`](module-111-docker-basics/theory.md) |
-| 112 | Dockerfile, слои, кэш, multi-stage build | [`module-112-docker-dockerfile`](module-112-docker-dockerfile/theory.md) |
-| 113 | Layered images, Buildpacks, `bootBuildImage` | [`module-113-docker-spring-boot-image`](module-113-docker-spring-boot-image/theory.md) |
-| 114 | Externalized config, profiles, volumes, логи | [`module-114-docker-configuration`](module-114-docker-configuration/theory.md) |
-| 115 | Compose: app + PostgreSQL, startup order, readiness | [`module-115-docker-compose`](module-115-docker-compose/theory.md) |
-| 116 | +Redis, +RabbitMQ, dev-workflow, troubleshooting | [`module-116-docker-compose-extended`](module-116-docker-compose-extended/theory.md) |
-| 117 | JVM под memory/CPU limits, image hygiene, non-root | [`module-117-docker-jvm-tuning`](module-117-docker-jvm-tuning/theory.md) |
-| 118 | Финальный reusable template, production-ready образ | [`module-118-docker-final-template`](module-118-docker-final-template/theory.md) |
+| 93 | Spring Security: зачем нужен, filter chain | [`m93_spring_security_intro`](m93_spring_security_intro/theory.md) |
+| 94 | In-memory users, `PasswordEncoder`, form login, CSRF | [`m94_spring_security_inmemory`](m94_spring_security_inmemory/theory.md) |
+| 95 | Session-based security, HTTP Basic, CORS, cookies | [`m95_spring_security_session_cors`](m95_spring_security_session_cors/theory.md) |
+| 96 | DB-backed users, `CustomUserDetailsService`, регистрация | [`m96_spring_security_db_users`](m96_spring_security_db_users/theory.md) |
+| 97 | Request-level и method security, ownership | [`m97_spring_security_authorization`](m97_spring_security_authorization/theory.md) |
+| 98 | Stateless, JWT: выдача и валидация | [`m98_spring_security_jwt`](m98_spring_security_jwt/theory.md) |
+| 99 | Custom JWT filter, встроенный Bearer support | [`m99_spring_security_custom_jwt_filter`](m99_spring_security_custom_jwt_filter/theory.md) |
+| 100 | MockMvc security tests, CSRF/JWT, hardening, audit | [`m100_spring_security_testing`](m100_spring_security_testing/theory.md) |
+| 101 | JUnit 5, AssertJ, Hamcrest, JSONassert, Mockito | [`m101_spring_test_basics`](m101_spring_test_basics/theory.md) |
+| 102 | Unit-тесты бизнес-логики без Spring-контекста | [`m102_spring_test_unit`](m102_spring_test_unit/theory.md) |
+| 103 | Test profiles, properties, управляемая конфигурация | [`m103_spring_test_config`](m103_spring_test_config/theory.md) |
+| 104 | `@WebMvcTest`, MockMvc, MockMvcTester, JSON tests | [`m104_spring_test_webmvc`](m104_spring_test_webmvc/theory.md) |
+| 105 | Validation, error handling, pagination, file upload | [`m105_spring_test_controller_scenarios`](m105_spring_test_controller_scenarios/theory.md) |
+| 106 | `@DataJpaTest`, TestEntityManager, flush, queries | [`m106_spring_test_datajpa`](m106_spring_test_datajpa/theory.md) |
+| 107 | Lazy loading, конкурентность, Flyway, `@Sql` | [`m107_spring_test_entity_relationships`](m107_spring_test_entity_relationships/theory.md) |
+| 108 | `@SpringBootTest`, MockMvc, RestTestClient | [`m108_spring_test_full_context`](m108_spring_test_full_context/theory.md) |
+| 109 | Testcontainers, PostgreSQL, regression suite | [`m109_spring_test_integration`](m109_spring_test_integration/theory.md) |
+| 110 | Security-тесты, внешние интеграции, async, REST Docs | [`m110_spring_test_security_async`](m110_spring_test_security_async/theory.md) |
+| 111 | Контейнерное мышление, Docker CLI, первый контейнер | [`m111_docker_basics`](m111_docker_basics/theory.md) |
+| 112 | Dockerfile, слои, кэш, multi-stage build | [`m112_docker_dockerfile`](m112_docker_dockerfile/theory.md) |
+| 113 | Layered images, Buildpacks, `bootBuildImage` | [`m113_docker_spring_boot_image`](m113_docker_spring_boot_image/theory.md) |
+| 114 | Externalized config, profiles, volumes, логи | [`m114_docker_configuration`](m114_docker_configuration/theory.md) |
+| 115 | Compose: app + PostgreSQL, startup order, readiness | [`m115_docker_compose`](m115_docker_compose/theory.md) |
+| 116 | +Redis, +RabbitMQ, dev-workflow, troubleshooting | [`m116_docker_compose_extended`](m116_docker_compose_extended/theory.md) |
+| 117 | JVM под memory/CPU limits, image hygiene, non-root | [`m117_docker_jvm_tuning`](m117_docker_jvm_tuning/theory.md) |
+| 118 | Финальный reusable template, production-ready образ | [`m118_docker_final_template`](m118_docker_final_template/theory.md) |
 
 ---
 

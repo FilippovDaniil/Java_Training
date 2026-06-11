@@ -69,57 +69,57 @@ java TaskNN
 
 | #  | Тема | Содержание | Мини-проект (07) | Каталог |
 |----|------|-----------|------------------|---------|
-| 01 | Принципы ООП | инкапсуляция, наследование, полиморфизм, абстракция; композиция vs наследование | OPS | [`module-01-oop-principles`](module-01-oop-principles/theory.md) |
-| 02 | SOLID: SRP, OCP | одна ответственность; открыт для расширения, закрыт для изменения | OPS | [`module-02-solid-srp-ocp`](module-02-solid-srp-ocp/theory.md) |
-| 03 | SOLID: LSP, ISP, DIP | подстановка Лисков, разделение интерфейсов, инверсия зависимостей | BAM | [`module-03-solid-lsp-isp-dip`](module-03-solid-lsp-isp-dip/theory.md) |
+| 01 | Принципы ООП | инкапсуляция, наследование, полиморфизм, абстракция; композиция vs наследование | OPS | [`m01_oop_principles`](m01_oop_principles/theory.md) |
+| 02 | SOLID: SRP, OCP | одна ответственность; открыт для расширения, закрыт для изменения | OPS | [`m02_solid_srp_ocp`](m02_solid_srp_ocp/theory.md) |
+| 03 | SOLID: LSP, ISP, DIP | подстановка Лисков, разделение интерфейсов, инверсия зависимостей | BAM | [`m03_solid_lsp_isp_dip`](m03_solid_lsp_isp_dip/theory.md) |
 
 ### Часть 2 — Порождающие паттерны (04–06)
 
 | #  | Тема | Содержание | Мини-проект (07) | Каталог |
 |----|------|-----------|------------------|---------|
-| 04 | Singleton, Factory Method | потокобезопасный Singleton, enum; фабричный метод | OPS | [`module-04-singleton-factory-method`](module-04-singleton-factory-method/theory.md) |
-| 05 | Abstract Factory, Builder | семейства объектов; пошаговое построение, fluent | BAM | [`module-05-abstract-factory-builder`](module-05-abstract-factory-builder/theory.md) |
-| 06 | Prototype, Object Pool | клонирование (clone / copy ctor); пул тяжёлых объектов | OPS | [`module-06-prototype-pool`](module-06-prototype-pool/theory.md) |
+| 04 | Singleton, Factory Method | потокобезопасный Singleton, enum; фабричный метод | OPS | [`m04_singleton_factory_method`](m04_singleton_factory_method/theory.md) |
+| 05 | Abstract Factory, Builder | семейства объектов; пошаговое построение, fluent | BAM | [`m05_abstract_factory_builder`](m05_abstract_factory_builder/theory.md) |
+| 06 | Prototype, Object Pool | клонирование (clone / copy ctor); пул тяжёлых объектов | OPS | [`m06_prototype_pool`](m06_prototype_pool/theory.md) |
 
 ### Часть 3 — Структурные паттерны (07–09)
 
 | #  | Тема | Содержание | Мини-проект (07) | Каталог |
 |----|------|-----------|------------------|---------|
-| 07 | Adapter, Decorator | конвертация интерфейса; динамическое добавление поведения | BAM | [`module-07-adapter-decorator`](module-07-adapter-decorator/theory.md) |
-| 08 | Proxy, Facade | заместитель (защита/ленивость/лог); упрощённый интерфейс | OPS | [`module-08-proxy-facade`](module-08-proxy-facade/theory.md) |
-| 09 | Composite, Bridge | древовидные структуры; разделение абстракции и реализации | BAM | [`module-09-composite-bridge`](module-09-composite-bridge/theory.md) |
+| 07 | Adapter, Decorator | конвертация интерфейса; динамическое добавление поведения | BAM | [`m07_adapter_decorator`](m07_adapter_decorator/theory.md) |
+| 08 | Proxy, Facade | заместитель (защита/ленивость/лог); упрощённый интерфейс | OPS | [`m08_proxy_facade`](m08_proxy_facade/theory.md) |
+| 09 | Composite, Bridge | древовидные структуры; разделение абстракции и реализации | BAM | [`m09_composite_bridge`](m09_composite_bridge/theory.md) |
 
 ### Часть 4 — Поведенческие паттерны (10–13)
 
 | #  | Тема | Содержание | Мини-проект (07) | Каталог |
 |----|------|-----------|------------------|---------|
-| 10 | Strategy, Command | семейство алгоритмов; запрос как объект, undo | OPS | [`module-10-strategy-command`](module-10-strategy-command/theory.md) |
-| 11 | Observer, Chain of Responsibility | подписка на события; цепочка обработчиков | BAM | [`module-11-observer-chain-of-responsibility`](module-11-observer-chain-of-responsibility/theory.md) |
-| 12 | State, Template Method | поведение от состояния; скелет алгоритма с хуками | OPS | [`module-12-state-template-method`](module-12-state-template-method/theory.md) |
-| 13 | Iterator, Visitor | обход агрегата; операции над иерархией, double dispatch | BAM | [`module-13-iterator-visitor`](module-13-iterator-visitor/theory.md) |
+| 10 | Strategy, Command | семейство алгоритмов; запрос как объект, undo | OPS | [`m10_strategy_command`](m10_strategy_command/theory.md) |
+| 11 | Observer, Chain of Responsibility | подписка на события; цепочка обработчиков | BAM | [`m11_observer_chain_of_responsibility`](m11_observer_chain_of_responsibility/theory.md) |
+| 12 | State, Template Method | поведение от состояния; скелет алгоритма с хуками | OPS | [`m12_state_template_method`](m12_state_template_method/theory.md) |
+| 13 | Iterator, Visitor | обход агрегата; операции над иерархией, double dispatch | BAM | [`m13_iterator_visitor`](m13_iterator_visitor/theory.md) |
 
 ### Часть 5 — Архитектурные принципы и паттерны (14–21)
 
 | #  | Тема | Содержание | Мини-проект (07) | Каталог |
 |----|------|-----------|------------------|---------|
-| 14 | GRASP | Information Expert, Low Coupling, High Cohesion, Controller, Pure Fabrication | OPS | [`module-14-grasp`](module-14-grasp/theory.md) |
-| 15 | Layered (MVC, Clean) | слои Presentation/Business/Persistence; MVC; Clean Architecture | BAM | [`module-15-layered-mvc-clean`](module-15-layered-mvc-clean/theory.md) |
-| 16 | DI и IoC | DI как реализация DIP; контейнеры; ручное внедрение; Service Locator | OPS | [`module-16-dependency-injection-ioc`](module-16-dependency-injection-ioc/theory.md) |
-| 17 | Hexagonal (Ports & Adapters) | ядро + порты + адаптеры; независимость от БД/Web; тестируемость | BAM | [`module-17-hexagonal-ports-adapters`](module-17-hexagonal-ports-adapters/theory.md) |
-| 18 | Strategic DDD | Bounded Context, Ubiquitous Language, Entity, Value Object, Aggregate | OPS | [`module-18-ddd-strategic`](module-18-ddd-strategic/theory.md) |
-| 19 | Tactical DDD | Repositories, доменные сервисы, фабрики, Domain Events | BAM | [`module-19-ddd-tactical`](module-19-ddd-tactical/theory.md) |
-| 20 | Event Sourcing, CQRS | состояние как поток событий; разделение команд и запросов, проекции | OPS | [`module-20-event-sourcing-cqrs`](module-20-event-sourcing-cqrs/theory.md) |
-| 21 | Saga (распределённые транзакции) | хореография vs оркестрация; компенсирующие действия | BAM | [`module-21-saga-distributed-transactions`](module-21-saga-distributed-transactions/theory.md) |
+| 14 | GRASP | Information Expert, Low Coupling, High Cohesion, Controller, Pure Fabrication | OPS | [`m14_grasp`](m14_grasp/theory.md) |
+| 15 | Layered (MVC, Clean) | слои Presentation/Business/Persistence; MVC; Clean Architecture | BAM | [`m15_layered_mvc_clean`](m15_layered_mvc_clean/theory.md) |
+| 16 | DI и IoC | DI как реализация DIP; контейнеры; ручное внедрение; Service Locator | OPS | [`m16_dependency_injection_ioc`](m16_dependency_injection_ioc/theory.md) |
+| 17 | Hexagonal (Ports & Adapters) | ядро + порты + адаптеры; независимость от БД/Web; тестируемость | BAM | [`m17_hexagonal_ports_adapters`](m17_hexagonal_ports_adapters/theory.md) |
+| 18 | Strategic DDD | Bounded Context, Ubiquitous Language, Entity, Value Object, Aggregate | OPS | [`m18_ddd_strategic`](m18_ddd_strategic/theory.md) |
+| 19 | Tactical DDD | Repositories, доменные сервисы, фабрики, Domain Events | BAM | [`m19_ddd_tactical`](m19_ddd_tactical/theory.md) |
+| 20 | Event Sourcing, CQRS | состояние как поток событий; разделение команд и запросов, проекции | OPS | [`m20_event_sourcing_cqrs`](m20_event_sourcing_cqrs/theory.md) |
+| 21 | Saga (распределённые транзакции) | хореография vs оркестрация; компенсирующие действия | BAM | [`m21_saga_distributed_transactions`](m21_saga_distributed_transactions/theory.md) |
 
 ### Часть 6 — Продвинутые архитектурные принципы (22–26)
 
 | #  | Тема | Содержание | Мини-проект (07) | Каталог |
 |----|------|-----------|------------------|---------|
-| 22 | Антипаттерны | Anemic Domain Model, God Object, Lava Flow, Golden Hammer; рефакторинг | OPS | [`module-22-antipatterns`](module-22-antipatterns/theory.md) |
-| 23 | Microservices vs Monolith | стили, trade-offs, границы сервисов, REST/gRPC/messaging, Modular Monolith | BAM | [`module-23-microservices-vs-monolith`](module-23-microservices-vs-monolith/theory.md) |
-| 24 | Асинхронные архитектуры | Message Queue, Pub-Sub, Event-Driven, Kafka, гарантии доставки, DLQ | OPS | [`module-24-messaging-event-driven-kafka`](module-24-messaging-event-driven-kafka/theory.md) |
-| 25 | Тестирование архитектуры | ArchUnit (слои, циклы), Testcontainers, снимок архитектуры в CI | BAM | [`module-25-architecture-testing-archunit`](module-25-architecture-testing-archunit/theory.md) |
-| 26 | Рефакторинг legacy (capstone) | strangle pattern, feature toggles, parallel run; сведение OPS + BAM | OPS + BAM | [`module-26-legacy-refactoring-capstone`](module-26-legacy-refactoring-capstone/theory.md) |
+| 22 | Антипаттерны | Anemic Domain Model, God Object, Lava Flow, Golden Hammer; рефакторинг | OPS | [`m22_antipatterns`](m22_antipatterns/theory.md) |
+| 23 | Microservices vs Monolith | стили, trade-offs, границы сервисов, REST/gRPC/messaging, Modular Monolith | BAM | [`m23_microservices_vs_monolith`](m23_microservices_vs_monolith/theory.md) |
+| 24 | Асинхронные архитектуры | Message Queue, Pub-Sub, Event-Driven, Kafka, гарантии доставки, DLQ | OPS | [`m24_messaging_event_driven_kafka`](m24_messaging_event_driven_kafka/theory.md) |
+| 25 | Тестирование архитектуры | ArchUnit (слои, циклы), Testcontainers, снимок архитектуры в CI | BAM | [`m25_architecture_testing_archunit`](m25_architecture_testing_archunit/theory.md) |
+| 26 | Рефакторинг legacy (capstone) | strangle pattern, feature toggles, parallel run; сведение OPS + BAM | OPS + BAM | [`m26_legacy_refactoring_capstone`](m26_legacy_refactoring_capstone/theory.md) |
 
 ---
 
