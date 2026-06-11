@@ -82,7 +82,7 @@ python tools/migrate_inplace.py --course java-course --from 2 --to 20 --apply
 - [x] Доки: `tools/fix_doc_links.py` переписал 390 ссылок `module-NN-*` → `mNN_*` в `java-course/README.md`, `patterns-architecture/README.md` + `PROGRESS.md`, `algorithms-course/README.md` + `PROGRESS.md`. Корневой `README.md` и `LEARNING-METHODOLOGY.md` — 0 ссылок (не трогали).
 - [x] `run.ps1`: поиск резолвит `mNN_*` пути (проверено на m24).
 - [x] Финальный `gradlew clean compileJava` — exit 0, **0 структурных ошибок** по всем 3 курсам.
-- [ ] **ОСТАЁТСЯ (online):** `m99_…/practice/Task06.java` импортирует `org.springframework.security.oauth2.jwt/jose` — нужен dep `spring-security-oauth2-jose`/`spring-boot-starter-oauth2-resource-server`. Не добавлено: BOM 3.4.1 хочет 6.4.x, в офлайн-кеше только 6.2.4 → добавить при наличии сети. 1 задача из ~2986.
+- [x] **ЗАКРЫТО:** добавлен `spring-boot-starter-oauth2-resource-server` (резолв 6.4.2 по сети) → `m99_…/Task06.java` компилируется. `gradlew clean compileJava` теперь **0 ошибок по всему репо**.
 - [ ] (опц.) Прозаические упоминания `module-NN` внутри `theory.md` (~390) — не критично, можно прогнать тем же `fix_doc_links.py` при желании.
 
 ## 9. Откат
