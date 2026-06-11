@@ -1,3 +1,5 @@
+package m01_intro_first_program.practice;
+
 /**
  * Задача 03 — Модуль 01: print vs println
  *

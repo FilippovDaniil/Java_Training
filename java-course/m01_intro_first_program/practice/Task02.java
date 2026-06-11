@@ -1,3 +1,5 @@
+package m01_intro_first_program.practice;
+
 /**
  * Задача 02 — Модуль 01: Несколько строк
  *
@@ -18,5 +20,8 @@
 public class Task02 {
     public static void main(String[] args) {
         // Ваш код здесь
+        System.out.println("Daniil");
+        System.out.println("Moscow");
+        System.out.println("Java");
     }
 }

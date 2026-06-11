@@ -1,3 +1,5 @@
+package m01_intro_first_program.practice;
+
 /**
  * Задача 04 — Модуль 01: Спецсимвол перевода строки
  *

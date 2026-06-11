@@ -1,3 +1,5 @@
+package m01_intro_first_program.practice;
+
 /**
  * Задача 06 — Модуль 01: ASCII-рисунок
  *

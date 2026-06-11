@@ -1,0 +1,75 @@
+// Служебный проект: только резолвит classpath курса и выгружает его в build/cp.txt.
+// Ничего не компилирует. Версии управляются Spring Boot BOM 3.3.x.
+import org.gradle.api.attributes.java.TargetJvmEnvironment
+
+plugins { id 'java' }
+
+repositories { mavenCentral() }
+
+configurations {
+    cp {
+        attributes {
+            attribute(TargetJvmEnvironment.TARGET_JVM_ENVIRONMENT_ATTRIBUTE,
+                      objects.named(TargetJvmEnvironment, TargetJvmEnvironment.STANDARD_JVM))
+        }
+    }
+}
+
+dependencies {
+    cp platform('org.springframework.boot:spring-boot-dependencies:3.4.1')
+
+    // Spring / Boot
+    cp 'org.springframework.boot:spring-boot-starter'
+    cp 'org.springframework.boot:spring-boot-starter-web'
+    cp 'org.springframework.boot:spring-boot-starter-data-jpa'
+    cp 'org.springframework.boot:spring-boot-starter-security'
+    cp 'org.springframework.boot:spring-boot-starter-validation'
+    cp 'org.springframework.boot:spring-boot-starter-aop'
+    cp 'org.springframework.boot:spring-boot-starter-actuator'
+
+    // Тесты
+    cp 'org.springframework.boot:spring-boot-starter-test'
+    cp 'org.springframework.security:spring-security-test'
+    cp 'org.mockito:mockito-core'
+    cp 'org.mockito:mockito-junit-jupiter'
+    cp 'org.assertj:assertj-core'
+
+    // ORM / JSON / JDBC / логирование
+    cp 'org.hibernate.orm:hibernate-core'
+    cp 'com.fasterxml.jackson.core:jackson-databind'
+    cp 'org.slf4j:slf4j-api'
+    cp 'com.h2database:h2'
+    cp 'org.postgresql:postgresql'
+
+    // Утилиты (модули 33 и др.)
+    cp 'com.google.guava:guava:33.3.1-jre'
+    cp 'org.apache.commons:commons-lang3:3.17.0'
+    cp 'org.apache.commons:commons-collections4:4.4'
+
+    // JWT (модули 98, 99) — не в Boot BOM
+    cp 'io.jsonwebtoken:jjwt-api:0.12.6'
+    cp 'io.jsonwebtoken:jjwt-impl:0.12.6'
+    cp 'io.jsonwebtoken:jjwt-jackson:0.12.6'
+
+    // Testcontainers (тест-модули) — версии из Boot BOM
+    cp 'org.springframework.boot:spring-boot-testcontainers'
+    cp 'org.testcontainers:testcontainers'
+    cp 'org.testcontainers:junit-jupiter'
+    cp 'org.testcontainers:postgresql'
+
+    // OpenAPI / Swagger (модуль 75) — springdoc не в Boot BOM
+    cp 'org.springdoc:springdoc-openapi-starter-webmvc-ui:2.7.0'
+
+    // Spring REST Docs — версия из Boot BOM
+    cp 'org.springframework.restdocs:spring-restdocs-mockmvc'
+}
+
+tasks.register('exportCp') {
+    doLast {
+        def f = layout.buildDirectory.file('cp.txt').get().asFile
+        f.parentFile.mkdirs()
+        def files = configurations.cp.files
+        f.text = files.collect { it.absolutePath }.join(File.pathSeparator)
+        println "WROTE ${f} (${files.size()} jars)"
+    }
+}

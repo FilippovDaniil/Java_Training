@@ -1,3 +1,5 @@
+package m01_intro_first_program.practice;
+
 /**
  * Задача 07 — Модуль 01 (МИНИ-ПРОЕКТ): Визитка
  *

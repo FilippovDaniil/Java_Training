@@ -1,3 +1,5 @@
+package m01_intro_first_program.practice;
+
 /**
  * Задача 01 — Модуль 01: Первая программа
  *
@@ -12,6 +14,6 @@
  */
 public class Task01 {
     public static void main(String[] args) {
-        // Ваш код здесь
+        System.out.println("Hello World!");
     }
 }

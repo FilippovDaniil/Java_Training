@@ -2,14 +2,89 @@ plugins {
     id 'java'
 }
 
-group = 'Start'
+group = 'training'
 version = '1.0-SNAPSHOT'
 
 repositories {
     mavenCentral()
 }
 
+// The three course trees are additional source roots, so IntelliJ shows the
+// native green Run gutter for each TaskNN once it has a unique package.
+// A migrated module folder is renamed module-01-...  ->  m01_... (a valid
+// package segment); files get `package m01_....practice;`. Not-yet-migrated
+// modules keep their `module-*` name and are EXCLUDED below, so during the
+// multi-batch rollout they never clash on duplicate default-package classes.
+sourceSets {
+    main {
+        java {
+            srcDir 'java-course'
+            srcDir 'patterns-architecture'
+            srcDir 'algorithms-course'
+            exclude 'module-*/**'   // un-migrated (hyphenated) modules: ignored until renamed
+        }
+    }
+}
+
+// Practice files are teaching templates: many are intentionally incomplete.
+// failOnError=false lets a finished task compile & run even if siblings are
+// still stubs; UTF-8 keeps the Russian comments intact.
+tasks.withType(JavaCompile).configureEach {
+    options.encoding = 'UTF-8'
+    options.failOnError = false
+}
+
 dependencies {
+    // Versions are managed by the Spring Boot BOM (mirrors tools/deps).
+    implementation platform('org.springframework.boot:spring-boot-dependencies:3.4.1')
+
+    // Spring / Boot
+    implementation 'org.springframework.boot:spring-boot-starter'
+    implementation 'org.springframework.boot:spring-boot-starter-web'
+    implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
+    implementation 'org.springframework.boot:spring-boot-starter-security'
+    implementation 'org.springframework.boot:spring-boot-starter-validation'
+    implementation 'org.springframework.boot:spring-boot-starter-aop'
+    implementation 'org.springframework.boot:spring-boot-starter-actuator'
+
+    // Test libs are on the MAIN classpath on purpose: the test-topic modules
+    // keep their practice files in src/main/java like every other module.
+    implementation 'org.springframework.boot:spring-boot-starter-test'
+    implementation 'org.springframework.security:spring-security-test'
+    implementation 'org.mockito:mockito-core'
+    implementation 'org.mockito:mockito-junit-jupiter'
+    implementation 'org.assertj:assertj-core'
+
+    // ORM / JSON / JDBC / logging
+    implementation 'org.hibernate.orm:hibernate-core'
+    implementation 'com.fasterxml.jackson.core:jackson-databind'
+    implementation 'org.slf4j:slf4j-api'
+    implementation 'com.h2database:h2'
+    implementation 'org.postgresql:postgresql'
+
+    // Utilities
+    implementation 'com.google.guava:guava:33.3.1-jre'
+    implementation 'org.apache.commons:commons-lang3:3.17.0'
+    implementation 'org.apache.commons:commons-collections4:4.4'
+
+    // JWT (not in Boot BOM)
+    implementation 'io.jsonwebtoken:jjwt-api:0.12.6'
+    implementation 'io.jsonwebtoken:jjwt-impl:0.12.6'
+    implementation 'io.jsonwebtoken:jjwt-jackson:0.12.6'
+
+    // Testcontainers
+    implementation 'org.springframework.boot:spring-boot-testcontainers'
+    implementation 'org.testcontainers:testcontainers'
+    implementation 'org.testcontainers:junit-jupiter'
+    implementation 'org.testcontainers:postgresql'
+
+    // OpenAPI / Swagger (not in Boot BOM)
+    implementation 'org.springdoc:springdoc-openapi-starter-webmvc-ui:2.7.0'
+
+    // Spring REST Docs
+    implementation 'org.springframework.restdocs:spring-restdocs-mockmvc'
+
+    // JUnit Platform for the gradle `test` task (kept for completeness)
     testImplementation platform('org.junit:junit-bom:5.10.0')
     testImplementation 'org.junit.jupiter:junit-jupiter'
     testRuntimeOnly 'org.junit.platform:junit-platform-launcher'

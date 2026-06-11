@@ -1,0 +1,9 @@
+<toolSet name="External Tools">
+  <tool name="Run Java File" description="Run current Java file via run.ps1 (JDK 25 single-file launch)" showInMainMenu="true" showInEditor="true" showInProject="true" showInSearchPopup="true" disabled="false" useConsole="true" showConsoleOnStdOut="true" showConsoleOnStdErr="true" synchronizeAfterRun="true">
+    <exec>
+      <option name="COMMAND" value="powershell.exe" />
+      <option name="PARAMETERS" value="-NoProfile -ExecutionPolicy Bypass -File &quot;$ProjectFileDir$\run.ps1&quot; &quot;$FilePath$&quot;" />
+      <option name="WORKING_DIRECTORY" value="$ProjectFileDir$" />
+    </exec>
+  </tool>
+</toolSet>
