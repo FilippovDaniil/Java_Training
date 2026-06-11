@@ -1,3 +1,0 @@
-interface Swimmable {
-    void swim();
-}

@@ -1,3 +1,0 @@
-interface Greetable {
-    void greet();
-}
