@@ -7,7 +7,7 @@
 **Три связанных курса в одном репозитории:** основы Java и backend на Spring → паттерны и архитектура → алгоритмы и структуры данных.
 Единая методика: **маленькая тема → короткая теория → задачи без готовых решений → проверяемый результат.**
 
-![Java](https://img.shields.io/badge/Java-17%2B-orange?logo=openjdk&logoColor=white)
+![Java](https://img.shields.io/badge/Java-21%20LTS-orange?logo=openjdk&logoColor=white)
 ![Spring Boot](https://img.shields.io/badge/Spring%20Boot-3.x-6DB33F?logo=springboot&logoColor=white)
 ![Build](https://img.shields.io/badge/build-javac%20%2F%20Gradle-blue?logo=gradle&logoColor=white)
 ![Docker](https://img.shields.io/badge/Docker-ready-2496ED?logo=docker&logoColor=white)
@@ -104,27 +104,27 @@ public class TaskNN {
             └── ...            #   вспомогательные типы — каждый своим файлом
 ```
 
-> **Конвенция:** один top-level класс — файл `TaskNN.java`; несколько типов — папка `TaskNN/`. Пакет не объявляется (default package).
+> **Конвенция:** один top-level класс — файл `TaskNN.java`; несколько типов — папка `TaskNN/`. Каждый файл объявляет пакет по своему модулю: `mNN_…/practice/TaskNN.java` → `package mNN_….practice;` (папки-модули — валидные идентификаторы пакетов, поэтому работает нативный ▶ в IDE).
 
 ---
 
 ## ▶️ Как запускать
 
-Большинство задач Core Java и весь `algorithms-course` / `patterns-architecture` собираются напрямую компилятором:
+Каждая тема лежит в папке-модуле `mNN_…` (валидный пакет), поэтому задачи запускаются **нативно из IntelliJ IDEA**:
 
-```bash
-# задача из одного файла
-javac -encoding UTF-8 TaskNN.java
-java TaskNN
+1. Откройте `<курс>/mNN_…/practice/TaskNN.java`.
+2. Нажмите **зелёную ▶** слева от `main` → **Run 'TaskNN.main()'**. Вывод — в консоли Run.
 
-# задача-папка (все файлы вместе)
-javac -encoding UTF-8 -d out module-NN-.../practice/TaskNN/*.java
-java -cp out TaskNN
+Тест-классы (JUnit, без `main`) и темы со Spring / Hibernate / Testcontainers запускаются так же из IDEA либо через **Gradle** (`./gradlew test`).
+
+**Без IDE** — скрипт `run.ps1` (single-file launch + classpath Spring/JUnit):
+
+```powershell
+.\run.ps1 m05_loops Task01                              # по имени модуля и задаче
+.\run.ps1 java-course\m05_loops\practice\Task01.java    # или по полному пути
 ```
 
-Темы со Spring / Hibernate / Testcontainers и тест-классы (JUnit) запускаются через **Gradle** или прямо из **IntelliJ IDEA** (▶ рядом с `main` или тест-классом).
-
-> ⚙️ **Окружение:** JDK 17 LTS · IntelliJ IDEA (Community достаточно) · Docker — для модулей контейнеризации `java-course`.
+> ⚙️ **Окружение:** **JDK 21 LTS** — важно: на JDK 25 IntelliJ 2025.2 краснит стандартную библиотеку, поэтому в IDE поставьте **Gradle JVM = 21** и **Project SDK = 21** (проект уже пинит toolchain 21). IntelliJ IDEA (Community достаточно) · Docker — для модулей контейнеризации `java-course`.
 
 ---
 

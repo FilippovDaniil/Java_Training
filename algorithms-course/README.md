@@ -213,7 +213,7 @@ public class TaskNN {
 
 | Что | Требование |
 |-----|------------|
-| JDK | 17 LTS |
+| JDK | **21 LTS** (в IDE: Gradle JVM = 21, Project SDK = 21) |
 | IDE | IntelliJ IDEA (Community достаточно) |
 | Сборка | напрямую `javac -encoding UTF-8` (раздел не требует внешних зависимостей) |
 

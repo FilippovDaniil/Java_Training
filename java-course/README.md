@@ -206,7 +206,7 @@ java TaskNN
 
 | Что | Требование |
 |-----|------------|
-| JDK | 17 LTS (минимум 11; модули 111+ предполагают 17) |
+| JDK | **21 LTS** (проект пинит toolchain 21; в IDE: Gradle JVM = 21 и Project SDK = 21 — на JDK 25 IntelliJ краснит stdlib) |
 | IDE | IntelliJ IDEA (Community Edition достаточно) |
 | Сборка | Core-задачи запускаются напрямую; для Spring/JPA — Gradle (есть в Spring-проектах) |
 | Docker | для модулей 111–118 — Docker Desktop / Rancher Desktop |

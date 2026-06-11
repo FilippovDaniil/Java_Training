@@ -191,7 +191,7 @@ public class TaskNN {
 
 | Что | Требование |
 |-----|------------|
-| JDK | 17 LTS |
+| JDK | **21 LTS** (в IDE: Gradle JVM = 21, Project SDK = 21) |
 | IDE | IntelliJ IDEA (Community достаточно) |
 | Сборка | Core-задачи — напрямую `javac`; темы с зависимостями — Gradle |
 | Доп. | темы 23–25 предполагают Docker (Testcontainers, брокеры) |
