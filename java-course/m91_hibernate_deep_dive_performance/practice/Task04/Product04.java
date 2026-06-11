@@ -1,0 +1,17 @@
+package m91_hibernate_deep_dive_performance.practice.task04;
+
+import jakarta.persistence.*;
+import java.util.List;
+
+@Entity @Table(name = "products")
+class Product04 {
+    @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
+    private String name;
+    private int price;
+    protected Product04() {}
+    public Product04(String name, int price) { this.name = name; this.price = price; }
+    public Long getId() { return id; }
+    public int getPrice() { return price; }
+    public void setPrice(int price) { this.price = price; }
+}

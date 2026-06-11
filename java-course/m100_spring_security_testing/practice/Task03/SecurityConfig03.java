@@ -1,0 +1,46 @@
+package m100_spring_security_testing.practice.task03;
+
+import org.junit.jupiter.api.Test;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
+import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.Import;
+import org.springframework.security.config.annotation.web.builders.HttpSecurity;
+import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
+import org.springframework.security.config.Customizer;
+import org.springframework.security.core.userdetails.User;
+import org.springframework.security.core.userdetails.UserDetailsService;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.security.provisioning.InMemoryUserDetailsManager;
+import org.springframework.security.web.SecurityFilterChain;
+import org.springframework.test.web.servlet.MockMvc;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
+import java.util.List;
+import static org.springframework.security.test.web.servlet.request.SecurityMockMvcRequestPostProcessors.httpBasic;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
+
+@Configuration
+@EnableWebSecurity
+class SecurityConfig03 {
+    @Bean
+    PasswordEncoder encoder() { return new BCryptPasswordEncoder(); }
+
+    @Bean
+    UserDetailsService users(PasswordEncoder enc) {
+        return new InMemoryUserDetailsManager(
+                User.withUsername("alice").password(enc.encode("password")).roles("USER").build());
+    }
+
+    @Bean
+    SecurityFilterChain chain(HttpSecurity http) throws Exception {
+        http.authorizeHttpRequests(a -> a.anyRequest().authenticated())
+            .httpBasic(Customizer.withDefaults())
+            .csrf(c -> c.disable());
+        return http.build();
+    }
+}

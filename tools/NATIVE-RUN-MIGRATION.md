@@ -69,7 +69,7 @@ python tools/migrate_inplace.py --course java-course --from 2 --to 20 --apply
 - [x] **B3** java-course 21–40 — 68 rename, 172 pkg, compile clean
 - [x] **B4** java-course 41–60 — 64 rename, 250 pkg, compile clean (Spring deps OK)
 - [x] **B5** java-course 61–80 — 157 rename, 506 pkg, compile clean
-- [ ] **B6** java-course 81–100
+- [x] **B6** java-course 81–100 — 149 rename, 501 pkg, 0 структурных. NB: m99 Task06 импортирует oauth2.jwt/jose (нет в deps) → см. B11
 - [ ] **B7** java-course 101–118
 - [ ] **B8** patterns-architecture 01–13
 - [ ] **B9** patterns-architecture 14–26
@@ -79,6 +79,7 @@ python tools/migrate_inplace.py --course java-course --from 2 --to 20 --apply
 ## 8. Финал (B11)
 
 - [ ] Пин JDK 21 в `build.gradle` (toolchain) — чтобы IDE/консоль всегда совпадали.
+- [ ] Добавить в deps `spring-boot-starter-oauth2-resource-server` (m99 Task06 импортирует `org.springframework.security.oauth2.jwt/jose`) — проверить, что jar есть в офлайн-кеше.
 - [ ] `run.ps1`: расширить поиск (пути уже не `module-*`, а `mNN_*`).
 - [ ] Доки на новые пути: `README.md` (корень + курсы), `*/PROGRESS.md`,
       `LEARNING-METHODOLOGY.md`, память (`MEMORY.md` и связанные).
