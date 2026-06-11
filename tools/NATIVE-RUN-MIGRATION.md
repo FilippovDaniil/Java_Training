@@ -65,7 +65,7 @@ python tools/migrate_inplace.py --course java-course --from 2 --to 20 --apply
 ## 7. Чек-лист батчей
 
 - [x] **B1** java-course m01 (пилот) — структура+компиляция OK; ▶ подтверждён
-- [ ] **B2** java-course 02–20
+- [x] **B2** java-course 02–20 — 51 rename, 169 pkg, compile clean (170 классов)
 - [ ] **B3** java-course 21–40
 - [ ] **B4** java-course 41–60
 - [ ] **B5** java-course 61–80

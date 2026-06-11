@@ -1,0 +1,27 @@
+package m10_oop_intro.practice.task03;
+
+/**
+ * Задача 03 — Модуль 10: null и NullPointerException
+ *
+ * ЗАДАНИЕ:
+ *   1. Объявите переменную типа Student со значением null.
+ *   2. Перед обращением к её полю/методу проверьте, что она не null.
+ *      Если null — выведите "Студент не задан".
+ *   3. Затем создайте реальный объект, заполните имя и выведите его
+ *      через метод printInfo().
+ *
+ * ОЖИДАЕМЫЙ ВЫВОД:
+ *   Студент не задан
+ *   Студент: Иван
+ *
+ * ПОДСКАЗКА:
+ *   Обращение к методу через null приводит к NullPointerException.
+ *   Защита: if (student != null) { ... }
+ */
+
+public class Task03 {
+    public static void main(String[] args) {
+        Student student = null;
+        // Ваш код здесь
+    }
+}

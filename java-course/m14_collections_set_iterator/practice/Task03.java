@@ -1,0 +1,32 @@
+package m14_collections_set_iterator.practice;
+
+/**
+ * Задача 03 — Модуль 14: Операции над множествами
+ *
+ * ЗАДАНИЕ:
+ *   Даны два множества студентов, посещающих курсы Java и Python.
+ *   Найдите и выведите:
+ *     - всех студентов (объединение);
+ *     - тех, кто ходит на оба курса (пересечение);
+ *     - тех, кто ходит ТОЛЬКО на Java (разность).
+ *
+ * ПРИМЕР:
+ *   java   = {Анна, Борис, Виктор}
+ *   python = {Борис, Виктор, Галина}
+ *   Объединение: [Анна, Борис, Виктор, Галина]
+ *   Оба курса:   [Борис, Виктор]
+ *   Только Java: [Анна]
+ *
+ * ПОДСКАЗКА:
+ *   Копируйте множество (new HashSet<>(a)), затем addAll / retainAll / removeAll.
+ */
+import java.util.HashSet;
+import java.util.Set;
+
+public class Task03 {
+    public static void main(String[] args) {
+        Set<String> java = new HashSet<>(Set.of("Анна", "Борис", "Виктор"));
+        Set<String> python = new HashSet<>(Set.of("Борис", "Виктор", "Галина"));
+        // Ваш код здесь
+    }
+}
