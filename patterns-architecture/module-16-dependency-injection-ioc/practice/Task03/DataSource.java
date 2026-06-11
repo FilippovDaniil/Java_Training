@@ -1,3 +1,0 @@
-interface DataSource {
-    String data();
-}

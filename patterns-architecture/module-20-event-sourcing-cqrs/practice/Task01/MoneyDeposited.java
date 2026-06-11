@@ -1,2 +1,0 @@
-record MoneyDeposited(long amount) {
-}

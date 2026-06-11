@@ -1,3 +1,0 @@
-interface SagaStep {
-    void execute();
-}

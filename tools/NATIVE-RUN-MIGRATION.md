@@ -72,7 +72,7 @@ python tools/migrate_inplace.py --course java-course --from 2 --to 20 --apply
 - [x] **B6** java-course 81–100 — 149 rename, 501 pkg, 0 структурных. NB: m99 Task06 импортирует oauth2.jwt/jose (нет в deps) → см. B11
 - [x] **B7** java-course 101–118 — 86 rename, 320 pkg, compile clean. ✅ java-course мигрирован ПОЛНОСТЬЮ (0 module-* осталось)
 - [x] **B8** patterns-architecture 01–13 — 103 rename, 465 pkg, compile clean
-- [ ] **B9** patterns-architecture 14–26
+- [x] **B9** patterns-architecture 14–26 — 104 rename, 378 pkg, compile clean. ✅ patterns-architecture ПОЛНОСТЬЮ
 - [ ] **B10** algorithms-course 01–25
 - [ ] **B11** Финал: доки + `run.ps1` поиск + JDK 21 в build.gradle (см. §8)
 

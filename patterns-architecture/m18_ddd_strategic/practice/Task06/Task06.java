@@ -1,0 +1,35 @@
+package m18_ddd_strategic.practice.task06;
+
+/**
+ * Задача 06 — Тема 18: Bounded Context и Ubiquitous Language
+ *
+ * ЗАДАНИЕ:
+ *   Один и тот же термин «Товар» в разных контекстах — это РАЗНЫЕ модели.
+ *   Не делайте «один Product на всё»; смоделируйте две версии:
+ *     - CatalogProduct (файл CatalogProduct.java) — контекст «Каталог»: sku,
+ *       title, priceCents (что важно для витрины);
+ *     - ShippingProduct (файл ShippingProduct.java) — контекст «Доставка»: sku,
+ *       weightGrams, dimensions (что важно для логистики);
+ *     - у обоих метод describe(), отражающий ТОЛЬКО релевантные контексту данные.
+ *   В main создайте обе модели для одного sku и выведите их описания — каждый
+ *   контекст знает своё.
+ *
+ * ОЖИДАЕМЫЙ ВЫВОД (пример):
+ *   Каталог: BOOK-1 / Чистый код / 50000
+ *   Доставка: BOOK-1 / 500 г / 20x15x3
+ *
+ * ТРЕБОВАНИЯ:
+ *   - CatalogProduct НЕ содержит вес/габариты; ShippingProduct НЕ содержит цену/название;
+ *   - связь между контекстами — через общий идентификатор (sku), а не общую модель;
+ *   - каждая модель отражает Ubiquitous Language своего контекста.
+ *
+ * ПОДСКАЗКА:
+ *   Соблазн «единого Product со всеми полями» ведёт к раздутой модели. Bounded
+ *   Context разделяет: в каждом контексте — своя согласованная версия понятия.
+ */
+
+public class Task06 {
+    public static void main(String[] args) {
+        // TODO: создайте CatalogProduct и ShippingProduct для одного sku, выведите describe()
+    }
+}

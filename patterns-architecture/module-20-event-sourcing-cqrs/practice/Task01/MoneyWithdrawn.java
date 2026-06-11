@@ -1,2 +1,0 @@
-record MoneyWithdrawn(long amount) {
-}

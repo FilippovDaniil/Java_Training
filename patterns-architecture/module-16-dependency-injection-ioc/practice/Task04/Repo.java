@@ -1,3 +1,0 @@
-interface Repo {
-    String find();
-}

@@ -1,2 +1,0 @@
-record OrderShipped(String orderId) {
-}

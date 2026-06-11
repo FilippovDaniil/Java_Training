@@ -1,2 +1,0 @@
-record OrderCreated(String orderId) {
-}

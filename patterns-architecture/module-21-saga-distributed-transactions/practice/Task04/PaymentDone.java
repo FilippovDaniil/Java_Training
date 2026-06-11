@@ -1,2 +1,0 @@
-record PaymentDone(String orderId) {
-}
