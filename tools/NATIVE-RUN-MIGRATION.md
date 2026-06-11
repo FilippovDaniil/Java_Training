@@ -67,7 +67,7 @@ python tools/migrate_inplace.py --course java-course --from 2 --to 20 --apply
 - [x] **B1** java-course m01 (пилот) — структура+компиляция OK; ▶ подтверждён
 - [x] **B2** java-course 02–20 — 51 rename, 169 pkg, compile clean (170 классов)
 - [x] **B3** java-course 21–40 — 68 rename, 172 pkg, compile clean
-- [ ] **B4** java-course 41–60
+- [x] **B4** java-course 41–60 — 64 rename, 250 pkg, compile clean (Spring deps OK)
 - [ ] **B5** java-course 61–80
 - [ ] **B6** java-course 81–100
 - [ ] **B7** java-course 101–118
