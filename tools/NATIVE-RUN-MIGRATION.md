@@ -70,7 +70,7 @@ python tools/migrate_inplace.py --course java-course --from 2 --to 20 --apply
 - [x] **B4** java-course 41–60 — 64 rename, 250 pkg, compile clean (Spring deps OK)
 - [x] **B5** java-course 61–80 — 157 rename, 506 pkg, compile clean
 - [x] **B6** java-course 81–100 — 149 rename, 501 pkg, 0 структурных. NB: m99 Task06 импортирует oauth2.jwt/jose (нет в deps) → см. B11
-- [ ] **B7** java-course 101–118
+- [x] **B7** java-course 101–118 — 86 rename, 320 pkg, compile clean. ✅ java-course мигрирован ПОЛНОСТЬЮ (0 module-* осталось)
 - [ ] **B8** patterns-architecture 01–13
 - [ ] **B9** patterns-architecture 14–26
 - [ ] **B10** algorithms-course 01–25

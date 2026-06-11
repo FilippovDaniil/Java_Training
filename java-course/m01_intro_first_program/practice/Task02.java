@@ -20,8 +20,5 @@ package m01_intro_first_program.practice;
 public class Task02 {
     public static void main(String[] args) {
         // Ваш код здесь
-        System.out.println("Daniil");
-        System.out.println("Moscow");
-        System.out.println("Java");
     }
 }
