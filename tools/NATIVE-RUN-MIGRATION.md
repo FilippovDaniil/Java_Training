@@ -73,7 +73,7 @@ python tools/migrate_inplace.py --course java-course --from 2 --to 20 --apply
 - [x] **B7** java-course 101–118 — 86 rename, 320 pkg, compile clean. ✅ java-course мигрирован ПОЛНОСТЬЮ (0 module-* осталось)
 - [x] **B8** patterns-architecture 01–13 — 103 rename, 465 pkg, compile clean
 - [x] **B9** patterns-architecture 14–26 — 104 rename, 378 pkg, compile clean. ✅ patterns-architecture ПОЛНОСТЬЮ
-- [ ] **B10** algorithms-course 01–25
+- [x] **B10** algorithms-course 01–25 — 67 rename, 218 pkg, compile clean. ✅ algorithms-course ПОЛНОСТЬЮ. 🎉 ВСЕ 3 КУРСА мигрированы
 - [ ] **B11** Финал: доки + `run.ps1` поиск + JDK 21 в build.gradle (см. §8)
 
 ## 8. Финал (B11)
