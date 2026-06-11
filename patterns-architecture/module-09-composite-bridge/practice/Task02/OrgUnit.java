@@ -1,3 +1,0 @@
-interface OrgUnit {
-    int headcount();
-}

@@ -1,3 +1,0 @@
-interface Shape {
-    long area();
-}

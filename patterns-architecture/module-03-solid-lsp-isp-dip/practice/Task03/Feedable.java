@@ -1,3 +1,0 @@
-interface Feedable {
-    void eat();
-}

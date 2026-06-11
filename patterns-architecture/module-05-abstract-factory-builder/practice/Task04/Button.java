@@ -1,3 +1,0 @@
-interface Button {
-    String render();
-}

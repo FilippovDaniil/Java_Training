@@ -1,3 +1,0 @@
-interface Checkbox {
-    String render();
-}

@@ -1,3 +1,0 @@
-interface Connection {
-    String connect();
-}

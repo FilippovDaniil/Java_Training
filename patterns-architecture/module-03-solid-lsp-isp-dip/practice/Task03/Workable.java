@@ -1,3 +1,0 @@
-interface Workable {
-    void work();
-}

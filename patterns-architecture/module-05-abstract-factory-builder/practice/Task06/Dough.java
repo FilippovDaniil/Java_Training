@@ -1,3 +1,0 @@
-interface Dough {
-    String describe();
-}

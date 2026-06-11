@@ -1,3 +1,0 @@
-interface Transport {
-    String deliver();
-}

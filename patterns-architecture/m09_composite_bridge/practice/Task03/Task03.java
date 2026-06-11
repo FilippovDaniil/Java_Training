@@ -1,0 +1,37 @@
+package m09_composite_bridge.practice.task03;
+
+/**
+ * Задача 03 — Тема 09: Composite (рендер дерева с отступами)
+ *
+ * ЗАДАНИЕ:
+ *   Покажите операцию обхода дерева, которая печатает структуру с отступами:
+ *     - интерфейс MenuComponent (файл MenuComponent.java):
+ *       String render(int indent);   // indent — глубина для отступа
+ *     - MenuItem (файл MenuItem.java) — лист: возвращает отступ + название;
+ *     - Menu (файл Menu.java) — композит: содержит List<MenuComponent>,
+ *       add(...), render(indent) печатает СВОЁ название с отступом и затем
+ *       детей с отступом indent+1.
+ *   В main соберите меню с подменю и выведите render(0).
+ *
+ * ОЖИДАЕМЫЙ ВЫВОД (пример):
+ *   Меню
+ *     Кофе
+ *     Десерты
+ *       Тирамису
+ *       Чизкейк
+ *
+ * ТРЕБОВАНИЯ:
+ *   - render() работает единообразно на пункте и на меню;
+ *   - вложенные меню отображаются с увеличенным отступом;
+ *   - отступ — например, 2 пробела на уровень ("  ".repeat(indent)).
+ *
+ * ПОДСКАЗКА:
+ *   Menu.render(indent): сначала своя строка с отступом, потом для каждого
+ *   ребёнка child.render(indent + 1). Собирать в StringBuilder или склеивать.
+ */
+
+public class Task03 {
+    public static void main(String[] args) {
+        // TODO: соберите Menu с MenuItem и вложенным Menu, выведите render(0)
+    }
+}
