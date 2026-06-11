@@ -1,6 +1,6 @@
 # Модуль 94. Spring Security: in-memory пользователи, PasswordEncoder, форма логина, CSRF
 
-В [модуле 93](../module-93-spring-security-intro/theory.md) мы пользовались сгенерированным пользователем `user`. Теперь зададим **своих** пользователей в памяти, разберём **хеширование паролей** (`PasswordEncoder`), форму логина и азы **CSRF**.
+В [модуле 93](../m93_spring_security_intro/theory.md) мы пользовались сгенерированным пользователем `user`. Теперь зададим **своих** пользователей в памяти, разберём **хеширование паролей** (`PasswordEncoder`), форму логина и азы **CSRF**.
 
 > Практика — задачи в `practice/`. Зависимости: `spring-boot-starter-web`, `spring-boot-starter-security`. Реалистичные импорты + «ТРЕБУЮТСЯ ЗАВИСИМОСТИ»; bare-javac не компилируется (норма). Сквозной проект — **Task Tracker API**.
 
@@ -94,7 +94,7 @@ http.formLogin(form -> form
 http.logout(logout -> logout.logoutUrl("/logout").logoutSuccessUrl("/login?logout"));
 ```
 
-Без `loginPage(...)` Spring сгенерирует страницу автоматически. Для REST-API форма не нужна — там `httpBasic`/JWT ([модули 95](../module-95-spring-security-session-cors/theory.md), [98](../module-98-spring-security-jwt/theory.md)).
+Без `loginPage(...)` Spring сгенерирует страницу автоматически. Для REST-API форма не нужна — там `httpBasic`/JWT ([модули 95](../m95_spring_security_session_cors/theory.md), [98](../m98_spring_security_jwt/theory.md)).
 
 ---
 
@@ -145,4 +145,4 @@ http.csrf(csrf -> csrf.disable());
 
 ## Что дальше
 
-В [модуле 95](../module-95-spring-security-session-cors/theory.md) — session-based безопасность, HTTP Basic, CORS, cookies и защита загрузки файлов.
+В [модуле 95](../m95_spring_security_session_cors/theory.md) — session-based безопасность, HTTP Basic, CORS, cookies и защита загрузки файлов.

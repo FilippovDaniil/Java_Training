@@ -1,6 +1,6 @@
 # Модуль 64. Знакомство со Spring Boot
 
-В [модулях 59–63](../module-59-spring-core-intro/theory.md) мы вручную поднимали контейнер Spring (`AnnotationConfigApplicationContext`), сами описывали бины, конфигурацию, профили. **Spring Boot** убирает почти всю эту рутину: достаточно одной аннотации и одной строки `main`, и приложение поднимается само — с веб-сервером, логированием, разумными настройками по умолчанию.
+В [модулях 59–63](../m59_spring_core_intro/theory.md) мы вручную поднимали контейнер Spring (`AnnotationConfigApplicationContext`), сами описывали бины, конфигурацию, профили. **Spring Boot** убирает почти всю эту рутину: достаточно одной аннотации и одной строки `main`, и приложение поднимается само — с веб-сервером, логированием, разумными настройками по умолчанию.
 
 > Практика — задачи в `practice/`. Зависимости: `org.springframework.boot:spring-boot-starter` (+ `spring-boot-starter-web` для эндпоинтов). Bare-`javac` НЕ компилируется без зависимостей — запускайте в IDE/Gradle.
 
@@ -14,7 +14,7 @@ Spring Boot — это надстройка над Spring Framework. Его тр
 |-----|----------|
 | **Автоконфигурация** | сам настраивает бины по тому, что есть в classpath (есть `spring-web` → поднимет MVC и Tomcat) |
 | **Стартеры** | «пакеты зависимостей» — подключаешь один `starter`, он тянет всё нужное согласованных версий |
-| **Встроенный сервер** | Tomcat/Jetty/Undertow внутри jar — не нужен внешний контейнер сервлетов (ср. [модуль 40](../module-40-servlet-containers/theory.md)) |
+| **Встроенный сервер** | Tomcat/Jetty/Undertow внутри jar — не нужен внешний контейнер сервлетов (ср. [модуль 40](../m40_servlet_containers/theory.md)) |
 
 Девиз: **convention over configuration** — соглашения важнее конфигурации. Меньше кода — больше готового поведения.
 
@@ -77,10 +77,10 @@ public class ShopApplication {
 |---------|--------------|
 | `spring-boot-starter` | ядро: контекст, логирование, автоконфигурация |
 | `spring-boot-starter-web` | Spring MVC + REST + встроенный Tomcat + Jackson (JSON) |
-| `spring-boot-starter-data-jpa` | Spring Data JPA + Hibernate (см. [модуль 77](../module-77-spring-data-jpa-intro/theory.md)) |
+| `spring-boot-starter-data-jpa` | Spring Data JPA + Hibernate (см. [модуль 77](../m77_spring_data_jpa_intro/theory.md)) |
 | `spring-boot-starter-validation` | Bean Validation (Hibernate Validator) |
 | `spring-boot-starter-test` | JUnit 5 + Mockito + Spring Test + MockMvc |
-| `spring-boot-starter-actuator` | мониторинг и метрики (см. [модуль 66](../module-66-spring-boot-devops/theory.md)) |
+| `spring-boot-starter-actuator` | мониторинг и метрики (см. [модуль 66](../m66_spring_boot_devops/theory.md)) |
 
 Пример (Gradle):
 
@@ -117,7 +117,7 @@ public class StartupRunner implements CommandLineRunner {
 | `CommandLineRunner` | `run(String... args)` | «сырые» аргументы командной строки |
 | `ApplicationRunner` | `run(ApplicationArguments args)` | разобранные опции (`--name=value`) |
 
-Можно объявить и через `@Bean` (см. [модуль 62](../module-62-spring-core-configuration/theory.md)):
+Можно объявить и через `@Bean` (см. [модуль 62](../m62_spring_core_configuration/theory.md)):
 
 ```java
 @Bean
@@ -142,7 +142,7 @@ shop.currency=RUB
 shop.welcome-message=Добро пожаловать в магазин!
 ```
 
-Чтение значений (см. [модуль 62](../module-62-spring-core-configuration/theory.md)):
+Чтение значений (см. [модуль 62](../m62_spring_core_configuration/theory.md)):
 
 ```java
 @Value("${shop.welcome-message}")
@@ -167,7 +167,7 @@ public class HelloController {
 }
 ```
 
-Запустите приложение и откройте `http://localhost:8080/hello`. `@RestController` = `@Controller` + `@ResponseBody`: возвращённое значение пишется прямо в тело ответа (строка — как текст, объект — как JSON). Подробно — в [модуле 65](../module-65-spring-boot-web-config/theory.md).
+Запустите приложение и откройте `http://localhost:8080/hello`. `@RestController` = `@Controller` + `@ResponseBody`: возвращённое значение пишется прямо в тело ответа (строка — как текст, объект — как JSON). Подробно — в [модуле 65](../m65_spring_boot_web_config/theory.md).
 
 ---
 
@@ -211,9 +211,9 @@ java -jar build/libs/shop-0.0.1.jar   # запустить собранный ja
 
 - [Spring Boot Reference Documentation](https://docs.spring.io/spring-boot/index.html).
 - [Spring Initializr](https://start.spring.io/) — генератор стартового проекта.
-- [модуль 54](../module-54-gradle-build-tools/theory.md) — Gradle и сборка проектов.
-- [модуль 59](../module-59-spring-core-intro/theory.md) — IoC/DI, основа, на которой стоит Boot.
+- [модуль 54](../m54_gradle_build_tools/theory.md) — Gradle и сборка проектов.
+- [модуль 59](../m59_spring_core_intro/theory.md) — IoC/DI, основа, на которой стоит Boot.
 
 ## Что дальше
 
-В [модуле 65](../module-65-spring-boot-web-config/theory.md) — построение REST-API: `@RestController`, JSON DTO, `@RequestBody`/`@PathVariable`, валидация и единый контракт ошибок через `@ControllerAdvice`.
+В [модуле 65](../m65_spring_boot_web_config/theory.md) — построение REST-API: `@RestController`, JSON DTO, `@RequestBody`/`@PathVariable`, валидация и единый контракт ошибок через `@ControllerAdvice`.

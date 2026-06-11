@@ -130,7 +130,7 @@ try (Scanner sc = new Scanner(System.in)) {
 }
 ```
 
-> Предпочтительнее, чем `finally { resource.close(); }`. Подробнее — в [модуле 18](../module-18-io-streams/theory.md).
+> Предпочтительнее, чем `finally { resource.close(); }`. Подробнее — в [модуле 18](../m18_io_streams/theory.md).
 
 ---
 
@@ -176,4 +176,4 @@ catch (Exception e) {
 
 ## Что дальше
 
-В [модуле 18](../module-18-io-streams/theory.md) — потоки ввода-вывода (где исключения обязательны).
+В [модуле 18](../m18_io_streams/theory.md) — потоки ввода-вывода (где исключения обязательны).

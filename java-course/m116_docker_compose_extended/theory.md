@@ -1,6 +1,6 @@
 # Модуль 116. Docker Compose: расширенный стек (+Redis, +RabbitMQ) и dev-workflow
 
-Базовый стек app + PostgreSQL собран ([модуль 115](../module-115-docker-compose/theory.md)). Реальное приложение часто опирается и на другие инфраструктурные сервисы: **Redis** (кэш/сессии) и **RabbitMQ** (очередь сообщений). В этом модуле — как добавить их в Compose, настроить healthcheck и порядок старта для каждого, удобный dev-workflow (override-файлы, профили Compose, пересборка) и диагностику типовых проблем.
+Базовый стек app + PostgreSQL собран ([модуль 115](../m115_docker_compose/theory.md)). Реальное приложение часто опирается и на другие инфраструктурные сервисы: **Redis** (кэш/сессии) и **RabbitMQ** (очередь сообщений). В этом модуле — как добавить их в Compose, настроить healthcheck и порядок старта для каждого, удобный dev-workflow (override-файлы, профили Compose, пересборка) и диагностику типовых проблем.
 
 > Практика — задачи в `practice/`. **Задачи-носители:** `.java` с text-блоком (`docker-compose.yml`/`application.yml`/команды) + `println` — **компилируются bare-javac**. Сквозной проект — **Task Tracker API** + PostgreSQL + Redis + RabbitMQ.
 
@@ -179,4 +179,4 @@ docker compose down -v               # снести всё + тома
 
 ## Что дальше
 
-В [модуле 117](../module-117-docker-jvm-tuning/theory.md) — **JVM под контейнерные лимиты**: как JVM видит память/CPU контейнера, `-XX:MaxRAMPercentage` вместо `-Xmx`, гигиена образа (минимальный размер, distroless) и запуск от non-root пользователя. Готовим образ к проду по-настоящему.
+В [модуле 117](../m117_docker_jvm_tuning/theory.md) — **JVM под контейнерные лимиты**: как JVM видит память/CPU контейнера, `-XX:MaxRAMPercentage` вместо `-Xmx`, гигиена образа (минимальный размер, distroless) и запуск от non-root пользователя. Готовим образ к проду по-настоящему.

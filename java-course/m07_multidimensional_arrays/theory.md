@@ -152,4 +152,4 @@ System.out.println(Arrays.deepToString(m));
 
 ## Что дальше
 
-В [модуле 08](../module-08-methods/theory.md) научимся выносить логику в методы.
+В [модуле 08](../m08_methods/theory.md) научимся выносить логику в методы.

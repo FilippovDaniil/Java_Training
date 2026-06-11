@@ -145,7 +145,7 @@ DNS-сервер ──▶ "93.184.216.34"
 ## Где это в Java
 
 - Низкий уровень: `java.net.Socket`, `ServerSocket` (TCP), `DatagramSocket` (UDP).
-- Высокий уровень: `java.net.http.HttpClient` (HTTP — см. [модуль 38](../module-38-http-protocol/theory.md)).
+- Высокий уровень: `java.net.http.HttpClient` (HTTP — см. [модуль 38](../m38_http_protocol/theory.md)).
 
 ---
 
@@ -168,4 +168,4 @@ DNS-сервер ──▶ "93.184.216.34"
 
 ## Что дальше
 
-В [модуле 37](../module-37-software-architecture/theory.md) — архитектура ПО (теория).
+В [модуле 37](../m37_software_architecture/theory.md) — архитектура ПО (теория).

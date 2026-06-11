@@ -1,8 +1,8 @@
 # Модуль 57. Java HTTP Client — продвинутый уровень
 
-В [модуле 38](../module-38-http-protocol/theory.md) рассмотрены основы `java.net.http`: отправка GET/POST, чтение тела и заголовков. Этот модуль — следующий шаг: тонкая настройка клиента, таймауты, обработка ошибок, разные форматы ответов и асинхронность через `CompletableFuture`.
+В [модуле 38](../m38_http_protocol/theory.md) рассмотрены основы `java.net.http`: отправка GET/POST, чтение тела и заголовков. Этот модуль — следующий шаг: тонкая настройка клиента, таймауты, обработка ошибок, разные форматы ответов и асинхронность через `CompletableFuture`.
 
-> Весь API входит в JDK 11+ — внешние зависимости не нужны. Базовые концепции HTTP см. в [модуле 55](../module-55-http-basics/theory.md).
+> Весь API входит в JDK 11+ — внешние зависимости не нужны. Базовые концепции HTTP см. в [модуле 55](../m55_http_basics/theory.md).
 
 ---
 
@@ -186,4 +186,4 @@ String encoded = URLEncoder.encode(value, StandardCharsets.UTF_8);
 
 ## Что дальше
 
-В [модуле 58](../module-58-jdk-httpserver/theory.md) — встроенный HTTP-сервер JDK (`com.sun.net.httpserver`).
+В [модуле 58](../m58_jdk_httpserver/theory.md) — встроенный HTTP-сервер JDK (`com.sun.net.httpserver`).

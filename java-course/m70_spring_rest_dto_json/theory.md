@@ -1,8 +1,8 @@
 # Модуль 70. DTO, Jackson и форма JSON-ответа
 
-Контроллер ([модуль 69](../module-69-spring-rest-controllers/theory.md)) принимает и отдаёт объекты. **Какие именно** объекты пересекают границу API — критически важно. Здесь разбираем паттерн **DTO** (Data Transfer Object), работу сериализатора **Jackson** и проектирование формы ответа.
+Контроллер ([модуль 69](../m69_spring_rest_controllers/theory.md)) принимает и отдаёт объекты. **Какие именно** объекты пересекают границу API — критически важно. Здесь разбираем паттерн **DTO** (Data Transfer Object), работу сериализатора **Jackson** и проектирование формы ответа.
 
-> Практика — задачи в `practice/`. Зависимости: `spring-boot-starter-web` (Jackson внутри). Продолжаем **Task Tracker API**. Базовый Jackson разбирался в [модуле 56](../module-56-json-jackson-dto/theory.md).
+> Практика — задачи в `practice/`. Зависимости: `spring-boot-starter-web` (Jackson внутри). Продолжаем **Task Tracker API**. Базовый Jackson разбирался в [модуле 56](../m56_json_jackson_dto/theory.md).
 
 ---
 
@@ -151,7 +151,7 @@ public ApiResponse<TaskResponse> getOne(@PathVariable Long id) {
 
 ### Generics и стирание типов
 
-`ApiResponse<TaskResponse>` сериализуется корректно: Jackson смотрит на **реальный** объект в поле `data` во время выполнения, поэтому стирание типов (type erasure) не мешает сериализации. Проблемы возможны при **десериализации** дженерик-обёртки — там нужен `TypeReference` (см. [модуль 56](../module-56-json-jackson-dto/theory.md)).
+`ApiResponse<TaskResponse>` сериализуется корректно: Jackson смотрит на **реальный** объект в поле `data` во время выполнения, поэтому стирание типов (type erasure) не мешает сериализации. Проблемы возможны при **десериализации** дженерик-обёртки — там нужен `TypeReference` (см. [модуль 56](../m56_json_jackson_dto/theory.md)).
 
 ---
 
@@ -183,7 +183,7 @@ public record TaskResponse(
 | `null`-поля засоряют ответ | inclusion = ALWAYS | `@JsonInclude(NON_NULL)` / глобально |
 | Jackson не создаёт объект из JSON | нет подходящего конструктора | `record` или конструктор + поля |
 | Имя поля в JSON не нравится клиенту | дефолтное имя | `@JsonProperty("...")` |
-| `LazyInitializationException` при сериализации | сериализуем ленивую связь сущности | маппить в DTO до выхода из транзакции (см. [модуль 82](../module-82-spring-data-jpa-lazy-loading/theory.md)) |
+| `LazyInitializationException` при сериализации | сериализуем ленивую связь сущности | маппить в DTO до выхода из транзакции (см. [модуль 82](../m82_spring_data_jpa_lazy_loading/theory.md)) |
 
 ---
 
@@ -191,8 +191,8 @@ public record TaskResponse(
 
 - [Jackson Annotations (wiki)](https://github.com/FasterXML/jackson-annotations/wiki/Jackson-Annotations).
 - [MapStruct](https://mapstruct.org/) — генерация мапперов.
-- [модуль 56](../module-56-json-jackson-dto/theory.md) — основы Jackson, `ObjectMapper`, `TypeReference`.
+- [модуль 56](../m56_json_jackson_dto/theory.md) — основы Jackson, `ObjectMapper`, `TypeReference`.
 
 ## Что дальше
 
-В [модуле 71](../module-71-spring-rest-validation/theory.md) — валидация входных DTO: Bean Validation, кастомные ограничения, формирование ответа об ошибке.
+В [модуле 71](../m71_spring_rest_validation/theory.md) — валидация входных DTO: Bean Validation, кастомные ограничения, формирование ответа об ошибке.

@@ -134,4 +134,4 @@ public class Demo {
 
 ## Что дальше
 
-В [модуле 04](../module-04-conditionals/theory.md) научим программу принимать решения.
+В [модуле 04](../m04_conditionals/theory.md) научим программу принимать решения.

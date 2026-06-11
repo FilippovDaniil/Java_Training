@@ -1,6 +1,6 @@
 # Модуль 79. Репозитории: derived queries, Page, Slice
 
-Сущности готовы ([модуль 78](../module-78-spring-data-jpa-entity/theory.md)). Теперь — **репозитории**: как Spring Data из имени метода генерирует SQL-запрос, как возвращать страницы и сортировать. Это «рабочая лошадка» слоя данных.
+Сущности готовы ([модуль 78](../m78_spring_data_jpa_entity/theory.md)). Теперь — **репозитории**: как Spring Data из имени метода генерирует SQL-запрос, как возвращать страницы и сортировать. Это «рабочая лошадка» слоя данных.
 
 > Практика — задачи в `practice/`. Зависимости: `spring-boot-starter-data-jpa`, `com.h2database:h2`. Проект — `shop-data-jpa`.
 
@@ -151,7 +151,7 @@ public Page<ProductDto> list(Pageable pageable) {
 }
 ```
 
-(см. [модуль 73](../module-73-spring-rest-collections/theory.md) — там это было «превью», теперь — с настоящей БД).
+(см. [модуль 73](../m73_spring_rest_collections/theory.md) — там это было «превью», теперь — с настоящей БД).
 
 ---
 
@@ -162,7 +162,7 @@ public Page<ProductDto> list(Pageable pageable) {
 | Опечатка в имени метода → ошибка старта | поле не найдено по имени | имя должно точно соответствовать полю сущности |
 | `findBy...` возвращает `null` вместо пустого списка | вернули не тот тип | для коллекций — `List` (пустой), не `null` |
 | `deleteBy...` бросает «no transaction» | модифицирующий запрос вне транзакции | `@Transactional` на сервисном методе |
-| Сложное имя метода нечитаемо | слишком много условий в имени | перейти на `@Query` ([модуль 80](../module-80-spring-data-jpa-advanced/theory.md)) |
+| Сложное имя метода нечитаемо | слишком много условий в имени | перейти на `@Query` ([модуль 80](../m80_spring_data_jpa_advanced/theory.md)) |
 | `Page` медленный | лишний `COUNT` | взять `Slice`, если число не нужно |
 | `findAll()` тянет всю таблицу | нет пагинации | использовать `Pageable` |
 
@@ -172,8 +172,8 @@ public Page<ProductDto> list(Pageable pageable) {
 
 - [Spring Data JPA: Query Methods](https://docs.spring.io/spring-data/jpa/reference/jpa/query-methods.html).
 - [Spring Data: Paging and Sorting](https://docs.spring.io/spring-data/commons/reference/repositories/query-methods-details.html).
-- [модуль 73](../module-73-spring-rest-collections/theory.md) — пагинация на уровне REST.
+- [модуль 73](../m73_spring_rest_collections/theory.md) — пагинация на уровне REST.
 
 ## Что дальше
 
-В [модуле 80](../module-80-spring-data-jpa-advanced/theory.md) — когда derived-методов мало: JPQL, `@Query`, проекции, native queries и Specification.
+В [модуле 80](../m80_spring_data_jpa_advanced/theory.md) — когда derived-методов мало: JPQL, `@Query`, проекции, native queries и Specification.

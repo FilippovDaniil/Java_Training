@@ -255,9 +255,9 @@ for (Product p : all) {
 
 ## Перекрёстные ссылки
 
-- Предыдущий модуль: [Модуль 52 — Связи в Hibernate (relationships)](../module-52-hibernate-relationships/theory.md)
-- Основы Hibernate: [Модуль 51](../module-51-hibernate-orm/theory.md)
-- Проектирование БД: [Модуль 48](../module-48-database-design/theory.md)
+- Предыдущий модуль: [Модуль 52 — Связи в Hibernate (relationships)](../m52_hibernate_relationships/theory.md)
+- Основы Hibernate: [Модуль 51](../m51_hibernate_orm/theory.md)
+- Проектирование БД: [Модуль 48](../m48_database_design/theory.md)
 
 ## Дополнительные источники
 
@@ -267,4 +267,4 @@ for (Product p : all) {
 
 ## Что дальше
 
-В [модуле 54](../module-54-gradle-build-tools/theory.md) — система сборки Gradle: управление зависимостями, многомодульные проекты, плагины.
+В [модуле 54](../m54_gradle_build_tools/theory.md) — система сборки Gradle: управление зависимостями, многомодульные проекты, плагины.

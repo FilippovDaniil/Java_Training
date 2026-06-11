@@ -1,6 +1,6 @@
 # Модуль 80. Продвинутые запросы: JPQL, @Query, проекции, Specification
 
-Derived-методы ([модуль 79](../module-79-spring-data-jpa-repository/theory.md)) хороши для простых случаев, но имя `findByCategoryAndPriceGreaterThanAndAvailableTrueOrderByPriceDesc` уже нечитаемо. Для сложных запросов есть **JPQL**, аннотация **`@Query`**, **проекции** и динамические **Specification**.
+Derived-методы ([модуль 79](../m79_spring_data_jpa_repository/theory.md)) хороши для простых случаев, но имя `findByCategoryAndPriceGreaterThanAndAvailableTrueOrderByPriceDesc` уже нечитаемо. Для сложных запросов есть **JPQL**, аннотация **`@Query`**, **проекции** и динамические **Specification**.
 
 > Практика — задачи в `practice/`. Зависимости: `spring-boot-starter-data-jpa`, `com.h2database:h2`. Проект — `shop-data-jpa`.
 
@@ -71,7 +71,7 @@ int raisePrices(@Param("factor") double factor, @Param("cat") String category);
 // возвращает число изменённых строк; вызывать внутри @Transactional
 ```
 
-> Bulk-update обходит persistence context (см. [модуль 91](../module-91-hibernate-deep-dive-performance/theory.md)) — уже загруженные объекты в кэше не обновятся. После такого запроса часто нужен `flush`/`clear`.
+> Bulk-update обходит persistence context (см. [модуль 91](../m91_hibernate_deep_dive_performance/theory.md)) — уже загруженные объекты в кэше не обновятся. После такого запроса часто нужен `flush`/`clear`.
 
 ---
 
@@ -182,8 +182,8 @@ List<Product> result = repo.findAll(spec);
 - [Spring Data JPA: @Query](https://docs.spring.io/spring-data/jpa/reference/jpa/query-methods.html#jpa.query-methods.at-query).
 - [Spring Data JPA: Projections](https://docs.spring.io/spring-data/jpa/reference/repositories/projections.html).
 - [Spring Data JPA: Specifications](https://docs.spring.io/spring-data/jpa/reference/jpa/specifications.html).
-- [модуль 87](../module-87-hibernate-deep-dive-querying/theory.md) — HQL, Criteria API глубже.
+- [модуль 87](../m87_hibernate_deep_dive_querying/theory.md) — HQL, Criteria API глубже.
 
 ## Что дальше
 
-В [модуле 81](../module-81-spring-data-jpa-transactions/theory.md) — транзакции: `@Transactional`, propagation, isolation и persistence context.
+В [модуле 81](../m81_spring_data_jpa_transactions/theory.md) — транзакции: `@Transactional`, propagation, isolation и persistence context.

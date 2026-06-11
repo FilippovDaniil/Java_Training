@@ -1,6 +1,6 @@
 # Модуль 117. Docker: JVM под контейнерные лимиты, гигиена образа, non-root
 
-Образ собран, стек поднимается ([модули 113–116](../module-113-docker-spring-boot-image/theory.md)). Остался production-tuning: чтобы JVM **уважала лимиты памяти/CPU** контейнера (иначе OOM-kill), чтобы образ был **маленьким и безопасным**, и чтобы приложение работало **не от root**. В этом модуле — память/CPU JVM в контейнере, гигиена образа и non-root запуск.
+Образ собран, стек поднимается ([модули 113–116](../m113_docker_spring_boot_image/theory.md)). Остался production-tuning: чтобы JVM **уважала лимиты памяти/CPU** контейнера (иначе OOM-kill), чтобы образ был **маленьким и безопасным**, и чтобы приложение работало **не от root**. В этом модуле — память/CPU JVM в контейнере, гигиена образа и non-root запуск.
 
 > Практика — задачи в `practice/`. **Задачи-носители:** `.java` с text-блоком (Dockerfile/команды/флаги JVM) + `println` — **компилируются bare-javac**. Сквозной проект — **Task Tracker API**.
 
@@ -91,7 +91,7 @@ ENTRYPOINT ["java", "-jar", "app.jar"]
    USER app             →  пробой → ограниченные права (безопаснее)
 ```
 
-> Buildpacks (`bootBuildImage`, [модуль 113](../module-113-docker-spring-boot-image/theory.md)) делают non-root **из коробки** — ещё причина их предпочесть.
+> Buildpacks (`bootBuildImage`, [модуль 113](../m113_docker_spring_boot_image/theory.md)) делают non-root **из коробки** — ещё причина их предпочесть.
 
 ---
 
@@ -104,7 +104,7 @@ HEALTHCHECK --interval=30s --timeout=3s --retries=3 \
     CMD wget -qO- http://localhost:8080/actuator/health || exit 1
 ```
 
-> Опирается на Spring Boot Actuator (`/actuator/health`, [модуль 66](../module-66-spring-boot-devops/theory.md)). Healthcheck в Compose (`healthcheck:`) — то же снаружи; в Dockerfile — встроено в образ.
+> Опирается на Spring Boot Actuator (`/actuator/health`, [модуль 66](../m66_spring_boot_devops/theory.md)). Healthcheck в Compose (`healthcheck:`) — то же снаружи; в Dockerfile — встроено в образ.
 
 ---
 
@@ -127,8 +127,8 @@ HEALTHCHECK --interval=30s --timeout=3s --retries=3 \
 - [Java in Containers — memory/CPU awareness](https://docs.oracle.com/en/java/javase/17/docs/specs/man/java.html) (флаги `-XX:MaxRAMPercentage`).
 - [Docker: Runtime resource constraints (`--memory`, `--cpus`)](https://docs.docker.com/config/containers/resource_constraints/).
 - [Distroless images](https://github.com/GoogleContainerTools/distroless) · [`docker scout`](https://docs.docker.com/scout/).
-- [модуль 66](../module-66-spring-boot-devops/theory.md) — Actuator `/actuator/health` (для HEALTHCHECK).
+- [модуль 66](../m66_spring_boot_devops/theory.md) — Actuator `/actuator/health` (для HEALTHCHECK).
 
 ## Что дальше
 
-В [модуле 118](../module-118-docker-final-template/theory.md) — **финальный production-ready шаблон**: соберём всё вместе (multi-stage/layered Dockerfile, non-root, JVM-tuning, healthcheck, Compose со всеми сервисами, лимиты) в переиспользуемый template и пройдём чек-лист прод-готовности. Это капстоун всего курса.
+В [модуле 118](../m118_docker_final_template/theory.md) — **финальный production-ready шаблон**: соберём всё вместе (multi-stage/layered Dockerfile, non-root, JVM-tuning, healthcheck, Compose со всеми сервисами, лимиты) в переиспользуемый template и пройдём чек-лист прод-готовности. Это капстоун всего курса.

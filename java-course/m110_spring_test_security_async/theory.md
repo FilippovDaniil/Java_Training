@@ -8,7 +8,7 @@
 
 ## Security в полном контексте
 
-В отличие от среза `@WebMvcTest` (модуль [100](../module-100-spring-security-testing/theory.md)), здесь поднимается всё приложение — security-цепочка реальная, с реальными правилами:
+В отличие от среза `@WebMvcTest` (модуль [100](../m100_spring_security_testing/theory.md)), здесь поднимается всё приложение — security-цепочка реальная, с реальными правилами:
 
 ```java
 @SpringBootTest
@@ -41,7 +41,7 @@ class SecurityIntegrationTest {
 
 ## Тестирование `@Async`
 
-Асинхронный метод (`@Async` возвращает `CompletableFuture`, модуль [25](../module-25-multithreading-concurrency/theory.md)) выполняется в другом потоке — тест должен **дождаться** результата:
+Асинхронный метод (`@Async` возвращает `CompletableFuture`, модуль [25](../m25_multithreading_concurrency/theory.md)) выполняется в другом потоке — тест должен **дождаться** результата:
 
 ```java
 @SpringBootTest
@@ -137,7 +137,7 @@ class TaskDocsTest {
 | сниппеты | curl, http-request, http-response, request/response-fields |
 | гарантия | документация не «протухнет» — рассинхрон ломает тест |
 
-> Отличие от OpenAPI/springdoc (модуль [75](../module-75-spring-rest-config-openapi/theory.md)): springdoc генерирует спеку из аннотаций/кода, REST Docs — из **тестов** (точнее отражает реальное поведение, но требует писать тесты).
+> Отличие от OpenAPI/springdoc (модуль [75](../m75_spring_rest_config_openapi/theory.md)): springdoc генерирует спеку из аннотаций/кода, REST Docs — из **тестов** (точнее отражает реальное поведение, но требует писать тесты).
 
 ---
 
@@ -160,8 +160,8 @@ class TaskDocsTest {
 - [Spring Security: Testing](https://docs.spring.io/spring-security/reference/servlet/test/index.html).
 - [Spring: Testing `@Async`](https://docs.spring.io/spring-framework/reference/integration/scheduling.html) + [Awaitility](https://github.com/awaitility/awaitility).
 - [Spring REST Docs](https://docs.spring.io/spring-restdocs/docs/current/reference/htmlsingle/).
-- [модуль 100](../module-100-spring-security-testing/theory.md) — security-тесты в срезе `@WebMvcTest`.
+- [модуль 100](../m100_spring_security_testing/theory.md) — security-тесты в срезе `@WebMvcTest`.
 
 ## Что дальше
 
-**Блок Spring Test (101–110) завершён**: от инструментов и unit-тестов до Testcontainers, security, async и REST Docs — полное покрытие пирамиды. Дальше — **Docker (модули 111–118)**: контейнеризация приложения, Dockerfile, образы Spring Boot, Compose и production-ready упаковка. Начинаем с [модуля 111](../module-111-docker-basics/theory.md) — основы контейнеров.
+**Блок Spring Test (101–110) завершён**: от инструментов и unit-тестов до Testcontainers, security, async и REST Docs — полное покрытие пирамиды. Дальше — **Docker (модули 111–118)**: контейнеризация приложения, Dockerfile, образы Spring Boot, Compose и production-ready упаковка. Начинаем с [модуля 111](../m111_docker_basics/theory.md) — основы контейнеров.

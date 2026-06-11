@@ -130,7 +130,7 @@ diff.removeAll(b);          // разность a−b: {1,2}
 
 ## Множество объектов требует equals/hashCode
 
-Чтобы `HashSet` корректно определял дубликаты **ваших** объектов, в классе должны быть переопределены `equals()` и `hashCode()` (см. [модуль 11](../module-11-objects-constructors/theory.md)).
+Чтобы `HashSet` корректно определял дубликаты **ваших** объектов, в классе должны быть переопределены `equals()` и `hashCode()` (см. [модуль 11](../m11_objects_constructors/theory.md)).
 
 ```java
 Set<Book> books = new HashSet<>();
@@ -153,4 +153,4 @@ books.add(new Book("1984", 1949));   // дубликат отбросится Т
 
 ## Что дальше
 
-В [модуле 15](../module-15-map-collections-framework/theory.md) — словари `Map` и обзор всего фреймворка коллекций.
+В [модуле 15](../m15_map_collections_framework/theory.md) — словари `Map` и обзор всего фреймворка коллекций.

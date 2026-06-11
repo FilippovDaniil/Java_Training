@@ -132,7 +132,7 @@ Outer.Inner inner = outer.new Inner();
 | `static class` | нет | `new Outer.Nested()` |
 | inner `class` | да | `outer.new Inner()` |
 
-> Вложенные классы группируют тесно связанную логику. Подробнее (анонимные классы) — в [модуле 23](../module-23-oop-overloading-overriding-abstract/theory.md).
+> Вложенные классы группируют тесно связанную логику. Подробнее (анонимные классы) — в [модуле 23](../m23_oop_overloading_overriding_abstract/theory.md).
 
 ---
 
@@ -159,10 +159,10 @@ class StringUtils {
 | доступ к нестатическому полю из `static` | у статического метода нет объекта |
 | `static`-поле как «глобальная переменная» | общее состояние; меняется всеми — осторожно |
 | создание объекта ради `static`-метода | вызывайте через имя класса |
-| изменение `static` поля в многопотоке | требует синхронизации (см. [модуль 25](../module-25-multithreading-concurrency/theory.md)) |
+| изменение `static` поля в многопотоке | требует синхронизации (см. [модуль 25](../m25_multithreading_concurrency/theory.md)) |
 
 ---
 
 ## Что дальше
 
-В [модуле 13](../module-13-lists-generics/theory.md) — динамические списки и Generics.
+В [модуле 13](../m13_lists_generics/theory.md) — динамические списки и Generics.

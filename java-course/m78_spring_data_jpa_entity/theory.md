@@ -1,6 +1,6 @@
 # Модуль 78. Сущности JPA: ключи, маппинг полей, @Embeddable
 
-В [модуле 77](../module-77-spring-data-jpa-intro/theory.md) сущность была минимальной (`@Entity` + `@Id`). Реальные сущности требуют точного **маппинга**: какая колонка обязательна, какой длины, как хранить перечисление и дату, как вынести группу полей в отдельный тип. Разберём детально.
+В [модуле 77](../m77_spring_data_jpa_intro/theory.md) сущность была минимальной (`@Entity` + `@Id`). Реальные сущности требуют точного **маппинга**: какая колонка обязательна, какой длины, как хранить перечисление и дату, как вынести группу полей в отдельный тип. Разберём детально.
 
 > Практика — задачи в `practice/`. Зависимости: `spring-boot-starter-data-jpa`, `com.h2database:h2`. Проект — `shop-data-jpa`.
 
@@ -94,7 +94,7 @@ private Status status;
 
 ## Дата и время
 
-`java.time` (см. [модуль 20](../module-20-date-time/theory.md)) маппится автоматически:
+`java.time` (см. [модуль 20](../m20_date_time/theory.md)) маппится автоматически:
 
 ```java
 private LocalDate dueDate;          // → DATE
@@ -178,7 +178,7 @@ public class OrderItem {
 }
 ```
 
-Альтернатива — `@IdClass`. Для составных ключей **обязательны** `equals`/`hashCode` (детально — [модуль 88](../module-88-hibernate-deep-dive-modeling/theory.md)).
+Альтернатива — `@IdClass`. Для составных ключей **обязательны** `equals`/`hashCode` (детально — [модуль 88](../m88_hibernate_deep_dive_modeling/theory.md)).
 
 ---
 
@@ -199,9 +199,9 @@ public class OrderItem {
 
 - [Jakarta Persistence: Entities](https://jakarta.ee/specifications/persistence/).
 - [Hibernate ORM: Mapping](https://docs.jboss.org/hibernate/orm/current/userguide/html_single/Hibernate_User_Guide.html).
-- [модуль 51](../module-51-hibernate-orm/theory.md) — основы Hibernate-маппинга.
-- [модуль 88](../module-88-hibernate-deep-dive-modeling/theory.md) — value objects, `equals`/`hashCode`, идентификаторы.
+- [модуль 51](../m51_hibernate_orm/theory.md) — основы Hibernate-маппинга.
+- [модуль 88](../m88_hibernate_deep_dive_modeling/theory.md) — value objects, `equals`/`hashCode`, идентификаторы.
 
 ## Что дальше
 
-В [модуле 79](../module-79-spring-data-jpa-repository/theory.md) — репозитории: derived queries, `Page`/`Slice`, сортировка.
+В [модуле 79](../m79_spring_data_jpa_repository/theory.md) — репозитории: derived queries, `Page`/`Slice`, сортировка.

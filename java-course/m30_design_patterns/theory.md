@@ -32,7 +32,7 @@ class Config {
 }
 ```
 
-> Лучший способ в Java — через `enum` (см. [модуль 16](../module-16-enums-switch/theory.md)): потокобезопасно из коробки.
+> Лучший способ в Java — через `enum` (см. [модуль 16](../m16_enums_switch/theory.md)): потокобезопасно из коробки.
 
 ### Factory Method — фабричный метод
 
@@ -89,7 +89,7 @@ class PrinterAdapter implements Printer {
 
 ### Decorator — декоратор
 
-Добавляет поведение, оборачивая объект (подробно — в [модуле 19](../module-19-io-nio/theory.md)).
+Добавляет поведение, оборачивая объект (подробно — в [модуле 19](../m19_io_nio/theory.md)).
 
 ### Facade — фасад
 
@@ -141,7 +141,7 @@ class Sorter {
 }
 ```
 
-> Лямбды (см. [модуль 24](../module-24-stream-api-lambda/theory.md)) — частая лёгкая реализация Strategy.
+> Лямбды (см. [модуль 24](../m24_stream_api_lambda/theory.md)) — частая лёгкая реализация Strategy.
 
 ### Observer — наблюдатель
 
@@ -171,7 +171,7 @@ class Subject {
 
 ### Template Method — шаблонный метод
 
-Скелет алгоритма в базовом классе; шаги переопределяют потомки (см. абстрактные классы, [модуль 23](../module-23-oop-overloading-overriding-abstract/theory.md)).
+Скелет алгоритма в базовом классе; шаги переопределяют потомки (см. абстрактные классы, [модуль 23](../m23_oop_overloading_overriding_abstract/theory.md)).
 
 ---
 
@@ -198,4 +198,4 @@ class Subject {
 
 ## Что дальше
 
-В [модуле 31](../module-31-dev-methodologies/theory.md) — методологии разработки.
+В [модуле 31](../m31_dev_methodologies/theory.md) — методологии разработки.

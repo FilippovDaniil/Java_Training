@@ -1,6 +1,6 @@
 # Модуль 112. Docker: Dockerfile, слои, кэш и multi-stage build
 
-Запускать чужие образы умеем ([модуль 111](../module-111-docker-basics/theory.md)). Теперь соберём **свой**. `Dockerfile` — это рецепт образа: набор инструкций, каждая создаёт слой. Понимание слоёв и кэша сборки отличает образ, который собирается за секунды, от того, что качает интернет каждый раз. В этом модуле — инструкции Dockerfile, кэширование слоёв, `.dockerignore` и multi-stage build.
+Запускать чужие образы умеем ([модуль 111](../m111_docker_basics/theory.md)). Теперь соберём **свой**. `Dockerfile` — это рецепт образа: набор инструкций, каждая создаёт слой. Понимание слоёв и кэша сборки отличает образ, который собирается за секунды, от того, что качает интернет каждый раз. В этом модуле — инструкции Dockerfile, кэширование слоёв, `.dockerignore` и multi-stage build.
 
 > Практика — задачи в `practice/`. **Задачи-носители:** `.java` с text-блоком (несёт `Dockerfile`) и `println` — **компилируются bare-javac**. Сам `Dockerfile` создавайте в корне проекта и собирайте `docker build`. Сквозной проект — **Task Tracker API** (упаковка Spring Boot jar).
 
@@ -153,4 +153,4 @@ ENTRYPOINT ["java", "-jar", "app.jar"]
 
 ## Что дальше
 
-В [модуле 113](../module-113-docker-spring-boot-image/theory.md) — **образы именно для Spring Boot**: layered jars (расслоение зависимостей и кода для кэша), `bootBuildImage` (Buildpacks — образ без Dockerfile вообще). Доведём упаковку Spring Boot до оптимума.
+В [модуле 113](../m113_docker_spring_boot_image/theory.md) — **образы именно для Spring Boot**: layered jars (расслоение зависимостей и кода для кэша), `bootBuildImage` (Buildpacks — образ без Dockerfile вообще). Доведём упаковку Spring Boot до оптимума.

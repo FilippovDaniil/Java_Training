@@ -141,7 +141,7 @@ Planning│  Standup Standup Standup                      │  Review  Retrospec
 Инженерные практики качества кода:
 
 - **Парное программирование** (двое за одним кодом).
-- **TDD** — тесты до кода (см. концепцию в [модуле 28](../module-28-junit/theory.md)).
+- **TDD** — тесты до кода (см. концепцию в [модуле 28](../m28_junit/theory.md)).
 - **Непрерывная интеграция** (CI).
 - **Рефакторинг**, простота дизайна, частые релизы.
 
@@ -197,4 +197,4 @@ Planning│  Standup Standup Standup                      │  Review  Retrospec
 
 ## Что дальше
 
-В [модуле 32](../module-32-maven-multimodule/theory.md) — продвинутый Maven (многомодульность, профили).
+В [модуле 32](../m32_maven_multimodule/theory.md) — продвинутый Maven (многомодульность, профили).

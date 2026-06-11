@@ -55,7 +55,7 @@ ProductService и репозиторий  →  и передаёт их тем, 
 | **Сеттер** | `setRepo(repo)` / `@Autowired` на методе | Необязательные зависимости; позволяет переопределить |
 | **Поле** | `@Autowired` прямо на поле | Удобно, но плохо для тестов (нет доступа без рефлексии) |
 
-Spring построен на механизме рефлексии Java — подробнее в [модуле 26](../module-26-reflection-annotations/theory.md).
+Spring построен на механизме рефлексии Java — подробнее в [модуле 26](../m26_reflection_annotations/theory.md).
 
 ---
 
@@ -203,4 +203,4 @@ ProductService svc = ctx.getBean("productService", ProductService.class);
 
 ## Что дальше
 
-В [модуле 60](../module-60-spring-core-beans/theory.md) — жизненный цикл бинов, области видимости (scope), @ComponentScan и стереотипные аннотации (@Component, @Service, @Repository).
+В [модуле 60](../m60_spring_core_beans/theory.md) — жизненный цикл бинов, области видимости (scope), @ComponentScan и стереотипные аннотации (@Component, @Service, @Repository).

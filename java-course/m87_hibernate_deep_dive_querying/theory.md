@@ -165,8 +165,8 @@ private List<OrderLine> lines = new ArrayList<>();
 - [Hibernate ORM: HQL and JPQL](https://docs.jboss.org/hibernate/orm/current/userguide/html_single/Hibernate_User_Guide.html#hql).
 - [Jakarta Persistence: Criteria API](https://jakarta.ee/specifications/persistence/3.1/).
 - [Vlad Mihalcea — The best way to map a bidirectional association](https://vladmihalcea.com/the-best-way-to-map-a-onetomany-association-with-jpa-and-hibernate/).
-- [модуль 80](../module-80-spring-data-jpa-advanced/theory.md) — те же `@Query`/Specification в Spring Data.
+- [модуль 80](../m80_spring_data_jpa_advanced/theory.md) — те же `@Query`/Specification в Spring Data.
 
 ## Что дальше
 
-В [модуле 88](../module-88-hibernate-deep-dive-modeling/theory.md) — моделирование домена: правильные `equals`/`hashCode`, value objects (`@Embeddable`), составные ключи и стратегии идентификаторов.
+В [модуле 88](../m88_hibernate_deep_dive_modeling/theory.md) — моделирование домена: правильные `equals`/`hashCode`, value objects (`@Embeddable`), составные ключи и стратегии идентификаторов.

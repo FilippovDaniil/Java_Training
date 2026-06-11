@@ -179,7 +179,7 @@ Team ◇──────▶ Player    (агрегация: игроки жив
 | Состояние (поля) | только константы | обычные поля |
 | Методы | абстрактные + default/static | любые |
 
-Подробно об абстрактных классах — в [модуле 23](../module-23-oop-overloading-overriding-abstract/theory.md).
+Подробно об абстрактных классах — в [модуле 23](../m23_oop_overloading_overriding_abstract/theory.md).
 
 ---
 
@@ -196,4 +196,4 @@ Team ◇──────▶ Player    (агрегация: игроки жив
 
 ## Что дальше
 
-В [модуле 23](../module-23-oop-overloading-overriding-abstract/theory.md) — перегрузка, переопределение и абстрактные классы.
+В [модуле 23](../m23_oop_overloading_overriding_abstract/theory.md) — перегрузка, переопределение и абстрактные классы.

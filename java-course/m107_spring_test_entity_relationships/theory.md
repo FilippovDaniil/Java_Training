@@ -1,6 +1,6 @@
 # Модуль 107. Spring Test: связи сущностей, lazy loading и конкурентность
 
-Репозитории проверять умеем ([модуль 106](../module-106-spring-test-datajpa/theory.md)). Но самые коварные баги JPA — в **связях**: lazy loading и `LazyInitializationException`, N+1, каскады, оптимистическая блокировка. Эти эффекты воспроизводимы тестом — и именно тест ловит их до прода. В этом модуле — как тестировать ленивую загрузку, `JOIN FETCH`, каскады, `@Version` и сидинг данных через `@Sql`/Flyway.
+Репозитории проверять умеем ([модуль 106](../m106_spring_test_datajpa/theory.md)). Но самые коварные баги JPA — в **связях**: lazy loading и `LazyInitializationException`, N+1, каскады, оптимистическая блокировка. Эти эффекты воспроизводимы тестом — и именно тест ловит их до прода. В этом модуле — как тестировать ленивую загрузку, `JOIN FETCH`, каскады, `@Version` и сидинг данных через `@Sql`/Flyway.
 
 > Практика — задачи в `practice/`. **Тест-классы (без `main`)**, запуск в IDE (▶) или `./gradlew test`. Зависимости: `spring-boot-starter-data-jpa`, `com.h2database:h2`, `spring-boot-starter-test`. bare-javac не верифицируется (норма). Сквозной проект — **shop-data-jpa** (Category 1—N Product).
 
@@ -51,7 +51,7 @@ void lazy_access_after_detach_fails() {
    detached (вне):         loaded.getProducts() → LazyInitializationException
 ```
 
-> На проде это «вылезает» при сериализации сущности в JSON вне транзакции (модули [82](../module-82-spring-data-jpa-lazy-loading/theory.md), [86](../module-86-hibernate-deep-dive-fetching/theory.md)). Тест фиксирует ожидаемое поведение.
+> На проде это «вылезает» при сериализации сущности в JSON вне транзакции (модули [82](../m82_spring_data_jpa_lazy_loading/theory.md), [86](../m86_hibernate_deep_dive_fetching/theory.md)). Тест фиксирует ожидаемое поведение.
 
 ---
 
@@ -110,7 +110,7 @@ void orphan_removal_deletes_child() {
 
 ## Оптимистическая блокировка: `@Version`
 
-Конкурентное обновление воспроизводят двумя «снимками» одной сущности. Версия устаревает → `OptimisticLockException` (модуль [90](../module-90-hibernate-deep-dive-locking/theory.md)):
+Конкурентное обновление воспроизводят двумя «снимками» одной сущности. Версия устаревает → `OptimisticLockException` (модуль [90](../m90_hibernate_deep_dive_locking/theory.md)):
 
 ```java
 @Test
@@ -146,7 +146,7 @@ void counts_seeded() {
 }
 ```
 
-Если в проекте Flyway (модуль [84](../module-84-spring-data-jpa-migrations/theory.md)), миграции применяются и в тесте (схема + опорные данные). Для тестовых данных используют либо `@Sql`, либо отдельный набор Flyway-скриптов в `src/test/resources`.
+Если в проекте Flyway (модуль [84](../m84_spring_data_jpa_migrations/theory.md)), миграции применяются и в тесте (схема + опорные данные). Для тестовых данных используют либо `@Sql`, либо отдельный набор Flyway-скриптов в `src/test/resources`.
 
 | Инструмент | Когда |
 |------------|-------|
@@ -173,9 +173,9 @@ void counts_seeded() {
 
 - [Spring Framework: `@Sql`](https://docs.spring.io/spring-framework/reference/testing/annotations/integration-spring/annotation-sql.html).
 - [Hibernate: Lazy initialization & `Hibernate.isInitialized`](https://docs.jboss.org/hibernate/orm/current/userguide/html_single/Hibernate_User_Guide.html#fetching).
-- [модуль 82](../module-82-spring-data-jpa-lazy-loading/theory.md) — lazy loading и N+1.
-- [модуль 90](../module-90-hibernate-deep-dive-locking/theory.md) — оптимистическая блокировка.
+- [модуль 82](../m82_spring_data_jpa_lazy_loading/theory.md) — lazy loading и N+1.
+- [модуль 90](../m90_hibernate_deep_dive_locking/theory.md) — оптимистическая блокировка.
 
 ## Что дальше
 
-В [модуле 108](../module-108-spring-test-full-context/theory.md) — **тесты в полном контексте**: `@SpringBootTest`, реальный веб-сервер (`RANDOM_PORT`), `MockMvc` поверх всего приложения, `TestRestTemplate`/`RestTestClient`. Поднимаемся с уровня срезов к интеграции всего стека.
+В [модуле 108](../m108_spring_test_full_context/theory.md) — **тесты в полном контексте**: `@SpringBootTest`, реальный веб-сервер (`RANDOM_PORT`), `MockMvc` поверх всего приложения, `TestRestTemplate`/`RestTestClient`. Поднимаемся с уровня срезов к интеграции всего стека.

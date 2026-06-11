@@ -8,7 +8,7 @@ API живёт долго: меняются требования, добавля
 
 ## Внешняя конфигурация (напоминание)
 
-Параметры API выносятся в `application.properties` и читаются через `@Value` или `@ConfigurationProperties` ([модуль 65](../module-65-spring-boot-web-config/theory.md)):
+Параметры API выносятся в `application.properties` и читаются через `@Value` или `@ConfigurationProperties` ([модуль 65](../m65_spring_boot_web_config/theory.md)):
 
 ```properties
 api.title=Task Tracker API
@@ -16,7 +16,7 @@ api.version=1.0.0
 api.default-page-size=20
 ```
 
-Преимущество: одно и то же приложение настраивается под dev/prod без пересборки (профили — [модуль 62](../module-62-spring-core-configuration/theory.md)).
+Преимущество: одно и то же приложение настраивается под dev/prod без пересборки (профили — [модуль 62](../m62_spring_core_configuration/theory.md)).
 
 ---
 
@@ -166,8 +166,8 @@ public OpenAPI apiInfo() {
 - [springdoc-openapi](https://springdoc.org/).
 - [OpenAPI Specification](https://swagger.io/specification/).
 - [Spring CORS](https://docs.spring.io/spring-framework/reference/web/webmvc-cors.html).
-- [модуль 65](../module-65-spring-boot-web-config/theory.md) — `@ConfigurationProperties`.
+- [модуль 65](../m65_spring_boot_web_config/theory.md) — `@ConfigurationProperties`.
 
 ## Что дальше
 
-В [модуле 76](../module-76-spring-rest-testing/theory.md) — тестирование REST-API: `@WebMvcTest` + `MockMvc` (slice) и `@SpringBootTest` + `TestRestTemplate` (интеграция). На этом блок Spring REST (67–76) завершается.
+В [модуле 76](../m76_spring_rest_testing/theory.md) — тестирование REST-API: `@WebMvcTest` + `MockMvc` (slice) и `@SpringBootTest` + `TestRestTemplate` (интеграция). На этом блок Spring REST (67–76) завершается.

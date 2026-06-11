@@ -302,9 +302,9 @@ zipStorePath=wrapper/dists
 
 ## Перекрёстные ссылки
 
-- [Модуль 27 — Maven: основы](../module-27-maven/theory.md)
-- [Модуль 32 — Maven: многомодульные проекты](../module-32-maven-multimodule/theory.md)
+- [Модуль 27 — Maven: основы](../m27_maven/theory.md)
+- [Модуль 32 — Maven: многомодульные проекты](../m32_maven_multimodule/theory.md)
 
 ## Что дальше
 
-В [модуле 55](../module-55-http-basics/theory.md) — протокол HTTP: запросы, ответы, методы и коды состояний.
+В [модуле 55](../m55_http_basics/theory.md) — протокол HTTP: запросы, ответы, методы и коды состояний.

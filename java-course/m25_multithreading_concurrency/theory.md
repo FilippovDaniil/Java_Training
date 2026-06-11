@@ -202,4 +202,4 @@ submit(Callable) ──▶ Future ──future.get()──▶ результат
 
 ## Что дальше
 
-В [модуле 26](../module-26-reflection-annotations/theory.md) — Reflection API и аннотации.
+В [модуле 26](../m26_reflection_annotations/theory.md) — Reflection API и аннотации.

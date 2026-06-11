@@ -126,7 +126,7 @@ SET TRANSACTION ISOLATION LEVEL READ COMMITTED;
 
 ## Транзакции в Java (превью)
 
-В JDBC транзакциями управляют через `Connection` (см. [модуль 50](../module-50-jdbc-2/theory.md)):
+В JDBC транзакциями управляют через `Connection` (см. [модуль 50](../m50_jdbc_2/theory.md)):
 
 ```java
 connection.setAutoCommit(false);   // выключить авто-коммит
@@ -157,4 +157,4 @@ try {
 
 ## Что дальше
 
-В [модуле 48](../module-48-database-design/theory.md) — проектирование БД и нормальные формы.
+В [модуле 48](../m48_database_design/theory.md) — проектирование БД и нормальные формы.

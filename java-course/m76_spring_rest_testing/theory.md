@@ -175,9 +175,9 @@ class TaskApiIntegrationTest {
 
 - [Spring Boot: Testing](https://docs.spring.io/spring-boot/reference/testing/index.html).
 - [MockMvc — Spring Reference](https://docs.spring.io/spring-framework/reference/testing/mockmvc.html).
-- [модуль 34](../module-34-testing-junit-mockito/theory.md) — JUnit 5 и Mockito.
-- [модуль 66](../module-66-spring-boot-devops/theory.md) — `@WebMvcTest`/`@SpringBootTest` (введение).
+- [модуль 34](../m34_testing_junit_mockito/theory.md) — JUnit 5 и Mockito.
+- [модуль 66](../m66_spring_boot_devops/theory.md) — `@WebMvcTest`/`@SpringBootTest` (введение).
 
 ## Что дальше
 
-Блок Spring REST (67–76) завершён. В [модуле 77](../module-77-spring-data-jpa-intro/theory.md) начинается **Spring Data JPA**: слой доступа к данным, сущности, репозитории — и второй сквозной проект `shop-data-jpa`.
+Блок Spring REST (67–76) завершён. В [модуле 77](../m77_spring_data_jpa_intro/theory.md) начинается **Spring Data JPA**: слой доступа к данным, сущности, репозитории — и второй сквозной проект `shop-data-jpa`.

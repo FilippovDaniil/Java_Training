@@ -1,6 +1,6 @@
 # Модуль 86. Hibernate Deep Dive: стратегии загрузки, N+1, JOIN FETCH, EntityGraph
 
-В [модуле 82](../module-82-spring-data-jpa-lazy-loading/theory.md) мы боролись с N+1 средствами Spring Data. Теперь — те же приёмы **на уровне Hibernate/HQL**, плюс инструменты, которых нет в Spring Data: `Hibernate.initialize`, `@Fetch(FetchMode)`, batch fetching, проекции через `Tuple`.
+В [модуле 82](../m82_spring_data_jpa_lazy_loading/theory.md) мы боролись с N+1 средствами Spring Data. Теперь — те же приёмы **на уровне Hibernate/HQL**, плюс инструменты, которых нет в Spring Data: `Hibernate.initialize`, `@Fetch(FetchMode)`, batch fetching, проекции через `Tuple`.
 
 > Практика — задачи в `practice/`. Зависимости: `org.hibernate.orm:hibernate-core`, `com.h2database:h2` + `META-INF/persistence.xml` ("shop-pu"). Работаем через `EntityManager`/HQL. Проект — `shop-data-jpa`.
 
@@ -69,7 +69,7 @@ Category c = em.find(Category.class, 1L,
 | `jakarta.persistence.fetchgraph` | грузить ТОЛЬКО узлы графа (остальное — lazy) |
 | `jakarta.persistence.loadgraph` | грузить узлы графа + связи с EAGER по умолчанию |
 
-(В Spring Data то же делается аннотацией `@EntityGraph` — см. [модуль 82](../module-82-spring-data-jpa-lazy-loading/theory.md).)
+(В Spring Data то же делается аннотацией `@EntityGraph` — см. [модуль 82](../m82_spring_data_jpa_lazy_loading/theory.md).)
 
 ---
 
@@ -159,8 +159,8 @@ for (Tuple t : tuples) {
 
 - [Hibernate ORM: Fetching](https://docs.jboss.org/hibernate/orm/current/userguide/html_single/Hibernate_User_Guide.html#fetching).
 - [Vlad Mihalcea — The best way to fix the Hibernate MultipleBagFetchException](https://vladmihalcea.com/hibernate-multiplebagfetchexception/).
-- [модуль 82](../module-82-spring-data-jpa-lazy-loading/theory.md) — те же приёмы в Spring Data JPA.
+- [модуль 82](../m82_spring_data_jpa_lazy_loading/theory.md) — те же приёмы в Spring Data JPA.
 
 ## Что дальше
 
-В [модуле 87](../module-87-hibernate-deep-dive-querying/theory.md) — языки запросов: HQL/JPQL, **Criteria API** (типобезопасные динамические запросы), native SQL, плюс владелец связи (owning side) и каскады.
+В [модуле 87](../m87_hibernate_deep_dive_querying/theory.md) — языки запросов: HQL/JPQL, **Criteria API** (типобезопасные динамические запросы), native SQL, плюс владелец связи (owning side) и каскады.

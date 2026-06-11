@@ -1,8 +1,8 @@
 # Модуль 83. Тестирование слоя данных: @DataJpaTest, H2, Testcontainers
 
-Репозитории и запросы ([модули 79–82](../module-79-spring-data-jpa-repository/theory.md)) тоже нужно **тестировать**: derived queries, JPQL, маппинг, отсутствие N+1. Spring Boot даёт срез `@DataJpaTest` — быстрый изолированный тест слоя persistence на in-memory H2.
+Репозитории и запросы ([модули 79–82](../m79_spring_data_jpa_repository/theory.md)) тоже нужно **тестировать**: derived queries, JPQL, маппинг, отсутствие N+1. Spring Boot даёт срез `@DataJpaTest` — быстрый изолированный тест слоя persistence на in-memory H2.
 
-> Практика — задачи в `practice/`. Это **тест-классы без `main`** (стиль [модуля 34](../module-34-testing-junit-mockito/theory.md)): методы `@Test` с пустым телом/`// TODO`, запуск в IDE / Gradle. Зависимости: `spring-boot-starter-data-jpa`, `spring-boot-starter-test`, `com.h2database:h2`.
+> Практика — задачи в `practice/`. Это **тест-классы без `main`** (стиль [модуля 34](../m34_testing_junit_mockito/theory.md)): методы `@Test` с пустым телом/`// TODO`, запуск в IDE / Gradle. Зависимости: `spring-boot-starter-data-jpa`, `spring-boot-starter-test`, `com.h2database:h2`.
 
 ---
 
@@ -156,9 +156,9 @@ class ProductRepositoryPgTest {
 
 - [Spring Boot: Testing — @DataJpaTest](https://docs.spring.io/spring-boot/reference/testing/spring-boot-applications.html#testing.spring-boot-applications.autoconfigured-spring-data-jpa).
 - [Testcontainers for Java](https://java.testcontainers.org/modules/databases/).
-- [модуль 76](../module-76-spring-rest-testing/theory.md) — тестирование REST-слоя (`@WebMvcTest`, MockMvc).
-- [модуль 92](../module-92-hibernate-deep-dive-diagnostics/theory.md) — тестирование числа SQL-запросов (ловля N+1 в тестах).
+- [модуль 76](../m76_spring_rest_testing/theory.md) — тестирование REST-слоя (`@WebMvcTest`, MockMvc).
+- [модуль 92](../m92_hibernate_deep_dive_diagnostics/theory.md) — тестирование числа SQL-запросов (ловля N+1 в тестах).
 
 ## Что дальше
 
-В [модуле 84](../module-84-spring-data-jpa-migrations/theory.md) — управление схемой в продакшене: миграции **Flyway**, оптимистичная блокировка `@Version` и **аудит** (`@CreatedDate`/`@LastModifiedDate`). Это закрывает блок Spring Data JPA (77–84).
+В [модуле 84](../m84_spring_data_jpa_migrations/theory.md) — управление схемой в продакшене: миграции **Flyway**, оптимистичная блокировка `@Version` и **аудит** (`@CreatedDate`/`@LastModifiedDate`). Это закрывает блок Spring Data JPA (77–84).

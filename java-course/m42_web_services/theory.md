@@ -22,7 +22,7 @@
 
 ## REST — современный стандарт
 
-**REST** (Representational State Transfer) — архитектурный стиль поверх HTTP. Ресурсы адресуются URL, действия — HTTP-методами (см. [модуль 38](../module-38-http-protocol/theory.md)).
+**REST** (Representational State Transfer) — архитектурный стиль поверх HTTP. Ресурсы адресуются URL, действия — HTTP-методами (см. [модуль 38](../m38_http_protocol/theory.md)).
 
 ```
 GET    /users        → список пользователей
@@ -157,4 +157,4 @@ JSON                              XML
 
 ## Что дальше
 
-В [модуле 43](../module-43-html-css/theory.md) — основы HTML и CSS (факультатив).
+В [модуле 43](../m43_html_css/theory.md) — основы HTML и CSS (факультатив).

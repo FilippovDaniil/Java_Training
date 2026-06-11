@@ -157,4 +157,4 @@
 
 ## Что дальше
 
-В [модуле 38](../module-38-http-protocol/theory.md) — протоколы HTTP/HTTPS (с практикой).
+В [модуле 38](../m38_http_protocol/theory.md) — протоколы HTTP/HTTPS (с практикой).

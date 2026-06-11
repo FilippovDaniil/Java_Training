@@ -44,7 +44,7 @@ SQL
 | DDL | CREATE, ALTER, DROP | структура таблиц |
 | DML | INSERT, SELECT, UPDATE, DELETE | сами данные |
 | DCL | GRANT, REVOKE | доступ |
-| TCL | COMMIT, ROLLBACK | транзакции (см. [модуль 47](../module-47-transactions/theory.md)) |
+| TCL | COMMIT, ROLLBACK | транзакции (см. [модуль 47](../m47_transactions/theory.md)) |
 
 ---
 
@@ -107,7 +107,7 @@ SELECT * FROM users WHERE age > 30;        -- с условием
 SELECT * FROM users ORDER BY age DESC;     -- сортировка
 ```
 
-(Подробно SELECT — в [модулях 45](../module-45-sql-dml/theory.md) и [46](../module-46-sql-queries/theory.md).)
+(Подробно SELECT — в [модулях 45](../m45_sql_dml/theory.md) и [46](../m46_sql_queries/theory.md).)
 
 ---
 
@@ -118,7 +118,7 @@ H2 — встроенная Java-БД. Варианты:
 2. **В файле**: `jdbc:h2:./data/mydb` — сохраняется на диск.
 3. **H2 Console** — веб-интерфейс для выполнения SQL.
 
-В этом модуле SQL можно выполнять в любом SQL-клиенте; JDBC-подключение из Java — в [модуле 49](../module-49-jdbc-1/theory.md).
+В этом модуле SQL можно выполнять в любом SQL-клиенте; JDBC-подключение из Java — в [модуле 49](../m49_jdbc_1/theory.md).
 
 ---
 
@@ -140,4 +140,4 @@ H2 — встроенная Java-БД. Варианты:
 
 ## Что дальше
 
-В [модуле 45](../module-45-sql-dml/theory.md) — подробно про DML и типы данных.
+В [модуле 45](../m45_sql_dml/theory.md) — подробно про DML и типы данных.

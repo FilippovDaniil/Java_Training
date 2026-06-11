@@ -25,7 +25,7 @@
 </dependency>
 ```
 
-Тесты живут в `src/test/java` (см. [модуль 27](../module-27-maven/theory.md)).
+Тесты живут в `src/test/java` (см. [модуль 27](../m27_maven/theory.md)).
 
 ---
 

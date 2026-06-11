@@ -167,7 +167,7 @@ Product p = session.bySimpleNaturalId(Product.class).load("SKU-123");
 | `AUTO` | выбирает провайдер | для прода лучше задавать явно |
 | UUID | `@GeneratedValue` + `UUID` тип | id известен до INSERT; крупнее int |
 
-> Для PostgreSQL обычно `SEQUENCE` (с `@SequenceGenerator`). `IDENTITY` прост, но отключает JDBC-батчинг вставок ([модуль 91](../module-91-hibernate-deep-dive-performance/theory.md)).
+> Для PostgreSQL обычно `SEQUENCE` (с `@SequenceGenerator`). `IDENTITY` прост, но отключает JDBC-батчинг вставок ([модуль 91](../m91_hibernate_deep_dive_performance/theory.md)).
 
 ---
 
@@ -188,9 +188,9 @@ Product p = session.bySimpleNaturalId(Product.class).load("SKU-123");
 
 - [Vlad Mihalcea — How to implement equals and hashCode using the JPA entity identifier](https://vladmihalcea.com/the-best-way-to-implement-equals-hashcode-and-tostring-with-jpa-and-hibernate/).
 - [Hibernate ORM: Embeddable & NaturalId](https://docs.jboss.org/hibernate/orm/current/userguide/html_single/Hibernate_User_Guide.html#embeddables).
-- [модуль 78](../module-78-spring-data-jpa-entity/theory.md) — маппинг полей и `@Embeddable` в Spring Data.
-- [модуль 11](../module-11-objects-constructors/theory.md) — equals/hashCode в чистой Java.
+- [модуль 78](../m78_spring_data_jpa_entity/theory.md) — маппинг полей и `@Embeddable` в Spring Data.
+- [модуль 11](../m11_objects_constructors/theory.md) — equals/hashCode в чистой Java.
 
 ## Что дальше
 
-В [модуле 89](../module-89-hibernate-deep-dive-inheritance/theory.md) — наследование сущностей (`SINGLE_TABLE`/`JOINED`/`TABLE_PER_CLASS`), `@MappedSuperclass`, `@DynamicUpdate` и полиморфные запросы.
+В [модуле 89](../m89_hibernate_deep_dive_inheritance/theory.md) — наследование сущностей (`SINGLE_TABLE`/`JOINED`/`TABLE_PER_CLASS`), `@MappedSuperclass`, `@DynamicUpdate` и полиморфные запросы.

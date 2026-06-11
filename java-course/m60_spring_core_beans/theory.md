@@ -1,6 +1,6 @@
 # Модуль 60. Spring Core: бины, стереотипы, компонентное сканирование
 
-> Предыдущий модуль: [модуль 59 — Spring Core. Введение](../module-59-spring-core-intro/theory.md)
+> Предыдущий модуль: [модуль 59 — Spring Core. Введение](../m59_spring_core_intro/theory.md)
 
 Этот модуль посвящён тому, как Spring **находит** классы и **собирает** граф зависимостей автоматически — без ручной регистрации каждого бина.
 
@@ -165,7 +165,7 @@ public class NotificationService {
 | Проблема | Описание |
 |----------|---------|
 | **Field injection и тестируемость** | Нельзя передать зависимость через конструктор в unit-тесте — поле приватное. Нужна рефлексия (`ReflectionTestUtils`) или контекст Spring. |
-| **Цикличные зависимости** | `A → B → A` через constructor injection вызывает `BeanCurrentlyInCreationException` при старте. Spring не может разрешить цикл. Через field/setter injection Spring разрывает цикл (паттерн «протолкнуть сначала», потом заполнить) — но это симптом плохого дизайна. Детально — в [модуле 61](../module-61-spring-core-advanced/theory.md). |
+| **Цикличные зависимости** | `A → B → A` через constructor injection вызывает `BeanCurrentlyInCreationException` при старте. Spring не может разрешить цикл. Через field/setter injection Spring разрывает цикл (паттерн «протолкнуть сначала», потом заполнить) — но это симптом плохого дизайна. Детально — в [модуле 61](../m61_spring_core_advanced/theory.md). |
 | **@ComponentScan не охватывает пакет** | Бин не зарегистрируется, если его пакет вне `basePackages`. Ошибка — `NoSuchBeanDefinitionException`. |
 | **Несколько бинов одного типа без @Primary / @Qualifier** | `NoUniqueBeanDefinitionException`. Добавьте `@Primary` к «главному» или `@Qualifier("name")` на точку инъекции. |
 
@@ -179,4 +179,4 @@ public class NotificationService {
 
 ## Что дальше
 
-В [модуле 61](../module-61-spring-core-advanced/theory.md) — области видимости бинов (scope), жизненный цикл (`@PostConstruct`, `@PreDestroy`), `@Bean`-методы в `@Configuration`, профили и циклические зависимости подробно.
+В [модуле 61](../m61_spring_core_advanced/theory.md) — области видимости бинов (scope), жизненный цикл (`@PostConstruct`, `@PreDestroy`), `@Bean`-методы в `@Configuration`, профили и циклические зависимости подробно.

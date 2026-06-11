@@ -1,6 +1,6 @@
 # Модуль 65. Spring Boot Web: REST-контроллеры, конфигурация, валидация
 
-В [модуле 64](../module-64-spring-boot-intro/theory.md) мы подняли первое Boot-приложение и сделали простой эндпоинт. Теперь строим **полноценное REST-API**: приём и отдача JSON, параметры запроса, статусы ответа, типизированная конфигурация, валидация входных данных и единый контракт ошибок.
+В [модуле 64](../m64_spring_boot_intro/theory.md) мы подняли первое Boot-приложение и сделали простой эндпоинт. Теперь строим **полноценное REST-API**: приём и отдача JSON, параметры запроса, статусы ответа, типизированная конфигурация, валидация входных данных и единый контракт ошибок.
 
 > Практика — задачи в `practice/`. Зависимости: `spring-boot-starter-web`, `spring-boot-starter-validation`. Bare-`javac` НЕ компилируется — запускайте в IDE/Gradle.
 
@@ -61,7 +61,7 @@ public class ProductController {
 | `@RequestBody` | тело запроса (JSON → объект) | `{ "name": ... }` |
 | `@RequestHeader` | заголовок | `Authorization` |
 
-Преобразование JSON ↔ объект делает **Jackson** (входит в `starter-web`). Подробнее про DTO и JSON — [модуль 56](../module-56-json-jackson-dto/theory.md) и [модуль 70](../module-70-spring-rest-dto-json/theory.md).
+Преобразование JSON ↔ объект делает **Jackson** (входит в `starter-web`). Подробнее про DTO и JSON — [модуль 56](../m56_json_jackson_dto/theory.md) и [модуль 70](../m70_spring_rest_dto_json/theory.md).
 
 ---
 
@@ -107,7 +107,7 @@ public ResponseEntity<ProductDto> getOne(@PathVariable Long id) {
 | Ресурс не найден | **404 Not Found** |
 | Конфликт (дубликат) | **409 Conflict** |
 
-> Соглашения REST (URI без глаголов, существительные во множественном числе, смена статуса через PATCH) подробно разбираются в [модуле 68](../module-68-spring-rest-design/theory.md).
+> Соглашения REST (URI без глаголов, существительные во множественном числе, смена статуса через PATCH) подробно разбираются в [модуле 68](../m68_spring_rest_design/theory.md).
 
 ---
 
@@ -191,7 +191,7 @@ public class GlobalExceptionHandler {
    @ExceptionHandler(нужный тип) → ResponseEntity с единым телом
 ```
 
-> Современный стандарт тела ошибки — **`ProblemDetail`** (RFC 7807), он встроен в Spring 6 / Boot 3. Подробно — в [модуле 72](../module-72-spring-rest-error-handling/theory.md).
+> Современный стандарт тела ошибки — **`ProblemDetail`** (RFC 7807), он встроен в Spring 6 / Boot 3. Подробно — в [модуле 72](../m72_spring_rest_error_handling/theory.md).
 
 ---
 
@@ -245,9 +245,9 @@ public class ShopProperties {
 
 - [Spring Web MVC — официальная документация](https://docs.spring.io/spring-framework/reference/web/webmvc.html).
 - [Jakarta Bean Validation](https://beanvalidation.org/).
-- [модуль 56](../module-56-json-jackson-dto/theory.md) — Jackson, DTO, сериализация JSON.
+- [модуль 56](../m56_json_jackson_dto/theory.md) — Jackson, DTO, сериализация JSON.
 - Глобальные соглашения REST API — раздел «🌐 REST API — СОГЛАШЕНИЯ» в проектных инструкциях.
 
 ## Что дальше
 
-В [модуле 66](../module-66-spring-boot-devops/theory.md) — эксплуатация: логирование, Actuator (`/health`, `/info`), упаковка в jar и тестирование (`@SpringBootTest`, `@WebMvcTest` + `MockMvc`).
+В [модуле 66](../m66_spring_boot_devops/theory.md) — эксплуатация: логирование, Actuator (`/health`, `/info`), упаковка в jar и тестирование (`@SpringBootTest`, `@WebMvcTest` + `MockMvc`).

@@ -3,7 +3,7 @@
 > Практика — чистый Spring Context (spring-context 6.1.x), без Boot.
 > Зависимость для Gradle: `implementation 'org.springframework:spring-context:6.1.14'`
 
-Смотри также: [модуль 61 — Spring Core Advanced](../module-61-spring-core-advanced/theory.md)
+Смотри также: [модуль 61 — Spring Core Advanced](../m61_spring_core_advanced/theory.md)
 
 ---
 
@@ -224,7 +224,7 @@ public class MailProperties {
 }
 ```
 
-> Полноценный разбор `@ConfigurationProperties` — в [модуле 65](../module-65-spring-boot-configuration/theory.md) (Spring Boot).
+> Полноценный разбор `@ConfigurationProperties` — в [модуле 65](../m65_spring_boot_configuration/theory.md) (Spring Boot).
 
 ---
 
@@ -249,4 +249,4 @@ public class MailProperties {
 
 ## Что дальше
 
-В [модуле 63](../module-63-spring-core-events-aop/theory.md) — события ApplicationContext и основы AOP.
+В [модуле 63](../m63_spring_core_events_aop/theory.md) — события ApplicationContext и основы AOP.

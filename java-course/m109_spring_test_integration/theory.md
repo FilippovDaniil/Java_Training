@@ -57,7 +57,7 @@ class ProductRepositoryPgTest {
 | `@Testcontainers` | подключает JUnit-расширение, управляет жизненным циклом контейнеров |
 | `@Container` на `static` поле | поднять контейнер (static → один на класс) |
 | `PostgreSQLContainer<>("postgres:16-alpine")` | образ и версия СУБД |
-| `@DynamicPropertySource` | передать `jdbcUrl`/`username`/`password` в Spring (модуль [103](../module-103-spring-test-config/theory.md)) |
+| `@DynamicPropertySource` | передать `jdbcUrl`/`username`/`password` в Spring (модуль [103](../m103_spring_test_config/theory.md)) |
 | `@AutoConfigureTestDatabase(replace=NONE)` | запретить подмену на H2 |
 
 > `@Container` на **static**-поле → контейнер один на весь класс (быстрее). На **нестатическом** — новый на каждый тест (изоляция ценой скорости).
@@ -152,8 +152,8 @@ class FullIntegrationTest {
 - [Testcontainers for Java — Quickstart](https://java.testcontainers.org/quickstart/junit_5_quickstart/).
 - [Spring Boot: Testcontainers & `@ServiceConnection`](https://docs.spring.io/spring-boot/reference/testing/testcontainers.html).
 - [Testcontainers — PostgreSQL Module](https://java.testcontainers.org/modules/databases/postgres/).
-- [модуль 83](../module-83-spring-data-jpa-testing/theory.md) — обзор Testcontainers (введение).
+- [модуль 83](../m83_spring_data_jpa_testing/theory.md) — обзор Testcontainers (введение).
 
 ## Что дальше
 
-В [модуле 110](../module-110-spring-test-security-async/theory.md) — завершение блока Spring Test: **security-тесты в полном контексте**, тестирование **асинхронного** кода (`@Async`/`CompletableFuture`), мокирование **внешних интеграций** и документирование API через **Spring REST Docs**. После него — переход к Docker (модули 111–118).
+В [модуле 110](../m110_spring_test_security_async/theory.md) — завершение блока Spring Test: **security-тесты в полном контексте**, тестирование **асинхронного** кода (`@Async`/`CompletableFuture`), мокирование **внешних интеграций** и документирование API через **Spring REST Docs**. После него — переход к Docker (модули 111–118).

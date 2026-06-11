@@ -134,8 +134,8 @@ docker logs -f tasktracker         # логи = stdout контейнера
 - [The Twelve-Factor App](https://12factor.net/).
 - [Spring Boot: Externalized Configuration](https://docs.spring.io/spring-boot/reference/features/external-config.html).
 - [Docker: Volumes](https://docs.docker.com/storage/volumes/).
-- [модуль 103](../module-103-spring-test-config/theory.md) — профили и свойства (в тестах).
+- [модуль 103](../m103_spring_test_config/theory.md) — профили и свойства (в тестах).
 
 ## Что дальше
 
-В [модуле 115](../module-115-docker-compose/theory.md) — **Docker Compose**: описать приложение + PostgreSQL одним `docker-compose.yml`, поднять весь стек одной командой, настроить порядок запуска (`depends_on` + healthcheck) и сети между сервисами. Конец ручного связывания контейнеров.
+В [модуле 115](../m115_docker_compose/theory.md) — **Docker Compose**: описать приложение + PostgreSQL одним `docker-compose.yml`, поднять весь стек одной командой, настроить порядок запуска (`depends_on` + healthcheck) и сети между сервисами. Конец ручного связывания контейнеров.

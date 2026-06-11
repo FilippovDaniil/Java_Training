@@ -1,6 +1,6 @@
 # Модуль 68. REST как стиль проектирования API
 
-В [модуле 67](../module-67-spring-rest-http-backend/theory.md) мы разобрали HTTP. **REST** (REpresentational State Transfer) — это архитектурный стиль, который использует HTTP «по назначению»: данные представляются как **ресурсы**, а действия — как **HTTP-методы** над ними. Хорошо спроектированный REST-API предсказуем: зная одну часть, разработчик угадывает остальное.
+В [модуле 67](../m67_spring_rest_http_backend/theory.md) мы разобрали HTTP. **REST** (REpresentational State Transfer) — это архитектурный стиль, который использует HTTP «по назначению»: данные представляются как **ресурсы**, а действия — как **HTTP-методы** над ними. Хорошо спроектированный REST-API предсказуем: зная одну часть, разработчик угадывает остальное.
 
 > Практика — задачи в `practice/`. Зависимости: `spring-boot-starter-web`. Продолжаем проектировать **Task Tracker API**.
 
@@ -126,7 +126,7 @@ Spring предлагает `spring-boot-starter-hateoas` (`EntityModel`, `Link`
 
 - продумывайте имена ресурсов и поля **заранее**;
 - расширяйте **аддитивно** (добавлять поля можно, удалять/переименовывать — ломает клиентов);
-- несовместимые изменения — через **версионирование** (`/api/v2/...`), подробно в [модуле 75](../module-75-spring-rest-config-openapi/theory.md).
+- несовместимые изменения — через **версионирование** (`/api/v2/...`), подробно в [модуле 75](../m75_spring_rest_config_openapi/theory.md).
 
 ---
 
@@ -152,4 +152,4 @@ Spring предлагает `spring-boot-starter-hateoas` (`EntityModel`, `Link`
 
 ## Что дальше
 
-В [модуле 69](../module-69-spring-rest-controllers/theory.md) — как Spring MVC принимает запрос: `DispatcherServlet`, аргументы методов-обработчиков, конвертация тела, `consumes`/`produces`.
+В [модуле 69](../m69_spring_rest_controllers/theory.md) — как Spring MVC принимает запрос: `DispatcherServlet`, аргументы методов-обработчиков, конвертация тела, `consumes`/`produces`.

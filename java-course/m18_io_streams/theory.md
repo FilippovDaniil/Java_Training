@@ -1,6 +1,6 @@
 # Модуль 18. Потоки ввода-вывода (I/O Streams)
 
-**Поток (stream)** в I/O — это последовательность данных, текущая от источника к приёмнику: файл, консоль, сеть. (Не путать со Stream API из [модуля 24](../module-24-stream-api-lambda/theory.md) — это разные вещи!)
+**Поток (stream)** в I/O — это последовательность данных, текущая от источника к приёмнику: файл, консоль, сеть. (Не путать со Stream API из [модуля 24](../m24_stream_api_lambda/theory.md) — это разные вещи!)
 
 ## Два вида потоков
 
@@ -37,7 +37,7 @@ try (FileWriter writer = new FileWriter("notes.txt")) {
 - `new FileWriter("file.txt", true)` — **дописывает** в конец (append).
 - try-with-resources автоматически закроет файл.
 
-> ⚠️ Файловые операции бросают **проверяемое** `IOException` — его обязательно обрабатывать (см. [модуль 17](../module-17-exceptions/theory.md)).
+> ⚠️ Файловые операции бросают **проверяемое** `IOException` — его обязательно обрабатывать (см. [модуль 17](../m17_exceptions/theory.md)).
 
 ---
 
@@ -149,4 +149,4 @@ try (FileInputStream in = new FileInputStream("a.dat");
 
 ## Что дальше
 
-В [модуле 19](../module-19-io-nio/theory.md) — современный `java.nio` (`Path`, `Files`) и паттерн Decorator.
+В [модуле 19](../m19_io_nio/theory.md) — современный `java.nio` (`Path`, `Files`) и паттерн Decorator.

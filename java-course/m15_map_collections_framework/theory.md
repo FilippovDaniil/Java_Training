@@ -163,4 +163,4 @@ int n = Collections.binarySearch(sortedList, key);  // бинарный поис
 
 ## Что дальше
 
-В [модуле 16](../module-16-enums-switch/theory.md) — перечисления `enum`.
+В [модуле 16](../m16_enums_switch/theory.md) — перечисления `enum`.

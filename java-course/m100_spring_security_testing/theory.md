@@ -25,7 +25,7 @@ class TaskControllerSecurityTest {
 }
 ```
 
-> Если в `SecurityConfig` есть свой `SecurityFilterChain`, импортируйте его: `@Import(SecurityConfig.class)` — иначе сработает дефолтная автоконфигурация, и правила не совпадут с продом (см. модуль [76](../module-76-spring-rest-testing/theory.md)).
+> Если в `SecurityConfig` есть свой `SecurityFilterChain`, импортируйте его: `@Import(SecurityConfig.class)` — иначе сработает дефолтная автоконфигурация, и правила не совпадут с продом (см. модуль [76](../m76_spring_rest_testing/theory.md)).
 
 ---
 
@@ -195,7 +195,7 @@ class AuthEventListener {
 }
 ```
 
-> Аудит — основа для обнаружения brute-force и расследования инцидентов (тема [модуля 110](../module-110-spring-test-security-async/theory.md) — security-тесты в полном контексте, и далее SecOps).
+> Аудит — основа для обнаружения brute-force и расследования инцидентов (тема [модуля 110](../m110_spring_test_security_async/theory.md) — security-тесты в полном контексте, и далее SecOps).
 
 ---
 
@@ -219,8 +219,8 @@ class AuthEventListener {
 - [Spring Security: Testing](https://docs.spring.io/spring-security/reference/servlet/test/index.html).
 - [Spring Security: Testing Method Security & MockMvc](https://docs.spring.io/spring-security/reference/servlet/test/mockmvc/index.html).
 - [Spring Security: HTTP Response Headers](https://docs.spring.io/spring-security/reference/servlet/exploits/headers.html).
-- [модуль 76](../module-76-spring-rest-testing/theory.md) — `@WebMvcTest`/MockMvc (база тестирования контроллеров).
+- [модуль 76](../m76_spring_rest_testing/theory.md) — `@WebMvcTest`/MockMvc (база тестирования контроллеров).
 
 ## Что дальше
 
-Блок **Spring Security (93–100) закрыт**: от первого 401 до stateless JWT с тестами, hardening и аудитом. Дальше — **Часть «Spring Test» (модули 101–110)**: системное тестирование от unit без контекста до Testcontainers и REST Docs. Начинаем с [модуля 101](../module-101-spring-test-basics/theory.md) — инструменты тест-стека (JUnit 5, AssertJ, Hamcrest, JSONassert, Mockito).
+Блок **Spring Security (93–100) закрыт**: от первого 401 до stateless JWT с тестами, hardening и аудитом. Дальше — **Часть «Spring Test» (модули 101–110)**: системное тестирование от unit без контекста до Testcontainers и REST Docs. Начинаем с [модуля 101](../m101_spring_test_basics/theory.md) — инструменты тест-стека (JUnit 5, AssertJ, Hamcrest, JSONassert, Mockito).

@@ -1,6 +1,6 @@
 # Модуль 101. Spring Test: инструменты тест-стека
 
-Блок Spring Security закрыт ([модули 93–100](../module-100-spring-security-testing/theory.md)). Начинаем системный разговор о **тестировании**. Прежде чем поднимать Spring-контекст, нужно владеть базовым инструментарием, который входит в `spring-boot-starter-test`: **JUnit 5** (движок), **AssertJ** и **Hamcrest** (проверки), **JSONassert** (сравнение JSON), **Mockito** (моки). Этот модуль — обзор каждого с примерами.
+Блок Spring Security закрыт ([модули 93–100](../m100_spring_security_testing/theory.md)). Начинаем системный разговор о **тестировании**. Прежде чем поднимать Spring-контекст, нужно владеть базовым инструментарием, который входит в `spring-boot-starter-test`: **JUnit 5** (движок), **AssertJ** и **Hamcrest** (проверки), **JSONassert** (сравнение JSON), **Mockito** (моки). Этот модуль — обзор каждого с примерами.
 
 > Практика — задачи в `practice/`. Это **тест-классы (без `main`)**, запуск в IDE (▶) или `./gradlew test`. Зависимость одна: `org.springframework.boot:spring-boot-starter-test` (тянет JUnit 5, AssertJ, Hamcrest, JSONassert, Mockito, JsonPath). bare-javac не верифицируется (норма). Сквозной проект — **Task Tracker API**.
 
@@ -118,7 +118,7 @@ assertThat(list, hasSize(3));
 assertThat(name, allOf(startsWith("Al"), endsWith("ce")));
 ```
 
-> Hamcrest-матчеры особенно нужны в `MockMvc` (`jsonPath("$.x", is(...))`) — модуль [104](../module-104-spring-test-webmvc/theory.md). Для обычных проверок AssertJ удобнее.
+> Hamcrest-матчеры особенно нужны в `MockMvc` (`jsonPath("$.x", is(...))`) — модуль [104](../m104_spring_test_webmvc/theory.md). Для обычных проверок AssertJ удобнее.
 
 ---
 
@@ -175,7 +175,7 @@ class TaskServiceTest {
 }
 ```
 
-> `@ExtendWith(MockitoExtension.class)` — это **не** Spring-контекст: тест быстрый, без поднятия приложения. Подробно — в [модуле 102](../module-102-spring-test-unit/theory.md).
+> `@ExtendWith(MockitoExtension.class)` — это **не** Spring-контекст: тест быстрый, без поднятия приложения. Подробно — в [модуле 102](../m102_spring_test_unit/theory.md).
 
 ---
 
@@ -211,8 +211,8 @@ class TaskServiceTest {
 - [AssertJ — Core assertions guide](https://assertj.github.io/doc/).
 - [Mockito — javadoc/обзор](https://javadoc.io/doc/org.mockito/mockito-core/latest/org/mockito/Mockito.html).
 - [JSONassert](https://github.com/skyscreamer/JSONassert).
-- [модуль 34](../module-34-testing-junit-mockito/theory.md) — первое знакомство с JUnit + Mockito.
+- [модуль 34](../m34_testing_junit_mockito/theory.md) — первое знакомство с JUnit + Mockito.
 
 ## Что дальше
 
-В [модуле 102](../module-102-spring-test-unit/theory.md) — **unit-тесты бизнес-логики без Spring-контекста**: `@ExtendWith(MockitoExtension)`, `@Mock`/`@InjectMocks`, `ArgumentCaptor`, проверка взаимодействий и краевых случаев. Это самый быстрый и многочисленный слой пирамиды.
+В [модуле 102](../m102_spring_test_unit/theory.md) — **unit-тесты бизнес-логики без Spring-контекста**: `@ExtendWith(MockitoExtension)`, `@Mock`/`@InjectMocks`, `ArgumentCaptor`, проверка взаимодействий и краевых случаев. Это самый быстрый и многочисленный слой пирамиды.

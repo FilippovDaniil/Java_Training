@@ -254,8 +254,8 @@ List<Post> byAuthor = session
 
 ## Перекрёстные ссылки
 
-- Предыдущий модуль: [Модуль 50 — JDBC углублённо](../module-50-jdbc-2/theory.md) — прямые SQL-запросы через JDBC, которые Hibernate заменяет автоматически.
-- Следующий модуль: [Модуль 52 — Hibernate связи (@OneToMany, @ManyToOne)](../module-52-hibernate-relationships/theory.md) — отображение связей между сущностями.
+- Предыдущий модуль: [Модуль 50 — JDBC углублённо](../m50_jdbc_2/theory.md) — прямые SQL-запросы через JDBC, которые Hibernate заменяет автоматически.
+- Следующий модуль: [Модуль 52 — Hibernate связи (@OneToMany, @ManyToOne)](../m52_hibernate_relationships/theory.md) — отображение связей между сущностями.
 
 ---
 
@@ -267,4 +267,4 @@ List<Post> byAuthor = session
 
 ## Что дальше
 
-В [модуле 52](../module-52-hibernate-relationships/theory.md) — отображение связей: `@OneToMany`, `@ManyToOne`, `@ManyToMany`, стратегии загрузки (LAZY/EAGER) и каскадирование операций.
+В [модуле 52](../m52_hibernate_relationships/theory.md) — отображение связей: `@OneToMany`, `@ManyToOne`, `@ManyToMany`, стратегии загрузки (LAZY/EAGER) и каскадирование операций.

@@ -1,6 +1,6 @@
 # Модуль 113. Docker: образы для Spring Boot — layered jars и Buildpacks
 
-Обычный Dockerfile кладёт весь jar одним слоем ([модуль 112](../module-112-docker-dockerfile/theory.md)). Но в Spring Boot jar ≈ 95% — это **зависимости** (меняются редко), и лишь ~5% — **ваш код** (меняется постоянно). Если всё в одном слое, любая правка кода пересобирает и перекачивает весь слой с зависимостями. Spring Boot решает это **layered jars** (расслоение) и **Buildpacks** (`bootBuildImage` — образ вообще без Dockerfile). В этом модуле — оба подхода.
+Обычный Dockerfile кладёт весь jar одним слоем ([модуль 112](../m112_docker_dockerfile/theory.md)). Но в Spring Boot jar ≈ 95% — это **зависимости** (меняются редко), и лишь ~5% — **ваш код** (меняется постоянно). Если всё в одном слое, любая правка кода пересобирает и перекачивает весь слой с зависимостями. Spring Boot решает это **layered jars** (расслоение) и **Buildpacks** (`bootBuildImage` — образ вообще без Dockerfile). В этом модуле — оба подхода.
 
 > Практика — задачи в `practice/`. **Задачи-носители:** `.java` с text-блоком (Dockerfile / build.gradle-фрагмент / команды) + `println` — **компилируются bare-javac**. Сквозной проект — **Task Tracker API**.
 
@@ -126,8 +126,8 @@ tasks.named('bootBuildImage') {
 - [Spring Boot: Container Images — Layering](https://docs.spring.io/spring-boot/reference/packaging/container-images/dockerfiles.html).
 - [Spring Boot: Building Container Images (`bootBuildImage`)](https://docs.spring.io/spring-boot/reference/packaging/container-images/cloud-native-buildpacks.html).
 - [Cloud Native Buildpacks](https://buildpacks.io/).
-- [модуль 66](../module-66-spring-boot-devops/theory.md) — `bootJar` и упаковка Spring Boot.
+- [модуль 66](../m66_spring_boot_devops/theory.md) — `bootJar` и упаковка Spring Boot.
 
 ## Что дальше
 
-В [модуле 114](../module-114-docker-configuration/theory.md) — **внешняя конфигурация контейнера**: переменные окружения и профили (`SPRING_PROFILES_ACTIVE`), тома (volumes) для данных, логи в stdout, принципы 12-factor. Один образ — разные окружения через конфигурацию снаружи.
+В [модуле 114](../m114_docker_configuration/theory.md) — **внешняя конфигурация контейнера**: переменные окружения и профили (`SPRING_PROFILES_ACTIVE`), тома (volumes) для данных, логи в stdout, принципы 12-factor. Один образ — разные окружения через конфигурацию снаружи.

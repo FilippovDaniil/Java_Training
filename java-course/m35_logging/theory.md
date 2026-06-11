@@ -191,4 +191,4 @@ MDC.clear();
 
 ## Что дальше
 
-В [модуле 36](../module-36-network-basics/theory.md) — устройство сети (теория).
+В [модуле 36](../m36_network_basics/theory.md) — устройство сети (теория).

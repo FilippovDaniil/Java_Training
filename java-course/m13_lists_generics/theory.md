@@ -129,7 +129,7 @@ Collections.max(numbers);           // максимум
 int min = Collections.min(numbers); // минимум
 ```
 
-(Подробнее — в [модуле 15](../module-15-map-collections-framework/theory.md).)
+(Подробнее — в [модуле 15](../m15_map_collections_framework/theory.md).)
 
 ---
 
@@ -139,7 +139,7 @@ int min = Collections.min(numbers); // минимум
 |--------|-----------|
 | `List<int>` | generics работают только с объектами: `List<Integer>` |
 | `IndexOutOfBoundsException` | обращение к `get(i)` за границей |
-| удаление в цикле `for-each` | `ConcurrentModificationException`; используйте `Iterator` (см. [модуль 14](../module-14-collections-set-iterator/theory.md)) |
+| удаление в цикле `for-each` | `ConcurrentModificationException`; используйте `Iterator` (см. [модуль 14](../m14_collections_set_iterator/theory.md)) |
 | `list.size` вместо `list.size()` | у списка это метод |
 | сравнение элементов через `==` | используйте `.equals()` |
 
@@ -147,4 +147,4 @@ int min = Collections.min(numbers); // минимум
 
 ## Что дальше
 
-В [модуле 14](../module-14-collections-set-iterator/theory.md) — множества `Set` и итераторы.
+В [модуле 14](../m14_collections_set_iterator/theory.md) — множества `Set` и итераторы.

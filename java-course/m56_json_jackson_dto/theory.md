@@ -3,7 +3,7 @@
 JSON (JavaScript Object Notation) — текстовый формат обмена данными. Используется во всех REST API, конфигурационных файлах и очередях сообщений. В экосистеме Java основная библиотека для работы с JSON — **Jackson**.
 
 > Практика — сериализация/десериализация объектов, аннотации, маппинг DTO↔Entity.  
-> Предыдущий модуль: [модуль 55](../module-55-http-basics/theory.md) — HTTP, клиент-серверная модель.
+> Предыдущий модуль: [модуль 55](../m55_http_basics/theory.md) — HTTP, клиент-серверная модель.
 
 ---
 
@@ -313,4 +313,4 @@ ObjectMapper mapper = JsonMapper.builder()
 
 ## Что дальше
 
-В [модуле 57](../module-57-java-http-client/theory.md) — Java HTTP Client: отправка HTTP-запросов из Java, интеграция с JSON (Jackson) для работы с REST API.
+В [модуле 57](../m57_java_http_client/theory.md) — Java HTTP Client: отправка HTTP-запросов из Java, интеграция с JSON (Jackson) для работы с REST API.

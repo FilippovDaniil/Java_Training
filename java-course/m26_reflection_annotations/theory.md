@@ -164,4 +164,4 @@ for (Method m : MyTests.class.getDeclaredMethods()) {
 
 ## Что дальше
 
-В [модуле 27](../module-27-maven/theory.md) — система сборки Maven.
+В [модуле 27](../m27_maven/theory.md) — система сборки Maven.

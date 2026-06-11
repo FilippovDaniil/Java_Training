@@ -161,8 +161,8 @@ void find_missing_throws_not_found() {
 - [Mockito — официальная документация](https://site.mockito.org/).
 - [Baeldung: Mockito ArgumentCaptor](https://www.baeldung.com/mockito-argumentcaptor).
 - [JUnit 5 + Mockito (`MockitoExtension`)](https://junit.org/junit5/docs/current/user-guide/#extensions).
-- [модуль 101](../module-101-spring-test-basics/theory.md) — базовые инструменты (JUnit/AssertJ/Mockito).
+- [модуль 101](../m101_spring_test_basics/theory.md) — базовые инструменты (JUnit/AssertJ/Mockito).
 
 ## Что дальше
 
-В [модуле 103](../module-103-spring-test-config/theory.md) — **управляемая конфигурация тестов**: профили (`@ActiveProfiles`), свойства (`@TestPropertySource`, `application-test.properties`), `@TestConfiguration` с тестовыми бинами и `@DynamicPropertySource`. Это мост от чистых unit-тестов к тестам, которым нужен (управляемый) контекст.
+В [модуле 103](../m103_spring_test_config/theory.md) — **управляемая конфигурация тестов**: профили (`@ActiveProfiles`), свойства (`@TestPropertySource`, `application-test.properties`), `@TestConfiguration` с тестовыми бинами и `@DynamicPropertySource`. Это мост от чистых unit-тестов к тестам, которым нужен (управляемый) контекст.

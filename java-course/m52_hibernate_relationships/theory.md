@@ -314,8 +314,8 @@ List<Author> authors = em
 
 ## Что дальше
 
-В [модуле 53](../module-53-hibernate-inheritance/theory.md) — стратегии наследования сущностей в JPA: `@Inheritance`, `SINGLE_TABLE`, `JOINED`, `TABLE_PER_CLASS`.
+В [модуле 53](../m53_hibernate_inheritance/theory.md) — стратегии наследования сущностей в JPA: `@Inheritance`, `SINGLE_TABLE`, `JOINED`, `TABLE_PER_CLASS`.
 
 ---
 
-*Смежные темы: [модуль 51 — Hibernate ORM, основы](../module-51-hibernate-orm/theory.md), [модуль 48 — проектирование БД](../module-48-database-design/theory.md).*
+*Смежные темы: [модуль 51 — Hibernate ORM, основы](../m51_hibernate_orm/theory.md), [модуль 48 — проектирование БД](../m48_database_design/theory.md).*

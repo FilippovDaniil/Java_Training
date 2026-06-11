@@ -184,8 +184,8 @@ class TaskDtoJsonTest {
 - [Spring Boot: Testing the Web Layer (`@WebMvcTest`)](https://docs.spring.io/spring-boot/reference/testing/spring-boot-applications.html#testing.spring-boot-applications.spring-mvc-tests).
 - [`MockMvcTester` — Spring Framework docs](https://docs.spring.io/spring-framework/reference/testing/mockmvc/assertj.html).
 - [`@JsonTest` + `JacksonTester`](https://docs.spring.io/spring-boot/reference/testing/spring-boot-applications.html#testing.spring-boot-applications.json-tests).
-- [модуль 76](../module-76-spring-rest-testing/theory.md) — первое знакомство с `@WebMvcTest`/MockMvc.
+- [модуль 76](../m76_spring_rest_testing/theory.md) — первое знакомство с `@WebMvcTest`/MockMvc.
 
 ## Что дальше
 
-В [модуле 105](../module-105-spring-test-controller-scenarios/theory.md) — **реальные сценарии контроллера**: тест валидации (`@Valid` → 400 + ProblemDetail), обработки ошибок (`@ControllerAdvice` в срезе), пагинации/сортировки и загрузки файлов (`MockMultipartFile`). Применим инструменты этого модуля к типичным задачам REST API.
+В [модуле 105](../m105_spring_test_controller_scenarios/theory.md) — **реальные сценарии контроллера**: тест валидации (`@Valid` → 400 + ProblemDetail), обработки ошибок (`@ControllerAdvice` в срезе), пагинации/сортировки и загрузки файлов (`MockMultipartFile`). Применим инструменты этого модуля к типичным задачам REST API.

@@ -30,7 +30,7 @@ http.sessionManagement(sm -> sm.sessionCreationPolicy(SessionCreationPolicy.IF_R
 | `IF_REQUIRED` (по умолч.) | сессия создаётся при необходимости (form login) |
 | `ALWAYS` | всегда |
 | `NEVER` | не создаёт, но использует существующую |
-| `STATELESS` | **никаких сессий** — для JWT/REST ([модуль 98](../module-98-spring-security-jwt/theory.md)) |
+| `STATELESS` | **никаких сессий** — для JWT/REST ([модуль 98](../m98_spring_security_jwt/theory.md)) |
 
 ---
 
@@ -175,8 +175,8 @@ public String upload(@RequestParam("file") MultipartFile file) {
 - [Spring Security: CORS](https://docs.spring.io/spring-security/reference/servlet/integrations/cors.html).
 - [Spring Security: Session Management](https://docs.spring.io/spring-security/reference/servlet/authentication/session-management.html).
 - [OWASP: File Upload Cheat Sheet](https://cheatsheetseries.owasp.org/cheatsheets/File_Upload_Cheat_Sheet.html).
-- [модуль 74](../module-74-spring-rest-crud-file/theory.md) — загрузка/выгрузка файлов в REST.
+- [модуль 74](../m74_spring_rest_crud_file/theory.md) — загрузка/выгрузка файлов в REST.
 
 ## Что дальше
 
-В [модуле 96](../module-96-spring-security-db-users/theory.md) — пользователи из базы данных: `CustomUserDetailsService`, сущность `User` с ролями и эндпоинт регистрации.
+В [модуле 96](../m96_spring_security_db_users/theory.md) — пользователи из базы данных: `CustomUserDetailsService`, сущность `User` с ролями и эндпоинт регистрации.

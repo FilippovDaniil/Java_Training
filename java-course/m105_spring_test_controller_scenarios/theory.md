@@ -1,6 +1,6 @@
 # Модуль 105. Spring Test: реальные сценарии контроллера
 
-Инструменты веб-тестирования ([модуль 104](../module-104-spring-test-webmvc/theory.md)) показаны на «счастливом пути». Реальный REST API проверяют по типовым сценариям: **валидация** (плохой ввод → 400 + понятная ошибка), **обработка ошибок** (404/конфликт → единый контракт `ProblemDetail`), **коллекции** (пагинация, сортировка, фильтрация) и **файлы** (загрузка/выгрузка). Этот модуль — тесты для каждого, по-прежнему в срезе `@WebMvcTest`. Завершает первую часть блока Spring Test.
+Инструменты веб-тестирования ([модуль 104](../m104_spring_test_webmvc/theory.md)) показаны на «счастливом пути». Реальный REST API проверяют по типовым сценариям: **валидация** (плохой ввод → 400 + понятная ошибка), **обработка ошибок** (404/конфликт → единый контракт `ProblemDetail`), **коллекции** (пагинация, сортировка, фильтрация) и **файлы** (загрузка/выгрузка). Этот модуль — тесты для каждого, по-прежнему в срезе `@WebMvcTest`. Завершает первую часть блока Spring Test.
 
 > Практика — задачи в `practice/`. **Тест-классы (без `main`)**, запуск в IDE (▶) или `./gradlew test`. Зависимости: `spring-boot-starter-web`, `spring-boot-starter-validation`, `spring-boot-starter-test`. bare-javac не верифицируется (норма). Сквозной проект — **Task Tracker API**.
 
@@ -8,7 +8,7 @@
 
 ## Тест валидации: `@Valid` → 400
 
-Контроллер с `@Valid` отклоняет некорректное тело статусом 400 (модули [71](../module-71-spring-rest-validation/theory.md), [72](../module-72-spring-rest-error-handling/theory.md)). Тест фиксирует и статус, и сообщение:
+Контроллер с `@Valid` отклоняет некорректное тело статусом 400 (модули [71](../m71_spring_rest_validation/theory.md), [72](../m72_spring_rest_error_handling/theory.md)). Тест фиксирует и статус, и сообщение:
 
 ```java
 @Test
@@ -74,7 +74,7 @@ void paginated_response() throws Exception {
 }
 ```
 
-Передаём `page`/`size`/`sort` как query-параметры; проверяем метаданные страницы (`content`, `totalElements`, `number`, `size`). Если пагинация ручная (модуль [73](../module-73-spring-rest-collections/theory.md)) — структура своя, но логика теста та же.
+Передаём `page`/`size`/`sort` как query-параметры; проверяем метаданные страницы (`content`, `totalElements`, `number`, `size`). Если пагинация ручная (модуль [73](../m73_spring_rest_collections/theory.md)) — структура своя, но логика теста та же.
 
 ---
 
@@ -141,9 +141,9 @@ void downloads_attachment() throws Exception {
 
 - [Spring: Testing Multipart Requests (`MockMultipartFile`)](https://docs.spring.io/spring-framework/reference/testing/spring-mvc-test-framework/server-performing-requests.html).
 - [Spring REST: Error Responses (`ProblemDetail`, RFC 9457)](https://docs.spring.io/spring-framework/reference/web/webmvc/mvc-ann-rest-exceptions.html).
-- [модуль 72](../module-72-spring-rest-error-handling/theory.md) — `ProblemDetail` и `@RestControllerAdvice`.
-- [модуль 74](../module-74-spring-rest-crud-file/theory.md) — загрузка/выгрузка файлов.
+- [модуль 72](../m72_spring_rest_error_handling/theory.md) — `ProblemDetail` и `@RestControllerAdvice`.
+- [модуль 74](../m74_spring_rest_crud_file/theory.md) — загрузка/выгрузка файлов.
 
 ## Что дальше
 
-Первая часть Spring Test (101–105: инструменты, unit, конфигурация, web-слой, сценарии) пройдена. В [модуле 106](../module-106-spring-test-datajpa/theory.md) начинается **тестирование слоя данных**: `@DataJpaTest`, `TestEntityManager`, `flush/clear`, проверка запросов. Поднимаемся от web-среза к data-срезу.
+Первая часть Spring Test (101–105: инструменты, unit, конфигурация, web-слой, сценарии) пройдена. В [модуле 106](../m106_spring_test_datajpa/theory.md) начинается **тестирование слоя данных**: `@DataJpaTest`, `TestEntityManager`, `flush/clear`, проверка запросов. Поднимаемся от web-среза к data-срезу.

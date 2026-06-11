@@ -1,6 +1,6 @@
 # Модуль 69. Spring MVC: контроллеры и обработка запроса
 
-Мы знаем, как должен выглядеть HTTP-запрос ([модуль 67](../module-67-spring-rest-http-backend/theory.md)) и как проектировать URI ([модуль 68](../module-68-spring-rest-design/theory.md)). Теперь — **как Spring MVC превращает запрос в вызов вашего метода**: что делает `DispatcherServlet`, откуда метод-обработчик берёт аргументы, как тело JSON становится объектом и обратно.
+Мы знаем, как должен выглядеть HTTP-запрос ([модуль 67](../m67_spring_rest_http_backend/theory.md)) и как проектировать URI ([модуль 68](../m68_spring_rest_design/theory.md)). Теперь — **как Spring MVC превращает запрос в вызов вашего метода**: что делает `DispatcherServlet`, откуда метод-обработчик берёт аргументы, как тело JSON становится объектом и обратно.
 
 > Практика — задачи в `practice/`. Зависимости: `spring-boot-starter-web`. Продолжаем **Task Tracker API**.
 
@@ -112,7 +112,7 @@ public TaskDto handle(
    Ответ:   TaskDto(...)      ──Jackson──►  { "id":1, "title":"X", ... }
 ```
 
-Выбор конвертера зависит от `Content-Type` (вход) и `Accept` (выход) — это и есть content negotiation из [модуля 67](../module-67-spring-rest-http-backend/theory.md).
+Выбор конвертера зависит от `Content-Type` (вход) и `Accept` (выход) — это и есть content negotiation из [модуля 67](../m67_spring_rest_http_backend/theory.md).
 
 ---
 
@@ -179,9 +179,9 @@ public List<TaskDto> byDate(
 ## Дополнительные источники
 
 - [Spring Web MVC — Annotated Controllers](https://docs.spring.io/spring-framework/reference/web/webmvc/mvc-controller.html).
-- [модуль 39](../module-39-servlets/theory.md) — сервлеты (что под капотом `DispatcherServlet`).
-- [модуль 65](../module-65-spring-boot-web-config/theory.md) — введение в `@RestController` и параметры.
+- [модуль 39](../m39_servlets/theory.md) — сервлеты (что под капотом `DispatcherServlet`).
+- [модуль 65](../m65_spring_boot_web_config/theory.md) — введение в `@RestController` и параметры.
 
 ## Что дальше
 
-В [модуле 70](../module-70-spring-rest-dto-json/theory.md) — DTO и Jackson: форма данных на границе API, аннотации сериализации, обёртки ответа, generics.
+В [модуле 70](../m70_spring_rest_dto_json/theory.md) — DTO и Jackson: форма данных на границе API, аннотации сериализации, обёртки ответа, generics.

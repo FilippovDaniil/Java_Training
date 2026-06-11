@@ -1,6 +1,6 @@
 # Модуль 118. Docker: финальный production-ready шаблон (капстоун курса)
 
-Это **последний модуль курса**. Здесь всё, что мы изучили о контейнеризации ([модули 111–117](../module-111-docker-basics/theory.md)), собирается в **переиспользуемый production-ready шаблон**: финальный Dockerfile, `docker-compose.yml` со всеми сервисами, `.dockerignore`, шаблон `.env` и чек-лист готовности к проду. Этот шаблон — то, что можно скопировать в новый Spring Boot проект и сразу получить грамотную упаковку.
+Это **последний модуль курса**. Здесь всё, что мы изучили о контейнеризации ([модули 111–117](../m111_docker_basics/theory.md)), собирается в **переиспользуемый production-ready шаблон**: финальный Dockerfile, `docker-compose.yml` со всеми сервисами, `.dockerignore`, шаблон `.env` и чек-лист готовности к проду. Этот шаблон — то, что можно скопировать в новый Spring Boot проект и сразу получить грамотную упаковку.
 
 > Практика — задачи в `practice/`. **Задачи-носители:** `.java` с text-блоком (финальные артефакты) + `println` — **компилируются bare-javac**. Сквозной проект — **Task Tracker API** (финальная упаковка).
 
@@ -21,7 +21,7 @@
 
 ## Финальный Dockerfile
 
-Совмещает multi-stage ([112](../module-112-docker-dockerfile/theory.md)), layered jars ([113](../module-113-docker-spring-boot-image/theory.md)), non-root и JVM-tuning ([117](../module-117-docker-jvm-tuning/theory.md)):
+Совмещает multi-stage ([112](../m112_docker_dockerfile/theory.md)), layered jars ([113](../m113_docker_spring_boot_image/theory.md)), non-root и JVM-tuning ([117](../m117_docker_jvm_tuning/theory.md)):
 
 ```dockerfile
 # ── этап сборки ──

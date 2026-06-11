@@ -2,7 +2,7 @@
 
 До сих пор схему создавал Hibernate через `ddl-auto`. Для **продакшена** это опасно: нет контроля над DDL, нет истории, нельзя откатить. Промышленный подход — **версионируемые миграции** (Flyway). Заодно разберём защиту от потерянных обновлений (`@Version`) и автоматический **аудит** (кто/когда менял).
 
-> Практика — задачи в `practice/`. Задачи 01–03 — написание **SQL-миграций** (носитель — `.java` с text-блоком, как в [модуле 45](../module-45-sql-dml/theory.md)). Задачи 04–07 — Spring Boot (`spring-boot-starter-data-jpa`, `flyway-core`, `com.h2database:h2`). Проект — `shop-data-jpa`.
+> Практика — задачи в `practice/`. Задачи 01–03 — написание **SQL-миграций** (носитель — `.java` с text-блоком, как в [модуле 45](../m45_sql_dml/theory.md)). Задачи 04–07 — Spring Boot (`spring-boot-starter-data-jpa`, `flyway-core`, `com.h2database:h2`). Проект — `shop-data-jpa`.
 
 ---
 
@@ -101,7 +101,7 @@ WHERE id = ? AND version = ?      -- ожидаемая версия
 | **Оптимистичная** (`@Version`) | проверка версии при коммите; конфликт → исключение | редкие конфликты (большинство кейсов) |
 | **Пессимистичная** (`SELECT ... FOR UPDATE`) | блокирует строку при чтении | частые конфликты, критичные операции |
 
-Пессимистичную и Envers (история изменений) разбираем в [модуле 90](../module-90-hibernate-deep-dive-locking/theory.md).
+Пессимистичную и Envers (история изменений) разбираем в [модуле 90](../m90_hibernate_deep_dive_locking/theory.md).
 
 > Обработка: ловите `ObjectOptimisticLockingFailureException` (Spring) / `OptimisticLockException` (JPA) и **повторяйте** операцию (re-read + retry) либо сообщайте пользователю «данные изменились, обновите».
 
@@ -162,8 +162,8 @@ class Product {
 - [Flyway Documentation](https://documentation.red-gate.com/fd).
 - [Spring Boot: Database Initialization — Flyway](https://docs.spring.io/spring-boot/how-to/data-initialization.html#howto.data-initialization.migration-tool.flyway).
 - [Spring Data JPA: Auditing](https://docs.spring.io/spring-data/jpa/reference/auditing.html).
-- [модуль 90](../module-90-hibernate-deep-dive-locking/theory.md) — пессимистичная блокировка, soft delete, Envers.
+- [модуль 90](../m90_hibernate_deep_dive_locking/theory.md) — пессимистичная блокировка, soft delete, Envers.
 
 ## Что дальше
 
-Это **финал блока Spring Data JPA (77–84)**. Дальше — **Hibernate Deep Dive (85–92)**: в [модуле 85](../module-85-hibernate-deep-dive-lifecycle/theory.md) заглянем под капот — жизненный цикл сущности, dirty checking, flush, detached. Spring Data JPA — это удобная обёртка над тем, что вы изучите там.
+Это **финал блока Spring Data JPA (77–84)**. Дальше — **Hibernate Deep Dive (85–92)**: в [модуле 85](../m85_hibernate_deep_dive_lifecycle/theory.md) заглянем под капот — жизненный цикл сущности, dirty checking, flush, detached. Spring Data JPA — это удобная обёртка над тем, что вы изучите там.

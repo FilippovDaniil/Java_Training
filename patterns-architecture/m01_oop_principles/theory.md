@@ -131,7 +131,7 @@ class LoggingList {
 - **SOLID (темы 02–03)** — это пять правил, как применять эти четыре принципа, чтобы не получить хрупкую систему.
 - **Полиморфизм** — основа Strategy (10), State (12), Template Method (12), почти всех структурных паттернов.
 - **Композиция** — основа Decorator (07), Adapter (07), Bridge (09).
-- Базовый синтаксис ООП — в `../../java-course/module-22-oop-encapsulation-polymorphism-interfaces`.
+- Базовый синтаксис ООП — в `../../java-course/m22_oop_encapsulation_polymorphism_interfaces`.
 
 ## ➡️ Что дальше
 

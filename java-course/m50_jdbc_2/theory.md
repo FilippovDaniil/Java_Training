@@ -205,5 +205,5 @@ class JdbcAccountDao implements AccountDao {
 
 ## Что дальше
 
-В [модуле 49](../module-49-jdbc-1/theory.md) — основы JDBC: подключение, простые запросы, `PreparedStatement`.  
-В [модуле 51](../module-51-hibernate-orm/theory.md) — Hibernate ORM: работа с БД без написания SQL вручную.
+В [модуле 49](../m49_jdbc_1/theory.md) — основы JDBC: подключение, простые запросы, `PreparedStatement`.  
+В [модуле 51](../m51_hibernate_orm/theory.md) — Hibernate ORM: работа с БД без написания SQL вручную.

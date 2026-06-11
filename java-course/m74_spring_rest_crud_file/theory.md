@@ -17,7 +17,7 @@
 | **U**pdate (частично) | PATCH | `/tasks/{id}` | 200 |
 | **D**elete | DELETE | `/tasks/{id}` | 204 |
 
-Это «скелет» почти любого ресурса (детально — [модуль 68](../module-68-spring-rest-design/theory.md)).
+Это «скелет» почти любого ресурса (детально — [модуль 68](../m68_spring_rest_design/theory.md)).
 
 ---
 
@@ -167,8 +167,8 @@ public ResponseEntity<String> exportCsv() {
 
 - [Spring: Multipart (File Upload)](https://docs.spring.io/spring-framework/reference/web/webmvc/mvc-servlet/multipart.html).
 - [MDN: Content-Disposition](https://developer.mozilla.org/ru/docs/Web/HTTP/Headers/Content-Disposition).
-- [модуль 18](../module-18-io-streams/theory.md) и [модуль 19](../module-19-io-nio/theory.md) — потоки и файлы в Java.
+- [модуль 18](../m18_io_streams/theory.md) и [модуль 19](../m19_io_nio/theory.md) — потоки и файлы в Java.
 
 ## Что дальше
 
-В [модуле 75](../module-75-spring-rest-config-openapi/theory.md) — конфигурация, версионирование API, CORS и документация через OpenAPI/Swagger.
+В [модуле 75](../m75_spring_rest_config_openapi/theory.md) — конфигурация, версионирование API, CORS и документация через OpenAPI/Swagger.

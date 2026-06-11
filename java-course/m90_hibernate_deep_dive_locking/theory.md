@@ -1,6 +1,6 @@
 # Модуль 90. Hibernate Deep Dive: блокировки, soft delete, аудит истории (Envers)
 
-В [модуле 84](../module-84-spring-data-jpa-migrations/theory.md) мы кратко увидели `@Version`. Теперь — полная картина управления конкуренцией: **оптимистичная** и **пессимистичная** блокировки, плюс два прикладных приёма поверх — **мягкое удаление** (soft delete) и **аудит истории** изменений через Envers.
+В [модуле 84](../m84_spring_data_jpa_migrations/theory.md) мы кратко увидели `@Version`. Теперь — полная картина управления конкуренцией: **оптимистичная** и **пессимистичная** блокировки, плюс два прикладных приёма поверх — **мягкое удаление** (soft delete) и **аудит истории** изменений через Envers.
 
 > Практика — задачи в `practice/`. Зависимости: `org.hibernate.orm:hibernate-core`, `com.h2database:h2`, для Envers — `org.hibernate.orm:hibernate-envers` + `META-INF/persistence.xml` ("shop-pu"). Работаем через `EntityManager`. Проект — `shop-data-jpa`.
 
@@ -163,8 +163,8 @@ Product old = reader.find(Product.class, productId, revisions.get(0));     // с
 - [Jakarta Persistence: Lock Modes](https://jakarta.ee/specifications/persistence/3.1/).
 - [Hibernate ORM: Soft delete (@SoftDelete / @SQLRestriction)](https://docs.jboss.org/hibernate/orm/current/userguide/html_single/Hibernate_User_Guide.html#soft-delete).
 - [Hibernate Envers User Guide](https://docs.jboss.org/hibernate/orm/current/userguide/html_single/Hibernate_User_Guide.html#envers).
-- [модуль 84](../module-84-spring-data-jpa-migrations/theory.md) — `@Version` в контексте Spring Data + Flyway.
+- [модуль 84](../m84_spring_data_jpa_migrations/theory.md) — `@Version` в контексте Spring Data + Flyway.
 
 ## Что дальше
 
-В [модуле 91](../module-91-hibernate-deep-dive-performance/theory.md) — производительность: JDBC batching, bulk-операции, read-only, `StatelessSession` и кэш 2-го уровня.
+В [модуле 91](../m91_hibernate_deep_dive_performance/theory.md) — производительность: JDBC batching, bulk-операции, read-only, `StatelessSession` и кэш 2-го уровня.

@@ -158,8 +158,8 @@ class StatefulTest { ... }
 - [Spring Boot: `@SpringBootTest`](https://docs.spring.io/spring-boot/reference/testing/spring-boot-applications.html).
 - [`TestRestTemplate` — Javadoc](https://docs.spring.io/spring-boot/api/java/org/springframework/boot/test/web/client/TestRestTemplate.html).
 - [Spring: `RestTestClient`](https://docs.spring.io/spring-framework/reference/testing/resttestclient.html).
-- [модуль 76](../module-76-spring-rest-testing/theory.md) — `@SpringBootTest` + `TestRestTemplate` (первое знакомство).
+- [модуль 76](../m76_spring_rest_testing/theory.md) — `@SpringBootTest` + `TestRestTemplate` (первое знакомство).
 
 ## Что дальше
 
-В [модуле 109](../module-109-spring-test-integration/theory.md) — **интеграционные тесты с Testcontainers**: запуск реального PostgreSQL в Docker-контейнере на время теста (`@Container`, `@ServiceConnection`), проверка на той же СУБД, что в проде. Самый верх пирамиды тестов.
+В [модуле 109](../m109_spring_test_integration/theory.md) — **интеграционные тесты с Testcontainers**: запуск реального PostgreSQL в Docker-контейнере на время теста (`@Container`, `@ServiceConnection`), проверка на той же СУБД, что в проде. Самый верх пирамиды тестов.

@@ -1,6 +1,6 @@
 # Модуль 85. Hibernate Deep Dive: жизненный цикл сущности, dirty checking, flush
 
-Spring Data JPA ([модули 77–84](../module-77-spring-data-jpa-intro/theory.md)) удобно прятал работу с `EntityManager`. Теперь — **под капот**. Чтобы понимать, почему `save()` иногда не нужен, когда выполняется SQL и откуда берётся `LazyInitializationException`, нужно знать **жизненный цикл сущности** и **persistence context**.
+Spring Data JPA ([модули 77–84](../m77_spring_data_jpa_intro/theory.md)) удобно прятал работу с `EntityManager`. Теперь — **под капот**. Чтобы понимать, почему `save()` иногда не нужен, когда выполняется SQL и откуда берётся `LazyInitializationException`, нужно знать **жизненный цикл сущности** и **persistence context**.
 
 > Практика — задачи в `practice/`. Зависимости: `org.hibernate.orm:hibernate-core` (или `jakarta.persistence` + провайдер), `com.h2database:h2` + файл `META-INF/persistence.xml` с persistence-unit `shop-pu`. Работаем через `EntityManager` напрямую (а не Spring Data). Проект — `shop-data-jpa`.
 
@@ -133,7 +133,7 @@ Product managed = em.merge(detached); // managed-копия — работать
 | `merge()` «не работает» | продолжают менять исходный объект | использовать возвращённый managed |
 | SQL «не выполняется» сразу | отложен до flush | `em.flush()` / commit / запрос |
 | Два `find` = два SELECT | разные контексты (em закрыт) | один контекст на единицу работы |
-| `LazyInitializationException` | доступ к lazy после закрытия контекста | держать контекст открытым / fetch ([модуль 86](../module-86-hibernate-deep-dive-fetching/theory.md)) |
+| `LazyInitializationException` | доступ к lazy после закрытия контекста | держать контекст открытым / fetch ([модуль 86](../m86_hibernate_deep_dive_fetching/theory.md)) |
 | `save()` пишут везде | не знают про dirty checking | для managed `save`/`merge` не нужен |
 
 ---
@@ -142,8 +142,8 @@ Product managed = em.merge(detached); // managed-копия — работать
 
 - [Jakarta Persistence: Entity Lifecycle](https://jakarta.ee/specifications/persistence/3.1/).
 - [Vlad Mihalcea — JPA entity states](https://vladmihalcea.com/jpa-persist-merge-hibernate/).
-- [модуль 81](../module-81-spring-data-jpa-transactions/theory.md) — то же dirty checking глазами Spring `@Transactional`.
+- [модуль 81](../m81_spring_data_jpa_transactions/theory.md) — то же dirty checking глазами Spring `@Transactional`.
 
 ## Что дальше
 
-В [модуле 86](../module-86-hibernate-deep-dive-fetching/theory.md) — стратегии загрузки на уровне Hibernate: lazy-прокси, `Hibernate.initialize`, проблема N+1, `JOIN FETCH` в HQL, `EntityGraph`, `@BatchSize`/`@Fetch`, проекции.
+В [модуле 86](../m86_hibernate_deep_dive_fetching/theory.md) — стратегии загрузки на уровне Hibernate: lazy-прокси, `Hibernate.initialize`, проблема N+1, `JOIN FETCH` в HQL, `EntityGraph`, `@BatchSize`/`@Fetch`, проекции.

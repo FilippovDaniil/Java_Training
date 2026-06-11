@@ -106,7 +106,7 @@ abstract class Auditable {
 | цель ассоциации | ❌ нельзя | ✅ можно |
 | зачем | переиспользовать общие поля (аудит, id) | моделировать «is-a» иерархию |
 
-> Аудит-поля из [модуля 84](../module-84-spring-data-jpa-migrations/theory.md) — классический `@MappedSuperclass`. Иерархию «Платёж → Карта/Наличные» — `@Inheritance`.
+> Аудит-поля из [модуля 84](../m84_spring_data_jpa_migrations/theory.md) — классический `@MappedSuperclass`. Иерархию «Платёж → Карта/Наличные» — `@Inheritance`.
 
 ---
 
@@ -171,9 +171,9 @@ em.createQuery("select p from Payment p where treat(p as CardPayment).cardNumber
 
 - [Hibernate ORM: Inheritance](https://docs.jboss.org/hibernate/orm/current/userguide/html_single/Hibernate_User_Guide.html#entity-inheritance).
 - [Vlad Mihalcea — Inheritance strategies with JPA and Hibernate](https://vladmihalcea.com/inheritance-jpa-hibernate/).
-- [модуль 53](../module-53-hibernate-inheritance/theory.md) — введение в наследование Hibernate (Часть 2).
-- [модуль 88](../module-88-hibernate-deep-dive-modeling/theory.md) — `@MappedSuperclass` для общих полей.
+- [модуль 53](../m53_hibernate_inheritance/theory.md) — введение в наследование Hibernate (Часть 2).
+- [модуль 88](../m88_hibernate_deep_dive_modeling/theory.md) — `@MappedSuperclass` для общих полей.
 
 ## Что дальше
 
-Это завершает **средний блок Hibernate Deep Dive (85–89)**. В следующем батче — [модуль 90](../module-90-hibernate-deep-dive-locking/theory.md): блокировки (оптимистичная/пессимистичная), soft delete и аудит истории через Envers. Затем производительность (91) и диагностика (92).
+Это завершает **средний блок Hibernate Deep Dive (85–89)**. В следующем батче — [модуль 90](../m90_hibernate_deep_dive_locking/theory.md): блокировки (оптимистичная/пессимистичная), soft delete и аудит истории через Envers. Затем производительность (91) и диагностика (92).

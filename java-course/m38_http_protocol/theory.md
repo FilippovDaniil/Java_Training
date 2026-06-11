@@ -1,6 +1,6 @@
 # Модуль 38. Протоколы HTTP/HTTPS
 
-**HTTP** (HyperText Transfer Protocol) — протокол передачи данных в вебе: клиент шлёт **запрос**, сервер возвращает **ответ**. Работает поверх TCP (см. [модуль 36](../module-36-network-basics/theory.md)).
+**HTTP** (HyperText Transfer Protocol) — протокол передачи данных в вебе: клиент шлёт **запрос**, сервер возвращает **ответ**. Работает поверх TCP (см. [модуль 36](../m36_network_basics/theory.md)).
 
 > Практика выполняется на встроенном `java.net.http.HttpClient` (Java 11+) — **внешние зависимости не нужны**. Для запуска требуется доступ в интернет.
 
@@ -183,4 +183,4 @@ HttpClient client = HttpClient.newBuilder()
 
 ## Что дальше
 
-В [модуле 39](../module-39-servlets/theory.md) — сервлеты (теория).
+В [модуле 39](../m39_servlets/theory.md) — сервлеты (теория).

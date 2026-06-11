@@ -1,6 +1,6 @@
 # Модуль 98. Spring Security: переход к stateless, JWT — выдача и валидация
 
-HTTP Basic и сессии ([модули 94–95](../module-94-spring-security-inmemory/theory.md)) привязывают клиента к серверу (сессия) или шлют пароль в каждом запросе. Для масштабируемых API применяют **stateless**-аутентификацию через **JWT** (JSON Web Token): сервер не хранит сессию — токен самодостаточен. В этом модуле — устройство JWT, его **выдача** и **валидация** библиотекой `jjwt`.
+HTTP Basic и сессии ([модули 94–95](../m94_spring_security_inmemory/theory.md)) привязывают клиента к серверу (сессия) или шлют пароль в каждом запросе. Для масштабируемых API применяют **stateless**-аутентификацию через **JWT** (JSON Web Token): сервер не хранит сессию — токен самодостаточен. В этом модуле — устройство JWT, его **выдача** и **валидация** библиотекой `jjwt`.
 
 > Практика — задачи в `practice/`. Зависимости: `spring-boot-starter-web`, `spring-boot-starter-security`, JWT — `io.jsonwebtoken:jjwt-api:0.12.x` (+ `jjwt-impl`, `jjwt-jackson` в runtime). Реалистичные импорты + «ТРЕБУЮТСЯ ЗАВИСИМОСТИ»; bare-javac не компилируется (норма). Сквозной проект — **Task Tracker API**.
 
@@ -62,7 +62,7 @@ import java.nio.charset.StandardCharsets;
 SecretKey key = Keys.hmacShaKeyFor("change-me-to-a-very-long-secret-key-256bits!".getBytes(StandardCharsets.UTF_8));
 ```
 
-> Слишком короткий секрет → `WeakKeyException`. В проде секрет хранят вне кода (env/secret-store), как в [модуле 84](../module-84-spring-data-jpa-migrations/theory.md) для credentials.
+> Слишком короткий секрет → `WeakKeyException`. В проде секрет хранят вне кода (env/secret-store), как в [модуле 84](../m84_spring_data_jpa_migrations/theory.md) для credentials.
 
 ---
 
@@ -148,7 +148,7 @@ public class JwtService {
 }
 ```
 
-> Сам **фильтр**, который читает заголовок `Authorization: Bearer ...` и кладёт пользователя в `SecurityContext`, — тема [модуля 99](../module-99-spring-security-custom-jwt-filter/theory.md). Здесь — только выдача (login) и проверка токена.
+> Сам **фильтр**, который читает заголовок `Authorization: Bearer ...` и кладёт пользователя в `SecurityContext`, — тема [модуля 99](../m99_spring_security_custom_jwt_filter/theory.md). Здесь — только выдача (login) и проверка токена.
 
 ---
 
@@ -206,8 +206,8 @@ AuthenticationManager authManager(AuthenticationConfiguration cfg) throws Except
 - [JWT.io — структура токена](https://jwt.io/introduction).
 - [jjwt (Java JWT) — README](https://github.com/jwtk/jjwt).
 - [Spring Security: Authentication](https://docs.spring.io/spring-security/reference/servlet/authentication/index.html).
-- [модуль 95](../module-95-spring-security-session-cors/theory.md) — session vs stateless.
+- [модуль 95](../m95_spring_security_session_cors/theory.md) — session vs stateless.
 
 ## Что дальше
 
-В [модуле 99](../module-99-spring-security-custom-jwt-filter/theory.md) — **custom JWT-фильтр**: чтение `Bearer`-токена из заголовка, установка `Authentication` в `SecurityContext`, плюс встроенная поддержка Bearer (`oauth2ResourceServer`) и тестирование. Тогда выданный здесь токен начнёт реально авторизовать запросы.
+В [модуле 99](../m99_spring_security_custom_jwt_filter/theory.md) — **custom JWT-фильтр**: чтение `Bearer`-токена из заголовка, установка `Authentication` в `SecurityContext`, плюс встроенная поддержка Bearer (`oauth2ResourceServer`) и тестирование. Тогда выданный здесь токен начнёт реально авторизовать запросы.

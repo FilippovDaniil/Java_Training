@@ -146,4 +146,4 @@ DELETE FROM products WHERE qty = 0;
 
 ## Что дальше
 
-В [модуле 46](../module-46-sql-queries/theory.md) — сложные запросы: JOIN, GROUP BY, индексы.
+В [модуле 46](../m46_sql_queries/theory.md) — сложные запросы: JOIN, GROUP BY, индексы.

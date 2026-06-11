@@ -129,4 +129,4 @@ System.out.println("D");    // → C\nD\n
 
 ## Что дальше
 
-В [модуле 02](../module-02-variables-int-string/theory.md) научимся хранить данные в переменных.
+В [модуле 02](../m02_variables_int_string/theory.md) научимся хранить данные в переменных.

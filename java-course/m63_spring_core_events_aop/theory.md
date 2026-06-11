@@ -276,9 +276,9 @@ class OrderServiceTest {
 
 - Официальная документация Spring: [Events](https://docs.spring.io/spring-framework/reference/core/beans/context-introduction.html#context-functionality-events) и [AOP](https://docs.spring.io/spring-framework/reference/core/aop.html).
 - «Spring in Action» (Craig Walls) — главы по AOP и событиям.
-- [модуль 62](../module-62-spring-core-configuration/theory.md) — конфигурация Spring-контейнера (`@Configuration`, `@Bean`, `@ComponentScan`).
-- [модуль 26](../module-26-reflection-annotations/theory.md) — рефлексия и аннотации (основа механизма прокси).
+- [модуль 62](../m62_spring_core_configuration/theory.md) — конфигурация Spring-контейнера (`@Configuration`, `@Bean`, `@ComponentScan`).
+- [модуль 26](../m26_reflection_annotations/theory.md) — рефлексия и аннотации (основа механизма прокси).
 
 ## Что дальше
 
-В [модуле 64](../module-64-spring-boot-intro/theory.md) — Spring Boot: автоконфигурация, стартеры, `application.properties`, встроенный сервер.
+В [модуле 64](../m64_spring_boot_intro/theory.md) — Spring Boot: автоконфигурация, стартеры, `application.properties`, встроенный сервер.

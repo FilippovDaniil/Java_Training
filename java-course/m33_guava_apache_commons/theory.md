@@ -172,4 +172,4 @@ CollectionUtils.subtract(listA, listB);     // разность
 
 ## Что дальше
 
-В [модуле 34](../module-34-testing-junit-mockito/theory.md) — тестирование с JUnit и Mockito.
+В [модуле 34](../m34_testing_junit_mockito/theory.md) — тестирование с JUnit и Mockito.

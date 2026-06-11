@@ -1,6 +1,6 @@
 # Модуль 82. Ленивая загрузка, проблема N+1, JOIN FETCH, EntityGraph
 
-В [модуле 81](../module-81-spring-data-jpa-transactions/theory.md) мы научились объединять изменения в транзакцию. Но связи между сущностями (`Category → Product`, `Order → Customer`) загружаются не сразу. Как именно Hibernate подтягивает связанные данные — и почему наивный код порождает **сотни лишних запросов** — тема этого модуля.
+В [модуле 81](../m81_spring_data_jpa_transactions/theory.md) мы научились объединять изменения в транзакцию. Но связи между сущностями (`Category → Product`, `Order → Customer`) загружаются не сразу. Как именно Hibernate подтягивает связанные данные — и почему наивный код порождает **сотни лишних запросов** — тема этого модуля.
 
 > Практика — задачи в `practice/`. Зависимости: `spring-boot-starter-data-jpa`, `com.h2database:h2`. Проект — `shop-data-jpa`.
 
@@ -138,7 +138,7 @@ public interface CategoryRepository extends JpaRepository<Category, Long> {
 
 ## Решение 3: DTO-проекция (часто лучшее)
 
-Если view нужны только несколько полей — **не грузите сущности вообще**. Запросите сразу DTO (см. [модуль 80](../module-80-spring-data-jpa-advanced/theory.md)):
+Если view нужны только несколько полей — **не грузите сущности вообще**. Запросите сразу DTO (см. [модуль 80](../m80_spring_data_jpa_advanced/theory.md)):
 
 ```java
 public record CategorySummary(String name, long productCount) {}
@@ -188,9 +188,9 @@ private List<Product> products;
 
 - [Spring Data JPA: Entity Graphs](https://docs.spring.io/spring-data/jpa/reference/jpa/entity-graph.html).
 - [Vlad Mihalcea — N+1 query problem](https://vladmihalcea.com/n-plus-1-query-problem/).
-- [модуль 86](../module-86-hibernate-deep-dive-fetching/theory.md) — fetching в Hibernate глубже (то же на уровне HQL/Criteria).
-- [модуль 91](../module-91-hibernate-deep-dive-performance/theory.md) — производительность, batching, кэш.
+- [модуль 86](../m86_hibernate_deep_dive_fetching/theory.md) — fetching в Hibernate глубже (то же на уровне HQL/Criteria).
+- [модуль 91](../m91_hibernate_deep_dive_performance/theory.md) — производительность, batching, кэш.
 
 ## Что дальше
 
-В [модуле 83](../module-83-spring-data-jpa-testing/theory.md) — как **проверять** репозитории и запросы: `@DataJpaTest`, `TestEntityManager`, H2 и обзор Testcontainers. Тесты помогут ловить тот же N+1 и регрессии в запросах автоматически.
+В [модуле 83](../m83_spring_data_jpa_testing/theory.md) — как **проверять** репозитории и запросы: `@DataJpaTest`, `TestEntityManager`, H2 и обзор Testcontainers. Тесты помогут ловить тот же N+1 и регрессии в запросах автоматически.

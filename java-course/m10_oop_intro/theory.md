@@ -127,7 +127,7 @@ dog.eat();    // унаследовано от Animal → "Рекс ест"
 dog.bark();   // собственный метод → "Рекс лает: Гав!"
 ```
 
-> Подробно об инкапсуляции, полиморфизме и интерфейсах — в [модуле 22](../module-22-oop-encapsulation-polymorphism-interfaces/theory.md), о переопределении и абстракции — в [модуле 23](../module-23-oop-overloading-overriding-abstract/theory.md).
+> Подробно об инкапсуляции, полиморфизме и интерфейсах — в [модуле 22](../m22_oop_encapsulation_polymorphism_interfaces/theory.md), о переопределении и абстракции — в [модуле 23](../m23_oop_overloading_overriding_abstract/theory.md).
 
 ---
 
@@ -163,11 +163,11 @@ class Dog extends Animal { ... }
 |--------|-----------|
 | `NullPointerException` | обращение к методу/полю через `null` |
 | забыли `new` | переменная остаётся `null` |
-| `==` для объектов | сравнивает ссылки, а не содержимое (см. [модуль 11](../module-11-objects-constructors/theory.md)) |
+| `==` для объектов | сравнивает ссылки, а не содержимое (см. [модуль 11](../m11_objects_constructors/theory.md)) |
 | два `public`-класса в файле | разрешён только один, совпадающий с именем файла |
 
 ---
 
 ## Что дальше
 
-В [модуле 11](../module-11-objects-constructors/theory.md) — конструкторы, инкапсуляция и `equals`/`hashCode`.
+В [модуле 11](../m11_objects_constructors/theory.md) — конструкторы, инкапсуляция и `equals`/`hashCode`.

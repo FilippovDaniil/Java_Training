@@ -1,6 +1,6 @@
 # Модуль 103. Spring Test: профили, свойства и управляемая конфигурация тестов
 
-Unit-тесты ([модуль 102](../module-102-spring-test-unit/theory.md)) контекст не поднимают. Но как только тест поднимает Spring (`@SpringBootTest`, `@WebMvcTest`, `@DataJpaTest` — модули 104+), встаёт вопрос: **какая конфигурация активна в тесте?** Какие свойства, какой профиль, какие бины. Этот модуль — про управление окружением теста: профили (`@ActiveProfiles`), свойства (`@TestPropertySource`, `application-test.properties`), подмена бинов (`@TestConfiguration`) и динамические свойства (`@DynamicPropertySource`).
+Unit-тесты ([модуль 102](../m102_spring_test_unit/theory.md)) контекст не поднимают. Но как только тест поднимает Spring (`@SpringBootTest`, `@WebMvcTest`, `@DataJpaTest` — модули 104+), встаёт вопрос: **какая конфигурация активна в тесте?** Какие свойства, какой профиль, какие бины. Этот модуль — про управление окружением теста: профили (`@ActiveProfiles`), свойства (`@TestPropertySource`, `application-test.properties`), подмена бинов (`@TestConfiguration`) и динамические свойства (`@DynamicPropertySource`).
 
 > Практика — задачи в `practice/`. **Тест-классы (без `main`)**, запуск в IDE (▶) или `./gradlew test`. Зависимость: `spring-boot-starter-test`. bare-javac не верифицируется (норма). Сквозной проект — **Task Tracker API**.
 
@@ -68,7 +68,7 @@ class AnotherTest { ... }
 
 ## `@ConfigurationProperties` в тесте
 
-Типобезопасную конфигурацию (модуль [65](../module-65-spring-boot-web-config/theory.md)) удобно тестировать на корректность биндинга:
+Типобезопасную конфигурацию (модуль [65](../m65_spring_boot_web_config/theory.md)) удобно тестировать на корректность биндинга:
 
 ```java
 @ConfigurationProperties(prefix = "app")
@@ -113,7 +113,7 @@ class ReportServiceTest {
 | Подмена | Инструмент |
 |---------|------------|
 | Заменить бин на заглушку/фиксированный | `@TestConfiguration` + `@Import` |
-| Заменить бин моком в slice/контексте | `@MockBean` (Mockito-мок в контексте) — модуль [104](../module-104-spring-test-webmvc/theory.md) |
+| Заменить бин моком в slice/контексте | `@MockBean` (Mockito-мок в контексте) — модуль [104](../m104_spring_test_webmvc/theory.md) |
 
 > `@TestConfiguration` (в отличие от `@Configuration`) **не подхватывается** автосканированием — подключается явно через `@Import`, поэтому не «протекает» в другие тесты.
 
@@ -121,7 +121,7 @@ class ReportServiceTest {
 
 ## `@DynamicPropertySource`: значения из рантайма
 
-Когда свойство известно только при старте (порт встроенного брокера, URL Testcontainers — модуль [109](../module-109-spring-test-integration/theory.md)):
+Когда свойство известно только при старте (порт встроенного брокера, URL Testcontainers — модуль [109](../m109_spring_test_integration/theory.md)):
 
 ```java
 @DynamicPropertySource
@@ -154,8 +154,8 @@ static void props(DynamicPropertyRegistry registry) {
 - [Spring Boot: Testing — Properties & Configuration](https://docs.spring.io/spring-boot/reference/testing/spring-boot-applications.html).
 - [`@TestPropertySource` — Spring Framework docs](https://docs.spring.io/spring-framework/reference/testing/annotations/integration-spring/annotation-testpropertysource.html).
 - [`@DynamicPropertySource`](https://docs.spring.io/spring-framework/reference/testing/annotations/integration-spring/annotation-dynamicpropertysource.html).
-- [модуль 65](../module-65-spring-boot-web-config/theory.md) — `@ConfigurationProperties` и профили.
+- [модуль 65](../m65_spring_boot_web_config/theory.md) — `@ConfigurationProperties` и профили.
 
 ## Что дальше
 
-В [модуле 104](../module-104-spring-test-webmvc/theory.md) — **тестирование веб-слоя**: `@WebMvcTest`, `MockMvc`, новый текучий `MockMvcTester`, `@MockBean` сервиса, JSON-проверки (`jsonPath`), `@JsonTest` с `JacksonTester`. Это первый «срезовый» тест, поднимающий часть контекста — и здесь конфигурация из этого модуля начинает работать на практике.
+В [модуле 104](../m104_spring_test_webmvc/theory.md) — **тестирование веб-слоя**: `@WebMvcTest`, `MockMvc`, новый текучий `MockMvcTester`, `@MockBean` сервиса, JSON-проверки (`jsonPath`), `@JsonTest` с `JacksonTester`. Это первый «срезовый» тест, поднимающий часть контекста — и здесь конфигурация из этого модуля начинает работать на практике.

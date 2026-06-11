@@ -1,6 +1,6 @@
 # Модуль 93. Spring Security: введение, что меняет starter-security, цепочка фильтров
 
-REST API из [блока 67–76](../module-67-spring-rest-http-backend/theory.md) открыто всем. Перед продакшеном нужна **безопасность**: кто ты (аутентификация) и что тебе можно (авторизация). Spring Security добавляет это декларативно. В этом модуле — что происходит после подключения стартера, как устроена **цепочка фильтров** и базовый `SecurityFilterChain`.
+REST API из [блока 67–76](../m67_spring_rest_http_backend/theory.md) открыто всем. Перед продакшеном нужна **безопасность**: кто ты (аутентификация) и что тебе можно (авторизация). Spring Security добавляет это декларативно. В этом модуле — что происходит после подключения стартера, как устроена **цепочка фильтров** и базовый `SecurityFilterChain`.
 
 > Практика — задачи в `practice/`. Зависимости: `spring-boot-starter-web`, `spring-boot-starter-security`. Реалистичные импорты `org.springframework.security.*` + «ТРЕБУЮТСЯ ЗАВИСИМОСТИ» в шапке; bare-javac **не компилируется** (это норма). Сквозной проект — **Task Tracker API**.
 
@@ -149,7 +149,7 @@ public String me2(@AuthenticationPrincipal org.springframework.security.core.use
 | `antMatchers` не компилируется | удалён в SS6 | `requestMatchers` |
 | Правила «не срабатывают» | неверный порядок (`anyRequest()` раньше частных) | частные правила — выше, `anyRequest()` — последним |
 | `WebSecurityConfigurerAdapter` не найден | удалён в SS6 | бин `SecurityFilterChain` |
-| REST-клиент видит форму логина (302) | `formLogin` редиректит | для REST — `httpBasic`/JWT, отдельный entry point ([модуль 95](../module-95-spring-security-session-cors/theory.md)) |
+| REST-клиент видит форму логина (302) | `formLogin` редиректит | для REST — `httpBasic`/JWT, отдельный entry point ([модуль 95](../m95_spring_security_session_cors/theory.md)) |
 | `Authentication == null` | эндпоинт `permitAll`, пользователь не вошёл | проверять на null / защитить эндпоинт |
 
 ---
@@ -158,8 +158,8 @@ public String me2(@AuthenticationPrincipal org.springframework.security.core.use
 
 - [Spring Security: Architecture](https://docs.spring.io/spring-security/reference/servlet/architecture.html).
 - [Spring Security: Authorize HTTP Requests](https://docs.spring.io/spring-security/reference/servlet/authorization/authorize-http-requests.html).
-- [модуль 69](../module-69-spring-rest-controllers/theory.md) — Spring MVC и DispatcherServlet (что после цепочки фильтров).
+- [модуль 69](../m69_spring_rest_controllers/theory.md) — Spring MVC и DispatcherServlet (что после цепочки фильтров).
 
 ## Что дальше
 
-В [модуле 94](../module-94-spring-security-inmemory/theory.md) — первые пользователи: `InMemoryUserDetailsManager`, `PasswordEncoder` (BCrypt), форма логина и основы CSRF.
+В [модуле 94](../m94_spring_security_inmemory/theory.md) — первые пользователи: `InMemoryUserDetailsManager`, `PasswordEncoder` (BCrypt), форма логина и основы CSRF.

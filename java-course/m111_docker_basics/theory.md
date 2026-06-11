@@ -1,6 +1,6 @@
 # Модуль 111. Docker: основы — контейнеры, образы, CLI
 
-Блок Spring Test закрыт ([модули 101–110](../module-110-spring-test-security-async/theory.md)). Финальная часть курса — **контейнеризация**. Приложение, упакованное в Docker-образ, запускается одинаково на ноутбуке, в CI и на проде — «у меня работает» перестаёт быть отговоркой. В этом модуле — что такое контейнер и образ, чем отличается от виртуальной машины, и базовые команды Docker CLI.
+Блок Spring Test закрыт ([модули 101–110](../m110_spring_test_security_async/theory.md)). Финальная часть курса — **контейнеризация**. Приложение, упакованное в Docker-образ, запускается одинаково на ноутбуке, в CI и на проде — «у меня работает» перестаёт быть отговоркой. В этом модуле — что такое контейнер и образ, чем отличается от виртуальной машины, и базовые команды Docker CLI.
 
 > Практика — задачи в `practice/`. **Формат изменился: задачи-носители.** Это обычные `.java` с text-блоком (несёт команды/артефакты) и `println` — **компилируются bare-javac** (JDK 15+, dep-free). Суть задания — в JavaDoc; команды Docker выполняйте в терминале. Нужен установленный Docker (Rancher Desktop/Docker Desktop). Сквозной проект — **Task Tracker API**.
 
@@ -111,7 +111,7 @@ docker rmi nginx                  # удалить образ
 docker run --rm -p 8080:8080 -v "$(pwd)/app.jar:/app.jar" eclipse-temurin:17-jre java -jar /app.jar
 ```
 
-В [модуле 112](../module-112-docker-dockerfile/theory.md) jar будет «запекаться» в собственный образ через `Dockerfile` — это правильный путь упаковки Spring Boot.
+В [модуле 112](../m112_docker_dockerfile/theory.md) jar будет «запекаться» в собственный образ через `Dockerfile` — это правильный путь упаковки Spring Boot.
 
 ---
 
@@ -123,7 +123,7 @@ docker run --rm -p 8080:8080 -v "$(pwd)/app.jar:/app.jar" eclipse-temurin:17-jre
 | `docker rm` отказывает | контейнер запущен | сначала `docker stop`, потом `rm` (или `rm -f`) |
 | Контейнеров много, место кончилось | остановленные не удалены | `docker ps -a`, `docker rm`; `docker system prune` |
 | `docker run` каждый раз новый контейнер | `run` создаёт новый | повторно — `docker start <имя>` |
-| Изменения в контейнере пропали | writable-слой удалён с контейнером | данные — в томах (`-v`), модуль [114](../module-114-docker-configuration/theory.md) |
+| Изменения в контейнере пропали | writable-слой удалён с контейнером | данные — в томах (`-v`), модуль [114](../m114_docker_configuration/theory.md) |
 | `latest` тащит непредсказуемую версию | плавающий тег | фиксировать версию (`postgres:16`) |
 | Нет доступа к Docker | демон не запущен | поднять Docker/Rancher Desktop |
 
@@ -138,4 +138,4 @@ docker run --rm -p 8080:8080 -v "$(pwd)/app.jar:/app.jar" eclipse-temurin:17-jre
 
 ## Что дальше
 
-В [модуле 112](../module-112-docker-dockerfile/theory.md) — **Dockerfile**: как описать собственный образ (инструкции `FROM`, `COPY`, `RUN`, `ENTRYPOINT`), что такое слои и кэш сборки, и зачем нужен **multi-stage build**. Соберём первый образ своими руками.
+В [модуле 112](../m112_docker_dockerfile/theory.md) — **Dockerfile**: как описать собственный образ (инструкции `FROM`, `COPY`, `RUN`, `ENTRYPOINT`), что такое слои и кэш сборки, и зачем нужен **multi-stage build**. Соберём первый образ своими руками.

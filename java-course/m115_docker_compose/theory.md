@@ -1,6 +1,6 @@
 # Модуль 115. Docker Compose: приложение + PostgreSQL одной командой
 
-Запускать приложение и БД отдельными `docker run`, вручную связывать их по сети, помнить порядок старта — утомительно и хрупко ([модули 111](../module-111-docker-basics/theory.md), [114](../module-114-docker-configuration/theory.md)). **Docker Compose** описывает весь стек в одном файле `docker-compose.yml` и поднимает его одной командой. В этом модуле — структура Compose-файла, сеть между сервисами, порядок запуска через `depends_on` + healthcheck, тома и переменные.
+Запускать приложение и БД отдельными `docker run`, вручную связывать их по сети, помнить порядок старта — утомительно и хрупко ([модули 111](../m111_docker_basics/theory.md), [114](../m114_docker_configuration/theory.md)). **Docker Compose** описывает весь стек в одном файле `docker-compose.yml` и поднимает его одной командой. В этом модуле — структура Compose-файла, сеть между сервисами, порядок запуска через `depends_on` + healthcheck, тома и переменные.
 
 > Практика — задачи в `practice/`. **Задачи-носители:** `.java` с text-блоком (несёт `docker-compose.yml`) + `println` — **компилируются bare-javac**. Сам файл создавайте в корне проекта и запускайте `docker compose up`. Сквозной проект — **Task Tracker API** + PostgreSQL.
 
@@ -148,4 +148,4 @@ services:
 
 ## Что дальше
 
-В [модуле 116](../module-116-docker-compose-extended/theory.md) — **расширенный Compose**: добавим Redis и RabbitMQ, отладим порядок старта и удобный dev-workflow (override-файлы, пересборка, troubleshooting). Стек приблизится к боевому.
+В [модуле 116](../m116_docker_compose_extended/theory.md) — **расширенный Compose**: добавим Redis и RabbitMQ, отладим порядок старта и удобный dev-workflow (override-файлы, пересборка, troubleshooting). Стек приблизится к боевому.

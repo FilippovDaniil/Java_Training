@@ -166,4 +166,4 @@ ZonedDateTime tokyo = moscow.withZoneSameInstant(ZoneId.of("Asia/Tokyo"));
 
 ## Что дальше
 
-В [модуле 21](../module-21-git/theory.md) — основы системы контроля версий Git.
+В [модуле 21](../m21_git/theory.md) — основы системы контроля версий Git.

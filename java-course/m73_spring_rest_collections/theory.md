@@ -120,7 +120,7 @@ List<TaskDto> result = s.toList();
 
 ## Spring Data: Pageable и Page (превью)
 
-Когда данные приходят из БД ([модуль 79](../module-79-spring-data-jpa-repository/theory.md)), Spring Data берёт пагинацию на себя. Контроллер принимает `Pageable` прямо как аргумент:
+Когда данные приходят из БД ([модуль 79](../m79_spring_data_jpa_repository/theory.md)), Spring Data берёт пагинацию на себя. Контроллер принимает `Pageable` прямо как аргумент:
 
 ```java
 import org.springframework.data.domain.Page;
@@ -160,9 +160,9 @@ public Page<TaskDto> all(Pageable pageable) {   // ?page=0&size=20&sort=createdA
 
 - [Spring Data: Paging and Sorting](https://docs.spring.io/spring-data/commons/reference/repositories/query-methods-details.html#repositories.special-parameters).
 - [API Design: Pagination (Microsoft REST Guidelines)](https://github.com/microsoft/api-guidelines).
-- [модуль 24](../module-24-stream-api-lambda/theory.md) — Stream API (фильтрация/сортировка коллекций).
-- [модуль 79](../module-79-spring-data-jpa-repository/theory.md) — `Pageable`/`Page` с реальной БД.
+- [модуль 24](../m24_stream_api_lambda/theory.md) — Stream API (фильтрация/сортировка коллекций).
+- [модуль 79](../m79_spring_data_jpa_repository/theory.md) — `Pageable`/`Page` с реальной БД.
 
 ## Что дальше
 
-В [модуле 74](../module-74-spring-rest-crud-file/theory.md) — полный CRUD, не-CRUD действия и работа с файлами (загрузка/выгрузка).
+В [модуле 74](../m74_spring_rest_crud_file/theory.md) — полный CRUD, не-CRUD действия и работа с файлами (загрузка/выгрузка).

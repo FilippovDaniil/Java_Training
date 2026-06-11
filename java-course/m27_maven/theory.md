@@ -178,4 +178,4 @@ mvn dependency:tree     # дерево зависимостей
 
 ## Что дальше
 
-В [модуле 28](../module-28-junit/theory.md) — модульное тестирование с JUnit (подключается через Maven/Gradle).
+В [модуле 28](../m28_junit/theory.md) — модульное тестирование с JUnit (подключается через Maven/Gradle).

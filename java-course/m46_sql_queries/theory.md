@@ -189,4 +189,4 @@ FROM → JOIN → WHERE → GROUP BY → HAVING → SELECT → ORDER BY → LIMI
 
 ## Что дальше
 
-В [модуле 47](../module-47-transactions/theory.md) — транзакции и ACID.
+В [модуле 47](../m47_transactions/theory.md) — транзакции и ACID.

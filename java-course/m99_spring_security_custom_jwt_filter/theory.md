@@ -1,6 +1,6 @@
 # Модуль 99. Spring Security: custom JWT-фильтр и встроенная поддержка Bearer
 
-В [модуле 98](../module-98-spring-security-jwt/theory.md) мы научились **выдавать** и **проверять** JWT (сервис `JwtService`, endpoint логина). Но выданный токен ещё ничего не авторизует: `/api/**` остаётся недоступным, потому что никто не читает заголовок `Authorization: Bearer ...` и не кладёт пользователя в `SecurityContext`. В этом модуле — **фильтр**, который замыкает stateless-флоу: читает токен из каждого запроса и аутентифицирует пользователя.
+В [модуле 98](../m98_spring_security_jwt/theory.md) мы научились **выдавать** и **проверять** JWT (сервис `JwtService`, endpoint логина). Но выданный токен ещё ничего не авторизует: `/api/**` остаётся недоступным, потому что никто не читает заголовок `Authorization: Bearer ...` и не кладёт пользователя в `SecurityContext`. В этом модуле — **фильтр**, который замыкает stateless-флоу: читает токен из каждого запроса и аутентифицирует пользователя.
 
 > Практика — задачи в `practice/`. Зависимости: `spring-boot-starter-web`, `spring-boot-starter-security`, JWT — `io.jsonwebtoken:jjwt-api:0.12.x` (+ `jjwt-impl`, `jjwt-jackson` в runtime); для задачи 06 (встроенный resource server) — `spring-boot-starter-oauth2-resource-server`. Реалистичные импорты + «ТРЕБУЮТСЯ ЗАВИСИМОСТИ»; bare-javac не компилируется (норма). Сквозной проект — **Task Tracker API**.
 
@@ -26,7 +26,7 @@
    остальная цепочка → авторизация (authenticated / hasRole) → контроллер
 ```
 
-После того как фильтр положил `Authentication` в контекст, правила `authorizeHttpRequests` (модуль [97](../module-97-spring-security-authorization/theory.md)) видят пользователя как залогиненного.
+После того как фильтр положил `Authentication` в контекст, правила `authorizeHttpRequests` (модуль [97](../m97_spring_security_authorization/theory.md)) видят пользователя как залогиненного.
 
 ---
 
@@ -52,7 +52,7 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
 }
 ```
 
-> ⚠️ Метод `doFilter` в `OncePerRequestFilter` объявлен `final` — переопределять можно **только** `doFilterInternal`. Это важно и для тестов: мокать сам фильтр через `@MockBean` бессмысленно (Mockito не перехватит `final`-метод) — см. модуль [100](../module-100-spring-security-testing/theory.md).
+> ⚠️ Метод `doFilter` в `OncePerRequestFilter` объявлен `final` — переопределять можно **только** `doFilterInternal`. Это важно и для тестов: мокать сам фильтр через `@MockBean` бессмысленно (Mockito не перехватит `final`-метод) — см. модуль [100](../m100_spring_security_testing/theory.md).
 
 ---
 
@@ -196,7 +196,7 @@ SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
 |----------|---------|---------|
 | Запрос «висит» / пустой ответ | забыли `chain.doFilter(...)` | вызывать `chain.doFilter` **всегда**, на всех ветках |
 | `hasRole("USER")` не срабатывает | в токене роль без префикса `ROLE_` | класть `ROLE_USER` либо строить authority с префиксом |
-| `@MockBean` на фильтре ломает тест → 200 пустой | `doFilter` в `OncePerRequestFilter` — `final`, Mockito не перехватит | не мокать фильтр; мокать его зависимости (`JwtService`) — модуль [100](../module-100-spring-security-testing/theory.md) |
+| `@MockBean` на фильтре ломает тест → 200 пустой | `doFilter` в `OncePerRequestFilter` — `final`, Mockito не перехватит | не мокать фильтр; мокать его зависимости (`JwtService`) — модуль [100](../m100_spring_security_testing/theory.md) |
 | Невалидный токен роняет приложение | исключение из `doFilterInternal` не поймано | `try/catch (JwtException)` → не ставить контекст, продолжить цепочку |
 | 401 даже с валидным токеном | фильтр не зарегистрирован / стоит после авторизации | `addFilterBefore(jwtFilter, UsernamePasswordAuthenticationFilter.class)` |
 | Создаются сессии | не задан `STATELESS` | `sessionCreationPolicy(STATELESS)` |
@@ -209,8 +209,8 @@ SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
 - [Spring Security: Adding a Custom Filter](https://docs.spring.io/spring-security/reference/servlet/architecture.html#servlet-adding-custom-filter).
 - [Spring Security: OAuth2 Resource Server (JWT)](https://docs.spring.io/spring-security/reference/servlet/oauth2/resource-server/jwt.html).
 - [`OncePerRequestFilter` — Javadoc](https://docs.spring.io/spring-framework/docs/current/javadoc-api/org/springframework/web/filter/OncePerRequestFilter.html).
-- [модуль 98](../module-98-spring-security-jwt/theory.md) — выдача и валидация JWT (предыдущий шаг).
+- [модуль 98](../m98_spring_security_jwt/theory.md) — выдача и валидация JWT (предыдущий шаг).
 
 ## Что дальше
 
-В [модуле 100](../module-100-spring-security-testing/theory.md) — **тестирование безопасности**: `@WebMvcTest` + `spring-security-test`, `@WithMockUser`, post-processors `jwt()`/`httpBasic()`/`csrf()`, проверка 401/403/200, hardening и аудит. Закроем блок Spring Security (93–100) и перейдём к Spring Test (101–110).
+В [модуле 100](../m100_spring_security_testing/theory.md) — **тестирование безопасности**: `@WebMvcTest` + `spring-security-test`, `@WithMockUser`, post-processors `jwt()`/`httpBasic()`/`csrf()`, проверка 401/403/200, hardening и аудит. Закроем блок Spring Security (93–100) и перейдём к Spring Test (101–110).

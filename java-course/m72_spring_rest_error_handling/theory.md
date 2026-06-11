@@ -1,6 +1,6 @@
 # Модуль 72. Обработка ошибок: единый контракт и ProblemDetail
 
-В [модуле 71](../module-71-spring-rest-validation/theory.md) валидация бросала `400` при неверных данных. Но ошибки бывают разные: ресурс не найден (`404`), конфликт (`409`), нет прав (`403`). Чтобы клиент получал их **в одном предсказуемом формате**, в Spring есть централизованная обработка исключений и стандарт тела ошибки — **ProblemDetail** (RFC 7807).
+В [модуле 71](../m71_spring_rest_validation/theory.md) валидация бросала `400` при неверных данных. Но ошибки бывают разные: ресурс не найден (`404`), конфликт (`409`), нет прав (`403`). Чтобы клиент получал их **в одном предсказуемом формате**, в Spring есть централизованная обработка исключений и стандарт тела ошибки — **ProblemDetail** (RFC 7807).
 
 > Практика — задачи в `practice/`. Зависимости: `spring-boot-starter-web`, `spring-boot-starter-validation`. Продолжаем **Task Tracker API**.
 
@@ -152,7 +152,7 @@ public ProblemDetail handle(TaskNotFoundException ex) {
 
 ## Обработка ошибок валидации в едином формате
 
-`MethodArgumentNotValidException` (из [модуля 71](../module-71-spring-rest-validation/theory.md)) тоже приводим к `ProblemDetail`:
+`MethodArgumentNotValidException` (из [модуля 71](../m71_spring_rest_validation/theory.md)) тоже приводим к `ProblemDetail`:
 
 ```java
 @ExceptionHandler(MethodArgumentNotValidException.class)
@@ -213,9 +213,9 @@ public ProblemDetail handleValidation(MethodArgumentNotValidException ex) {
 
 - [RFC 7807 — Problem Details for HTTP APIs](https://www.rfc-editor.org/rfc/rfc7807).
 - [Spring: Error Responses / ProblemDetail](https://docs.spring.io/spring-framework/reference/web/webmvc/mvc-ann-rest-exceptions.html).
-- [модуль 71](../module-71-spring-rest-validation/theory.md) — валидация и `MethodArgumentNotValidException`.
-- [модуль 17](../module-17-exceptions/theory.md) — исключения в Java.
+- [модуль 71](../m71_spring_rest_validation/theory.md) — валидация и `MethodArgumentNotValidException`.
+- [модуль 17](../m17_exceptions/theory.md) — исключения в Java.
 
 ## Что дальше
 
-В [модуле 73](../module-73-spring-rest-collections/theory.md) — работа с коллекциями: пагинация, сортировка, фильтрация и форма ответа для списков.
+В [модуле 73](../m73_spring_rest_collections/theory.md) — работа с коллекциями: пагинация, сортировка, фильтрация и форма ответа для списков.

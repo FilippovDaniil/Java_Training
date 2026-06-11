@@ -1,6 +1,6 @@
 # Модуль 71. Валидация входных данных REST-API
 
-DTO ([модуль 70](../module-70-spring-rest-dto-json/theory.md)) описывает форму данных. Но клиент может прислать мусор: пустой заголовок, отрицательную цену, кривой email. **Bean Validation** (JSR 380 / Jakarta Validation) позволяет описать правила декларативно — аннотациями на полях DTO, а Spring проверит их **до** входа в метод контроллера.
+DTO ([модуль 70](../m70_spring_rest_dto_json/theory.md)) описывает форму данных. Но клиент может прислать мусор: пустой заголовок, отрицательную цену, кривой email. **Bean Validation** (JSR 380 / Jakarta Validation) позволяет описать правила декларативно — аннотациями на полях DTO, а Spring проверит их **до** входа в метод контроллера.
 
 > Практика — задачи в `practice/`. Зависимости: `spring-boot-starter-web`, `spring-boot-starter-validation`. Продолжаем **Task Tracker API**.
 
@@ -184,7 +184,7 @@ ex.getBindingResult().getFieldErrors()
   .forEach(e -> System.out.println(e.getField() + ": " + e.getDefaultMessage()));
 ```
 
-Формирование красивого ответа об ошибке (единый контракт, `ProblemDetail`) — тема [модуля 72](../module-72-spring-rest-error-handling/theory.md). Здесь достаточно вернуть `400` с картой `поле → сообщение`.
+Формирование красивого ответа об ошибке (единый контракт, `ProblemDetail`) — тема [модуля 72](../m72_spring_rest_error_handling/theory.md). Здесь достаточно вернуть `400` с картой `поле → сообщение`.
 
 ---
 
@@ -205,8 +205,8 @@ ex.getBindingResult().getFieldErrors()
 
 - [Jakarta Bean Validation — спецификация](https://beanvalidation.org/).
 - [Hibernate Validator (референс-реализация)](https://hibernate.org/validator/).
-- [модуль 65](../module-65-spring-boot-web-config/theory.md) — введение в `@Valid` и базовые ограничения.
+- [модуль 65](../m65_spring_boot_web_config/theory.md) — введение в `@Valid` и базовые ограничения.
 
 ## Что дальше
 
-В [модуле 72](../module-72-spring-rest-error-handling/theory.md) — единый контракт ошибок: `@RestControllerAdvice`, `@ExceptionHandler` и стандарт `ProblemDetail` (RFC 7807).
+В [модуле 72](../m72_spring_rest_error_handling/theory.md) — единый контракт ошибок: `@RestControllerAdvice`, `@ExceptionHandler` и стандарт `ProblemDetail` (RFC 7807).

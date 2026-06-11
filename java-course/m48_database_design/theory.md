@@ -189,4 +189,4 @@ departments(dept_id, dept_name)
 
 ## Что дальше
 
-В [модуле 49](../module-49-jdbc-1/theory.md) — работа с БД из Java через JDBC.
+В [модуле 49](../m49_jdbc_1/theory.md) — работа с БД из Java через JDBC.

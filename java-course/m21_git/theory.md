@@ -152,4 +152,4 @@ git pull                   # забрать изменения с сервера
 
 ## Что дальше
 
-В [модуле 22](../module-22-oop-encapsulation-polymorphism-interfaces/theory.md) — возвращаемся к ООП: интерфейсы и полиморфизм.
+В [модуле 22](../m22_oop_encapsulation_polymorphism_interfaces/theory.md) — возвращаемся к ООП: интерфейсы и полиморфизм.

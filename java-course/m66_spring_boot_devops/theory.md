@@ -1,6 +1,6 @@
 # Модуль 66. Spring Boot в эксплуатации: логирование, Actuator, упаковка, тесты
 
-Приложение из [модуля 65](../module-65-spring-boot-web-config/theory.md) умеет принимать запросы. Чтобы довести его до **production-ready** состояния, нужно ещё четыре вещи: видеть, что внутри (логи), отдавать состояние наружу (Actuator), собирать в один артефакт (упаковка) и быть уверенным, что оно работает (тесты).
+Приложение из [модуля 65](../m65_spring_boot_web_config/theory.md) умеет принимать запросы. Чтобы довести его до **production-ready** состояния, нужно ещё четыре вещи: видеть, что внутри (логи), отдавать состояние наружу (Actuator), собирать в один артефакт (упаковка) и быть уверенным, что оно работает (тесты).
 
 > Практика — задачи в `practice/`. Зависимости: `spring-boot-starter-web`, `spring-boot-starter-actuator`, `spring-boot-starter-test`. Bare-`javac` НЕ компилируется — запускайте в IDE/Gradle.
 
@@ -8,7 +8,7 @@
 
 ## Логирование
 
-Spring Boot из коробки использует **SLF4J + Logback** (см. [модуль 35](../module-35-logging/theory.md)). Получить логгер:
+Spring Boot из коробки использует **SLF4J + Logback** (см. [модуль 35](../m35_logging/theory.md)). Получить логгер:
 
 ```java
 import org.slf4j.Logger;
@@ -176,7 +176,7 @@ class ProductControllerTest {
 |-----------|---------------|----------|----------|
 | `@SpringBootTest` | весь контекст | медленно | интеграция, связки |
 | `@WebMvcTest` | только MVC-слой | быстро | контроллеры (статусы, JSON) |
-| `@DataJpaTest` | только JPA-слой | быстро | репозитории ([модуль 83](../module-83-spring-data-jpa-testing/theory.md)) |
+| `@DataJpaTest` | только JPA-слой | быстро | репозитории ([модуль 83](../m83_spring_data_jpa_testing/theory.md)) |
 | `@MockBean` | подменяет бин моком | — | изолировать зависимости |
 
 > Тонкости тестирования контроллеров под Spring Security (почему `@MockBean JwtAuthenticationFilter` ломает цепочку фильтров, когда нужен `@Import(SecurityConfig.class)`) разобраны в проектных инструкциях — раздел «SPRING SECURITY — ТЕСТИРОВАНИЕ».
@@ -214,9 +214,9 @@ class ProductControllerTest {
 
 - [Spring Boot Actuator — документация](https://docs.spring.io/spring-boot/reference/actuator/index.html).
 - [Testing in Spring Boot](https://docs.spring.io/spring-boot/reference/testing/index.html).
-- [модуль 35](../module-35-logging/theory.md) — SLF4J и Logback.
-- [модуль 34](../module-34-testing-junit-mockito/theory.md) — JUnit 5 и Mockito.
+- [модуль 35](../m35_logging/theory.md) — SLF4J и Logback.
+- [модуль 34](../m34_testing_junit_mockito/theory.md) — JUnit 5 и Mockito.
 
 ## Что дальше
 
-Трек 54–66 завершён — пройден путь от инструментов сборки и HTTP до production-ready Spring Boot. В [модуле 67](../module-67-spring-rest-http-backend/theory.md) начинается углублённый блок: **HTTP глазами backend-разработчика** — фундамент для профессионального проектирования REST-API.
+Трек 54–66 завершён — пройден путь от инструментов сборки и HTTP до production-ready Spring Boot. В [модуле 67](../m67_spring_rest_http_backend/theory.md) начинается углублённый блок: **HTTP глазами backend-разработчика** — фундамент для профессионального проектирования REST-API.

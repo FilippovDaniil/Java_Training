@@ -1,6 +1,6 @@
 # Модуль 96. Spring Security: пользователи из базы данных, CustomUserDetailsService, регистрация
 
-In-memory пользователи ([модуль 94](../module-94-spring-security-inmemory/theory.md)) годятся для демо. В реальном приложении пользователи хранятся в **БД**, регистрируются через API и имеют роли. Здесь — сущность `User`, `CustomUserDetailsService` и эндпоинт регистрации.
+In-memory пользователи ([модуль 94](../m94_spring_security_inmemory/theory.md)) годятся для демо. В реальном приложении пользователи хранятся в **БД**, регистрируются через API и имеют роли. Здесь — сущность `User`, `CustomUserDetailsService` и эндпоинт регистрации.
 
 > Практика — задачи в `practice/`. Зависимости: `spring-boot-starter-web`, `spring-boot-starter-security`, `spring-boot-starter-data-jpa`, `com.h2database:h2`. Реалистичные импорты + «ТРЕБУЮТСЯ ЗАВИСИМОСТИ»; bare-javac не компилируется (норма). Сквозной проект — **Task Tracker API**.
 
@@ -157,8 +157,8 @@ http.authorizeHttpRequests(auth -> auth
 
 - [Spring Security: UserDetailsService](https://docs.spring.io/spring-security/reference/servlet/authentication/passwords/user-details-service.html).
 - [Spring Security: DaoAuthenticationProvider](https://docs.spring.io/spring-security/reference/servlet/authentication/passwords/dao-authentication-provider.html).
-- [модуль 77](../module-77-spring-data-jpa-intro/theory.md) — JpaRepository и сущности (основа для UserRepository).
+- [модуль 77](../m77_spring_data_jpa_intro/theory.md) — JpaRepository и сущности (основа для UserRepository).
 
 ## Что дальше
 
-В [модуле 97](../module-97-spring-security-authorization/theory.md) — авторизация: правила на уровне запросов и методов (`@PreAuthorize`), доступ на основе владения ресурсом (ownership).
+В [модуле 97](../m97_spring_security_authorization/theory.md) — авторизация: правила на уровне запросов и методов (`@PreAuthorize`), доступ на основе владения ресурсом (ownership).
