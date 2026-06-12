@@ -43,19 +43,19 @@ public class AppConfig { }
 
 ```
   ApplicationContext.start()
-         │
+         |
          ▼
   @ComponentScan("com.example.blog")
-         │
+         |
          ▼
-  Сканирование classpath ──► находит классы с @Component / @Service / @Repository / @Controller
-         │
+  Сканирование classpath --► находит классы с @Component / @Service / @Repository / @Controller
+         |
          ▼
   Для каждого класса: создать экземпляр, зарегистрировать в BeanFactory
-         │
+         |
          ▼
-  Разрешить зависимости (@Autowired) ──► внедрить нужные бины
-         │
+  Разрешить зависимости (@Autowired) --► внедрить нужные бины
+         |
          ▼
   Готовый граф бинов (ApplicationContext)
 ```

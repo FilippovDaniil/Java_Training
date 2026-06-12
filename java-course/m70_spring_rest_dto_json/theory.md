@@ -12,8 +12,8 @@
 
 ```
    ВНУТРИ                          ГРАНИЦА API                   КЛИЕНТ
-   ──────                          ───────────                   ──────
-   Task (сущность БД)  ──маппинг──► TaskDto (DTO)   ──Jackson──► JSON
+   ------                          -----------                   ------
+   Task (сущность БД)  --маппинг--► TaskDto (DTO)   --Jackson--► JSON
    id, title, status,              id, title,                    { "id":..., }
    passwordHash(!),                status
    internalNotes(!)                (только публичное)
@@ -135,7 +135,7 @@ public ApiResponse<TaskResponse> getOne(@PathVariable Long id) {
 
 ```
    Плоский ответ            Обёрнутый ответ (envelope)
-   ───────────             ──────────────────────────
+   -----------             --------------------------
    { "id":1, ... }         { "data": { "id":1, ... },
                              "message": "OK",
                              "timestamp": "..." }

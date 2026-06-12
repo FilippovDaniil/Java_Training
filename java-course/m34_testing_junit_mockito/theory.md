@@ -30,7 +30,7 @@
 ```
        реальный                          в тесте
   OrderService                       OrderService
-      │ зависит от                        │ зависит от
+      | зависит от                        | зависит от
       ▼                                    ▼
   PaymentGateway (реальный API)   PaymentGateway (МОК — мы задаём ответы)
   Repository     (реальная БД)    Repository     (МОК)

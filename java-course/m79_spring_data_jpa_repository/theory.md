@@ -10,11 +10,11 @@
 
 ```
    Repository<T,ID>               маркер (ничего не даёт)
-        │
+        |
    CrudRepository<T,ID>           save, findById, findAll, delete, count, existsById
-        │
+        |
    PagingAndSortingRepository     + findAll(Pageable), findAll(Sort)
-        │
+        |
    JpaRepository<T,ID>            + flush, saveAll, deleteAllInBatch, findAll → List
 ```
 
@@ -55,7 +55,7 @@ public interface ProductRepository extends JpaRepository<Product, Long> {
 
 ```
    find    By    Name    And    PriceLessThan    OrderBy    PriceDesc
-   ────    ──    ────    ───    ─────────────    ───────    ─────────
+   ----    --    ----    ---    -------------    -------    ---------
    глагол       поле    логика   поле+условие    сортировка   поле+напр
 ```
 

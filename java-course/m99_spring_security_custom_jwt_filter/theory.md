@@ -12,17 +12,17 @@
 
 ```
    Запрос с Authorization: Bearer eyJ...
-        │
-   ┌────▼─────────────────────────────────────────┐
-   │ JwtAuthenticationFilter (OncePerRequestFilter) │
-   │  1. читает заголовок Authorization             │
-   │  2. префикс "Bearer " → вырезает токен          │
-   │  3. JwtService.isValid(token)?                  │
-   │  4. да → строит UsernamePasswordAuthenticationToken
-   │         → SecurityContextHolder.setAuthentication│
-   │  5. chain.doFilter(req, res)  ← всегда!          │
-   └────┬───────────────────────────────────────────┘
-        │
+        |
+   +----▼-----------------------------------------+
+   | JwtAuthenticationFilter (OncePerRequestFilter) |
+   |  1. читает заголовок Authorization             |
+   |  2. префикс "Bearer " → вырезает токен          |
+   |  3. JwtService.isValid(token)?                  |
+   |  4. да → строит UsernamePasswordAuthenticationToken
+   |         → SecurityContextHolder.setAuthentication|
+   |  5. chain.doFilter(req, res)  ← всегда!          |
+   +----+-------------------------------------------+
+        |
    остальная цепочка → авторизация (authenticated / hasRole) → контроллер
 ```
 

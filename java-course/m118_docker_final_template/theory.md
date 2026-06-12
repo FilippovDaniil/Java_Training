@@ -10,11 +10,11 @@
 
 ```
    проект/
-   ├── Dockerfile                  # multi-stage / layered, non-root, JVM-tuning, HEALTHCHECK
-   ├── .dockerignore               # чистый контекст сборки
-   ├── docker-compose.yml          # app + db (+ redis/rabbitmq), healthcheck, тома, лимиты
-   ├── .env.example                # шаблон переменных (без секретов, в git)
-   └── .env                        # реальные секреты (gitignored)
+   +-- Dockerfile                  # multi-stage / layered, non-root, JVM-tuning, HEALTHCHECK
+   +-- .dockerignore               # чистый контекст сборки
+   +-- docker-compose.yml          # app + db (+ redis/rabbitmq), healthcheck, тома, лимиты
+   +-- .env.example                # шаблон переменных (без секретов, в git)
+   +-- .env                        # реальные секреты (gitignored)
 ```
 
 ---
@@ -24,7 +24,7 @@
 Совмещает multi-stage ([112](../m112_docker_dockerfile/theory.md)), layered jars ([113](../m113_docker_spring_boot_image/theory.md)), non-root и JVM-tuning ([117](../m117_docker_jvm_tuning/theory.md)):
 
 ```dockerfile
-# ── этап сборки ──
+# -- этап сборки --
 FROM eclipse-temurin:17-jdk AS build
 WORKDIR /src
 COPY gradlew settings.gradle build.gradle ./
@@ -33,7 +33,7 @@ RUN ./gradlew dependencies --no-daemon          # кэш зависимосте�
 COPY src ./src
 RUN ./gradlew bootJar --no-daemon
 
-# ── этап рантайма: минимальный, non-root, container-aware ──
+# -- этап рантайма: минимальный, non-root, container-aware --
 FROM eclipse-temurin:17-jre-alpine
 RUN addgroup -S app && adduser -S app -G app
 WORKDIR /app
@@ -144,13 +144,13 @@ POSTGRES_PASSWORD=change-me
 
 ```
    Core Java (01–28)
-        │ синтаксис, ООП, коллекции, исключения, потоки
+        | синтаксис, ООП, коллекции, исключения, потоки
    Инструменты и БД (29–53)
-        │ Maven/Gradle, тесты, SQL, JDBC, Hibernate
+        | Maven/Gradle, тесты, SQL, JDBC, Hibernate
    Spring (54–92)
-        │ Spring Core → Boot → REST → Data JPA → Hibernate Deep Dive
+        | Spring Core → Boot → REST → Data JPA → Hibernate Deep Dive
    Production-ready (93–118)        ← Часть 4
-        │ Security (93–100) → Test (101–110) → Docker (111–118)
+        | Security (93–100) → Test (101–110) → Docker (111–118)
         ▼
    Task Tracker API: REST + JWT-аутентификация + полное покрытие тестами + Docker-упаковка
 ```

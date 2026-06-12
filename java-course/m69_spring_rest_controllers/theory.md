@@ -10,19 +10,19 @@
 
 ```
    HTTP-запрос
-        │
+        |
         ▼
-   ┌─────────────────┐
-   │ DispatcherServlet│  ← единая «входная дверь» (front controller)
-   └─────────────────┘
-        │ 1. HandlerMapping: найти метод по URI+методу
-        │ 2. HandlerAdapter: подготовить аргументы
-        │ 3. (для @RequestBody) HttpMessageConverter: JSON → объект
+   +-----------------+
+   | DispatcherServlet|  ← единая «входная дверь» (front controller)
+   +-----------------+
+        | 1. HandlerMapping: найти метод по URI+методу
+        | 2. HandlerAdapter: подготовить аргументы
+        | 3. (для @RequestBody) HttpMessageConverter: JSON → объект
         ▼
-   ┌─────────────────┐
-   │ ваш @RestController.метод(...) │  ← бизнес-логика
-   └─────────────────┘
-        │ 4. (для тела ответа) HttpMessageConverter: объект → JSON
+   +-----------------+
+   | ваш @RestController.метод(...) |  ← бизнес-логика
+   +-----------------+
+        | 4. (для тела ответа) HttpMessageConverter: объект → JSON
         ▼
    HTTP-ответ
 ```
@@ -108,8 +108,8 @@ public TaskDto handle(
 `@RequestBody` и возвращаемый объект проходят через **HttpMessageConverter**. Для JSON это `MappingJackson2HttpMessageConverter` (Jackson, входит в `starter-web`).
 
 ```
-   Запрос:  { "title":"X" }  ──Jackson──►  CreateTaskDto(title="X")
-   Ответ:   TaskDto(...)      ──Jackson──►  { "id":1, "title":"X", ... }
+   Запрос:  { "title":"X" }  --Jackson--►  CreateTaskDto(title="X")
+   Ответ:   TaskDto(...)      --Jackson--►  { "id":1, "title":"X", ... }
 ```
 
 Выбор конвертера зависит от `Content-Type` (вход) и `Accept` (выход) — это и есть content negotiation из [модуля 67](../m67_spring_rest_http_backend/theory.md).

@@ -41,16 +41,16 @@ private Notifier notifier;
 
 ```
 @Autowired Notifier notifier
-        │
+        |
         ▼
-  Есть @Qualifier? ──► Да ──► внедрить бин с этим именем
-        │
+  Есть @Qualifier? --► Да --► внедрить бин с этим именем
+        |
         ▼ Нет
-  Есть @Primary? ──► Да ──► внедрить помеченный @Primary
-        │
+  Есть @Primary? --► Да --► внедрить помеченный @Primary
+        |
         ▼ Нет
-  Имя поля совпадает с именем бина? ──► Да ──► внедрить
-        │
+  Имя поля совпадает с именем бина? --► Да --► внедрить
+        |
         ▼ Нет
   NoUniqueBeanDefinitionException
 ```
@@ -74,9 +74,9 @@ private Notifier notifier;
 ```
 Singleton:                   Prototype:
   context.getBean(A)           context.getBean(A)
-       │                            │
-       └──► один объект             └──► новый объект
-  context.getBean(A) ──► тот же    context.getBean(A) ──► другой объект
+       |                            |
+       +--► один объект             +--► новый объект
+  context.getBean(A) --► тот же    context.getBean(A) --► другой объект
 ```
 
 ---
@@ -103,25 +103,25 @@ public class HeavyReportService { ... }
 
 ```
   Контейнер находит класс (@Component / @Bean)
-              │
+              |
               ▼
   Создание объекта (конструктор)
-              │
+              |
               ▼
   Инъекция зависимостей (setters / fields / constructor)
-              │
+              |
               ▼
-  @PostConstruct ──► инициализация (открыть соединение, загрузить кеш)
-              │
+  @PostConstruct --► инициализация (открыть соединение, загрузить кеш)
+              |
               ▼
     БИЗНЕС-ЛОГИКА (бин используется)
-              │
+              |
               ▼
   context.close() / shutdown
-              │
+              |
               ▼
-  @PreDestroy ──► очистка (закрыть соединение, сохранить состояние)
-              │
+  @PreDestroy --► очистка (закрыть соединение, сохранить состояние)
+              |
               ▼
     Объект уничтожен сборщиком мусора
 ```

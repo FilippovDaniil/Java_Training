@@ -95,10 +95,10 @@ public class GlobalExceptionHandler {
 
 ```
    Любой контроллер бросает исключение
-              │
+              |
               ▼
    @RestControllerAdvice (глобальный перехват)
-              │
+              |
               ▼
    нужный @ExceptionHandler → единое тело ошибки
 ```
@@ -175,10 +175,10 @@ public ProblemDetail handleValidation(MethodArgumentNotValidException ex) {
 
 ```
    RuntimeException
-        └── BusinessException (базовое)
-              ├── TaskNotFoundException   → 404
-              ├── DuplicateTaskException  → 409
-              └── InvalidStatusException  → 400
+        +-- BusinessException (базовое)
+              +-- TaskNotFoundException   → 404
+              +-- DuplicateTaskException  → 409
+              +-- InvalidStatusException  → 400
 ```
 
 Каждому подтипу — свой `@ExceptionHandler`, или один обработчик базового типа с маппингом «класс → статус».

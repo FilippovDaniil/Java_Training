@@ -10,13 +10,13 @@
 
 ```
    spring-boot-starter-test
-   ├── JUnit 5 (Jupiter)   — движок: @Test, lifecycle, параметризация
-   ├── AssertJ             — текучие проверки: assertThat(x).isEqualTo(...)
-   ├── Hamcrest            — матчеры: assertThat(x, is(...))
-   ├── Mockito             — моки и стабы коллабораторов
-   ├── JSONassert          — сравнение JSON-строк (с допусками)
-   ├── JsonPath            — выборка по JSON ($.field)
-   └── Spring Test         — MockMvc, @SpringBootTest и т.д. (модули 104+)
+   +-- JUnit 5 (Jupiter)   — движок: @Test, lifecycle, параметризация
+   +-- AssertJ             — текучие проверки: assertThat(x).isEqualTo(...)
+   +-- Hamcrest            — матчеры: assertThat(x, is(...))
+   +-- Mockito             — моки и стабы коллабораторов
+   +-- JSONassert          — сравнение JSON-строк (с допусками)
+   +-- JsonPath            — выборка по JSON ($.field)
+   +-- Spring Test         — MockMvc, @SpringBootTest и т.д. (модули 104+)
 ```
 
 ---
@@ -182,10 +182,10 @@ class TaskServiceTest {
 ## Пирамида тестов (куда это ведёт)
 
 ```
-        ╱╲          E2E / интеграционные (медленные, мало)   ← Testcontainers (модуль 109)
-       ╱──╲         @SpringBootTest, @WebMvcTest, @DataJpaTest (модули 104–108)
-      ╱────╲        Unit-тесты (быстрые, много)               ← этот блок (модули 101–102)
-     ╱──────╲
+        /\          E2E / интеграционные (медленные, мало)   ← Testcontainers (модуль 109)
+       /--\         @SpringBootTest, @WebMvcTest, @DataJpaTest (модули 104–108)
+      /----\        Unit-тесты (быстрые, много)               ← этот блок (модули 101–102)
+     /------\
 ```
 
 Чем ниже — тем быстрее и многочисленнее тесты. Базовый инструментарий этого модуля — фундамент всех уровней.

@@ -11,11 +11,11 @@ In-memory пользователи ([модуль 94](../m94_spring_security_inm
 Spring Security не знает про вашу таблицу. Он спрашивает у `UserDetailsService`: «дай пользователя по имени». Ваша задача — загрузить его из БД и вернуть `UserDetails`.
 
 ```
-   логин-пароль  ──►  DaoAuthenticationProvider
-                          │ loadUserByUsername("alice")
+   логин-пароль  --►  DaoAuthenticationProvider
+                          | loadUserByUsername("alice")
                           ▼
                   CustomUserDetailsService → UserRepository → таблица users
-                          │
+                          |
                           ▼ UserDetails (хеш пароля + authorities)
                   сравнение пароля через PasswordEncoder.matches
 ```

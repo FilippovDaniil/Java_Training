@@ -38,10 +38,10 @@ public class ShopApplication {
 
 ```
 @SpringBootApplication
-   │
-   ├── @Configuration          ← класс может содержать @Bean (см. модуль 62)
-   ├── @EnableAutoConfiguration ← включить автоконфигурацию
-   └── @ComponentScan          ← сканировать @Component/@Service/... в этом пакете и ниже
+   |
+   +-- @Configuration          ← класс может содержать @Bean (см. модуль 62)
+   +-- @EnableAutoConfiguration ← включить автоконфигурацию
+   +-- @ComponentScan          ← сканировать @Component/@Service/... в этом пакете и ниже
 ```
 
 > **Важно про расположение.** `@ComponentScan` сканирует пакет главного класса и **все вложенные**. Поэтому главный класс кладут в **корневой пакет** (например, `com.example.shop`), а все остальные — в подпакеты (`com.example.shop.service`, `...web`). Если бин лежит «выше» главного класса — он не будет найден.
@@ -52,7 +52,7 @@ public class ShopApplication {
 
 ```
  SpringApplication.run(...)
-        │
+        |
         ▼
  1. создаёт ApplicationContext (для web — сервлетный)
  2. читает classpath → решает, что автонастроить (auto-configuration)
@@ -60,7 +60,7 @@ public class ShopApplication {
  4. читает application.properties / application.yml
  5. поднимает встроенный Tomcat (если есть spring-web)
  6. вызывает все CommandLineRunner / ApplicationRunner
-        │
+        |
         ▼
  приложение работает (для web — слушает порт 8080)
 ```

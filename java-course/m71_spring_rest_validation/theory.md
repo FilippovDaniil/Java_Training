@@ -53,12 +53,12 @@ public TaskResponse create(@Valid @RequestBody CreateTaskRequest req) { ... }
 
 ```
    POST /tasks { "title":"" }
-        │
+        |
         ▼
    @Valid → проверка ограничений
-        │
-        ├─ не прошла → MethodArgumentNotValidException → 400 (без входа в метод)
-        └─ прошла    → вызов метода контроллера
+        |
+        +- не прошла → MethodArgumentNotValidException → 400 (без входа в метод)
+        +- прошла    → вызов метода контроллера
 ```
 
 > Забыли `@Valid` → ограничения **молча игнорируются**. Самая частая ошибка.

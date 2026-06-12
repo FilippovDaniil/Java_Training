@@ -116,10 +116,10 @@ public class TaskSecurity {
 
 ```
    запрос DELETE /api/tasks/5
-        │
-   @PreAuthorize: ADMIN? ──да──► разрешить
-        │ нет
-   @taskSecurity.isOwner(5, "alice")? ──да──► разрешить, нет──► 403
+        |
+   @PreAuthorize: ADMIN? --да--► разрешить
+        | нет
+   @taskSecurity.isOwner(5, "alice")? --да--► разрешить, нет--► 403
 ```
 
 > `AccessDeniedException` → **403 Forbidden** (вошёл, но прав нет), в отличие от 401 (не вошёл).

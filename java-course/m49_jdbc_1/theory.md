@@ -10,12 +10,12 @@ JDBC (Java Database Connectivity) — стандартный API для рабо
 
 ```
 java.sql
- ├── DriverManager        — фабрика соединений (статический класс)
- ├── Connection           — одно соединение с БД
- ├── Statement            — SQL-запрос без параметров
- ├── PreparedStatement    — SQL-запрос с параметрами (?)
- ├── ResultSet            — таблица результатов SELECT
- └── ResultSetMetaData    — метаданные о столбцах ResultSet
+ +-- DriverManager        — фабрика соединений (статический класс)
+ +-- Connection           — одно соединение с БД
+ +-- Statement            — SQL-запрос без параметров
+ +-- PreparedStatement    — SQL-запрос с параметрами (?)
+ +-- ResultSet            — таблица результатов SELECT
+ +-- ResultSetMetaData    — метаданные о столбцах ResultSet
 ```
 
 | Интерфейс | Когда использовать |
@@ -40,14 +40,14 @@ Connection conn = DriverManager.getConnection(url, user, pass);
 
 ```
 DriverManager.getConnection(url, user, pass)
-        │
+        |
         ▼
-   Connection   ◄── нужно закрыть! (implements AutoCloseable)
-        │
-   ┌────┴────────────────┐
-   │                     │
+   Connection   ◄-- нужно закрыть! (implements AutoCloseable)
+        |
+   +----+----------------+
+   |                     |
 Statement          PreparedStatement
-   │                     │
+   |                     |
 ResultSet          ResultSet
 ```
 

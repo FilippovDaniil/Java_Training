@@ -48,7 +48,7 @@ public class ProductController {
                   HTTP-запрос
    POST /api/products/42?notify=true
    Body: { "name": "Мышь", "price": 990 }
-        │           │          │
+        |           |          |
         ▼           ▼          ▼
    @PathVariable  @RequestParam  @RequestBody
    id = 42        notify = true  Product{name, price}
@@ -183,10 +183,10 @@ public class GlobalExceptionHandler {
 
 ```
    Контроллер бросает исключение
-            │
+            |
             ▼
    @RestControllerAdvice (перехватывает ГЛОБАЛЬНО)
-            │
+            |
             ▼
    @ExceptionHandler(нужный тип) → ResponseEntity с единым телом
 ```

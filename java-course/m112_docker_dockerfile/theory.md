@@ -52,10 +52,10 @@ docker run -p 8080:8080 tasktracker:1.0.0
 Каждая инструкция Dockerfile = **слой** (read-only). Слои кэшируются:
 
 ```
-   FROM eclipse-temurin:17-jre   ─┐
-   WORKDIR /app                   ├─ слои (кэшируются по содержимому)
-   COPY app.jar app.jar          ─┤
-   ENTRYPOINT [...]              ─┘
+   FROM eclipse-temurin:17-jre   -+
+   WORKDIR /app                   +- слои (кэшируются по содержимому)
+   COPY app.jar app.jar          -+
+   ENTRYPOINT [...]              -+
 ```
 
 > Docker переиспользует кэш слоя, пока инструкция и её входные данные **не изменились**. Изменили `app.jar` → пересобирается слой `COPY` и все **после** него; слои **до** берутся из кэша.
@@ -102,13 +102,13 @@ target
 Проблема: если собирать jar внутри образа c JDK + Gradle, финальный образ тащит компилятор и кэш — сотни МБ лишнего. Решение — **два этапа**: собрать в одном, скопировать результат в чистый рантайм-образ.
 
 ```dockerfile
-# ── Этап 1: сборка (есть JDK + Gradle) ──
+# -- Этап 1: сборка (есть JDK + Gradle) --
 FROM eclipse-temurin:17-jdk AS build
 WORKDIR /src
 COPY . .
 RUN ./gradlew bootJar --no-daemon        # собираем jar
 
-# ── Этап 2: рантайм (только JRE, ничего лишнего) ──
+# -- Этап 2: рантайм (только JRE, ничего лишнего) --
 FROM eclipse-temurin:17-jre
 WORKDIR /app
 COPY --from=build /src/build/libs/*.jar app.jar    # копируем ТОЛЬКО jar из этапа build
@@ -117,7 +117,7 @@ ENTRYPOINT ["java", "-jar", "app.jar"]
 ```
 
 ```
-   [Этап build: JDK+Gradle+исходники]  ──только jar──►  [Этап runtime: JRE+jar]
+   [Этап build: JDK+Gradle+исходники]  --только jar--►  [Этап runtime: JRE+jar]
             (выбрасывается)                                  (финальный образ — компактный)
 ```
 

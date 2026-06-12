@@ -83,8 +83,8 @@ class DarkFactory implements UiFactory {
           UiFactory (абстрактная фабрика)
          /                              \
    LightFactory                     DarkFactory
-   ├ LightButton                    ├ DarkButton
-   └ LightCheckbox                  └ DarkCheckbox
+   + LightButton                    + DarkButton
+   + LightCheckbox                  + DarkCheckbox
    (одна согласованная семья)       (другая семья)
 ```
 

@@ -9,28 +9,28 @@
 ## Архитектура: клиент → запрос → ответ
 
 ```
- ┌─────────────────────────────────────────────────────────┐
- │                    HttpClient                           │
- │  (переиспользуется; хранит пул соединений)              │
- │  connectTimeout · version · followRedirects             │
- │  cookieHandler · authenticator · executor               │
- └────────────────────┬────────────────────────────────────┘
-                      │ send(request, bodyHandler)
-                      │ sendAsync(request, bodyHandler)
+ +---------------------------------------------------------+
+ |                    HttpClient                           |
+ |  (переиспользуется; хранит пул соединений)              |
+ |  connectTimeout · version · followRedirects             |
+ |  cookieHandler · authenticator · executor               |
+ +--------------------+------------------------------------+
+                      | send(request, bodyHandler)
+                      | sendAsync(request, bodyHandler)
                       ▼
- ┌─────────────────────────────────────────────────────────┐
- │                   HttpRequest                           │
- │  uri · method · headers                                 │
- │  timeout(Duration) · version                            │
- │  body: BodyPublisher (ofString / ofFile / noBody …)     │
- └────────────────────┬────────────────────────────────────┘
-                      │
+ +---------------------------------------------------------+
+ |                   HttpRequest                           |
+ |  uri · method · headers                                 |
+ |  timeout(Duration) · version                            |
+ |  body: BodyPublisher (ofString / ofFile / noBody …)     |
+ +--------------------+------------------------------------+
+                      |
                       ▼
- ┌─────────────────────────────────────────────────────────┐
- │               HttpResponse<T>                           │
- │  statusCode() · headers() · body(): T                   │
- │  body: BodyHandler (ofString / ofLines / ofFile …)      │
- └─────────────────────────────────────────────────────────┘
+ +---------------------------------------------------------+
+ |               HttpResponse<T>                           |
+ |  statusCode() · headers() · body(): T                   |
+ |  body: BodyHandler (ofString / ofLines / ofFile …)      |
+ +---------------------------------------------------------+
 ```
 
 ---
