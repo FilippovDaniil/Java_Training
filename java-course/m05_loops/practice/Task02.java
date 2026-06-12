@@ -18,8 +18,15 @@ import java.util.Scanner;
 public class Task02 {
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
+        System.out.println("Enter the number: ");
         int n = scanner.nextInt();
-        // Ваш код здесь
+        int sum = 0;
+        int i = 0;
+        while (i <= n){
+            sum = sum + i;
+            i++;
+        }
+        System.out.println(sum);
 
         scanner.close();
     }

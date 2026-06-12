@@ -16,6 +16,8 @@ package m06_arrays.practice;
 public class Task01 {
     public static void main(String[] args) {
         int[] a = {10, 20, 30, 40, 50};
-        // Ваш код здесь
+        for (int i : a) {
+            System.out.print(i + " ");
+        }
     }
 }

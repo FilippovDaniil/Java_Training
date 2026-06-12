@@ -1,5 +1,7 @@
 package m05_loops.practice;
 
+import java.util.Scanner;
+
 /**
  * Задача 06 — Модуль 05: Таблица умножения (вложенные циклы)
  *
@@ -20,6 +22,15 @@ package m05_loops.practice;
  */
 public class Task06 {
     public static void main(String[] args) {
-        // Ваш код здесь
+        Scanner scanner = new Scanner(System.in);
+        System.out.println("Enter the number: ");
+        int n = scanner.nextInt();
+
+        for (int row = 1; row <= n; row++){
+            for (int col = 1; col <= n; col++){
+                System.out.print(row * col + "\t");
+            }
+            System.out.println();
+        }
     }
 }

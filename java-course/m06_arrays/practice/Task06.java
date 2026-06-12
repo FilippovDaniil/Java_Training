@@ -21,8 +21,18 @@ public class Task06 {
     public static void main(String[] args) {
         int[] a = {5, 8, 12, 3, 9};
         Scanner scanner = new Scanner(System.in);
+        System.out.println("Enter the number: ");
         int target = scanner.nextInt();
-        // Ваш код здесь
+        int result = -1;
+        int i = 0;
+        while (i < a.length){
+            if (a[i] == target){
+                result = i;
+                break;
+            }
+            i++;
+        }
+        System.out.println(result);
 
         scanner.close();
     }

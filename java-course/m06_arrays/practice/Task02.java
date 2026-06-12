@@ -17,6 +17,11 @@ package m06_arrays.practice;
 public class Task02 {
     public static void main(String[] args) {
         int[] a = {4, 8, 15, 16, 23, 42};
-        // Ваш код здесь
+        int sum = 0;
+        for (int i = 0; i < a.length; i++){
+            sum = sum + a[i];
+        }
+        System.out.println("Sum: " + sum);
+        System.out.println("Srednee: " + (double) sum / a.length);
     }
 }

@@ -32,7 +32,41 @@ import java.util.Scanner;
 public class Task07 {
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
-        // Ваш код здесь
+
+        int count = 0;        // общее количество чисел (без нуля)
+        int positive = 0;     // количество положительных
+        int negative = 0;     // количество отрицательных
+        int sum = 0;          // сумма всех чисел
+        int max = Integer.MIN_VALUE;  // начальное значение – минимально возможное
+        int min = Integer.MAX_VALUE;  // начальное значение – максимально возможное
+
+        System.out.println("Enter numbers: ");
+
+        while (true) {
+            int n = scanner.nextInt();
+            if (n == 0) break;   // признак окончания ввода
+
+            count++;
+            sum += n;
+
+            if (n > 0) positive++;
+            else if (n < 0) negative++;
+
+            if (n > max) max = n;
+            if (n < min) min = n;
+        }
+
+        // Проверка: были ли введены числа, кроме нуля?
+        if (count == 0) {
+            System.out.println("Null");
+        } else {
+            System.out.println("Count: " + count);
+            System.out.println("Poloj: " + positive);
+            System.out.println("Otric: " + negative);
+            System.out.println("Sum: " + sum);
+            System.out.println("Max: " + max);
+            System.out.println("Min: " + min);
+        }
 
         scanner.close();
     }

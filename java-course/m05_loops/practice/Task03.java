@@ -20,8 +20,20 @@ import java.util.Scanner;
 public class Task03 {
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
+        System.out.println("Enter the number:");
         int n = scanner.nextInt();
-        // Ваш код здесь
+        int sum_of_factorial = 1;
+        int i = 1;
+        if (n == 0){
+            sum_of_factorial = 1;
+        } else{
+            while (i <= n){
+                sum_of_factorial = sum_of_factorial * i;
+                i++;
+            }
+        }
+        System.out.println(sum_of_factorial);
+
 
         scanner.close();
     }

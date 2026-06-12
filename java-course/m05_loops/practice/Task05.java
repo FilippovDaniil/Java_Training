@@ -17,6 +17,11 @@ package m05_loops.practice;
  */
 public class Task05 {
     public static void main(String[] args) {
-        // Ваш код здесь
+        for (int i = 1; i <= 50; i++){
+            if (i >= 40) break;
+            if (i % 2 == 0) continue;
+            else if (i % 7 == 0) continue;
+            System.out.print(i + " ");
+        }
     }
 }

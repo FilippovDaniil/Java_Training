@@ -1,5 +1,7 @@
 package m06_arrays.practice;
 
+import java.util.Arrays;
+
 /**
  * Задача 04 — Модуль 06: Разворот массива
  *
@@ -18,6 +20,14 @@ package m06_arrays.practice;
 public class Task04 {
     public static void main(String[] args) {
         int[] a = {1, 2, 3, 4, 5};
-        // Ваш код здесь
+        int left = 0;
+        int right = a.length - 1;
+        while (left < right) {
+            int tmp = a[left];
+            a[left] = a[right];
+            a[right] = tmp;
+            left++; right--;
+        }
+        System.out.println(Arrays.toString(a));
     }
 }

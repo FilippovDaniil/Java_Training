@@ -19,7 +19,11 @@ import java.util.Scanner;
 public class Task04 {
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
-        // Ваш код здесь
+        int n;
+        do {
+            System.out.println("Enter the number");
+            n = scanner.nextInt();
+        } while (n <= 0);
 
         scanner.close();
     }
