@@ -19,5 +19,10 @@ package m10_oop_intro.practice.task02;
 public class Task02 {
     public static void main(String[] args) {
         // Создайте объекты Car и вызовите start()
+        Car car1 = new Car("BMW");
+        Car car2 = new Car();
+        car2.setBrand("Mercedes");
+        car1.start();
+        car2.start();
     }
 }

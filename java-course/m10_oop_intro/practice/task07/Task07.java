@@ -32,9 +32,26 @@ package m10_oop_intro.practice.task07;
  *   Поля name и age наследуются всеми потомками.
  */
 
-// TODO: объявите классы Lion, Elephant, Monkey, наследующие Animal
 public class Task07 {
     public static void main(String[] args) {
-        // Создайте массив Animal[] и обработайте его
+        // Объект потомка хранится в переменной типа Animal
+        Animal[] zoo = {
+                new Lion("Симба", 5),
+                new Elephant("Дамбо", 10, 150),
+                new Monkey("Чита", 3)
+        };
+
+        System.out.println("=== ЗООПАРК ===");
+
+        int sumAge = 0;
+        for (Animal animal : zoo) {
+            animal.describe();
+            animal.makeSound();
+            sumAge += animal.age;
+        }
+
+        double averageAge = (double) sumAge / zoo.length;
+        System.out.println("Всего животных: " + zoo.length);
+        System.out.println("Средний возраст: " + averageAge);
     }
 }

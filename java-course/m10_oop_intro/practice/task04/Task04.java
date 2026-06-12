@@ -23,5 +23,16 @@ package m10_oop_intro.practice.task04;
 public class Task04 {
     public static void main(String[] args) {
         // Создайте и заполните массив Product, выведите товары и сумму
+        Product[] products = new Product[3];
+        products[0] = new Product("Hleb",25.0);
+        products[1] = new Product("Moloko",35.0);
+        products[2] = new Product("Sir",560.0);
+        double sum = 0;
+
+        for (Product product : products) {
+            System.out.println(product.getName() + " - " + product.getPrice());
+            sum = sum + product.getPrice();
+        }
+        System.out.println("Itogo: " + sum);
     }
 }

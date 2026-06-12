@@ -17,5 +17,13 @@ package m10_oop_intro.practice.task01;
 public class Task01 {
     public static void main(String[] args) {
         // Создайте объект Book, заполните поля и выведите их
+        Book book = new Book("Voina i mir", 1337);
+        Book book2 = new Book();
+        book2.setPages(1488);
+        book2.setTitle("Batman");
+
+        System.out.println(book);
+        System.out.println(book2);
+
     }
 }

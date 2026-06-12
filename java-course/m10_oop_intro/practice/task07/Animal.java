@@ -4,6 +4,11 @@ class Animal {
     String name;
     int age;
 
+    Animal(String name, int age) {
+        this.name = name;
+        this.age = age;
+    }
+
     void describe() {
         System.out.println(name + ", возраст " + age);
     }

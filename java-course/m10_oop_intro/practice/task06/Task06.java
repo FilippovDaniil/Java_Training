@@ -23,5 +23,14 @@ package m10_oop_intro.practice.task06;
 public class Task06 {
     public static void main(String[] args) {
         // Создайте массив Shape с разными фигурами и выведите их имена
+        Shape[] shapes = {
+                new Circle("circle",47),
+                new Square("square", 56),
+                new Shape("shape")
+        };
+
+        for (Shape shape : shapes) {
+            System.out.println(shape.getName());
+        }
     }
 }

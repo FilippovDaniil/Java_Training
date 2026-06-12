@@ -1,5 +1,7 @@
 package m10_oop_intro.practice.task03;
 
+import java.util.Arrays;
+
 /**
  * Задача 03 — Модуль 10: null и NullPointerException
  *
@@ -23,5 +25,20 @@ public class Task03 {
     public static void main(String[] args) {
         Student student = null;
         // Ваш код здесь
+        Student student1 = new Student("Ivan");
+
+        Student[] Array_Of_Student = new Student[2];
+        Array_Of_Student[0] = student;
+        Array_Of_Student[1] = student1;
+
+        for (Student student_in_arr : Array_Of_Student) {
+            if(student_in_arr == null){
+                System.out.println("Student ne zadan");
+            }else{
+                System.out.println(student_in_arr);
+            }
+        }
+
+
     }
 }

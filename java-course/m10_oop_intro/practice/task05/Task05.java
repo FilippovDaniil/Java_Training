@@ -25,5 +25,15 @@ package m10_oop_intro.practice.task05;
 public class Task05 {
     public static void main(String[] args) {
         // Создайте Dog и Cat, задайте имена, вызовите методы
+        Animal dog = new Dog("Jerry");
+        Animal cat = new Cat("Karry");
+        Dog dog2 = new Dog("Dock");
+        Cat katya = new Cat("Katya");
+        dog.eat();
+        cat.eat();
+        dog2.bark();
+        dog2.eat();
+        katya.eat();
+        katya.meow();
     }
 }
