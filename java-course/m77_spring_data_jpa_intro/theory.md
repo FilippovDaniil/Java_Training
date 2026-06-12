@@ -9,7 +9,7 @@ REST-блок ([модули 67–76](../m67_spring_rest_http_backend/theory.md)
 ## Эволюция доступа к данным
 
 ```
-   JDBC ──────────► JPA ──────────► Hibernate ──────────► Spring Data JPA
+   JDBC ----------► JPA ----------► Hibernate ----------► Spring Data JPA
    (модуль 49-50)   (стандарт)      (реализация JPA)      (надстройка Spring)
 
    ручной SQL,      аннотации,       ORM-движок,           репозитории «из
@@ -34,9 +34,9 @@ REST-блок ([модули 67–76](../m67_spring_rest_http_backend/theory.md)
 
 ```
    Java-объект Product            Таблица products
-   ────────────────────          ─────────────────────
+   --------------------          ---------------------
    class Product {               | id | name   | price |
-     Long id;          ◄────────►|----|--------|-------|
+     Long id;          ◄--------►|----|--------|-------|
      String name;                | 1  | Кофе   | 500   |
      long price;                 | 2  | Чай    | 300   |
    }
@@ -151,11 +151,11 @@ class SeedRunner implements CommandLineRunner {
 ```
 
 ```
-   repo.save(product)   ──► INSERT INTO products ...
-   repo.findById(1L)    ──► SELECT * FROM products WHERE id = 1
-   repo.findAll()       ──► SELECT * FROM products
-   repo.count()         ──► SELECT COUNT(*) FROM products
-   repo.deleteById(1L)  ──► DELETE FROM products WHERE id = 1
+   repo.save(product)   --► INSERT INTO products ...
+   repo.findById(1L)    --► SELECT * FROM products WHERE id = 1
+   repo.findAll()       --► SELECT * FROM products
+   repo.count()         --► SELECT COUNT(*) FROM products
+   repo.deleteById(1L)  --► DELETE FROM products WHERE id = 1
 ```
 
 Ни строчки SQL — а CRUD работает.

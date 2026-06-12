@@ -104,9 +104,9 @@ class Order {                                        // Aggregate Root
 
 ```
         Order (Aggregate Root)
-         ├── OrderLine  ← внутри агрегата, доступ только через Order
-         ├── OrderLine
-         └── total(), addLine() — корень стережёт инварианты
+         +-- OrderLine  ← внутри агрегата, доступ только через Order
+         +-- OrderLine
+         +-- total(), addLine() — корень стережёт инварианты
    снаружи: ссылка только на Order
 ```
 

@@ -88,9 +88,9 @@ class Account {
 Дальше события **публикуют** (диспетчер раздаёт их обработчикам): отправить письмо, обновить проекцию, проинтегрироваться с другим контекстом.
 
 ```
-   Account.deposit() ──записывает──▶ MoneyDeposited
-                                          │ publish
-                       ┌──────────────────┼──────────────────┐
+   Account.deposit() --записывает--▶ MoneyDeposited
+                                          | publish
+                       +------------------+------------------+
                   EmailHandler       AuditHandler       ProjectionHandler
 ```
 

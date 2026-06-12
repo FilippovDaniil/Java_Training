@@ -46,17 +46,17 @@ Spring Security — это **цепочка сервлет-фильтров** п
 
 ```
    HTTP-запрос
-        │
-   ┌────▼─────────────────────────────────────────────┐
-   │  FilterChainProxy (springSecurityFilterChain)     │
-   │   ├─ SecurityContextPersistenceFilter             │
-   │   ├─ CsrfFilter                                   │
-   │   ├─ UsernamePasswordAuthenticationFilter (форма) │
-   │   ├─ BasicAuthenticationFilter (HTTP Basic)       │
-   │   ├─ ... (≈15 фильтров)                           │
-   │   └─ AuthorizationFilter (проверка прав)          │
-   └────┬──────────────────────────────────────────────┘
-        │  (если разрешено)
+        |
+   +----▼---------------------------------------------+
+   |  FilterChainProxy (springSecurityFilterChain)     |
+   |   +- SecurityContextPersistenceFilter             |
+   |   +- CsrfFilter                                   |
+   |   +- UsernamePasswordAuthenticationFilter (форма) |
+   |   +- BasicAuthenticationFilter (HTTP Basic)       |
+   |   +- ... (≈15 фильтров)                           |
+   |   +- AuthorizationFilter (проверка прав)          |
+   +----+----------------------------------------------+
+        |  (если разрешено)
    DispatcherServlet → ваш @RestController
 ```
 

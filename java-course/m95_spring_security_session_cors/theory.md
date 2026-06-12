@@ -10,7 +10,7 @@
 
 ```
    SESSION-BASED (stateful)              STATELESS (JWT, модуль 98)
-   ─────────────────────────            ──────────────────────────
+   -------------------------            --------------------------
    вход → сервер создаёт сессию         каждый запрос несёт токен
    браузер хранит JSESSIONID (cookie)   состояние НЕ хранится на сервере
    сервер помнит, кто вошёл             токен самодостаточен
@@ -73,10 +73,10 @@ http.sessionManagement(sm -> sm
 Браузер блокирует запросы к другому **origin** (домен/порт/схема) — это Same-Origin Policy. **CORS** разрешает их явно. Нужен, когда SPA (`http://localhost:3000`) ходит к API (`http://localhost:8080`).
 
 ```
-   localhost:3000 (React)  ──preflight OPTIONS──►  localhost:8080 (API)
-        │                                              │
-        │   ◄── Access-Control-Allow-Origin: ... ──────┘
-        └── если origin разрешён → основной запрос проходит
+   localhost:3000 (React)  --preflight OPTIONS--►  localhost:8080 (API)
+        |                                              |
+        |   ◄-- Access-Control-Allow-Origin: ... ------+
+        +-- если origin разрешён → основной запрос проходит
 ```
 
 ```java

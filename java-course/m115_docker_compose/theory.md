@@ -66,9 +66,9 @@ volumes:
 Compose создаёт общую сеть; сервисы адресуются **по имени сервиса** (не localhost!):
 
 ```
-   app  ──jdbc:postgresql://db:5432/...──►  db
-                          │
-                          └─ "db" = имя сервиса, Compose резолвит его в IP контейнера
+   app  --jdbc:postgresql://db:5432/...--►  db
+                          |
+                          +- "db" = имя сервиса, Compose резолвит его в IP контейнера
 ```
 
 > Внутри Compose-сети `db` — это hostname сервиса БД. `localhost` внутри контейнера `app` указывал бы на сам `app`, а не на `db`.

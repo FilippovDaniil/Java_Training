@@ -11,26 +11,26 @@ Java поставляется с встроенным HTTP-сервером — 
 
 ```
   Клиент (браузер / curl)
-        │
-        │  TCP-соединение  (порт 8080)
+        |
+        |  TCP-соединение  (порт 8080)
         ▼
-  ┌─────────────────────────────────────────┐
-  │           HttpServer                    │
-  │  слушает порт, принимает соединения     │
-  │                                         │
-  │  createContext("/notes")  ──────────────┼──► NotesHandler
-  │  createContext("/")       ──────────────┼──► RootHandler
-  └─────────────────────────────────────────┘
-        │
-        │  передаёт HttpExchange
+  +-----------------------------------------+
+  |           HttpServer                    |
+  |  слушает порт, принимает соединения     |
+  |                                         |
+  |  createContext("/notes")  --------------+--► NotesHandler
+  |  createContext("/")       --------------+--► RootHandler
+  +-----------------------------------------+
+        |
+        |  передаёт HttpExchange
         ▼
-  ┌──────────────────────┐
-  │    HttpHandler       │  ◄── ваш код
-  │  handle(exchange)    │
-  │  – читает метод/URI  │
-  │  – читает тело       │
-  │  – пишет ответ       │
-  └──────────────────────┘
+  +----------------------+
+  |    HttpHandler       |  ◄-- ваш код
+  |  handle(exchange)    |
+  |  – читает метод/URI  |
+  |  – читает тело       |
+  |  – пишет ответ       |
+  +----------------------+
 ```
 
 ---
@@ -238,24 +238,24 @@ server.createContext("/notes", handler);
 
 ```
 curl -X POST http://localhost:8080/notes -d '{"text":"купить молоко"}'
-  │
-  │ TCP SYN → ACK
+  |
+  | TCP SYN → ACK
   ▼
 HttpServer.accept()
-  │
-  │ парсит HTTP-запрос (метод, URI, заголовки, тело)
+  |
+  | парсит HTTP-запрос (метод, URI, заголовки, тело)
   ▼
 Executor.submit(задача) — новый поток из пула
-  │
+  |
   ▼
 NotesHandler.handle(exchange)
-  ├─ getRequestMethod()  → "POST"
-  ├─ getRequestURI()     → /notes
-  ├─ getRequestBody()    → {"text":"купить молоко"}
-  ├─ создать заметку, id = 1
-  ├─ sendResponseHeaders(201, длина)
-  └─ getResponseBody().write({"id":1,"text":"купить молоко"})
-  │
+  +- getRequestMethod()  → "POST"
+  +- getRequestURI()     → /notes
+  +- getRequestBody()    → {"text":"купить молоко"}
+  +- создать заметку, id = 1
+  +- sendResponseHeaders(201, длина)
+  +- getResponseBody().write({"id":1,"text":"купить молоко"})
+  |
   ▼
 Клиент получает ответ 201 Created
 ```

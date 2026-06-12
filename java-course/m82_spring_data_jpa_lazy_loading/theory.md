@@ -45,9 +45,9 @@ class Product {
 
 ```
    findById(category)         → SELECT * FROM categories WHERE id=?
-        │
+        |
    category.getProducts()     → прокси ещё пуст
-        │
+        |
    products.size() / iterate  → SELECT * FROM products WHERE category_id=?   ← загрузка ЗДЕСЬ
 ```
 
@@ -85,10 +85,10 @@ for (Category c : cats) {
 ```
 
 ```
-   1 запрос   ──► [ cat1, cat2, ..., catN ]
-                    │     │          │
-   N запросов  ─────┴─────┴──────────┴───►  по products для каждой
-   ──────────────────────────────────────
+   1 запрос   --► [ cat1, cat2, ..., catN ]
+                    |     |          |
+   N запросов  -----+-----+----------+---►  по products для каждой
+   --------------------------------------
    ИТОГО: 1 + N запросов вместо одного-двух
 ```
 

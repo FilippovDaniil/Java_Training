@@ -31,12 +31,12 @@ class CashPayment extends Payment { String cashier; }
 
 ```
    таблица payments:
-   ┌────┬────────┬──────────────┬─────────────┬─────────┐
-   │ id │ amount │ payment_type │ card_number │ cashier │
-   ├────┼────────┼──────────────┼─────────────┼─────────┤
-   │  1 │  1000  │ CARD         │ 4111...     │  NULL   │
-   │  2 │   500  │ CASH         │   NULL      │ Иванов  │
-   └────┴────────┴──────────────┴─────────────┴─────────┘
+   +----+--------+--------------+-------------+---------+
+   | id | amount | payment_type | card_number | cashier |
+   +----+--------+--------------+-------------+---------+
+   |  1 |  1000  | CARD         | 4111...     |  NULL   |
+   |  2 |   500  | CASH         |   NULL      | Иванов  |
+   +----+--------+--------------+-------------+---------+
 ```
 
 ✅ быстро (нет JOIN), полиморфные запросы дёшевы.
@@ -52,8 +52,8 @@ class CashPayment extends Payment { String cashier; }
 
 ```
    payments(id, amount)
-        ├── card_payments(id → payments.id, card_number)
-        └── cash_payments(id → payments.id, cashier)
+        +-- card_payments(id → payments.id, card_number)
+        +-- cash_payments(id → payments.id, cashier)
    CardPayment = payments JOIN card_payments
 ```
 

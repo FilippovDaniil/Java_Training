@@ -10,13 +10,13 @@
 
 ```
         Таблица users
- ┌────┬──────────┬─────┐
- │ id │  name    │ age │   ← столбцы (поля)
- ├────┼──────────┼─────┤
- │ 1  │ Иван     │ 30  │   ← строка (запись)
- │ 2  │ Мария    │ 25  │
- │ 3  │ Пётр     │ 42  │
- └────┴──────────┴─────┘
+ +----+----------+-----+
+ | id |  name    | age |   ← столбцы (поля)
+ +----+----------+-----+
+ | 1  | Иван     | 30  |   ← строка (запись)
+ | 2  | Мария    | 25  |
+ | 3  | Пётр     | 42  |
+ +----+----------+-----+
 ```
 
 | Термин | Значение |
@@ -33,10 +33,10 @@
 
 ```
 SQL
- ├── DDL (Data Definition)    — структура: CREATE, ALTER, DROP
- ├── DML (Data Manipulation)  — данные: INSERT, SELECT, UPDATE, DELETE
- ├── DCL (Data Control)       — права: GRANT, REVOKE
- └── TCL (Transaction Control)— транзакции: COMMIT, ROLLBACK
+ +-- DDL (Data Definition)    — структура: CREATE, ALTER, DROP
+ +-- DML (Data Manipulation)  — данные: INSERT, SELECT, UPDATE, DELETE
+ +-- DCL (Data Control)       — права: GRANT, REVOKE
+ +-- TCL (Transaction Control)— транзакции: COMMIT, ROLLBACK
 ```
 
 | Категория | Команды | О чём |

@@ -35,11 +35,11 @@ class Directory implements FileSystemNode {          // контейнер (ко
 
 ```
         Directory
-        ├── FileLeaf (10)
-        ├── Directory
-        │   ├── FileLeaf (5)
-        │   └── FileLeaf (5)
-        └── FileLeaf (20)
+        +-- FileLeaf (10)
+        +-- Directory
+        |   +-- FileLeaf (5)
+        |   +-- FileLeaf (5)
+        +-- FileLeaf (20)
    size() рекурсивно: 10 + (5+5) + 20 = 40
 ```
 
@@ -74,8 +74,8 @@ class Circle extends Shape {
 
 ```
    Абстракция (Shape)            Реализация (Renderer)
-   ├ Circle ───────мост(ссылка)──▶ VectorRenderer
-   └ Square                       └ RasterRenderer
+   + Circle -------мост(ссылка)--▶ VectorRenderer
+   + Square                       + RasterRenderer
    N фигур × M рендереров = N+M классов, а не N*M
 ```
 

@@ -33,7 +33,7 @@ class ImageProxy implements Image {                // заместитель с 
 ```
 
 ```
-   Клиент ──▶ Image ──▶ ImageProxy ──(создаёт лениво / проверяет / кеширует)──▶ RealImage
+   Клиент --▶ Image --▶ ImageProxy --(создаёт лениво / проверяет / кеширует)--▶ RealImage
 ```
 
 ### Виды Proxy
@@ -74,9 +74,9 @@ class Computer {
 ```
 
 ```
-              ┌──────── Facade (Computer.start) ────────┐
-   Клиент ──▶ │  cpu.boot() → memory.load() → disk.read()│
-              └──────────────────────────────────────────┘
+              +-------- Facade (Computer.start) --------+
+   Клиент --▶ |  cpu.boot() → memory.load() → disk.read()|
+              +------------------------------------------+
                  (клиент не знает про CPU/Memory/Disk)
 ```
 

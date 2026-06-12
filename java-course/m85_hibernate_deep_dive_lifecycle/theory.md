@@ -10,18 +10,18 @@ Spring Data JPA ([модули 77–84](../m77_spring_data_jpa_intro/theory.md))
 
 ```
             new Product(...)
-                  │  transient (новый, не в контексте, нет id из БД)
+                  |  transient (новый, не в контексте, нет id из БД)
                   ▼
-        ┌──── em.persist() ────┐
-        │                      ▼
+        +---- em.persist() ----+
+        |                      ▼
    em.remove()           MANAGED / persistent
-        │                (в persistence context, отслеживается)
-        ▼                      │  em.detach()/clear()/close()
+        |                (в persistence context, отслеживается)
+        ▼                      |  em.detach()/clear()/close()
      REMOVED                   ▼
    (помечен на DELETE)     DETACHED
                           (был managed, контекст закрыт; изменения НЕ отслеживаются)
-                               │  em.merge()
-                               └──► снова MANAGED (копия)
+                               |  em.merge()
+                               +--► снова MANAGED (копия)
 ```
 
 | Состояние | Что значит | В контексте? | Изменения → БД? |
@@ -60,9 +60,9 @@ em.getTransaction().commit();              // flush → Hibernate сам дел�
 
 ```
    find → объект managed + снимок [price=500]
-        │
+        |
    setPrice(999) → объект [price=999], снимок прежний
-        │
+        |
    flush/commit → сравнение: price изменился → UPDATE products SET price=999 WHERE id=1
 ```
 

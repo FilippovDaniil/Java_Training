@@ -73,11 +73,11 @@ class ExpressShipping  implements ShippingMethod { public double cost(double w){
 
 ```
 Закрыт для модификации          Открыт для расширения
-┌────────────────────┐          ┌──────────────────────┐
-│ ShippingCalculator │  ──использует──▶  ShippingMethod │
-│  (не трогаем)      │          │  Standard / Express / │
-└────────────────────┘          │  Drone (добавляем)    │
-                                 └──────────────────────┘
++--------------------+          +----------------------+
+| ShippingCalculator |  --использует--▶  ShippingMethod |
+|  (не трогаем)      |          |  Standard / Express / |
++--------------------+          |  Drone (добавляем)    |
+                                 +----------------------+
 ```
 
 ---

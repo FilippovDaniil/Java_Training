@@ -12,7 +12,7 @@ Spring Security представляет пользователя как `UserDe
 
 ```
    loadUserByUsername("alice")
-        │
+        |
         ▼
    UserDetails { username, password(хеш), authorities[ROLE_USER], enabled... }
 ```
@@ -103,9 +103,9 @@ http.logout(logout -> logout.logoutUrl("/logout").logoutSuccessUrl("/login?logou
 **CSRF** (Cross-Site Request Forgery): чужой сайт от имени залогиненного пользователя шлёт изменяющий запрос (ваш браузер сам приложит cookie сессии). Защита — секретный **CSRF-токен**, который атакующий не знает.
 
 ```
-   Браузер с активной сессией (cookie) ──► ваш сайт: POST /tasks
+   Браузер с активной сессией (cookie) --► ваш сайт: POST /tasks
         ▲
-        └── вредоносная страница инициирует запрос; cookie уедет автоматически
+        +-- вредоносная страница инициирует запрос; cookie уедет автоматически
    Защита: сервер требует CSRF-токен, которого у чужого сайта нет → запрос отклонён
 ```
 

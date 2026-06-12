@@ -60,10 +60,10 @@ implementation 'com.fasterxml.jackson.datatype:jackson-datatype-jsr310:2.17.2'
 ## ObjectMapper: основные операции
 
 ```
-Java-объект ──────── writeValueAsString() ──────► JSON-строка
-JSON-строка ──────── readValue()           ──────► Java-объект
-JSON-файл   ──────── readValue(File, ...)  ──────► Java-объект
-Java-объект ──────── writeValue(File, ...) ──────► JSON-файл
+Java-объект -------- writeValueAsString() ------► JSON-строка
+JSON-строка -------- readValue()           ------► Java-объект
+JSON-файл   -------- readValue(File, ...)  ------► Java-объект
+Java-объект -------- writeValue(File, ...) ------► JSON-файл
 ```
 
 ```java
@@ -189,12 +189,12 @@ DTO (Data Transfer Object) — объект, созданный специаль
 
 ```
 HTTP-запрос                Слой сервиса               БД
-─────────────              ─────────────               ────
+-------------              -------------               ----
 ProductCreateDto           ProductService              ProductEntity
-  name: "Кофе"      ──►     toEntity()         ──►      id
+  name: "Кофе"      --►     toEntity()         --►      id
   price: 350.0               save()                     name
-                             toDto()            ◄──      price
-ProductResponseDto    ◄──                                createdAt
+                             toDto()            ◄--      price
+ProductResponseDto    ◄--                                createdAt
   id: 1                                                  updatedAt
   name: "Кофе"                                           deletedAt  (внутреннее)
   price: 350.0
@@ -256,7 +256,7 @@ Jackson 3.x — следующее поколение библиотеки (по
 
 ```
 Jackson 2.x   →   Jackson 3.x
-──────────────────────────────────────────────────────────
+----------------------------------------------------------
 com.fasterxml.jackson.*   →   tools.jackson.*
 ```
 

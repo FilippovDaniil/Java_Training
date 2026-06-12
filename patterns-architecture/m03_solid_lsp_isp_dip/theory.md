@@ -98,7 +98,7 @@ class MySqlOrderRepository    implements OrderRepository { ... }  // подме�
 
 ```
    Без DIP                         С DIP (стрелка инвертирована)
-ReportService ──▶ MySqlDao     ReportService ──▶ OrderRepository ◀── MySqlRepository
+ReportService --▶ MySqlDao     ReportService --▶ OrderRepository ◀-- MySqlRepository
 (верхний)        (нижний)      (верхний)         (абстракция)        (нижний, деталь)
 ```
 

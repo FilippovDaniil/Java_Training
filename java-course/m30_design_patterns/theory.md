@@ -4,7 +4,7 @@
 
 ```
                   Паттерны GoF
-        ┌──────────────┼──────────────┐
+        +--------------+--------------+
    Порождающие     Структурные    Поведенческие
    (создание       (композиция    (взаимодействие
     объектов)       объектов)      объектов)
@@ -160,9 +160,9 @@ class Subject {
 ```
 
 ```
-   Subject ──notify──▶ Observer1
-           ──notify──▶ Observer2
-           ──notify──▶ Observer3
+   Subject --notify--▶ Observer1
+           --notify--▶ Observer2
+           --notify--▶ Observer3
 ```
 
 ### Command — команда

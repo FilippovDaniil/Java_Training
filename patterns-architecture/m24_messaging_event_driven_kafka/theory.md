@@ -26,7 +26,7 @@ class MessageQueue {
 ```
 
 ```
-   Producer ──send──▶ [ msg msg msg ] ──receive──▶ Consumer
+   Producer --send--▶ [ msg msg msg ] --receive--▶ Consumer
 ```
 
 ---
@@ -44,9 +44,9 @@ class Topic {
 ```
 
 ```
-   Publisher ──publish──▶ Topic ──▶ Subscriber A
-                                 ──▶ Subscriber B
-                                 ──▶ Subscriber C
+   Publisher --publish--▶ Topic --▶ Subscriber A
+                                 --▶ Subscriber B
+                                 --▶ Subscriber C
 ```
 
 > Очередь vs топик: очередь — «работу сделает один из»; топик — «уведомить всех заинтересованных». В Kafka это сочетается: топик с партициями + группы консьюмеров.
@@ -84,7 +84,7 @@ void onMessage(String id, String payload) {
 «Ядовитое» сообщение, которое не удаётся обработать (ошибка, битые данные), нельзя крутить вечно — после N повторов его отправляют в **DLQ** для разбора, не блокируя остальную очередь.
 
 ```
-   Очередь ──▶ обработка ──ошибка──▶ retry (до N раз) ──всё ещё падает──▶ DLQ
+   Очередь --▶ обработка --ошибка--▶ retry (до N раз) --всё ещё падает--▶ DLQ
 ```
 
 ---

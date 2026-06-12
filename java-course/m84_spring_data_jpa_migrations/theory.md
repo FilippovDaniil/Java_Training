@@ -25,19 +25,19 @@ Flyway применяет SQL-скрипты по порядку версий и
 
 ```
    src/main/resources/db/migration/
-   ├── V1__create_products.sql        ← применится первой
-   ├── V2__add_category_column.sql    ← затем
-   ├── V3__seed_categories.sql
-   └── R__refresh_catalog_view.sql    ← repeatable: применяется при изменении контента
+   +-- V1__create_products.sql        ← применится первой
+   +-- V2__add_category_column.sql    ← затем
+   +-- V3__seed_categories.sql
+   +-- R__refresh_catalog_view.sql    ← repeatable: применяется при изменении контента
 ```
 
 **Правила именования:**
 
 ```
    V  1  __  create_products  .sql
-   │  │      │
-   │  │      описание (двойное подчёркивание перед ним)
-   │  версия (1, 2, 2.1, 20240601 ...)
+   |  |      |
+   |  |      описание (двойное подчёркивание перед ним)
+   |  версия (1, 2, 2.1, 20240601 ...)
    префикс: V = versioned (однократно), R = repeatable
 ```
 
@@ -45,13 +45,13 @@ Flyway применяет SQL-скрипты по порядку версий и
 
 ```
    старт приложения
-        │
+        |
    Flyway читает db/migration
-        │
+        |
    сверяет с таблицей flyway_schema_history (что уже применено)
-        │
+        |
    применяет НОВЫЕ версии по возрастанию, фиксирует в истории
-        │
+        |
    (если checksum применённого файла изменился → ошибка validate!)
 ```
 
@@ -73,7 +73,7 @@ Flyway применяет SQL-скрипты по порядку версий и
 ```
    T1 читает Product(stock=10)        T2 читает Product(stock=10)
    T1 ставит stock=9, commit          T2 ставит stock=5, commit
-                                       └─ затёрло изменение T1! (lost update)
+                                       +- затёрло изменение T1! (lost update)
 ```
 
 Решение — поле `@Version`. Hibernate добавляет его в `WHERE` при `UPDATE` и инкрементит:

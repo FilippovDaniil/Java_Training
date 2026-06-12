@@ -100,10 +100,10 @@ class SeaLogistics  extends Logistics { Transport createTransport() { return new
 
 ```
    Logistics.planDelivery()
-        │ вызывает
+        | вызывает
         ▼
    createTransport()  ← каждый подкласс решает, ЧТО создать
-        │
+        |
    Truck / Ship
 ```
 

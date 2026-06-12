@@ -10,7 +10,7 @@
 
 ```
    COPY app.jar app.jar      ← один слой ~50 МБ
-        │
+        |
    правка одной строки кода → весь слой (50 МБ) пересобирается и перекачивается
 ```
 
@@ -39,13 +39,13 @@ java -Djarmode=layertools -jar app.jar extract   # извлечь слои в п
 ### Dockerfile с layered jars
 
 ```dockerfile
-# ── этап извлечения слоёв ──
+# -- этап извлечения слоёв --
 FROM eclipse-temurin:17-jre AS builder
 WORKDIR /app
 COPY build/libs/app.jar app.jar
 RUN java -Djarmode=layertools -jar app.jar extract     # распаковать на слои
 
-# ── рантайм: копируем слои по отдельности (порядок = от стабильного к изменчивому) ──
+# -- рантайм: копируем слои по отдельности (порядок = от стабильного к изменчивому) --
 FROM eclipse-temurin:17-jre
 WORKDIR /app
 COPY --from=builder /app/dependencies/ ./

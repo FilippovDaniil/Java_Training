@@ -13,20 +13,20 @@
 
 ```
 КЛИЕНТ                                           СЕРВЕР
-  │  POST /notes HTTP/1.1                          │
-  │  Host: api.example.com                         │
-  │  Content-Type: application/json                │
-  │  Authorization: Bearer eyJhbGc...              │
-  │                                                 │
-  │  {"title":"Купить молоко","text":"2 литра"}    │
-  │ ──────────────────────────────────────────────▶│
-  │                                                 │
-  │  HTTP/1.1 201 Created                           │
-  │  Content-Type: application/json                 │
-  │  Location: /notes/42                            │
-  │                                                 │
-  │  {"id":42,"title":"Купить молоко","text":"..."}│
-  │ ◀──────────────────────────────────────────────│
+  |  POST /notes HTTP/1.1                          |
+  |  Host: api.example.com                         |
+  |  Content-Type: application/json                |
+  |  Authorization: Bearer eyJhbGc...              |
+  |                                                 |
+  |  {"title":"Купить молоко","text":"2 литра"}    |
+  | ----------------------------------------------▶|
+  |                                                 |
+  |  HTTP/1.1 201 Created                           |
+  |  Content-Type: application/json                 |
+  |  Location: /notes/42                            |
+  |                                                 |
+  |  {"id":42,"title":"Купить молоко","text":"..."}|
+  | ◀----------------------------------------------|
 ```
 
 ---

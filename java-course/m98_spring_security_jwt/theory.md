@@ -10,7 +10,7 @@ HTTP Basic и сессии ([модули 94–95](../m94_spring_security_inmemo
 
 ```
    SESSION (stateful)                    JWT (stateless)
-   ──────────────────                    ───────────────
+   ------------------                    ---------------
    вход → сервер хранит сессию           вход → сервер выдаёт ТОКЕН
    клиент шлёт JSESSIONID (cookie)       клиент шлёт Authorization: Bearer <token>
    сервер помнит, кто вошёл              сервер НЕ хранит ничего — токен самодостаточен
@@ -31,7 +31,7 @@ http.sessionManagement(sm -> sm.sessionCreationPolicy(SessionCreationPolicy.STAT
 
 ```
    eyJhbGciOiJIUzI1NiJ9 . eyJzdWIiOiJhbGljZSIsImV4cCI6...} . 4f9a8c...
-   └──── header ────┘     └──────── payload (claims) ──────┘  └ signature ┘
+   +---- header ----+     +-------- payload (claims) ------+  + signature +
 
    header:    {"alg":"HS256","typ":"JWT"}        — алгоритм подписи
    payload:   {"sub":"alice","roles":["USER"],   — claims (данные)
@@ -177,11 +177,11 @@ AuthenticationManager authManager(AuthenticationConfiguration cfg) throws Except
 
 ```
    POST /api/auth/login {username, password}
-        │
+        |
    AuthenticationManager.authenticate → проверка через UserDetailsService + PasswordEncoder
-        │ успех
+        | успех
    JwtService.generateToken → {token}
-        │
+        |
    клиент сохраняет токен и шлёт его в Authorization: Bearer <token> (фильтр — модуль 99)
 ```
 

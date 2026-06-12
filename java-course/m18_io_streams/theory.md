@@ -11,8 +11,8 @@
 | Для чего | картинки, аудио, любые байты | текст |
 
 ```
-ИСТОЧНИК ──▶ [ поток ] ──▶ ПРОГРАММА     (чтение, Input/Reader)
-ПРОГРАММА ──▶ [ поток ] ──▶ ПРИЁМНИК     (запись, Output/Writer)
+ИСТОЧНИК --▶ [ поток ] --▶ ПРОГРАММА     (чтение, Input/Reader)
+ПРОГРАММА --▶ [ поток ] --▶ ПРИЁМНИК     (запись, Output/Writer)
 ```
 
 > Для **текста** используйте `Reader`/`Writer`. Для **бинарных данных** — `InputStream`/`OutputStream`.
@@ -61,7 +61,7 @@ try (BufferedReader reader = new BufferedReader(new FileReader("notes.txt"))) {
 ```
 
 ```
-FileReader (читает символы) ──обёрнут в──▶ BufferedReader (читает строки)
+FileReader (читает символы) --обёрнут в--▶ BufferedReader (читает строки)
 ```
 
 > `readLine()` возвращает `null` в конце файла — это условие выхода из цикла.
