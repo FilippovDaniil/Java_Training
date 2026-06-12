@@ -34,8 +34,44 @@ public class Task07 {
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
         String text = scanner.nextLine();
-        // Ваш код здесь
-
         scanner.close();
+
+        // 1. Количество символов (с пробелами)
+        int charsWithSpaces = text.length();
+
+        // 2. Количество символов без пробелов (все пробельные символы? по заданию просто пробелы)
+        int charsWithoutSpaces = text.replace(" ", "").length();
+
+        // 3. Количество слов (разбиваем по одному и более пробелам, игнорируем пустые строки)
+        String[] words = text.trim().split("\\s+");
+        int wordCount = (text.trim().isEmpty()) ? 0 : words.length;
+
+        // 4. Количество предложений (по символам . ! ?)
+        int sentenceCount = 0;
+        for (int i = 0; i < text.length(); i++) {
+            char c = text.charAt(i);
+            if (c == '.' || c == '!' || c == '?') {
+                sentenceCount++;
+            }
+        }
+
+        // 5. Title Case: каждое слово с заглавной буквы, остальные строчные
+        StringBuilder titleCaseBuilder = new StringBuilder();
+        for (String word : words) {
+            if (word.isEmpty()) continue;
+            // Первая буква — заглавная, остальная часть — строчная
+            char first = Character.toUpperCase(word.charAt(0));
+            String rest = word.substring(1).toLowerCase();
+            titleCaseBuilder.append(first).append(rest).append(" ");
+        }
+        // Удаляем лишний пробел в конце
+        String titleCase = titleCaseBuilder.toString().trim();
+
+        // Вывод результатов
+        System.out.println("Символов (с пробелами): " + charsWithSpaces);
+        System.out.println("Символов (без пробелов): " + charsWithoutSpaces);
+        System.out.println("Слов: " + wordCount);
+        System.out.println("Предложений: " + sentenceCount);
+        System.out.println("Title Case: " + titleCase);
     }
 }

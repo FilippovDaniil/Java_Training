@@ -16,7 +16,13 @@ package m08_methods.practice;
 public class Task02 {
     public static void main(String[] args) {
         // Вызовите метод и выведите результат
+        System.out.println(sum(5,4));
+        System.out.println(sum(55,44));
+
     }
 
     // Объявите метод sum ниже
+    private static int sum(int a, int b){
+        return a+b;
+    }
 }

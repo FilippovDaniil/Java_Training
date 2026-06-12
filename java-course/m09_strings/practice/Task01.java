@@ -22,6 +22,9 @@ package m09_strings.practice;
 public class Task01 {
     public static void main(String[] args) {
         String s = "Programming";
-        // Ваш код здесь
+        System.out.println("Length: " + s.length());
+        System.out.println("First char: " + s.charAt(0));
+        System.out.println("Last char: " + s.charAt(s.length()-1));
+        System.out.println("Uppercase: " + s.toUpperCase());
     }
 }

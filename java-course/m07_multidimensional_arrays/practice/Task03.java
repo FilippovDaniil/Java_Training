@@ -23,5 +23,13 @@ public class Task03 {
             {7, 8, 9}
         };
         // Ваш код здесь
+
+        for (int i = 0; i < m.length; i++) {       // i — номер строки
+            int sum = 0;
+            for (int j = 0; j < m[i].length; j++) { // j — номер столбца
+                sum += m[i][j];
+            }
+            System.out.println("Sum of row " + i + ": " + sum);
+        }
     }
 }

@@ -17,7 +17,16 @@ package m08_methods.practice;
 public class Task03 {
     public static void main(String[] args) {
         // Проверьте метод на нескольких числах
+        System.out.println(isEven(7));
+        System.out.println(isEven(8));
     }
 
     // Объявите метод isEven ниже
+    private static boolean isEven(int number){
+        if(number % 2 ==0){
+            return true;
+        } else {
+            return false;
+        }
+    }
 }

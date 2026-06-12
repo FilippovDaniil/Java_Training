@@ -17,8 +17,18 @@ public class Task02 {
         int[][] m = {
             {1, 2, 3},
             {4, 5, 6},
-            {7, 8, 9}
+            {7, 8, 9},
+                {10,11,12}
         };
         // Ваш код здесь
+
+        int sum = 0;
+
+        for (int[] row: m){
+            for(int value: row){
+                sum = sum + value;
+            }
+        }
+        System.out.println(sum);
     }
 }

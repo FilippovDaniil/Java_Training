@@ -23,5 +23,13 @@ public class Task04 {
             {7, 8, 9}
         };
         // Ваш код здесь
+        int diag = 0;
+        int poboch_diag = 0;
+        for (int i = 0; i < m.length; i++){
+            diag = diag + m[i][i];
+            poboch_diag = poboch_diag + m[i][m.length-1-i];
+        }
+        System.out.println(diag);
+        System.out.println(poboch_diag);
     }
 }

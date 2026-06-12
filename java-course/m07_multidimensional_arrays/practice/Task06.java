@@ -25,6 +25,33 @@ package m07_multidimensional_arrays.practice;
  */
 public class Task06 {
     public static void main(String[] args) {
-        // Ваш код здесь
+        int rows = 5;
+
+        // 1. Создаём зубчатый массив: каждая строка имеет разную длину
+        int[][] triangle = new int[rows][];
+
+        // 2. Заполняем массив по правилу треугольника Паскаля
+        for (int i = 0; i < rows; i++) {
+            // строка i содержит i+1 элементов
+            triangle[i] = new int[i + 1];
+
+            // первый и последний элемент каждой строки = 1
+            triangle[i][0] = 1;
+            triangle[i][i] = 1;
+
+            // заполняем внутренние элементы (если строка длиннее 2)
+            for (int j = 1; j < i; j++) {
+                // каждый элемент = сумма двух элементов из предыдущей строки
+                triangle[i][j] = triangle[i - 1][j - 1] + triangle[i - 1][j];
+            }
+        }
+
+        // 3. Выводим треугольник Паскаля
+        for (int i = 0; i < triangle.length; i++) {
+            for (int j = 0; j < triangle[i].length; j++) {
+                System.out.print(triangle[i][j] + " ");
+            }
+            System.out.println();
+        }
     }
 }

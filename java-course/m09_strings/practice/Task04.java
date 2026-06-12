@@ -24,6 +24,34 @@ public class Task04 {
         Scanner scanner = new Scanner(System.in);
         String s = scanner.nextLine();
         // Ваш код здесь
+        s = s.replace(" ","");
+        int length = s.length();
+        boolean result;
+        String first_polovina = "";
+        String second_polovina = "";
+        if (length % 2 == 0){
+            first_polovina = s.substring(0,length/2);
+            second_polovina = s.substring(length/2);
+        }else{
+            first_polovina = s.substring(0,length/2);
+            second_polovina = s.substring(length/2+1);
+        }
+
+        StringBuilder second = new StringBuilder(second_polovina);
+        second.reverse();
+        second_polovina = second.toString();
+
+        if (first_polovina.equals(second_polovina)){
+            result = true;
+        }else{
+            result = false;
+        }
+
+        if (result == true){
+            System.out.println("Palindrom");
+        } else{
+            System.out.println("Ne Palindrom");
+        }
 
         scanner.close();
     }

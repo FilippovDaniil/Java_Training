@@ -17,6 +17,20 @@ package m09_strings.practice;
 public class Task06 {
     public static void main(String[] args) {
         String data = "5,12,3,8,1";
+        String[] a = data.split(",");
+        int max = 0;
+        int sum = 0;
+        for (String stringInA : a) {
+            int number = Integer.parseInt(stringInA);
+            if (number > max){
+                max = number;
+            }
+            sum = sum + number;
+        }
+
+        System.out.println("Max: " + max);
+        System.out.println("Sum: " + sum);
+
         // Ваш код здесь
     }
 }

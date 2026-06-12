@@ -17,7 +17,12 @@ package m08_methods.practice;
 public class Task01 {
     public static void main(String[] args) {
         // Вызовите ваш метод здесь
+        greetName("Anna");
+        greetName("Boris");
     }
 
     // Объявите метод greet ниже
+    public static void greetName(String name){
+        System.out.println("Hello, " + name + "!");
+    }
 }

@@ -20,8 +20,16 @@ package m09_strings.practice;
  */
 public class Task05 {
     public static void main(String[] args) {
-        String[] names = {"Хлеб", "Молоко", "Сыр"};
+        String[] names = {"Hleb", "Moloko", "Sir"};
         double[] prices = {45.0, 80.5, 560.0};
         // Ваш код здесь
+
+        // Заголовок таблицы
+        System.out.printf("%-12s%8s%n", "Tovar", "Cena");
+
+        // Вывод строк с товарами
+        for (int i = 0; i < names.length; i++) {
+            System.out.printf("%-12s%8.2f%n", names[i], prices[i]);
+        }
     }
 }

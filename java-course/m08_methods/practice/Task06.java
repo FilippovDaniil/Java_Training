@@ -21,7 +21,21 @@ package m08_methods.practice;
 public class Task06 {
     public static void main(String[] args) {
         // Вызовите factorial и sumDigits
+        System.out.println(factorial(5));
+        System.out.println(sumDigits(12345));
     }
 
     // Объявите рекурсивные методы factorial и sumDigits ниже
+
+    private static long factorial(int n) {
+        if (n <= 1) return 1;            // базовый случай
+        return n * factorial(n - 1);     // рекурсивный шаг
+    }
+
+    public static int sumDigits(int n) {
+        if (n < 10) {
+            return n;                 // базовый случай
+        }
+        return (n % 10) + sumDigits(n / 10); // рекурсивный шаг
+    }
 }

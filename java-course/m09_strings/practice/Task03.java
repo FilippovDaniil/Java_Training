@@ -18,6 +18,15 @@ package m09_strings.practice;
 public class Task03 {
     public static void main(String[] args) {
         String s = "Hello World";
-        // Ваш код здесь
+        s = s.toLowerCase();
+        int count_of_glass = 0;
+        String vowels = "aeiou";
+        for (int i = 0; i < s.length(); i++){
+            char c = s.charAt(i);
+            if (vowels.indexOf(c) >= 0){
+                count_of_glass = count_of_glass + 1;
+            }
+        }
+        System.out.println("Count of glass: " + count_of_glass);
     }
 }
