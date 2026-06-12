@@ -17,12 +17,21 @@ package m03_types_keyboard_input_idea.practice;
  *   scanner.nextDouble(); площадь = ширина * высота;
  *   периметр = 2 * (ширина + высота).
  */
+import java.util.Locale;
 import java.util.Scanner;
 
 public class Task06 {
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
-        // Ваш код здесь
+        scanner.useLocale(Locale.US);
+        System.out.println("Enter height and width: ");
+        double a = scanner.nextDouble();
+        double b = scanner.nextDouble();
+        double ploshad = a * b;
+        double perimeter = 2 * (a+b);
+        System.out.println("Ploshad: " + ploshad);
+        System.out.println("Perimeter: " + perimeter);
+
 
         scanner.close();
     }

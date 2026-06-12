@@ -17,6 +17,11 @@ package m02_variables_int_string.practice;
  */
 public class Task01 {
     public static void main(String[] args) {
-        // Ваш код здесь
+        int year = 2026;
+        int month = 6;
+        int day = 5;
+        System.out.println("Year: " + year);
+        System.out.println("Month: " + month);
+        System.out.println("Day: " + day);
     }
 }

@@ -20,6 +20,16 @@ package m03_types_keyboard_input_idea.practice;
  */
 public class Task01 {
     public static void main(String[] args) {
-        // Ваш код здесь
+        int a = 52;
+        double b = 3.13;
+        char c = 'C';
+        boolean is_false = true;
+        long d = 1_000_000_000;
+        System.out.println(((Object) a).getClass().getName() + ": " + a);
+        System.out.println(((Object) b).getClass().getName() + ": " + b);
+        System.out.println(((Object) c).getClass().getName() + ": " + c);
+        System.out.println(((Object) is_false).getClass().getName() + ": " + is_false);
+        System.out.println(((Object) d).getClass().getName() + ": " + d);
+
     }
 }

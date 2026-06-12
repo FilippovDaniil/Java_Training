@@ -20,8 +20,15 @@ import java.util.Scanner;
 public class Task01 {
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
+        System.out.println("Enter number:");
         int n = scanner.nextInt();
-        // Ваш код здесь
+        if (n > 0){
+            System.out.println("Polojitelnoe");
+        } else if (n < 0){
+            System.out.println("Otricatelnoe");
+        } else {
+            System.out.println("Ravno 0");
+        }
 
         scanner.close();
     }

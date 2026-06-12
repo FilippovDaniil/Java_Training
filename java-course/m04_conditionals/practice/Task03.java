@@ -21,7 +21,17 @@ public class Task03 {
         int a = scanner.nextInt();
         int b = scanner.nextInt();
         int c = scanner.nextInt();
-        // Ваш код здесь
+
+        int max;
+
+        if(a > b && a > c){
+            max = a;
+        }else if(b > c && b > a){
+            max = b;
+        }else{
+            max = c;
+        }
+        System.out.println("Max: " + max);
 
         scanner.close();
     }

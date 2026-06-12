@@ -17,6 +17,6 @@ package m02_variables_int_string.practice;
 public class Task04 {
     public static void main(String[] args) {
         int age = 25;
-        // Ваш код здесь
+        System.out.println("Hello, I am: " + age);
     }
 }

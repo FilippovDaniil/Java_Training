@@ -17,7 +17,10 @@ package m01_intro_first_program.practice;
  *   Комментарии не влияют на вывод — компилятор их игнорирует.
  */
 public class Task05 {
+    /*
+    Проврека комментариев
+     */
     public static void main(String[] args) {
-        // Ваш код здесь
+        System.out.println("Programm running");
     }
 }

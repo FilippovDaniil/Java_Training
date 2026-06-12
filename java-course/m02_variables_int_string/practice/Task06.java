@@ -20,6 +20,7 @@ package m02_variables_int_string.practice;
  */
 public class Task06 {
     public static void main(String[] args) {
-        // Ваш код здесь
+        System.out.println("Sum: " + 2 + 3);
+        System.out.println(2 + 3 + " Sum");
     }
 }

@@ -15,8 +15,8 @@ package m02_variables_int_string.practice;
  */
 public class Task03 {
     public static void main(String[] args) {
-        String firstName = "Иван";
-        String lastName = "Петров";
-        // Ваш код здесь
+        String firstName = "Daniil";
+        String lastName = "Filippov";
+        System.out.println("Hello, " + firstName + " " + lastName + "!");
     }
 }

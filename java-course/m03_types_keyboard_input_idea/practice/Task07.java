@@ -28,12 +28,27 @@ package m03_types_keyboard_input_idea.practice;
  * ПОДСКАЗКА:
  *   Порядок чтения продумайте сами; для см используйте (int)(рост*100).
  */
+import java.util.Locale;
 import java.util.Scanner;
 
 public class Task07 {
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
-        // Ваш код здесь
+        scanner.useLocale(Locale.US);
+        System.out.println("Enter your name:");
+        String name = scanner.nextLine();
+        System.out.println("Enter your age:");
+        int age = scanner.nextInt();
+        System.out.println("Enter your rost:");
+        double rost = scanner.nextDouble();
+        int god_of_birth = 2026 - age;
+        double sm_rost = rost * 100;
+        System.out.println("=====Anketa=====");
+        System.out.println("Name: " + name);
+        System.out.println("Age: " + age);
+        System.out.println("Year of birth: " + god_of_birth);
+        System.out.println("Rost: " + rost + "m (" + (int) sm_rost + " sm)");
+
 
         scanner.close();
     }

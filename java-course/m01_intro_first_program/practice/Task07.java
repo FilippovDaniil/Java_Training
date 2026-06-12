@@ -25,6 +25,10 @@ package m01_intro_first_program.practice;
  */
 public class Task07 {
     public static void main(String[] args) {
-        // Ваш код здесь
+        System.out.println("+----------------------------+");
+        System.out.println("| Daniil Filippov            |");
+        System.out.println("| Java-developer             |");
+        System.out.println("| danya@example.com          |");
+        System.out.println("+----------------------------+");
     }
 }

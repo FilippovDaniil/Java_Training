@@ -16,6 +16,6 @@ package m01_intro_first_program.practice;
  */
 public class Task04 {
     public static void main(String[] args) {
-        // Ваш код здесь
+        System.out.println("First line\nSecond line");
     }
 }

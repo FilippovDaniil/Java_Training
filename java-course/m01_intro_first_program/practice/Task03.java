@@ -16,6 +16,7 @@ package m01_intro_first_program.practice;
  */
 public class Task03 {
     public static void main(String[] args) {
-        // Ваш код здесь
+        System.out.print("Java ");
+        System.out.println("Core");
     }
 }

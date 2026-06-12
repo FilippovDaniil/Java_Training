@@ -28,6 +28,19 @@ package m02_variables_int_string.practice;
  */
 public class Task07 {
     public static void main(String[] args) {
-        // Ваш код здесь
+        String name_of_one_good = "Hleb";
+        int price_of_one = 45;
+        int count_of_one = 2;
+        String name_of_two_good = "Moloko";
+        int price_of_two = 80;
+        int count_of_two = 3;
+        int sum_of_one = price_of_one * count_of_one;
+        int sum_of_two = price_of_two * count_of_two;
+        int sum = sum_of_one + sum_of_two;
+        System.out.println("===== Check =====");
+        System.out.println(name_of_one_good + " x" + count_of_one + " = " + sum_of_one);
+        System.out.println(name_of_two_good + " x" + count_of_two + " = " + sum_of_two);
+        System.out.println("=================");
+        System.out.println("Itogo: " + sum);
     }
 }

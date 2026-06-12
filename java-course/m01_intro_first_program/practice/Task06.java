@@ -19,6 +19,6 @@ package m01_intro_first_program.practice;
  */
 public class Task06 {
     public static void main(String[] args) {
-        // Ваш код здесь
+        System.out.println("*" + '\n' + "**" + '\n'+ "***" + '\n'+ "****");
     }
 }

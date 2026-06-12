@@ -20,8 +20,10 @@ import java.util.Scanner;
 public class Task04 {
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
+        System.out.println("Enter your age: ");
         int age = scanner.nextInt();
-        // Ваш код здесь
+        String result = (age >= 18) ? "Sovershenoletny" : "Nesovershenoletnyy";
+        System.out.println(result);
 
         scanner.close();
     }

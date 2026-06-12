@@ -22,6 +22,8 @@ public class Task05 {
         double price = 199.99;
         char letter = 'Z';
         int code = 97;
-        // Ваш код здесь
+        System.out.println("Price without kopeepki: " + (int) price);
+        System.out.println("Kov simvola Z: " + (int) letter);
+        System.out.println("Simvol s codom 97: " + (char) code);
     }
 }

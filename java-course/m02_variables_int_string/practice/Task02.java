@@ -22,6 +22,10 @@ public class Task02 {
     public static void main(String[] args) {
         int a = 15;
         int b = 4;
-        // Ваш код здесь
+        System.out.println(a+b);
+        System.out.println(a-b);
+        System.out.println(a*b);
+        System.out.println(a/b);
+        System.out.println(a%b);
     }
 }

@@ -23,8 +23,12 @@ import java.util.Scanner;
 public class Task04 {
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
-        // Ваш код здесь
-
+        System.out.println("Enter 3 numbers: ");
+        int a = scanner.nextInt();
+        int b = scanner.nextInt();
+        int c = scanner.nextInt();
+        double d = (a+b+c)/3.0;
+        System.out.println("Srednee arifm of numbers: " + d);
         scanner.close();
     }
 }
