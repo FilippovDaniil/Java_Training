@@ -1,5 +1,7 @@
 package m12_classes_static.practice.task07;
 
+import org.h2.util.json.JSONItemType;
+
 /**
  * Задача 07 — Модуль 12 (МИНИ-ПРОЕКТ): Генератор сотрудников с ID
  *
@@ -31,5 +33,20 @@ package m12_classes_static.practice.task07;
 public class Task07 {
     public static void main(String[] args) {
         // Создайте сотрудников и выведите их + общее количество
+        Employee employee1 = new Employee("Danya",177777.55);
+        Employee employee2 = new Employee("Vanya",1777.55);
+        Employee employee3 = new Employee("Sanya",17.55);
+        Employee employee11 = new Employee("Danya",177777.55);
+        Employee employee21 = new Employee("Vanya",1777.55);
+        Employee employee31 = new Employee("Sanya",17.55);
+
+        System.out.println(employee1);
+        System.out.println(employee2);
+        System.out.println(employee3);
+        System.out.println(employee11);
+        System.out.println(employee21);
+        System.out.println(employee31);
+
+        System.out.println("Kolichestvo: " + Employee.nextId);
     }
 }

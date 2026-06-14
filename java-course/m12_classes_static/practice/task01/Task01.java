@@ -1,5 +1,6 @@
 package m12_classes_static.practice.task01;
 
+
 /**
  * Задача 01 — Модуль 12: Статический счётчик объектов
  *
@@ -20,5 +21,11 @@ package m12_classes_static.practice.task01;
 public class Task01 {
     public static void main(String[] args) {
         // Создайте несколько User и выведите User.count
+        User user1 = new User("Vanya1");
+        System.out.println(User.count);
+        User user2 = new User("Vanya2");
+        System.out.println(User.count);
+        User user3 = new User("Vanya3");
+        System.out.println(User.count);
     }
 }

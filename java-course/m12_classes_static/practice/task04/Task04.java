@@ -24,5 +24,15 @@ package m12_classes_static.practice.task04;
 public class Task04 {
     public static void main(String[] args) {
         // Создайте 2 игры, добавьте очки, выведите счёт и Game.totalGames
+
+        Game game1 = new Game(15);
+        System.out.println(Game.totalGames);
+        Game game2 = new Game(15);
+        System.out.println(Game.totalGames);
+        game1.addPoints(44);
+        game2.addPoints(55);
+        System.out.println(game1);
+        System.out.println(game2);
+
     }
 }

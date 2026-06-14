@@ -25,5 +25,9 @@ package m12_classes_static.practice.task05;
 public class Task05 {
     public static void main(String[] args) {
         // Создайте 2 объекта AppConfig, затем выведите AppConfig.version
+        AppConfig appConfig = new AppConfig();
+        AppConfig appConfig2 = new AppConfig();
+        AppConfig appConfig3 = new AppConfig();
+        AppConfig appConfig24 = new AppConfig();
     }
 }

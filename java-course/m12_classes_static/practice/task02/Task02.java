@@ -22,5 +22,9 @@ package m12_classes_static.practice.task02;
 public class Task02 {
     public static void main(String[] args) {
         // Вызовите статические методы MathUtils
+        System.out.println(MathUtils.max(5,7));
+        System.out.println(MathUtils.min(5,7));
+        System.out.println(MathUtils.isEven(5));
+        System.out.println(MathUtils.isEven(8));
     }
 }

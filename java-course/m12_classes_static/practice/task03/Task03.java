@@ -22,6 +22,11 @@ package m12_classes_static.practice.task03;
 public class Task03 {
     public static void main(String[] args) {
         int t = 3;
+        System.out.println(padenie(t));
         // Используйте константы Physics для расчётов
+    }
+
+    private static String padenie(int t){
+        return String.format("%.3f",Physics.GRAVITY * t * t / 2);
     }
 }

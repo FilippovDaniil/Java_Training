@@ -20,5 +20,8 @@ package m12_classes_static.practice.task06;
 public class Task06 {
     public static void main(String[] args) {
         // Создайте Computer.Processor и выведите его данные
+        Computer computer = new Computer();
+        Computer.Processor processor = new Computer.Processor("BMW",55);
+        processor.info();
     }
 }
