@@ -21,5 +21,10 @@ package m11_objects_constructors.practice.task03;
 public class Task03 {
     public static void main(String[] args) {
         // Создайте Person, попробуйте задать корректный и некорректный возраст
+        Person chelovek = new Person();
+        chelovek.setName("Alex");
+        chelovek.setAge(44);
+
+        System.out.println(chelovek);
     }
 }

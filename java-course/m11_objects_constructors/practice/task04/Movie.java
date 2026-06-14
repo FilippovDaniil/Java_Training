@@ -12,4 +12,14 @@ class Movie {
     }
 
     // TODO: переопределите toString()
+
+
+    @Override
+    public String toString() {
+        return "Movie{" +
+                "title='" + title + '\'' +
+                ", director='" + director + '\'' +
+                ", year=" + year +
+                '}';
+    }
 }

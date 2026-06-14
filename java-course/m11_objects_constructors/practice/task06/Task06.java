@@ -25,5 +25,20 @@ package m11_objects_constructors.practice.task06;
 public class Task06 {
     public static void main(String[] args) {
         // Создайте студентов и продемонстрируйте работу класса
+        Student vanya = new Student();
+        Student danya = new Student();
+        Student lesha = new Student("Lesha","BIB202",4.99);
+
+        vanya.setGpa(4.55);
+        vanya.setGroup("BOB202");
+        vanya.setName("Vanya");
+
+        danya.setGpa(7.77);
+        danya.setName("danya");
+        danya.setGroup("BIB202222");
+
+        System.out.println(danya);
+        System.out.println(vanya);
+        System.out.println(lesha);
     }
 }

@@ -12,4 +12,17 @@ class Book {
     }
 
     // TODO: переопределите equals() и hashCode()
+
+
+    @Override
+    public boolean equals(Object object) {
+        if (object == null || getClass() != object.getClass()) return false;
+        Book book = (Book) object;
+        return year == book.year && Objects.equals(title, book.title);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(title, year);
+    }
 }

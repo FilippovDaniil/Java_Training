@@ -22,5 +22,10 @@ package m11_objects_constructors.practice.task02;
 public class Task02 {
     public static void main(String[] args) {
         // Создайте Rectangle(3,4) и Rectangle(5), выведите площади
+
+        Rectangle pryam = new Rectangle(3,4);
+        Rectangle kvadrat = new Rectangle(5);
+        System.out.println("Square of pryam: " + pryam.area());
+        System.out.println("Square of kvadrat: " + kvadrat.area());
     }
 }

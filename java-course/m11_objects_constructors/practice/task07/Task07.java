@@ -33,5 +33,32 @@ package m11_objects_constructors.practice.task07;
 public class Task07 {
     public static void main(String[] args) {
         // Создайте BankAccount и продемонстрируйте операции
+        BankAccount bankAccountAnna = new BankAccount("Anna",700);
+        BankAccount bankAccountAlex = new BankAccount();
+
+        bankAccountAlex.setOwner("Alex");
+        bankAccountAlex.setBalance(-777);
+        System.out.println("--------------------------");
+        System.out.println();
+
+        System.out.println(bankAccountAlex);
+        System.out.println(bankAccountAnna);
+        System.out.println("--------------------------");
+        System.out.println();
+
+        bankAccountAnna.deposit(500);
+        bankAccountAnna.withdraw(2000);
+        System.out.println("--------------------------");
+        System.out.println();
+
+        System.out.println(bankAccountAnna);
+        System.out.println("--------------------------");
+        System.out.println();
+
+        bankAccountAnna.withdraw(400);
+        System.out.println(bankAccountAnna);
+        System.out.println("--------------------------");
+        System.out.println();
+
     }
 }

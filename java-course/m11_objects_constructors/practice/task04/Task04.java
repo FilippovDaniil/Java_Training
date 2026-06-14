@@ -19,5 +19,7 @@ package m11_objects_constructors.practice.task04;
 public class Task04 {
     public static void main(String[] args) {
         // Создайте Movie и выведите его
+        Movie movie = new Movie("Patrick","Bateman",1488);
+        System.out.println(movie);
     }
 }

@@ -25,5 +25,14 @@ import java.util.Objects;
 public class Task05 {
     public static void main(String[] args) {
         // Создайте книги и сравните их
+        Book book1 = new Book("Bob",1337);
+        Book book2 = new Book("Bob",1337);
+        Book book3 = new Book("Bob",1555);
+
+        System.out.println(book1==book2);//false
+        System.out.println(book1.equals(book2));//true
+        System.out.println(book1==book3);//false
+        System.out.println(book1.equals(book3));//false
+
     }
 }
