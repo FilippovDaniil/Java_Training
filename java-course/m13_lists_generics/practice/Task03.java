@@ -20,9 +20,16 @@ import java.util.List;
 public class Task03 {
     public static void main(String[] args) {
         List<String> tasks = new ArrayList<>();
-        tasks.add("Проверить почту");
-        tasks.add("Купить хлеб");
-        tasks.add("Позвонить врачу");
+        tasks.add("Check pochta");
+        tasks.add("Buy hleb");
+        tasks.add("call doctor");
         // Ваш код здесь
+        System.out.println(tasks.contains("Buy hleb"));
+        System.out.println(tasks.indexOf("call doctor"));
+        tasks.set(0,"Do gym");
+        System.out.println(tasks);
+        tasks.remove("Buy hleb");
+        System.out.println(tasks);
+        System.out.println(tasks.size());
     }
 }

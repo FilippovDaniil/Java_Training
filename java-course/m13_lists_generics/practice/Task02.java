@@ -21,5 +21,21 @@ import java.util.List;
 public class Task02 {
     public static void main(String[] args) {
         // Ваш код здесь
+        List<Integer> numbers = new ArrayList<>();
+        for (int i = 0; i < 150; i++){
+            numbers.add(i);
+        }
+        numbers.add(2000);
+        numbers.add(4000);
+        numbers.add(8653);
+
+        int sum = 0;
+
+        for (Integer number : numbers) {
+            sum = sum + number;
+        }
+
+        System.out.println("Summa: :" + sum);
+        System.out.println("Srednee: " + ((double) sum / numbers.size()));
     }
 }

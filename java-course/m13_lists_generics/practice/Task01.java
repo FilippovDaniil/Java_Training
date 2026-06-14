@@ -24,5 +24,15 @@ import java.util.List;
 public class Task01 {
     public static void main(String[] args) {
         // Ваш код здесь
+        ArrayList<String> cities = new ArrayList<>();
+        cities.add("Moscow");
+        cities.add("New-York");
+        cities.add("London");
+        cities.add("Kazan");
+
+        System.out.println("Vsevo gorodov: " + cities.size());
+        for (String city : cities) {
+            System.out.println(city);
+        }
     }
 }

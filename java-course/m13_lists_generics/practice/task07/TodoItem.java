@@ -5,11 +5,35 @@ import java.util.List;
 import java.util.Scanner;
 
 class TodoItem {
-    String title;
-    boolean done;
+    private String title;
+    private boolean done;
 
-    TodoItem(String title) {
+    TodoItem(String title, boolean done) {
         this.title = title;
-        this.done = false;
+        this.done = done;
+    }
+
+    public String getTitle() {
+        return title;
+    }
+
+    public void setTitle(String title) {
+        this.title = title;
+    }
+
+    public boolean isDone() {
+        return done;
+    }
+
+    public void setDone(boolean done) {
+        this.done = done;
+    }
+
+    @Override
+    public String toString() {
+        return "TodoItem{" +
+                "title='" + title + '\'' +
+                ", done=" + done +
+                '}';
     }
 }

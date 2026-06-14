@@ -20,7 +20,15 @@ import java.util.List;
 public class Task04 {
     public static void main(String[] args) {
         List<Integer> numbers = new ArrayList<>();
-        for (int i = 1; i <= 8; i++) numbers.add(i);
+        for (int i = 1; i <= 32; i++) numbers.add(i);
         // Ваш код здесь
+        List<Integer> new_numbers = new ArrayList<>();
+        for (Integer number : numbers) {
+            if (number % 2 == 0){
+                new_numbers.add(number);
+            }
+        }
+
+        System.out.println(new_numbers);
     }
 }

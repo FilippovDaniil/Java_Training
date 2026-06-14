@@ -26,7 +26,12 @@ import java.util.List;
 
 public class Task06 {
     public static void main(String[] args) {
-        List<Integer> numbers = new ArrayList<>(List.of(5, 2, 8, 1, 9, 3));
+        List<Integer> numbers = new ArrayList<>(List.of(5, 2, 8, 1, 9, 3, 55, -4,9));
         // Ваш код здесь
+        Collections.sort(numbers);
+        System.out.println(numbers);
+        System.out.println("Minimum: " + Collections.min(numbers) + " Maximum: " + Collections.max(numbers));
+        Collections.reverse(numbers);
+        System.out.println(numbers);
     }
 }

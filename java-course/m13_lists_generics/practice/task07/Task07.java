@@ -36,6 +36,25 @@ public class Task07 {
         List<TodoItem> items = new ArrayList<>();
         Scanner scanner = new Scanner(System.in);
         // Ваш код здесь (меню в цикле)
+        System.out.println(" 1. [ ] Buy products ");
+        System.out.println(" 2. [ ] Wash car ");
+        System.out.println(" 3. [ ] Read book ");
+        System.out.println("Enter the number: ");
+        int enterring_number = scanner.nextInt();
+        switch (enterring_number){
+            case 1:
+                items.add(new TodoItem("Buy products",true));
+                break;
+            case 2:
+                items.add(new TodoItem("Wash car",true));
+                break;
+            case 3:
+                items.add(new TodoItem("Read book",true));
+                break;
+            default:
+                System.out.println("Thank for taking part");
+        }
+        System.out.println(items);
 
         scanner.close();
     }
