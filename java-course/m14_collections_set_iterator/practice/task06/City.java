@@ -14,4 +14,25 @@ class City {
     }
 
     // TODO: переопределите equals() и hashCode()
+
+
+    @Override
+    public boolean equals(Object object) {
+        if (object == null || getClass() != object.getClass()) return false;
+        City city = (City) object;
+        return Objects.equals(name, city.name) && Objects.equals(country, city.country);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(name, country);
+    }
+
+    @Override
+    public String toString() {
+        return "City{" +
+                "name='" + name + '\'' +
+                ", country='" + country + '\'' +
+                '}';
+    }
 }

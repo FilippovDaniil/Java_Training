@@ -22,16 +22,22 @@ package m14_collections_set_iterator.practice;
  *   - для алфавитного порядка используйте TreeSet;
  *   - для порядка появления используйте LinkedHashSet.
  */
-import java.util.LinkedHashSet;
-import java.util.Scanner;
-import java.util.Set;
-import java.util.TreeSet;
+import java.util.*;
 
 public class Task07 {
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
+        System.out.println("Enter the words: ");
         String text = scanner.nextLine();
         // Ваш код здесь
+        String[] massive_strok = text.toLowerCase().split("\\s+");
+        Set<String> set = new LinkedHashSet<>(Arrays.asList(massive_strok));
+        Set<String> treeSet = new TreeSet<>(set);
+        System.out.println("vsevo slov: " + massive_strok.length);
+        System.out.println("unikalnih slov: " + set.size());
+        System.out.println("po alfavitu: " + treeSet);
+        System.out.println("kak dobavlyali: " + set);
+
 
         scanner.close();
     }

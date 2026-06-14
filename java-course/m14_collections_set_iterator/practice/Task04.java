@@ -26,6 +26,16 @@ import java.util.List;
 public class Task04 {
     public static void main(String[] args) {
         List<Integer> list = new ArrayList<>(List.of(3, -1, 4, -5, 9, -2, 6));
+        Iterator<Integer> iterator = list.iterator();
+        System.out.println("Before: " + list);
+        while (iterator.hasNext()){
+            int x = iterator.next();
+            if (x < 0){
+                iterator.remove();
+            }
+        }
+
+        System.out.println("After: " + list);
         // Ваш код здесь
     }
 }

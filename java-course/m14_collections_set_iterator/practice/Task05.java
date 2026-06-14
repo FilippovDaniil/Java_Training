@@ -1,4 +1,5 @@
 package m14_collections_set_iterator.practice;
+import java.util.Random;
 
 /**
  * Задача 05 — Модуль 14: HashSet vs TreeSet
@@ -23,5 +24,19 @@ import java.util.TreeSet;
 public class Task05 {
     public static void main(String[] args) {
         // Ваш код здесь
+        Set<Integer> treeSet = new TreeSet<>();
+        Set<Integer> hashSet = new HashSet<>();
+        Random random = new Random();
+
+        for (int i = 0; i < 100; i++){
+            int ran = random.nextInt(100,200);
+            treeSet.add(ran);
+            hashSet.add(ran);
+        }
+
+        System.out.println(treeSet);
+        System.out.println(hashSet);
+
+
     }
 }

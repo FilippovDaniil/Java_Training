@@ -25,8 +25,22 @@ import java.util.Set;
 
 public class Task03 {
     public static void main(String[] args) {
-        Set<String> java = new HashSet<>(Set.of("Анна", "Борис", "Виктор"));
-        Set<String> python = new HashSet<>(Set.of("Борис", "Виктор", "Галина"));
-        // Ваш код здесь
+        Set<String> java = new HashSet<>(Set.of("Anna", "Boris", "Victor"));
+        Set<String> python = new HashSet<>(Set.of("Boris", "Victor", "Galina"));
+
+        // Объединение
+        Set<String> union = new HashSet<>(java);
+        union.addAll(python);
+        System.out.println("Union: " + union);
+
+        // Пересечение
+        Set<String> intersection = new HashSet<>(java);
+        intersection.retainAll(python);
+        System.out.println("Two courses: " + intersection);
+
+        // Только Java
+        Set<String> onlyJava = new HashSet<>(java);
+        onlyJava.removeAll(python);
+        System.out.println("Only Java: " + onlyJava);
     }
 }

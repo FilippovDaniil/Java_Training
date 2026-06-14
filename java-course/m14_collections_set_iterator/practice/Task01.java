@@ -21,5 +21,14 @@ import java.util.Set;
 public class Task01 {
     public static void main(String[] args) {
         // Ваш код здесь
+        Set<String> set = new HashSet<>();
+        set.add("Kot");
+        set.add("Kot");
+        set.add("Pes");
+        set.add("Fish");
+        set.add("Pes");
+        System.out.println(set.size());
+        System.out.println(set);
+
     }
 }

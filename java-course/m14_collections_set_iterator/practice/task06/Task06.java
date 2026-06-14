@@ -28,5 +28,12 @@ import java.util.Set;
 public class Task06 {
     public static void main(String[] args) {
         // Создайте HashSet<City>, добавьте города с дубликатом, выведите размер
+
+        Set<City> cities = new HashSet<>();
+        cities.add(new City("Moscow","Russia"));
+        cities.add(new City("Moscow","Russia"));
+        cities.add(new City("Saint-P","Russia"));
+
+        System.out.println(cities);
     }
 }
