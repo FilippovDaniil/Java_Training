@@ -20,8 +20,13 @@ import java.util.Map;
 public class Task03 {
     public static void main(String[] args) {
         Map<String, Integer> stock = new HashMap<>();
-        stock.put("Хлеб", 20);
-        stock.put("Сыр", 5);
+        stock.put("Hleb", 20);
+        stock.put("Sir", 5);
         // Ваш код здесь
+        System.out.println("Est li moloko: " + stock.getOrDefault("Milk",0));
+        stock.put("Hleb",stock.get("Hleb")+10);
+        stock.remove("Sir");
+        System.out.println("Est li sir: " + stock.getOrDefault("Sir",0));
+        System.out.println(stock);
     }
 }

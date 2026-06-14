@@ -25,5 +25,16 @@ public class Task06 {
     public static void main(String[] args) {
         Map<String, Contact> phoneBook = new HashMap<>();
         // Добавьте контакты и реализуйте поиск
+
+        Map<String, Contact> telephoneBook = new HashMap<>();
+        telephoneBook.put("Anna", new Contact("+7 964 794 55 74", "AnnaFil@mail.ru"));
+        telephoneBook.put("Alex", new Contact("+7 977 487 25 35", "AlexFil@mail.ru"));
+        System.out.println(telephoneBook.get("Anna"));
+        for (Map.Entry<String, Contact> contacts: telephoneBook.entrySet()){
+            System.out.println(contacts.getKey() + ": " + contacts.getValue().getPhone());
+        }
+        if (telephoneBook.get("Oleg") == null){
+            System.out.println("No such contact");
+        }
     }
 }

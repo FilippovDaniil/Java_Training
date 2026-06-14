@@ -20,7 +20,15 @@ import java.util.Map;
 
 public class Task02 {
     public static void main(String[] args) {
-        String[] words = {"кот", "пёс", "кот", "кот", "рыба", "пёс"};
+        String[] words = {"cat", "dog", "cat", "cat", "fish", "dog"};
         // Ваш код здесь
+
+        Map<String,Integer> freq = new HashMap<>();
+        for (String word : words){
+            freq.put(word,freq.getOrDefault(word,0)+1);
+        }
+
+        System.out.println(freq);
+
     }
 }

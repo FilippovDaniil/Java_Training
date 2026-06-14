@@ -27,9 +27,31 @@ import java.util.Map;
 public class Task04 {
     public static void main(String[] args) {
         Map<String, Integer> grades = new HashMap<>();
-        grades.put("Анна", 5);
-        grades.put("Борис", 3);
-        grades.put("Виктор", 4);
+        grades.put("Anna", 5);
+        grades.put("Boris", 3);
+        grades.put("Victor", 4);
         // Ваш код здесь
+        int sum_of_grades = 0;
+        int max_of_grades = 0;
+        for (Map.Entry<String, Integer> entry : grades.entrySet()){
+            if (entry.getValue() > max_of_grades){
+                max_of_grades = entry.getValue();
+            }
+            sum_of_grades = sum_of_grades + entry.getValue();
+            System.out.println(entry.getKey() + ": " + entry.getValue());
+        }
+
+        Integer targetValue = max_of_grades;
+        String foundKey = null;
+
+        for (Map.Entry<String, Integer> entry : grades.entrySet()) {
+            if (targetValue.equals(entry.getValue())) {
+                foundKey = entry.getKey();
+                break; // если нужно только первое совпадение
+            }
+        }
+
+        System.out.println("Average grade: " + sum_of_grades/grades.size());
+        System.out.println("Best student: " + foundKey);
     }
 }

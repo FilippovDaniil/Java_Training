@@ -25,6 +25,8 @@ package m15_map_collections_framework.practice;
  *   - для сортировки по названию используйте TreeMap или TreeSet ключей;
  *   - помните о «ловушке» nextInt()/nextLine() (см. модуль 03).
  */
+
+
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Scanner;
@@ -32,8 +34,53 @@ import java.util.Scanner;
 public class Task07 {
     public static void main(String[] args) {
         Map<String, Integer> warehouse = new HashMap<>();
+        warehouse.put("Gvozdi", 100);
+        warehouse.put("Doski", 200);
+        warehouse.put("Kraska", 50);
         Scanner scanner = new Scanner(System.in);
-        // Ваш код здесь (меню в цикле)
+        String choice;
+
+        while (true) {
+            System.out.println("\nEnter do:");
+            System.out.println("1 – do 1 - add smth");
+            System.out.println("2 – do 2 - remove smth");
+            System.out.println("3 – do 3 - show ostatki");
+            System.out.println("4 – do 4 - show less");
+            System.out.println("0 – exit");
+            System.out.print("Enter number: ");
+
+            choice = scanner.nextLine();
+
+            if (choice.equals("0")) {
+                System.out.println("Close programm");
+                break;  // выходим из цикла
+            }
+
+            switch (choice) {
+                case "add gvozdi":
+                    warehouse.put("Gvozdi",warehouse.get("Gvozdi")+10);
+                    System.out.println("Count of gvozdi: " + warehouse.get("Gvozdi"));
+                    // ваша логика для 1
+                    break;
+                case "remove gvozdi":
+                    warehouse.put("Gvozdi",warehouse.get("Gvozdi")-10);
+                    System.out.println("Count of gvozdi: " + warehouse.get("Gvozdi"));
+                    // логика для 2
+                    break;
+                case "show ostatki":
+                    for (Map.Entry<String, Integer> ostatki: warehouse.entrySet()){
+                        System.out.println(ostatki.getKey() + ": " + ostatki.getValue());
+                    }
+                    break;
+                case "show less":
+                    for (Map.Entry<String, Integer> ostatki: warehouse.entrySet()){
+                        System.out.println(ostatki.getKey() + ": " + ostatki.getValue());
+                    }
+                    break;
+                default:
+                    System.out.println("Bad request. Please, enter 1, 2, 3, 4 or 0.");
+            }
+        }
 
         scanner.close();
     }

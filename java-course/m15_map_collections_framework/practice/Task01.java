@@ -22,5 +22,14 @@ import java.util.Map;
 public class Task01 {
     public static void main(String[] args) {
         // Ваш код здесь
+        Map<String,Integer> spravochnik = new HashMap<>();
+        spravochnik.put("Moscow",555);
+        spravochnik.put("Moscow",777);
+        spravochnik.put("London",888);
+        spravochnik.put("Kazan",333);
+
+        System.out.println(spravochnik.get("Moscow"));
+        System.out.println("Vhodit li kazan: " + spravochnik.containsKey("Kazan"));
+        System.out.println(spravochnik);
     }
 }

@@ -16,12 +16,23 @@ package m15_map_collections_framework.practice;
  *   Map<String, Integer> tree = new TreeMap<>();
  *   TreeMap автоматически сортирует записи по ключу.
  */
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.TreeMap;
 
 public class Task05 {
     public static void main(String[] args) {
-        // Ваш код здесь
+        String[] words = {"X","Y","Z","B","A","D","C"};
+        int[] numbers = {1, 4, 3, 65, 2, -2, -5};
+        Map<String, Integer> hashMap = new HashMap<>();
+        Map<String, Integer> treeMap = new TreeMap<>();
+        for (int i = 0; i < words.length; i++){
+            hashMap.put(words[i],numbers[i]);
+            treeMap.put(words[i],numbers[i]);
+        }
+
+        System.out.println(hashMap);
+        System.out.println(treeMap);
     }
 }
