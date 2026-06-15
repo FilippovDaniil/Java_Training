@@ -22,5 +22,9 @@ import java.time.LocalTime;
 public class Task02 {
     public static void main(String[] args) {
         // Ваш код здесь
+        LocalTime localTime = LocalTime.of(9,0);
+        System.out.println("Start: " + localTime + "\nAfter 8h 30m: " + localTime.plusHours(8).plusMinutes(30));
+        LocalDateTime localDateTime = LocalDateTime.of(2026,9,1,10,45);
+        System.out.println("Action: " + localDateTime);
     }
 }

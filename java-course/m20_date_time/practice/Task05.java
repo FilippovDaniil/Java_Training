@@ -23,6 +23,16 @@ import java.time.format.DateTimeFormatter;
 
 public class Task05 {
     public static void main(String[] args) {
-        // Ваш код здесь
+        // 1. Форматирование текущей даты-времени
+        LocalDateTime now = LocalDateTime.now();
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd.MM.yyyy HH:mm");
+        String formattedNow = now.format(formatter);
+        System.out.println("Сейчас: " + formattedNow);
+
+        // 2. Парсинг строки в LocalDate и вывод дня недели
+        String dateString = "25.12.2026";
+        DateTimeFormatter dateFormatter = DateTimeFormatter.ofPattern("dd.MM.yyyy");
+        LocalDate parsedDate = LocalDate.parse(dateString, dateFormatter);
+        System.out.println(dateString + " — это " + parsedDate.getDayOfWeek());
     }
 }

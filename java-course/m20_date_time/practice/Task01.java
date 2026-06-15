@@ -23,5 +23,10 @@ import java.time.LocalDate;
 public class Task01 {
     public static void main(String[] args) {
         // Ваш код здесь
+        LocalDate localDate = LocalDate.now();
+        System.out.println("Today is: " + localDate);
+        System.out.println("Year: " + localDate.getYear() + " Month: " + localDate.getMonth() + " Day: " + localDate.getDayOfMonth());
+        System.out.println("Day of week: " + localDate.getDayOfWeek());
+        System.out.println("LeapYear: " + localDate.isLeapYear());
     }
 }

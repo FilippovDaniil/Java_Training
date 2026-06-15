@@ -28,15 +28,45 @@ package m20_date_time.practice;
 import java.time.LocalDate;
 import java.time.Period;
 import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
 import java.time.temporal.ChronoUnit;
 import java.util.Scanner;
 
 public class Task07 {
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
+        System.out.println("Введите дату рождения. Используйте dd.MM.yyyy");
         String input = scanner.nextLine().trim();
-        // Ваш код здесь
-
         scanner.close();
+
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd.MM.yyyy");
+        LocalDate birthDate;
+        try {
+            birthDate = LocalDate.parse(input, formatter);
+        } catch (DateTimeParseException e) {
+            System.out.println("Неверный формат даты. Используйте dd.MM.yyyy");
+            return;
+        }
+
+        LocalDate today = LocalDate.now();
+
+        // 1) Точный возраст
+        Period age = Period.between(birthDate, today);
+        System.out.println("Возраст: " + age.getYears() + " лет, " + age.getMonths() + " месяцев, " + age.getDays() + " дней");
+
+        // 2) Прожито дней
+        long daysLived = ChronoUnit.DAYS.between(birthDate, today);
+        System.out.println("Прожито дней: " + daysLived);
+
+        // 3) День недели рождения
+        System.out.println("Родился в: " + birthDate.getDayOfWeek());
+
+        // 4) Следующий день рождения и дни до него
+        LocalDate nextBirthday = birthDate.withYear(today.getYear());
+        if (nextBirthday.isBefore(today) || nextBirthday.isEqual(today)) {
+            nextBirthday = nextBirthday.plusYears(1);
+        }
+        long daysUntilNext = ChronoUnit.DAYS.between(today, nextBirthday);
+        System.out.println("До следующего дня рождения: " + daysUntilNext + " дней (" + nextBirthday.format(formatter) + ", " + nextBirthday.getDayOfWeek() + ")");
     }
 }

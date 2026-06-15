@@ -27,5 +27,13 @@ import java.time.temporal.ChronoUnit;
 public class Task04 {
     public static void main(String[] args) {
         // Ваш код здесь
+        LocalDate birth = LocalDate.of(2000, 5, 15);
+        LocalDate now = LocalDate.of(2026, 6, 1);
+        System.out.println(ChronoUnit.DAYS.between(birth, now));
+        Period age = Period.between(birth, now);
+        System.out.println(age.getYears());
+        System.out.println(age.getMonths());
+        System.out.println(age.getDays());
+
     }
 }

@@ -25,6 +25,21 @@ public class Task06 {
     public static void main(String[] args) {
         LocalDate a = LocalDate.of(2026, 1, 1);
         LocalDate b = LocalDate.of(2026, 12, 31);
-        // Ваш код здесь
+
+        // 1. Сравнение дат
+        if (a.isBefore(b)) {
+            System.out.println(a + " раньше, чем " + b);
+        } else if (b.isBefore(a)) {
+            System.out.println(b + " раньше, чем " + a);
+        } else {
+            System.out.println("Даты равны");
+        }
+
+        // 2. Текущее время в разных часовых поясах
+        ZonedDateTime moscowTime = ZonedDateTime.now(ZoneId.of("Europe/Moscow"));
+        ZonedDateTime tokyoTime = ZonedDateTime.now(ZoneId.of("Asia/Tokyo"));
+
+        System.out.println("Москва: " + moscowTime);
+        System.out.println("Токио: " + tokyoTime);
     }
 }
