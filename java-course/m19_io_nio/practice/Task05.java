@@ -25,6 +25,17 @@ import java.util.stream.Stream;
 
 public class Task05 {
     public static void main(String[] args) {
-        // Ваш код здесь
+        Path currentDir = Path.of(".");
+        try (Stream<Path> entries = Files.list(currentDir)) {
+            entries.forEach(path -> {
+                if (Files.isDirectory(path)) {
+                    System.out.println("[DIR]  " + path.getFileName());
+                } else {
+                    System.out.println("[FILE] " + path.getFileName());
+                }
+            });
+        } catch (IOException e) {
+            System.err.println("Ошибка при чтении каталога: " + e.getMessage());
+        }
     }
 }

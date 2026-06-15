@@ -22,10 +22,21 @@ package m19_io_nio.practice;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
+import java.nio.file.Paths;
+import java.util.List;
 
 public class Task03 {
-    public static void main(String[] args) {
-        Path path = Path.of("temp-data.txt");
+    public static void main(String[] args) throws IOException{
+        Path path = Paths.get("java-course","m19_io_nio","practice","report2.txt");
         // Ваш код здесь
+        if (!Files.exists(path)){
+            System.out.println("File does not exist, creating ...");
+            Files.write(path, List.of("Milk", "Hleb", "Eggs"));
+        }
+        System.out.println("Size: " + Files.size(path));
+        Files.delete(path);
+        if (!Files.exists(path)){
+            System.out.println("File deleted");
+        }
     }
 }

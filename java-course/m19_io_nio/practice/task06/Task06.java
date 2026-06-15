@@ -25,5 +25,9 @@ package m19_io_nio.practice.task06;
 public class Task06 {
     public static void main(String[] args) {
         // Соберите кофе из декораторов и выведите описание + стоимость
+        Coffee c = new SugarDecorator(new SimpleCoffee());
+        Coffee cc = new MilkDecorator(new SimpleCoffee());
+        System.out.println(c.description() + " :" + c.cost());
+        System.out.println(cc.description() + " :" + cc.cost());
     }
 }
