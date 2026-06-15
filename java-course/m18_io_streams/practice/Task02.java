@@ -26,5 +26,13 @@ import java.io.IOException;
 public class Task02 {
     public static void main(String[] args) {
         // Ваш код здесь
+        try (BufferedReader reader = new BufferedReader(new FileReader("java-course/m18_io_streams/practice/output.txt"))){
+            String line;
+            while ((line = reader.readLine()) != null){
+                System.out.println(line);
+            }
+        }catch (IOException e){
+            System.out.println(e.getMessage());
+        }
     }
 }

@@ -25,5 +25,18 @@ import java.io.PrintWriter;
 public class Task05 {
     public static void main(String[] args) {
         // Ваш код здесь
+
+        try (BufferedReader reader = new BufferedReader(new FileReader("java-course/m18_io_streams/practice/output.txt"));
+             FileWriter w = new FileWriter("java-course/m18_io_streams/practice/output2.txt")){
+            String line;
+            int count_of_strochka = 0;
+            while ((line = reader.readLine()) != null){
+                count_of_strochka++;
+                w.write(line + "\n");
+            }
+            System.out.println("Copy lines: " + count_of_strochka);
+        }catch (IOException e){
+            System.out.println(e.getMessage());
+        }
     }
 }

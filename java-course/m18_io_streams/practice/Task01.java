@@ -23,5 +23,12 @@ import java.io.IOException;
 public class Task01 {
     public static void main(String[] args) {
         // Ваш код здесь
+        try (FileWriter w = new FileWriter("java-course/m18_io_streams/practice/output.txt")){
+            w.write("Hello\n");
+            w.write("I am\n");
+            w.write("Danya\n");
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
     }
 }

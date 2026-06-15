@@ -18,12 +18,34 @@ package m18_io_streams.practice;
  *   BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
  *   int age = Integer.parseInt(br.readLine());
  */
+import jdk.swing.interop.SwingInterOpUtils;
+
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 
 public class Task04 {
     public static void main(String[] args) {
-        // Ваш код здесь
+        try (BufferedReader br = new BufferedReader(new InputStreamReader(System.in))) {
+            System.out.println("Enter the name:");
+            String name = br.readLine();
+
+            int age = 0;
+            boolean valid = false;
+            while (!valid) {
+                System.out.println("Enter the age:");
+                String ageInput = br.readLine();
+                try {
+                    age = Integer.parseInt(ageInput);
+                    valid = true; // если парсинг успешен, выходим из цикла
+                } catch (NumberFormatException e) {
+                    System.out.println("Invalid input. Please enter a number for age.");
+                }
+            }
+
+            System.out.println(name + ", " + age);
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
     }
 }

@@ -18,9 +18,23 @@ import java.util.Scanner;
 
 public class Task03 {
     public static void main(String[] args) {
+        // Создаём Scanner один раз
         Scanner scanner = new Scanner(System.in);
-        // Ваш код здесь
 
-        scanner.close();
+        // Используем try-with-resources для FileWriter, который будет закрыт автоматически
+        try (FileWriter writer = new FileWriter("java-course/m18_io_streams/practice/output.txt", true)) {
+            while (true) {
+                System.out.println("Enter words: ");
+                String line = scanner.nextLine();
+                if (line.isEmpty()) {
+                    break;
+                }
+                writer.write(line + System.lineSeparator()); // добавляем перевод строки
+            }
+        } catch (IOException e) {
+            System.err.println("Error" + e.getMessage());
+        } finally {
+            scanner.close(); // закрываем Scanner
+        }
     }
 }

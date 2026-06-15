@@ -26,6 +26,28 @@ import java.io.IOException;
 
 public class Task06 {
     public static void main(String[] args) {
-        // Ваш код здесь
+        int lines = 0;
+        int words = 0;
+        int chars = 0;
+
+        try (BufferedReader reader = new BufferedReader(new FileReader("java-course/m18_io_streams/practice/output.txt"))) {
+            String line;
+            while ((line = reader.readLine()) != null) {
+                lines++;
+                chars += line.length();               // символы без учёта перевода строки
+
+                if (!line.trim().isEmpty()) {         // пустая строка не даёт слов
+                    String[] wordArray = line.trim().split("\\s+");
+                    words += wordArray.length;
+                }
+            }
+        } catch (IOException e) {
+            System.err.println("Ошибка при чтении файла: " + e.getMessage());
+            return;
+        }
+
+        System.out.println("Strok: " + lines);
+        System.out.println("Slov: " + words);
+        System.out.println("Simvolov: " + chars);
     }
 }

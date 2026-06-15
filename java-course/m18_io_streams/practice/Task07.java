@@ -27,18 +27,111 @@ package m18_io_streams.practice;
  *   - чтение: BufferedReader; при FileNotFoundException — "Заметок пока нет";
  *   - помните о «ловушке» nextInt()/nextLine() (см. модуль 03).
  */
-import java.io.BufferedReader;
-import java.io.FileReader;
-import java.io.FileWriter;
-import java.io.IOException;
-import java.io.PrintWriter;
+import java.io.*;
 import java.util.Scanner;
 
 public class Task07 {
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
-        // Ваш код здесь (меню в цикле)
+        String fileName = "notes.txt";
 
-        scanner.close();
+        while (true) {
+            System.out.println("\n=== Записная книжка ===");
+            System.out.println("1 — добавить заметку");
+            System.out.println("2 — показать все заметки");
+            System.out.println("3 — посчитать количество заметок");
+            System.out.println("0 — выход");
+            System.out.print("Ваш выбор: ");
+
+            int choice;
+            try {
+                choice = Integer.parseInt(scanner.nextLine());
+            } catch (NumberFormatException e) {
+                System.out.println("Ошибка: введите число от 0 до 3.");
+                continue;
+            }
+
+            switch (choice) {
+                case 1:
+                    addNote(fileName, scanner);
+                    break;
+                case 2:
+                    showAllNotes(fileName);
+                    break;
+                case 3:
+                    countNotes(fileName);
+                    break;
+                case 0:
+                    System.out.println("До свидания!");
+                    scanner.close();
+                    return;
+                default:
+                    System.out.println("Неверный выбор. Попробуйте снова.");
+            }
+        }
+    }
+
+    private static void addNote(String fileName, Scanner scanner) {
+        System.out.print("Введите текст заметки: ");
+        String text = scanner.nextLine().trim();
+        if (text.isEmpty()) {
+            System.out.println("Заметка не может быть пустой.");
+            return;
+        }
+
+        // Определяем номер для новой заметки (текущее количество строк + 1)
+        int nextNumber = 1;
+        try (BufferedReader reader = new BufferedReader(new FileReader(fileName))) {
+            int lines = 0;
+            while (reader.readLine() != null) {
+                lines++;
+            }
+            nextNumber = lines + 1;
+        } catch (FileNotFoundException e) {
+            // файл ещё не существует, номер остаётся 1
+        } catch (IOException e) {
+            System.err.println("Ошибка при чтении файла: " + e.getMessage());
+            return;
+        }
+
+        // Дописываем новую заметку
+        try (PrintWriter writer = new PrintWriter(new FileWriter(fileName, true))) {
+            writer.println(nextNumber + ". " + text);
+            System.out.println("Заметка добавлена (№" + nextNumber + ").");
+        } catch (IOException e) {
+            System.err.println("Ошибка при записи в файл: " + e.getMessage());
+        }
+    }
+
+    private static void showAllNotes(String fileName) {
+        try (BufferedReader reader = new BufferedReader(new FileReader(fileName))) {
+            String line;
+            boolean hasNotes = false;
+            while ((line = reader.readLine()) != null) {
+                System.out.println(line);
+                hasNotes = true;
+            }
+            if (!hasNotes) {
+                System.out.println("Заметок пока нет.");
+            }
+        } catch (FileNotFoundException e) {
+            System.out.println("Заметок пока нет.");
+        } catch (IOException e) {
+            System.err.println("Ошибка при чтении файла: " + e.getMessage());
+        }
+    }
+
+    private static void countNotes(String fileName) {
+        try (BufferedReader reader = new BufferedReader(new FileReader(fileName))) {
+            int count = 0;
+            while (reader.readLine() != null) {
+                count++;
+            }
+            System.out.println("Всего заметок: " + count);
+        } catch (FileNotFoundException e) {
+            System.out.println("Всего заметок: 0");
+        } catch (IOException e) {
+            System.err.println("Ошибка при чтении файла: " + e.getMessage());
+        }
     }
 }
