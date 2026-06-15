@@ -26,5 +26,11 @@ package m16_enums_switch.practice.task03;
 public class Task03 {
     public static void main(String[] args) {
         // Переберите Coin.values(), выведите номиналы и сумму
+        int sum = 0;
+        for (Coin coin: Coin.values()){
+            System.out.println(coin.name() + " = " + coin.getValue() + " kop.");
+            sum = sum + coin.getValue();
+        }
+        System.out.println("Sum: " + sum + " kop.");
     }
 }

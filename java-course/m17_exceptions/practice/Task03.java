@@ -21,7 +21,19 @@ package m17_exceptions.practice;
 public class Task03 {
     public static void main(String[] args) {
         // Вызовите метод divide дважды (корректно и с делением на 0)
+        devide(10,0);
+        devide(111,6);
     }
 
     // TODO: метод divide(int a, int b) с try-catch-finally
+    private static void devide(int a, int b){
+        try{
+            int result = a / b;
+            System.out.println("Result: " + result);
+        }catch(ArithmeticException e){
+            System.out.println("Error: " + e.getMessage());
+        }finally {
+            System.out.println("Operation is done.");
+        }
+    }
 }

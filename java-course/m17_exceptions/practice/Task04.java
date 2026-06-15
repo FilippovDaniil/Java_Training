@@ -20,7 +20,18 @@ package m17_exceptions.practice;
 public class Task04 {
     public static void main(String[] args) {
         // Вызовите checkAge для разных значений в try-catch
+        checkAge(24);
+        checkAge(-5);
+        checkAge(120);
+
     }
 
     // TODO: метод checkAge(int age) с throw
+    private static void checkAge(int age){
+        if(age < 0 || age > 120){
+            throw new IllegalArgumentException("No valid age: " + age);
+        }else{
+            System.out.println("Age is valid: " + age);
+        }
+    }
 }

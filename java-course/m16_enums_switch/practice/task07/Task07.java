@@ -31,7 +31,55 @@ package m16_enums_switch.practice.task07;
 public class Task07 {
     public static void main(String[] args) {
         // Проведите заказ по стадиям и проверьте возможность отмены
+        System.out.println(nextSout(OrderStatus.NEW));
+        System.out.println(nextSout(OrderStatus.DELIVERED));
+        System.out.println(canCancelSout(OrderStatus.NEW));
+        System.out.println(canCancelSout(OrderStatus.CANCELLED));
     }
 
     // TODO: методы next(OrderStatus) и canCancel(OrderStatus)
+
+    private static String canCancelSout(OrderStatus orderStatus){
+        return "Can we cancel " + orderStatus.name() + ": " + canCancel(orderStatus);
+    }
+
+    private static boolean canCancel(OrderStatus orderStatus){
+        switch (orderStatus){
+            case NEW -> {
+                return true;
+            }
+            case PAID -> {
+                return true;
+            }
+            default -> {
+                return false;
+            }
+        }
+    }
+
+    private static OrderStatus next(OrderStatus orderStatus){
+        switch (orderStatus){
+            case NEW -> {
+                return OrderStatus.PAID;
+            }
+            case PAID -> {
+                return OrderStatus.SHIPPED;
+            }
+            case SHIPPED -> {
+                return OrderStatus.DELIVERED;
+            }
+            default -> {
+                return orderStatus;
+            }
+        }
+    }
+
+    private static String nextSout(OrderStatus orderStatus){
+        OrderStatus orderStatus_new = next(orderStatus);
+        if(orderStatus.equals(orderStatus_new)){
+            return orderStatus.name() + " -> " + orderStatus.name() + " finished";
+        }else{
+            return orderStatus.name() + " -> " + orderStatus_new.name();
+        }
+    }
 }

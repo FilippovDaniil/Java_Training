@@ -25,5 +25,9 @@ package m16_enums_switch.practice.task06;
 public class Task06 {
     public static void main(String[] args) {
         // Вызовите Logger.INSTANCE.log(...) несколько раз
+        Logger.INSTANCE.log("Start app");
+        Logger.INSTANCE.log("Load data");
+        Logger.INSTANCE.log("Done");
+        Logger.INSTANCE.log("...");
     }
 }

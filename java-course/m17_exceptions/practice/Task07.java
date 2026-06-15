@@ -31,10 +31,11 @@ import java.util.Scanner;
 
 public class Task07 {
     public static void main(String[] args) {
-        Scanner scanner = new Scanner(System.in);
-        // Создайте ATM и организуйте цикл снятия с обработкой ошибок
-
-        scanner.close();
+        Atm atm = new Atm(1000);
+        atm.withdraw(300);
+        //atm.withdraw(5000);
+        atm.withdraw(-1);
+        atm.withdraw(0);
     }
 }
 

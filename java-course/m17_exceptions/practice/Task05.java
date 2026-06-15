@@ -23,9 +23,24 @@ package m17_exceptions.practice;
  *   обработать или пробросить дальше.
  */
 public class Task05 {
-    public static void main(String[] args) {
+    public static void main(String[] args) throws Exception {
         // Вызовите parsePositive для "42", "-5", "abc" в try-catch
+        parsePositive("42");
+        parsePositive("-5");
+        parsePositive("abc");
     }
 
     // TODO: метод parsePositive(String s) throws Exception
+
+    private static void parsePositive(String s) throws Exception {
+        try {
+            if (Integer.parseInt(s) < 0){
+                throw new Exception("Number has to be more than 0");
+            }else{
+                System.out.println(s);
+            }
+        }catch (Exception e){
+            System.out.println(e.getMessage());
+        }
+    }
 }

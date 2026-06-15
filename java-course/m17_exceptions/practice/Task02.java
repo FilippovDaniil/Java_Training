@@ -25,5 +25,14 @@ public class Task02 {
         int[] arr = {1, 2, 3};
         String text = "abc";
         // Ваш код здесь
+        try{
+            System.out.println(Integer.parseInt(text));
+            System.out.println(arr[10]);
+        }catch(NumberFormatException e){
+            System.out.println(e.getMessage());
+        }
+        catch(ArrayIndexOutOfBoundsException e){
+            System.out.println(e.getMessage());
+        }
     }
 }

@@ -20,11 +20,30 @@ package m17_exceptions.practice;
  *   }
  */
 public class Task06 {
-    public static void main(String[] args) {
+    public static void main(String[] args){
         // Проверьте несколько паролей через validatePassword в try-catch
+        validatePassword("abc");
+        validatePassword("pass1234");
+        validatePassword("password");
     }
 
     // TODO: метод validatePassword(String password)
+    private static void validatePassword(String password){
+        if (password.length() < 8 || containsDigit(password)){
+            throw new InvalidPasswordException("Your passowrd is bad");
+        }else{
+            System.out.println("Password is ok");
+        }
+    }
+
+    private static boolean containsDigit(String str) {
+        for (int i = 0; i < str.length(); i++) {
+            if (Character.isDigit(str.charAt(i))) {
+                return true;
+            }
+        }
+        return false;
+    }
 }
 
 // TODO: объявите класс InvalidPasswordException extends RuntimeException

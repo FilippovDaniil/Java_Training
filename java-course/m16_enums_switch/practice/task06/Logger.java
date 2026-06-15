@@ -6,4 +6,9 @@ enum Logger {
     private int count = 0;
 
     // TODO: метод log(String message)
+
+    public void log (String message){
+        count++;
+        System.out.println("[" + count + "] " + message);
+    }
 }

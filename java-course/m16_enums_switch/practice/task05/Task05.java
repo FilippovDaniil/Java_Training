@@ -24,8 +24,15 @@ import java.util.Scanner;
 public class Task05 {
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
-        String input = scanner.nextLine().trim();
-        // Ваш код здесь
+        System.out.println("Enter your level: ");
+        String input = scanner.nextLine().trim().toUpperCase(); // приводим к верхнему регистру для надёжности
+
+        try {
+            Level level = Level.valueOf(input); // пробуем преобразовать
+            System.out.println("Level: " + level.name() + ", number: " + level.ordinal());
+        } catch (IllegalArgumentException e) {
+            System.out.println("Unknown level");
+        }
 
         scanner.close();
     }

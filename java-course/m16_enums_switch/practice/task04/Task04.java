@@ -23,5 +23,10 @@ package m16_enums_switch.practice.task04;
 public class Task04 {
     public static void main(String[] args) {
         // Примените каждую операцию к 12 и 4
+        int a = 12;
+        int b = 4;
+        for (Operation operation : Operation.values()){
+            System.out.println(operation.name() + ": " + operation.apply(12,4));
+        }
     }
 }

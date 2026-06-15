@@ -1,4 +1,4 @@
-package m16_enums_switch.practice;
+package m16_enums_switch.practice.task01;
 
 /**
  * Задача 01 — Модуль 16: Базовый enum
@@ -20,6 +20,11 @@ package m16_enums_switch.practice;
 public class Task01 {
     public static void main(String[] args) {
         // Переберите Season.values()
+        Season season = Season.SPRING;
+        System.out.println(season);
+        for (Season s : Season.values()){
+            System.out.println(s.ordinal() + ": " + s.name());
+        }
     }
 }
 

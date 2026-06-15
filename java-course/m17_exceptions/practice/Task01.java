@@ -23,7 +23,12 @@ public class Task01 {
         int a = scanner.nextInt();
         int b = scanner.nextInt();
         // Ваш код здесь
-
+        try{
+            int result = a / b;
+            System.out.println("Result: " + result);
+        }catch (ArithmeticException e){
+            System.out.println("Error: delenie na nol " + e.getMessage());
+        }
         scanner.close();
     }
 }
