@@ -27,5 +27,14 @@ public class Task04 {
     public static void main(String[] args) {
         List<String> names = List.of("anna", "boris", "viktor");
         // Ваш код здесь
+        List<String> new_names = names.stream()
+                .map(String::toUpperCase)
+                .toList();
+
+        String zap = new_names.stream()
+                .collect(Collectors.joining(", "));
+
+        System.out.println(new_names);
+        System.out.println(zap);
     }
 }

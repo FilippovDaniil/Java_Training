@@ -21,10 +21,20 @@ package m24_stream_api_lambda.practice;
  */
 import java.util.Comparator;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class Task06 {
     public static void main(String[] args) {
         List<Integer> numbers = List.of(5, 2, 8, 5, 1, 8, 9, 3, 9);
         // Ваш код здесь
+        // Ваш список numbers (например, List<Integer>)
+        String result = numbers.stream()
+                .distinct()
+                .sorted(Comparator.reverseOrder())
+                .limit(3)
+                .map(String::valueOf)          // превращаем числа в строки
+                .collect(Collectors.joining(", "));
+
+        System.out.println("Top 3 unique: " + result);
     }
 }

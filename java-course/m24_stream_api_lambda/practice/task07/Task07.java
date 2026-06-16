@@ -26,18 +26,63 @@ package m24_stream_api_lambda.practice.task07;
 
 import java.util.Comparator;
 import java.util.List;
+import java.util.Map;
 import java.util.stream.Collectors;
 
 public class Task07 {
     public static void main(String[] args) {
         List<Emp> staff = List.of(
-            new Emp("Иван", "IT", 80000, 28),
-            new Emp("Мария", "HR", 60000, 35),
-            new Emp("Пётр", "IT", 95000, 41),
-            new Emp("Анна", "Sales", 70000, 30),
-            new Emp("Олег", "IT", 75000, 33),
-            new Emp("Елена", "HR", 65000, 26)
+                new Emp("Иван", "IT", 80000, 28),
+                new Emp("Мария", "HR", 60000, 35),
+                new Emp("Пётр", "IT", 95000, 41),
+                new Emp("Анна", "Sales", 70000, 30),
+                new Emp("Олег", "IT", 75000, 33),
+                new Emp("Елена", "HR", 65000, 26)
         );
-        // Ваш код здесь (используйте Stream API)
+
+        // 1) имена всех сотрудников из отдела "IT", отсортированные по алфавиту
+        List<String> itNames = staff.stream()
+                .filter(e -> e.getDept().equals("IT"))
+                .map(Emp::getName)
+                .sorted() // естественный порядок (по алфавиту)
+                .toList();
+        System.out.println("IT сотрудники: " + itNames);
+
+        // 2) средняя зарплата по компании
+        double avgSalary = staff.stream()
+                .mapToDouble(Emp::getSalary)
+                .average()
+                .orElse(0);
+        System.out.printf("Средняя зарплата: %.2f%n", avgSalary);
+
+        // 3) сотрудник с максимальной зарплатой
+        staff.stream()
+                .max(Comparator.comparingDouble(Emp::getSalary))
+                .ifPresent(e -> System.out.printf("Максимальная зарплата у %s (%s): %.0f%n",
+                        e.getName(), e.getDept(), e.getSalary()));
+
+        // 4) количество сотрудников старше 30
+        long countOver30 = staff.stream()
+                .filter(e -> e.getAge() > 30)
+                .count();
+        System.out.println("Сотрудников старше 30: " + countOver30);
+
+        // 5) группировка: отдел -> список имён сотрудников
+        Map<String, List<String>> deptToNames = staff.stream()
+                .collect(Collectors.groupingBy(
+                        Emp::getDept,
+                        Collectors.mapping(Emp::getName, Collectors.toList())
+                ));
+        System.out.println("Группировка по отделам (имена):");
+        deptToNames.forEach((dept, names) -> System.out.println(dept + " -> " + names));
+
+        // 6) суммарный фонд зарплат по каждому отделу
+        Map<String, Double> deptToSalaryFund = staff.stream()
+                .collect(Collectors.groupingBy(
+                        Emp::getDept,
+                        Collectors.summingDouble(Emp::getSalary)
+                ));
+        System.out.println("Фонд зарплат по отделам:");
+        deptToSalaryFund.forEach((dept, fund) -> System.out.printf("%s -> %.2f%n", dept, fund));
     }
 }

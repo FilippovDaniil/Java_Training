@@ -26,5 +26,11 @@ import java.util.function.Predicate;
 public class Task02 {
     public static void main(String[] args) {
         // Создайте Predicate и Function, примените их
+        Predicate<Integer> isEven = n -> n % 2 == 0;
+        Function<String, Integer> len = s -> s.length();
+        System.out.println("4 чётное ? " + isEven.test(4));
+        System.out.println("7 чётное ? " + isEven.test(7));
+        System.out.println("Длина Java: " + len.apply("Java"));
+        System.out.println("Длина Stream: " + len.apply("Stream"));
     }
 }

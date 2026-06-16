@@ -22,5 +22,9 @@ public class Task03 {
     public static void main(String[] args) {
         List<String> words = List.of("кот", "собака", "рыба", "черепаха", "ёж");
         // Ваш код здесь
+        System.out.println("Длинные слова: ");
+        words.stream()
+                .filter(l -> l.length() > 4)
+                .forEach(System.out::println);
     }
 }
