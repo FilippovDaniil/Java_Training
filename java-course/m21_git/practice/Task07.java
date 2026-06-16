@@ -31,5 +31,6 @@ package m21_git.practice;
 public class Task07 {
     public static void main(String[] args) {
         System.out.println("Выполните задание командами Git в терминале (см. комментарий выше).");
+        System.out.println("Done");
     }
 }
