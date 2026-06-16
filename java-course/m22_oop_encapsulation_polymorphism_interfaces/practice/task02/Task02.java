@@ -24,5 +24,17 @@ package m22_oop_encapsulation_polymorphism_interfaces.practice.task02;
 public class Task02 {
     public static void main(String[] args) {
         // Создайте Duck, Fish, Plane и вызовите их методы
+        Flyable duck = new Duck("Duck");
+        Swimmable duck2 = new Duck("Duck2");
+        Swimmable fish = new Fish("Fish");
+        Flyable plane = new Plane("Plane");
+        Duck duck3 = new Duck("Duck3");
+
+        duck.fly();
+        duck2.swim();
+        fish.swim();
+        plane.fly();
+        duck3.fly();
+        duck3.swim();
     }
 }

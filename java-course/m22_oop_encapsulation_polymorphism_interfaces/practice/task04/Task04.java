@@ -25,5 +25,8 @@ package m22_oop_encapsulation_polymorphism_interfaces.practice.task04;
 public class Task04 {
     public static void main(String[] args) {
         // Создайте Car, вызовите start() и stop()
+        Car car = new Car();
+        car.start();
+        car.stop();
     }
 }

@@ -21,5 +21,12 @@ package m22_oop_encapsulation_polymorphism_interfaces.practice.task01;
 public class Task01 {
     public static void main(String[] args) {
         // Создайте объекты и вызовите greet()
+        Greetable[] greets = {
+                new EnglishPerson(),
+                new RussianPerson()
+        };
+        for (Greetable greet : greets) {
+            greet.greet();
+        }
     }
 }

@@ -34,5 +34,26 @@ package m22_oop_encapsulation_polymorphism_interfaces.practice.task07;
 public class Task07 {
     public static void main(String[] args) {
         // Создайте способы оплаты, проведите заказ разными методами
+        Order order = new Order(500);
+        PaymentMethod paymentMethod = new CreditCard(1001);
+        System.out.println(order.checkOut(paymentMethod));
+        System.out.println(order.checkOut(paymentMethod));
+        System.out.println(order.checkOut(paymentMethod));
+
+        System.out.println("----------------------------------------------");
+
+        Order order1 = new Order(1000);
+        PaymentMethod paymentMethod1 = new Cash(1001);
+        System.out.println(order1.checkOut(paymentMethod1));
+        System.out.println(order1.checkOut(paymentMethod1));
+        System.out.println(order1.checkOut(paymentMethod1));
+
+        System.out.println("-----------------------------------------------");
+
+        Order order2 = new Order(2000);
+        PaymentMethod paymentMethod2 = new DIgitalWallet(10001,15);
+        System.out.println(order2.checkOut(paymentMethod2));
+        System.out.println(order2.checkOut(paymentMethod2));
+        System.out.println(order2.checkOut(paymentMethod2));
     }
 }

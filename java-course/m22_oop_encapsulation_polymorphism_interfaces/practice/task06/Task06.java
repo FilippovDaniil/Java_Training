@@ -25,5 +25,12 @@ package m22_oop_encapsulation_polymorphism_interfaces.practice.task06;
 public class Task06 {
     public static void main(String[] args) {
         // Создайте Phone и Laptop, вызовите info()
+        Device[] devices = {
+                new Laptop(),
+                new Telephone()
+        };
+        for (Device device : devices) {
+            device.info();
+        }
     }
 }

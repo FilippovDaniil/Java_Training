@@ -4,9 +4,17 @@ import java.util.ArrayList;
 import java.util.List;
 
 class Player {
-    String name;
+    private String name;
 
-    Player(String name) {
+    public Player(String name) {
+        this.name = name;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
         this.name = name;
     }
 }

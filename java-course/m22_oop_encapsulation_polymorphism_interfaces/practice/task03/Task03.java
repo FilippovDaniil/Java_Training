@@ -23,5 +23,13 @@ package m22_oop_encapsulation_polymorphism_interfaces.practice.task03;
 public class Task03 {
     public static void main(String[] args) {
         // Создайте Animal[] и в цикле вызовите sound()
+        Animal[] animals = {
+                new Dog(),
+                new Cat(),
+                new Cow()
+        };
+        for (Animal animal : animals) {
+            animal.sound();
+        }
     }
 }

@@ -29,5 +29,14 @@ import java.util.List;
 public class Task05 {
     public static void main(String[] args) {
         // Создайте игроков, затем команду из них, выведите состав
+        ArrayList<Player> players = new ArrayList<>();
+        players.add(new Player("Petr"));
+        players.add(new Player("Ivan"));
+        players.add(new Player("Anna"));
+        Team team = new Team("Socols",players);
+        System.out.println("Komand: " + team.getName());
+        for (Player player: team.getPlayers()){
+            System.out.println(" - " + player.getName());
+        }
     }
 }
