@@ -34,6 +34,40 @@ import java.util.concurrent.Future;
 
 public class Task07 {
     public static void main(String[] args) throws Exception {
-        // Разбейте диапазон, посчитайте параллельно через Callable/Future
+        int n = 1_000_000;
+        int numThreads = 4;
+        long chunkSize = n / numThreads; // 250_000
+
+        ExecutorService pool = Executors.newFixedThreadPool(numThreads);
+        List<Future<Long>> futures = new ArrayList<>();
+
+        // 1. Разбиваем диапазон и отправляем задачи
+        for (int i = 0; i < numThreads; i++) {
+            long start = i * chunkSize + 1;
+            long end = (i == numThreads - 1) ? n : (i + 1) * chunkSize;
+            Callable<Long> task = () -> {
+                long sum = 0;
+                for (long j = start; j <= end; j++) {
+                    sum += j;
+                }
+                return sum;
+            };
+            futures.add(pool.submit(task));
+        }
+
+        // 2. Собираем результаты
+        long parallelSum = 0;
+        for (Future<Long> future : futures) {
+            parallelSum += future.get(); // может выбросить исключение
+        }
+
+        // 3. Эталонная сумма
+        long expectedSum = n * (n + 1L) / 2L;
+
+        System.out.println("Параллельная сумма: " + parallelSum);
+        System.out.println("Эталон: " + expectedSum);
+
+        // 4. Завершаем пул
+        pool.shutdown();
     }
 }

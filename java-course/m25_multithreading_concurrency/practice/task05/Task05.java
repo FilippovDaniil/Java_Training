@@ -24,6 +24,18 @@ package m25_multithreading_concurrency.practice.task05;
 
 public class Task05 {
     public static void main(String[] args) throws InterruptedException {
-        // Запустите Worker, через ~1с остановите через stop(), дождитесь join()
+        Worker worker = new Worker();
+        Thread thread = new Thread(worker);
+        thread.start();
+
+        // Даём поработать ~1 секунду
+        Thread.sleep(1000);
+
+        // Останавливаем
+        worker.stop();
+        System.out.println("Остановлен");
+
+        // Дожидаемся завершения потока
+        thread.join();
     }
 }

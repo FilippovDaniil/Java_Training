@@ -23,5 +23,22 @@ package m25_multithreading_concurrency.practice.task04;
 public class Task04 {
     public static void main(String[] args) throws InterruptedException {
         // Запустите 2 потока, инкрементирующих общий Counter, сравните итоги
+
+        Counter counter = new Counter();
+        Runnable r = () -> {
+            for (int i = 0; i < 10000; i++){
+                counter.increment();
+            }
+        };
+        Thread thread = new Thread(r);
+        thread.start();
+        Thread thread1 = new Thread(r);
+        thread1.start();
+        thread.join();
+        thread1.join();
+        System.out.println(counter.getCount());
+
+
+
     }
 }

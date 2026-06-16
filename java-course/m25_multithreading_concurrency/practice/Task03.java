@@ -21,5 +21,20 @@ package m25_multithreading_concurrency.practice;
 public class Task03 {
     public static void main(String[] args) throws InterruptedException {
         // Создайте 3 потока, запустите, дождитесь через join()
+        CountThread[] threads = {
+                new CountThread(),
+                new CountThread(),
+                new CountThread()
+        };
+
+            try {
+                for (CountThread thread : threads) {
+                    thread.start();
+                    thread.join();
+                }
+            } catch (InterruptedException e){
+                System.out.println(e.getMessage());
+            }
+        }
     }
-}
+

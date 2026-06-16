@@ -27,6 +27,28 @@ import java.util.concurrent.Executors;
 
 public class Task06 {
     public static void main(String[] args) {
-        // Создайте пул на 3 потока, отправьте 9 задач, завершите пул
+        // 1. Создаём пул из 3 потоков
+        ExecutorService pool = Executors.newFixedThreadPool(3);
+
+        // 2. Отправляем 9 задач
+        for (int i = 0; i < 9; i++) {
+            int taskId = i; // для использования в лямбде
+            pool.submit(() -> {
+                String threadName = Thread.currentThread().getName();
+                System.out.println("Задача " + taskId + " в " + threadName);
+            });
+        }
+
+        // 3. Завершаем пул (новые задачи не принимаются)
+        pool.shutdown();
+
+        // (Необязательно) дождаться окончания всех задач – для примера
+        // try {
+        //     if (!pool.awaitTermination(1, TimeUnit.MINUTES)) {
+        //         pool.shutdownNow();
+        //     }
+        // } catch (InterruptedException e) {
+        //     pool.shutdownNow();
+        // }
     }
 }

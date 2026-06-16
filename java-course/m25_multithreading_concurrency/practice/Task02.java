@@ -1,5 +1,7 @@
 package m25_multithreading_concurrency.practice;
 
+import java.sql.SQLOutput;
+
 /**
  * Задача 02 — Модуль 25: Поток через Runnable и лямбду
  *
@@ -22,5 +24,17 @@ package m25_multithreading_concurrency.practice;
 public class Task02 {
     public static void main(String[] args) {
         // Создайте Runnable лямбдой и запустите поток
+        Runnable r = () -> {
+            for (int i = 0; i < 7; i++){
+                try{
+                    Thread.sleep(2000);
+                    System.out.println("catch");
+                } catch (InterruptedException e) {
+                    throw new RuntimeException(e);
+                }
+            }
+        };
+        Thread thread = new Thread(r);
+        thread.start();
     }
 }

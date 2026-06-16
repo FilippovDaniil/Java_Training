@@ -23,6 +23,8 @@ package m25_multithreading_concurrency.practice;
 public class Task01 {
     public static void main(String[] args) {
         // Создайте и запустите поток через start()
+        CountThread countThread = new CountThread();
+        countThread.start();
     }
 }
 
