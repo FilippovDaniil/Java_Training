@@ -1,5 +1,7 @@
 package m23_oop_overloading_overriding_abstract.practice.task07;
 
+import java.util.ArrayList;
+
 /**
  * Задача 07 — Модуль 23 (МИНИ-ПРОЕКТ): Геометрический калькулятор
  *
@@ -32,6 +34,15 @@ package m23_oop_overloading_overriding_abstract.practice.task07;
 // TODO: Circle, Square, Rectangle (extends Shape) и класс ShapeUtils со static-методами
 public class Task07 {
     public static void main(String[] args) {
-        // Создайте массив фигур и обработайте через ShapeUtils
+        // Создайте массив фигур и обработайте через
+        ArrayList<Shape> shapes = new ArrayList<>();
+        shapes.add(new Circle("Circle", 10));
+        shapes.add(new Rectangle("Rectangle", 15, 20));
+        shapes.add(new Square("Square", 20));
+        for (Shape shape : shapes) {
+            System.out.println(shape.getName() + ": S=" + shape.area() + ", P=" + shape.perimeter());
+        }
+        System.out.println("Sum of areas: " + ShapeUtils.totalArea(shapes));
+        System.out.println("The biggest figure is: " + ShapeUtils.largestAreaOfShape(shapes).getName());
     }
 }

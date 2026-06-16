@@ -23,5 +23,12 @@ package m23_oop_overloading_overriding_abstract.practice.task02;
 public class Task02 {
     public static void main(String[] args) {
         // Создайте Employee и Manager, вызовите describe()
+        Employee[] employees = {
+                new Manager("Petr"),
+                new Employee("Ivan")
+        };
+        for (Employee employee : employees) {
+            employee.describe();
+        }
     }
 }

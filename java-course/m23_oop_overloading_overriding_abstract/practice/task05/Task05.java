@@ -24,5 +24,15 @@ package m23_oop_overloading_overriding_abstract.practice.task05;
 public class Task05 {
     public static void main(String[] args) {
         // Создайте два анонимных Command и вызовите execute()
+        Command save = new Command() {
+            public void execute() { System.out.println("Сохранение...");}
+        };
+        save.execute();
+
+        Command load = new Command() {
+            public void execute() { System.out.println("Загрузка...");}
+        };
+        load.execute();
+
     }
 }

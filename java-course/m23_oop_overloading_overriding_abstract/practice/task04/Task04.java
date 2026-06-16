@@ -1,5 +1,7 @@
 package m23_oop_overloading_overriding_abstract.practice.task04;
 
+import java.util.ArrayList;
+
 /**
  * Задача 04 — Модуль 23: Иерархия фигур (площадь и периметр)
  *
@@ -27,5 +29,12 @@ package m23_oop_overloading_overriding_abstract.practice.task04;
 public class Task04 {
     public static void main(String[] args) {
         // Создайте Figure[] из Circle, Rectangle, Triangle и обойдите его
+        ArrayList<Figure> figures = new ArrayList<>();
+        figures.add(new Circle("Circle",7));
+        figures.add(new Rectangle("Rectangle", 10, 5));
+        figures.add(new Triangle("Triangle", 3,4,5));
+        for (Figure figure : figures) {
+            figure.describe();
+        }
     }
 }

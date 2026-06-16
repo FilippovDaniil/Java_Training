@@ -1,16 +1,21 @@
 package m23_oop_overloading_overriding_abstract.practice.task07;
 
 abstract class Shape {
-    String name;
+
+    protected String name;
 
     Shape(String name) {
         this.name = name;
     }
 
-    abstract double area();
-    abstract double perimeter();
+    protected abstract double area();
+    protected abstract double perimeter();
 
-    boolean isLargerThan(Shape other) {
+    public boolean isLargerThan(Shape other) {
         return this.area() > other.area();
+    }
+
+    public String getName() {
+        return name;
     }
 }

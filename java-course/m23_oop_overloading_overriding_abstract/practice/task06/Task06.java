@@ -23,5 +23,11 @@ package m23_oop_overloading_overriding_abstract.practice.task06;
 public class Task06 {
     public static void main(String[] args) {
         // Создайте векторы, сложите их обеими версиями add
+        Vector2D vector2D = new Vector2D(1,2);
+        Vector2D vector2D1 = new Vector2D(3,4);
+        System.out.println(vector2D);
+        System.out.println(vector2D1);
+        System.out.println(vector2D.add(vector2D1));
+        System.out.println(vector2D.add(10,10));
     }
 }

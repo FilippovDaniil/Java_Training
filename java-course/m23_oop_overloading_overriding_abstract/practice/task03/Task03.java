@@ -23,5 +23,7 @@ package m23_oop_overloading_overriding_abstract.practice.task03;
 public class Task03 {
     public static void main(String[] args) {
         // Создайте Square и вызовите printArea()
+        Shape square = new Square(45);
+        square.printArea();
     }
 }
