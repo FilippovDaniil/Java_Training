@@ -27,5 +27,12 @@ import java.lang.reflect.Method;
 public class Task04 {
     public static void main(String[] args) throws Exception {
         // Создайте Greeter и вызовите greet через рефлексию
+        Constructor<?> ctor;
+        ctor = Greeter.class.getConstructor();
+        ctor.setAccessible(true);
+        Object g = ctor.newInstance();
+        Method m = Greeter.class.getMethod("greet", String.class);
+        Object res = m.invoke(g, "Мир");
+        System.out.println(res);
     }
 }

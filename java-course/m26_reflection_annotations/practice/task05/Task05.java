@@ -28,6 +28,13 @@ import java.lang.annotation.Target;
 
 public class Task05 {
     public static void main(String[] args) {
-        // Прочитайте аннотацию @Info у класса Module через рефлексию
+        // Получаем объект аннотации для класса Module
+        info info1 = Module.class.getAnnotation(info.class);
+
+        if (info1 != null) {
+            System.out.println("Автор: " + info1.author() + ", версия: " + info1.version());
+        } else {
+            System.out.println("Аннотация не найдена");
+        }
     }
 }

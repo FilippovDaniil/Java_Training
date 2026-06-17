@@ -35,10 +35,55 @@ import java.lang.annotation.ElementType;
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 import java.lang.annotation.Target;
+import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 
 public class Task07 {
+
     public static void main(String[] args) {
-        // Запустите TestRunner для класса MathTests
+        // Запускаем тесты для класса MathTests
+        runTests(MathTests.class);
+    }
+
+    private static void runTests(Class<?> testClass) {
+        // Получаем все методы класса
+        Method[] methods = testClass.getDeclaredMethods();
+
+        int total = 0;
+        int passed = 0;
+
+        System.out.println("Запуск тестов:");
+
+        // Создаём экземпляр тестового класса
+        Object instance = null;
+        try {
+            instance = testClass.getDeclaredConstructor().newInstance();
+        } catch (Exception e) {
+            System.err.println("Не удалось создать экземпляр класса: " + e.getMessage());
+            return;
+        }
+
+        for (Method m : methods) {
+            // Проверяем, помечен ли метод аннотацией @MyTest
+            if (m.isAnnotationPresent(MyTest.class)) {
+                total++;
+                System.out.print(m.getName() + ": ");
+                try {
+                    // Вызываем метод
+                    m.invoke(instance);
+                    System.out.println("PASSED");
+                    passed++;
+                } catch (InvocationTargetException e) {
+                    // Тест упал – исключение внутри метода
+                    Throwable cause = e.getCause();
+                    String message = (cause != null) ? cause.getMessage() : "без сообщения";
+                    System.out.println("FAILED (" + message + ")");
+                } catch (IllegalAccessException e) {
+                    System.out.println("FAILED (недоступный метод)");
+                }
+            }
+        }
+
+        System.out.println("Итог: " + passed + " из " + total + " пройдено");
     }
 }

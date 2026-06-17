@@ -21,5 +21,8 @@ import java.lang.reflect.Method;
 public class Task03 {
     public static void main(String[] args) {
         // Переберите getDeclaredMethods() класса Calculator
+        for (Method m : Calculator.class.getDeclaredMethods()){
+            System.out.println(m.getName() + ": return " + m.getReturnType().getSimpleName() + ", parameters: " + m.getParameterCount());
+        }
     }
 }

@@ -7,9 +7,13 @@ import java.lang.annotation.Target;
 import java.lang.reflect.Method;
 
 class Service {
-    // TODO: пометьте часть методов аннотацией @Important
+    @Important
     void processPayment() { }
+
     void log() { }
+
+    @Important
     void deleteAccount() { }
+
     void ping() { }
 }

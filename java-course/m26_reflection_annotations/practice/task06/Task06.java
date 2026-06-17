@@ -25,6 +25,16 @@ import java.lang.reflect.Method;
 
 public class Task06 {
     public static void main(String[] args) {
-        // Найдите методы Service, помеченные @Important
+        System.out.println("Важные методы:");
+
+        // Получаем все методы класса Service (включая package-private и private)
+        Method[] methods = Service.class.getDeclaredMethods();
+
+        for (Method m : methods) {
+            // Проверяем наличие аннотации @Important
+            if (m.isAnnotationPresent(Important.class)) {
+                System.out.println(m.getName());
+            }
+        }
     }
 }

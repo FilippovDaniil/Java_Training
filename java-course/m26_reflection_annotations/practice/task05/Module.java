@@ -8,5 +8,8 @@ import java.lang.annotation.Target;
 // TODO: объявите аннотацию @Info (RUNTIME, TYPE)
 
 // TODO: пометьте класс Module аннотацией @Info(author=..., version=...)
-class Module {
+
+@info(author = "Ivanov", version = "2.5")
+public class Module {
+
 }

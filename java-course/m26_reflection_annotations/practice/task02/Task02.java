@@ -23,5 +23,10 @@ import java.lang.reflect.Field;
 public class Task02 {
     public static void main(String[] args) {
         // Переберите getDeclaredFields() класса Person
+
+        System.out.println("Fields of Person: ");
+        for (Field f : Person.class.getDeclaredFields()){
+            System.out.println(f.getType().getSimpleName() + ": " + f.getName());
+        }
     }
 }
