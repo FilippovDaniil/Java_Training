@@ -19,14 +19,40 @@ package m28_junit.practice.task01;
  *   Помните паттерн AAA: Arrange → Act → Assert.
  */
 
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.*;
 
 public class Task01 {
 
+    @BeforeEach
+    void setUp() {            // выполняется ПЕРЕД каждым тестом
+        Calculator calc = new Calculator();
+    }
+
     @Test
+    @DisplayName("Сложение двух чисел")
     void testAdd() {
         // Ваш код здесь
+        int result = Calculator.add(2,3);
+        assertEquals(5,result);
+    }
+
+    @Test
+    @DisplayName("Вычитание двух чисел")
+    void testSubstract() {
+        // Ваш код здесь
+        int result = Calculator.subtract(2,3);
+        assertEquals(-1,result);
+    }
+
+    @Test
+    @DisplayName("Умножение двух чисел")
+    void testMultipy() {
+        // Ваш код здесь
+        int result = Calculator.multiply(2,3);
+        assertEquals(6,result);
     }
 
     // TODO: добавьте тесты testSubtract и testMultiply
