@@ -23,5 +23,6 @@ package m27_maven.practice;
 public class Task06 {
     public static void main(String[] args) {
         System.out.println("Выполните задание в терминале (см. комментарий выше).");
+        System.out.println("Done");
     }
 }
