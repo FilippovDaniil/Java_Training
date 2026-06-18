@@ -1,5 +1,7 @@
 package m30_design_patterns.practice.task04;
 
+import java.util.ArrayList;
+
 /**
  * Задача 04 — Модуль 30: Strategy (стратегия)
  *
@@ -26,5 +28,12 @@ package m30_design_patterns.practice.task04;
 public class Task04 {
     public static void main(String[] args) {
         // Меняйте стратегию оплаты и вызывайте checkout
+        ArrayList<ShoppingCart> arrayList = new ArrayList<>();
+        arrayList.add(new ShoppingCart(new CardPayment()));
+        arrayList.add(new ShoppingCart(new CashPayment()));
+        arrayList.add(new ShoppingCart(new CryptoPayment()));
+        for (ShoppingCart shoppingCart : arrayList) {
+            shoppingCart.checkOut(1000);
+        }
     }
 }

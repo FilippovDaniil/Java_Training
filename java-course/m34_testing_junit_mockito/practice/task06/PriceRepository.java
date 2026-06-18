@@ -6,4 +6,6 @@ import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.*;
 
 // Классы под тестом (готовы)
-interface PriceRepository { double getPrice(long productId); }
+interface PriceRepository {
+    double getPrice(long productId);
+}

@@ -27,5 +27,7 @@ import com.google.common.base.Splitter;
 public class Task05 {
     public static void main(String[] args) {
         // Используйте Joiner и Splitter
+        String joined = Joiner.on(", ").skipNulls().join("apple","banano", "grusha");  // "a, c"
+        System.out.println(joined);
     }
 }

@@ -10,6 +10,12 @@ import static org.mockito.Mockito.*;
 
 class OrderService {
     private final PaymentGateway gateway;
-    OrderService(PaymentGateway gateway) { this.gateway = gateway; }
-    boolean placeOrder(double amount) { return gateway.charge(amount); }
+
+    OrderService(PaymentGateway gateway) {
+        this.gateway = gateway;
+    }
+
+    boolean placeOrder(double amount) {
+        return gateway.charge(amount);
+    }
 }

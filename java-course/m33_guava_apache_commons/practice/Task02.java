@@ -28,5 +28,9 @@ import com.google.common.collect.HashBiMap;
 public class Task02 {
     public static void main(String[] args) {
         // Создайте BiMap кодов стран и ищите в обе стороны
+        BiMap<String,String> b = HashBiMap.create();
+        b.put("RU","Россия");
+        System.out.println(b.inverse().get("Россия"));
+        System.out.println(b.get("RU"));
     }
 }

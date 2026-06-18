@@ -28,6 +28,36 @@ package m30_design_patterns.practice.task06;
 
 public class Task06 {
     public static void main(String[] args) {
-        // Создайте ProxyImage, дважды вызовите display() — загрузка один раз
+        System.out.println("=== Паттерн Proxy: Ленивая загрузка ===\n");
+
+        // 1. Создаем прокси (без загрузки)
+        System.out.println("1. Создаем ProxyImage для 'photo.jpg':");
+        ProxyImage image1 = new ProxyImage("photo.jpg");
+
+        // 2. Первый вызов display() - происходит загрузка
+        System.out.println("\n2. Первый вызов display():");
+        image1.display();
+
+        // 3. Второй вызов display() - загрузка НЕ происходит
+        System.out.println("\n3. Второй вызов display():");
+        image1.display();
+
+        // 4. Третий вызов display() - снова без загрузки
+        System.out.println("\n4. Третий вызов display():");
+        image1.display();
+
+        // 5. Создаем еще один прокси
+        System.out.println("\n5. Создаем ProxyImage для 'avatar.png':");
+        ProxyImage image2 = new ProxyImage("avatar.png");
+
+        // 6. Первый вызов для второго изображения
+        System.out.println("\n6. Первый вызов display() для avatar.png:");
+        image2.display();
+
+        System.out.println("\n" + "=" .repeat(50));
+        System.out.println("📊 Статистика:");
+        System.out.println("   Изображение 1 (photo.jpg) - показано: " + image1.getDisplayCount() + " раз");
+        System.out.println("   Изображение 2 (avatar.png) - показано: " + image2.getDisplayCount() + " раз");
+        System.out.println("   Загрузка произошла только 2 раза (по одному на каждое изображение)");
     }
 }

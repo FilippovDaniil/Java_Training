@@ -25,5 +25,12 @@ package m30_design_patterns.practice.task01;
 public class Task01 {
     public static void main(String[] args) {
         // Получите экземпляр несколько раз, сравните через ==, выполните query
+        Database database1 = Database.getInstance();
+        Database database2 = Database.getInstance();
+        Database database3 = Database.getInstance();
+        System.out.println(database1==database2);
+        System.out.println(database3==database2);
+        System.out.println(database3==database1);
+
     }
 }

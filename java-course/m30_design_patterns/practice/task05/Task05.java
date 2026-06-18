@@ -30,5 +30,16 @@ import java.util.List;
 public class Task05 {
     public static void main(String[] args) {
         // Подпишите наблюдателей, публикуйте новости, отпишите одного
+        ArrayList<Observer> observers = new ArrayList<>();
+        observers.add(new SmsSubscriber());
+        observers.add(new EmailSubscriber());
+
+        NewsAgency newsAgency = new NewsAgency();
+        newsAgency.subscribe(observers.get(0));
+        newsAgency.subscribe(observers.get(1));
+        newsAgency.publish("Срочные новости !!!");
+        System.out.println();
+        newsAgency.unsubscribe(observers.get(1));
+        newsAgency.publish("Очень Срочные новости !!!");
     }
 }

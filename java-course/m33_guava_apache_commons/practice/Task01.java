@@ -27,6 +27,14 @@ import com.google.common.collect.Multimap;
 
 public class Task01 {
     public static void main(String[] args) {
-        // Создайте Multimap и заполните его категориями товаров
+        // Создайте Multimap и заполните его категориями
+        Multimap<String, String> m = ArrayListMultimap.create();
+        m.put("Fruits","apple");
+        m.put("Fruits","mango");
+        m.put("Fruits","watemelon");
+        m.put("Wegetables","carrot");
+        m.put("Wegetables","potato");
+        System.out.println(m.get("Fruits"));
+        System.out.println(m.get("Wegetables"));
     }
 }

@@ -27,15 +27,23 @@ import org.mockito.junit.jupiter.MockitoExtension;
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.*;
 
+@ExtendWith(MockitoExtension.class)
 public class Task03 {
 
-    @Mock PaymentGateway gateway;
-    @InjectMocks OrderService service;
+    @Mock
+    PaymentGateway gateway;
+    @InjectMocks
+    OrderService service;
 
     @Test
     void testSuccessfulOrder() {
         // when(gateway.charge(...)).thenReturn(true); assertTrue(service.placeOrder(...))
+        when(gateway.charge(100)).thenReturn(true);
+        assertTrue(service.placeOrder(100));
+        when(gateway.charge(200)).thenReturn(false);
+        assertFalse(service.placeOrder(200));
     }
 
     // TODO: тест на неуспешную оплату
+
 }

@@ -49,12 +49,34 @@ import org.apache.commons.lang3.StringUtils;
 public class Task07 {
     public static void main(String[] args) {
         String[] logs = {
-            "INFO;auth;Вход выполнен",
-            "ERROR;db;Нет соединения",
-            "INFO;auth;Выход",
-            "WARN;db;Медленный запрос",
-            "ERROR;auth;Неверный пароль"
+                "INFO;auth;Вход выполнен",
+                "ERROR;db;Нет соединения",
+                "INFO;auth;Выход",
+                "WARN;db;Медленный запрос",
+                "ERROR;auth;Неверный пароль",
+                "",  // Пустая строка
+                "INFO;;Сообщение без модуля",
+                "ERROR;db;", // Сообщение пустое
+                "  DEBUG;cache;Тестовое сообщение  ",
+                null, // null строка
+                "WARN;db;Долгий запрос",
+                "INFO;auth;Повторный вход"
         };
-        // Постройте отчёт по уровням и модулям, используя Guava + Commons
+
+        System.out.println("=== АНАЛИЗАТОР ЛОГОВ ===\n");
+
+        // Создаем анализатор и обрабатываем логи
+        LogAnalyzer analyzer = new LogAnalyzer();
+        analyzer.analyzeLogs(logs);
+
+        // Выводим отчет
+        analyzer.printReport();
+
+        // Дополнительная статистика
+        System.out.println("\n" + "=" .repeat(60));
+        System.out.println("\nДополнительная статистика:");
+        analyzer.printAdditionalStats();
     }
 }
+
+

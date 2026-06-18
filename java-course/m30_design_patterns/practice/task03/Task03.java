@@ -23,5 +23,12 @@ package m30_design_patterns.practice.task03;
 public class Task03 {
     public static void main(String[] args) {
         // Соберите бургеры через Builder и выведите их
+        Burger burger = Burger.builder()
+        .bulochka("Bulochka")
+                .bekon("Bekon")
+                .kotleta("Kotleta")
+        .build();
+
+        System.out.println(burger);
     }
 }

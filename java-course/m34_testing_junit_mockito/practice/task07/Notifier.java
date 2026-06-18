@@ -9,4 +9,6 @@ import org.mockito.junit.jupiter.MockitoExtension;
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.*;
 
-interface Notifier { void notify(String message); }
+interface Notifier {
+    void notify(String message);
+}

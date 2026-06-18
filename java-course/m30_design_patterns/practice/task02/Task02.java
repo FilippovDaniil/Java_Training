@@ -1,5 +1,7 @@
 package m30_design_patterns.practice.task02;
 
+import java.util.ArrayList;
+
 /**
  * Задача 02 — Модуль 30: Factory Method (фабричный метод)
  *
@@ -25,5 +27,12 @@ package m30_design_patterns.practice.task02;
 public class Task02 {
     public static void main(String[] args) {
         // Создайте уведомления через NotificationFactory и отправьте
+        ArrayList<Notification> arrayList = new ArrayList<>();
+        arrayList.add(NotificationFactory.create("Sms"));
+        arrayList.add(NotificationFactory.create("Push"));
+        arrayList.add(NotificationFactory.create("Email"));
+        for (Notification notification : arrayList) {
+            notification.send("check");
+        }
     }
 }

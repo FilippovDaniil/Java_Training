@@ -19,13 +19,24 @@ package m34_testing_junit_mockito.practice.task01;
  */
 
 import org.junit.jupiter.api.Test;
+import org.mockito.InjectMocks;
+import org.mockito.Mock;
+
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.*;
 
 public class Task01 {
 
+    @Mock
+    UserRepository repo = mock(UserRepository.class);
+
+    @InjectMocks
+    UserService userService = new UserService(repo);
+
     @Test
     void testGreet() {
         // Создайте мок, настройте when/thenReturn, проверьте результат
+        when(repo.findName(1)).thenReturn("Ivan");
+        assertEquals("Привет, Ivan",userService.greet(1));
     }
 }

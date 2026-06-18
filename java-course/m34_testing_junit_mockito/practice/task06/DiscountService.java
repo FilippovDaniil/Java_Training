@@ -6,8 +6,13 @@ import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.*;
 
 class DiscountService {
+
     private final PriceRepository repo;
-    DiscountService(PriceRepository repo) { this.repo = repo; }
+
+    DiscountService(PriceRepository repo) {
+        this.repo = repo;
+    }
+
     double finalPrice(long productId, int discountPercent) {
         double base = repo.getPrice(productId);
         return base * (1 - discountPercent / 100.0);

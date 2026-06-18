@@ -9,4 +9,6 @@ import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.*;
 
 // Классы под тестом (готовы)
-interface PaymentGateway { boolean charge(double amount); }
+interface PaymentGateway {
+    boolean charge(double amount);
+}

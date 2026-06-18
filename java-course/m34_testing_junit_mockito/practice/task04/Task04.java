@@ -18,16 +18,74 @@ package m34_testing_junit_mockito.practice.task04;
  *   when(api.fetch()).thenReturn("данные"); — для счастливого пути.
  */
 
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
+import org.mockito.InjectMocks;
+import org.mockito.Mock;
+import org.mockito.MockitoAnnotations;
+import org.mockito.junit.jupiter.MockitoExtension;
+
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.*;
 
+@ExtendWith(MockitoExtension.class)
 public class Task04 {
+
+    @Mock
+    private RemoteApi remoteApi;
+
+    @InjectMocks
+    private DataLoader dataLoader;
+
+    @Test
+    void testLoadSafeSuccess() {
+        // Счастливый путь: fetch() возвращает данные
+        String expectedData = "данные с сервера";
+        when(remoteApi.fetch()).thenReturn(expectedData);
+
+        String result = dataLoader.loadSafe();
+
+        assertEquals(expectedData, result);
+        verify(remoteApi, times(1)).fetch();
+    }
 
     @Test
     void testLoadSafeHandlesFailure() {
-        // Настройте мок на thenThrow и проверьте graceful-обработку
+        // Несчастливый путь: fetch() бросает исключение
+        when(remoteApi.fetch()).thenThrow(new RuntimeException("network down"));
+
+        String result = dataLoader.loadSafe();
+
+        assertEquals("", result);
+        verify(remoteApi, times(1)).fetch();
     }
 
-    // TODO: тест счастливого пути (thenReturn)
+    @Test
+    void testLoadSafeDoesNotThrowException() {
+        // Проверяем, что loadSafe никогда не бросает исключение
+        when(remoteApi.fetch()).thenThrow(new RuntimeException("error"));
+
+        assertDoesNotThrow(() -> dataLoader.loadSafe());
+
+        verify(remoteApi).fetch();
+    }
+
+    @Test
+    void testLoadSafeWithDifferentData() {
+        // Пустая строка
+        when(remoteApi.fetch()).thenReturn("");
+        assertEquals("", dataLoader.loadSafe());
+
+        // Обычные данные
+        when(remoteApi.fetch()).thenReturn("some data");
+        assertEquals("some data", dataLoader.loadSafe());
+
+        // Длинные данные
+        String longData = "a".repeat(1000);
+        when(remoteApi.fetch()).thenReturn(longData);
+        assertEquals(longData, dataLoader.loadSafe());
+
+        verify(remoteApi, times(3)).fetch();
+    }
 }

@@ -9,5 +9,8 @@ import static org.mockito.Mockito.*;
 class LogEntry {
     String user;
     String message;
-    LogEntry(String user, String message) { this.user = user; this.message = message; }
+    LogEntry(String user, String message) {
+        this.user = user;
+        this.message = message;
+    }
 }

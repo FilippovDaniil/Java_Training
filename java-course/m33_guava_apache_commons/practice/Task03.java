@@ -26,9 +26,20 @@ package m33_guava_apache_commons.practice;
 import com.google.common.collect.HashMultiset;
 import com.google.common.collect.Multiset;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+
 public class Task03 {
     public static void main(String[] args) {
         String text = "кот пёс кот рыба кот пёс";
+        List<String> list1 = new ArrayList<>(Arrays.asList(text.split(" ")));
         // Посчитайте частоту слов через Multiset
+        Multiset<String> ms = HashMultiset.create();
+        for (String string : list1) {
+            ms.add(string);
+        }
+        System.out.println(ms);
+
     }
 }

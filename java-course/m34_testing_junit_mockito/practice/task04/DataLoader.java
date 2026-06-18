@@ -5,8 +5,12 @@ import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.*;
 
 class DataLoader {
+
     private final RemoteApi api;
-    DataLoader(RemoteApi api) { this.api = api; }
+
+    DataLoader(RemoteApi api) {
+        this.api = api;
+    }
     String loadSafe() {
         try {
             return api.fetch();
