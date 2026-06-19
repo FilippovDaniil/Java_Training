@@ -23,7 +23,87 @@ package m46_sql_queries.practice;
 public class Task05 {
     public static void main(String[] args) {
         String sql = """
-            -- Напишите запросы с LEFT JOIN
+            -- ============================================
+            -- ПОДГОТОВКА ТАБЛИЦ customers И orders
+            -- ============================================
+            
+            CREATE TABLE IF NOT EXISTS customers (
+                id   INT PRIMARY KEY AUTO_INCREMENT,
+                name VARCHAR(100) NOT NULL,
+                city VARCHAR(50)
+            );
+            
+            CREATE TABLE IF NOT EXISTS orders (
+                id          INT PRIMARY KEY AUTO_INCREMENT,
+                customer_id INT,
+                amount      DECIMAL(10, 2) CHECK (amount >= 0),
+                order_date  DATE,
+                FOREIGN KEY (customer_id) REFERENCES customers(id)
+            );
+            
+            INSERT INTO customers (name, city) VALUES
+                ('Иван Петров', 'Москва'),
+                ('Мария Смирнова', 'Санкт-Петербург'),
+                ('Петр Сидоров', 'Москва'),
+                ('Анна Кузнецова', 'Новосибирск'),
+                ('Сергей Иванов', 'Москва'),
+                ('Елена Петрова', 'Казань'),
+                ('Алексей Васильев', 'Москва'),     -- без заказов
+                ('Ольга Павлова', 'Екатеринбург');  -- без заказов
+            
+            INSERT INTO orders (customer_id, amount, order_date) VALUES
+                (1, 1500.00, '2024-01-15'),
+                (1, 2000.00, '2024-01-20'),
+                (2, 3000.00, '2024-01-16'),
+                (3, 4500.00, '2024-01-17'),
+                (3, 1200.00, '2024-01-22'),
+                (4, 2500.00, '2024-01-18'),
+                (5, 800.00, '2024-01-19'),
+                (5, 900.00, '2024-01-23'),
+                (5, 1100.00, '2024-01-25');
+            
+            -- ============================================
+            -- 1) ВСЕ КЛИЕНТЫ И ИХ ЗАКАЗЫ (LEFT JOIN)
+            -- ============================================
+            SELECT 
+                c.id AS customer_id,
+                c.name AS customer,
+                c.city,
+                o.id AS order_id,
+                o.amount,
+                o.order_date
+            FROM customers c
+            LEFT JOIN orders o ON c.id = o.customer_id
+            ORDER BY c.id, o.order_date;
+            
+            -- ============================================
+            -- 2) КЛИЕНТЫ БЕЗ ЗАКАЗОВ
+            -- ============================================
+            SELECT 
+                c.id,
+                c.name,
+                c.city
+            FROM customers c
+            LEFT JOIN orders o ON c.id = o.customer_id
+            WHERE o.id IS NULL
+            ORDER BY c.name;
+            
+            -- ============================================
+            -- 3) КОЛИЧЕСТВО ЗАКАЗОВ У КАЖДОГО КЛИЕНТА
+            -- ============================================
+            SELECT 
+                c.id,
+                c.name,
+                c.city,
+                COUNT(o.id) AS order_count,
+                COALESCE(SUM(o.amount), 0) AS total_spent,
+                COALESCE(ROUND(AVG(o.amount), 2), 0) AS avg_amount,
+                COALESCE(MIN(o.amount), 0) AS min_amount,
+                COALESCE(MAX(o.amount), 0) AS max_amount
+            FROM customers c
+            LEFT JOIN orders o ON c.id = o.customer_id
+            GROUP BY c.id, c.name, c.city
+            ORDER BY order_count DESC, total_spent DESC;
             """;
         System.out.println(sql);
     }
