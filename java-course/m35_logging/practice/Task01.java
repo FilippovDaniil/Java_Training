@@ -29,5 +29,10 @@ public class Task01 {
 
     public static void main(String[] args) {
         // Выведите сообщения всех пяти уровней
+        log.trace("Очень детально");
+        log.debug("Значение x = ");
+        log.info("Пользователь вошёл");
+        log.warn("Память на исходе:");
+        log.error("Не удалось сохранить");
     }
 }

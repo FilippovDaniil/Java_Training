@@ -30,5 +30,18 @@ public class Task03 {
     public static void main(String[] args) {
         String input = "abc";
         // Спровоцируйте и залогируйте исключение через log.error(..., e)
+        try{
+            int a = 5;
+            int b = 0;
+            int c = a / b;
+        } catch (ArithmeticException e){
+            log.error("Не удалось произвести деление: " + e.getMessage());
+        }
+
+        try{
+            Integer.parseInt(input);
+        } catch (NumberFormatException e){
+            log.error("Не удалось привести строку к чсилу: " + e.getMessage());
+        }
     }
 }

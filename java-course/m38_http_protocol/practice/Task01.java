@@ -21,6 +21,7 @@ package m38_http_protocol.practice;
  *   HttpResponse<String> resp = client.send(req, BodyHandlers.ofString());
  *   client.send бросает IOException и InterruptedException.
  */
+import java.io.IOException;
 import java.net.URI;
 import java.net.http.HttpClient;
 import java.net.http.HttpRequest;
@@ -29,5 +30,24 @@ import java.net.http.HttpResponse;
 public class Task01 {
     public static void main(String[] args) throws Exception {
         // Отправьте GET и выведите statusCode() и body()
+        HttpClient client = HttpClient.newHttpClient();
+
+        HttpRequest request = HttpRequest.newBuilder()
+                .uri(URI.create("https://jsonplaceholder.typicode.com/todos/1"))
+                .GET()
+                .header("Accept", "application/json")
+                .build();
+
+        try{
+            HttpResponse<String> response = client.send(request,
+                    HttpResponse.BodyHandlers.ofString());
+            System.out.println(response.statusCode());   // 200
+            System.out.println(response.body());          // тело ответа
+        } catch (InterruptedException e) {
+            throw new RuntimeException(e);
+        } catch (IOException e){
+            throw new RuntimeException(e);
+        }
+
     }
 }

@@ -19,7 +19,21 @@ package m44_databases_intro.practice;
 public class Task03 {
     public static void main(String[] args) {
         String sql = """
-            -- Напишите здесь 4 запроса SELECT
+            -- ============================================
+            -- ЗАПРОСЫ ВЫБОРКИ ДАННЫХ ИЗ ТАБЛИЦЫ books
+            -- ============================================
+            
+            -- 1. Все книги (все столбцы)
+            SELECT * FROM books;
+            
+            -- 2. Только названия и цены
+            SELECT title, price FROM books;
+            
+            -- 3. Книги, изданные после 2015 года
+            SELECT * FROM books WHERE year > 2015;
+            
+            -- 4. Книги дороже 500, отсортированные по цене по убыванию
+            SELECT * FROM books WHERE price > 500 ORDER BY price DESC;
             """;
         System.out.println(sql);
     }

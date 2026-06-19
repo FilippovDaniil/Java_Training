@@ -21,7 +21,17 @@ package m44_databases_intro.practice;
 public class Task01 {
     public static void main(String[] args) {
         String sql = """
-            -- Напишите здесь CREATE TABLE books (...);
+            -- Создание таблицы books
+            CREATE TABLE IF NOT EXISTS books (
+                id     INT PRIMARY KEY AUTO_INCREMENT,
+                title  VARCHAR(200) NOT NULL,
+                author VARCHAR(100),
+                year   INT,
+                price  DECIMAL(10, 2)
+            );
+            
+            -- Проверка структуры таблицы
+            DESCRIBE books;
             """;
         System.out.println(sql);
     }
