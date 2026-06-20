@@ -42,105 +42,134 @@ package m49_jdbc_1.practice;
  *   - Все SQL-параметры — через PreparedStatement (никакой конкатенации строк!).
  */
 import java.math.BigDecimal;
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.Statement;
+import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
 public class Task07 {
 
-    // Готовый record — не изменять
-    record Product(long id, String name, BigDecimal price, int quantity) {
-        // Конструктор для создания нового (id=0, заполняется после INSERT)
-        Product(String name, BigDecimal price, int quantity) {
-            this(0, name, price, quantity);
-        }
-
-        @Override
-        public String toString() {
-            return String.format("Product[id=%d, name='%s', price=%s, qty=%d]",
-                    id, name, price, quantity);
-        }
-    }
-
-    // Готовый каркас DAO — реализовать все TODO
-    static class ProductDao {
-        private final Connection conn;
-
-        ProductDao(Connection conn) {
-            this.conn = conn;
-        }
-
-        /** Создаёт таблицу products если её ещё нет */
-        void createTable() throws Exception {
-            // TODO: выполните CREATE TABLE IF NOT EXISTS products (
-            //         id       BIGINT AUTO_INCREMENT PRIMARY KEY,
-            //         name     VARCHAR(100) NOT NULL,
-            //         price    DECIMAL(10,2) NOT NULL,
-            //         quantity INT NOT NULL DEFAULT 0
-            //       ) через Statement.executeUpdate()
-        }
-
-        /** Вставляет товар; возвращает id, присвоенный базой */
-        long add(Product p) throws Exception {
-            // TODO: подготовьте PreparedStatement с RETURN_GENERATED_KEYS,
-            //       установите параметры, выполните, извлеките и верните сгенерированный id
-            return -1;
-        }
-
-        /** Возвращает все товары, упорядоченные по id */
-        List<Product> findAll() throws Exception {
-            // TODO: выполните SELECT * FROM products ORDER BY id,
-            //       смаппьте каждую строку ResultSet в Product, верните список
-            return new ArrayList<>();
-        }
-
-        /** Ищет товар по id */
-        Optional<Product> findById(long id) throws Exception {
-            // TODO: выполните SELECT ... WHERE id=? через PreparedStatement,
-            //       если строка найдена — верните Optional.of(product),
-            //       иначе — Optional.empty()
-            return Optional.empty();
-        }
-
-        /** Обновляет имя, цену и количество товара; возвращает число затронутых строк */
-        int update(Product p) throws Exception {
-            // TODO: UPDATE products SET name=?, price=?, quantity=? WHERE id=?
-            return 0;
-        }
-
-        /** Удаляет товар по id; возвращает число затронутых строк */
-        int delete(long id) throws Exception {
-            // TODO: DELETE FROM products WHERE id=?
-            return 0;
-        }
-    }
-
     public static void main(String[] args) throws Exception {
         String url  = "jdbc:h2:mem:testdb;DB_CLOSE_DELAY=-1";
         String user = "sa";
         String pass = "";
 
+        System.out.println("=== КОНСОЛЬНЫЙ CRUD-КАТАЛОГ ТОВАРОВ ===\n");
+
         try (Connection conn = DriverManager.getConnection(url, user, pass)) {
             ProductDao dao = new ProductDao(conn);
 
-            // TODO шаг 1: dao.createTable()
+            // ===== ШАГ 1: Создание таблицы =====
+            System.out.println("--- ШАГ 1: Создание таблицы ---");
+            dao.createTable();
 
-            // TODO шаг 2: добавьте 3 товара через dao.add(), выведите id каждого
+            // ===== ШАГ 2: Добавление товаров =====
+            System.out.println("\n--- ШАГ 2: Добавление товаров ---");
 
-            // TODO шаг 3: dao.findAll() и вывести все товары
+            Product[] products = {
+                    new Product("Ноутбук", new BigDecimal("89999.00"), 5),
+                    new Product("Мышь", new BigDecimal("1299.50"), 100),
+                    new Product("Монитор", new BigDecimal("34500.00"), 12)
+            };
 
-            // TODO шаг 4: dao.findById(id) — найти один товар
+            long[] ids = new long[products.length];
+            for (int i = 0; i < products.length; i++) {
+                long id = dao.add(products[i]);
+                ids[i] = id;
+                System.out.printf("   Добавлен: %s -> ID: %d%n", products[i].name(), id);
+            }
 
-            // TODO шаг 5: dao.update(новый Product с изменёнными данными)
+            // ===== ШАГ 3: Вывод всех товаров =====
+            System.out.println("\n--- ШАГ 3: Все товары (findAll) ---");
+            List<Product> allProducts = dao.findAll();
+            if (allProducts.isEmpty()) {
+                System.out.println("   Товаров нет");
+            } else {
+                for (Product p : allProducts) {
+                    System.out.println("   " + p);
+                }
+                System.out.printf("   Всего: %d товаров%n", allProducts.size());
+            }
 
-            // TODO шаг 6: dao.delete(id одного товара)
+            // ===== ШАГ 4: Поиск по ID =====
+            System.out.println("\n--- ШАГ 4: Поиск по ID ---");
 
-            // TODO шаг 7: dao.findAll() финальный список
+            // Поиск существующего товара (id = ids[0])
+            long searchId = ids[0];
+            Optional<Product> found = dao.findById(searchId);
+            if (found.isPresent()) {
+                System.out.printf("   Товар с ID %d найден: %s%n", searchId, found.get());
+            } else {
+                System.out.printf("   Товар с ID %d не найден%n", searchId);
+            }
+
+            // Поиск несуществующего товара
+            long nonExistentId = 999;
+            Optional<Product> notFound = dao.findById(nonExistentId);
+            if (notFound.isPresent()) {
+                System.out.printf("   Товар с ID %d найден: %s%n", nonExistentId, notFound.get());
+            } else {
+                System.out.printf("   Товар с ID %d не найден%n", nonExistentId);
+            }
+
+            // ===== ШАГ 5: Обновление товара =====
+            System.out.println("\n--- ШАГ 5: Обновление товара ---");
+
+            long updateId = ids[1]; // ID второго товара (Мышь)
+            Product updatedProduct = new Product(
+                    updateId,
+                    "Беспроводная мышь",  // новое имя
+                    new BigDecimal("1599.00"), // новая цена
+                    150 // новое количество
+            );
+
+            int updateRows = dao.update(updatedProduct);
+            System.out.printf("   Обновление ID %d: изменено строк: %d%n", updateId, updateRows);
+
+            // Проверяем обновленный товар
+            Optional<Product> afterUpdate = dao.findById(updateId);
+            if (afterUpdate.isPresent()) {
+                System.out.println("   После обновления: " + afterUpdate.get());
+            }
+
+            // ===== ШАГ 6: Удаление товара =====
+            System.out.println("\n--- ШАГ 6: Удаление товара ---");
+
+            long deleteId = ids[2]; // ID третьего товара (Монитор)
+            int deleteRows = dao.delete(deleteId);
+            System.out.printf("   Удаление ID %d: удалено строк: %d%n", deleteId, deleteRows);
+
+            // Проверяем, что товар удален
+            Optional<Product> afterDelete = dao.findById(deleteId);
+            if (afterDelete.isEmpty()) {
+                System.out.printf("   Товар с ID %d успешно удален%n", deleteId);
+            }
+
+            // ===== ШАГ 7: Финальный список =====
+            System.out.println("\n--- ШАГ 7: Финальный список товаров ---");
+            List<Product> finalProducts = dao.findAll();
+            if (finalProducts.isEmpty()) {
+                System.out.println("   Товаров нет");
+            } else {
+                for (Product p : finalProducts) {
+                    System.out.println("   " + p);
+                }
+                System.out.printf("   Всего: %d товаров%n", finalProducts.size());
+            }
+
+            // ===== ДОПОЛНИТЕЛЬНО: Статистика =====
+            System.out.println("\n--- СТАТИСТИКА ---");
+            System.out.println("   Всего товаров в БД: " + dao.count());
+
+        } catch (SQLException e) {
+            System.err.println("\n❌ Ошибка SQL:");
+            System.err.println("   Код: " + e.getErrorCode());
+            System.err.println("   Сообщение: " + e.getMessage());
+            System.err.println("   SQL состояние: " + e.getSQLState());
+            e.printStackTrace();
         }
+
+        System.out.println("\n✅ Соединение закрыто");
+
     }
 }

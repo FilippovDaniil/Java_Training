@@ -26,18 +26,29 @@ package m49_jdbc_1.practice;
  */
 import java.sql.Connection;
 import java.sql.DriverManager;
+import java.sql.SQLException;
 
 public class Task01 {
-    public static void main(String[] args) throws Exception {
+    public static void main(String[] args) {
         String url  = "jdbc:h2:mem:testdb;DB_CLOSE_DELAY=-1";
         String user = "sa";
         String pass = "";
 
-        // TODO: откройте Connection через DriverManager.getConnection(url, user, pass)
-        //       выведите подтверждение и закройте соединение через try-with-resources
+        // Способ 2: try-with-resources (рекомендуемый для Java 7+)
+        try (Connection conn = DriverManager.getConnection(url, user, pass)) {
+            System.out.println("Соединение установлено: " + conn.toString());
+            System.out.println("   isClosed(): " + conn.isClosed()); // false
+            System.out.println("   Каталог: " + conn.getCatalog());
+            System.out.println("   Авто-коммит: " + conn.getAutoCommit());
 
-        Connection conn = null; // замените на правильный код
+            // Здесь можно выполнять запросы
 
-        System.out.println("Соединение закрыто: " + (conn == null || conn.isClosed()));
+        } catch (SQLException e) {
+            System.err.println("❌ Ошибка подключения: " + e.getMessage());
+        }
+
+        // После try-with-resources соединение автоматически закрыто,
+        // но мы не можем обратиться к conn, так как она вне области видимости
+        System.out.println("Соединение автоматически закрыто (try-with-resources)");
     }
 }

@@ -26,10 +26,7 @@ package m49_jdbc_1.practice;
  *   rs.getLong("id")  — получить значение столбца по имени.
  *   rs.getString("name"), rs.getBigDecimal("price"), rs.getInt("quantity").
  */
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.ResultSet;
-import java.sql.Statement;
+import java.sql.*;
 
 public class Task03 {
     public static void main(String[] args) throws Exception {
@@ -40,5 +37,57 @@ public class Task03 {
         // TODO: создайте таблицу products, вставьте несколько товаров,
         //       затем выполните SELECT и распечатайте каждую строку ResultSet,
         //       в конце выведите общее число строк
+        // Способ 2: try-with-resources (рекомендуемый для Java 7+)
+        try (Connection conn = DriverManager.getConnection(url, user, pass);
+             Statement  stmt = conn.createStatement()) {
+            System.out.println("Соединение установлено: " + conn.toString());
+            System.out.println("   isClosed(): " + conn.isClosed()); // false
+            System.out.println("   Каталог: " + conn.getCatalog());
+            System.out.println("   Авто-коммит: " + conn.getAutoCommit());
+
+            // Здесь можно выполнять запросы
+            stmt.executeUpdate("""
+                         CREATE TABLE products (
+                             id       BIGINT AUTO_INCREMENT PRIMARY KEY,
+                             name     VARCHAR(100) NOT NULL,
+                             price    DECIMAL(10,2) NOT NULL,
+                             quantity INT NOT NULL DEFAULT 0
+                         );
+                """);
+
+            System.out.println("Таблица создана");
+
+            int rows = stmt.executeUpdate(
+                    "INSERT INTO products(name,price,quantity) VALUES('Ноутбук', 89999.00, 5)"
+            );
+            System.out.println("Вставлено строк: " + rows);
+            int rows2 = stmt.executeUpdate(
+                    "INSERT INTO products(name,price,quantity) VALUES('Планшет', 55555.00, 3)"
+            );
+            System.out.println("Вставлено строк: " + rows2);
+            int rows3 = stmt.executeUpdate(
+                    "INSERT INTO products(name,price,quantity) VALUES('Айфон', 666666.00, 2)"
+            );
+            System.out.println("Вставлено строк: " + rows3);
+
+            // DQL — SELECT
+            ResultSet rs = stmt.executeQuery("SELECT * FROM products");
+            while (rs.next()) {
+                long   id   = rs.getLong("id");
+                String name = rs.getString("name");
+                double price = rs.getDouble("price");
+                int quantity = rs.getInt("quantity");
+                System.out.println("Id товара: " + id + " Название: " + name + " По цене: " + price + " В количестве: " + quantity);
+            }
+
+
+
+        } catch (SQLException e) {
+            System.err.println("❌ Ошибка подключения: " + e.getMessage());
+        }
+
+        // После try-with-resources соединение автоматически закрыто,
+        // но мы не можем обратиться к conn, так как она вне области видимости
+        System.out.println("Соединение автоматически закрыто (try-with-resources)");
     }
 }
