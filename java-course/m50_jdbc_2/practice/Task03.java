@@ -47,29 +47,182 @@ public class Task03 {
     static final String USER = "sa";
     static final String PASS = "";
 
-    public static void main(String[] args) throws Exception {
+    public static void main(String[] args) {
         try (Connection con = DriverManager.getConnection(URL, USER, PASS)) {
-            // Создать таблицу
+            System.out.println("=== РАСШИРЕННАЯ ОБРАБОТКА SQLException ===\n");
+
+            // Создание таблицы
             try (Statement st = con.createStatement()) {
-                st.execute("CREATE TABLE IF NOT EXISTS accounts " +
-                           "(id BIGINT PRIMARY KEY, owner VARCHAR(100), balance BIGINT)");
+                st.execute("""
+                    CREATE TABLE IF NOT EXISTS accounts (
+                        id      BIGINT PRIMARY KEY,
+                        owner   VARCHAR(100),
+                        balance BIGINT CHECK (balance >= 0)
+                    )
+                """);
+                System.out.println("✅ Таблица accounts создана");
             }
 
-            con.setAutoCommit(false);
+            // 1. Демонстрация ошибки PRIMARY KEY
+            demonstrateDuplicateKeyError(con);
+
+            // 2. Демонстрация ошибки CHECK constraint
+            demonstrateCheckConstraintError(con);
+
+            // 3. Демонстрация ошибки NOT NULL (если добавить)
+            demonstrateNullError(con);
+
+            // 4. Демонстрация восстановления после ошибки
+            demonstrateRecovery(con);
+
+        } catch (SQLException e) {
+            System.err.println("❌ Ошибка: " + e.getMessage());
+            e.printStackTrace();
+        }
+
+        System.out.println("\n✅ Соединение закрыто");
+    }
+
+    private static void demonstrateDuplicateKeyError(Connection con) throws SQLException{
+        System.out.println("\n--- 1. НАРУШЕНИЕ PRIMARY KEY ---");
+        con.setAutoCommit(false);
+
+        try {
+            // Очищаем таблицу
+            try (Statement st = con.createStatement()) {
+                st.execute("DELETE FROM accounts");
+            }
+
+            // Вставляем корректную запись
+            try (Statement st = con.createStatement()) {
+                st.executeUpdate(
+                        "INSERT INTO accounts (id, owner, balance) VALUES (1, 'Алиса', 5000)"
+                );
+                System.out.println("   ✅ Вставлена запись (1, 'Алиса', 5000)");
+            }
+
+            // Пытаемся вставить дубликат
+            try (Statement st = con.createStatement()) {
+                st.executeUpdate(
+                        "INSERT INTO accounts (id, owner, balance) VALUES (1, 'Дубль', 0)"
+                );
+                System.out.println("   ❌ Дубликат вставлен (не должно быть!)");
+            }
+
+            con.commit();
+
+        } catch (SQLException e) {
+            System.out.println("   ❌ ПЕРЕХВАТЧЕНО SQLException:");
+            System.out.println("      Тип: DUPLICATE KEY");
+            System.out.println("      SQLState: " + e.getSQLState());
+            System.out.println("      ErrorCode: " + e.getErrorCode());
+            System.out.println("      Message: " + e.getMessage());
+
             try {
-                // TODO: вставить строку (1, 'Алиса', 5000) — должна пройти
-                // TODO: вставить строку (1, 'Дубль', 0) — должна выбросить SQLException
-                // TODO: con.commit()
-                // Заглушка для компиляции; удалить после реализации TODO выше:
-                if (con == null) throw new java.sql.SQLException("stub");
-            } catch (java.sql.SQLException e) {
-                // TODO: напечатать getSQLState(), getErrorCode(), getMessage()
-                // TODO: con.rollback()
+                con.rollback();
+                System.out.println("   ✅ ROLLBACK выполнен");
+            } catch (SQLException ex) {
+                ex.printStackTrace();
+            }
+        } finally {
+            try {
+                con.setAutoCommit(true);
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+        }
+    }
+
+    private static void demonstrateCheckConstraintError(Connection con) throws SQLException{
+        System.out.println("\n--- 2. НАРУШЕНИЕ CHECK CONSTRAINT ---");
+        con.setAutoCommit(false);
+
+        try {
+            // Очищаем таблицу
+            try (Statement st = con.createStatement()) {
+                st.execute("DELETE FROM accounts");
             }
 
-            // После ошибки: выведите все строки из accounts
-            System.out.println("Таблица после ошибки:");
-            // TODO: SELECT * FROM accounts и напечатать строки
+            // Вставляем корректную запись
+            try (Statement st = con.createStatement()) {
+                st.executeUpdate(
+                        "INSERT INTO accounts (id, owner, balance) VALUES (1, 'Алиса', 5000)"
+                );
+                System.out.println("   ✅ Вставлена запись (1, 'Алиса', 5000)");
+            }
+
+            // Пытаемся вставить запись с отрицательным балансом
+            try (Statement st = con.createStatement()) {
+                st.executeUpdate(
+                        "INSERT INTO accounts (id, owner, balance) VALUES (2, 'Боб', -1000)"
+                );
+                System.out.println("   ❌ Запись с отрицательным балансом вставлена (не должно быть!)");
+            }
+
+            con.commit();
+
+        } catch (SQLException e) {
+            System.out.println("   ❌ ПЕРЕХВАТЧЕНО SQLException:");
+            System.out.println("      Тип: CHECK CONSTRAINT");
+            System.out.println("      SQLState: " + e.getSQLState());
+            System.out.println("      ErrorCode: " + e.getErrorCode());
+            System.out.println("      Message: " + e.getMessage());
+
+            try {
+                con.rollback();
+                System.out.println("   ✅ ROLLBACK выполнен");
+            } catch (SQLException ex) {
+                ex.printStackTrace();
+            }
+        } finally {
+            try {
+                con.setAutoCommit(true);
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+        }
+    }
+
+    private static void demonstrateNullError(Connection con) {
+        System.out.println("\n--- 3. НАРУШЕНИЕ NOT NULL (если добавить) ---");
+        // В H2 NOT NULL можно добавить через ALTER TABLE, но для демонстрации пропускаем
+        System.out.println("   (NOT NULL ошибки не демонстрируются, т.к. столбцы не имеют этого ограничения)");
+    }
+
+    private static void demonstrateRecovery(Connection con) {
+        System.out.println("\n--- 4. ВОССТАНОВЛЕНИЕ ПОСЛЕ ОШИБКИ ---");
+
+        try (Statement st = con.createStatement()) {
+            // Очищаем таблицу
+            st.execute("DELETE FROM accounts");
+
+            // Вставляем корректные данные
+            st.executeUpdate(
+                    "INSERT INTO accounts (id, owner, balance) VALUES (1, 'Алиса', 5000)"
+            );
+            st.executeUpdate(
+                    "INSERT INTO accounts (id, owner, balance) VALUES (2, 'Боб', 3000)"
+            );
+            st.executeUpdate(
+                    "INSERT INTO accounts (id, owner, balance) VALUES (3, 'Чарли', 7000)"
+            );
+            System.out.println("   ✅ Вставлены корректные данные");
+
+            // Выводим результат
+            System.out.println("\n   Содержимое таблицы:");
+            try (ResultSet rs = st.executeQuery("SELECT * FROM accounts ORDER BY id")) {
+                System.out.println("   ID | Владелец | Баланс");
+                System.out.println("   ---|----------|--------");
+                while (rs.next()) {
+                    System.out.printf("   %-2d | %-8s | %d%n",
+                            rs.getLong("id"),
+                            rs.getString("owner"),
+                            rs.getLong("balance"));
+                }
+            }
+
+        } catch (SQLException e) {
+            System.err.println("   ❌ Ошибка восстановления: " + e.getMessage());
         }
     }
 }

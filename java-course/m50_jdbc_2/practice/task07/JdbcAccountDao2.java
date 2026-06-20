@@ -22,9 +22,9 @@ class JdbcAccountDao2 implements AccountDao2 {
             try (ResultSet rs = ps.executeQuery()) {
                 if (rs.next()) {
                     return new Account2(
-                        rs.getLong("id"),
-                        rs.getString("owner"),
-                        rs.getLong("balance")
+                            rs.getLong("id"),
+                            rs.getString("owner"),
+                            rs.getLong("balance")
                     );
                 }
                 return null;
@@ -49,7 +49,10 @@ class JdbcAccountDao2 implements AccountDao2 {
                 "UPDATE accounts SET balance = ? WHERE id = ?")) {
             ps.setLong(1, newBalance);
             ps.setLong(2, id);
-            ps.executeUpdate();
+            int rows = ps.executeUpdate();
+            if (rows == 0) {
+                throw new SQLException("Счет с ID " + id + " не найден");
+            }
         }
     }
 }
