@@ -77,26 +77,114 @@ import java.util.Optional;
 public class Task07 {
 
     public static void main(String[] args) {
-        // TODO 1: создайте EntityManagerFactory через Hibernate Configuration
-        //   Configuration config = new Configuration().configure("hibernate.cfg.xml");
-        //   config.addAnnotatedClass(Post7.class);
-        //   EntityManagerFactory emf = config.buildSessionFactory();
-        //   (SessionFactory implements EntityManagerFactory в Hibernate 6)
+        // Создаем EntityManagerFactory
+        Configuration config = new Configuration();
+        config.setProperty("hibernate.connection.driver_class", "org.h2.Driver");
+        config.setProperty("hibernate.connection.url", "jdbc:h2:mem:blogdb;DB_CLOSE_DELAY=-1");
+        config.setProperty("hibernate.dialect", "org.hibernate.dialect.H2Dialect");
+        config.setProperty("hibernate.hbm2ddl.auto", "create-drop");
+        config.setProperty("hibernate.show_sql", "true");
+        config.setProperty("hibernate.format_sql", "true");
+        config.addAnnotatedClass(Post7.class);
 
-        // TODO 2: создайте PostRepository(emf)
+        // SessionFactory implements EntityManagerFactory в Hibernate 6
+        try (EntityManagerFactory emf = config.buildSessionFactory()) {
+            System.out.println("=== POST REPOSITORY (CRUD-ОБЁРТКА) ===\n");
 
-        // TODO 3: save — сохраните 3 поста и выведите их id
+            // Создаем репозиторий
+            PostRepository repository = new PostRepository(emf);
 
-        // TODO 4: findById — найдите пост по id=1, выведите title
+            // ===== 1. SAVE - СОХРАНЕНИЕ ПОСТОВ =====
+            System.out.println("--- 1. SAVE: Сохранение 3 постов ---");
 
-        // TODO 5: findAll — выведите все посты
+            Post7 post1 = new Post7("Введение в Java", "Основы языка Java");
+            Post7 post2 = new Post7("Spring Boot", "Настройка Spring Boot");
+            Post7 post3 = new Post7("Hibernate ORM", "Работа с Hibernate");
 
-        // TODO 6: update — измените title поста с id=1, сохраните через update()
-        //         затем findById(1L) и убедитесь что title изменился
+            Post7 saved1 = repository.save(post1);
+            Post7 saved2 = repository.save(post2);
+            Post7 saved3 = repository.save(post3);
 
-        // TODO 7: delete — удалите пост с id=2
-        //         вызовите findAll() — должно остаться 2 поста
+            System.out.println("   Сохранены посты:");
+            System.out.println("   - " + saved1);
+            System.out.println("   - " + saved2);
+            System.out.println("   - " + saved3);
 
-        // TODO 8: закройте emf
+            // ===== 2. FIND_BY_ID - ПОИСК ПО ID =====
+            System.out.println("\n--- 2. FIND_BY_ID: Поиск по ID ---");
+
+            Optional<Post7> found = repository.findById(1L);
+            found.ifPresentOrElse(
+                    post -> System.out.println("   Найден пост: " + post),
+                    () -> System.out.println("   ❌ Пост с id=1 не найден")
+            );
+
+            // Поиск несуществующего поста
+            Optional<Post7> notFound = repository.findById(999L);
+            System.out.println("   Поиск id=999: " + (notFound.isEmpty() ? "не найден ✅" : "найден ❌"));
+
+            // ===== 3. FIND_ALL - ВСЕ ПОСТЫ =====
+            System.out.println("\n--- 3. FIND_ALL: Все посты ---");
+
+            List<Post7> allPosts = repository.findAll();
+            System.out.println("   Всего постов: " + allPosts.size());
+            for (Post7 post : allPosts) {
+                System.out.println("   - " + post);
+            }
+
+            // ===== 4. UPDATE - ОБНОВЛЕНИЕ =====
+            System.out.println("\n--- 4. UPDATE: Обновление поста ---");
+
+            // Изменяем detached-объект
+            saved1.setTitle("Введение в Java (обновлено)");
+            saved1.setContent("Обновленное содержание");
+
+            System.out.println("   До обновления: " + saved1);
+            Post7 updated = repository.update(saved1);
+            System.out.println("   После обновления: " + updated);
+
+            // Проверяем, что обновление сохранилось
+            Optional<Post7> checkUpdated = repository.findById(1L);
+            checkUpdated.ifPresent(post ->
+                    System.out.println("   Проверка в БД: " + post)
+            );
+
+            // ===== 5. DELETE - УДАЛЕНИЕ =====
+            System.out.println("\n--- 5. DELETE: Удаление поста ---");
+
+            System.out.println("   До удаления: " + repository.findAll().size() + " постов");
+            repository.delete(2L);
+            System.out.println("   После удаления id=2: " + repository.findAll().size() + " постов");
+
+            // Попытка удалить несуществующий пост
+            System.out.println("   Попытка удалить id=999 (не существует)");
+            repository.delete(999L);
+            System.out.println("   Постов осталось: " + repository.findAll().size());
+
+            // ===== 6. ФИНАЛЬНАЯ ПРОВЕРКА =====
+            System.out.println("\n--- 6. ФИНАЛЬНЫЙ СПИСОК ПОСТОВ ---");
+
+            List<Post7> finalPosts = repository.findAll();
+            System.out.println("   Осталось постов: " + finalPosts.size());
+            for (Post7 post : finalPosts) {
+                System.out.println("   - " + post);
+            }
+
+            // ===== 7. СТАТИСТИКА =====
+            System.out.println("\n--- СТАТИСТИКА ---");
+            System.out.println("   Всего постов: " + repository.count());
+
+            // Дополнительная демонстрация: сохранение еще одного поста
+            System.out.println("\n   Добавление еще одного поста...");
+            Post7 post4 = new Post7("Java Stream API", "Работа со Stream");
+            repository.save(post4);
+            System.out.println("   Всего постов: " + repository.count());
+
+        } catch (Exception e) {
+            System.err.println("❌ Ошибка: " + e.getMessage());
+            e.printStackTrace();
+        }
+
+        System.out.println("\n✅ Программа завершена");
     }
 }

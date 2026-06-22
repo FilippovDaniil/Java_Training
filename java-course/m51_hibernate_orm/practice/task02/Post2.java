@@ -6,6 +6,7 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
+import lombok.ToString;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
@@ -15,6 +16,7 @@ import java.time.LocalDateTime;
 // Готовая сущность (аннотации уже расставлены)
 @Entity
 @Table(name = "posts")
+@ToString
 class Post2 {
 
     @Id

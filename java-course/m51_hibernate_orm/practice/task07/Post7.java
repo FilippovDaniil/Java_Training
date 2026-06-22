@@ -8,6 +8,8 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
+import lombok.Getter;
+import lombok.Setter;
 import org.hibernate.cfg.Configuration;
 import java.time.LocalDateTime;
 import java.util.List;
@@ -16,6 +18,8 @@ import java.util.Optional;
 // Готовая сущность
 @Entity
 @Table(name = "posts")
+@Getter
+@Setter
 class Post7 {
 
     @Id

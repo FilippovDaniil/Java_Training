@@ -54,21 +54,30 @@ public class Task02 {
     public static void main(String[] args) {
         // TODO 1: создайте SessionFactory (программная конфигурация или из hibernate.cfg.xml)
         // Пример программной настройки:
-        //   Configuration config = new Configuration();
-        //   config.setProperty("hibernate.connection.driver_class", "org.h2.Driver");
-        //   config.setProperty("hibernate.connection.url", "jdbc:h2:mem:blogdb;DB_CLOSE_DELAY=-1");
-        //   config.setProperty("hibernate.dialect", "org.hibernate.dialect.H2Dialect");
-        //   config.setProperty("hibernate.hbm2ddl.auto", "create-drop");
-        //   config.setProperty("hibernate.show_sql", "true");
-        //   config.addAnnotatedClass(Post2.class);
-        //   SessionFactory factory = config.buildSessionFactory();
+        Configuration config = new Configuration();
+        config.setProperty("hibernate.connection.driver_class", "org.h2.Driver");
+        config.setProperty("hibernate.connection.url", "jdbc:h2:mem:blogdb;DB_CLOSE_DELAY=-1");
+        config.setProperty("hibernate.dialect", "org.hibernate.dialect.H2Dialect");
+        config.setProperty("hibernate.hbm2ddl.auto", "create-drop");
+        config.setProperty("hibernate.show_sql", "true");
+        config.addAnnotatedClass(Post2.class);
+        SessionFactory factory = config.buildSessionFactory();
 
         // TODO 2: создайте объект Post с заголовком "Первый пост" и контентом
+        Post2 post = new Post2("Первый пост!", "Привет, hibernate!");
 
         // TODO 3: откройте Session, начните транзакцию, вызовите persist, сделайте commit
+        try (Session session = factory.openSession()) {
+        Transaction tx = session.beginTransaction();
+        session.persist(post);
+        tx.commit();
+        Post2 found = session.get(Post2.class, 1L);
+        System.out.println(found);
+        System.out.println("Сохранён пост с id=" + post.getId());
+        }
 
         // TODO 4: выведите id присвоенный базой данных
-        // System.out.println("Сохранён пост с id=" + post.getId());
+
 
         // TODO 5: закройте factory
     }

@@ -6,27 +6,30 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
+import lombok.ToString;
+
 import java.time.LocalDateTime;
 
 // ============================================================
 // Сущность Post — расставьте аннотации (TODO-метки)
 // ============================================================
 
-// TODO: @Entity
-// TODO: @Table(name = "posts")
+@Entity
+@Table(name = "posts")
+@ToString
 class Post {
 
-    // TODO: @Id
-    // TODO: @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    // TODO: @Column(name = "title", nullable = false, length = 255)
+    @Column(name = "title", nullable = false, length = 255)
     private String title;
 
-    // TODO: @Column(name = "content", columnDefinition = "TEXT")
+    @Column(name = "content", columnDefinition = "TEXT")
     private String content;
 
-    // TODO: @Column(name = "created_at")
+    @Column(name = "created_at")
     private LocalDateTime createdAt;
 
     // Конструктор без аргументов — ОБЯЗАТЕЛЕН для JPA (не удалять)
@@ -39,4 +42,37 @@ class Post {
     }
 
     // TODO: добавьте геттеры и сеттеры для всех полей
+
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public String getTitle() {
+        return title;
+    }
+
+    public void setTitle(String title) {
+        this.title = title;
+    }
+
+    public LocalDateTime getCreatedAt() {
+        return createdAt;
+    }
+
+    public void setCreatedAt(LocalDateTime createdAt) {
+        this.createdAt = createdAt;
+    }
+
+    public String getContent() {
+        return content;
+    }
+
+    public void setContent(String content) {
+        this.content = content;
+    }
 }

@@ -42,5 +42,7 @@ public class Task01 {
         // Точка входа — просто убедитесь, что класс Post компилируется с нужными аннотациями.
         // Создайте объект Post и выведите его поля.
         // TODO
+        Post post = new Post("Title","Content");
+        System.out.println(post);
     }
 }

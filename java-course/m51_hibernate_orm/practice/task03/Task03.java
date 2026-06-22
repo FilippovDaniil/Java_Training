@@ -34,6 +34,7 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
+import m51_hibernate_orm.practice.task03.Post3;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
@@ -44,14 +45,55 @@ public class Task03 {
 
     public static void main(String[] args) {
         // TODO 1: создайте SessionFactory (аналогично Task02)
+        Configuration config = new Configuration();
+        config.setProperty("hibernate.connection.driver_class", "org.h2.Driver");
+        config.setProperty("hibernate.connection.url", "jdbc:h2:mem:blogdb;DB_CLOSE_DELAY=-1");
+        config.setProperty("hibernate.dialect", "org.hibernate.dialect.H2Dialect");
+        config.setProperty("hibernate.hbm2ddl.auto", "create-drop");
+        config.setProperty("hibernate.show_sql", "true");
+        config.addAnnotatedClass(Post3.class);
+        SessionFactory factory = config.buildSessionFactory();
 
         // TODO 2: в отдельной транзакции сохраните 2–3 поста через session.persist()
+        Post3 post1 = new Post3("Title1","Content1");
+        Post3 post2 = new Post3("Title2","Content2");
+        Post3 post3 = new Post3("Title3","Content3");
+
+        try (Session session = factory.openSession()) {
+            Transaction tx = session.beginTransaction();
+
+            session.persist(post1);   // INSERT выполнится при commit
+            session.persist(post2);   // INSERT выполнится при commit
+            session.persist(post3);   // INSERT выполнится при commit
+
+            tx.commit();             // фиксируем транзакцию
+        }
 
         // TODO 3: откройте новую Session и найдите пост с id=1L через session.get()
         //         выведите title и content
+        try (Session session2 = factory.openSession()) {
+            Transaction tx = session2.beginTransaction();
+            Post3 find1 = session2.get(Post3.class,1L);
+            System.out.println(find1.getContent() + " " + find1.getTitle());
+
+            tx.commit();             // фиксируем транзакцию
+        }
 
         // TODO 4: попробуйте session.get(Post3.class, 999L) и выведите результат (null)
+        try (Session session3 = factory.openSession()) {
+            Transaction tx = session3.beginTransaction();
+            try{
+                Post3 find1 = session3.get(Post3.class,999L);
+                System.out.println(find1.getContent() + " " + find1.getTitle());
+            }catch (NullPointerException e){
+                System.out.println("Null");
+            }
+
+
+            tx.commit();             // фиксируем транзакцию
+        }
 
         // TODO 5: закройте factory
+        factory.close();
     }
 }
