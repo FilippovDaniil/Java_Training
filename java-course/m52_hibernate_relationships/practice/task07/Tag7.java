@@ -17,11 +17,14 @@ class Tag7 {
     @Column(unique = true, nullable = false)
     private String name;
 
-    // TODO: @ManyToMany(mappedBy = "tags")
+    @ManyToMany(mappedBy = "tags")
     private Set<Post7> posts = new HashSet<>();
 
     public Tag7() {}
-    public Tag7(String name) { this.name = name; }
+
+    public Tag7(String name) {
+        this.name = name;
+    }
 
     public Long getId() { return id; }
     public String getName() { return name; }

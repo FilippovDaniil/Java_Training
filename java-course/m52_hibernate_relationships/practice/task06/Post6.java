@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
+// ===== ENTITY POST =====
 @Entity
 @Table(name = "posts6")
 class Post6 {
@@ -19,16 +20,23 @@ class Post6 {
     @JoinColumn(name = "author_id")
     private Author6 author;
 
-    // Комментарии к посту — LAZY по умолчанию для @OneToMany
     @OneToMany(mappedBy = "post", cascade = CascadeType.ALL)
     private List<Comment6> comments = new ArrayList<>();
 
     public Post6() {}
-    public Post6(String title) { this.title = title; }
+
+    public Post6(String title) {
+        this.title = title;
+    }
 
     public Long getId() { return id; }
     public String getTitle() { return title; }
     public Author6 getAuthor() { return author; }
     public void setAuthor(Author6 author) { this.author = author; }
     public List<Comment6> getComments() { return comments; }
+
+    @Override
+    public String toString() {
+        return "Post6{id=" + id + ", title='" + title + "'}";
+    }
 }

@@ -22,21 +22,29 @@ class Author7 {
     @Column(nullable = false, unique = true)
     private String email;
 
-    // TODO: @OneToOne(cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.LAZY)
-    // TODO: @JoinColumn(name = "profile_id", unique = true)
+    @OneToOne(cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.LAZY)
+    @JoinColumn(name = "profile_id", unique = true)
     private UserProfile7 profile;
 
-    // TODO: @OneToMany(mappedBy = "author", cascade = CascadeType.ALL, orphanRemoval = true)
+    @OneToMany(mappedBy = "author", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Post7> posts = new ArrayList<>();
 
     public Author7() {}
-    public Author7(String name, String email) { this.name = name; this.email = email; }
 
-    /** TODO: реализовать addPost — синхронизировать post.setAuthor + posts.add */
-    public void addPost(Post7 post) { /* TODO */ }
+    public Author7(String name, String email) {
+        this.name = name;
+        this.email = email;
+    }
 
-    /** TODO: реализовать removePost */
-    public void removePost(Post7 post) { /* TODO */ }
+    public void addPost(Post7 post) {
+        post.setAuthor(this);
+        posts.add(post);
+    }
+
+    public void removePost(Post7 post) {
+        posts.remove(post);
+        post.setAuthor(null);
+    }
 
     public Long getId() { return id; }
     public String getName() { return name; }

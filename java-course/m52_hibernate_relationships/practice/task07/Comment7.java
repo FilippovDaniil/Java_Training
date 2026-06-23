@@ -17,11 +17,15 @@ class Comment7 {
     @Column(nullable = false)
     private String text;
 
-    // TODO: @ManyToOne(fetch = FetchType.LAZY) + @JoinColumn(name = "post_id")
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "post_id")
     private Post7 post;
 
     public Comment7() {}
-    public Comment7(String text) { this.text = text; }
+
+    public Comment7(String text) {
+        this.text = text;
+    }
 
     public Long getId() { return id; }
     public String getText() { return text; }

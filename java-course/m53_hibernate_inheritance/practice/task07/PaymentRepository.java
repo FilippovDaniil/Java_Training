@@ -9,6 +9,7 @@ import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 // ============================================================
 // PaymentRepository — репозиторий (каркас с TODO)
@@ -21,48 +22,71 @@ class PaymentRepository {
         this.sessionFactory = sessionFactory;
     }
 
-    /** Сохраняет новый платёж в транзакции */
     public void save(Payment payment) {
-        // TODO: открыть сессию, начать транзакцию, persist, commit
+        try (Session session = sessionFactory.openSession()) {
+            session.getTransaction().begin();
+            session.persist(payment);
+            session.getTransaction().commit();
+        }
     }
 
-    /** Загружает платёж по id; возвращает Optional.empty() если не найден */
     public Optional<Payment> findById(Long id) {
-        // TODO: session.get(Payment.class, id) → Optional.ofNullable(...)
-        return Optional.empty();
+        try (Session session = sessionFactory.openSession()) {
+            return Optional.ofNullable(session.get(Payment.class, id));
+        }
     }
 
-    /** Загружает все платежи (полиморфный запрос) */
     public List<Payment> findAll() {
-        // TODO: JPQL "FROM Payment"
-        return List.of();
+        try (Session session = sessionFactory.openSession()) {
+            return session.createQuery("FROM Payment ORDER BY id", Payment.class)
+                    .getResultList();
+        }
     }
 
-    /** Загружает платежи по статусу */
     public List<Payment> findByStatus(PaymentStatus status) {
-        // TODO: JPQL "FROM Payment p WHERE p.status = :status"
-        return List.of();
+        try (Session session = sessionFactory.openSession()) {
+            return session.createQuery(
+                            "FROM Payment p WHERE p.status = :status ORDER BY id",
+                            Payment.class
+                    )
+                    .setParameter("status", status)
+                    .getResultList();
+        }
     }
 
-    /** Загружает только карточные платежи */
     public List<CardPayment> findAllCardPayments() {
-        // TODO: JPQL "FROM CardPayment"
-        return List.of();
+        try (Session session = sessionFactory.openSession()) {
+            return session.createQuery("FROM CardPayment ORDER BY id", CardPayment.class)
+                    .getResultList();
+        }
     }
 
-    /**
-     * Возвращает карту: имя класса → количество.
-     * Используйте JPQL: "SELECT TYPE(p), COUNT(p) FROM Payment p GROUP BY TYPE(p)"
-     */
     public Map<String, Long> countByType() {
-        // TODO: выполните запрос, преобразуйте List<Object[]> в Map<String, Long>
-        //       Object[0] = Class (простое имя через getSimpleName()), Object[1] = Long count
-        return Map.of();
+        try (Session session = sessionFactory.openSession()) {
+            List<Object[]> results = session.createQuery(
+                            "SELECT TYPE(p), COUNT(p) FROM Payment p GROUP BY TYPE(p)",
+                            Object[].class
+                    )
+                    .getResultList();
+
+            return results.stream()
+                    .collect(Collectors.toMap(
+                            row -> ((Class<?>) row[0]).getSimpleName(),
+                            row -> (Long) row[1]
+                    ));
+        }
     }
 
-    /** Обновляет статус платежа через JPQL UPDATE */
     public void updateStatus(Long id, PaymentStatus newStatus) {
-        // TODO: JPQL "UPDATE Payment p SET p.status = :status WHERE p.id = :id"
-        //       executeUpdate() требует явной транзакции!
+        try (Session session = sessionFactory.openSession()) {
+            session.getTransaction().begin();
+            session.createQuery(
+                            "UPDATE Payment p SET p.status = :status WHERE p.id = :id"
+                    )
+                    .setParameter("status", newStatus)
+                    .setParameter("id", id)
+                    .executeUpdate();
+            session.getTransaction().commit();
+        }
     }
 }

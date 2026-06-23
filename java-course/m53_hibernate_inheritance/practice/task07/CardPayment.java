@@ -15,9 +15,9 @@ import java.util.Optional;
 // ============================================================
 
 @Entity
-// TODO: @Table(name = "card_payments") — только если JOINED
-// TODO: @DiscriminatorValue("CARD") — только если SINGLE_TABLE
+@DiscriminatorValue("CARD")
 class CardPayment extends Payment {
+
     @Column(name = "masked_card_number")
     private String maskedCardNumber;
 
@@ -28,7 +28,33 @@ class CardPayment extends Payment {
     private String expiryDate;
 
     @Column(name = "authorization_code")
-    private String authorizationCode; // заполняется при успехе
+    private String authorizationCode;
 
-    // TODO: конструктор(amount, maskedCardNumber, cardHolderName, expiryDate), геттеры, toString()
+    public CardPayment() {}
+
+    public CardPayment(BigDecimal amount, String maskedCardNumber, String cardHolderName, String expiryDate) {
+        super(amount, "RUB", PaymentStatus.PENDING);
+        this.maskedCardNumber = maskedCardNumber;
+        this.cardHolderName = cardHolderName;
+        this.expiryDate = expiryDate;
+    }
+
+    public String getMaskedCardNumber() { return maskedCardNumber; }
+    public void setMaskedCardNumber(String maskedCardNumber) { this.maskedCardNumber = maskedCardNumber; }
+
+    public String getCardHolderName() { return cardHolderName; }
+    public void setCardHolderName(String cardHolderName) { this.cardHolderName = cardHolderName; }
+
+    public String getExpiryDate() { return expiryDate; }
+    public void setExpiryDate(String expiryDate) { this.expiryDate = expiryDate; }
+
+    public String getAuthorizationCode() { return authorizationCode; }
+    public void setAuthorizationCode(String authorizationCode) { this.authorizationCode = authorizationCode; }
+
+    @Override
+    public String toString() {
+        return String.format("CardPayment{id=%d, amount=%s, status=%s, card='%s'}",
+                getId(), getAmount(), getStatus(), maskedCardNumber);
+    }
 }
+

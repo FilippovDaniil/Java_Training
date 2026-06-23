@@ -4,6 +4,7 @@ import jakarta.persistence.*;
 import java.util.ArrayList;
 import java.util.List;
 
+// ===== ENTITY COMMENT =====
 @Entity
 @Table(name = "comments5")
 class Comment5 {
@@ -15,14 +16,27 @@ class Comment5 {
     @Column(nullable = false)
     private String text;
 
-    // TODO: @ManyToOne(fetch = FetchType.LAZY) + @JoinColumn(name = "post_id")
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "post_id")
     private Post5 post;
 
     public Comment5() {}
-    public Comment5(String text) { this.text = text; }
+
+    public Comment5(String text) {
+        this.text = text;
+    }
 
     public Long getId() { return id; }
+    public void setId(Long id) { this.id = id; }
+
     public String getText() { return text; }
+    public void setText(String text) { this.text = text; }
+
     public Post5 getPost() { return post; }
     public void setPost(Post5 post) { this.post = post; }
+
+    @Override
+    public String toString() {
+        return "Comment5{id=" + id + ", text='" + text + "'}";
+    }
 }

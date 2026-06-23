@@ -43,27 +43,150 @@ import java.util.List;
 public class Task03 {
 
     public static void main(String[] args) {
-        // TODO: создайте SessionFactory с show_sql=true чтобы видеть генерируемый SQL
+        // Создаем SessionFactory с show_sql=true
+        Configuration config = new Configuration();
+        config.setProperty("hibernate.connection.driver_class", "org.h2.Driver");
+        config.setProperty("hibernate.connection.url", "jdbc:h2:mem:shop;DB_CLOSE_DELAY=-1");
+        config.setProperty("hibernate.dialect", "org.hibernate.dialect.H2Dialect");
+        config.setProperty("hibernate.hbm2ddl.auto", "create-drop");
+        config.setProperty("hibernate.show_sql", "true");
+        config.setProperty("hibernate.format_sql", "true");
+        config.addAnnotatedClass(ProductTPC.class);
+        config.addAnnotatedClass(BookTPC.class);
+        config.addAnnotatedClass(ElectronicsTPC.class);
 
-        // TODO: сохраните 2 книги и 1 электронику
+        try (SessionFactory factory = config.buildSessionFactory()) {
+            System.out.println("=== ИЕРАРХИЯ ТОВАРОВ (TABLE_PER_CLASS) ===\n");
 
-        // TODO: выполните JPQL: em.createQuery("FROM ProductTPC", ProductTPC.class).getResultList()
-        //       и выведите размер списка
+            // ===== СОХРАНЕНИЕ =====
+            System.out.println("--- СОХРАНЕНИЕ ТОВАРОВ ---");
 
-        // TODO: проверьте в консоли — Hibernate должен сгенерировать UNION ALL
+            try (Session session = factory.openSession()) {
+                session.getTransaction().begin();
 
-        // TODO: закройте SessionFactory
+                // Создаем книги
+                BookTPC book1 = new BookTPC(
+                        "Чистый код",
+                        new BigDecimal("1200.00"),
+                        "Роберт Мартин",
+                        "978-5-4461-0959-9"
+                );
+
+                BookTPC book2 = new BookTPC(
+                        "Эффективная Java",
+                        new BigDecimal("1500.00"),
+                        "Джошуа Блох",
+                        "978-5-8459-1152-5"
+                );
+
+                // Создаем электронику
+                ElectronicsTPC electronics = new ElectronicsTPC(
+                        "Смартфон Samsung",
+                        new BigDecimal("45000.00"),
+                        "Samsung",
+                        12
+                );
+
+                // Сохраняем
+                session.persist(book1);
+                session.persist(book2);
+                session.persist(electronics);
+
+                System.out.println("   ✅ Сохранена книга 1: " + book1);
+                System.out.println("   ✅ Сохранена книга 2: " + book2);
+                System.out.println("   ✅ Сохранена электроника: " + electronics);
+
+                session.getTransaction().commit();
+            }
+
+            // ===== ПОЛИМОРФНЫЙ ЗАПРОС (UNION ALL) =====
+            System.out.println("\n--- ПОЛИМОРФНЫЙ ЗАПРОС (FROM ProductTPC) ---");
+            System.out.println("   📌 Hibernate должен сгенерировать UNION ALL");
+            System.out.println("   📌 Смотрите SQL в логах выше\n");
+
+            try (Session session = factory.openSession()) {
+                // Полиморфный запрос - возвращает все подтипы
+                List<ProductTPC> products = session
+                        .createQuery("FROM ProductTPC", ProductTPC.class)
+                        .getResultList();
+
+                System.out.println("   📊 Всего товаров: " + products.size());
+                for (ProductTPC p : products) {
+                    System.out.println("   - " + p.getClass().getSimpleName() + ": " + p);
+                }
+            }
+
+            // ===== ЗАГРУЗКА КОНКРЕТНЫХ ТИПОВ =====
+            System.out.println("\n--- ЗАГРУЗКА КОНКРЕТНЫХ ТИПОВ ---");
+
+            try (Session session = factory.openSession()) {
+                // Загружаем книгу (id = 1)
+                BookTPC loadedBook = session.get(BookTPC.class, 1L);
+                if (loadedBook != null) {
+                    System.out.println("   📚 Книга: " + loadedBook);
+                }
+
+                // Загружаем электронику (id = 3)
+                ElectronicsTPC loadedElectronics = session.get(ElectronicsTPC.class, 3L);
+                if (loadedElectronics != null) {
+                    System.out.println("   💻 Электроника: " + loadedElectronics);
+                }
+            }
+
+            // ===== ПРОВЕРКА СТРУКТУРЫ ТАБЛИЦ =====
+            System.out.println("\n--- ПРОВЕРКА СТРУКТУРЫ ТАБЛИЦ (NATIVE SQL) ---");
+
+            try (Session session = factory.openSession()) {
+                // Проверяем таблицу книг
+                Number booksCount = (Number) session
+                        .createNativeQuery("SELECT COUNT(*) FROM tpc_books")
+                        .getSingleResult();
+                System.out.println("   📊 Строк в tpc_books: " + booksCount);
+
+                // Проверяем таблицу электроники
+                Number electronicsCount = (Number) session
+                        .createNativeQuery("SELECT COUNT(*) FROM tpc_electronics")
+                        .getSingleResult();
+                System.out.println("   📊 Строк в tpc_electronics: " + electronicsCount);
+
+                // Проверяем, что у книг есть все поля (name, price, author, isbn)
+                System.out.println("\n   📌 В tpc_books есть ВСЕ поля: id, name, price, author, isbn");
+                System.out.println("   📌 В tpc_electronics есть ВСЕ поля: id, name, price, brand, warrantyMonths");
+                System.out.println("   📌 Нет таблицы products (в отличие от JOINED)");
+            }
+
+            // ===== СРАВНЕНИЕ СТРАТЕГИЙ =====
+            System.out.println("\n--- СРАВНЕНИЕ СТРАТЕГИЙ НАСЛЕДОВАНИЯ ---");
+            System.out.println("   📌 TABLE_PER_CLASS: отдельная таблица для каждого класса");
+            System.out.println("   📌 Каждая таблица содержит ВСЕ поля (родительские + свои)");
+            System.out.println("   📌 При полиморфном запросе используется UNION ALL");
+            System.out.println("   📌 Преимущества: нет NULL, нет JOIN");
+            System.out.println("   📌 Недостатки: дублирование полей, UNION ALL при полиморфных запросах");
+
+            // ===== ОТВЕТЫ НА ВОПРОСЫ =====
+            System.out.println("\n--- ОТВЕТЫ НА ВОПРОСЫ ---");
+            System.out.println("\n   Q1: Почему GenerationType.IDENTITY не работает с TABLE_PER_CLASS?");
+            System.out.println("      ID должен быть уникальным СРЕДИ ВСЕХ подтипов.");
+            System.out.println("      При IDENTITY каждая таблица имеет свой счетчик,");
+            System.out.println("      что может привести к конфликтам ID в разных таблицах.");
+            System.out.println("      GenerationType.TABLE использует общий счетчик.");
+
+            System.out.println("\n   Q2: Можно ли создать внешний ключ из таблицы orders на «любой Product»");
+            System.out.println("      при стратегии TABLE_PER_CLASS? Почему?");
+            System.out.println("      НЕТ. При TABLE_PER_CLASS нет общей таблицы products,");
+            System.out.println("      поэтому FK не может ссылаться на все подтипы.");
+            System.out.println("      FK может ссылаться только на одну конкретную таблицу.");
+
+            System.out.println("\n   Q3: При каком числе подтипов UNION ALL становится заметно медленнее?");
+            System.out.println("      При 10+ подтипах UNION ALL может стать проблемой.");
+            System.out.println("      Чем больше подтипов, тем больше подзапросов в UNION,");
+            System.out.println("      что увеличивает время выполнения и нагрузку на БД.");
+
+        } catch (Exception e) {
+            System.err.println("❌ Ошибка: " + e.getMessage());
+            e.printStackTrace();
+        }
+
+        System.out.println("\n✅ Программа завершена");
     }
-
-    /*
-     * ВОПРОСЫ ДЛЯ РАЗМЫШЛЕНИЯ (ответьте в комментариях):
-     *
-     * Q1: Почему GenerationType.IDENTITY не работает с TABLE_PER_CLASS?
-     *     (Подсказка: id должен быть уникален СРЕДИ ВСЕХ подтипов, а не только в одной таблице)
-     *
-     * Q2: Можно ли создать внешний ключ из таблицы orders на «любой Product»
-     *     при стратегии TABLE_PER_CLASS? Почему?
-     *
-     * Q3: При каком числе подтипов UNION ALL становится заметно медленнее?
-     */
 }

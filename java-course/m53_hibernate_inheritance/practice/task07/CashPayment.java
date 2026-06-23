@@ -15,9 +15,9 @@ import java.util.Optional;
 // ============================================================
 
 @Entity
-// TODO: @Table(name = "cash_payments") — только если JOINED
-// TODO: @DiscriminatorValue("CASH") — только если SINGLE_TABLE
+@DiscriminatorValue("CASH")
 class CashPayment extends Payment {
+
     @Column(name = "courier_name")
     private String courierName;
 
@@ -27,5 +27,26 @@ class CashPayment extends Payment {
     @Column(name = "change_required")
     private BigDecimal changeRequired;
 
-    // TODO: конструктор(amount, deliveryAddress, changeRequired), геттеры, toString()
+    public CashPayment() {}
+
+    public CashPayment(BigDecimal amount, String deliveryAddress, BigDecimal changeRequired) {
+        super(amount, "RUB", PaymentStatus.PENDING);
+        this.deliveryAddress = deliveryAddress;
+        this.changeRequired = changeRequired;
+    }
+
+    public String getCourierName() { return courierName; }
+    public void setCourierName(String courierName) { this.courierName = courierName; }
+
+    public String getDeliveryAddress() { return deliveryAddress; }
+    public void setDeliveryAddress(String deliveryAddress) { this.deliveryAddress = deliveryAddress; }
+
+    public BigDecimal getChangeRequired() { return changeRequired; }
+    public void setChangeRequired(BigDecimal changeRequired) { this.changeRequired = changeRequired; }
+
+    @Override
+    public String toString() {
+        return String.format("CashPayment{id=%d, amount=%s, status=%s, address='%s'}",
+                getId(), getAmount(), getStatus(), deliveryAddress);
+    }
 }

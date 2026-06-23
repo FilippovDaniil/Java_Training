@@ -15,10 +15,11 @@ import java.util.Optional;
 // ============================================================
 
 @Entity
-// TODO: @Table(name = "payments") если SINGLE_TABLE; оставьте только аннотации корня
-// TODO: @Inheritance(strategy = ...) — SINGLE_TABLE или JOINED
-// TODO: если SINGLE_TABLE — добавьте @DiscriminatorColumn
+@Table(name = "payments")
+@Inheritance(strategy = InheritanceType.SINGLE_TABLE)
+@DiscriminatorColumn(name = "payment_type", discriminatorType = DiscriminatorType.STRING)
 abstract class Payment {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -36,5 +37,32 @@ abstract class Payment {
     @Column(name = "created_at", nullable = false, updatable = false)
     private LocalDateTime createdAt = LocalDateTime.now();
 
-    // TODO: конструктор(amount, currency, status), геттеры, toString()
+    public Payment() {}
+
+    public Payment(BigDecimal amount, String currency, PaymentStatus status) {
+        this.amount = amount;
+        this.currency = currency;
+        this.status = status;
+    }
+
+    public Long getId() { return id; }
+    public void setId(Long id) { this.id = id; }
+
+    public BigDecimal getAmount() { return amount; }
+    public void setAmount(BigDecimal amount) { this.amount = amount; }
+
+    public String getCurrency() { return currency; }
+    public void setCurrency(String currency) { this.currency = currency; }
+
+    public PaymentStatus getStatus() { return status; }
+    public void setStatus(PaymentStatus status) { this.status = status; }
+
+    public LocalDateTime getCreatedAt() { return createdAt; }
+    public void setCreatedAt(LocalDateTime createdAt) { this.createdAt = createdAt; }
+
+    @Override
+    public String toString() {
+        return String.format("Payment{id=%d, amount=%s, currency='%s', status='%s'}",
+                id, amount, currency, status);
+    }
 }

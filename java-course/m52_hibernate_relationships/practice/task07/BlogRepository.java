@@ -1,10 +1,8 @@
 package m52_hibernate_relationships.practice.task07;
 
 import jakarta.persistence.*;
-import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
+
+import java.util.*;
 
 // ─── Репозиторий — каркас ────────────────────────────────────────────────────
 class BlogRepository {
@@ -15,33 +13,141 @@ class BlogRepository {
         this.emf = emf;
     }
 
-    /** Сохранить автора в транзакции (каскад сохранит всё дерево) */
     public void save(Author7 author) {
-        // TODO: em.getTransaction().begin(); em.persist(author); em.getTransaction().commit();
+        try (EntityManager em = emf.createEntityManager()) {
+            em.getTransaction().begin();
+            em.merge(author);
+            em.getTransaction().commit();
+        }
     }
 
-    /** Найти автора по id (простой em.find) */
     public Author7 findById(Long id) {
-        // TODO: return em.find(Author7.class, id);
-        return null;
+        try (EntityManager em = emf.createEntityManager()) {
+            return em.find(Author7.class, id);
+        }
     }
 
     /**
-     * Загрузить всех авторов с постами одним запросом (решение N+1).
-     * JPQL: "SELECT DISTINCT a FROM Author7 a JOIN FETCH a.posts"
+     * Загружает авторов с постами, профилями, тегами и комментариями.
+     * Использует несколько запросов для избежания проблем с множественным JOIN FETCH.
      */
     public List<Author7> findAuthorsWithPosts() {
-        // TODO: createQuery + JOIN FETCH
-        return List.of();
+        try (EntityManager em = emf.createEntityManager()) {
+            // 1. Загружаем авторов с постами и профилями
+            List<Author7> authors = em.createQuery(
+                            "SELECT DISTINCT a FROM Author7 a " +
+                                    "LEFT JOIN FETCH a.posts p " +
+                                    "LEFT JOIN FETCH a.profile " +
+                                    "ORDER BY a.id",
+                            Author7.class)
+                    .getResultList();
+
+            if (authors.isEmpty()) {
+                return authors;
+            }
+
+            // 2. Собираем ID всех постов
+            List<Long> postIds = new ArrayList<>();
+            for (Author7 author : authors) {
+                for (Post7 post : author.getPosts()) {
+                    postIds.add(post.getId());
+                }
+            }
+
+            // 3. Загружаем теги для всех постов
+            if (!postIds.isEmpty()) {
+                List<Post7> postsWithTags = em.createQuery(
+                                "SELECT DISTINCT p FROM Post7 p " +
+                                        "LEFT JOIN FETCH p.tags " +
+                                        "WHERE p.id IN :postIds",
+                                Post7.class)
+                        .setParameter("postIds", postIds)
+                        .getResultList();
+
+                Map<Long, Set<Tag7>> tagMap = new HashMap<>();
+                for (Post7 post : postsWithTags) {
+                    tagMap.put(post.getId(), post.getTags());
+                }
+
+                for (Author7 author : authors) {
+                    for (Post7 post : author.getPosts()) {
+                        Set<Tag7> tags = tagMap.get(post.getId());
+                        if (tags != null) {
+                            post.getTags().clear();
+                            post.getTags().addAll(tags);
+                        }
+                    }
+                }
+            }
+
+            // 4. Загружаем комментарии для всех постов
+            if (!postIds.isEmpty()) {
+                List<Post7> postsWithComments = em.createQuery(
+                                "SELECT DISTINCT p FROM Post7 p " +
+                                        "LEFT JOIN FETCH p.comments " +
+                                        "WHERE p.id IN :postIds",
+                                Post7.class)
+                        .setParameter("postIds", postIds)
+                        .getResultList();
+
+                Map<Long, List<Comment7>> commentMap = new HashMap<>();
+                for (Post7 post : postsWithComments) {
+                    commentMap.put(post.getId(), post.getComments());
+                }
+
+                for (Author7 author : authors) {
+                    for (Post7 post : author.getPosts()) {
+                        List<Comment7> comments = commentMap.get(post.getId());
+                        if (comments != null) {
+                            post.getComments().clear();
+                            post.getComments().addAll(comments);
+                        }
+                    }
+                }
+            }
+
+            return authors;
+        }
     }
 
     /**
-     * Загрузить посты автора с тегами и комментариями.
-     * ПОДСКАЗКА: нельзя делать два JOIN FETCH на разные коллекции в одном запросе.
-     * Выполните два отдельных запроса или используйте @BatchSize на одной коллекции.
+     * Загружает посты автора с тегами и комментариями.
+     * Использует два запроса и объединяет результаты.
      */
     public List<Post7> findPostsWithTagsAndComments(Long authorId) {
-        // TODO
-        return List.of();
+        try (EntityManager em = emf.createEntityManager()) {
+            // 1. Загружаем посты с тегами
+            List<Post7> postsWithTags = em.createQuery(
+                            "SELECT DISTINCT p FROM Post7 p " +
+                                    "LEFT JOIN FETCH p.tags " +
+                                    "WHERE p.author.id = :authorId",
+                            Post7.class)
+                    .setParameter("authorId", authorId)
+                    .getResultList();
+
+            // 2. Загружаем посты с комментариями
+            List<Post7> postsWithComments = em.createQuery(
+                            "SELECT DISTINCT p FROM Post7 p " +
+                                    "LEFT JOIN FETCH p.comments " +
+                                    "WHERE p.author.id = :authorId",
+                            Post7.class)
+                    .setParameter("authorId", authorId)
+                    .getResultList();
+
+            // 3. Объединяем результаты
+            Map<Long, Post7> postMap = new HashMap<>();
+            for (Post7 post : postsWithTags) {
+                postMap.put(post.getId(), post);
+            }
+            for (Post7 post : postsWithComments) {
+                Post7 existing = postMap.get(post.getId());
+                if (existing != null) {
+                    existing.getComments().clear();
+                    existing.getComments().addAll(post.getComments());
+                }
+            }
+
+            return new ArrayList<>(postMap.values());
+        }
     }
 }

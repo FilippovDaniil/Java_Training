@@ -45,16 +45,130 @@ import java.math.BigDecimal;
 public class Task02 {
 
     public static void main(String[] args) {
-        // TODO: создайте SessionFactory — добавьте Product, Book, Electronics, Clothing через addAnnotatedClass
+        // Создаем SessionFactory
+        Configuration config = new Configuration();
+        config.setProperty("hibernate.connection.driver_class", "org.h2.Driver");
+        config.setProperty("hibernate.connection.url", "jdbc:h2:mem:shop;DB_CLOSE_DELAY=-1");
+        config.setProperty("hibernate.dialect", "org.hibernate.dialect.H2Dialect");
+        config.setProperty("hibernate.hbm2ddl.auto", "create-drop");
+        config.setProperty("hibernate.show_sql", "true");
+        config.setProperty("hibernate.format_sql", "true");
+        config.addAnnotatedClass(Product2.class);
+        config.addAnnotatedClass(Book2.class);
+        config.addAnnotatedClass(Electronics2.class);
+        config.addAnnotatedClass(Clothing.class);
 
-        // TODO: сохраните:
-        //   Book: "Чистый код", 1200.00, author="Роберт Мартин", isbn="978-5-4461-0959-9"
-        //   Electronics: "Смартфон", 45000.00, brand="Samsung", warrantyMonths=12
-        //   Clothing: "Худи", 3500.00, size="M", material="Хлопок"
+        try (SessionFactory factory = config.buildSessionFactory()) {
+            System.out.println("=== ИЕРАРХИЯ ТОВАРОВ (JOINED) ===\n");
 
-        // TODO: откройте новую сессию; выполните нативный SELECT COUNT(*) FROM products
-        //       и SELECT COUNT(*) FROM books; выведите результаты
+            // ===== СОХРАНЕНИЕ =====
+            System.out.println("--- СОХРАНЕНИЕ ТОВАРОВ ---");
 
-        // TODO: закройте SessionFactory
+            try (Session session = factory.openSession()) {
+                session.getTransaction().begin();
+
+                // Создаем книгу
+                Book2 book = new Book2(
+                        "Чистый код",
+                        new BigDecimal("1200.00"),
+                        "Роберт Мартин",
+                        "978-5-4461-0959-9"
+                );
+
+                // Создаем электронику
+                Electronics2 electronics = new Electronics2(
+                        "Смартфон Samsung",
+                        new BigDecimal("45000.00"),
+                        "Samsung",
+                        12
+                );
+
+                // Создаем одежду
+                Clothing clothing = new Clothing(
+                        "Худи",
+                        new BigDecimal("3500.00"),
+                        "M",
+                        "Хлопок"
+                );
+
+                // Сохраняем
+                session.persist(book);
+                session.persist(electronics);
+                session.persist(clothing);
+
+                System.out.println("   ✅ Сохранена книга: " + book);
+                System.out.println("   ✅ Сохранена электроника: " + electronics);
+                System.out.println("   ✅ Сохранена одежда: " + clothing);
+
+                session.getTransaction().commit();
+            }
+
+            // ===== ПРОВЕРКА ЧЕРЕЗ NATIVE SQL =====
+            System.out.println("\n--- ПРОВЕРКА ЧЕРЕЗ NATIVE SQL ---");
+
+            try (Session session = factory.openSession()) {
+                // 1. Проверяем количество строк в таблице products
+                Number productsCount = (Number) session
+                        .createNativeQuery("SELECT COUNT(*) FROM products")
+                        .getSingleResult();
+                System.out.println("   📊 Строк в products: " + productsCount);
+
+                // 2. Проверяем количество строк в таблице books
+                Number booksCount = (Number) session
+                        .createNativeQuery("SELECT COUNT(*) FROM books")
+                        .getSingleResult();
+                System.out.println("   📊 Строк в books: " + booksCount);
+
+                // 3. Проверяем количество строк в таблице electronics
+                Number electronicsCount = (Number) session
+                        .createNativeQuery("SELECT COUNT(*) FROM electronics")
+                        .getSingleResult();
+                System.out.println("   📊 Строк в electronics: " + electronicsCount);
+
+                // 4. Проверяем количество строк в таблице clothing
+                Number clothingCount = (Number) session
+                        .createNativeQuery("SELECT COUNT(*) FROM clothing")
+                        .getSingleResult();
+                System.out.println("   📊 Строк в clothing: " + clothingCount);
+            }
+
+            // ===== ЗАГРУЗКА И ВЫВОД =====
+            System.out.println("\n--- ЗАГРУЗКА ТОВАРОВ ---");
+
+            try (Session session = factory.openSession()) {
+                // Загружаем книгу (id = 1)
+                Book2 loadedBook = session.get(Book2.class, 1L);
+                if (loadedBook != null) {
+                    System.out.println("   📚 Книга: " + loadedBook);
+                }
+
+                // Загружаем электронику (id = 2)
+                Electronics2 loadedElectronics = session.get(Electronics2.class, 2L);
+                if (loadedElectronics != null) {
+                    System.out.println("   💻 Электроника: " + loadedElectronics);
+                }
+
+                // Загружаем одежду (id = 3)
+                Clothing loadedClothing = session.get(Clothing.class, 3L);
+                if (loadedClothing != null) {
+                    System.out.println("   👕 Одежда: " + loadedClothing);
+                }
+            }
+
+            // ===== СРАВНЕНИЕ СТРАТЕГИЙ =====
+            System.out.println("\n--- СРАВНЕНИЕ СТРАТЕГИЙ НАСЛЕДОВАНИЯ ---");
+            System.out.println("   📌 JOINED: каждая сущность имеет свою таблицу");
+            System.out.println("   📌 Общие поля хранятся в родительской таблице (products)");
+            System.out.println("   📌 Специфичные поля — в дочерних таблицах (books, electronics, clothing)");
+            System.out.println("   📌 При SELECT выполняется JOIN родительской и дочерней таблиц");
+            System.out.println("   📌 Преимущества: нормализованная структура, нет NULL");
+            System.out.println("   📌 Недостатки: медленнее при JOIN (особенно с большим количеством подклассов)");
+
+        } catch (Exception e) {
+            System.err.println("❌ Ошибка: " + e.getMessage());
+            e.printStackTrace();
+        }
+
+        System.out.println("\n✅ Программа завершена");
     }
 }

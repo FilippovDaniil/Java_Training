@@ -93,38 +93,211 @@ import java.util.Optional;
 public class Task07 {
 
     /*
-     * STRATEGY_CHOICE: выбранная стратегия наследования: [???]
-     * Обоснование: TODO
+     * STRATEGY_CHOICE: SINGLE_TABLE
+     * Обоснование:
+     * - Всего 3 подтипа, у каждого не более 4 уникальных полей
+     * - Частые полиморфные запросы (findAll, findByStatus)
+     * - Нужна производительность при чтении
+     * - NULL-поля допустимы, т.к. их немного
+     * - Простота запросов без JOIN
+     * - Легко добавлять новые типы оплаты
+     * - В отличие от TABLE_PER_CLASS, можно делать FK на Payment
      */
 
     public static void main(String[] args) {
-        // TODO: создайте SessionFactory с H2 in-memory
-        //   Зарегистрируйте: Payment, CardPayment, CashPayment, CryptoPayment
-        //   Включите show_sql=true и format_sql=true
+        // Создаем SessionFactory
+        Configuration config = new Configuration();
+        config.setProperty("hibernate.connection.driver_class", "org.h2.Driver");
+        config.setProperty("hibernate.connection.url", "jdbc:h2:mem:payments;DB_CLOSE_DELAY=-1");
+        config.setProperty("hibernate.dialect", "org.hibernate.dialect.H2Dialect");
+        config.setProperty("hibernate.hbm2ddl.auto", "create-drop");
+        config.setProperty("hibernate.show_sql", "true");
+        config.setProperty("hibernate.format_sql", "true");
+        config.addAnnotatedClass(Payment.class);
+        config.addAnnotatedClass(CardPayment.class);
+        config.addAnnotatedClass(CashPayment.class);
+        config.addAnnotatedClass(CryptoPayment.class);
 
-        // TODO: создайте PaymentRepository(sessionFactory)
+        try (SessionFactory factory = config.buildSessionFactory()) {
+            System.out.println("=== ИЕРАРХИЯ СПОСОБОВ ОПЛАТЫ (SINGLE_TABLE) ===\n");
 
-        // a) TODO: сохраните тестовые данные:
-        //   CardPayment: 5000.00 RUB, карта 4111 **** **** 1111, PENDING
-        //   CardPayment: 12500.00 RUB, карта 5555 **** **** 4444, COMPLETED
-        //   CashPayment: 800.00 RUB, адрес "ул. Ленина 1", PENDING
-        //   CashPayment: 1200.00 RUB, адрес "пр. Мира 5", COMPLETED
-        //   CryptoPayment: 0.005 BTC (50000.00 RUB), кошелёк "bc1q...", PENDING
-        //   CryptoPayment: 1.5 ETH (30000.00 RUB), кошелёк "0xAB...", COMPLETED
+            PaymentRepository repo = new PaymentRepository(factory);
 
-        // b) TODO: вызовите findAll(), переберите результат через instanceof,
-        //    выведите тип и сумму каждого платежа
+            // ============================================
+            // a) СОХРАНЕНИЕ ТЕСТОВЫХ ДАННЫХ
+            // ============================================
+            System.out.println("--- a) СОХРАНЕНИЕ ПЛАТЕЖЕЙ ---");
 
-        // c) TODO: вызовите findByStatus(PaymentStatus.PENDING)
-        //    выведите количество и суммы
+            // Карточные платежи
+            CardPayment card1 = new CardPayment(
+                    new BigDecimal("5000.00"),
+                    "4111 **** **** 1111",
+                    "Иван Петров",
+                    "12/25"
+            );
+            card1.setStatus(PaymentStatus.PENDING);
 
-        // d) TODO: вызовите findAllCardPayments()
-        //    выведите maskedCardNumber каждой карты
+            CardPayment card2 = new CardPayment(
+                    new BigDecimal("12500.00"),
+                    "5555 **** **** 4444",
+                    "Мария Смирнова",
+                    "06/26"
+            );
+            card2.setStatus(PaymentStatus.COMPLETED);
+            card2.setAuthorizationCode("AUTH-12345");
 
-        // e) TODO: вызовите countByType()
-        //    выведите: "CardPayment: X шт., CashPayment: Y шт., CryptoPayment: Z шт."
+            // Наличные платежи
+            CashPayment cash1 = new CashPayment(
+                    new BigDecimal("800.00"),
+                    "ул. Ленина 1",
+                    new BigDecimal("200.00")
+            );
+            cash1.setStatus(PaymentStatus.PENDING);
+            cash1.setCourierName("Петр Сидоров");
 
-        // f) TODO: вызовите updateStatus(1L, PaymentStatus.COMPLETED)
-        //    затем findById(1L) и убедитесь, что статус изменился
+            CashPayment cash2 = new CashPayment(
+                    new BigDecimal("1200.00"),
+                    "пр. Мира 5",
+                    new BigDecimal("300.00")
+            );
+            cash2.setStatus(PaymentStatus.COMPLETED);
+            cash2.setCourierName("Анна Кузнецова");
+
+            // Криптовалютные платежи
+            CryptoPayment crypto1 = new CryptoPayment(
+                    new BigDecimal("50000.00"),
+                    "bc1q7x4g5h9k2m3n6p8r1s2t3u4v5w6x7y8z9a0b1c2",
+                    "BTC",
+                    new BigDecimal("100000.00")
+            );
+            crypto1.setStatus(PaymentStatus.PENDING);
+
+            CryptoPayment crypto2 = new CryptoPayment(
+                    new BigDecimal("30000.00"),
+                    "0xAB12CD34EF56GH78IJ90KL12MN34OP56QR78ST90",
+                    "ETH",
+                    new BigDecimal("20000.00")
+            );
+            crypto2.setStatus(PaymentStatus.COMPLETED);
+            crypto2.setTransactionHash("0x9876543210abcdef1234567890abcdef12345678");
+
+            repo.save(card1);
+            repo.save(card2);
+            repo.save(cash1);
+            repo.save(cash2);
+            repo.save(crypto1);
+            repo.save(crypto2);
+
+            System.out.println("   ✅ Сохранены платежи:");
+            System.out.println("      - 2 карточных");
+            System.out.println("      - 2 наличных");
+            System.out.println("      - 2 криптовалютных");
+
+            // ============================================
+            // b) FINDALL() С INSTANCEOF
+            // ============================================
+            System.out.println("\n--- b) ВСЕ ПЛАТЕЖИ (findAll + instanceof) ---");
+
+            List<Payment> allPayments = repo.findAll();
+            System.out.println("   Всего платежей: " + allPayments.size() + "\n");
+
+            for (Payment p : allPayments) {
+                if (p instanceof CardPayment card) {
+                    System.out.printf("   💳 Карта: %.2f %s, статус: %s, карта: %s%n",
+                            card.getAmount(), card.getCurrency(),
+                            card.getStatus(), card.getMaskedCardNumber());
+                } else if (p instanceof CashPayment cash) {
+                    System.out.printf("   💵 Наличные: %.2f %s, статус: %s, адрес: %s%n",
+                            cash.getAmount(), cash.getCurrency(),
+                            cash.getStatus(), cash.getDeliveryAddress());
+                } else if (p instanceof CryptoPayment crypto) {
+                    System.out.printf("   🪙 Криптовалюта: %.2f %s, статус: %s, валюта: %s%n",
+                            crypto.getAmount(), crypto.getCurrency(),
+                            crypto.getStatus(), crypto.getCryptoCurrency());
+                }
+            }
+
+            // ============================================
+            // c) FIND BY STATUS (PENDING)
+            // ============================================
+            System.out.println("\n--- c) ПЛАТЕЖИ СО СТАТУСОМ PENDING ---");
+
+            List<Payment> pendingPayments = repo.findByStatus(PaymentStatus.PENDING);
+            System.out.println("   Найдено платежей в статусе PENDING: " + pendingPayments.size());
+            BigDecimal totalPending = pendingPayments.stream()
+                    .map(Payment::getAmount)
+                    .reduce(BigDecimal.ZERO, BigDecimal::add);
+            System.out.printf("   Общая сумма: %.2f %s%n", totalPending, "RUB");
+
+            // ============================================
+            // d) FIND ALL CARD PAYMENTS
+            // ============================================
+            System.out.println("\n--- d) ВСЕ КАРТОЧНЫЕ ПЛАТЕЖИ ---");
+
+            List<CardPayment> cardPayments = repo.findAllCardPayments();
+            System.out.println("   Карточных платежей: " + cardPayments.size());
+            for (CardPayment card : cardPayments) {
+                System.out.printf("      - %s, сумма: %.2f %s, статус: %s%n",
+                        card.getMaskedCardNumber(),
+                        card.getAmount(), card.getCurrency(),
+                        card.getStatus());
+            }
+
+            // ============================================
+            // e) COUNT BY TYPE
+            // ============================================
+            System.out.println("\n--- e) СТАТИСТИКА ПО ТИПАМ ---");
+
+            Map<String, Long> typeCounts = repo.countByType();
+            System.out.println("   Распределение платежей по типам:");
+            typeCounts.forEach((type, count) ->
+                    System.out.printf("      %s: %d шт.%n", type, count)
+            );
+
+            // ============================================
+            // f) UPDATE STATUS
+            // ============================================
+            System.out.println("\n--- f) ОБНОВЛЕНИЕ СТАТУСА ---");
+
+            Long paymentId = 1L;
+            System.out.printf("   Обновление статуса платежа ID=%d: PENDING → COMPLETED%n", paymentId);
+
+            repo.updateStatus(paymentId, PaymentStatus.COMPLETED);
+
+            Optional<Payment> updated = repo.findById(paymentId);
+            updated.ifPresentOrElse(
+                    p -> System.out.printf("   ✅ Статус обновлен: %s%n", p.getStatus()),
+                    () -> System.out.println("   ❌ Платеж не найден")
+            );
+
+            // ============================================
+            // ДОПОЛНИТЕЛЬНО: ФИЛЬТРАЦИЯ ПО СТАТУСУ COMPLETED
+            // ============================================
+            System.out.println("\n--- ДОПОЛНИТЕЛЬНО: ПЛАТЕЖИ СО СТАТУСОМ COMPLETED ---");
+
+            List<Payment> completedPayments = repo.findByStatus(PaymentStatus.COMPLETED);
+            System.out.println("   Завершенных платежей: " + completedPayments.size());
+            BigDecimal totalCompleted = completedPayments.stream()
+                    .map(Payment::getAmount)
+                    .reduce(BigDecimal.ZERO, BigDecimal::add);
+            System.out.printf("   Общая сумма: %.2f %s%n", totalCompleted, "RUB");
+
+            // ============================================
+            // ИТОГИ
+            // ============================================
+            System.out.println("\n--- ИТОГИ ---");
+            System.out.printf("   Всего платежей: %d%n", repo.findAll().size());
+            System.out.printf("   Общая сумма: %.2f %s%n",
+                    repo.findAll().stream()
+                            .map(Payment::getAmount)
+                            .reduce(BigDecimal.ZERO, BigDecimal::add),
+                    "RUB");
+
+        } catch (Exception e) {
+            System.err.println("❌ Ошибка: " + e.getMessage());
+            e.printStackTrace();
+        }
+
+        System.out.println("\n✅ Программа завершена");
     }
 }

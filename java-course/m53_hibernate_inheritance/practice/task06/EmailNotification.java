@@ -9,11 +9,35 @@ import java.util.List;
 
 // --- EmailNotification (дополните @Entity @Table) ---
 
-// TODO: добавьте @Entity и @Table(name = "email_notifications")
+@Entity
+@Table(name = "email_notifications")
 class EmailNotification extends Notification {
+
     private String subject;
     private String body;
     private String recipientEmail;
 
-    // TODO: конструктор(subject, body, recipientEmail, status), геттеры, toString()
+    public EmailNotification() {}
+
+    public EmailNotification(String subject, String body, String recipientEmail, String status) {
+        super(status);
+        this.subject = subject;
+        this.body = body;
+        this.recipientEmail = recipientEmail;
+    }
+
+    public String getSubject() { return subject; }
+    public void setSubject(String subject) { this.subject = subject; }
+
+    public String getBody() { return body; }
+    public void setBody(String body) { this.body = body; }
+
+    public String getRecipientEmail() { return recipientEmail; }
+    public void setRecipientEmail(String recipientEmail) { this.recipientEmail = recipientEmail; }
+
+    @Override
+    public String toString() {
+        return String.format("EmailNotification{id=%d, subject='%s', recipient='%s', status='%s'}",
+                getId(), subject, recipientEmail, getStatus());
+    }
 }

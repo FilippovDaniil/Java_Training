@@ -14,6 +14,7 @@ import java.util.List;
 @Inheritance(strategy = InheritanceType.SINGLE_TABLE)
 @DiscriminatorColumn(name = "product_type", discriminatorType = DiscriminatorType.STRING)
 abstract class ProductShop {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -24,5 +25,25 @@ abstract class ProductShop {
     @Column(nullable = false)
     private BigDecimal price;
 
-    // TODO: конструктор(name, price), геттеры, toString()
+    public ProductShop() {}
+
+    public ProductShop(String name, BigDecimal price) {
+        this.name = name;
+        this.price = price;
+    }
+
+    public Long getId() { return id; }
+    public void setId(Long id) { this.id = id; }
+
+    public String getName() { return name; }
+    public void setName(String name) { this.name = name; }
+
+    public BigDecimal getPrice() { return price; }
+    public void setPrice(BigDecimal price) { this.price = price; }
+
+    @Override
+    public String toString() {
+        return String.format("ProductShop{id=%d, name='%s', price=%s}",
+                id, name, price);
+    }
 }

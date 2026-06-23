@@ -19,11 +19,15 @@ class UserProfile7 {
 
     private String avatarUrl;
 
-    // TODO: @OneToOne(mappedBy = "profile", fetch = FetchType.LAZY)
+    @OneToOne(mappedBy = "profile", fetch = FetchType.LAZY)
     private Author7 author;
 
     public UserProfile7() {}
-    public UserProfile7(String bio, String avatarUrl) { this.bio = bio; this.avatarUrl = avatarUrl; }
+
+    public UserProfile7(String bio, String avatarUrl) {
+        this.bio = bio;
+        this.avatarUrl = avatarUrl;
+    }
 
     public Long getId() { return id; }
     public String getBio() { return bio; }

@@ -9,10 +9,30 @@ import java.util.List;
 
 // --- SmsNotification (дополните @Entity @Table) ---
 
-// TODO: добавьте @Entity и @Table(name = "sms_notifications")
+@Entity
+@Table(name = "sms_notifications")
 class SmsNotification extends Notification {
+
     private String phoneNumber;
     private String messageText;
 
-    // TODO: конструктор(phoneNumber, messageText, status), геттеры, toString()
+    public SmsNotification() {}
+
+    public SmsNotification(String phoneNumber, String messageText, String status) {
+        super(status);
+        this.phoneNumber = phoneNumber;
+        this.messageText = messageText;
+    }
+
+    public String getPhoneNumber() { return phoneNumber; }
+    public void setPhoneNumber(String phoneNumber) { this.phoneNumber = phoneNumber; }
+
+    public String getMessageText() { return messageText; }
+    public void setMessageText(String messageText) { this.messageText = messageText; }
+
+    @Override
+    public String toString() {
+        return String.format("SmsNotification{id=%d, phone='%s', text='%s', status='%s'}",
+                getId(), phoneNumber, messageText, getStatus());
+    }
 }

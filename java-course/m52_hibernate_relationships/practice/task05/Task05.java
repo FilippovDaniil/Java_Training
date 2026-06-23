@@ -39,28 +39,152 @@ package m52_hibernate_relationships.practice.task05;
  */
 
 import jakarta.persistence.*;
+import org.hibernate.cfg.Configuration;
+
 import java.util.ArrayList;
 import java.util.List;
 
-public class Task05 {
+class Task05 {
 
     public static void main(String[] args) {
-        // TODO: создать EMF (H2 in-memory)
+        Configuration config = new Configuration();
+        config.setProperty("hibernate.connection.driver_class", "org.h2.Driver");
+        config.setProperty("hibernate.connection.url", "jdbc:h2:mem:blogdb;DB_CLOSE_DELAY=-1");
+        config.setProperty("hibernate.hbm2ddl.auto", "create-drop");
+        config.setProperty("hibernate.show_sql", "true");
+        config.addAnnotatedClass(Post5.class);
+        config.addAnnotatedClass(Comment5.class);
 
-        // Сценарий А
-        // TODO: создать Post5 "Про каскады"
-        // TODO: добавить 3 комментария через post.addComment(...)
-        // TODO: em.persist(post) — убедиться, что CASCADE сохранит комментарии
-        // TODO: вывести COUNT комментариев через JPQL
+        try (EntityManagerFactory emf = config.buildSessionFactory()) {
+            System.out.println("=== РАСШИРЕННЫЕ ТЕСТЫ CASCADE ===\n");
 
-        // Сценарий Б
-        // TODO: em.remove(post) — убедиться, что комментарии удалены
-        // TODO: вывести COUNT комментариев (должно быть 0)
+            // ===== ТЕСТ 1: CASCADE PERSIST =====
+            System.out.println("--- ТЕСТ 1: Cascade PERSIST ---");
+            testCascadePersist(emf);
 
-        // Сценарий В
-        // TODO: создать новый Post5 с 2 комментариями, сохранить
-        // TODO: post.getComments().remove(0) — убрать первый
-        // TODO: em.merge(post), em.flush()
-        // TODO: вывести COUNT (должно быть 1)
+            // ===== ТЕСТ 2: CASCADE REMOVE =====
+            System.out.println("\n--- ТЕСТ 2: Cascade REMOVE ---");
+            testCascadeRemove(emf);
+
+            // ===== ТЕСТ 3: ORPHAN REMOVAL =====
+            System.out.println("\n--- ТЕСТ 3: Orphan Removal ---");
+            testOrphanRemoval(emf);
+
+            // ===== ТЕСТ 4: Cascade MERGE =====
+            System.out.println("\n--- ТЕСТ 4: Cascade MERGE ---");
+            testCascadeMerge(emf);
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    private static void testCascadePersist(EntityManagerFactory emf) {
+        try (EntityManager em = emf.createEntityManager()) {
+            em.getTransaction().begin();
+
+            Post5 post = new Post5("Пост с комментариями");
+            post.addComment(new Comment5("Комментарий 1"));
+            post.addComment(new Comment5("Комментарий 2"));
+            post.addComment(new Comment5("Комментарий 3"));
+
+            // Сохраняем только пост
+            em.persist(post);
+
+            em.getTransaction().commit();
+
+            // Проверяем
+            Long count = em.createQuery("SELECT COUNT(c) FROM Comment5 c", Long.class)
+                    .getSingleResult();
+            System.out.println("   ✅ Комментариев сохранено: " + count);
+        }
+    }
+
+    private static void testCascadeRemove(EntityManagerFactory emf) {
+        try (EntityManager em = emf.createEntityManager()) {
+            // Сначала создаем пост с комментариями
+            em.getTransaction().begin();
+
+            Post5 post = new Post5("Пост для удаления");
+            post.addComment(new Comment5("Комментарий для удаления 1"));
+            post.addComment(new Comment5("Комментарий для удаления 2"));
+
+            em.persist(post);
+            Long postId = post.getId();
+            em.getTransaction().commit();
+
+            // Теперь удаляем
+            em.getTransaction().begin();
+            Post5 toDelete = em.find(Post5.class, postId);
+            em.remove(toDelete);
+            em.getTransaction().commit();
+
+            // Проверяем
+            Long count = em.createQuery("SELECT COUNT(c) FROM Comment5 c", Long.class)
+                    .getSingleResult();
+            System.out.println("   ✅ Комментариев после удаления: " + count + " (ожидается 0)");
+        }
+    }
+
+    private static void testOrphanRemoval(EntityManagerFactory emf) {
+        try (EntityManager em = emf.createEntityManager()) {
+            // Создаем пост с комментариями
+            em.getTransaction().begin();
+
+            Post5 post = new Post5("Пост для orphan");
+            post.addComment(new Comment5("Первый"));
+            post.addComment(new Comment5("Второй"));
+            post.addComment(new Comment5("Третий"));
+
+            em.persist(post);
+            Long postId = post.getId();
+            em.getTransaction().commit();
+
+            // Удаляем один комментарий из коллекции
+            em.getTransaction().begin();
+            Post5 loaded = em.find(Post5.class, postId);
+            Comment5 toRemove = loaded.getComments().get(1); // Второй комментарий
+            loaded.removeComment(toRemove);
+            em.merge(loaded);
+            em.getTransaction().commit();
+
+            // Проверяем
+            Long count = em.createQuery("SELECT COUNT(c) FROM Comment5 c", Long.class)
+                    .getSingleResult();
+            System.out.println("   ✅ Комментариев после orphan removal: " + count + " (ожидается 2)");
+        }
+    }
+
+    private static void testCascadeMerge(EntityManagerFactory emf) {
+        try (EntityManager em = emf.createEntityManager()) {
+            // Создаем пост с комментариями
+            Long postId;
+            em.getTransaction().begin();
+
+            Post5 post = new Post5("Пост для merge");
+            post.addComment(new Comment5("Комментарий для merge"));
+
+            em.persist(post);
+            postId = post.getId();
+            em.getTransaction().commit();
+
+            // Закрываем EM, объект становится DETACHED
+            em.clear();
+
+            // Изменяем detached объект
+            Post5 detached = em.find(Post5.class, postId);
+            detached.setTitle("Измененный заголовок");
+            detached.getComments().get(0).setText("Измененный комментарий");
+
+            // merge должен обновить и пост, и комментарий
+            em.getTransaction().begin();
+            em.merge(detached);
+            em.getTransaction().commit();
+
+            // Проверяем
+            Post5 updated = em.find(Post5.class, postId);
+            System.out.println("   ✅ Заголовок обновлен: " + updated.getTitle());
+            System.out.println("   ✅ Комментарий обновлен: " + updated.getComments().get(0).getText());
+        }
     }
 }

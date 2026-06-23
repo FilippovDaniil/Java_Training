@@ -38,23 +38,98 @@ import java.math.BigDecimal;
 public class Task01 {
 
     public static void main(String[] args) {
-        // TODO: создайте SessionFactory с H2 in-memory и addAnnotatedClass для каждого Entity
-        // Пример минимальной конфигурации:
-        //   Configuration cfg = new Configuration();
-        //   cfg.setProperty("hibernate.connection.url", "jdbc:h2:mem:shop;DB_CLOSE_DELAY=-1");
-        //   cfg.setProperty("hibernate.connection.driver_class", "org.h2.Driver");
-        //   cfg.setProperty("hibernate.dialect", "org.hibernate.dialect.H2Dialect");
-        //   cfg.setProperty("hibernate.hbm2ddl.auto", "create-drop");
-        //   cfg.setProperty("hibernate.show_sql", "true");
-        //   cfg.addAnnotatedClass(Product.class);
-        //   cfg.addAnnotatedClass(Book.class);
-        //   cfg.addAnnotatedClass(Electronics.class);
-        //   SessionFactory sf = cfg.buildSessionFactory();
+        // Создаем SessionFactory
+        Configuration config = new Configuration();
+        config.setProperty("hibernate.connection.driver_class", "org.h2.Driver");
+        config.setProperty("hibernate.connection.url", "jdbc:h2:mem:shop;DB_CLOSE_DELAY=-1");
+        config.setProperty("hibernate.dialect", "org.hibernate.dialect.H2Dialect");
+        config.setProperty("hibernate.hbm2ddl.auto", "create-drop");
+        config.setProperty("hibernate.show_sql", "true");
+        config.setProperty("hibernate.format_sql", "true");
+        config.addAnnotatedClass(Product.class);
+        config.addAnnotatedClass(Book.class);
+        config.addAnnotatedClass(Electronics.class);
 
-        // TODO: откройте сессию и транзакцию; создайте Book и Electronics; сделайте persist; закройте транзакцию
+        try (SessionFactory factory = config.buildSessionFactory()) {
+            System.out.println("=== ИЕРАРХИЯ ТОВАРОВ (SINGLE_TABLE) ===\n");
 
-        // TODO: откройте новую сессию; загрузите обе сущности через session.get(Book.class, 1L) и session.get(Electronics.class, 2L)
+            // ===== СОХРАНЕНИЕ =====
+            System.out.println("--- СОХРАНЕНИЕ ТОВАРОВ ---");
 
-        // TODO: выведите поля обоих объектов; закройте SessionFactory
+            try (Session session = factory.openSession()) {
+                session.getTransaction().begin();
+
+                // Создаем книгу
+                Book book = new Book(
+                        "Чистый код",
+                        new BigDecimal("1200.00"),
+                        "Роберт Мартин",
+                        "978-5-4461-0959-9"
+                );
+
+                // Создаем электронику
+                Electronics electronics = new Electronics(
+                        "Ноутбук Dell",
+                        new BigDecimal("85000.00"),
+                        "Dell",
+                        12
+                );
+
+                // Сохраняем
+                session.persist(book);
+                session.persist(electronics);
+
+                System.out.println("   ✅ Сохранена книга: " + book);
+                System.out.println("   ✅ Сохранена электроника: " + electronics);
+
+                session.getTransaction().commit();
+            }
+
+            // ===== ЗАГРУЗКА =====
+            System.out.println("\n--- ЗАГРУЗКА ТОВАРОВ ---");
+
+            try (Session session = factory.openSession()) {
+                // Загружаем книгу (id = 1)
+                Book loadedBook = session.get(Book.class, 1L);
+                if (loadedBook != null) {
+                    System.out.println("   📚 Книга: " + loadedBook);
+                } else {
+                    System.out.println("   ❌ Книга не найдена");
+                }
+
+                // Загружаем электронику (id = 2)
+                Electronics loadedElectronics = session.get(Electronics.class, 2L);
+                if (loadedElectronics != null) {
+                    System.out.println("   💻 Электроника: " + loadedElectronics);
+                } else {
+                    System.out.println("   ❌ Электроника не найдена");
+                }
+
+                // Загружаем все товары как Product (полиморфный запрос)
+                System.out.println("\n--- ВСЕ ТОВАРЫ (ПОЛИМОРФНЫЙ ЗАПРОС) ---");
+                java.util.List<Product> products = session
+                        .createQuery("FROM Product", Product.class)
+                        .getResultList();
+
+                System.out.println("   Всего товаров: " + products.size());
+                for (Product p : products) {
+                    System.out.println("   - " + p.getClass().getSimpleName() + ": " + p);
+                }
+            }
+
+            // ===== ПОКАЗ СТРУКТУРЫ ТАБЛИЦЫ =====
+            System.out.println("\n--- СТРУКТУРА ТАБЛИЦЫ ---");
+            System.out.println("   📌 SINGLE_TABLE создает одну таблицу products");
+            System.out.println("   📌 Добавляется колонка product_type для различения типов");
+            System.out.println("   📌 Колонки подклассов могут быть NULL для других типов");
+            System.out.println("   📌 Преимущества: быстрые запросы, нет JOIN");
+            System.out.println("   📌 Недостатки: NULL-значения, ограничения NOT NULL невозможны");
+
+        } catch (Exception e) {
+            System.err.println("❌ Ошибка: " + e.getMessage());
+            e.printStackTrace();
+        }
+
+        System.out.println("\n✅ Программа завершена");
     }
 }
