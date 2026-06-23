@@ -49,17 +49,20 @@ public class Task03 {
                 HttpResponse.BodyHandlers.ofString());
 
         // TODO: выведите статус-код
-        System.out.println("Статус: " /* + ? */);
+        System.out.println("Статус: " + response.statusCode()/* + ? */);
 
         // TODO: выведите все заголовки ответа (обойдите response.headers().map())
         System.out.println("--- Заголовки ---");
         // response.headers().map().forEach(...)
+        System.out.println(response.headers());
 
         // TODO: выведите значение заголовка Content-Type отдельно
         System.out.println("Content-Type: " /* + ? */);
+        System.out.println(response.headers().map().get("Content-Type"));
 
         // TODO: выведите первые 100 символов тела
         String body = response.body();
         System.out.println("Начало тела: " /* + body.substring(0, Math.min(100, body.length())) */);
+        System.out.println(response.body().substring(0, Math.min(100, body.length())));
     }
 }

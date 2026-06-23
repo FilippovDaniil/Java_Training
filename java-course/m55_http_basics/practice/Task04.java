@@ -35,15 +35,15 @@ public class Task04 {
                 ┌────────┬─────────────────────┬────────────────────────────────────┐
                 │ Метод  │ URL                 │ Описание / Статус успеха           │
                 ├────────┼─────────────────────┼────────────────────────────────────┤
-                │ TODO   │ /notes              │ Список всех заметок / TODO         │
-                │ TODO   │ /notes              │ Создать заметку / TODO             │
-                │ TODO   │ /notes/{id}         │ Получить заметку / TODO            │
-                │ TODO   │ /notes/{id}         │ Полная замена / TODO               │
-                │ TODO   │ /notes/{id}         │ Частичное обновление / TODO        │
-                │ TODO   │ /notes/{id}         │ Удалить заметку / TODO             │
-                │ TODO   │ /notes/{id}/tags    │ Получить теги заметки / TODO       │
-                │ TODO   │ /notes/{id}/tags    │ Добавить тег к заметке / TODO      │
-                │ TODO   │ /notes/{id}/tags/{tagId} │ Удалить тег с заметки / TODO  │
+                │ GET    │ /notes              │ Список всех заметок / DONE         │
+                │ POST   │ /notes              │ Создать заметку / DONE             │
+                │ GET    │ /notes/{id}         │ Получить заметку / DONE            │
+                │ PUT    │ /notes/{id}         │ Полная замена / DONE               │
+                │ PATCH  │ /notes/{id}         │ Частичное обновление / DONE        │
+                │ DELETE │ /notes/{id}         │ Удалить заметку / DONE             │
+                │ GET    │ /notes/{id}/tags    │ Получить теги заметки / DONE       │
+                │ POST   │ /notes/{id}/tags    │ Добавить тег к заметке / DONE      │
+                │ DELETE │ /notes/{id}/tags/{tagId} │ Удалить тег с заметки / DONE  │
                 └────────┴─────────────────────┴────────────────────────────────────┘
                 """;
 
@@ -53,12 +53,12 @@ public class Task04 {
                 ┌────────┬────────────────────────────┬────────────────────────────┐
                 │ Метод  │ URL                        │ Описание / Статус          │
                 ├────────┼────────────────────────────┼────────────────────────────┤
-                │ TODO   │ /products                  │ Список товаров / TODO      │
-                │ TODO   │ /products/{id}             │ Один товар / TODO          │
-                │ TODO   │ /orders                    │ Создать заказ / TODO       │
-                │ TODO   │ /orders/{id}               │ Получить заказ / TODO      │
-                │ TODO   │ /orders/{id}               │ Сменить статус / TODO      │
-                │ TODO   │ /orders/{id}/items         │ Позиции заказа / TODO      │
+                │ GET    │ /products                  │ Список товаров / Получить  │
+                │ GET    │ /products/{id}             │ Один товар / Получить      │
+                │ POST   │ /orders                    │ Создать заказ / Create     │
+                │ GET    │ /orders/{id}               │ Получить заказ / GET       │
+                │ PATCH  │ /orders/{id}               │ Сменить статус / Change    │
+                │ GET    │ /orders/{id}/items         │ Позиции заказа / GET       │
                 └────────┴────────────────────────────┴────────────────────────────┘
                 """;
 
@@ -68,12 +68,18 @@ public class Task04 {
         // ── Исправьте плохие URL ─────────────────────────────────────────────
         System.out.println("=== Плохие URL — найдите ошибку и исправьте ===");
         String[][] badUrls = {
-            {"POST /createNote",              "TODO: ошибка — ..., правильно: ..."},
-            {"GET  /note?id=42",              "TODO: ошибка — ..., правильно: ..."},
-            {"GET  /getNotesList",            "TODO: ошибка — ..., правильно: ..."},
-            {"POST /notes/42/update",         "TODO: ошибка — ..., правильно: ..."},
-            {"GET  /deleteNote/42",           "TODO: ошибка — ..., правильно: ..."},
-            {"GET  /orders/5/items/3/discount/apply", "TODO: ошибка — ..., правильно: ..."},
+            {"POST /createNote",              "TODO: ошибка — в эндпоинте нужны существительные в множественном числе" +
+                    ", правильно: POST /notes"},
+            {"GET  /note?id=42",              "TODO: ошибка — ресурсы не надо искать через параметры, " +
+                    "правильно: GET /POST/{id}"},
+            {"GET  /getNotesList",            "TODO: ошибка — в эндпоинте нужны существительные в множествнноме числе" +
+                    ", правильно: GET /notes"},
+            {"POST /notes/42/update",         "TODO: ошибка — Метод сам говорит за за себя" +
+                    "глаголы не нужны в ендпоинте, правильно: PUT /notes/{id}"},
+            {"GET  /deleteNote/42",           "TODO: ошибка — Глаголы не нужны в ендпоинте" +
+                    ", правильно: DELETE /notes/{id}"},
+            {"GET  /orders/5/items/3/discount/apply", "TODO: ошибка — Слишком большая вложенность" +
+                    ", правильно: GET /orders/{id}/apply"},
         };
 
         for (String[] pair : badUrls) {

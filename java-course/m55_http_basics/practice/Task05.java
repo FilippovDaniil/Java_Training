@@ -44,11 +44,11 @@ public class Task05 {
                 ┌──────────┬────────────┬───────────────┬──────────────────────────────────┐
                 │ Метод    │ Безопасный │ Идемпотентный │ Обоснование                      │
                 ├──────────┼────────────┼───────────────┼──────────────────────────────────┤
-                │ GET      │ TODO       │ TODO          │ TODO                             │
-                │ POST     │ TODO       │ TODO          │ TODO                             │
-                │ PUT      │ TODO       │ TODO          │ TODO                             │
-                │ PATCH    │ TODO       │ TODO          │ TODO                             │
-                │ DELETE   │ TODO       │ TODO          │ TODO                             │
+                │ GET      │ Да         │ Да            │ Чтение ресурсов их не изменяет   │
+                │ POST     │ Нет        │ Нет           │ Изменение ресурсов               │
+                │ PUT      │ Нет        │ Да            │ Повторное изменение не поменяет  │
+                │ PATCH    │ Нет        │ Да            │ Повторное изменение не поменяет  │
+                │ DELETE   │ Нет        │ Да            │ Повтроное удаление не добавит    │
                 └──────────┴────────────┴───────────────┴──────────────────────────────────┘
                 """;
         System.out.println(table);
@@ -64,17 +64,17 @@ public class Task05 {
         //       Отправьте его ДВАЖДЫ, выведите статус и тело обоих ответов
         //       Вопрос: совпадают ли тела ответов?
 
-        // HttpRequest putRequest = HttpRequest.newBuilder()
-        //         .uri(URI.create("https://jsonplaceholder.typicode.com/posts/1"))
-        //         .header("Content-Type", "application/json")
-        //         .PUT(HttpRequest.BodyPublishers.ofString(putBody))
-        //         .build();
+         HttpRequest putRequest = HttpRequest.newBuilder()
+                 .uri(URI.create("https://jsonplaceholder.typicode.com/posts/1"))
+                 .header("Content-Type", "application/json")
+                 .PUT(HttpRequest.BodyPublishers.ofString(putBody))
+                 .build();
 
-        // HttpResponse<String> put1 = client.send(putRequest, HttpResponse.BodyHandlers.ofString());
-        // HttpResponse<String> put2 = client.send(putRequest, HttpResponse.BodyHandlers.ofString());
-        // System.out.println("PUT #1 статус: " + put1.statusCode() + "  тело: " + put1.body());
-        // System.out.println("PUT #2 статус: " + put2.statusCode() + "  тело: " + put2.body());
-        // System.out.println("Тела одинаковы: " + put1.body().equals(put2.body()));
+         HttpResponse<String> put1 = client.send(putRequest, HttpResponse.BodyHandlers.ofString());
+         HttpResponse<String> put2 = client.send(putRequest, HttpResponse.BodyHandlers.ofString());
+         System.out.println("PUT #1 статус: " + put1.statusCode() + "  тело: " + put1.body());
+         System.out.println("PUT #2 статус: " + put2.statusCode() + "  тело: " + put2.body());
+         System.out.println("Тела одинаковы: " + put1.body().equals(put2.body()));
 
         System.out.println("(реализуйте PUT-запросы выше)");
         System.out.println();
@@ -87,16 +87,16 @@ public class Task05 {
         //       Отправьте его ДВАЖДЫ, выведите статусы и тела
         //       Вопрос: одинаковы ли поля "id" в обоих ответах? Почему?
 
-        // HttpRequest postRequest = HttpRequest.newBuilder()
-        //         .uri(URI.create("https://jsonplaceholder.typicode.com/posts"))
-        //         .header("Content-Type", "application/json")
-        //         .POST(HttpRequest.BodyPublishers.ofString(postBody))
-        //         .build();
+         HttpRequest postRequest = HttpRequest.newBuilder()
+                 .uri(URI.create("https://jsonplaceholder.typicode.com/posts"))
+                 .header("Content-Type", "application/json")
+                 .POST(HttpRequest.BodyPublishers.ofString(postBody))
+                 .build();
 
-        // HttpResponse<String> post1 = client.send(postRequest, HttpResponse.BodyHandlers.ofString());
-        // HttpResponse<String> post2 = client.send(postRequest, HttpResponse.BodyHandlers.ofString());
-        // System.out.println("POST #1 статус: " + post1.statusCode() + "  тело: " + post1.body());
-        // System.out.println("POST #2 статус: " + post2.statusCode() + "  тело: " + post2.body());
+         HttpResponse<String> post1 = client.send(postRequest, HttpResponse.BodyHandlers.ofString());
+         HttpResponse<String> post2 = client.send(postRequest, HttpResponse.BodyHandlers.ofString());
+         System.out.println("POST #1 статус: " + post1.statusCode() + "  тело: " + post1.body());
+         System.out.println("POST #2 статус: " + post2.statusCode() + "  тело: " + post2.body());
 
         System.out.println("(реализуйте POST-запросы выше)");
         System.out.println();

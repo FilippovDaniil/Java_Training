@@ -52,69 +52,89 @@ public class Task07 {
             ── 1. CRUD «Заметки» ───────────────────────────────────────────────────
 
             [А] Создать заметку
-              Метод:   TODO
-              URL:     TODO
+              Метод:   POST
+              URL:     /notes
               Заголовки запроса:
                 Content-Type: application/json
                 Authorization: Bearer <token>
               Тело запроса (пример):
                 TODO — напишите пример JSON
-              Статус успеха: TODO
-              Заголовок ответа: TODO (Location: ...)
+                {
+                    "message": "SomeText",
+                    "title": "SomeTitle"
+                }           
+              Статус успеха: 201
+              Заголовок ответа: TODO (Location: https://notes.com/new-resource)
               Тело ответа (пример):
                 TODO — напишите пример JSON с полем id
+                {
+                    "id": 1,
+                    "StatusCode": 1
+                }
 
             [Б] Получить список заметок (с пагинацией)
-              Метод:   TODO
-              URL:     TODO (включите параметры ?page=&size=)
+              Метод:   GET
+              URL:     /notes?page=12&size=5 (включите параметры ?page=&size=)
               Заголовки запроса:
                 Accept: application/json
                 Authorization: Bearer <token>
               Тело запроса: нет
-              Статус успеха: TODO
+              Статус успеха: 200
               Тело ответа (пример):
                 TODO — напишите обёртку с items, page, size, totalPages
+                {
+                    "someText": "SomeText",
+                    "page": 12,
+                    "size": 5
+                }
 
             [В] Получить одну заметку
-              Метод:   TODO
-              URL:     TODO
-              Статус успеха: TODO   Статус «не найдено»: TODO
+              Метод:   GET
+              URL:     /notes/{id}
+              Статус успеха: 200   Статус «не найдено»: 404
               Тело ответа: TODO
+              {
+                "someText": "SomeText",
+                "statusCode": 1
+              }
 
             [Г] Полная замена заметки (PUT)
-              Метод:   TODO
-              URL:     TODO
+              Метод:   PUT
+              URL:     /notes/{id}
               Тело запроса: TODO
-              Статус успеха: TODO
+              {
+                "someText": "Newtext"
+              }
+              Статус успеха: TODO 204 no content
 
             [Д] Частичное обновление (PATCH) — только title или done
-              Метод:   TODO
-              URL:     TODO
+              Метод:   PATCH
+              URL:     /notes/{id}
               Тело запроса: TODO
-              Статус успеха: TODO
+              Статус успеха: 200 ok
 
             [Е] Удалить заметку
-              Метод:   TODO
-              URL:     TODO
-              Статус успеха: TODO   Тело ответа: нет
+              Метод:   DELETE
+              URL:     /notes/{id}
+              Статус успеха: 200   Тело ответа: нет
 
             ── 2. Вложенный ресурс «Теги» ─────────────────────────────────────────
 
             [Ж] Получить теги заметки
-              Метод:   TODO
-              URL:     TODO
-              Статус: TODO
+              Метод:   GET
+              URL:     /notes/{id}/tags
+              Статус: 200
 
             [З] Добавить тег к заметке
-              Метод:   TODO
-              URL:     TODO
+              Метод:   POST
+              URL:     /notes/{id}/tags
               Тело: TODO
-              Статус: TODO
+              Статус: 201 created
 
             [И] Удалить тег с заметки
-              Метод:   TODO
-              URL:     TODO
-              Статус: TODO
+              Метод:   DELETE
+              URL:     /notes/{id}/tags/{id}
+              Статус: 200 ok
 
             ── 3. Стандартный формат ошибки ────────────────────────────────────────
 
@@ -125,23 +145,51 @@ public class Task07 {
               }
 
               Маппинг кодов ошибок:
-                NOTE_NOT_FOUND       → TODO статус
-                VALIDATION_ERROR     → TODO статус
-                UNAUTHORIZED         → TODO статус
-                FORBIDDEN            → TODO статус
-                INTERNAL_ERROR       → TODO статус
+                NOTE_NOT_FOUND       → TODO статус - 404 - ресурс не найден
+                VALIDATION_ERROR     → TODO статус - 400 - ошибка валидации
+                UNAUTHORIZED         → TODO статус - 401 - не пройдена аутентификация
+                FORBIDDEN            → TODO статус - 403 - ошибка доступа не пройдена авторизация
+                INTERNAL_ERROR       → TODO статус - 500 - ошибка сервера
 
             ── 4. Контрольные вопросы ──────────────────────────────────────────────
 
               a) Почему список должен возвращать обёртку (с totalPages),
                  а не просто массив JSON?
                  // TODO: ответ
+                 Обёртка обязательна, потому что:
+            
+                 ✅ Клиент знает все о пагинации
+            
+                 ✅ UI может показать навигацию
+            
+                 ✅ Один запрос дает всю информацию
+            
+                 ✅ Соответствует стандартам REST API
+            
+                 ✅ Упрощает разработку клиента
+            
+                 ✅ Легко расширяется (можно добавить фильтры, сортировку)
 
               b) Когда нужен статус 204, а когда 200 при обновлении?
                  // TODO: ответ
+                 204 - без тела
+                 200 - с ответом
 
               c) Чем опасно использование POST вместо PUT для обновления?
                  // TODO: ответ
+                 POST для обновления опасен, потому что:
+            
+                 ❌ Нарушает идемпотентность
+            
+                 ❌ Может создавать дубликаты при повторных запросах
+            
+                 ❌ Смешивает семантику создания и обновления
+            
+                 ❌ Проблемы с кешированием
+            
+                 ❌ Путаница в RESTful API
+            
+                 ❌ Сложности с HTTP статусами
             """;
 
     // ── Практика: имитация пагинированного GET-запроса ───────────────────
@@ -158,10 +206,10 @@ public class Task07 {
                 .build();
 
         // TODO: выполните запрос и выведите статус + тело
-        // HttpResponse<String> response = client.send(request, HttpResponse.BodyHandlers.ofString());
-        // System.out.println("Статус: " + response.statusCode());
-        // System.out.println("Тело (3 поста = имитация page=1, size=3):");
-        // System.out.println(response.body());
+        HttpResponse<String> response = client.send(request, HttpResponse.BodyHandlers.ofString());
+        System.out.println("Статус: " + response.statusCode());
+        System.out.println("Тело (3 поста = имитация page=1, size=3):");
+        System.out.println(response.body());
 
         System.out.println("(реализуйте отправку и вывод ответа)");
     }
