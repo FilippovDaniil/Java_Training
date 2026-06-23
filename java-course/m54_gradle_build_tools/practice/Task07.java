@@ -103,5 +103,6 @@ package m54_gradle_build_tools.practice;
 public class Task07 {
     public static void main(String[] args) {
         System.out.println("Задание выполняется в терминале — см. JavaDoc-комментарий.");
+        System.out.println("Done");
     }
 }
