@@ -61,16 +61,26 @@ public class Task06 {
         //       } catch (Exception e) {
         //           System.out.println("Ожидаемая ошибка: " + e.getMessage());
         //       }
+        try{
+            ProductDto dto = strictMapper.readValue(JSON_WITH_EXTRA, ProductDto.class);
+        }catch (Exception e){
+            System.out.println("Ожидаемая ошибка: " + e.getMessage());
+        }
 
         // 2. Настройте lenientMapper и десериализуйте снова
         // TODO: lenientMapper.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
         //       ProductDto dto = lenientMapper.readValue(JSON_WITH_EXTRA, ProductDto.class);
         //       System.out.println("Успешно: " + dto.getName());
+        lenientMapper.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
+        ProductDto dto = lenientMapper.readValue(JSON_WITH_EXTRA, ProductDto.class);
+        System.out.println(dto);
 
         // 3. @JsonIgnoreProperties(ignoreUnknown = true) — раскомментируйте аннотацию
         //    на классе ProductDto и десериализуйте строгим mapper
         // TODO: ProductDto dto2 = strictMapper.readValue(JSON_WITH_EXTRA, ProductDto.class);
         //       System.out.println("Через @JsonIgnoreProperties: " + dto2.getName());
+        ProductDto dto2 = strictMapper.readValue(JSON_WITH_EXTRA, ProductDto.class);
+        System.out.println("Через @JsonIgnoreProperties: " + dto2);
 
         // ЧАСТЬ B — @JsonInclude
 
@@ -79,14 +89,23 @@ public class Task06 {
         //       partial.setId(5L);
         //       partial.setName("Ноутбук");
         //       // description и imageUrl — не задаём (null)
+        ProductDto dto3 = new ProductDto();
+        dto3.setId(7L);
+        dto3.setName("Ноутбук");
+        System.out.println(dto3);
 
         // 5. Сериализуйте без @JsonInclude (раскомментируйте и убедитесь что null присутствуют)
         // TODO: String withNulls = lenientMapper.writeValueAsString(partial);
         //       System.out.println("С null-полями: " + withNulls);
+        String withNulls = lenientMapper.writerWithDefaultPrettyPrinter().writeValueAsString(dto3);
+        System.out.println("With nulls: " + withNulls);
 
         // 6. Добавьте @JsonInclude(JsonInclude.Include.NON_NULL) на класс ProductDto
         //    и сериализуйте снова
         // TODO: String withoutNulls = lenientMapper.writeValueAsString(partial);
         //       System.out.println("Без null-полей: " + withoutNulls);
+        String withoutNulls = lenientMapper.writerWithDefaultPrettyPrinter().writeValueAsString(dto3);
+        System.out.println("Without nulls: " + withoutNulls);
+
     }
 }

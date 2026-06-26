@@ -22,7 +22,15 @@ class ProductMapper {
         //   dto.setDescription(...);
         //   dto.setCreatedAt(...);
         //   return dto;
-        return null; // заглушка — замените реализацией
+        ProductResponseDto dto = new ProductResponseDto();
+        dto.setId(entity.getId());
+        dto.setName(entity.getName());
+        dto.setPrice(entity.getPrice());
+        dto.setCategoryId(entity.getCategoryId());
+        dto.setDescription(entity.getDescription());
+        dto.setCreatedAt(entity.getCreatedAt());
+        return dto;
+        //return null; // заглушка — замените реализацией
     }
 
     // CreateDto → Entity (новый объект, без id и служебных полей)
@@ -35,6 +43,11 @@ class ProductMapper {
         //   entity.setDescription(...);
         //   // id, createdAt, deletedAt — НЕ заполняем (управляет БД)
         //   return entity;
-        return null; // заглушка — замените реализацией
+        ProductEntity entity = new ProductEntity();
+        entity.setName(dto.getName());
+        entity.setPrice(dto.getPrice());
+        entity.setCategoryId(dto.getCategoryId());
+        entity.setDescription(dto.getDescription());
+        return entity; // заглушка — замените реализацией
     }
 }

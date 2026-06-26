@@ -22,6 +22,8 @@ package m56_json_jackson_dto.practice.task02;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.core.type.TypeReference;
+
+import java.util.ArrayList;
 import java.util.List;
 
 public class Task02 {
@@ -42,20 +44,28 @@ public class Task02 {
     public static void main(String[] args) throws Exception {
         // 1. Создайте ObjectMapper
         // TODO: ObjectMapper mapper = ...
+        ObjectMapper mapper = new ObjectMapper();
 
         // 2. Десериализуйте JSON_SINGLE в Product
         // TODO: Product product = ...
+        Product product = mapper.readValue(JSON_SINGLE, Product.class);
 
         // 3. Выведите поля объекта
         // TODO: System.out.println("id="   + product.id());
         //       System.out.println("name=" + product.name());
         //       System.out.println("price="+ product.price());
+        System.out.println("id="   + product.id());
+        System.out.println("name=" + product.name());
+        System.out.println("price="+ product.price());
 
         // 4. Десериализуйте JSON_ARRAY в List<Product>
         // TODO: List<Product> products = ...
+        ArrayList<Product> products = mapper.readValue(JSON_ARRAY, new TypeReference<ArrayList<Product>>() {});
 
         // 5. Выведите количество и имена
         // TODO: System.out.println("Товаров: " + products.size());
         //       products.forEach(p -> System.out.println(" - " + p.name()));
+        System.out.println("Товаров: " + products.size());
+        products.forEach(p -> System.out.println(" - " + p.name() + ": " + p.price()));
     }
 }

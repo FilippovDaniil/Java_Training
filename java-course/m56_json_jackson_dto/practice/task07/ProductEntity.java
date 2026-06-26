@@ -6,11 +6,14 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.SerializationFeature;
 import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
+import lombok.ToString;
+
 import java.time.LocalDateTime;
 
 // ─── Entity (слой БД / JPA) ───────────────────────────────────────────────────
 // Содержит все поля, включая служебные (deletedAt, version)
 // НИКОГДА не сериализуется в JSON напрямую
+@ToString
 class ProductEntity {
     private Long id;
     private String name;

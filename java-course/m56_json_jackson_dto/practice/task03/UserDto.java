@@ -7,12 +7,15 @@ import com.fasterxml.jackson.annotation.JsonInclude;
 
 // Заготовка DTO — добавьте аннотации вместо TODO-комментариев
 // TODO: добавьте @JsonInclude(JsonInclude.Include.NON_NULL) на класс
+@JsonInclude(JsonInclude.Include.NON_NULL)
 class UserDto {
 
     // TODO: добавьте @JsonProperty("user_name")
+    @JsonProperty("user_name")
     private String userName;
 
     // TODO: добавьте @JsonIgnore
+    @JsonIgnore
     private String password;
 
     private String email;

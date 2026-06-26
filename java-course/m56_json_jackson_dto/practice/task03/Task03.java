@@ -46,11 +46,18 @@ public class Task03 {
         //       System.out.println(json);
         // Ожидается: {"user_name":"alice"}
         // (password — скрыт, email — null → не выводить)
+        String json = mapper.writerWithDefaultPrettyPrinter().writeValueAsString(user);
+        System.out.println(json);
 
         // 2. Десериализуйте JSON обратно в UserDto
         String incoming = "{\"user_name\":\"bob\"}";
         // TODO: UserDto parsed = ...
         //       System.out.println(parsed.getUserName());  // bob
         //       System.out.println(parsed.getPassword());  // null (не было в JSON)
+        UserDto parsed = mapper.readValue(incoming,UserDto.class);
+        System.out.println("Name: " + parsed.getUserName());
+        System.out.println("Password: " + parsed.getPassword());
+        System.out.println("Email: " + parsed.getEmail());
+
     }
 }

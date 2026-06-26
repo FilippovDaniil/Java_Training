@@ -28,6 +28,8 @@ package m56_json_jackson_dto.practice.task04;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.core.type.TypeReference;
+
+import java.util.ArrayList;
 import java.util.List;
 
 public class Task04 {
@@ -63,22 +65,43 @@ public class Task04 {
         //           new Item("Круассан", 120.0, 3)
         //       );
         // TODO: Order order = new Order(1L, customer, items);
+        List<Item> items = new ArrayList<>();
+        items.add(new Item("Кофе",45,3));
+        items.add(new Item("Круасана",777,3));
+        Order order = new Order(1L,new Customer(1L,"Екатерина"),items);
 
         // 2. Сериализуйте в JSON с pretty print
         // TODO: String json = mapper.writerWithDefaultPrettyPrinter().writeValueAsString(order);
         //       System.out.println(json);
+        String json = mapper.writerWithDefaultPrettyPrinter().writeValueAsString(order);
+        System.out.println(json);
 
         // 3. Десериализуйте обратно в Order
         // TODO: Order parsed = mapper.readValue(json, Order.class);
+        Order parsedJson = mapper.readValue(json, Order.class);
 
         // 4. Выведите имя покупателя и суммарную стоимость
         // TODO: System.out.println("Покупатель: " + parsed.customer().name());
         // TODO: double total = parsed.items().stream()
         //           .mapToDouble(i -> i.price() * i.quantity()).sum();
         //       System.out.println("Итого: " + total);
+        System.out.println("Покупатель: " + parsedJson.customer().name());
+        double total = parsedJson.items().stream()
+                .mapToDouble(a -> a.price() * a.quantity()).sum();
+        System.out.println("Itogo: " + total);
 
         // 5. Десериализуйте список заказов
         // TODO: List<Order> orders = mapper.readValue(JSON_ORDERS, new TypeReference<List<Order>>() {});
         //       System.out.println("Заказов: " + orders.size());
+        ArrayList<Order> list = mapper.readValue(JSON_ORDERS,
+                new TypeReference<ArrayList<Order>>() {});
+
+        for (Order order1 : list) {
+            System.out.println("Покупатель: " + order1.customer().name());
+            for (Item item: order1.items()){
+                System.out.println("Купил: " + item.productName() + " в количестве: " + item.quantity() + " по цене: " +
+                        item.price());
+            }
+        }
     }
 }

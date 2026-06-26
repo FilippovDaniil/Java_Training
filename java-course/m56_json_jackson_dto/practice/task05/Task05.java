@@ -45,19 +45,27 @@ public class Task05 {
         // TODO: ObjectMapper mapper = new ObjectMapper();
         //       mapper.registerModule(new JavaTimeModule());
         //       mapper.disable(SerializationFeature.WRITE_DATES_AS_TIMESTAMPS);
+        ObjectMapper mapper = new ObjectMapper();
+        mapper.registerModule(new JavaTimeModule());
+        mapper.disable(SerializationFeature.WRITE_DATES_AS_TIMESTAMPS);
 
         // 2. Создайте объект BlogPost
         // TODO: BlogPost post = new BlogPost(
         //           1L, "Привет, Jackson!", LocalDate.now(), LocalDateTime.now()
         //       );
+        BlogPost post = new BlogPost(1L, "Hi", LocalDate.now(), LocalDateTime.now());
 
         // 3. Сериализуйте и выведите JSON
         // TODO: String json = mapper.writerWithDefaultPrettyPrinter().writeValueAsString(post);
         //       System.out.println(json);
+        String json = mapper.writerWithDefaultPrettyPrinter().writeValueAsString(post);
+        System.out.println(json);
 
         // 4. Десериализуйте обратно и выведите год
         // TODO: BlogPost parsed = mapper.readValue(json, BlogPost.class);
         //       System.out.println("Год публикации: " + parsed.publishedOn().getYear());
+        BlogPost parsed = mapper.readValue(json, BlogPost.class);
+        System.out.println("Год публикации: " + parsed.getPublishedOn().getYear());
 
         // 5. Попробуйте без JavaTimeModule (ожидается исключение)
         // TODO: try {

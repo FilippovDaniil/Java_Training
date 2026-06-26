@@ -28,18 +28,24 @@ public class Task01 {
     public static void main(String[] args) throws Exception {
         // 1. Создайте ObjectMapper
         // TODO: ObjectMapper mapper = ...
+        ObjectMapper mapper = new ObjectMapper();
 
         // 2. Создайте объект Product
         // TODO: Product product = new Product(...)
+        Product product = new Product(1L,"Name",7777);
 
         // 3. Сериализуйте объект в JSON-строку
         // TODO: String json = ...
+        String json = mapper.writeValueAsString(product);
 
         // 4. Выведите результат
         // TODO: System.out.println(json);
+        System.out.println(json);
 
         // 5. (Дополнительно) Выведите JSON с отступами
         // TODO: String pretty = ...
         //       System.out.println(pretty);
+        String json2 = mapper.writerWithDefaultPrettyPrinter().writeValueAsString(product);
+        System.out.println(json2);
     }
 }

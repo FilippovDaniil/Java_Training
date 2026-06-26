@@ -10,6 +10,7 @@ import java.time.LocalDateTime;
 
 // ─── ProductResponseDto (исходящий DTO → JSON-ответ API) ─────────────────────
 // TODO: добавьте @JsonInclude(JsonInclude.Include.NON_NULL)
+@JsonInclude(JsonInclude.Include.NON_NULL)
 class ProductResponseDto {
 
     private Long id;

@@ -6,9 +6,12 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.SerializationFeature;
 import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
+import lombok.ToString;
+
 import java.time.LocalDateTime;
 
 // ─── ProductCreateDto (входящий DTO ← тело POST-запроса) ─────────────────────
+@ToString
 class ProductCreateDto {
 
     private String name;

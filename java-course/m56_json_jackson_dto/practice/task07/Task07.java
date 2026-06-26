@@ -64,6 +64,9 @@ public class Task07 {
         // TODO: ObjectMapper mapper = new ObjectMapper();
         //       mapper.registerModule(new JavaTimeModule());
         //       mapper.disable(SerializationFeature.WRITE_DATES_AS_TIMESTAMPS);
+        ObjectMapper mapper = new ObjectMapper();
+        mapper.registerModule(new JavaTimeModule());
+        mapper.disable(SerializationFeature.WRITE_DATES_AS_TIMESTAMPS);
 
         // ЧАСТЬ 3 — Сериализация ответа API
         // Создайте тестовый Entity (как будто он уже сохранён в БД)
@@ -75,24 +78,43 @@ public class Task07 {
         //       entity.setDescription("Флагманский смартфон 2024 года");
         //       entity.setCreatedAt(LocalDateTime.now());
         //       entity.setDeletedAt(null);  // не удалён
+        ProductEntity entity = new ProductEntity();
+        entity.setId(1L);
+        entity.setName("Smatphone");
+        entity.setPrice(7777.22);
+        entity.setCategoryId(5L);
+        entity.setDescription("Супер удобный и технологичный");
+        entity.setCreatedAt(LocalDateTime.now());
+        entity.setDeletedAt(null);
 
         // Смаппируйте Entity → DTO
         // TODO: ProductResponseDto dto = ProductMapper.toDto(entity);
+        ProductResponseDto dto = ProductMapper.toDto(entity);
 
         // Сериализуйте DTO в JSON (ответ API)
         // TODO: String responseJson = mapper.writerWithDefaultPrettyPrinter().writeValueAsString(dto);
         //       System.out.println("=== JSON ОТВЕТ API ===");
         //       System.out.println(responseJson);
         // Убедитесь: deletedAt отсутствует, поля называются по snake_case
+        String responseJson = mapper.writerWithDefaultPrettyPrinter().writeValueAsString(dto);
+        System.out.println("====== Ответ JSON по API ======");
+        System.out.println(responseJson);
+
 
         // ЧАСТЬ 4 — Десериализация входящего запроса
         // TODO: ProductCreateDto createDto = mapper.readValue(JSON_CREATE_REQUEST, ProductCreateDto.class);
         //       System.out.println("Запрос: " + createDto.getName() + ", " + createDto.getPrice());
+        ProductCreateDto createDto = mapper.readValue(JSON_CREATE_REQUEST, ProductCreateDto.class);
+        System.out.println("==== CreateDto ====");
+        System.out.println(createDto);
 
         // Создайте Entity из DTO
         // TODO: ProductEntity newEntity = ProductMapper.toEntity(createDto);
         //       System.out.println("Entity.name = " + newEntity.getName());
         //       System.out.println("Entity.categoryId = " + newEntity.getCategoryId());
+        ProductEntity newEntity = ProductMapper.toEntity(createDto);
+        System.out.println("==== Entity from DTO ====");
+        System.out.println(newEntity);
 
         // ЧАСТЬ 5 — Полный цикл
         // TODO: // симулируем «save»:
@@ -103,5 +125,15 @@ public class Task07 {
         //       String finalJson = mapper.writeValueAsString(finalDto);
         //       System.out.println("=== ПОЛНЫЙ ЦИКЛ — ОТВЕТ ===");
         //       System.out.println(finalJson);
+
+               newEntity.setId(42L);
+               newEntity.setCreatedAt(LocalDateTime.now());
+               // маппинг → ответ
+               ProductResponseDto finalDto = ProductMapper.toDto(newEntity);
+               String finalJson = mapper
+                       .writerWithDefaultPrettyPrinter()
+                       .writeValueAsString(finalDto);
+               System.out.println("=== ПОЛНЫЙ ЦИКЛ — ОТВЕТ ===");
+               System.out.println(finalJson);
     }
 }

@@ -4,10 +4,14 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import lombok.ToString;
 
 // Заготовка DTO — добавьте аннотации согласно заданию
 // TODO: добавьте @JsonIgnoreProperties(ignoreUnknown = true)   — для шага 3
 // TODO: добавьте @JsonInclude(JsonInclude.Include.NON_NULL)     — для шага 6
+@ToString
+@JsonIgnoreProperties(ignoreUnknown = true)
+@JsonInclude(JsonInclude.Include.NON_NULL)
 class ProductDto {
     private Long id;
     private String name;
