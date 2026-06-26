@@ -34,6 +34,7 @@ import java.net.URI;
 import java.net.http.HttpClient;
 import java.net.http.HttpRequest;
 import java.net.http.HttpResponse;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.CompletableFuture;
 
@@ -44,9 +45,58 @@ public class Task06 {
         String base = "https://jsonplaceholder.typicode.com/posts/";
 
         // 1. Создайте список CompletableFuture — по одному sendAsync на каждый id
+        List<CompletableFuture<HttpResponse<String>>> futures = new ArrayList<>();
+
+        for (int id : ids) {
+            // Для каждого id создаем отдельный запрос
+            HttpRequest request = HttpRequest.newBuilder()
+                    .uri(URI.create(base + id))
+                    .header("Accept", "application/json")
+                    .header("User-Agent", "JavaCourse-57/1.0")
+                    .header("X-Request-ID", "test-42")
+                    .GET()
+                    .build();
+
+            // Запускаем асинхронный запрос с обработкой ошибок
+            CompletableFuture<HttpResponse<String>> future = client
+                    .sendAsync(request, HttpResponse.BodyHandlers.ofString())
+                    .exceptionally(e -> {
+                        System.err.println("❌ Ошибка при запросе id=" + id + ": " + e.getMessage());
+                        return null; // Возвращаем null при ошибке
+                    });
+
+            futures.add(future);
+            System.out.println("🚀 Запрос отправлен для id=" + id);
+        }
 
         // 2. Дождитесь всех через CompletableFuture.allOf(...).join()
+        System.out.println("\n⏳ Ожидание завершения всех запросов...");
+        CompletableFuture.allOf(futures.toArray(new CompletableFuture[0]))
+                .join();
+        System.out.println("✅ Все запросы завершены\n");
 
         // 3. Пройдите по futures, получите ответы и выведите результат
+        System.out.println("=== РЕЗУЛЬТАТЫ ===");
+        for (int i = 0; i < futures.size(); i++) {
+            int id = ids[i];
+            CompletableFuture<HttpResponse<String>> future = futures.get(i);
+
+            try {
+                HttpResponse<String> response = future.join();
+
+                if (response != null) {
+                    int statusCode = response.statusCode();
+                    int bodyLength = response.body() != null ? response.body().length() : 0;
+                    System.out.printf("Пост %d: код=%d, длина=%d%n", id, statusCode, bodyLength);
+                } else {
+                    System.out.printf("Пост %d: Ошибка - ответ null%n", id);
+                }
+
+            } catch (Exception e) {
+                System.out.printf("Пост %d: Ошибка - %s%n", id, e.getMessage());
+            }
+        }
+
+        System.out.println("\n✅ Программа завершена");
     }
 }

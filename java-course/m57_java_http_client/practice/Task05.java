@@ -40,18 +40,37 @@ import java.net.URI;
 import java.net.http.HttpClient;
 import java.net.http.HttpRequest;
 import java.net.http.HttpResponse;
+import java.time.Duration;
 import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 public class Task05 {
+
+    static final HttpClient CLIENT = HttpClient.newHttpClient();
+
     public static void main(String[] args) throws Exception {
+
         // 1. URI с query-параметром userId=1
+
+        String url = "https://jsonplaceholder.typicode.com/posts?userId=1";
 
         // 2. Создайте GET-запрос с заголовками Accept, User-Agent, X-Request-Id
 
+        HttpRequest request = HttpRequest.newBuilder()
+                .uri(URI.create(url))
+                .header("Accept", "application/json")
+                .header("User-Agent","JavaCourse-57/1.0")
+                .header("X-Request-ID","test-42")
+                .GET()
+                .build();
+
         // 3. Отправьте с BodyHandlers.ofLines() и соберите в List<String>
+        HttpResponse<Stream<String>> r = CLIENT.send(request, HttpResponse.BodyHandlers.ofLines());
 
         // 4. Выведите код ответа, первые 5 строк и общее количество строк
+        List<String> lines = r.body().collect(Collectors.toList());
+        lines.stream().limit(5).forEach(System.out::println);
+        System.out.println("Всего строк: " + lines.size());
     }
 }

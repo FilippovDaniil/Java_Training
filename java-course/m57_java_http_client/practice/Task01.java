@@ -44,9 +44,23 @@ import java.time.Duration;
 public class Task01 {
     public static void main(String[] args) throws Exception {
         // 1. Создайте HttpClient с connectTimeout, version=HTTP_2, followRedirects=NORMAL
+        HttpClient client = HttpClient.newBuilder()
+                .connectTimeout(Duration.ofSeconds(5))
+                .version(HttpClient.Version.HTTP_2)
+                .followRedirects(HttpClient.Redirect.NORMAL)
+                .build();
 
         // 2. Создайте GET-запрос к /posts/1 с заголовком Accept: application/json
+        HttpRequest request = HttpRequest.newBuilder()
+                .uri(URI.create("https://jsonplaceholder.typicode.com/posts/1"))
+                .header("Accept", "application/json")
+                .GET()
+                .build();
 
         // 3. Отправьте запрос (send) и выведите version, statusCode, body
+        HttpResponse<String> r = client.send(request, HttpResponse.BodyHandlers.ofString());
+        System.out.println(r.version());
+        System.out.println(r.statusCode());
+        System.out.println(r.body());
     }
 }

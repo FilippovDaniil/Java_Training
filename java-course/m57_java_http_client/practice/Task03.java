@@ -44,6 +44,31 @@ public class Task03 {
 
         // A) Выполните PUT-запрос и выведите код + тело
 
+        try(HttpClient client = HttpClient.newHttpClient();){
+            HttpRequest request = HttpRequest.newBuilder()
+                    .uri(URI.create(base))
+                    .header("Accept", "application/json")
+                    .PUT(HttpRequest.BodyPublishers.ofString(putJson))
+                    .build();
+
+            HttpResponse<String> r = client.send(request, HttpResponse.BodyHandlers.ofString());
+            System.out.println(r.version());
+            System.out.println(r.statusCode());
+            System.out.println(r.body());
+        }
+
         // B) Выполните DELETE-запрос и выведите код + тело
+        try(HttpClient client = HttpClient.newHttpClient();){
+            HttpRequest request = HttpRequest.newBuilder()
+                    .uri(URI.create(base))
+                    .header("Accept", "application/json")
+                    .DELETE()
+                    .build();
+
+            HttpResponse<String> r = client.send(request, HttpResponse.BodyHandlers.ofString());
+            System.out.println(r.version());
+            System.out.println(r.statusCode());
+            System.out.println(r.body());
+        }
     }
 }

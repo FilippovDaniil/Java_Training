@@ -44,17 +44,67 @@ import java.net.http.HttpTimeoutException;
 import java.time.Duration;
 
 public class Task04 {
+
     public static void main(String[] args) {
         // 1. Создайте HttpClient с connectTimeout 3 секунды
 
+        HttpClient client = HttpClient.newBuilder()
+                .connectTimeout(Duration.ofSeconds(3))      // таймаут соединения
+                .version(HttpClient.Version.HTTP_2)         // предпочесть HTTP/2 (fallback → HTTP/1.1)
+                .followRedirects(HttpClient.Redirect.NORMAL)// следовать 3xx (кроме HTTPS→HTTP)
+                .build();
+
         String url = "https://jsonplaceholder.typicode.com/posts/2";
+
 
         // 2. Запрос с таймаутом 1 мс — должен вызвать HttpTimeoutException
         System.out.println("Запрос с малым таймаутом:");
         // TODO: создать запрос с timeout(Duration.ofMillis(1)) и поймать исключения
+        HttpRequest request = HttpRequest.newBuilder()
+                .uri(URI.create(url))
+                .header("Accept", "application/json")
+                .timeout(Duration.ofMillis(1))
+                .GET()
+                .build();
+
+        HttpRequest request2 = HttpRequest.newBuilder()
+                .uri(URI.create(url))
+                .header("Accept", "application/json")
+                .timeout(Duration.ofSeconds(5))
+                .GET()
+                .build();
+
+        try{
+            HttpResponse<String> r = client.send(request, HttpResponse.BodyHandlers.ofString());
+            System.out.println(r.version());
+            System.out.println(r.statusCode());
+            System.out.println(r.body());
+        } catch (HttpTimeoutException e){
+            System.out.println("Таймаут истёк: " + e.getMessage());
+        } catch (IOException e){
+            System.out.println("Ошибка ввода-вывода: " + e.getMessage());
+        } catch (InterruptedException e){
+            System.out.println("Поток прерван");
+            Thread.currentThread().interrupt();
+        }
+
 
         // 3. Запрос с нормальным таймаутом 5 секунд — должен успешно вернуть 200
         System.out.println("\nЗапрос с нормальным таймаутом:");
         // TODO: создать запрос с timeout(Duration.ofSeconds(5)) и вывести код ответа
+        try{
+            HttpResponse<String> r = client.send(request2, HttpResponse.BodyHandlers.ofString());
+            System.out.println(r.version());
+            System.out.println(r.statusCode());
+            System.out.println(r.body());
+        } catch (HttpTimeoutException e){
+            System.out.println("Таймаут истёк: " + e.getMessage());
+        } catch (IOException e){
+            System.out.println("Ошибка ввода-вывода: " + e.getMessage());
+        } catch (InterruptedException e){
+            System.out.println("Поток прерван");
+            Thread.currentThread().interrupt();
+        }
+
     }
 }

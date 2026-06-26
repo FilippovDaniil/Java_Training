@@ -33,6 +33,7 @@ import java.net.URI;
 import java.net.http.HttpClient;
 import java.net.http.HttpRequest;
 import java.net.http.HttpResponse;
+import java.time.Duration;
 
 public class Task02 {
     public static void main(String[] args) throws Exception {
@@ -40,10 +41,24 @@ public class Task02 {
         String json = "{\"title\":\"Мой заголовок\",\"body\":\"Текст заметки\",\"userId\":1}";
 
         // 1. Создайте HttpClient (можно HttpClient.newHttpClient())
+        HttpClient client = HttpClient.newBuilder()
+                .connectTimeout(Duration.ofSeconds(5))
+                .version(HttpClient.Version.HTTP_2)
+                .followRedirects(HttpClient.Redirect.NORMAL)
+                .build();
 
         // 2. Создайте POST-запрос с заголовком Content-Type и телом из json
+        HttpRequest request = HttpRequest.newBuilder()
+                .uri(URI.create("https://jsonplaceholder.typicode.com/posts"))
+                .header("Accept", "application/json")
+                .POST(HttpRequest.BodyPublishers.ofString(json))
+                .build();
 
         // 3. Отправьте запрос через send(..., BodyHandlers.ofString())
+        HttpResponse<String> r = client.send(request, HttpResponse.BodyHandlers.ofString());
+        System.out.println(r.version());
+        System.out.println(r.statusCode());
+        System.out.println(r.body());
 
         // 4. Проверьте statusCode() и выведите результат или сообщение об ошибке
     }
