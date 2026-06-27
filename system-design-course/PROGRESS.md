@@ -13,7 +13,7 @@
 
 **Режим генерации:** 3 модуля за батч (как в `system-analysis-course`), пауза/подтверждение пользователя перед каждым батчем (контроль токенов). Часть 8 (14 модулей) разбита на под-батчи.
 
-**На текущий момент:** 🟡 **В работе — готовы Батчи 1–3 (Части 1–2 + Часть 3 (a), модули 01–10): 10/49.** Сгенерировано 120 .md (10×[theory + 10 задач + questions]), скан на кракозябры/NUL/CJK — чисто. Дальше Батч 4 (модули 11–13: БД в дизайне / репликация / шардинг). Детальный план каждого модуля (что обязательно в `theory.md` + темы 10 задач) дописывается в этот файл в начале соответствующего батча, перед генерацией.
+**На текущий момент:** 🟡 **В работе — готовы Батчи 1–4 (Части 1–2 + Часть 3 (a,b), модули 01–13): 13/49.** Сгенерировано 156 .md (13×[theory + 10 задач + questions]), скан на кракозябры/NUL/CJK — чисто. Дальше Батч 5 (модули 14–17: consistent hashing/ID, очереди/стриминг, rate limiting, поиск/гео — завершает Часть 3). Детальный план каждого модуля (что обязательно в `theory.md` + темы 10 задач) дописывается в этот файл в начале соответствующего батча, перед генерацией.
 
 ---
 
@@ -27,7 +27,7 @@
 | 1 | 01–03 | Ч.1 Основы дизайна | 🔍 |
 | 2 | 04–07 | Ч.2 Количественное проектирование | 🔍 |
 | 3 | 08–10 | Ч.3 Строительные блоки (a) | 🔍 |
-| 4 | 11–13 | Ч.3 Строительные блоки (b) | ⬜ |
+| 4 | 11–13 | Ч.3 Строительные блоки (b) | 🔍 |
 | 5 | 14–17 | Ч.3 Строительные блоки (c) | ⬜ |
 | 6 | 18–20 | Ч.4 Данные и аналитика на масштабе | ⬜ |
 | 7 | 21–23 | Ч.5 Распределённые системы | ⬜ |
@@ -69,9 +69,9 @@
 | 08 | Балансировка нагрузки | `module-08-load-balancing` | ✅ | ✅ 10/10 | ✅ | 🔍 |
 | 09 | Кэширование на масштабе | `module-09-caching` | ✅ | ✅ 10/10 | ✅ | 🔍 |
 | 10 | CDN и хранение объектов/медиа | `module-10-cdn-blob-storage` | ✅ | ✅ 10/10 | ✅ | 🔍 |
-| 11 | Базы данных в дизайне (SQL vs NoSQL) | `module-11-databases-in-design` | ⬜ | ⬜ 0/10 | ⬜ | ⬜ |
-| 12 | Репликация и согласованность | `module-12-replication-consistency` | ⬜ | ⬜ 0/10 | ⬜ | ⬜ |
-| 13 | Шардирование и партиционирование | `module-13-sharding-partitioning` | ⬜ | ⬜ 0/10 | ⬜ | ⬜ |
+| 11 | Базы данных в дизайне (SQL vs NoSQL) | `module-11-databases-in-design` | ✅ | ✅ 10/10 | ✅ | 🔍 |
+| 12 | Репликация и согласованность | `module-12-replication-consistency` | ✅ | ✅ 10/10 | ✅ | 🔍 |
+| 13 | Шардирование и партиционирование | `module-13-sharding-partitioning` | ✅ | ✅ 10/10 | ✅ | 🔍 |
 | 14 | Consistent hashing и уникальные ID | `module-14-consistent-hashing-ids` | ⬜ | ⬜ 0/10 | ⬜ | ⬜ |
 | 15 | Очереди и стриминг сообщений | `module-15-queues-streaming` | ⬜ | ⬜ 0/10 | ⬜ | ⬜ |
 | 16 | Rate limiting & throttling | `module-16-rate-limiting` | ⬜ | ⬜ 0/10 | ⬜ | ⬜ |
@@ -145,7 +145,7 @@
 |-------|--------|--------|--------|
 | 1 — Основы дизайна | 01–03 | 3 | ✅ 3/3 |
 | 2 — Количественное проектирование | 04–07 | 4 | ✅ 4/4 |
-| 3 — Строительные блоки на масштабе | 08–17 | 10 | 🟡 3/10 |
+| 3 — Строительные блоки на масштабе | 08–17 | 10 | 🟡 6/10 |
 | 4 — Данные и аналитика на масштабе | 18–20 | 3 | ⬜ 0/3 |
 | 5 — Распределённые системы | 21–23 | 3 | ⬜ 0/3 |
 | 6 — Надёжность/производительность/масштаб | 24–28 | 5 | ⬜ 0/5 |
@@ -153,7 +153,7 @@
 | 8 — Референсные архитектуры | 32–45 | 14 | ⬜ 0/14 |
 | 9 — Подготовка к интервью | 46–47 | 2 | ⬜ 0/2 |
 | 10 — Финал (capstone + ИИ) | 48–49 | 2 | ⬜ 0/2 |
-| **Итого** | **01–49** | **49** | **🟡 10/49** |
+| **Итого** | **01–49** | **49** | **🟡 13/49** |
 
 **Ожидаемый объём при завершении:** 49 модулей × (1 `theory.md` + 10 задач + 1 `questions.md`) + `README.md` + `PROGRESS.md` = **590 .md**.
 
@@ -216,6 +216,23 @@
 Теория: CDN — зачем (latency через edge-PoP, разгрузка origin, экономия egress, поглощение DDoS); как работает (edge↔origin, pull vs push CDN, cache key, cache-control/TTL, purge/инвалидация, versioned URLs); static vs dynamic, dynamic acceleration/edge compute; object/blob storage (S3-like): immutable-объекты, плоское пространство имён, metadata, HTTP API, durability «11 nines», дёшево — vs block/file; когда blob (медиа, бэкапы, статика, data lake); presigned URLs (direct upload/download, разгрузка app); media pipeline (upload → transcode → store → CDN); storage classes/tiering (hot/cold/archive); multipart/chunked upload; geo-replication.
 Задачи: 01 pull vs push CDN под кейс · 02 cache-control/TTL для статики vs динамики · 03 расчёт экономии egress через CDN (offload ratio) · 04 дизайн presigned URL (direct upload в blob) · 05 blob vs block vs file — выбор · 06 media pipeline (upload→transcode→CDN) — диаграмма · 07 storage tiering под профиль доступа + стоимость · 08 найти ошибки (медиа из app, нет CDN) · 09 стратегия purge/инвалидации (versioned URL vs purge) · 10 мини-проект: хранение и доставка медиа (фото/видео-сервис).
 Вопросы (25): зачем CDN, pull/push, edge/cache-control/purge, object vs block/file, когда blob, presigned URL, media pipeline, tiering, durability, egress-экономия.
+
+### Батч 4 — Часть 3 «Строительные блоки (b)» (модули 11–13)
+
+**Модуль 11 — Базы данных в дизайне (SQL vs NoSQL)**
+Теория: выбор БД как одно из ключевых решений дизайна; реляционные (таблицы, схема, ACID, JOIN, нормализация, сильная согласованность, вертикальный масштаб + read-реплики) — когда транзакции/связи/целостность; NoSQL-семейства (key-value — кэш/сессии; document — гибкие агрегаты; wide-column — write-heavy/time-series по партиционному ключу; graph — обход связей); ACID vs BASE; schema-on-write vs schema-on-read; нормализация vs денормализация под запросы; query-driven моделирование в NoSQL; polyglot persistence; NewSQL (Spanner/CockroachDB — SQL + горизонтальный масштаб); как выбирать (модель данных, паттерны доступа, масштаб, согласованность, транзакции).
+Задачи: 01 выбрать тип БД под набор кейсов (финансы/кэш/документы/соцграф/time-series) · 02 SQL vs NoSQL для системы с обоснованием · 03 выбрать NoSQL-семейство под профиль доступа · 04 ACID vs BASE — где что нужно · 05 нормализация vs денормализация (схема) · 06 query-driven моделирование в NoSQL (от паттернов к модели) · 07 найти ошибки в выборе БД (антипаттерны) · 08 polyglot persistence — БД по подсистемам · 09 ADR: SQL vs NoSQL · 10 мини-проект: выбор хранилищ системы (модель + БД на подсистему).
+Вопросы (25): зачем выбор БД, реляционные/ACID, NoSQL-семейства, BASE, schema-on-read/write, нормализация/денорм., query-driven, polyglot, NewSQL, критерии выбора.
+
+**Модуль 12 — Репликация и согласованность**
+Теория: зачем репликация (доступность, масштаб чтений, гео-близость, durability); топологии — single-leader (primary-replica), multi-leader (multi-DC, конфликты), leaderless (Dynamo-style, кворум); sync vs async (durability vs latency, replication lag); последствия lag — read-your-writes, monotonic reads, consistent prefix; уровни согласованности (strong/eventual/read-your-writes/monotonic); failover (выбор нового лидера, split-brain, потеря данных при async); кворумы (N/W/R, W+R>N → перекрытие); разрешение конфликтов (LWW, vector clocks, CRDT, application merge); согласованность кэша как частный случай.
+Задачи: 01 выбрать топологию под кейс · 02 sync vs async trade-off · 03 replication lag: диагноз симптома + решение · 04 обеспечить read-your-writes/monotonic reads · 05 посчитать кворум W/R/N под требование · 06 failover + защита от split-brain · 07 разрешение конфликтов multi-leader (LWW/vector/CRDT) · 08 найти ошибки в дизайне репликации · 09 read-реплики для масштаба чтений (расчёт + ограничения) · 10 мини-проект: схема репликации и согласованности системы.
+Вопросы (25): зачем репликация, топологии, sync/async, replication lag, read-your-writes/monotonic, кворумы, failover/split-brain, конфликты LWW/vector/CRDT, durability vs availability.
+
+**Модуль 13 — Шардирование и партиционирование**
+Теория: зачем (один узел не вмещает данные/запись); partitioning vs replication (ортогональны, обычно вместе); vertical vs horizontal partitioning; стратегии — range-based (range-запросы, риск hotspot), hash-based (равномерно, нет range), consistent hashing (минимум перемещения), directory/lookup (гибко, но SPOF), geo/entity; выбор shard key (кардинальность, равномерность, соответствие запросам); проблемы — hotspot/celebrity, cross-shard запросы (scatter-gather) и транзакции (2PC, избегать), rebalancing/resharding; mitigation hot key.
+Задачи: 01 выбрать стратегию (range/hash/directory) · 02 выбрать shard key + обоснование · 03 диагностировать hot shard/celebrity + решение · 04 range vs hash под конкретные запросы · 05 cross-shard запрос/транзакция — избежать/обработать · 06 resharding-план (почему hash%N плох, consistent hashing) · 07 найти ошибки в шардировании · 08 расчёт числа шардов + реплики на шард · 09 partitioning vs replication — разграничить и скомбинировать (диаграмма) · 10 мини-проект: схема шардирования системы.
+Вопросы (25): зачем шардировать, part vs repl, vertical/horizontal, стратегии (range/hash/directory/consistent), выбор shard key, hotspot/celebrity, cross-shard запросы/транзакции, resharding, число шардов, шард как SPOF.
 
 ---
 
