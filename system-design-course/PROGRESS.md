@@ -13,7 +13,7 @@
 
 **Режим генерации:** 3 модуля за батч (как в `system-analysis-course`), пауза/подтверждение пользователя перед каждым батчем (контроль токенов). Часть 8 (14 модулей) разбита на под-батчи.
 
-**На текущий момент:** 🟡 **В работе — готовы Батчи 1–2 (Части 1–2, модули 01–07): 7/49.** Сгенерировано 84 .md (7×[theory + 10 задач + questions]), скан на кракозябры/NUL/CJK — чисто. Детальный план каждого модуля (что обязательно в `theory.md` + темы 10 задач) дописывается в этот файл в начале соответствующего батча, перед генерацией.
+**На текущий момент:** 🟡 **В работе — готовы Батчи 1–3 (Части 1–2 + Часть 3 (a), модули 01–10): 10/49.** Сгенерировано 120 .md (10×[theory + 10 задач + questions]), скан на кракозябры/NUL/CJK — чисто. Дальше Батч 4 (модули 11–13: БД в дизайне / репликация / шардинг). Детальный план каждого модуля (что обязательно в `theory.md` + темы 10 задач) дописывается в этот файл в начале соответствующего батча, перед генерацией.
 
 ---
 
@@ -26,7 +26,7 @@
 | 0 | — | Скелет (README + PROGRESS) | ✅ |
 | 1 | 01–03 | Ч.1 Основы дизайна | 🔍 |
 | 2 | 04–07 | Ч.2 Количественное проектирование | 🔍 |
-| 3 | 08–10 | Ч.3 Строительные блоки (a) | ⬜ |
+| 3 | 08–10 | Ч.3 Строительные блоки (a) | 🔍 |
 | 4 | 11–13 | Ч.3 Строительные блоки (b) | ⬜ |
 | 5 | 14–17 | Ч.3 Строительные блоки (c) | ⬜ |
 | 6 | 18–20 | Ч.4 Данные и аналитика на масштабе | ⬜ |
@@ -66,9 +66,9 @@
 ### Часть 3 — Строительные блоки на масштабе
 | #  | Модуль | Каталог | theory | Задачи | Вопросы | Проверка |
 |----|--------|---------|--------|--------|---------|----------|
-| 08 | Балансировка нагрузки | `module-08-load-balancing` | ⬜ | ⬜ 0/10 | ⬜ | ⬜ |
-| 09 | Кэширование на масштабе | `module-09-caching` | ⬜ | ⬜ 0/10 | ⬜ | ⬜ |
-| 10 | CDN и хранение объектов/медиа | `module-10-cdn-blob-storage` | ⬜ | ⬜ 0/10 | ⬜ | ⬜ |
+| 08 | Балансировка нагрузки | `module-08-load-balancing` | ✅ | ✅ 10/10 | ✅ | 🔍 |
+| 09 | Кэширование на масштабе | `module-09-caching` | ✅ | ✅ 10/10 | ✅ | 🔍 |
+| 10 | CDN и хранение объектов/медиа | `module-10-cdn-blob-storage` | ✅ | ✅ 10/10 | ✅ | 🔍 |
 | 11 | Базы данных в дизайне (SQL vs NoSQL) | `module-11-databases-in-design` | ⬜ | ⬜ 0/10 | ⬜ | ⬜ |
 | 12 | Репликация и согласованность | `module-12-replication-consistency` | ⬜ | ⬜ 0/10 | ⬜ | ⬜ |
 | 13 | Шардирование и партиционирование | `module-13-sharding-partitioning` | ⬜ | ⬜ 0/10 | ⬜ | ⬜ |
@@ -145,7 +145,7 @@
 |-------|--------|--------|--------|
 | 1 — Основы дизайна | 01–03 | 3 | ✅ 3/3 |
 | 2 — Количественное проектирование | 04–07 | 4 | ✅ 4/4 |
-| 3 — Строительные блоки на масштабе | 08–17 | 10 | ⬜ 0/10 |
+| 3 — Строительные блоки на масштабе | 08–17 | 10 | 🟡 3/10 |
 | 4 — Данные и аналитика на масштабе | 18–20 | 3 | ⬜ 0/3 |
 | 5 — Распределённые системы | 21–23 | 3 | ⬜ 0/3 |
 | 6 — Надёжность/производительность/масштаб | 24–28 | 5 | ⬜ 0/5 |
@@ -153,7 +153,7 @@
 | 8 — Референсные архитектуры | 32–45 | 14 | ⬜ 0/14 |
 | 9 — Подготовка к интервью | 46–47 | 2 | ⬜ 0/2 |
 | 10 — Финал (capstone + ИИ) | 48–49 | 2 | ⬜ 0/2 |
-| **Итого** | **01–49** | **49** | **🟡 7/49** |
+| **Итого** | **01–49** | **49** | **🟡 10/49** |
 
 **Ожидаемый объём при завершении:** 49 модулей × (1 `theory.md` + 10 задач + 1 `questions.md`) + `README.md` + `PROGRESS.md` = **590 .md**.
 
@@ -199,6 +199,23 @@
 Теория: зачем считать деньги (дизайн без $ неполон; senior говорит о стоимости); статьи (compute, storage, bandwidth/egress — дорог!, managed services); $/запрос, $/пользователя, $/мес; TCO (инфра + люди + операционка); cost↔performance (кэш дешевле чтений из БД; CDN дешевле egress); build vs buy (managed vs self-hosted); стоимость как ось дизайна; порядки облачных цен как ориентиры.
 Задачи: 01 $/мес compute под RPS · 02 стоимость хранения за год · 03 egress costs и экономия CDN · 04 $/запрос системы · 05 cost trade-off (кэш vs реплики) · 06 build vs buy (managed Kafka) · 07 найти главную статью расходов · 08 TCO двух архитектур · 09 оптимизировать стоимость без потери NFR · 10 мини-проект: cost-model системы ($/мес breakdown + $/запрос + оптимизации).
 Вопросы (25): статьи затрат, $/запрос, egress/CDN, TCO, build vs buy, cost как ось дизайна, оптимизация.
+
+### Батч 3 — Часть 3 «Строительные блоки на масштабе (a)» (модули 08–10)
+
+**Модуль 08 — Балансировка нагрузки**
+Теория: зачем LB (горизонтальное масштабирование, доступность, скрытие топологии); L4 (transport, TCP/UDP, NAT, быстро) vs L7 (application, HTTP, маршрутизация по пути/хосту, TLS-termination, дороже); алгоритмы (round-robin, weighted RR, least connections, least response time, IP/consistent hash, power-of-two-choices); health checks (active vs passive, пороги, вывод нездоровых); session affinity / sticky sessions (когда нужно, минусы, альтернатива — stateless + внешняя сессия); LB как SPOF → HA-пара (active-passive/active-active, floating IP/VRRP); DNS-based LB и GSLB (geo, anycast); типы (hardware/software — nginx/HAProxy/Envoy / cloud ELB/ALB/NLB); reverse proxy vs LB; connection draining; global vs local LB.
+Задачи: 01 выбрать алгоритм под кейс (сравнение) · 02 L4 vs L7 — что и почему · 03 дизайн health-checks (active/passive, пороги, draining) · 04 sticky sessions: нужны ли, stateless-альтернатива · 05 LB как SPOF → HA-схема (диаграмма) · 06 найти ошибки в дизайне с LB · 07 расчёт числа backend'ов с запасом N+1/N+2 на отказ · 08 GSLB / geo-балансировка multi-region · 09 ADR: hardware vs software vs cloud LB · 10 мини-проект: дизайн слоя балансировки системы (от edge до сервиса).
+Вопросы (25): зачем LB, L4/L7, алгоритмы, health-checks, sticky vs stateless, SPOF/HA, GSLB/geo, типы LB, draining, reverse proxy.
+
+**Модуль 09 — Кэширование на масштабе**
+Теория: зачем кэш (latency, разгрузка БД, стоимость); уровни (client/browser, CDN, reverse-proxy, application in-memory, distributed Redis/Memcached, БД-кэш); паттерны (cache-aside/lazy, read-through, write-through, write-back/behind, write-around); eviction (LRU/LFU/FIFO/TTL); инвалидация («одна из двух трудных задач»): TTL vs событийная, staleness↔freshness; hit/miss rate, 80/20; hot keys; патологии — cache stampede/thundering herd (locking, request coalescing, probabilistic early expiration), cache penetration (null-caching, bloom filter), cache avalanche (jitter TTL); distributed-топология (consistent hashing, near-cache); согласованность кэш↔БД.
+Задачи: 01 выбрать паттерн записи (through/back/around) под кейс · 02 рассчитать hit rate и эффект на нагрузку БД/latency · 03 стратегия инвалидации (TTL vs событийная) · 04 eviction под профиль доступа (LRU vs LFU) · 05 решить cache stampede/thundering herd · 06 защита от penetration/avalanche · 07 найти ошибки в дизайне с кэшем (стейл, нет инвалидации) · 08 многоуровневый кэш (client→CDN→app→distributed) · 09 расчёт размера distributed-кэша (memory, число нод) · 10 мини-проект: стратегия кэширования read-heavy системы.
+Вопросы (25): зачем/где кэшировать, паттерны записи, eviction, инвалидация, hit rate/80-20, stampede/penetration/avalanche, distributed-топология, согласованность.
+
+**Модуль 10 — CDN и хранение объектов/медиа**
+Теория: CDN — зачем (latency через edge-PoP, разгрузка origin, экономия egress, поглощение DDoS); как работает (edge↔origin, pull vs push CDN, cache key, cache-control/TTL, purge/инвалидация, versioned URLs); static vs dynamic, dynamic acceleration/edge compute; object/blob storage (S3-like): immutable-объекты, плоское пространство имён, metadata, HTTP API, durability «11 nines», дёшево — vs block/file; когда blob (медиа, бэкапы, статика, data lake); presigned URLs (direct upload/download, разгрузка app); media pipeline (upload → transcode → store → CDN); storage classes/tiering (hot/cold/archive); multipart/chunked upload; geo-replication.
+Задачи: 01 pull vs push CDN под кейс · 02 cache-control/TTL для статики vs динамики · 03 расчёт экономии egress через CDN (offload ratio) · 04 дизайн presigned URL (direct upload в blob) · 05 blob vs block vs file — выбор · 06 media pipeline (upload→transcode→CDN) — диаграмма · 07 storage tiering под профиль доступа + стоимость · 08 найти ошибки (медиа из app, нет CDN) · 09 стратегия purge/инвалидации (versioned URL vs purge) · 10 мини-проект: хранение и доставка медиа (фото/видео-сервис).
+Вопросы (25): зачем CDN, pull/push, edge/cache-control/purge, object vs block/file, когда blob, presigned URL, media pipeline, tiering, durability, egress-экономия.
 
 ---
 
