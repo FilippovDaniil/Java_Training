@@ -13,7 +13,7 @@
 
 **Режим генерации:** 3 модуля за батч (как в `system-analysis-course`), пауза/подтверждение пользователя перед каждым батчем (контроль токенов). Часть 8 (14 модулей) разбита на под-батчи.
 
-**На текущий момент:** 🟡 **В работе — готовы Батчи 1–10 (Части 1–7 полностью, модули 01–31): 31/49.** Сгенерировано 372 .md (31×[theory + 10 задач + questions]), скан на кракозябры/NUL/CJK — чисто. **Части 1–7 ЗАВЕРШЕНЫ (Часть 7 — 3/3: AuthN/AuthZ-OAuth2/OIDC/JWT/SSO, защита API/OWASP/BOLA, развёртывание/контейнеры/CI-CD).** Дальше Батч 11 (модули 32–34: URL-shortener, distributed KV-store, newsfeed — Часть 8 «Референсные архитектуры», под-батч a; 14 систем = 5 под-батчей 11–15). Детальный план каждого модуля (что обязательно в `theory.md` + темы 10 задач) дописывается в этот файл в начале соответствующего батча, перед генерацией.
+**На текущий момент:** 🟡 **В работе — готовы Батчи 1–11 (Части 1–7 + Часть 8 под-батч a, модули 01–34): 34/49.** Сгенерировано 408 .md (34×[theory + 10 задач + questions]), скан на кракозябры/NUL/CJK — чисто. **Части 1–7 ЗАВЕРШЕНЫ; Часть 8 — 3/14 (референсные архитектуры: URL-shortener, distributed KV-store, newsfeed).** Дальше Батч 12 (модули 35–37: мессенджер, система уведомлений, видеостриминг — Часть 8, под-батч b). Детальный план каждого модуля (что обязательно в `theory.md` + темы 10 задач) дописывается в этот файл в начале соответствующего батча, перед генерацией.
 
 ---
 
@@ -34,7 +34,7 @@
 | 8 | 24–26 | Ч.6 Надёжность/производительность (a) | 🔍 |
 | 9 | 27–28 | Ч.6 Надёжность/производительность (b) | 🔍 |
 | 10 | 29–31 | Ч.7 Безопасность и эксплуатация | 🔍 |
-| 11 | 32–34 | Ч.8 Референсные архитектуры (a) | ⬜ |
+| 11 | 32–34 | Ч.8 Референсные архитектуры (a) | 🔍 |
 | 12 | 35–37 | Ч.8 Референсные архитектуры (b) | ⬜ |
 | 13 | 38–40 | Ч.8 Референсные архитектуры (c) | ⬜ |
 | 14 | 41–43 | Ч.8 Референсные архитектуры (d) | ⬜ |
@@ -110,9 +110,9 @@
 ### Часть 8 — Референсные архитектуры (разбор реальных систем)
 | #  | Модуль | Каталог | theory | Задачи | Вопросы | Проверка |
 |----|--------|---------|--------|--------|---------|----------|
-| 32 | URL-shortener / Pastebin | `module-32-url-shortener` | ⬜ | ⬜ 0/10 | ⬜ | ⬜ |
-| 33 | Distributed KV-store / распределённый кэш | `module-33-distributed-kv-store` | ⬜ | ⬜ 0/10 | ⬜ | ⬜ |
-| 34 | Newsfeed / лента соцсети | `module-34-newsfeed` | ⬜ | ⬜ 0/10 | ⬜ | ⬜ |
+| 32 | URL-shortener / Pastebin | `module-32-url-shortener` | ✅ | ✅ 10/10 | ✅ | 🔍 |
+| 33 | Distributed KV-store / распределённый кэш | `module-33-distributed-kv-store` | ✅ | ✅ 10/10 | ✅ | 🔍 |
+| 34 | Newsfeed / лента соцсети | `module-34-newsfeed` | ✅ | ✅ 10/10 | ✅ | 🔍 |
 | 35 | Чат / мессенджер | `module-35-messenger` | ⬜ | ⬜ 0/10 | ⬜ | ⬜ |
 | 36 | Система уведомлений | `module-36-notifications` | ⬜ | ⬜ 0/10 | ⬜ | ⬜ |
 | 37 | Видеостриминг (YouTube/Netflix) | `module-37-video-streaming` | ⬜ | ⬜ 0/10 | ⬜ | ⬜ |
@@ -150,10 +150,10 @@
 | 5 — Распределённые системы | 21–23 | 3 | ✅ 3/3 |
 | 6 — Надёжность/производительность/масштаб | 24–28 | 5 | ✅ 5/5 |
 | 7 — Безопасность и эксплуатация | 29–31 | 3 | ✅ 3/3 |
-| 8 — Референсные архитектуры | 32–45 | 14 | ⬜ 0/14 |
+| 8 — Референсные архитектуры | 32–45 | 14 | 🟡 3/14 |
 | 9 — Подготовка к интервью | 46–47 | 2 | ⬜ 0/2 |
 | 10 — Финал (capstone + ИИ) | 48–49 | 2 | ⬜ 0/2 |
-| **Итого** | **01–49** | **49** | **🟡 31/49** |
+| **Итого** | **01–49** | **49** | **🟡 34/49** |
 
 **Ожидаемый объём при завершении:** 49 модулей × (1 `theory.md` + 10 задач + 1 `questions.md`) + `README.md` + `PROGRESS.md` = **590 .md**.
 
@@ -335,6 +335,25 @@
 Теория: топология развёртывания — часть дизайна (как доезжает до прода); контейнеры (Docker — изоляция, воспроизводимость, immutable image) vs VM; оркестрация (Kubernetes — расписание, self-healing/рестарт, автомасштабирование HPA, service discovery, rolling update, декларативность); под/деплоймент/сервис (в контексте дизайна, не админства); стратегии — rolling (постепенно, без даунтайма — 24), blue-green (две среды, мгновенный откат), canary (малая доля→расширение, связь chaos/observability 27/28), feature flags (выкат кода ≠ включение фичи); zero-downtime; health checks (liveness/readiness — probes 24); IaC (Terraform, декларативная воспроизводимая инфра); CI/CD (build→test→scan→deploy; CI=интеграция/тесты, CD=доставка); immutable infrastructure (пересоздавать, не патчить); environments (dev/staging/prod, паритет); 12-factor (config в env, stateless, logs as streams); secrets в деплое (не в образе); rollback. Связь: 24/27/28/25.
 Задачи: 01 контейнер vs VM + зачем оркестрация под кейс · 02 выбрать стратегию деплоя (rolling/blue-green/canary) под требование · 03 zero-downtime дизайн (rolling+health checks) · 04 canary + observability/откат (27/28) · 05 blue-green: мгновенный откат + trade-off · 06 CI/CD pipeline (build→test→scan→deploy) · 07 feature flags vs деплой (разделить выкат кода и включение фичи) · 08 найти ошибки (нет health checks, секреты в образе, нет rollback, патчинг прода) · 09 IaC/immutable infra + паритет сред · 10 мини-проект: топология развёртывания + CI/CD + стратегия выката системы.
 Вопросы (25): топология деплоя как часть дизайна, контейнеры vs VM, зачем оркестрация/K8s, под/деплоймент/сервис, rolling/blue-green/canary, feature flags, zero-downtime, health checks liveness/readiness, IaC, CI vs CD, стадии pipeline, immutable infrastructure, environments/паритет, 12-factor, secrets в деплое, rollback.
+
+### Батч 11 — Часть 8 «Референсные архитектуры (a)» (модули 32–34)
+
+> Формат Части 8: `theory.md` — полноценный HLD по фреймворку design-интервью (модуль 03): требования FR/NFR → estimation (модули 5–7) → API → модель данных → high-level → deep dive → узкие места/масштаб → trade-off. Задачи ведут по шагам дизайна конкретной системы; 10-я — полный HLD. Синтез всех частей 1–7.
+
+**Модуль 32 — URL-shortener / Pastebin**
+Теория (HLD): требования FR (long→short code, redirect short→long, кастомный alias, TTL, аналитика опц.) / NFR (read-heavy ~100:1, низкая latency redirect, HA, неугадываемость опц.); estimation (100M URL/мес → ~40 write/s, ~4000 read/s, storage 5 лет ~3 ТБ); API (POST /urls {longUrl, alias?, ttl?}→{shortUrl}; GET /{code}→301/302); модель данных (code→longURL + метаданные; выбор KV vs SQL — модуль 11); генерация ключа (base62 a-zA-Z0-9, 7 символов≈3.5T; counter/base62, hash+коллизии, random+проверка, Snowflake/ticket — модуль 14, Key Generation Service с пред-генерацией); high-level (client→LB→app→cache Redis→DB); 301 vs 302 (301 кэшируется браузером→меньше хитов/нет аналитики; 302→каждый хит на сервер/аналитика); deep dive (кэш read-heavy hot URL — модуль 9, KV-БД — модуль 11, KGS против коллизий/координации — модуль 14); узкие места (read scaling кэш+реплики, KGS как SPOF→пред-генерация, шардирование по code — модуль 13); Pastebin-вариант (текст в blob/object storage — модуль 10, метаданные в БД).
+Задачи: 01 требования FR/NFR + read/write ratio · 02 estimation (write/read/storage 5y) · 03 API (shorten+redirect, 301 vs 302) · 04 генерация ключа (counter/hash/random/Snowflake/KGS + длина base62) · 05 модель данных + выбор БД (KV vs SQL) · 06 high-level диаграмма (LB→app→cache→DB) · 07 кэширование (read-heavy, hot URL) · 08 масштаб/узкие места (KGS как SPOF, шардирование, реплики) · 09 Pastebin-вариант (blob для текста) · 10 мини-проект: полный HLD URL-shortener.
+Вопросы (25): FR/NFR, read/write ratio, estimation, base62/длина кода, подходы генерации/коллизии, KGS, 301 vs 302, выбор БД (KV), кэширование, шардирование, узкие места, Pastebin-отличия, alias, TTL, аналитика.
+
+**Модуль 33 — Distributed KV-store / распределённый кэш**
+Теория (HLD, синтез распределёнки): требования FR (get/put/delete) / NFR (огромный масштаб, HA, низкая latency, горизонтальный масштаб, настраиваемая согласованность); зачем KV (простая модель, горизонтально масштабируется); распределение данных (consistent hashing + vnodes — модуль 14); репликация (preference list из N узлов, sync/async — модуль 12); настраиваемая согласованность (кворум W+R>N — модуль 21; AP-выбор Dynamo-style); разрешение конфликтов (vector clocks/version vectors, LWW, read-repair, CRDT — модуль 12); членство и обнаружение отказов (gossip-протокол, hinted handoff — временно упал узел→хранить подсказку, anti-entropy через Merkle-деревья); storage engine (LSM-tree vs B-tree — write-heavy→LSM, in-memory vs persistent); high-level (любой узел = координатор, request routing); read/write path (put→hash→preference list→W ack; get→R→разрешение конфликтов); узкие места (hot keys, rebalancing, tail latency→hedged requests — модуль 26); вариант distributed cache (Redis/Memcached: in-memory, eviction — модуль 9; кэш vs персистентный KV).
+Задачи: 01 требования + почему/когда KV · 02 распределение (consistent hashing+vnodes) · 03 репликация (preference list N, sync/async) · 04 настраиваемая согласованность (кворум W+R>N) · 05 разрешение конфликтов (vector clocks/LWW/read-repair) · 06 обнаружение отказов (gossip/hinted handoff/anti-entropy Merkle) · 07 storage engine (LSM vs B-tree) · 08 read/write path + coordinator · 09 узкие места (hot keys/rebalancing/tail latency) + distributed cache вариант · 10 мини-проект: полный дизайн distributed KV-store.
+Вопросы (25): зачем KV/модель, consistent hashing/vnodes, репликация/preference list, кворум W+R>N, настраиваемая согласованность, CAP/AP-выбор, vector clocks/конфликты, read-repair, gossip, hinted handoff, anti-entropy/Merkle, LSM vs B-tree, coordinator/routing, hot keys, кэш vs персистентный KV.
+
+**Модуль 34 — Newsfeed / лента соцсети**
+Теория (HLD, задача fan-out): требования FR (опубликовать пост, лента подписок, ранжированная/хронологическая) / NFR (read-heavy, низкая latency ленты, HA, eventual consistency ок); estimation (DAU, постов/день, чтений ленты/день, масштаб fan-out); ядро — генерация ленты: fan-out on write (push: при посте писать во все ленты подписчиков → быстрое чтение, дорого для celebrity/неактивных) vs fan-out on read (pull: собирать ленту при чтении → дешёвая запись, дорогое чтение) vs hybrid (push для большинства, pull для celebrity); модель данных (посты, граф подписок, feed cache); high-level (post service→fan-out service через очередь — модуль 15→feed cache Redis; чтение→feed cache — модуль 9); ранжирование (хронологическое vs ML/relevance); deep dive (celebrity problem→hybrid, fan-out через async-очередь, структура feed cache); узкие места (celebrity fan-out, hot users, размер кэша, fan-out lag, tail latency при сборке — модуль 26).
+Задачи: 01 требования FR/NFR + read-heavy · 02 estimation (DAU/посты/fan-out) · 03 fan-out on write vs read trade-off · 04 celebrity problem + hybrid · 05 модель данных (посты/граф подписок/feed) · 06 high-level (post→fan-out очередь→feed cache→чтение) · 07 fan-out через async-очередь (модуль 15) · 08 ранжирование (chrono vs ML/relevance) · 09 узкие места (celebrity/hot users/fan-out lag/кэш) · 10 мини-проект: полный HLD newsfeed.
+Вопросы (25): FR/NFR, read/write, estimation, fan-out on write vs read, push/pull trade-off, celebrity problem, hybrid, модель данных/граф подписок, feed cache, async fan-out/очередь, ранжирование chrono vs ML, fan-out lag, hot users, eventual consistency ленты.
 
 ---
 
