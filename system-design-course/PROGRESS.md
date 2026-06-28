@@ -13,7 +13,7 @@
 
 **Режим генерации:** 3 модуля за батч (как в `system-analysis-course`), пауза/подтверждение пользователя перед каждым батчем (контроль токенов). Часть 8 (14 модулей) разбита на под-батчи.
 
-**На текущий момент:** 🟡 **В работе — готовы Батчи 1–11 (Части 1–7 + Часть 8 под-батч a, модули 01–34): 34/49.** Сгенерировано 408 .md (34×[theory + 10 задач + questions]), скан на кракозябры/NUL/CJK — чисто. **Части 1–7 ЗАВЕРШЕНЫ; Часть 8 — 3/14 (референсные архитектуры: URL-shortener, distributed KV-store, newsfeed).** Дальше Батч 12 (модули 35–37: мессенджер, система уведомлений, видеостриминг — Часть 8, под-батч b). Детальный план каждого модуля (что обязательно в `theory.md` + темы 10 задач) дописывается в этот файл в начале соответствующего батча, перед генерацией.
+**На текущий момент:** 🟡 **В работе — готовы Батчи 1–12 (Части 1–7 + Часть 8 под-батчи a–b, модули 01–37): 37/49.** Сгенерировано 444 .md (37×[theory + 10 задач + questions]), скан на кракозябры/NUL/CJK/Arabic — чисто. **Части 1–7 ЗАВЕРШЕНЫ; Часть 8 — 6/14 (URL-shortener, distributed KV-store, newsfeed, мессенджер, уведомления, видеостриминг).** Дальше Батч 13 (модули 38–40: облачное файловое хранилище, ride-sharing, платёжная система — Часть 8, под-батч c). Детальный план каждого модуля (что обязательно в `theory.md` + темы 10 задач) дописывается в этот файл в начале соответствующего батча, перед генерацией.
 
 ---
 
@@ -35,7 +35,7 @@
 | 9 | 27–28 | Ч.6 Надёжность/производительность (b) | 🔍 |
 | 10 | 29–31 | Ч.7 Безопасность и эксплуатация | 🔍 |
 | 11 | 32–34 | Ч.8 Референсные архитектуры (a) | 🔍 |
-| 12 | 35–37 | Ч.8 Референсные архитектуры (b) | ⬜ |
+| 12 | 35–37 | Ч.8 Референсные архитектуры (b) | 🔍 |
 | 13 | 38–40 | Ч.8 Референсные архитектуры (c) | ⬜ |
 | 14 | 41–43 | Ч.8 Референсные архитектуры (d) | ⬜ |
 | 15 | 44–45 | Ч.8 Референсные архитектуры (e) | ⬜ |
@@ -113,9 +113,9 @@
 | 32 | URL-shortener / Pastebin | `module-32-url-shortener` | ✅ | ✅ 10/10 | ✅ | 🔍 |
 | 33 | Distributed KV-store / распределённый кэш | `module-33-distributed-kv-store` | ✅ | ✅ 10/10 | ✅ | 🔍 |
 | 34 | Newsfeed / лента соцсети | `module-34-newsfeed` | ✅ | ✅ 10/10 | ✅ | 🔍 |
-| 35 | Чат / мессенджер | `module-35-messenger` | ⬜ | ⬜ 0/10 | ⬜ | ⬜ |
-| 36 | Система уведомлений | `module-36-notifications` | ⬜ | ⬜ 0/10 | ⬜ | ⬜ |
-| 37 | Видеостриминг (YouTube/Netflix) | `module-37-video-streaming` | ⬜ | ⬜ 0/10 | ⬜ | ⬜ |
+| 35 | Чат / мессенджер | `module-35-messenger` | ✅ | ✅ 10/10 | ✅ | 🔍 |
+| 36 | Система уведомлений | `module-36-notifications` | ✅ | ✅ 10/10 | ✅ | 🔍 |
+| 37 | Видеостриминг (YouTube/Netflix) | `module-37-video-streaming` | ✅ | ✅ 10/10 | ✅ | 🔍 |
 | 38 | Облачное файловое хранилище (Dropbox/Drive) | `module-38-file-storage` | ⬜ | ⬜ 0/10 | ⬜ | ⬜ |
 | 39 | Сервис такси / ride-sharing | `module-39-ride-sharing` | ⬜ | ⬜ 0/10 | ⬜ | ⬜ |
 | 40 | Платёжная система | `module-40-payment-system` | ⬜ | ⬜ 0/10 | ⬜ | ⬜ |
@@ -150,10 +150,10 @@
 | 5 — Распределённые системы | 21–23 | 3 | ✅ 3/3 |
 | 6 — Надёжность/производительность/масштаб | 24–28 | 5 | ✅ 5/5 |
 | 7 — Безопасность и эксплуатация | 29–31 | 3 | ✅ 3/3 |
-| 8 — Референсные архитектуры | 32–45 | 14 | 🟡 3/14 |
+| 8 — Референсные архитектуры | 32–45 | 14 | 🟡 6/14 |
 | 9 — Подготовка к интервью | 46–47 | 2 | ⬜ 0/2 |
 | 10 — Финал (capstone + ИИ) | 48–49 | 2 | ⬜ 0/2 |
-| **Итого** | **01–49** | **49** | **🟡 34/49** |
+| **Итого** | **01–49** | **49** | **🟡 37/49** |
 
 **Ожидаемый объём при завершении:** 49 модулей × (1 `theory.md` + 10 задач + 1 `questions.md`) + `README.md` + `PROGRESS.md` = **590 .md**.
 
@@ -354,6 +354,25 @@
 Теория (HLD, задача fan-out): требования FR (опубликовать пост, лента подписок, ранжированная/хронологическая) / NFR (read-heavy, низкая latency ленты, HA, eventual consistency ок); estimation (DAU, постов/день, чтений ленты/день, масштаб fan-out); ядро — генерация ленты: fan-out on write (push: при посте писать во все ленты подписчиков → быстрое чтение, дорого для celebrity/неактивных) vs fan-out on read (pull: собирать ленту при чтении → дешёвая запись, дорогое чтение) vs hybrid (push для большинства, pull для celebrity); модель данных (посты, граф подписок, feed cache); high-level (post service→fan-out service через очередь — модуль 15→feed cache Redis; чтение→feed cache — модуль 9); ранжирование (хронологическое vs ML/relevance); deep dive (celebrity problem→hybrid, fan-out через async-очередь, структура feed cache); узкие места (celebrity fan-out, hot users, размер кэша, fan-out lag, tail latency при сборке — модуль 26).
 Задачи: 01 требования FR/NFR + read-heavy · 02 estimation (DAU/посты/fan-out) · 03 fan-out on write vs read trade-off · 04 celebrity problem + hybrid · 05 модель данных (посты/граф подписок/feed) · 06 high-level (post→fan-out очередь→feed cache→чтение) · 07 fan-out через async-очередь (модуль 15) · 08 ранжирование (chrono vs ML/relevance) · 09 узкие места (celebrity/hot users/fan-out lag/кэш) · 10 мини-проект: полный HLD newsfeed.
 Вопросы (25): FR/NFR, read/write, estimation, fan-out on write vs read, push/pull trade-off, celebrity problem, hybrid, модель данных/граф подписок, feed cache, async fan-out/очередь, ранжирование chrono vs ML, fan-out lag, hot users, eventual consistency ленты.
+
+### Батч 12 — Часть 8 «Референсные архитектуры (b)» (модули 35–37)
+
+> Формат — полный HLD по фреймворку (как в батче 11).
+
+**Модуль 35 — Чат / мессенджер (WhatsApp/Slack)**
+Теория (HLD): требования FR (1:1 сообщение, групповой чат, статусы доставки/прочтения, presence онлайн, история, offline-доставка) / NFR (низкая latency real-time, HA, порядок, durability сообщений, млрд пользователей); estimation (DAU, сообщений/день, одновременные соединения, storage); ядро — постоянное соединение: WebSocket vs HTTP polling/long-polling (двунаправленность, server push, низкая latency); connection servers (удерживают миллионы persistent-соединений); поток сообщения (sender→connection server→message service→connection server получателя→получатель; как найти сервер получателя — session registry/presence/routing); доставка (online→push по WS; offline→хранить в inbox/очереди, доставить при reconnect); семантика (at-least-once + дедуп/идемпотентность — модуль 23; ack-based receipts sent/delivered/read); порядок (per-conversation через sequence number/timestamp); storage (write-heavy → wide-column/Cassandra, partition по conversation_id — модуль 13); presence (online/offline, heartbeat, fan-out статуса контактам — дорого); групповой чат (fan-out членам); high-level (client↔WS gateway↔message service→БД+очередь; presence; push для offline); узкие места (масштаб connection servers — миллионы соединений, presence fan-out, порядок, hot groups).
+Задачи: 01 требования FR/NFR · 02 estimation (DAU/сообщения/соединения) · 03 WebSocket vs polling (зачем persistent) · 04 routing получателя (session registry/presence) · 05 доставка online/offline + at-least-once+дедуп+receipts · 06 порядок сообщений (per-conversation sequence) · 07 storage (wide-column, partition по conversation_id) · 08 presence (heartbeat, fan-out проблема) · 09 групповой чат + узкие места (connection servers/presence/hot groups) · 10 мини-проект: полный HLD мессенджера.
+Вопросы (25): FR/NFR, estimation, WebSocket vs polling, connection servers/persistent, routing/session registry, online/offline доставка, at-least-once+дедуп, receipts, порядок per-conversation, storage wide-column/partition, presence/heartbeat/fan-out, групповой чат, масштаб соединений, push для offline.
+
+**Модуль 36 — Система уведомлений**
+Теория (HLD): требования FR (отправка по каналам push/SMS/email/in-app, шаблоны, пользовательские настройки/opt-out, отложенная отправка) / NFR (высокая пропускная, надёжность/at-least-once, низкая latency для части, масштаб fan-out); estimation (уведомлений/день, fan-out кампании на миллионы, по каналам); каналы и провайдеры (push APNS/FCM, SMS Twilio, email SES/SendGrid — сторонние, у каждого rate limits); архитектура (notification service→очередь→воркеры по каналам→провайдер; развязка через очередь — модуль 15); fan-out (кампания на миллионы → очередь+воркеры, как newsfeed); надёжность (at-least-once+дедуп/идемпотентность — модуль 23; retry с backoff; DLQ для упавших); rate limiting (лимиты провайдера + пользовательские против спама — модуль 16); настройки/opt-out + compliance (GDPR/unsubscribe); шаблоны (template+персонализация); приоритет (транзакционные OTP/срочные vs промо/батч → priority queues); трекинг доставки/аналитика; high-level (producer→notification service→проверка настроек→шаблон→очередь по каналу→воркеры→провайдеры); узкие места (отказы/лимиты провайдеров → circuit breaker/fallback — модуль 23, масштаб fan-out, дедуп на масштабе).
+Задачи: 01 требования FR/NFR (каналы/настройки) · 02 estimation (уведомления/fan-out) · 03 каналы и сторонние провайдеры (push/SMS/email, rate limits) · 04 архитектура очередь+воркеры по каналам (развязка — модуль 15) · 05 надёжность (at-least-once+дедуп+retry+DLQ — модуль 23) · 06 rate limiting (провайдер+пользователь — модуль 16) · 07 настройки/opt-out + compliance · 08 приоритет (транзакционные vs промо, priority queues) · 09 узкие места (отказы провайдеров/circuit breaker/fan-out) · 10 мини-проект: полный HLD notification system.
+Вопросы (25): FR/NFR, каналы push/SMS/email, провайдеры/интеграция, очередь+воркеры/развязка, fan-out, at-least-once+дедуп, retry/backoff/DLQ, rate limiting провайдер+пользователь, настройки/opt-out/compliance, шаблоны, приоритет транзакционные vs промо, отложенная отправка, трекинг доставки, отказ провайдера/circuit breaker.
+
+**Модуль 37 — Видеостриминг (YouTube/Netflix)**
+Теория (HLD): требования FR (загрузка видео, транскодинг, стриминг/воспроизведение, поиск, рекомендации опц.) / NFR (огромное хранилище, высокий bandwidth, низкая latency старта/буферизации, глобальный охват, доступность); estimation (загрузок, storage петабайты, bandwidth — egress доминирует в стоимости, просмотры); два разных пути: upload/ingestion (запись) vs streaming/playback (чтение, огромный масштаб); upload pipeline (загрузка→object storage сырое→транскодинг в несколько разрешений/битрейтов/форматов→хранить варианты→раздать в CDN; транскодинг CPU-heavy, async через очередь — модуль 15); транскодинг (зачем — разные устройства/сети; ABR adaptive bitrate; нарезка на чанки); storage (blob/object для видео — модуль 10, метаданные в БД); доставка (CDN критичен — модуль 10: edge близко к пользователю, egress cost, pre-positioning популярного push vs pull); ABR (клиент переключает качество по сети; видео пред-нарезано на чанки в нескольких битрейтах, HLS/DASH manifest); протокол (HLS/DASH chunk-based поверх HTTP, CDN-friendly vs RTMP); метаданные/поиск; подсчёт просмотров (async-агрегация); узкие места (storage cost→tiering, egress/bandwidth→CDN, transcoding throughput, viral/hot video); Netflix vs YouTube (Netflix — пред-кодирование курируемого каталога + агрессивный CDN pre-positioning Open Connect; YouTube — огромный UGC-объём, транскод на загрузке).
+Задачи: 01 требования FR/NFR (storage/bandwidth/latency) · 02 estimation (storage петабайты/bandwidth/egress cost) · 03 два пути upload/ingestion vs streaming/playback · 04 transcoding pipeline (async через очередь, варианты) · 05 ABR/adaptive bitrate + chunking (HLS/DASH) · 06 storage (blob+метаданные, tiering) · 07 CDN критичен (egress cost, push vs pull, pre-positioning) · 08 протокол стриминга (HLS/DASH chunk-based vs RTMP) · 09 узкие места (egress/storage cost, transcoding, viral) + Netflix vs YouTube · 10 мини-проект: полный HLD видеостриминга.
+Вопросы (25): FR/NFR, estimation/storage/bandwidth, egress доминирует, upload vs streaming пути, транскодинг (зачем/async), ABR/adaptive bitrate, chunking/сегменты, HLS/DASH vs RTMP, blob+метаданные, CDN критичность, push vs pull CDN/pre-positioning, tiering, viral video, transcoding throughput, Netflix vs YouTube.
 
 ---
 
