@@ -13,7 +13,7 @@
 
 **Режим генерации:** 3 модуля за батч (как в `system-analysis-course`), пауза/подтверждение пользователя перед каждым батчем (контроль токенов). Часть 8 (14 модулей) разбита на под-батчи.
 
-**На текущий момент:** 🟡 **В работе — готовы Батчи 1–12 (Части 1–7 + Часть 8 под-батчи a–b, модули 01–37): 37/49.** Сгенерировано 444 .md (37×[theory + 10 задач + questions]), скан на кракозябры/NUL/CJK/Arabic — чисто. **Части 1–7 ЗАВЕРШЕНЫ; Часть 8 — 6/14 (URL-shortener, distributed KV-store, newsfeed, мессенджер, уведомления, видеостриминг).** Дальше Батч 13 (модули 38–40: облачное файловое хранилище, ride-sharing, платёжная система — Часть 8, под-батч c). Детальный план каждого модуля (что обязательно в `theory.md` + темы 10 задач) дописывается в этот файл в начале соответствующего батча, перед генерацией.
+**На текущий момент:** 🟡 **В работе — готовы Батчи 1–13 (Части 1–7 + Часть 8 под-батчи a–c, модули 01–40): 40/49.** Сгенерировано 480 .md (40×[theory + 10 задач + questions]), скан на кракозябры/NUL/CJK/Arabic — чисто. **Части 1–7 ЗАВЕРШЕНЫ; Часть 8 — 9/14 (URL-shortener, distributed KV-store, newsfeed, мессенджер, уведомления, видеостриминг, file storage, ride-sharing, payment).** Дальше Батч 14 (модули 41–43: рекламная система/агрегация кликов, веб-краулер/поисковый индекс, leaderboard — Часть 8, под-батч d). Детальный план каждого модуля (что обязательно в `theory.md` + темы 10 задач) дописывается в этот файл в начале соответствующего батча, перед генерацией.
 
 ---
 
@@ -36,7 +36,7 @@
 | 10 | 29–31 | Ч.7 Безопасность и эксплуатация | 🔍 |
 | 11 | 32–34 | Ч.8 Референсные архитектуры (a) | 🔍 |
 | 12 | 35–37 | Ч.8 Референсные архитектуры (b) | 🔍 |
-| 13 | 38–40 | Ч.8 Референсные архитектуры (c) | ⬜ |
+| 13 | 38–40 | Ч.8 Референсные архитектуры (c) | 🔍 |
 | 14 | 41–43 | Ч.8 Референсные архитектуры (d) | ⬜ |
 | 15 | 44–45 | Ч.8 Референсные архитектуры (e) | ⬜ |
 | 16 | 46–47 | Ч.9 Подготовка к интервью | ⬜ |
@@ -116,9 +116,9 @@
 | 35 | Чат / мессенджер | `module-35-messenger` | ✅ | ✅ 10/10 | ✅ | 🔍 |
 | 36 | Система уведомлений | `module-36-notifications` | ✅ | ✅ 10/10 | ✅ | 🔍 |
 | 37 | Видеостриминг (YouTube/Netflix) | `module-37-video-streaming` | ✅ | ✅ 10/10 | ✅ | 🔍 |
-| 38 | Облачное файловое хранилище (Dropbox/Drive) | `module-38-file-storage` | ⬜ | ⬜ 0/10 | ⬜ | ⬜ |
-| 39 | Сервис такси / ride-sharing | `module-39-ride-sharing` | ⬜ | ⬜ 0/10 | ⬜ | ⬜ |
-| 40 | Платёжная система | `module-40-payment-system` | ⬜ | ⬜ 0/10 | ⬜ | ⬜ |
+| 38 | Облачное файловое хранилище (Dropbox/Drive) | `module-38-file-storage` | ✅ | ✅ 10/10 | ✅ | 🔍 |
+| 39 | Сервис такси / ride-sharing | `module-39-ride-sharing` | ✅ | ✅ 10/10 | ✅ | 🔍 |
+| 40 | Платёжная система | `module-40-payment-system` | ✅ | ✅ 10/10 | ✅ | 🔍 |
 | 41 | Рекламная система / агрегация кликов | `module-41-ad-system` | ⬜ | ⬜ 0/10 | ⬜ | ⬜ |
 | 42 | Веб-краулер / поисковый индекс | `module-42-web-crawler` | ⬜ | ⬜ 0/10 | ⬜ | ⬜ |
 | 43 | Leaderboard / рейтинги | `module-43-leaderboard` | ⬜ | ⬜ 0/10 | ⬜ | ⬜ |
@@ -150,10 +150,10 @@
 | 5 — Распределённые системы | 21–23 | 3 | ✅ 3/3 |
 | 6 — Надёжность/производительность/масштаб | 24–28 | 5 | ✅ 5/5 |
 | 7 — Безопасность и эксплуатация | 29–31 | 3 | ✅ 3/3 |
-| 8 — Референсные архитектуры | 32–45 | 14 | 🟡 6/14 |
+| 8 — Референсные архитектуры | 32–45 | 14 | 🟡 9/14 |
 | 9 — Подготовка к интервью | 46–47 | 2 | ⬜ 0/2 |
 | 10 — Финал (capstone + ИИ) | 48–49 | 2 | ⬜ 0/2 |
-| **Итого** | **01–49** | **49** | **🟡 37/49** |
+| **Итого** | **01–49** | **49** | **🟡 40/49** |
 
 **Ожидаемый объём при завершении:** 49 модулей × (1 `theory.md` + 10 задач + 1 `questions.md`) + `README.md` + `PROGRESS.md` = **590 .md**.
 
@@ -373,6 +373,25 @@
 Теория (HLD): требования FR (загрузка видео, транскодинг, стриминг/воспроизведение, поиск, рекомендации опц.) / NFR (огромное хранилище, высокий bandwidth, низкая latency старта/буферизации, глобальный охват, доступность); estimation (загрузок, storage петабайты, bandwidth — egress доминирует в стоимости, просмотры); два разных пути: upload/ingestion (запись) vs streaming/playback (чтение, огромный масштаб); upload pipeline (загрузка→object storage сырое→транскодинг в несколько разрешений/битрейтов/форматов→хранить варианты→раздать в CDN; транскодинг CPU-heavy, async через очередь — модуль 15); транскодинг (зачем — разные устройства/сети; ABR adaptive bitrate; нарезка на чанки); storage (blob/object для видео — модуль 10, метаданные в БД); доставка (CDN критичен — модуль 10: edge близко к пользователю, egress cost, pre-positioning популярного push vs pull); ABR (клиент переключает качество по сети; видео пред-нарезано на чанки в нескольких битрейтах, HLS/DASH manifest); протокол (HLS/DASH chunk-based поверх HTTP, CDN-friendly vs RTMP); метаданные/поиск; подсчёт просмотров (async-агрегация); узкие места (storage cost→tiering, egress/bandwidth→CDN, transcoding throughput, viral/hot video); Netflix vs YouTube (Netflix — пред-кодирование курируемого каталога + агрессивный CDN pre-positioning Open Connect; YouTube — огромный UGC-объём, транскод на загрузке).
 Задачи: 01 требования FR/NFR (storage/bandwidth/latency) · 02 estimation (storage петабайты/bandwidth/egress cost) · 03 два пути upload/ingestion vs streaming/playback · 04 transcoding pipeline (async через очередь, варианты) · 05 ABR/adaptive bitrate + chunking (HLS/DASH) · 06 storage (blob+метаданные, tiering) · 07 CDN критичен (egress cost, push vs pull, pre-positioning) · 08 протокол стриминга (HLS/DASH chunk-based vs RTMP) · 09 узкие места (egress/storage cost, transcoding, viral) + Netflix vs YouTube · 10 мини-проект: полный HLD видеостриминга.
 Вопросы (25): FR/NFR, estimation/storage/bandwidth, egress доминирует, upload vs streaming пути, транскодинг (зачем/async), ABR/adaptive bitrate, chunking/сегменты, HLS/DASH vs RTMP, blob+метаданные, CDN критичность, push vs pull CDN/pre-positioning, tiering, viral video, transcoding throughput, Netflix vs YouTube.
+
+### Батч 13 — Часть 8 «Референсные архитектуры (c)» (модули 38–40)
+
+> Формат — полный HLD по фреймворку (как в батчах 11–12).
+
+**Модуль 38 — Облачное файловое хранилище (Dropbox/Google Drive)**
+Теория (HLD): требования FR (загрузка/скачивание файлов, синхронизация между устройствами, шеринг/права доступа, версионирование, папки/namespace) / NFR (durability — потеря файла недопустима, доступность, масштаб storage, разумная latency sync, согласованность метаданных); estimation (пользователи, файлов на юзера, средний размер, storage в петабайтах, read/write, эффект дедупликации); ключевая идея — **разделение metadata vs content** (metadata-сервис в БД: file tree, версии, права + содержимое файла в object/blob storage — модуль 10); **chunking** (файл бьётся на блоки фикс. размера → дедупликация, дельта-синхронизация, параллельная и **resumable** загрузка); **content-addressable storage** (хэш блока = его ключ → дедуп идентичных блоков между юзерами/версиями); **синхронизация** (как клиент узнаёт об изменениях — notification service/long-polling; **дельта-sync** — передаются только изменённые чанки, не весь файл); **конфликты** (одновременное редактирование на двух устройствах → версионирование/conflict copy, без «тихой» потери); метаданные (namespace, версии, права, ссылки на блоки); **дедуп/compression** ради экономии storage; high-level (клиент с локальным watcher → metadata service + block service → object storage + notification service для sync между устройствами); deep dive (chunking+дедуп, sync-протокол, шеринг/права); узкие места (нагрузка на metadata-сервис, sync на масштабе, hot files, storage cost через дедуп).
+Задачи: 01 FR/NFR + durability как главное · 02 estimation (storage/файлы/эффект дедупа) · 03 разделение metadata vs content (БД + object storage) · 04 chunking (зачем: дедуп/дельта/resumable) · 05 content-addressable storage + дедупликация · 06 sync-протокол (notification + дельта только изменённых чанков) · 07 конфликты одновременного редактирования (версии/conflict copy) · 08 шеринг и права доступа · 09 узкие места (metadata/sync/hot files/storage-дедуп) · 10 мини-проект: полный HLD file storage.
+Вопросы (25): FR/NFR, durability, estimation/дедуп, metadata vs content, object storage для содержимого, chunking зачем, content-addressable/хэш-ключ, дедупликация, дельта-синхронизация, notification/sync-протокол, конфликты/conflict copy/версии, шеринг/права, resumable upload, узкие места, compression.
+
+**Модуль 39 — Сервис такси / ride-sharing (Uber/Lyft)**
+Теория (HLD): требования FR (запрос поездки rider'ом, матчинг с ближайшим водителем, обновление локаций водителей в реальном времени, трекинг поездки, ETA/расчёт цены, оплата) / NFR (низкая latency матчинга, **огромный write-throughput location-апдейтов**, HA, геораспределённость, согласованность состояния поездки); estimation (число водителей, частота location update каждые ~4 с → огромный write QPS, поездок/день, гео-запросов); ключевое — **гео**: хранение и запрос локаций через **geospatial index** (geohash/quadtree/S2/H3 — модуль 17), nearby-запрос «ближайшие водители в радиусе»; **location update pipeline** (водители шлют координаты каждые несколько секунд → location service → in-memory geo-index/Redis GEO; write-heavy, не персистить каждый апдейт в durable БД); **матчинг/dispatch** (найти кандидатов рядом → выбрать → предложить → подтвердить; согласованность — **один водитель ↔ одна поездка**, locking/идемпотентность — модуль 23); **состояние поездки** (state machine: requested→matched→en route→started→completed; durable в БД); **real-time связь** (WebSocket/push для обновлений rider↔driver — как мессенджер, модуль 35); **ETA/pricing** (маршрут/ETA; **surge pricing** — динамическая цена при дисбалансе спроса/предложения); **шардирование гео** по региону/городу (модуль 13); high-level (rider/driver apps ↔ gateway ↔ location service + matching service + trip service + pricing → geo-index/Redis + БД + очередь); узкие места (location write throughput, гео-запросы на масштабе, hot regions/городские пики, matching latency, surge-расчёт).
+Задачи: 01 FR/NFR + real-time гео-природа · 02 estimation (location-throughput/поездки) · 03 geospatial index (geohash/quadtree/S2/H3 — модуль 17) для nearby · 04 location update pipeline (write-heavy, Redis GEO/in-memory) · 05 матчинг/dispatch (один водитель — одна поездка, идемпотентность — модуль 23) · 06 состояние поездки (state machine, durability) · 07 real-time связь (WebSocket/push — модуль 35) · 08 ETA + surge pricing (динамическая цена) · 09 шардирование гео по региону + узкие места (write throughput/hot regions/matching latency) · 10 мини-проект: полный HLD ride-sharing.
+Вопросы (25): FR/NFR, real-time/гео-природа, estimation/location-throughput, geospatial index/geohash/quadtree/S2/H3, nearby-запрос, location pipeline write-heavy/Redis GEO/не персистить всё, матчинг/dispatch, один водитель ↔ одна поездка/идемпотентность, state machine поездки, WebSocket/push, ETA, surge pricing, шард гео по региону, hot regions, узкие места.
+
+**Модуль 40 — Платёжная система (payment system)**
+Теория (HLD): требования FR (приём платежа, перевод средств, интеграция с PSP/банками, возвраты/refund, история транзакций, баланс/леджер) / NFR (**КОРРЕКТНОСТЬ — деньги нельзя терять/дублировать → strong consistency, CP-выбор** — модуль 21; durability; аудит/трассируемость; безопасность/compliance PCI DSS; разумная доступность); estimation (транзакций/день, пики, денежный объём, требования к согласованности); ключевое — корректность денег: **идемпотентность** (idempotency key обязателен — повтор запроса не должен списать дважды; exactly-once-эффект через at-least-once + дедуп — модуль 23); **double-entry ledger** (каждая транзакция = две записи дебет/кредит, баланс сходится, неизменяемый **append-only** журнал — источник правды); **согласованность** (деньги → strong consistency/ACID, SQL/транзакции, **не eventual** — модуль 21); **распределённая транзакция** (платёж затрагивает несколько сервисов → **не 2PC, а Saga + компенсации + Outbox** для надёжной публикации событий — модуль 23); **интеграция с внешними PSP/банками** (асинхронно, ненадёжно → retry, статусы pending/success/failed); **reconciliation** (периодическая сверка внутреннего леджера с банком/PSP → находить расхождения); **статусная модель платежа** (state machine: initiated→pending→authorized→captured→settled/failed/refunded); **безопасность** (PCI DSS — не хранить карты, токенизация, шифрование, secrets — модуль 30); audit log/трассируемость; high-level (client → payment service (idempotency) → ledger (double-entry, ACID) → PSP-адаптеры (async, Saga/Outbox) → reconciliation; очередь для async); узкие места (согласованность vs throughput, hot accounts, внешние провайдеры → circuit breaker/fallback, reconciliation на масштабе, аудит).
+Задачи: 01 FR/NFR + корректность/CP как главное · 02 estimation (транзакции/пики/объём) · 03 идемпотентность платежа (idempotency key против double-charge — модуль 23) · 04 double-entry ledger (дебет/кредит, append-only, источник правды) · 05 согласованность денег (strong/ACID/SQL, почему не eventual — модуль 21) · 06 распределённая транзакция (Saga+компенсации+Outbox, не 2PC — модуль 23) · 07 интеграция с PSP/банком (async, статусы, retry) + reconciliation · 08 статусная модель платежа (state machine) · 09 безопасность/PCI DSS (токенизация, не хранить карты — модуль 30) + узкие места · 10 мини-проект: полный HLD платёжной системы.
+Вопросы (25): FR/NFR, корректность/CP, почему strong consistency, а не eventual, estimation, идемпотентность/idempotency key/double-charge, double-entry ledger/дебет-кредит/append-only/источник правды, распределённая транзакция Saga/Outbox/почему не 2PC, интеграция PSP/async/статусы/retry, reconciliation/сверка, state machine платежа, PCI DSS/токенизация/не хранить карты, audit log, hot accounts, circuit breaker для провайдеров, exactly-once через at-least-once+дедуп.
 
 ---
 
