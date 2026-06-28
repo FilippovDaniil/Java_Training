@@ -13,7 +13,7 @@
 
 **Режим генерации:** 3 модуля за батч (как в `system-analysis-course`), пауза/подтверждение пользователя перед каждым батчем (контроль токенов). Часть 8 (14 модулей) разбита на под-батчи.
 
-**На текущий момент:** 🟡 **В работе — готовы Батчи 1–9 (Части 1–6 полностью, модули 01–28): 28/49.** Сгенерировано 336 .md (28×[theory + 10 задач + questions]), скан на кракозябры/NUL/CJK — чисто. **Части 1–6 ЗАВЕРШЕНЫ (Часть 6 — 5/5: масштаб/отказоустойчивость, multi-region/DR, узкие места, нагрузка/chaos, observability).** Дальше Батч 10 (модули 29–31: AuthN/AuthZ, защита API, развёртывание — Часть 7 «Безопасность и эксплуатация»). Детальный план каждого модуля (что обязательно в `theory.md` + темы 10 задач) дописывается в этот файл в начале соответствующего батча, перед генерацией.
+**На текущий момент:** 🟡 **В работе — готовы Батчи 1–10 (Части 1–7 полностью, модули 01–31): 31/49.** Сгенерировано 372 .md (31×[theory + 10 задач + questions]), скан на кракозябры/NUL/CJK — чисто. **Части 1–7 ЗАВЕРШЕНЫ (Часть 7 — 3/3: AuthN/AuthZ-OAuth2/OIDC/JWT/SSO, защита API/OWASP/BOLA, развёртывание/контейнеры/CI-CD).** Дальше Батч 11 (модули 32–34: URL-shortener, distributed KV-store, newsfeed — Часть 8 «Референсные архитектуры», под-батч a; 14 систем = 5 под-батчей 11–15). Детальный план каждого модуля (что обязательно в `theory.md` + темы 10 задач) дописывается в этот файл в начале соответствующего батча, перед генерацией.
 
 ---
 
@@ -33,7 +33,7 @@
 | 7 | 21–23 | Ч.5 Распределённые системы | 🔍 |
 | 8 | 24–26 | Ч.6 Надёжность/производительность (a) | 🔍 |
 | 9 | 27–28 | Ч.6 Надёжность/производительность (b) | 🔍 |
-| 10 | 29–31 | Ч.7 Безопасность и эксплуатация | ⬜ |
+| 10 | 29–31 | Ч.7 Безопасность и эксплуатация | 🔍 |
 | 11 | 32–34 | Ч.8 Референсные архитектуры (a) | ⬜ |
 | 12 | 35–37 | Ч.8 Референсные архитектуры (b) | ⬜ |
 | 13 | 38–40 | Ч.8 Референсные архитектуры (c) | ⬜ |
@@ -103,9 +103,9 @@
 ### Часть 7 — Безопасность и эксплуатация
 | #  | Модуль | Каталог | theory | Задачи | Вопросы | Проверка |
 |----|--------|---------|--------|--------|---------|----------|
-| 29 | AuthN/AuthZ в дизайне (OAuth2/OIDC/JWT, SSO) | `module-29-authn-authz` | ⬜ | ⬜ 0/10 | ⬜ | ⬜ |
-| 30 | Защита API и противодействие атакам | `module-30-api-protection` | ⬜ | ⬜ 0/10 | ⬜ | ⬜ |
-| 31 | Развёртывание (контейнеры/оркестрация/CI-CD топология) | `module-31-deployment` | ⬜ | ⬜ 0/10 | ⬜ | ⬜ |
+| 29 | AuthN/AuthZ в дизайне (OAuth2/OIDC/JWT, SSO) | `module-29-authn-authz` | ✅ | ✅ 10/10 | ✅ | 🔍 |
+| 30 | Защита API и противодействие атакам | `module-30-api-protection` | ✅ | ✅ 10/10 | ✅ | 🔍 |
+| 31 | Развёртывание (контейнеры/оркестрация/CI-CD топология) | `module-31-deployment` | ✅ | ✅ 10/10 | ✅ | 🔍 |
 
 ### Часть 8 — Референсные архитектуры (разбор реальных систем)
 | #  | Модуль | Каталог | theory | Задачи | Вопросы | Проверка |
@@ -149,11 +149,11 @@
 | 4 — Данные и аналитика на масштабе | 18–20 | 3 | ✅ 3/3 |
 | 5 — Распределённые системы | 21–23 | 3 | ✅ 3/3 |
 | 6 — Надёжность/производительность/масштаб | 24–28 | 5 | ✅ 5/5 |
-| 7 — Безопасность и эксплуатация | 29–31 | 3 | ⬜ 0/3 |
+| 7 — Безопасность и эксплуатация | 29–31 | 3 | ✅ 3/3 |
 | 8 — Референсные архитектуры | 32–45 | 14 | ⬜ 0/14 |
 | 9 — Подготовка к интервью | 46–47 | 2 | ⬜ 0/2 |
 | 10 — Финал (capstone + ИИ) | 48–49 | 2 | ⬜ 0/2 |
-| **Итого** | **01–49** | **49** | **🟡 28/49** |
+| **Итого** | **01–49** | **49** | **🟡 31/49** |
 
 **Ожидаемый объём при завершении:** 49 модулей × (1 `theory.md` + 10 задач + 1 `questions.md`) + `README.md` + `PROGRESS.md` = **590 .md**.
 
@@ -318,6 +318,23 @@
 Теория: зачем observability в дизайне (нельзя эксплуатировать то, что не видишь; находить узкие места — 26, подтверждать SLO, диагностировать инциденты); monitoring (известные вопросы/дашборды по заданным метрикам) vs observability (отвечать на новые вопросы о внутреннем состоянии по внешним сигналам, исследовать неизвестное); три столпа — metrics (агрегаты, дёшево, тренды/алерты; RED — Rate/Errors/Duration для сервисов, USE — Utilization/Saturation/Errors для ресурсов), logs (дискретные события, детально, дорого; структурированные), traces (путь запроса через сервисы, span'ы, где latency; correlation/trace ID); SLI (измеримый показатель — доступность, latency p99, error rate), SLO (целевое значение SLI, напр. 99.9% за 30 дней), SLA (контракт с последствиями); error budget (1−SLO = допустимый бюджет ошибок; связывает надёжность и скорость: есть бюджет → катим фичи, исчерпан → стоп на надёжность); как выбрать SLI (важное пользователю, не «всё подряд»); алертинг (на симптомы/SLO-burn, не на причины; alert fatigue; burn rate); ловушка high-cardinality labels; дашборды/on-call. Связь: 26/27/24/23.
 Задачи: 01 monitoring vs observability разграничить · 02 определить три столпа под задачу (что metrics/logs/traces) · 03 спроектировать SLI/SLO сервиса (важное пользователю) · 04 рассчитать error budget из SLO + что делать при исчерпании · 05 RED/USE метрики для сервиса/ресурса · 06 распределённый трейсинг (где latency, trace/span) · 07 алертинг на симптомы/SLO-burn, не на причины · 08 найти ошибки (алерт на всё, high-cardinality, SLO не про юзера, путаница SLO/SLA) · 09 разграничить SLI/SLO/SLA/error budget + связь надёжность↔скорость · 10 мини-проект: observability + SLO-стратегия системы.
 Вопросы (25): зачем observability, monitoring vs observability, три столпа (metrics/logs/traces), RED/USE, что каждый столп даёт/стоит, SLI, SLO, SLA, разница SLI/SLO/SLA, error budget, error budget связывает надёжность↔скорость, как выбрать SLI, алертинг на симптомы не причины, alert fatigue, burn rate, high-cardinality, trace/span/correlation ID.
+
+### Батч 10 — Часть 7 «Безопасность и эксплуатация» (модули 29–31) — завершает Часть 7
+
+**Модуль 29 — AuthN/AuthZ в дизайне (OAuth2/OIDC/JWT, SSO)**
+Теория: AuthN (кто ты) vs AuthZ (что можно) — разграничение; безопасность как архитектурное решение, не «прикрутить потом» (где аутентифицируемся, как пробрасываем identity); session-based (cookie + server-side session, stateful, общее хранилище сессий — модуль 24) vs token-based (JWT, stateless, самодостаточный); JWT (header.payload.signature, claims, подпись HMAC/RSA, проверка без БД; минусы — нельзя мгновенно отозвать, размер, refresh); OAuth2 (делегированная авторизация без передачи пароля; роли resource owner/client/authorization server/resource server; grant types — authorization code+PKCE для SPA/mobile, client credentials для M2M; access vs refresh token); OIDC (слой аутентификации поверх OAuth2, id_token = кто пользователь; OAuth2=доступ, OIDC=identity); SSO (один вход для многих систем, IdP/SAML/OIDC); модели авторизации — RBAC (роли), ABAC (атрибуты), ReBAC (отношения, Zanzibar); где проверять authZ (coarse на gateway, fine в сервисе); проброс identity в микросервисах (token propagation, zero trust — не доверять внутренней сети слепо); секреты не в коде; MFA (кратко). Связь: 24/30/gateway.
+Задачи: 01 разграничить AuthN vs AuthZ на кейсах · 02 session vs token (JWT) под кейс + trade-off · 03 спроектировать JWT-флоу (claims/подпись/проверка/refresh/отзыв) · 04 OAuth2 grant type под кейс (auth code+PKCE / client credentials) · 05 OAuth2 vs OIDC (доступ vs identity) · 06 SSO-дизайн (IdP, много приложений) · 07 выбрать RBAC/ABAC/ReBAC под требование · 08 где проверять authZ + проброс identity (token propagation/zero trust) · 09 найти ошибки (JWT в localStorage, пароль клиенту, authZ только на фронте, секреты в коде) · 10 мини-проект: дизайн AuthN/AuthZ системы.
+Вопросы (25): AuthN vs AuthZ, session vs token, JWT структура/плюсы-минусы/отзыв, OAuth2 роли/grant types/PKCE, access vs refresh token, OAuth2 vs OIDC, id_token, SSO/IdP, RBAC/ABAC/ReBAC, где проверять authZ, token propagation/zero trust, MFA, хранение секретов.
+
+**Модуль 30 — Защита API и противодействие атакам**
+Теория: API как поверхность атаки; defense in depth (эшелонированная оборона, много слоёв); транспорт — TLS везде (шифрование в транзите), HSTS; OWASP API Security Top 10 (BOLA/broken object level authorization, broken authentication, excessive data exposure, injection, mass assignment, misconfiguration); инъекции (SQLi → параметризованные запросы/ORM, не конкатенация; command injection); валидация ввода (allowlist, на сервере не только клиенте); BOLA/IDOR (проверять доступ именно к ЭТОМУ объекту, не только аутентификацию — частейшая API-уязвимость); rate limiting против brute-force/DDoS (модуль 16); DDoS-защита (CDN/scrubbing/anycast — модуль 10); secrets management (vault, не в коде/гите/логах); CORS (не `*`); CSRF (для cookie-based, токены); шифрование at rest; PII (минимизация, маскирование в логах); API gateway как точка политик (authN/rate limit/WAF); WAF; least privilege; security misconfiguration (дефолтные креды, открытые порты, verbose errors). Связь: 16/29/10/28.
+Задачи: 01 defense in depth — слои защиты API · 02 BOLA/IDOR найти и исправить (объектная авторизация) · 03 защита от инъекций (параметризация/валидация) · 04 валидация ввода (allowlist, сервер) · 05 secrets management (вынести из кода/гита) · 06 rate limiting + DDoS-защита публичного API (16/10) · 07 TLS/CORS/CSRF корректная настройка · 08 найти уязвимости в дизайне API (OWASP) · 09 PII/чувствительные данные (минимизация/маскирование/at-rest) · 10 мини-проект: модель угроз + защита API системы.
+Вопросы (25): API как поверхность атаки, defense in depth, TLS/in-transit, OWASP API Top 10, инъекции/параметризация, валидация/allowlist, BOLA/IDOR, rate limiting против brute-force, DDoS-защита, secrets management, CORS, CSRF, at-rest, PII/маскирование, API gateway/WAF, least privilege, misconfiguration.
+
+**Модуль 31 — Развёртывание (контейнеры/оркестрация/CI-CD топология)**
+Теория: топология развёртывания — часть дизайна (как доезжает до прода); контейнеры (Docker — изоляция, воспроизводимость, immutable image) vs VM; оркестрация (Kubernetes — расписание, self-healing/рестарт, автомасштабирование HPA, service discovery, rolling update, декларативность); под/деплоймент/сервис (в контексте дизайна, не админства); стратегии — rolling (постепенно, без даунтайма — 24), blue-green (две среды, мгновенный откат), canary (малая доля→расширение, связь chaos/observability 27/28), feature flags (выкат кода ≠ включение фичи); zero-downtime; health checks (liveness/readiness — probes 24); IaC (Terraform, декларативная воспроизводимая инфра); CI/CD (build→test→scan→deploy; CI=интеграция/тесты, CD=доставка); immutable infrastructure (пересоздавать, не патчить); environments (dev/staging/prod, паритет); 12-factor (config в env, stateless, logs as streams); secrets в деплое (не в образе); rollback. Связь: 24/27/28/25.
+Задачи: 01 контейнер vs VM + зачем оркестрация под кейс · 02 выбрать стратегию деплоя (rolling/blue-green/canary) под требование · 03 zero-downtime дизайн (rolling+health checks) · 04 canary + observability/откат (27/28) · 05 blue-green: мгновенный откат + trade-off · 06 CI/CD pipeline (build→test→scan→deploy) · 07 feature flags vs деплой (разделить выкат кода и включение фичи) · 08 найти ошибки (нет health checks, секреты в образе, нет rollback, патчинг прода) · 09 IaC/immutable infra + паритет сред · 10 мини-проект: топология развёртывания + CI/CD + стратегия выката системы.
+Вопросы (25): топология деплоя как часть дизайна, контейнеры vs VM, зачем оркестрация/K8s, под/деплоймент/сервис, rolling/blue-green/canary, feature flags, zero-downtime, health checks liveness/readiness, IaC, CI vs CD, стадии pipeline, immutable infrastructure, environments/паритет, 12-factor, secrets в деплое, rollback.
 
 ---
 
