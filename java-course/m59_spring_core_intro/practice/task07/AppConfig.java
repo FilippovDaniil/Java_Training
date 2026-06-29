@@ -12,23 +12,27 @@ import java.util.List;
 // ============================================================
 
 // TODO: @Configuration
+@Configuration
 class AppConfig {
 
     // TODO: @Bean
+    @Bean
     public ProductRepository productRepository() {
         // TODO: return new InMemoryProductRepository();
-        return null;
+        return new InMemoryProductRepository();
     }
 
     // TODO: @Bean
+    @Bean
     public ProductService productService() {
         // TODO: return new ProductService(productRepository());
-        return null;
+        return new ProductService(productRepository());
     }
 
     // TODO: @Bean
+    @Bean
     public OrderService orderService() {
         // TODO: return new OrderService(productService());
-        return null;
+        return new OrderService(productService());
     }
 }

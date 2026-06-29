@@ -62,7 +62,14 @@ public class Task07 {
 
     public static void main(String[] args) {
         // TODO 1: поднять контейнер с AppConfig
+        ApplicationContext ctx = new AnnotationConfigApplicationContext(AppConfig.class);
         // TODO 2: получить OrderService из контекста
+        OrderService orderService = ctx.getBean(OrderService.class);
+        orderService.placeOrder("Ноутбук", 2);
+        orderService.placeOrder("Мышь", 5);
+        orderService.printOrders();
+        ProductService productService = ctx.getBean(ProductService.class);
+        System.out.println(orderService.getProductService() == productService);
         // TODO 3: выполнить сценарий:
         //         orderService.placeOrder("Ноутбук", 2)
         //         orderService.placeOrder("Мышь", 5)

@@ -47,9 +47,23 @@ public class Task06 {
 
     public static void main(String[] args) {
         // TODO 1: поднять контейнер с AppConfig
+        ApplicationContext ctx = new AnnotationConfigApplicationContext(AppConfig.class);
         // TODO 2: ctx.getBeansOfType(ProductRepository.class) — вывести имена бинов
+        Map<String, ProductRepository> all = ctx.getBeansOfType(ProductRepository.class);
         // TODO 3: получить "inMemoryRepo" и "fileRepo" по имени, вызвать findAll()
+        ProductService productService = ctx.getBean("BeanServiceFile", ProductService.class);
+        ProductService productService1 = ctx.getBean("productService", ProductService.class);
+        productService.listAll();
+        productService1.listAll();
         // TODO 4: получить productService дважды и проверить (==)
+        for (Map.Entry<String, ProductRepository> entry : all.entrySet()) {
+            String beanName = entry.getKey();
+            ProductRepository repo = entry.getValue();
+            System.out.println("Бин: " + beanName + " → " + repo.getClass().getSimpleName());
+        }
+        System.out.println(all.get("inMemoryRepo") == all.get("fileRepo"));
+        System.out.println(productService == productService1);
+
         // TODO 5: закрыть контекст
     }
 }

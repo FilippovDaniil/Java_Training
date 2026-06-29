@@ -44,9 +44,15 @@ public class Task04 {
 
     public static void main(String[] args) {
         // TODO 1: поднять контейнер с AppConfig
+        ApplicationContext ctx = new AnnotationConfigApplicationContext(AppConfig.class);
         // TODO 2: получить ProductService и PriceService
+        ProductService productService = ctx.getBean(ProductService.class);
+        PriceService priceService = ctx.getBean(PriceService.class);
         // TODO 3: вызвать методы обоих сервисов
+        System.out.println(priceService.getPrice("Ноутбук"));
+        productService.listAll();
         // TODO 4: сравнить ProductRepository внутри обоих сервисов (через геттер getRepository())
+        System.out.println(productService.getRepository() == priceService.getRepository());
         // TODO 5: закрыть контекст
     }
 }

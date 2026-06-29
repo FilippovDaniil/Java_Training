@@ -5,14 +5,21 @@ import org.springframework.context.annotation.AnnotationConfigApplicationContext
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
+import java.util.List;
+import java.util.Map;
+
 class InMemoryProductRepository implements ProductRepository {
     @Override
-    public java.util.List<String> findAll() {
-        return java.util.List.of("Ноутбук", "Мышь", "Клавиатура");
+    public List<String> findAll() {
+        return List.of("Ноутбук", "Мышь", "Клавиатура");
     }
 
     @Override
-    public java.util.Map<String, Double> getPriceMap() {
-        return java.util.Map.of("Ноутбук", 75000.0, "Мышь", 1500.0, "Клавиатура", 3500.0);
+    public Map<String, Double> getPriceMap() {
+        return Map.of(
+                "Ноутбук", 75000.0,
+                "Мышь", 1500.0,
+                "Клавиатура", 3500.0
+        );
     }
 }

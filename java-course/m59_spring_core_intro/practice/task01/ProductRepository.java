@@ -4,7 +4,9 @@ package m59_spring_core_intro.practice.task01;
 // Доменные классы (готовы — не менять)
 // ============================================================
 
+import java.util.List;
+
 /** Интерфейс репозитория: абстракция над источником данных. */
 interface ProductRepository {
-    java.util.List<String> findAll();
+    List<String> findAll();
 }

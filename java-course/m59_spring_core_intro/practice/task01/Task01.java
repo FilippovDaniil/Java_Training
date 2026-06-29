@@ -30,8 +30,12 @@ public class Task01 {
 
     public static void main(String[] args) {
         // TODO 1: создайте InMemoryProductRepository через new
+        InMemoryProductRepository memoryProductRepository = new InMemoryProductRepository();
         // TODO 2: создайте ProductService, передав репозиторий в конструктор
+        ProductRepository repository = new InMemoryProductRepository();
+        ProductService productService = new ProductService(repository);
         // TODO 3: вызовите svc.listAll() и выведите список
+        productService.listAll();
         // TODO 4: в комментарии ответьте — сколько мест менять при смене реализации?
     }
 }

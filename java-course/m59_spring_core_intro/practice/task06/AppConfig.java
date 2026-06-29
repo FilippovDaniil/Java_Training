@@ -12,23 +12,33 @@ import java.util.Map;
 // ============================================================
 
 // TODO: @Configuration
+@Configuration
 class AppConfig {
 
     // TODO: @Bean("inMemoryRepo")
+    @Bean("inMemoryRepo")
     public ProductRepository inMemoryProductRepository() {
         // TODO: return new InMemoryProductRepository();
-        return null;
+        return new InMemoryProductRepository();
     }
 
     // TODO: @Bean("fileRepo")
+    @Bean("fileRepo")
     public ProductRepository fileProductRepository() {
         // TODO: return new FileProductRepository();
-        return null;
+        return new FileProductRepository();
     }
 
     // TODO: @Bean + @Qualifier("inMemoryRepo") на параметре
-    public ProductService productService(ProductRepository repo) {
+    @Bean
+    public ProductService productService(@Qualifier("fileRepo") ProductRepository repo) {
         // TODO: return new ProductService(repo);
-        return null;
+        return new ProductService(repo);
+    }
+
+    @Bean("BeanServiceFile")
+    public ProductService productServiceFile() {
+        // TODO: return new ProductService(repo);
+        return new ProductService(inMemoryProductRepository());
     }
 }

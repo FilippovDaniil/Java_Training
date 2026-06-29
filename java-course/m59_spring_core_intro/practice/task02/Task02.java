@@ -35,7 +35,11 @@ public class Task02 {
 
     public static void main(String[] args) {
         // TODO 1: поднять контейнер с AppConfig
+        AnnotationConfigApplicationContext ctx = new AnnotationConfigApplicationContext(AppConfig.class);
         // TODO 2: вывести "Контекст запущен"
+        ProductRepository productRepository = ctx.getBean(ProductRepository.class);
+        ProductService productService = new ProductService(productRepository);
+        productService.listAll();
         // TODO 3: закрыть контекст
     }
 }

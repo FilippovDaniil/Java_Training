@@ -10,22 +10,26 @@ import org.springframework.context.annotation.Configuration;
 // ============================================================
 
 // TODO: @Configuration
+@Configuration
 class AppConfig {
 
     // TODO: @Bean
+    @Bean
     public ProductRepository productRepository() {
         return new InMemoryProductRepository();
     }
 
     // TODO: @Bean — DI через вызов метода: productRepository()
+    @Bean
     public ProductService productService() {
         // TODO: return new ProductService(productRepository());
-        return null;
+        return new ProductService(productRepository());
     }
 
     // TODO: @Bean — DI через параметр метода
+    @Bean
     public PriceService priceService(ProductRepository productRepository) {
         // TODO: return new PriceService(productRepository);
-        return null;
+        return new PriceService(productRepository);
     }
 }

@@ -29,9 +29,14 @@ public class Task03 {
 
     public static void main(String[] args) {
         // TODO 1: поднять контейнер с AppConfig
+        ApplicationContext ctx = new AnnotationConfigApplicationContext(AppConfig.class);
         // TODO 2: получить бин по типу
+        ProductService productService = ctx.getBean("productService", ProductService.class);
         // TODO 3: получить бин по имени и типу
+        ProductService productService1 = ctx.getBean(ProductService.class);
         // TODO 4: сравнить ссылки (==) и вывести результат
+        System.out.println(productService==productService1);
         // TODO 5: вызвать listAll(), закрыть контекст
+        productService.listAll();
     }
 }

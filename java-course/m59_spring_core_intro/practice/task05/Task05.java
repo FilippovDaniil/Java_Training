@@ -40,16 +40,22 @@ package m59_spring_core_intro.practice.task05;
 
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
+import org.springframework.context.support.FileSystemXmlApplicationContext;
 
 public class Task05 {
 
     public static void main(String[] args) {
         // TODO 1: поднять контекст из XML
         //   ApplicationContext ctx = new ClassPathXmlApplicationContext("beans.xml");
-
+        ApplicationContext ctx = new FileSystemXmlApplicationContext("C:\\Users\\MaxxPC\\IdeaProjects\\Java_Training\\java-course\\m59_spring_core_intro\\practice\\task05\\beans.xml");
         // TODO 2: получить бин "productService" по имени и типу
+        ProductService productService = ctx.getBean("productService", ProductService.class);
+        ProductService productService1 = ctx.getBean( ProductService.class);
         // TODO 3: вызвать listAll()
+        productService.listAll();
         // TODO 4: получить priceService и вызвать getPrice("Ноутбук")
+        PriceService priceService = ctx.getBean(PriceService.class);
+        priceService.getPrice("Ноутбук");
         // TODO 5: закрыть контекст
     }
 }
