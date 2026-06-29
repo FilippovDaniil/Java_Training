@@ -27,34 +27,75 @@ package m58_jdk_httpserver.practice;
 import com.sun.net.httpserver.HttpExchange;
 import com.sun.net.httpserver.HttpHandler;
 import com.sun.net.httpserver.HttpServer;
+
+import java.io.BufferedReader;
 import java.io.IOException;
+import java.io.InputStreamReader;
 import java.io.OutputStream;
 import java.net.InetSocketAddress;
 import java.nio.charset.StandardCharsets;
+import java.util.stream.Collectors;
 
 public class Task02 {
 
     public static void main(String[] args) throws IOException {
-        // TODO: создайте сервер на порту 8080
-        // TODO: зарегистрируйте контекст "/echo" → new EchoHandler()
-        // TODO: setExecutor, start, вывод в консоль
+        HttpServer server = HttpServer.create(new InetSocketAddress(8089), 0);
+        server.createContext("/echo", new ExtendedEchoHandler());
+        server.setExecutor(null);
+        server.start();
+
+        System.out.println("🚀 Сервер запущен: http://localhost:8089");
+        System.out.println("📌 GET  /echo - возвращает 'Это GET-запрос'");
+        System.out.println("📌 POST /echo - возвращает тело запроса в ответе");
+        System.out.println("📌 DELETE /echo - 405 Method not allowed");
     }
 
-    static class EchoHandler implements HttpHandler {
+    static class ExtendedEchoHandler implements HttpHandler {
         @Override
         public void handle(HttpExchange exchange) throws IOException {
             String method = exchange.getRequestMethod();
-            // TODO: разветвите по методу
-            //       GET  → 200 "Это GET-запрос"
-            //       POST → 200 "Это POST-запрос"
-            //       иначе → 405 "Метод не разрешён"
+
+            switch (method) {
+                case "GET" -> sendText(exchange, 200, "Это GET-запрос");
+
+                case "POST" -> {
+                    // Читаем тело запроса
+                    String body = readRequestBody(exchange);
+                    String response = "Это POST-запрос\nТело запроса: " + body;
+                    sendText(exchange, 200, response);
+                }
+
+                default -> sendText(exchange, 405, "Метод не разрешён");
+            }
         }
 
-        // Вспомогательный метод — завершите реализацию
+        /**
+         * Читает тело запроса из HttpExchange
+         */
+        private String readRequestBody(HttpExchange exchange) throws IOException {
+            try (BufferedReader reader = new BufferedReader(
+                    new InputStreamReader(exchange.getRequestBody(), StandardCharsets.UTF_8))) {
+                return reader.lines().collect(Collectors.joining("\n"));
+            }
+        }
+
+        /**
+         * Отправляет текстовый ответ
+         */
         private void sendText(HttpExchange exchange, int status, String body) throws IOException {
             byte[] bytes = body.getBytes(StandardCharsets.UTF_8);
+
             exchange.getResponseHeaders().set("Content-Type", "text/plain; charset=UTF-8");
-            // TODO: sendResponseHeaders и запись bytes в getResponseBody()
+            exchange.getResponseHeaders().set("Content-Length", String.valueOf(bytes.length));
+
+            exchange.sendResponseHeaders(status, bytes.length);
+
+            try (OutputStream os = exchange.getResponseBody()) {
+                os.write(bytes);
+                os.flush();
+            }
+
+            System.out.printf("✅ %s /echo -> %d%n", exchange.getRequestMethod(), status);
         }
     }
 }

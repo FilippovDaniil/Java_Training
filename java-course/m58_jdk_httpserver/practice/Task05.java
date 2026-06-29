@@ -44,54 +44,159 @@ import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.Executors;
 import java.util.concurrent.atomic.AtomicInteger;
+import java.util.stream.Collectors;
 
 public class Task05 {
 
     public static void main(String[] args) throws IOException {
-        // TODO: создайте сервер на порту 8080
-        // TODO: createContext("/notes", new NotesHandler())
-        // TODO: setExecutor(Executors.newFixedThreadPool(4))
-        // TODO: start, вывод
+        HttpServer server = HttpServer.create(new InetSocketAddress(8089), 0);
+        server.createContext("/notes", new ExtendedNotesHandler());
+        server.setExecutor(Executors.newFixedThreadPool(4));
+        server.start();
+
+        System.out.println("🚀 Сервер запущен: http://localhost:8089");
+        System.out.println("📌 POST   /notes           - создать заметку");
+        System.out.println("📌 GET    /notes           - все заметки");
+        System.out.println("📌 GET    /notes/{id}      - заметка по ID");
+        System.out.println("📌 PUT    /notes/{id}      - обновить заметку");
+        System.out.println("📌 DELETE /notes/{id}      - удалить заметку");
     }
 
-    static class NotesHandler implements HttpHandler {
-        // Хранилище: id → текст заметки
+    static class ExtendedNotesHandler implements HttpHandler {
         private final Map<Integer, String> store = new ConcurrentHashMap<>();
         private final AtomicInteger counter = new AtomicInteger(0);
 
         @Override
         public void handle(HttpExchange exchange) throws IOException {
             String method = exchange.getRequestMethod();
-            if ("POST".equals(method)) {
-                handleCreate(exchange);
-            } else if ("GET".equals(method)) {
-                handleGetAll(exchange);
-            } else {
-                // TODO: ответить 405
+            String path = exchange.getRequestURI().getPath();
+
+            // Проверяем, есть ли ID в пути
+            String[] parts = path.split("/");
+            boolean hasId = parts.length > 2;
+            Integer id = null;
+
+            if (hasId) {
+                try {
+                    id = Integer.parseInt(parts[2]);
+                } catch (NumberFormatException e) {
+                    sendError(exchange, 400, "Неверный формат ID");
+                    return;
+                }
+            }
+
+            switch (method) {
+                case "POST" -> {
+                    if (hasId) {
+                        sendError(exchange, 405, "POST не поддерживает ID");
+                    } else {
+                        handleCreate(exchange);
+                    }
+                }
+                case "GET" -> {
+                    if (hasId) {
+                        handleGetById(exchange, id);
+                    } else {
+                        handleGetAll(exchange);
+                    }
+                }
+                case "PUT" -> {
+                    if (hasId) {
+                        handleUpdate(exchange, id);
+                    } else {
+                        sendError(exchange, 400, "Требуется ID");
+                    }
+                }
+                case "DELETE" -> {
+                    if (hasId) {
+                        handleDelete(exchange, id);
+                    } else {
+                        sendError(exchange, 400, "Требуется ID");
+                    }
+                }
+                default -> sendError(exchange, 405, "Метод не разрешён");
             }
         }
 
         private void handleCreate(HttpExchange exchange) throws IOException {
-            // TODO: прочитать тело из exchange.getRequestBody()
-            String text = null; // замените
+            String text = readBody(exchange);
+            if (text == null || text.trim().isEmpty()) {
+                sendError(exchange, 400, "Текст не может быть пустым");
+                return;
+            }
 
-            // TODO: если text пустой → sendError(exchange, 400, "Текст не может быть пустым")
+            int id = counter.incrementAndGet();
+            store.put(id, text);
 
-            // TODO: int id = counter.incrementAndGet(); store.put(id, text);
-            // TODO: сформировать JSON {"id":id,"text":"..."}
-            // TODO: sendJson(exchange, 201, json)
+            String json = String.format("{\"id\":%d,\"text\":\"%s\"}", id, escapeJson(text));
+            sendJson(exchange, 201, json);
+            System.out.printf("✅ POST /notes -> 201 (id=%d)%n", id);
         }
 
         private void handleGetAll(HttpExchange exchange) throws IOException {
-            // TODO: пройти по store.entrySet() (или entrySet().stream()),
-            //       собрать JSON-массив вида [{"id":1,"text":"..."},...]
-            // TODO: sendJson(exchange, 200, jsonArray)
+            String jsonArray = store.entrySet().stream()
+                    .map(entry -> String.format("{\"id\":%d,\"text\":\"%s\"}",
+                            entry.getKey(), escapeJson(entry.getValue())))
+                    .collect(Collectors.joining(",", "[", "]"));
+
+            sendJson(exchange, 200, jsonArray);
+            System.out.printf("✅ GET /notes -> 200 (%d заметок)%n", store.size());
+        }
+
+        private void handleGetById(HttpExchange exchange, int id) throws IOException {
+            String text = store.get(id);
+            if (text == null) {
+                sendError(exchange, 404, "Заметка не найдена");
+                return;
+            }
+
+            String json = String.format("{\"id\":%d,\"text\":\"%s\"}", id, escapeJson(text));
+            sendJson(exchange, 200, json);
+            System.out.printf("✅ GET /notes/%d -> 200%n", id);
+        }
+
+        private void handleUpdate(HttpExchange exchange, int id) throws IOException {
+            String text = readBody(exchange);
+            if (text == null || text.trim().isEmpty()) {
+                sendError(exchange, 400, "Текст не может быть пустым");
+                return;
+            }
+
+            if (!store.containsKey(id)) {
+                sendError(exchange, 404, "Заметка не найдена");
+                return;
+            }
+
+            store.put(id, text);
+            String json = String.format("{\"id\":%d,\"text\":\"%s\"}", id, escapeJson(text));
+            sendJson(exchange, 200, json);
+            System.out.printf("✅ PUT /notes/%d -> 200%n", id);
+        }
+
+        private void handleDelete(HttpExchange exchange, int id) throws IOException {
+            String removed = store.remove(id);
+            if (removed == null) {
+                sendError(exchange, 404, "Заметка не найдена");
+                return;
+            }
+
+            String json = String.format("{\"id\":%d,\"deleted\":true}", id);
+            sendJson(exchange, 200, json);
+            System.out.printf("✅ DELETE /notes/%d -> 200%n", id);
         }
 
         private void sendJson(HttpExchange exchange, int status, String json) throws IOException {
             byte[] bytes = json.getBytes(StandardCharsets.UTF_8);
+
             exchange.getResponseHeaders().set("Content-Type", "application/json; charset=UTF-8");
-            // TODO: sendResponseHeaders + write bytes
+            exchange.getResponseHeaders().set("Content-Length", String.valueOf(bytes.length));
+
+            exchange.sendResponseHeaders(status, bytes.length);
+
+            try (OutputStream os = exchange.getResponseBody()) {
+                os.write(bytes);
+                os.flush();
+            }
         }
 
         private void sendError(HttpExchange exchange, int code, String message) throws IOException {
@@ -100,8 +205,19 @@ public class Task05 {
         }
 
         private String readBody(HttpExchange exchange) throws IOException {
-            // TODO: реализуйте чтение тела запроса (UTF-8)
-            return null;
+            try (InputStream is = exchange.getRequestBody()) {
+                byte[] bytes = is.readAllBytes();
+                return new String(bytes, StandardCharsets.UTF_8);
+            }
+        }
+
+        private String escapeJson(String text) {
+            if (text == null) return "";
+            return text.replace("\\", "\\\\")
+                    .replace("\"", "\\\"")
+                    .replace("\n", "\\n")
+                    .replace("\r", "\\r")
+                    .replace("\t", "\\t");
         }
     }
 }
