@@ -50,6 +50,7 @@ package m60_spring_core_beans.practice.task07;
  *   они не зависят ни от кого — Spring создаёт их первыми.
  */
 
+
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
@@ -61,9 +62,14 @@ public class Task07 {
 
     public static void main(String[] args) {
         // TODO: создайте контекст с BlogAppConfig.class
+        AnnotationConfigApplicationContext ctx = new AnnotationConfigApplicationContext(BlogAppConfig.class);
         // TODO: получите бин PostController
+        PostController postController = ctx.getBean(PostController.class);
         // TODO: вызовите controller.createPost("Введение в Spring")
+        postController.createPost("Введение в Spring");
         // TODO: вызовите controller.addComment(1L, "Отличная статья!")
+        postController.addComment(1L,"Отличная статья!");
         // TODO: закройте контекст
+        ctx.close();
     }
 }

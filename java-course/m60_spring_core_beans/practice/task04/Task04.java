@@ -34,6 +34,7 @@ package m60_spring_core_beans.practice.task04;
  *       PostService04 service = new PostService04(mockRepo);  // никакой рефлексии!
  */
 
+
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
@@ -44,8 +45,11 @@ public class Task04 {
 
     public static void main(String[] args) {
         // TODO: создайте контекст с ConstructorInjectionConfig.class
+        AnnotationConfigApplicationContext ctx = new AnnotationConfigApplicationContext(ConstructorInjectionConfig.class);
         // TODO: получите бин PostService04
+        PostService04 service = ctx.getBean(PostService04.class);
         // TODO: вызовите getPost(42L) и выведите результат
+        System.out.println(service.getPost(47L));
         // TODO: закройте контекст
     }
 }

@@ -13,4 +13,6 @@ import org.springframework.stereotype.Service;
 
 // TODO: @Configuration
 // TODO: @ComponentScan(basePackages = "blog")
+@Configuration
+@ComponentScan(basePackages = "m60_spring_core_beans.practice.task07")
 class BlogAppConfig { }

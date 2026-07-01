@@ -8,5 +8,5 @@ import org.springframework.stereotype.Repository;
 import org.springframework.stereotype.Service;
 
 @Configuration
-@ComponentScan(basePackages = "blog")
+@ComponentScan(basePackages = "m60_spring_core_beans.practice.task03")
 class FieldInjectionConfig { }

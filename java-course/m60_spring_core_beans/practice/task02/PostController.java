@@ -8,6 +8,7 @@ import org.springframework.stereotype.Repository;
 import org.springframework.stereotype.Service;
 
 // TODO: какую аннотацию ставим на веб-слой? (@Controller)
+@Controller
 class PostController {
     public String handle(String request) {
         return "Контроллер обработал: " + request;  // заглушка

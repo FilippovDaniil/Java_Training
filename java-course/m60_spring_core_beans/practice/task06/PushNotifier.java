@@ -10,9 +10,12 @@ import java.util.List;
 
 // TODO: @Component
 // TODO: @Order(3)
+@Component
+@Order(3)
 class PushNotifier implements Notifier {
     @Override
     public void notify(String message) {
         // TODO: System.out.println("Push: " + message);
+        System.out.println("Push: " + message);
     }
 }

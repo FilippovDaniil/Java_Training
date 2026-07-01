@@ -12,6 +12,7 @@ import org.springframework.stereotype.Service;
 // ============================================================
 
 // TODO: @Repository
+@Repository
 class CommentRepository {
     public void save(long postId, String text) {
         // Заглушка сохранения в "БД"

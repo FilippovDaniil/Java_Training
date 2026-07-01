@@ -31,6 +31,7 @@ package m60_spring_core_beans.practice.task05;
  *   Для обязательных — используйте конструктор (см. Task04).
  */
 
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 import org.springframework.context.annotation.ComponentScan;
@@ -40,11 +41,19 @@ import org.springframework.stereotype.Service;
 
 public class Task05 {
 
-    public static void main(String[] args) {
+    public static void main(String[] args){
         // Сценарий A: с фильтром
         System.out.println("--- Сценарий A: SpamFilter присутствует ---");
         // TODO: создайте контекст с WithFilterConfig.class
+        AnnotationConfigApplicationContext ctx = new AnnotationConfigApplicationContext(WithFilterConfig.class);
         // TODO: получите PostService05, вызовите publish("Купи диплом!")
+        PostService05 service = ctx.getBean(PostService05.class);
+        try{
+            service.publish("Купи диплом!");
+            service.publish("Купи быка!");
+        }catch (IllegalArgumentException e){
+            System.out.println(e.getMessage());
+        }
         // TODO: обработайте исключение и выведите сообщение об ошибке
         // TODO: закройте контекст
 

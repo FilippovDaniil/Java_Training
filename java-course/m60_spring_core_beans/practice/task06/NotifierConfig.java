@@ -9,5 +9,5 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 
 @Configuration
-@ComponentScan(basePackages = "blog")
+@ComponentScan(basePackages = "m60_spring_core_beans.practice.task06")
 class NotifierConfig { }

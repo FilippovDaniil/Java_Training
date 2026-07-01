@@ -10,9 +10,12 @@ import java.util.List;
 
 // TODO: @Component
 // TODO: @Order(2)
+@Component
+@Order(2)
 class SmsNotifier implements Notifier {
     @Override
     public void notify(String message) {
         // TODO: System.out.println("SMS: " + message);
+        System.out.println("SMS: " + message);
     }
 }

@@ -12,6 +12,7 @@ import org.springframework.stereotype.Service;
 // ============================================================
 
 // TODO: какую аннотацию ставим на слой данных? (@Repository)
+@Repository
 class PostRepository {
     public String findById(long id) {
         return "Пост #" + id;  // заглушка

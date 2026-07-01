@@ -1,5 +1,6 @@
 package m60_spring_core_beans.practice.task06;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
@@ -16,10 +17,18 @@ import java.util.List;
 class NotificationService {
 
     // TODO: объявите поле  private final List<Notifier> notifiers
+    private final List<Notifier> notifiers;
 
     // TODO: добавьте конструктор, принимающий List<Notifier>
+    @Autowired
+    public NotificationService(List<Notifier> notifiers){
+        this.notifiers = notifiers;
+    }
 
     public void notifyAll(String message) {
         // TODO: переберите notifiers и вызовите notify(message) у каждого
+        for (Notifier notifier : notifiers) {
+            notifier.notify(message);
+        }
     }
 }

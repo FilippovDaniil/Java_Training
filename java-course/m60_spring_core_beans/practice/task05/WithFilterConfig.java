@@ -8,5 +8,7 @@ import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
 
 // Конфигурация С фильтром (SpamFilter зарегистрирован через @ComponentScan)
-// TODO: @Configuration + @ComponentScan, включающий пакет где лежит SpamFilter
+// TODO: @Configuration + @ComponentScan, включающий пакет где лежит
+@ComponentScan(basePackages = "m60_spring_core_beans.practice.task05")
+@Configuration
 class WithFilterConfig { }

@@ -12,6 +12,7 @@ import org.springframework.stereotype.Service;
 // ============================================================
 
 // TODO: @Repository
+@Repository
 class PostRepository07 {
     private long idCounter = 0;
 

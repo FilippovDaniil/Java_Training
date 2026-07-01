@@ -51,9 +51,13 @@ public class Task06 {
 
     public static void main(String[] args) {
         // TODO: создайте контекст с NotifierConfig.class
+        AnnotationConfigApplicationContext ctx = new AnnotationConfigApplicationContext(NotifierConfig.class);
         // TODO: получите бин NotificationService
+        NotificationService service = ctx.getBean(NotificationService.class);
         // TODO: вызовите notifyAll("Вышел новый пост!")
+        service.notifyAll("Вышел новый пост!!!");
         // TODO: убедитесь, что порядок: Email → SMS → Push
         // TODO: закройте контекст
+        ctx.close();
     }
 }

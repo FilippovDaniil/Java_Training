@@ -35,8 +35,12 @@ public class Task03 {
 
     public static void main(String[] args) {
         // TODO: создайте контекст с FieldInjectionConfig.class
+        AnnotationConfigApplicationContext ctx = new AnnotationConfigApplicationContext(FieldInjectionConfig.class);
         // TODO: получите бин PostService03
+        PostService03 postService03 = ctx.getBean(PostService03.class);
         // TODO: вызовите getPost(1L) и выведите результат
+        System.out.println(postService03.getPost(77L));
         // TODO: закройте контекст
+        ctx.close();
     }
 }

@@ -16,13 +16,15 @@ class PostService03 {
 
     // TODO: добавьте поле PostRepository03 postRepository с аннотацией @Autowired
     // private PostRepository03 postRepository;
+    @Autowired
+    private PostRepository03 postRepository;
 
     public String getPost(long id) {
         // TODO: используйте postRepository.findById(id)
-        return null;
+        return postRepository.findById(id);
     }
 
     // Вопрос (ответьте в комментарии):
     // Почему этот класс трудно тестировать без Spring?
-    // TODO: ваш ответ здесь
+    // TODO: ваш ответ здесь - Без контекста мы не создадим объект postRepository
 }

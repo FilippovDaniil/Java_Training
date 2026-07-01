@@ -14,9 +14,12 @@ import java.util.List;
 
 // TODO: @Component
 // TODO: @Order(1)
+@Component
+@Order(1)
 class EmailNotifier implements Notifier {
     @Override
     public void notify(String message) {
         // TODO: System.out.println("Email: " + message);
+        System.out.println("Email: " + message);
     }
 }

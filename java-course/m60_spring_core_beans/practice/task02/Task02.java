@@ -35,8 +35,19 @@ public class Task02 {
 
     public static void main(String[] args) {
         // TODO: создайте контекст с BlogConfig.class
+        AnnotationConfigApplicationContext ctx = new AnnotationConfigApplicationContext(BlogConfig.class);
         // TODO: получите бины PostRepository, PostService, PostController
+        PostController controller = ctx.getBean(PostController.class);
+        PostRepository repository = ctx.getBean(PostRepository.class);
+        PostService service = ctx.getBean(PostService.class);
         // TODO: для каждого выведите getClass().getSimpleName() + " зарегистрирован"
+        System.out.println("Controller: " + controller.getClass().getSimpleName());
+        System.out.println(controller.handle("Swag"));
+        System.out.println("Repository: " + repository.getClass().getSimpleName());
+        System.out.println(repository.findById(1L));
+        System.out.println("Service: " + service.getClass().getSimpleName());
+        System.out.println(service.getPost(2L));
         // TODO: закройте контекст
+        ctx.close();
     }
 }

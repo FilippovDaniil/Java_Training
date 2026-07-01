@@ -10,7 +10,9 @@ import org.springframework.stereotype.Component;
 // ============================================================
 
 // TODO: @Configuration
-// TODO: @ComponentScan(basePackages = "blog")
+// TODO: @ComponentScan(basePackages = "m60_spring_core_beans/practice/task01/AppConfig.java")
+@ComponentScan(basePackages = "m60_spring_core_beans.practice.task01")
+@Configuration
 class AppConfig {
     // Тело пустое — Spring сканирует пакет и сам регистрирует бины
 }

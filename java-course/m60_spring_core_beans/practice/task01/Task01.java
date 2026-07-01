@@ -32,8 +32,12 @@ public class Task01 {
 
     public static void main(String[] args) {
         // TODO: создайте AnnotationConfigApplicationContext с AppConfig.class
+        AnnotationConfigApplicationContext ctx = new AnnotationConfigApplicationContext(AppConfig.class);
         // TODO: получите бин ArticleFormatter
+        ArticleFormatter formatter = ctx.getBean(ArticleFormatter.class);
         // TODO: вызовите format("Spring бины") и выведите результат
+        System.out.println(formatter.format("Spring бины"));
         // TODO: закройте контекст
+        ctx.close();
     }
 }

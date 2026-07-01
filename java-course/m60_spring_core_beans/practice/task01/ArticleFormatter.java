@@ -10,6 +10,7 @@ import org.springframework.stereotype.Component;
 // ============================================================
 
 // TODO: @Component
+@Component
 class ArticleFormatter {
 
     /**

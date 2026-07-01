@@ -8,6 +8,7 @@ import org.springframework.stereotype.Repository;
 import org.springframework.stereotype.Service;
 
 // TODO: какую аннотацию ставим на бизнес-логику? (@Service)
+@Service
 class PostService {
     public String getPost(long id) {
         return "Сервис: пост " + id;  // заглушка
