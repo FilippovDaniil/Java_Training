@@ -10,6 +10,8 @@ import org.springframework.stereotype.Component;
 
 // TODO: @Component
 // TODO: @Primary  — этот бин внедряется по умолчанию
+@Component
+@Primary
 class PushNotifier02 implements Notifier02 {
     @Override
     public void send(String message) { System.out.println("[PUSH] " + message); }

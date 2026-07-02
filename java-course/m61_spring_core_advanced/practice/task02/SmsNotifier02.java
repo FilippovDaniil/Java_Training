@@ -9,6 +9,7 @@ import org.springframework.context.annotation.Primary;
 import org.springframework.stereotype.Component;
 
 // TODO: @Component
+@Component
 class SmsNotifier02 implements Notifier02 {
     @Override
     public void send(String message) { System.out.println("[SMS] " + message); }

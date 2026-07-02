@@ -72,9 +72,14 @@ public class Task07 {
 
     public static void main(String[] args) {
         // TODO: поднять контекст (AppConfig07)
+        AnnotationConfigApplicationContext ctx = new AnnotationConfigApplicationContext(AppConfig07.class);
         // TODO: получить NotificationService
+        NotificationService service = ctx.getBean(NotificationService.class);
         // TODO: вызвать sendDefault("user@example.com", "Ваш заказ принят")
+        service.sendDefault("user@example.com", "Ваш заказ принят");
         // TODO: вызвать sendViaSms("+79001234567", "Код подтверждения: 1234")
+        service.sendViaSms("+79001234567", "Код подтверждения: 1234");
         // TODO: закрыть контекст
+        ctx.close();
     }
 }

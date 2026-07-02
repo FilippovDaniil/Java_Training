@@ -16,9 +16,11 @@ import org.springframework.stereotype.Component;
 class DefaultNotificationService {
 
     // TODO: @Autowired (без @Qualifier — должен прийти PushNotifier02)
+    @Autowired
     private Notifier02 notifier;
 
     public void send(String message) {
         // TODO: notifier.send(message)
+        notifier.send(message);
     }
 }

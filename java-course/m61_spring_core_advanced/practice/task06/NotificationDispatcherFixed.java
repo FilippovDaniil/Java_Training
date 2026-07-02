@@ -10,10 +10,11 @@ import org.springframework.stereotype.Component;
 @Component
 class NotificationDispatcherFixed {
 
+
     private final RoutingServiceFixed rs;
 
-    // TODO: добавьте @Lazy к параметру rs, чтобы разорвать цикл
-    NotificationDispatcherFixed(RoutingServiceFixed rs) {
+    @Autowired
+    public NotificationDispatcherFixed(@Lazy RoutingServiceFixed rs) {
         this.rs = rs;
     }
 

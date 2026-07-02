@@ -18,13 +18,19 @@ import org.springframework.stereotype.Component;
 
 // TODO: @Component
 // TODO: @Primary
+@Component
+@Primary
 class EmailChannel implements NotificationChannel {
 
     // TODO: @PostConstruct — вывести "EmailChannel: инициализирован"
-    public void init() { }
+    @PostConstruct
+    public void init() {
+        System.out.println("EmailChannel: инициализирован");
+    }
 
     @Override
     public void send(String recipient, String body) {
         // TODO: вывести "[EMAIL → recipient] body"
+        System.out.println("[EMAIL] -> " + recipient + "] " + body);
     }
 }

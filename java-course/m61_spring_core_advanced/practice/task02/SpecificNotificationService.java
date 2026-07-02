@@ -17,9 +17,12 @@ class SpecificNotificationService {
 
     // TODO: @Autowired
     // TODO: @Qualifier("smsNotifier02")
+    @Qualifier("smsNotifier02")
+    @Autowired
     private Notifier02 notifier;
 
     public void send(String message) {
         // TODO: notifier.send(message)
+        notifier.send(message);
     }
 }

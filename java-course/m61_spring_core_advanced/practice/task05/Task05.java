@@ -38,6 +38,10 @@ public class Task05 {
 
     public static void main(String[] args) {
         // TODO: поднять контекст (можно через try-with-resources для автозакрытия)
+        try(AnnotationConfigApplicationContext context = new AnnotationConfigApplicationContext(AppConfig05.class);){
+            EmailNotifierLifecycle lifecycle = context.getBean(EmailNotifierLifecycle.class);
+            lifecycle.send("Тестовое сообщение");
+        }
         // TODO: получить бин EmailNotifierLifecycle
         // TODO: вызвать send("Тестовое сообщение")
         // TODO: закрыть контекст → должен сработать @PreDestroy

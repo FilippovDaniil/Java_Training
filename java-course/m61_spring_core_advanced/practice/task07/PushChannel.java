@@ -17,13 +17,18 @@ import org.springframework.stereotype.Component;
 // ============================================================
 
 // TODO: @Component
+@Component
 class PushChannel implements NotificationChannel {
 
     // TODO: @PostConstruct — вывести "PushChannel: инициализирован"
-    public void init() { }
+    @PostConstruct
+    public void init() {
+        System.out.println("PushChannel: инициализирован");
+    }
 
     @Override
     public void send(String recipient, String body) {
         // TODO: вывести "[PUSH → recipient] body"
+        System.out.println("[EMAIL] -> " + recipient + "] " + body);
     }
 }

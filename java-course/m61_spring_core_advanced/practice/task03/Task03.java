@@ -34,17 +34,22 @@ import org.springframework.stereotype.Component;
 public class Task03 {
 
     public static void main(String[] args) {
-        AnnotationConfigApplicationContext context =
-                new AnnotationConfigApplicationContext(AppConfig03.class);
+        AnnotationConfigApplicationContext context = new AnnotationConfigApplicationContext(AppConfig03.class);
 
         // --- Singleton ---
         // TODO: получить бин SingletonNotifier дважды
+        SingletonNotifier notifier1 = context.getBean(SingletonNotifier.class);
+        SingletonNotifier notifier2 = context.getBean(SingletonNotifier.class);
         // TODO: сравнить ссылки (==) и вывести результат
+        System.out.println("Ссылки равны ?: " + (notifier1 == notifier2));
         // Ожидается: true
 
         // --- Prototype ---
         // TODO: получить бин PrototypeNotifier дважды
+        PrototypeNotifier prototypeNotifier1 = context.getBean(PrototypeNotifier.class);
+        PrototypeNotifier prototypeNotifier2 = context.getBean(PrototypeNotifier.class);
         // TODO: сравнить ссылки (==) и вывести результат
+        System.out.println("Ссылки равны ?: " + (prototypeNotifier1 == prototypeNotifier2));
         // Ожидается: false
 
         context.close();

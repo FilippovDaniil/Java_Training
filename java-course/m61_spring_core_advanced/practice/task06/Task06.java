@@ -29,6 +29,7 @@ package m61_spring_core_advanced.practice.task06;
  *   NotificationDispatcher(@Lazy RoutingService rs) { ... }
  */
 
+import org.springframework.beans.factory.UnsatisfiedDependencyException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 import org.springframework.context.annotation.ComponentScan;
@@ -44,23 +45,26 @@ public class Task06 {
         // ЧАСТЬ A: раскомментируйте, запустите, получите ошибку,
         //          снова закомментируйте.
         // --------------------------------------------------------
-        /*
+
         System.out.println("=== ЧАСТЬ A: цикл через конструктор (ожидается ошибка) ===");
         try {
             new AnnotationConfigApplicationContext(AppConfigCycleA.class).close();
         } catch (Exception e) {
             System.out.println("Ошибка (ожидаемо): " + e.getClass().getSimpleName());
         }
-        */
+
 
         // --------------------------------------------------------
         // ЧАСТЬ B: @Lazy разрывает цикл
         // --------------------------------------------------------
         System.out.println("=== ЧАСТЬ B: цикл устранён через @Lazy ===");
-        AnnotationConfigApplicationContext ctx =
-                new AnnotationConfigApplicationContext(AppConfigCycleB.class);
+        try (AnnotationConfigApplicationContext ctx = new AnnotationConfigApplicationContext(AppConfigCycleB.class);){
+            // TODO: получить NotificationDispatcherFixed, вызвать dispatch("Привет")
+            ctx.getBean(NotificationDispatcherFixed.class).dispatch("Привет");
 
-        // TODO: получить NotificationDispatcherFixed, вызвать dispatch("Привет")
-        ctx.close();
+        }catch(UnsatisfiedDependencyException e){
+            System.out.println(e.getMessage());
+        }
+
     }
 }

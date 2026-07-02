@@ -41,8 +41,7 @@ public class Task04 {
     public static void main(String[] args) {
         System.out.println("[СТАРТ контекста]");
 
-        AnnotationConfigApplicationContext context =
-                new AnnotationConfigApplicationContext(AppConfig04.class);
+        AnnotationConfigApplicationContext context = new AnnotationConfigApplicationContext(AppConfig04.class);
 
         // EagerNotifier уже должен быть создан (вывод появился выше)
         // LazyNotifier ещё НЕ создан
@@ -50,6 +49,7 @@ public class Task04 {
         System.out.println("[ЗАПРОС LazyNotifier]");
 
         // TODO: вызовите context.getBean(LazyNotifier.class)
+        context.getBean(LazyNotifier.class);
         // TODO: убедитесь, что "LazyNotifier создан" появился ПОСЛЕ "[ЗАПРОС LazyNotifier]"
 
         context.close();

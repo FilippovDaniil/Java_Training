@@ -12,6 +12,7 @@ import org.springframework.stereotype.Component;
 // ============================================================
 
 // TODO: добавьте @Component
+@Component
 class EmailNotifierLifecycle {
 
     public EmailNotifierLifecycle() {
@@ -19,8 +20,10 @@ class EmailNotifierLifecycle {
     }
 
     // TODO: добавьте @PostConstruct
+    @PostConstruct
     public void init() {
         // TODO: вывести "EmailNotifier: @PostConstruct (открыть соединение)"
+        System.out.println("EmailNotifier: @PostConstruct (открыть соединение)");
     }
 
     public void send(String message) {
@@ -28,7 +31,9 @@ class EmailNotifierLifecycle {
     }
 
     // TODO: добавьте @PreDestroy
+    @PreDestroy
     public void cleanup() {
         // TODO: вывести "EmailNotifier: @PreDestroy (закрыть соединение)"
+        System.out.println("EmailNotifier: @PreDestroy (закрыть соединение)");
     }
 }

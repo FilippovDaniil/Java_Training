@@ -13,6 +13,8 @@ import org.springframework.stereotype.Component;
 
 // TODO: добавьте @Component
 // TODO: добавьте @Scope("prototype")
+@Component
+@Scope("prototype")
 class PrototypeNotifier {
     public void send(String message) {
         System.out.println("[PROTOTYPE:" + System.identityHashCode(this) + "] " + message);

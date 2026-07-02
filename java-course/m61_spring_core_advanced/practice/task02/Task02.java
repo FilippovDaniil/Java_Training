@@ -33,11 +33,12 @@ import org.springframework.stereotype.Component;
 public class Task02 {
 
     public static void main(String[] args) {
-        AnnotationConfigApplicationContext context =
-                new AnnotationConfigApplicationContext(AppConfig02.class);
+        AnnotationConfigApplicationContext context = new AnnotationConfigApplicationContext(AppConfig02.class);
 
         // TODO: получить DefaultNotificationService, вызвать send("Привет") → ожидается [PUSH]
+        context.getBean(DefaultNotificationService.class).send("Привет");
         // TODO: получить SpecificNotificationService, вызвать send("Привет") → ожидается [SMS]
+        context.getBean(SpecificNotificationService.class).send("Привет");
 
         context.close();
     }

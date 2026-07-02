@@ -13,6 +13,7 @@ import org.springframework.stereotype.Component;
 // ============================================================
 
 // TODO: @Component
+@Component
 class EmailNotifier02 implements Notifier02 {
     @Override
     public void send(String message) { System.out.println("[EMAIL] " + message); }

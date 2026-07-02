@@ -12,5 +12,5 @@ import org.springframework.stereotype.Component;
 // ============================================================
 
 @Configuration
-@ComponentScan
+@ComponentScan(basePackages = "m61_spring_core_advanced.practice.task01")
 class AppConfig01 {}

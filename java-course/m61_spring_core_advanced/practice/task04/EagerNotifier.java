@@ -11,10 +11,12 @@ import org.springframework.stereotype.Component;
 // Eager-бин (создаётся при старте контекста)
 // ============================================================
 
-// TODO: добавьте @Component
+// TODO: добавьте @Component\
+@Component
 class EagerNotifier {
 
     // TODO: добавьте @PostConstruct
+    @PostConstruct
     public void init() {
         System.out.println("EagerNotifier создан");
     }

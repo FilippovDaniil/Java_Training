@@ -13,9 +13,12 @@ import org.springframework.stereotype.Component;
 
 // TODO: добавьте @Component
 // TODO: добавьте @Lazy
+@Component
+@Lazy
 class LazyNotifier {
 
     // TODO: добавьте @PostConstruct
+    @PostConstruct
     public void init() {
         System.out.println("LazyNotifier создан");
     }

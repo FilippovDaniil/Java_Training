@@ -13,6 +13,8 @@ import org.springframework.stereotype.Component;
 
 // TODO: добавьте @Component
 // TODO: добавьте @Scope("singleton")   (можно не указывать — это умолчание)
+@Component
+@Scope("singleton")
 class SingletonNotifier {
     public void send(String message) {
         System.out.println("[SINGLETON:" + System.identityHashCode(this) + "] " + message);

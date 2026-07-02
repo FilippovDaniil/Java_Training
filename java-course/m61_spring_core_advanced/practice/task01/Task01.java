@@ -34,11 +34,12 @@ public class Task01 {
 
     public static void main(String[] args) {
         // Поднять контекст с текущим пакетом
-        AnnotationConfigApplicationContext context =
-                new AnnotationConfigApplicationContext(AppConfig01.class);
+        AnnotationConfigApplicationContext context = new AnnotationConfigApplicationContext(AppConfig01.class);
 
         // TODO: получить бин AlertService из контекста
+        AlertService service = context.getBean(AlertService.class);
         // TODO: вызвать alertService.notify("Сервер недоступен")
+        service.notify("Сервер не доступен");
         // TODO: убедиться в выводе, что использован EmailNotifier
 
         context.close();

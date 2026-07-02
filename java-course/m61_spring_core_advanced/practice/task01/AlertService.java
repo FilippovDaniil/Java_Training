@@ -16,9 +16,12 @@ class AlertService {
 
     // TODO: добавьте @Autowired
     // TODO: добавьте @Qualifier("emailNotifier")
+    @Autowired
+    @Qualifier("emailNotifier")
     private Notifier notifier;
 
     public void notify(String message) {
         // TODO: вызовите notifier.send(message)
+        notifier.send(message);
     }
 }
