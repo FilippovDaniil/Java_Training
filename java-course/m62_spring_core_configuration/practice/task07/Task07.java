@@ -93,7 +93,36 @@ import java.nio.charset.StandardCharsets;
 public class Task07 {
 
     public static void main(String[] args) {
-        // TODO: создайте контекст, активируйте профиль "dev" (затем попробуйте "prod")
-        //       получите AppRunner и вызовите run()
+        System.out.println("=== ЗАПУСК С ПРОФИЛЕМ DEV ===");
+        try (AnnotationConfigApplicationContext ctxDev = createContext("dev")) {
+            AppRunner runner = ctxDev.getBean(AppRunner.class);
+            runner.run();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        System.out.println("\n=== ЗАПУСК С ПРОФИЛЕМ PROD ===");
+        try (AnnotationConfigApplicationContext ctxProd = createContext("prod")) {
+            AppRunner runner = ctxProd.getBean(AppRunner.class);
+            runner.run();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    private static AnnotationConfigApplicationContext createContext(String profile) {
+        AnnotationConfigApplicationContext ctx = new AnnotationConfigApplicationContext();
+        ctx.getEnvironment().setActiveProfiles(profile);
+
+        // Регистрируем все конфигурации и бины явно
+        ctx.register(AppConfig.class);
+        if ("dev".equals(profile)) {
+            ctx.register(DevConfig.class);
+        } else if ("prod".equals(profile)) {
+            ctx.register(ProdConfig.class);
+        }
+
+        ctx.refresh();
+        return ctx;
     }
 }

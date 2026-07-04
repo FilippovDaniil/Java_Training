@@ -56,7 +56,17 @@ import java.nio.charset.StandardCharsets;
 public class Task06 {
 
     public static void main(String[] args) {
-        // TODO: создайте контекст с ResourceConfig.class
-        //       получите бин ResourceReader и вызовите readResources()
+        // Создаём контекст с конфигурацией
+        try (AnnotationConfigApplicationContext context =
+                     new AnnotationConfigApplicationContext(ResourceConfig.class)) {
+
+            // Получаем бин ResourceReader и вызываем метод
+            ResourceReader reader = context.getBean(ResourceReader.class);
+            reader.readResources();
+
+        } catch (IOException e) {
+            System.err.println("Ошибка при чтении ресурсов: " + e.getMessage());
+            e.printStackTrace();
+        }
     }
 }

@@ -23,5 +23,8 @@ import java.nio.charset.StandardCharsets;
 // TODO: @ComponentScan
 // TODO: @Import({DevConfig.class, ProdConfig.class})
 // TODO: @PropertySource("classpath:app-common.properties")
+@Configuration
+@ComponentScan(basePackages = "m62_spring_core_configuration.practice.task07")
+@PropertySource("file:java-course/m62_spring_core_configuration/practice/task07/resources/app-common.properties")
 class AppConfig {
 }

@@ -15,29 +15,34 @@ import java.nio.charset.StandardCharsets;
 // ============================================================
 
 // TODO: @Component
-class ResourceReader {
+@Component
+public class ResourceReader {
 
-    // TODO: @Value("classpath:banner.txt")
+    // Используем file: с относительным путём от корня проекта
+    @Value("file:java-course/m62_spring_core_configuration/practice/task06/resources/banner.txt")
     private Resource bannerResource;
 
-    // TODO: @Value("classpath:app.properties")
+    @Value("file:java-course/m62_spring_core_configuration/practice/task06/resources/application.properties")
     private Resource propsResource;
 
     public void readResources() throws IOException {
-        // TODO: 1) прочитать содержимое bannerResource и вывести текст
-        //       2) вывести имя файла propsResource и его размер в байтах
-        //       3) создать FileSystemResource программно, проверить exists()
+        // 1. Читаем баннер
+        String banner = new String(bannerResource.getInputStream().readAllBytes(), StandardCharsets.UTF_8);
+        System.out.println("=== BANNER ===\n" + banner);
 
-        // Пример для шага 1:
-        // String banner = new String(bannerResource.getInputStream().readAllBytes(), StandardCharsets.UTF_8);
-        // System.out.println("=== BANNER ===\n" + banner);
+        // 2. Выводим имя и размер файла свойств
+        System.out.println("=== СВОЙСТВА ===");
+        System.out.println("Файл: " + propsResource.getFilename()
+                + ", байт: " + propsResource.contentLength());
 
-        // Пример для шага 2:
-        // System.out.println("Файл: " + propsResource.getFilename()
-        //     + ", байт: " + propsResource.contentLength());
-
-        // Пример для шага 3:
-        // FileSystemResource fsr = new FileSystemResource("src/main/resources/banner.txt");
-        // System.out.println("Существует: " + fsr.exists() + ", путь: " + fsr.getFile().getAbsolutePath());
+        // 3. Проверяем FileSystemResource программно (как в задании)
+        FileSystemResource fsr = new FileSystemResource(
+                "java-course/m62_spring_core_configuration/practice/task06/resources/banner.txt"
+        );
+        System.out.println("=== ПРОВЕРКА FileSystemResource ===");
+        System.out.println("Существует: " + fsr.exists());
+        if (fsr.exists()) {
+            System.out.println("Абсолютный путь: " + fsr.getFile().getAbsolutePath());
+        }
     }
 }

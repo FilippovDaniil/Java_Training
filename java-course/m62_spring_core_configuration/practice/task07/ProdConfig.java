@@ -18,12 +18,21 @@ import java.nio.charset.StandardCharsets;
 // TODO: @Configuration
 // TODO: @Profile("prod")
 // TODO: @PropertySource("classpath:app-prod.properties")
+@Configuration
+@Profile("prod")
+@PropertySource("file:java-course/m62_spring_core_configuration/practice/task07/resources/app-prod.properties")
 class ProdConfig {
 
+    public ProdConfig() {
+        System.out.println("=== ProdConfig загружен ===");
+    }
+
     // TODO: @Bean
+    @Bean
     public NotificationService notificationService() {
         // TODO: создать EmailNotificationService, внедрить @Value-поля
         //       (можно через @Autowired Environment или конструктор с @Value)
-        return null;
+        System.out.println("Создаём ConsoleNotificationService");
+        return new EmailNotificationService();
     }
 }

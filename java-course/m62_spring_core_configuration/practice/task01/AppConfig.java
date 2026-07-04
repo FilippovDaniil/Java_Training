@@ -1,10 +1,7 @@
 package m62_spring_core_configuration.practice.task01;
 
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.context.annotation.AnnotationConfigApplicationContext;
-import org.springframework.context.annotation.Bean;
-import org.springframework.context.annotation.Configuration;
-import org.springframework.context.annotation.PropertySource;
+import org.springframework.context.annotation.*;
 import org.springframework.stereotype.Component;
 
 // ============================================================
@@ -13,7 +10,10 @@ import org.springframework.stereotype.Component;
 
 // TODO: добавьте @Configuration
 // TODO: добавьте @PropertySource("classpath:app.properties")
-// TODO: добавьте @ComponentScan (или объявите AppProperties как @Bean)
+// TODO: добавьте @ComponentScan (или объявите AppProperties как @Bean) - m62_spring_core_configuration/practice/task01
+@Configuration
+@ComponentScan(basePackages = "m62_spring_core_configuration.practice.task01")
+@PropertySource("file:java-course/m62_spring_core_configuration/practice/task01/resources/application.properties")
 class AppConfig {
     // Можно оставить пустым, если AppProperties помечен @Component
 }

@@ -18,11 +18,20 @@ import java.nio.charset.StandardCharsets;
 // TODO: @Configuration
 // TODO: @Profile("dev")
 // TODO: @PropertySource("classpath:app-dev.properties")
+@Configuration
+@Profile("dev")
+@PropertySource("file:java-course/m62_spring_core_configuration/practice/task07/resources/app-dev.properties")
 class DevConfig {
 
+    public DevConfig() {
+        System.out.println("=== DevConfig загружен ===");
+    }
+
     // TODO: @Bean
+    @Bean
     public NotificationService notificationService() {
         // TODO: вернуть new ConsoleNotificationService()
-        return null;
+        System.out.println("Создаём ConsoleNotificationService");
+        return new ConsoleNotificationService();
     }
 }

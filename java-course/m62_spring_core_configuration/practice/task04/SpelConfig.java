@@ -13,5 +13,7 @@ import org.springframework.stereotype.Component;
 
 // TODO: @Configuration, @ComponentScan
 // При наличии app.properties — добавьте @PropertySource("classpath:app.properties")
+@Configuration
+@ComponentScan(basePackages = "m62_spring_core_configuration.practice.task04")
 class SpelConfig {
 }

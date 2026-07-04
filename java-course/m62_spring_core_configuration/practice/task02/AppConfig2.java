@@ -13,5 +13,8 @@ import org.springframework.stereotype.Component;
 // ============================================================
 
 // TODO: @Configuration, @PropertySource("classpath:app.properties"), @ComponentScan
+@Configuration
+@ComponentScan(basePackages = "m62_spring_core_configuration.practice.task02")
+@PropertySource("file:java-course/m62_spring_core_configuration/practice/task02/resources/application.properties")
 class AppConfig2 {
 }

@@ -51,5 +51,8 @@ public class Task02 {
     public static void main(String[] args) {
         // TODO: создайте контекст с AppConfig2.class
         //       получите бин ConfigReader и вызовите printConfig()
+        AnnotationConfigApplicationContext ctx = new AnnotationConfigApplicationContext(AppConfig2.class);
+        ConfigReader reader = ctx.getBean(ConfigReader.class);
+        reader.printConfig();
     }
 }

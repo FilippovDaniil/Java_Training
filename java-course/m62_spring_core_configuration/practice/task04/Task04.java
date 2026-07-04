@@ -52,6 +52,9 @@ public class Task04 {
 
     public static void main(String[] args) {
         // TODO: создайте контекст с SpelConfig.class
+        AnnotationConfigApplicationContext ctx = new AnnotationConfigApplicationContext(SpelConfig.class);
         //       получите бин SpelDemo и выведите все поля
+        SpelDemo spelDemo = ctx.getBean(SpelDemo.class);
+        spelDemo.print();
     }
 }

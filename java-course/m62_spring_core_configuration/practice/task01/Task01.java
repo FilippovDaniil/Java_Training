@@ -47,8 +47,13 @@ public class Task01 {
         //       получите бин AppProperties и выведите его поля
         // Например:
         // AnnotationConfigApplicationContext ctx = new AnnotationConfigApplicationContext(AppConfig.class);
+        AnnotationConfigApplicationContext ctx = new AnnotationConfigApplicationContext(AppConfig.class);
         // AppProperties props = ctx.getBean(AppProperties.class);
+        AppProperties properties = ctx.getBean(AppProperties.class);
         // System.out.println("Приложение: " + props.getAppName() + ...);
+        System.out.println("Приложение: " + properties.getAppName() + " Port: " +
+                properties.getPort() + " Version: " + properties.getVersion());
         // ctx.close();
+        ctx.close();
     }
 }

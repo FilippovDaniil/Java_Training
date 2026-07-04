@@ -13,13 +13,22 @@ import org.springframework.stereotype.Component;
 // ============================================================
 
 // TODO: @Component
+@Component
 class ConfigReader {
 
     // TODO: внедрите Environment (@Autowired или через конструктор)
     private Environment env;
 
+    public ConfigReader(Environment env) {
+        this.env = env;
+    }
+
     public void printConfig() {
         // TODO: прочитайте app.name, app.port (Integer, дефолт 9090), app.debug (дефолт "false")
         // TODO: выведите активные профили через env.getActiveProfiles()
+        String name = env.getProperty("app.name");
+        int port = env.getProperty("app.port", Integer.class, 9090);
+        boolean debug = env.getProperty("app.debug", Boolean.class, false);
+        System.out.println("Name: " + name + "\nPort: " + port + "\nDebug: " + debug);
     }
 }

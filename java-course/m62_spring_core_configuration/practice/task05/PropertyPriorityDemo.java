@@ -12,15 +12,19 @@ import org.springframework.stereotype.Component;
 // ============================================================
 
 // TODO: @Component
+@Component
 class PropertyPriorityDemo {
 
     // TODO: @Value("${app.name}")  — должно быть "OverriddenApp"
+    @Value("${app.name}")
     private String appName;
 
     // TODO: @Value("${app.env}")   — должно быть "override"
+    @Value("${app.env}")
     private String appEnv;
 
     // TODO: @Value("${app.debug}") — должно быть "false" (только в default)
+    @Value("${app.debug}")
     private String debug;
 
     public void printProperties() {
@@ -28,5 +32,8 @@ class PropertyPriorityDemo {
         // Объясните в комментарии, почему override.properties победил над default.properties:
         // Подсказка: Spring регистрирует PropertySource-ы в порядке объявления;
         //            при поиске ключа опрашивает с конца (последний зарегистрированный = первый найденный).
+        System.out.println("AppName: " + appName);
+        System.out.println("AppEnv: " + appEnv);
+        System.out.println("AppDebug: " + debug);
     }
 }

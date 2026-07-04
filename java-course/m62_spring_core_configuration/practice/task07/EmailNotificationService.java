@@ -17,14 +17,14 @@ import java.nio.charset.StandardCharsets;
 
 class EmailNotificationService implements NotificationService {
 
-    // TODO: @Value("${mail.host}")
+    @Value("${mail.host}")
     private String host;
 
-    // TODO: @Value("${mail.port:587}")
+    @Value("${mail.port:587}")
     private int port;
 
     @Override
     public void send(String to, String message) {
-        // TODO: вывести "[EMAIL] SMTP: <host>:<port> → <to>: <message>"
+        System.out.println("[EMAIL] SMTP: " + host + ":" + port + " → " + to + ": " + message);
     }
 }

@@ -21,6 +21,6 @@ import java.nio.charset.StandardCharsets;
 class ConsoleNotificationService implements NotificationService {
     @Override
     public void send(String to, String message) {
-        // TODO: вывести "[CONSOLE] → to: <адрес>, сообщение: <текст>"
+        System.out.println("[CONSOLE] → to: " + to + ", сообщение: " + message);
     }
 }

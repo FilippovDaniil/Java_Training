@@ -15,6 +15,10 @@ import org.springframework.stereotype.Component;
 // TODO: @PropertySource("classpath:default.properties")
 // TODO: @PropertySource("classpath:override.properties")   — этот имеет БОЛЕЕ ВЫСОКИЙ приоритет
 // TODO: @ComponentScan
+@Configuration
+@ComponentScan(basePackages = "m62_spring_core_configuration.practice.task05")
+@PropertySource("file:java-course/m62_spring_core_configuration/practice/task05/resources/default.properties")
+@PropertySource("file:java-course/m62_spring_core_configuration/practice/task05/resources/override.properties")
 class MultiSourceConfig {
     // Пусто — Spring подхватит компоненты через @ComponentScan
 }

@@ -46,6 +46,7 @@ package m62_spring_core_configuration.practice.task05;
  *   app.env=override
  */
 
+
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 import org.springframework.context.annotation.ComponentScan;
@@ -57,6 +58,9 @@ public class Task05 {
 
     public static void main(String[] args) {
         // TODO: создайте контекст с MultiSourceConfig.class
+        AnnotationConfigApplicationContext ctx = new AnnotationConfigApplicationContext(MultiSourceConfig.class);
         //       получите бин PropertyPriorityDemo и вызовите printProperties()
+        PropertyPriorityDemo priorityDemo = ctx.getBean(PropertyPriorityDemo.class);
+        priorityDemo.printProperties();
     }
 }
