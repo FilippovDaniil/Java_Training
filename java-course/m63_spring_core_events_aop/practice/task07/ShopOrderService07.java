@@ -23,16 +23,17 @@ import static org.junit.jupiter.api.Assertions.*;
 // ============================================================
 
 @Service
-class ShopOrderService07 {
+public class ShopOrderService07 {
 
     private final ApplicationEventPublisher publisher;
 
+    @Autowired
     public ShopOrderService07(ApplicationEventPublisher publisher) {
         this.publisher = publisher;
     }
 
     public void placeOrder(String customerId, String product) {
-        // TODO: выведите "Оформляем заказ: товар=<product>, клиент=<customerId>"
-        // TODO: опубликуйте ShopOrderEvent07 через publisher.publishEvent(...)
+        System.out.println("Оформляем заказ: товар=" + product + ", клиент=" + customerId);
+        publisher.publishEvent(new ShopOrderEvent07(this, customerId, product));
     }
 }

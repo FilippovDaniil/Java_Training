@@ -49,7 +49,11 @@ public class Task03 {
 
     public static void main(String[] args) {
         // TODO: создайте контекст с AppConfig03
+        AnnotationConfigApplicationContext context = new AnnotationConfigApplicationContext(AppConfig03.class);
         // TODO: получите бин ProductService03 и вызовите addProduct("Ноутбук", 75000.0)
+        ProductService03 productService = context.getBean(ProductService03.class);
+        productService.addProduct("Ноутбук", 77500.00);
         // TODO: закройте контекст
+        context.close();
     }
 }

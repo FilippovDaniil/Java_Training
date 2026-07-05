@@ -21,6 +21,6 @@ import static org.junit.jupiter.api.Assertions.*;
 // ============================================================
 
 @Configuration
-@ComponentScan
+@ComponentScan(basePackages = "m63_spring_core_events_aop.practice.task06")
 @EnableAspectJAutoProxy
 class AppConfig06 { }

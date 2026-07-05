@@ -53,6 +53,7 @@ import org.aspectj.lang.annotation.Aspect;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationEventPublisher;
+import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.EnableAspectJAutoProxy;
@@ -65,13 +66,12 @@ import java.util.Arrays;
 import java.util.List;
 import static org.junit.jupiter.api.Assertions.*;
 
-class Task07 {
-
+public class Task07 {
     public static void main(String[] args) {
-        var ctx = new org.springframework.context.annotation.AnnotationConfigApplicationContext(AppConfig07.class);
-        ShopOrderService07 service = ctx.getBean(ShopOrderService07.class);
-        service.placeOrder("client-42", "Планшет");
-        service.placeOrder("client-99", "Смартфон");
-        ctx.close();
+        try (var ctx = new AnnotationConfigApplicationContext(AppConfig07.class)) {
+            ShopOrderService07 service = ctx.getBean(ShopOrderService07.class);
+            service.placeOrder("client-42", "Планшет");
+            service.placeOrder("client-99", "Смартфон");
+        }
     }
 }

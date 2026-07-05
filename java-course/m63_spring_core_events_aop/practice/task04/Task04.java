@@ -54,7 +54,11 @@ public class Task04 {
 
     public static void main(String[] args) {
         // TODO: создайте контекст с AppConfig04
+        AnnotationConfigApplicationContext context = new AnnotationConfigApplicationContext(AppConfig04.class);
         // TODO: получите бин ReportService04 и вызовите generateReport(1000)
+        ReportService04 service = context.getBean(ReportService04.class);
+        service.generateReport(1000);
         // TODO: закройте контекст
+        context.close();
     }
 }

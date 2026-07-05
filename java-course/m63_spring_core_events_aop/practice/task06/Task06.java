@@ -47,25 +47,35 @@ import java.util.ArrayList;
 import java.util.List;
 import static org.junit.jupiter.api.Assertions.*;
 
+@SpringJUnitConfig(AppConfig06.class)
+@SuppressWarnings("SpringJavaInjectionPointsAutowiringInspection")
 public class Task06 {
 
     @Autowired
-    CatalogService catalogService;
+    private CatalogService catalogService;
 
     @Autowired
-    AuditLog06 auditLog;
+    private AuditLog06 auditLog;
 
     @Test
     void addProductLogsToList() {
         // TODO: вызовите catalogService.addProduct("Мышь")
+        catalogService.addProduct("Мышь");
         // TODO: проверьте, что catalogService.getProducts().contains("Мышь")
+        catalogService.getProducts().contains("Мышь");
         // TODO: проверьте, что auditLog.getLogs() не пуст
         //       и содержит строку, включающую "addProduct"
+        auditLog.getLogs().isEmpty();
+        auditLog.getLogs().contains("addProduct");
     }
 
     @Test
     void multipleProductsAreStored() {
         // TODO: добавьте три товара
+        catalogService.addProduct("Мышь");
+        catalogService.addProduct("Ручка");
+        catalogService.addProduct("Пенал");
         // TODO: проверьте, что catalogService.getProducts().size() >= 3
+        assertTrue(catalogService.getProducts().size() >= 3);
     }
 }

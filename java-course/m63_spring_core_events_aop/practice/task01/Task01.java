@@ -35,6 +35,9 @@ public class Task01 {
 
     public static void main(String[] args) {
         // TODO: создайте AnnotationConfigApplicationContext(AppConfig01.class)
+        AnnotationConfigApplicationContext context = new AnnotationConfigApplicationContext(AppConfig01.class);
         // TODO: закройте контекст методом close()
+        StartupListener listener = context.getBean(StartupListener.class);
+        context.close();
     }
 }

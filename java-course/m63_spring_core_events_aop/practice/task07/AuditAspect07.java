@@ -23,23 +23,35 @@ import static org.junit.jupiter.api.Assertions.*;
 // ============================================================
 
 // TODO: добавьте @Aspect и @Component
-class AuditAspect07 {
+@Aspect
+@Component
+public class AuditAspect07 {
 
     private final AuditLog07 auditLog;
 
+    @Autowired
     public AuditAspect07(AuditLog07 auditLog) {
         this.auditLog = auditLog;
     }
 
-    // TODO: добавьте @Around("execution(* ShopOrderService07.*(..))")
+    @Around("execution(* ShopOrderService07.*(..))")
     public Object audit(ProceedingJoinPoint pjp) throws Throwable {
-        // TODO: вывести "[AUDIT START] <метод>(<аргументы>)"
-        // TODO: зафиксировать start
-        // TODO: вызвать pjp.proceed()
-        // TODO: вычислить мс
-        // TODO: добавить запись в auditLog: "[AUDIT END] <метод> — завершён за <мс> мс"
-        // TODO: вывести запись в консоль
-        // TODO: вернуть результат
-        return null; // заменить на реальный return
+        String methodName = pjp.getSignature().getName();
+        String args = Arrays.toString(pjp.getArgs());
+
+        // START
+        System.out.println("[AUDIT START] " + methodName + "(" + args + ")");
+        long start = System.currentTimeMillis();
+
+        // Выполнение целевого метода
+        Object result = pjp.proceed();
+
+        // END
+        long duration = System.currentTimeMillis() - start;
+        String logEntry = "[AUDIT END] " + methodName + " — завершён за " + duration + " мс";
+        auditLog.add(logEntry);
+        System.out.println(logEntry);
+
+        return result;
     }
 }

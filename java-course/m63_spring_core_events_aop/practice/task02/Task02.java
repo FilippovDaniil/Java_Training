@@ -39,7 +39,11 @@ public class Task02 {
 
     public static void main(String[] args) {
         // TODO: создайте контекст с AppConfig02
+        AnnotationConfigApplicationContext context = new AnnotationConfigApplicationContext(AppConfig02.class);
         // TODO: получите бин OrderService02 и вызовите createOrder("ORD-001")
+        OrderService02 orderService = context.getBean(OrderService02.class);
+        orderService.createOrder("ORD-001");
         // TODO: закройте контекст
+        context.close();
     }
 }

@@ -23,15 +23,19 @@ import static org.junit.jupiter.api.Assertions.*;
 // ============================================================
 
 @Component
-class EmailNotifier07 {
+public class EmailNotifier07 {
+
     private final List<String> notifications = new ArrayList<>();
 
-    // TODO: добавьте @EventListener
+    @EventListener
     public void onOrder(ShopOrderEvent07 event) {
-        // TODO: сформируйте строку "[EMAIL] Клиенту <customerId>: ваш заказ на <product> принят."
-        // TODO: добавьте строку в notifications
-        // TODO: выведите строку в консоль
+        String notification = "[EMAIL] Клиенту " + event.getCustomerId() +
+                ": ваш заказ на " + event.getProduct() + " принят.";
+        notifications.add(notification);
+        System.out.println(notification);
     }
 
-    public List<String> getNotifications() { return notifications; }
+    public List<String> getNotifications() {
+        return notifications;
+    }
 }

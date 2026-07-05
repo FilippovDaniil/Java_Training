@@ -15,10 +15,14 @@ import org.springframework.stereotype.Service;
 // ============================================================
 
 // TODO: добавьте @Aspect и @Component
+@Aspect
+@Component
 class ExceptionLoggingAspect05 {
 
     // TODO: добавьте @AfterThrowing(pointcut = "...", throwing = "ex")
+    @AfterThrowing(pointcut = "execution(* PaymentService05.*(..))", throwing = "ex")
     public void logException(JoinPoint joinPoint, Exception ex) {
-        // TODO: выведите "[ERROR] Исключение в <метод>: <сообщение>"
+        System.out.println("[ERROR] Исключение в "
+                           + joinPoint.getSignature().getName() + ": " + ex.getMessage());
     }
 }

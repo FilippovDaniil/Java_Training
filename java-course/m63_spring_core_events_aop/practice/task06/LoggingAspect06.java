@@ -22,7 +22,7 @@ import static org.junit.jupiter.api.Assertions.*;
 
 @Aspect
 @Component
-class LoggingAspect06 {
+public class LoggingAspect06 {
 
     private final AuditLog06 auditLog;
 

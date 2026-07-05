@@ -18,4 +18,5 @@ import java.util.Arrays;
 @Configuration
 @ComponentScan
 // TODO: добавьте @EnableAspectJAutoProxy
+@EnableAspectJAutoProxy
 class AppConfig03 { }

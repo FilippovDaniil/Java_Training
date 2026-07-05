@@ -25,5 +25,6 @@ class OrderService02 {
     public void createOrder(String orderId) {
         System.out.println("Создаём заказ: " + orderId);
         // TODO: опубликуйте OrderCreatedEvent через publisher.publishEvent(...)
+        publisher.publishEvent(new OrderCreatedEvent(this,orderId));
     }
 }

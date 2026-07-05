@@ -17,10 +17,15 @@ import java.util.Arrays;
 
 // TODO: добавьте @Aspect
 // TODO: добавьте @Component
+@Aspect
+@Component
 class LoggingAspect03 {
 
     // TODO: добавьте @Before с нужным pointcut-выражением
+    @Before("execution(public * ProductService03.*(..))")
     public void logBefore(JoinPoint joinPoint) {
         // TODO: выведите "[LOG] Вызов: <метод>, аргументы: <аргументы>"
+        System.out.println("[LOG] Вызов: <" + joinPoint.getSignature().getName() + ">, аргументы: "
+        + Arrays.toString(joinPoint.getArgs()));
     }
 }

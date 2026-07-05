@@ -23,22 +23,29 @@ import static org.junit.jupiter.api.Assertions.*;
 // ============================================================
 
 @SpringJUnitConfig(AppConfig07.class)
+@SuppressWarnings("SpringJavaInjectionPointsAutowiringInspection")
 class Task07Test {
 
     @Autowired
-    ShopOrderService07 shopOrderService;
+    private ShopOrderService07 shopOrderService;
 
     @Autowired
-    AuditLog07 auditLog07;
+    private AuditLog07 auditLog07;
 
     @Autowired
-    EmailNotifier07 notifier;
+    private EmailNotifier07 notifier;
 
     @Test
     void placeOrderTriggersAuditAndNotification() {
-        // TODO: вызовите shopOrderService.placeOrder("client-42", "Планшет")
-        // TODO: проверьте, что auditLog07.getLogs() не пуст
-        // TODO: проверьте, что notifier.getNotifications() не пуст
-        // TODO: проверьте, что notifier.getNotifications().get(0) содержит "client-42"
+        shopOrderService.placeOrder("client-42", "Планшет");
+
+        // Проверка аудит-лога
+        assertFalse(auditLog07.getLogs().isEmpty(), "Аудитный лог не должен быть пустым");
+        assertTrue(auditLog07.getLogs().get(0).contains("placeOrder"), "Лог должен содержать 'placeOrder'");
+
+        // Проверка уведомлений
+        assertFalse(notifier.getNotifications().isEmpty(), "Уведомления не должны быть пустыми");
+        assertTrue(notifier.getNotifications().get(0).contains("client-42"),
+                "Уведомление должно содержать ID клиента 'client-42'");
     }
 }

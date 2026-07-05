@@ -16,7 +16,9 @@ import org.springframework.stereotype.Service;
 class OrderCreatedListener {
 
     // TODO: добавьте @EventListener
+    @EventListener
     public void onOrderCreated(OrderCreatedEvent event) {
         // TODO: выведите "Уведомление: заказ <orderId> создан!"
+        System.out.println("Уведомление: заказ <" + event.getOrderId() + "> создан!");
     }
 }

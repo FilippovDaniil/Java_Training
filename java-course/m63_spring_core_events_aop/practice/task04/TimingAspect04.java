@@ -15,15 +15,17 @@ import org.springframework.stereotype.Service;
 // ============================================================
 
 // TODO: добавьте @Aspect и @Component
+@Aspect
+@Component
 class TimingAspect04 {
 
     // TODO: добавьте @Around с pointcut на все методы ReportService04
+    @Around("execution(* ReportService04.*(..))")
     public Object measureTime(ProceedingJoinPoint pjp) throws Throwable {
-        // TODO: зафиксируйте start = System.nanoTime()
-        // TODO: вызовите pjp.proceed() и сохраните результат
-        // TODO: вычислите время в мс
-        // TODO: выведите "[TIMING] <метод> выполнился за <мс> мс"
-        // TODO: верните результат proceed()
-        return null; // заменить на реальный return
+        long start = System.nanoTime();
+        Object result = pjp.proceed();
+        long ms = (System.nanoTime() - start) / 1_000_000;
+        System.out.println("[TIMING] " + pjp.getSignature().getName() + " выполнился за " + ms + " мс");
+        return result;
     }
 }

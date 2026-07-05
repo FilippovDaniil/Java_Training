@@ -56,9 +56,13 @@ public class Task05 {
 
     public static void main(String[] args) {
         // TODO: создайте контекст с AppConfig05
+        AnnotationConfigApplicationContext context = new AnnotationConfigApplicationContext(AppConfig05.class);
         // TODO: получите бин PaymentService05
+        PaymentService05 service = context.getBean(PaymentService05.class);
         // TODO: вызовите processPayment("4111-1111-1111-1111", -500.0) в try/catch
         //       — аспект залогирует ошибку, исключение всё равно пробросится
+        service.processPayment("4111-1111-1111-1111", -500.0);
         // TODO: закройте контекст
+        context.close();
     }
 }

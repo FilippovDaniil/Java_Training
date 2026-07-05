@@ -16,10 +16,16 @@ import org.springframework.stereotype.Component;
 class StartupListener {
 
     // TODO: добавьте @EventListener
+    @EventListener
     public void onRefresh(ContextRefreshedEvent event) {
         // TODO: выведите "Контекст поднят! Приложение готово к работе."
+        System.out.println("Контекст поднят! Приложение готово к работе.");
     }
 
     // TODO: добавьте второй метод — слушатель ContextClosedEvent
     // Выведите "Контекст закрыт."
+    @EventListener
+    public void onClose(ContextClosedEvent event){
+        System.out.println("Контекст закрыт.");
+    }
 }

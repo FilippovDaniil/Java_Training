@@ -21,7 +21,7 @@ import static org.junit.jupiter.api.Assertions.*;
 // ============================================================
 
 @Component
-class AuditLog06 {
+public class AuditLog06 {
     private final List<String> logs = new ArrayList<>();
 
     public void add(String entry) { logs.add(entry); }
