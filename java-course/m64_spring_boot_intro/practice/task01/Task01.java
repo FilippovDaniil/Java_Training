@@ -1,4 +1,4 @@
-package m64_spring_boot_intro.practice;
+package m64_spring_boot_intro.practice.task01;
 
 /**
  * Задача 01 — Модуль 64: Минимальное Spring Boot приложение
@@ -28,9 +28,12 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 // TODO: добавьте @SpringBootApplication
+@SpringBootApplication
 public class Task01 {
 
     public static void main(String[] args) {
         // TODO: SpringApplication.run(Task01.class, args);
+        SpringApplication.run(Task01.class, args);
+        System.out.println("Start of task 1");
     }
 }
