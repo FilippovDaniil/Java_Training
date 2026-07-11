@@ -15,7 +15,16 @@ import org.springframework.web.bind.annotation.RestController;
 
 // TODO: разметьте поля аннотациями валидации
 record CreateUserDto(
-        /* TODO: @NotBlank @Size(min = 2, max = 50) */ String name,
-        /* TODO: @NotBlank @Email */ String email,
-        /* TODO: @Min(18) @Max(120) */ int age
+        /* TODO: @NotBlank @Size(min = 2, max = 50) */
+        @NotBlank
+        @Size(min = 2, max = 50)
+        String name,
+        /* TODO: @NotBlank @Email */
+        @NotBlank
+        @Email
+        String email,
+        /* TODO: @Min(18) @Max(120) */
+        @Min(18)
+        @Max(120)
+        int age
 ) {}

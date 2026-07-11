@@ -8,11 +8,14 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 // TODO: @RestController + @RequestMapping("/api/products")
+@RequestMapping("/api/products")
+@RestController
 class CatalogController01 {
 
     // TODO: @GetMapping("/{id}")
-    public ProductDto getOne(/* TODO: @PathVariable */ Long id) {
+    @GetMapping("/{id}")
+    public ProductDto getOne(/* TODO: @PathVariable */ @PathVariable("id") Long id) {
         // TODO: верните new ProductDto(id, "Демо-товар", 9990)
-        return null;
+        return new ProductDto(id, "Демо-товар", 9990);
     }
 }

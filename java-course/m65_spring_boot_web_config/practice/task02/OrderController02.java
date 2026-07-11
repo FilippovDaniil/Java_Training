@@ -10,12 +10,16 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 // TODO: @RestController + @RequestMapping("/api/orders")
+@RequestMapping("/api/orders")
+@RestController
 class OrderController02 {
 
     // TODO: @PostMapping
-    public ResponseEntity<OrderDto> create(/* TODO: @RequestBody */ OrderDto dto) {
+    @PostMapping
+    public ResponseEntity<OrderDto> create(/* TODO: @RequestBody */ @RequestBody OrderDto dto) {
         // TODO: создайте OrderDto с id=100 (продукт и количество — из dto)
+        OrderDto saved = new OrderDto(dto.id(),dto.product(),dto.quantity());
         // TODO: верните ResponseEntity.status(HttpStatus.CREATED).body(saved)
-        return null;
+        return ResponseEntity.status(HttpStatus.CREATED).body(saved);
     }
 }

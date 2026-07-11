@@ -14,11 +14,14 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 // TODO: @RestController + @RequestMapping("/api/users")
+@RequestMapping("/api/users")
+@RestController
 class RegistrationController04 {
 
     // TODO: @PostMapping
-    public String register(/* TODO: @Valid @RequestBody */ CreateUserDto dto) {
+    @PostMapping
+    public String register(/* TODO: @Valid @RequestBody */ @Valid @RequestBody CreateUserDto dto) {
         // TODO: верните "Пользователь " + dto.name() + " зарегистрирован"
-        return null;
+        return "Пользователь " + dto.name() + " зарегистрирован.";
     }
 }
