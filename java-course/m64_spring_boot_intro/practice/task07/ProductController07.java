@@ -1,5 +1,6 @@
 package m64_spring_boot_intro.practice.task07;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -17,23 +18,34 @@ import java.util.List;
 // ============================================================
 
 // TODO: добавьте @RestController
+@RestController
 class ProductController07 {
 
     // TODO: внедрите ProductService07 через конструктор
+    private final ProductService07 service;
+
+    @Autowired
+    public ProductController07(ProductService07 service) {
+        this.service = service;
+    }
 
     // TODO: @GetMapping("/products")
+    @GetMapping("/products")
     public List<String> all() {
-        return null;
+        return service.findAll();
     }
 
     // TODO: @GetMapping("/products/count")
+    @GetMapping("/products/count")
     public int count() {
-        return 0;
+        return service.count();
     }
 
     // TODO: @PostMapping("/products")
-    public String add(/* TODO: @RequestParam */ String name) {
+    @PostMapping("/products")
+    public String add(/* TODO: @RequestParam */ @RequestParam("name") String name) {
         // TODO: добавьте товар и верните его имя
-        return null;
+        service.add(name);
+        return name;
     }
 }

@@ -25,10 +25,13 @@ package m64_spring_boot_intro.practice.task04;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.context.annotation.PropertySource;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RestController;
 
+@SpringBootApplication
+@PropertySource("file:./java-course/m64_spring_boot_intro/practice/task04/application.properties")
 public class Task04 {
     public static void main(String[] args) {
         SpringApplication.run(Task04.class, args);

@@ -8,14 +8,18 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.stereotype.Component;
 
 // TODO: добавьте @Component
+@Component
 class ConfigRunner03 implements ApplicationRunner {
 
     // TODO: @Value("${shop.welcome-message}")
+    @Value("${shop.welcome-message}")
     private String welcomeMessage;
 
     @Override
     public void run(ApplicationArguments args) {
         // TODO: выведите welcomeMessage
+        System.out.println(welcomeMessage);
         // TODO: выведите "Опций передано: " + args.getOptionNames().size()
+        System.out.println("Операций передано: " + args.getOptionNames().size());
     }
 }

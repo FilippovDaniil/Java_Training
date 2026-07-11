@@ -27,8 +27,11 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.context.annotation.PropertySource;
 import org.springframework.stereotype.Component;
 
+@SpringBootApplication
+@PropertySource("file:./java-course/m64_spring_boot_intro/practice/task05/application.properties")
 public class Task05 {
     public static void main(String[] args) {
         SpringApplication.run(Task05.class, args);

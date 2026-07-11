@@ -1,5 +1,6 @@
 package m64_spring_boot_intro.practice.task07;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -17,13 +18,24 @@ import java.util.List;
 // ============================================================
 
 // TODO: добавьте @Component
+@Component
 class SeedRunner07 implements CommandLineRunner {
 
     // TODO: внедрите ProductService07 через конструктор
+    private final ProductService07 service;
+
+    @Autowired
+    public SeedRunner07(ProductService07 service) {
+        this.service = service;
+    }
 
     @Override
     public void run(String... args) {
         // TODO: добавьте "Ноутбук", "Мышь", "Клавиатура"
+        service.add("Ноутбук");
+        service.add("Мышь");
+        service.add("Клавиатура");
         // TODO: выведите "Засеяно товаров: " + service.count()
+        System.out.println("Внесено товаров: " + service.count());
     }
 }

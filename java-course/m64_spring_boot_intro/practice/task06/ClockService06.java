@@ -8,9 +8,10 @@ import org.springframework.stereotype.Service;
 import java.time.LocalTime;
 
 // TODO: добавьте @Service
+@Service
 class ClockService06 {
     public String now() {
         // TODO: верните LocalTime.now().toString()
-        return null;
+        return LocalTime.now().toString();
     }
 }

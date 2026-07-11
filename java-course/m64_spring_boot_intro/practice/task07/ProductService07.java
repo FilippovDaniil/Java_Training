@@ -17,20 +17,23 @@ import java.util.List;
 // ============================================================
 
 // TODO: добавьте @Service
+@Service
 class ProductService07 {
+
     private final List<String> products = new ArrayList<>();
 
     public void add(String name) {
         // TODO: добавьте name в products
+        products.add(name);
     }
 
     public List<String> findAll() {
         // TODO: верните products
-        return null;
+        return products;
     }
 
     public int count() {
         // TODO: верните размер списка
-        return 0;
+        return products.size();
     }
 }

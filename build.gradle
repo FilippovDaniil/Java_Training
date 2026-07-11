@@ -32,6 +32,10 @@ sourceSets {
             srcDir 'algorithms-course'
             exclude 'module-*/**'   // un-migrated (hyphenated) modules: ignored until renamed
         }
+        resources {
+            srcDir 'resources'  // ← ДОБАВЬТЕ ЭТУ СТРОКУ
+            srcDir 'java-course'
+        }
     }
 }
 

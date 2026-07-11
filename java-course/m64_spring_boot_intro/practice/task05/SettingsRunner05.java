@@ -7,16 +7,20 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.stereotype.Component;
 
 // TODO: добавьте @Component
+@Component
 class SettingsRunner05 implements CommandLineRunner {
 
     // TODO: @Value("${shop.currency}")
+    @Value("${shop.currency}")
     private String currency;
 
     // TODO: @Value("${shop.tax-rate}")
+    @Value("${shop.tax-rate}")
     private int taxRate;
 
     @Override
     public void run(String... args) {
         // TODO: выведите "Валюта: " + currency + ", налог: " + taxRate + "%"
+        System.out.println("Валюта: " + currency + ", налог: " + taxRate + "%");
     }
 }

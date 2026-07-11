@@ -7,17 +7,20 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RestController;
 
 // TODO: добавьте @RestController
+@RestController
 class GreetingController04 {
 
     // TODO: @GetMapping("/hello")
+    @GetMapping("/hello")
     public String hello() {
         // TODO: верните "Привет от Spring Boot!"
-        return null;
+        return "Привет от Spring Boot!";
     }
 
     // TODO: @GetMapping("/greet/{name}")
-    public String greet(/* TODO: @PathVariable */ String name) {
+    @GetMapping("/greet/{name}")
+    public String greet(/* TODO: @PathVariable */ @PathVariable("name") String name) {
         // TODO: верните "Привет, " + name + "!"
-        return null;
+        return "Привет, " + name + "!";
     }
 }
