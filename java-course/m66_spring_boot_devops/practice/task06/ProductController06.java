@@ -3,7 +3,6 @@ package m66_spring_boot_devops.practice.task06;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
-import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.stereotype.Service;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -18,12 +17,12 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 // Контроллер (готов)
 @RestController
 @RequestMapping("/api/products")
-class ProductController06 {
+public class ProductController06 {
     private final ProductService06 service;
-    ProductController06(ProductService06 service) { this.service = service; }
+    public ProductController06(ProductService06 service) { this.service = service; }
 
     @GetMapping("/{id}")
-    public ProductView06 one(@PathVariable Long id) {
+    public ProductView06 one(@PathVariable("id") Long id) {
         return new ProductView06(id, service.getName(id));
     }
 }

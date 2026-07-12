@@ -25,16 +25,27 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 // ЧАСТЬ B — HealthIndicator (каркас)
 // ============================================================
 
-// TODO: @Component
+@Component
 class QueueHealthIndicator07 implements HealthIndicator {
     private final StatusService07 service;
-    QueueHealthIndicator07(StatusService07 service) { this.service = service; }
+
+    QueueHealthIndicator07(StatusService07 service) {
+        this.service = service;
+    }
 
     @Override
     public Health health() {
         int size = service.queueSize();
         // TODO: size < 100 → Health.up().withDetail("queue", size).build()
         // TODO: иначе      → Health.down().withDetail("queue", size).build()
-        return null;
+        if (size < 100) {
+            return Health.up()
+                    .withDetail("queue", size)
+                    .build();
+        } else {
+            return Health.down()
+                    .withDetail("queue", size)
+                    .build();
+        }
     }
 }

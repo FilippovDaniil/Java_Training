@@ -33,6 +33,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
 
+@SpringBootApplication
 public class Task01 {
     public static void main(String[] args) {
         SpringApplication.run(Task01.class, args);

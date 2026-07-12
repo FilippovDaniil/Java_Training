@@ -29,11 +29,14 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 @RequestMapping("/api/status")
 class StatusController07 {
     private final StatusService07 service;
-    StatusController07(StatusService07 service) { this.service = service; }
+
+    StatusController07(StatusService07 service) {
+        this.service = service;
+    }
 
     @GetMapping("/ping")
     public String ping() {
         // TODO: верните service.ping()
-        return null;
+        return service.ping();
     }
 }

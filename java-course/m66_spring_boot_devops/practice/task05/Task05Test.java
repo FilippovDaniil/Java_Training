@@ -33,22 +33,29 @@ import org.springframework.stereotype.Service;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 // TODO: @SpringBootTest
+@SpringBootTest(classes = Task05.class)
 class Task05Test {
 
     // TODO: @Autowired DiscountService05 discountService;
 
+    @Autowired
+    private DiscountService05 discountService;
+
     @Test
     void discount20() {
         // TODO: assertEquals(800, discountService.applyDiscount(1000, 20))
+        assertEquals(800, discountService.applyDiscount(1000, 20));
     }
 
     @Test
     void discountZero() {
         // TODO: assertEquals(1000, discountService.applyDiscount(1000, 0))
+        assertEquals(1000, discountService.applyDiscount(1000, 0));
     }
 
     @Test
     void discountFull() {
         // TODO: assertEquals(0, discountService.applyDiscount(1000, 100))
+        assertEquals(0, discountService.applyDiscount(1000, 100));
     }
 }

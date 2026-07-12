@@ -27,11 +27,14 @@ package m66_spring_boot_devops.practice.task06;
  *   import static org.mockito.Mockito.when;
  */
 
+import m66_spring_boot_devops.practice.task05.Task05;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
+import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.stereotype.Service;
+import org.springframework.test.context.bean.override.mockito.MockitoBean;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -43,15 +46,22 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 // TODO: @WebMvcTest(ProductController06.class)
+@WebMvcTest(ProductController06.class)
 class ProductControllerTest06 {
 
     // TODO: @Autowired MockMvc mockMvc;
+    @Autowired MockMvc mockMvc;
     // TODO: @MockBean ProductService06 service;
+    @MockitoBean
+    ProductService06 service;
 
     @Test
     void returnsProduct() throws Exception {
         // TODO: when(service.getName(1L)).thenReturn("Мышь");
+        when(service.getName(1L)).thenReturn("Мышь");
         // TODO: mockMvc.perform(get("/api/products/1"))
+        mockMvc.perform(get("/api/products/1")).andExpect(status().isOk()).
+                andExpect(jsonPath("$.name").value("Мышь"));
         //              .andExpect(status().isOk())
         //              .andExpect(jsonPath("$.name").value("Мышь"));
     }

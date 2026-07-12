@@ -12,6 +12,7 @@ import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
+import org.springframework.test.context.bean.override.mockito.MockitoBean;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -25,17 +26,27 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 // ЧАСТЬ E — Slice-тест (каркас)
 // ============================================================
 
-// TODO: @WebMvcTest(StatusController07.class)
+@WebMvcTest(StatusController07.class)
 class StatusControllerTest07 {
 
     // TODO: @Autowired MockMvc mockMvc;
+    @Autowired
+    private MockMvc mockMvc;
+
     // TODO: @MockBean StatusService07 service;
+    @MockitoBean
+    private StatusService07 service;
 
     @Test
     void pingReturnsPong() throws Exception {
         // TODO: when(service.ping()).thenReturn("pong");
+        when(service.ping()).thenReturn("pong");
+
         // TODO: mockMvc.perform(get("/api/status/ping"))
         //              .andExpect(status().isOk())
         //              .andExpect(content().string("pong"));
+        mockMvc.perform(get("/api/status/ping"))
+                .andExpect(status().isOk())
+                .andExpect(content().string("pong"));
     }
 }

@@ -28,10 +28,12 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 @Service
 class StatusService07 {
     // TODO: объявите логгер LoggerFactory.getLogger(StatusService07.class)
+    private static final Logger log = LoggerFactory.getLogger(StatusService07.class);
 
     public String ping() {
         // TODO: log.info("ping получен"); вернуть "pong"
-        return null;
+        log.info("ping получен");
+        return "pong";
     }
 
     public int queueSize() {

@@ -1,4 +1,4 @@
-package m66_spring_boot_devops.practice;
+package m66_spring_boot_devops.practice.task02;
 
 /**
  * Задача 02 — Модуль 66: Actuator — /health и /info
