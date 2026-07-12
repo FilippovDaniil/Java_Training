@@ -19,15 +19,28 @@ import java.util.concurrent.ConcurrentHashMap;
 // ============================================================
 
 // TODO: @RestControllerAdvice
+@RestControllerAdvice
 class NoteExceptionHandler07 {
 
     // TODO: @ExceptionHandler(MethodArgumentNotValidException.class) → 400 + { status, error, fields }
+    @ExceptionHandler(MethodArgumentNotValidException.class)
     public ResponseEntity<Map<String, Object>> handleValidation(MethodArgumentNotValidException ex) {
-        return null;
+        Map<String, String> fields = new HashMap<>();
+        ex.getBindingResult().getFieldErrors()
+                .forEach(e -> fields.put(e.getField(), e.getDefaultMessage()));
+
+        Map<String, Object> body = Map.of(
+                "status", 400,
+                "error", "Validation Failed",
+                "fields", fields
+        );
+        return ResponseEntity.badRequest().body(body);
     }
 
     // TODO: @ExceptionHandler(NoSuchElementException.class) → 404 + { status, error }
+    @ExceptionHandler(NoSuchElementException.class)
     public ResponseEntity<Map<String, Object>> handleNotFound(NoSuchElementException ex) {
-        return null;
+        return ResponseEntity.status(HttpStatus.NOT_FOUND)
+                .body(Map.of("status", 404, "error", ex.getMessage()));
     }
 }

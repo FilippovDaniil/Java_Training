@@ -15,8 +15,11 @@ import java.util.NoSuchElementException;
 class LookupController05 {
 
     @GetMapping("/{id}")
-    public String find(@PathVariable Long id) {
+    public String find(@PathVariable("id") Long id) {
         // TODO: если id <= 0 — бросьте new NoSuchElementException("Товар не найден: " + id)
+        if (id <= 0){
+            throw new NoSuchElementException("Товар не найден: " + id);
+        }
         return "Товар " + id;
     }
 }

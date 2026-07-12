@@ -15,4 +15,7 @@ import java.util.concurrent.atomic.AtomicLong;
 import java.util.concurrent.ConcurrentHashMap;
 
 // TODO: @NotBlank @Size(max = 280) на поле text
-record CreateNoteDto(/* TODO: валидация */ String text) {}
+record CreateNoteDto(/* TODO: валидация */
+        @NotBlank @Size(max = 280)
+        String text)
+{}

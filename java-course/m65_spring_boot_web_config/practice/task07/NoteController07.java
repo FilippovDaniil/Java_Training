@@ -3,6 +3,7 @@ package m65_spring_boot_web_config.practice.task07;
 import jakarta.validation.Valid;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Size;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.http.HttpStatus;
@@ -19,33 +20,54 @@ import java.util.concurrent.ConcurrentHashMap;
 // ============================================================
 
 // TODO: @RestController + @RequestMapping("/api/notes")
+@RestController
+@RequestMapping("/api/notes")
 class NoteController07 {
 
     // TODO: внедрите NoteService07 через конструктор
+    private final NoteService07 service;
+
+    @Autowired
+    public NoteController07(NoteService07 service) {
+        this.service = service;
+    }
 
     // TODO: @PostMapping → 201 Created + тело
-    public ResponseEntity<Note> create(/* @Valid @RequestBody */ CreateNoteDto dto) {
-        return null;
+    @PostMapping
+    public ResponseEntity<Note> create(/* @Valid @RequestBody */ @Valid @RequestBody CreateNoteDto dto) {
+        Note saved = service.create(dto.text());
+        return ResponseEntity.status(HttpStatus.CREATED).body(saved);
     }
 
     // TODO: @GetMapping → 200 + список
+    @GetMapping
     public List<Note> all() {
-        return null;
+        return service.findAll();
     }
 
     // TODO: @GetMapping("/{id}") → 200 либо 404
-    public ResponseEntity<Note> one(/* @PathVariable */ Long id) {
+    @GetMapping("/{id}")
+    public ResponseEntity<Note> one(/* @PathVariable */ @PathVariable("id") Long id) {
         // TODO: service.findById(id).map(ResponseEntity::ok).orElse(ResponseEntity.notFound().build())
-        return null;
+        return service.findById(id)
+                .map(ResponseEntity::ok)                                // 200
+                .orElse(ResponseEntity.notFound().build());             // 404
     }
 
     // TODO: @PutMapping("/{id}") → 200 + обновлённая
-    public Note update(/* @PathVariable */ Long id, /* @Valid @RequestBody */ CreateNoteDto dto) {
-        return null;
+    @PutMapping("/{id}")
+    public Note update(/* @PathVariable */@PathVariable("id") Long id, /* @Valid @RequestBody */ @Valid @RequestBody CreateNoteDto dto) {
+        return service.update(id,dto.text());
     }
 
     // TODO: @DeleteMapping("/{id}") → 204 No Content
-    public ResponseEntity<Void> delete(/* @PathVariable */ Long id) {
-        return null;
+    @DeleteMapping("/{id}")
+    public ResponseEntity<Void> delete(/* @PathVariable */ @PathVariable("id") Long id) {
+        try {
+            service.delete(id);
+            return ResponseEntity.noContent().build();    // 204
+        } catch (Exception e) {
+            return ResponseEntity.notFound().build();     // 404
+        }
     }
 }

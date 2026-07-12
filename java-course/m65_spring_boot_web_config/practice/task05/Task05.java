@@ -35,6 +35,7 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.NoSuchElementException;
 
+@SpringBootApplication
 public class Task05 {
     public static void main(String[] args) {
         SpringApplication.run(Task05.class, args);
