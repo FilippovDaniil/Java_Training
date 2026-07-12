@@ -5,25 +5,31 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.web.bind.annotation.*;
 
 // TODO: @RestController + @RequestMapping("/api/tasks")
+@RestController
+@RequestMapping("/api/tasks")
 class TaskRestController01 {
 
     // TODO: @GetMapping → "список задач"   (правило: ___)
+    @GetMapping
     public String list() {
-        return null;
+        return "список задач";
     }
 
     // TODO: @GetMapping("/{id}") → "задача " + id   (правило: ___)
-    public String getOne(/* @PathVariable */ Long id) {
-        return null;
+    @GetMapping("/{id}")
+    public String getOne(/* @PathVariable */ @PathVariable("id") Long id) {
+        return "задача " + id;
     }
 
     // TODO: @PostMapping → "создана"   (правило: ___)
+    @PostMapping
     public String create() {
-        return null;
+        return "создана";
     }
 
     // TODO: @DeleteMapping("/{id}") → "удалена " + id   (правило: ___)
-    public String delete(/* @PathVariable */ Long id) {
-        return null;
+    @DeleteMapping("/{id}")
+    public String delete(/* @PathVariable */ @PathVariable("id") Long id) {
+        return "удалена " + id;
     }
 }

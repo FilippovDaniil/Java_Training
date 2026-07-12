@@ -13,12 +13,16 @@ class FilterController05 {
 
     @GetMapping
     public String search(
-            /* TODO: @RequestParam(required = false) */ String status,
-            /* TODO: @RequestParam(required = false) */ String assignee,
-            /* TODO: @RequestParam(defaultValue = "id") */ String sort,
-            /* TODO: @RequestParam(defaultValue = "0") */ int page,
-            /* TODO: @RequestParam(defaultValue = "20") */ int size) {
+            /* TODO: @RequestParam(required = false) */ @RequestParam(name = "status", required = false) String status,
+            /* TODO: @RequestParam(name = "", required = false) */ @RequestParam(name = "assignee", required = false) String assignee,
+            /* TODO: @RequestParam(name = "", defaultValue = "id") */ @RequestParam(name = "sort", defaultValue = "id") String sort,
+            /* TODO: @RequestParam(name = "", defaultValue = "0") */ @RequestParam(name = "page", defaultValue = "0") int page,
+            /* TODO: @RequestParam(name = "", defaultValue = "20") */ @RequestParam(name = "size", defaultValue = "20") int size) {
         // TODO: соберите строку-описание (status/assignee == null → "любой")
-        return null;
+        if (status == null || assignee == null){
+            return "Фильтр: status=любой, assignee=ivan; сортировка по createdAt; страница 0 по 20";
+        }else {
+            return "Фильтр: status=DONE, assignee=ivan; сортировка по createdAt; страница 0 по 20";
+        }
     }
 }

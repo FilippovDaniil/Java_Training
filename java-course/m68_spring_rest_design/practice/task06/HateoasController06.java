@@ -14,7 +14,19 @@ class HateoasController06 {
 
     @GetMapping("/{id}")
     public Map<String, Object> getOne(@PathVariable Long id) {
-        // TODO: соберите Map с id, title, status и вложенной "_links"
-        return null;
+        // Создаем ссылки
+        Map<String, String> links = Map.of(
+                "self", "/api/tasks/" + id,
+                "complete", "/api/tasks/" + id,
+                "delete", "/api/tasks/" + id
+        );
+
+        // Собираем ответ
+        return Map.of(
+                "id", id,
+                "title", "Купить кофе",
+                "status", "NEW",
+                "_links", links
+        );
     }
 }

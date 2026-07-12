@@ -8,17 +8,20 @@ import org.springframework.web.bind.annotation.*;
 class NestedController04 {
 
     // TODO: @GetMapping("/api/projects/{projectId}/tasks")
-    public String projectTasks(@PathVariable Long projectId) {
-        return null;
+    @GetMapping("/api/projects/{projectId}/tasks")
+    public String projectTasks(@PathVariable("projectId") Long projectId) {
+        return "Получить задачи проекта: " + projectId;
     }
 
     // TODO: @PostMapping("/api/projects/{projectId}/tasks")
-    public String createInProject(@PathVariable Long projectId) {
-        return null;
+    @PostMapping("/api/projects/{projectId}/tasks")
+    public String createInProject(@PathVariable("projectId") Long projectId) {
+        return "Создать задачу проекта: " + projectId;
     }
 
     // TODO: @GetMapping("/api/tasks/{taskId}/comments")
-    public String taskComments(@PathVariable Long taskId) {
-        return null;
+    @GetMapping("/api/tasks/{taskId}/comments")
+    public String taskComments(@PathVariable("taskId") Long taskId) {
+        return "Получить комментарии по задаче: " + taskId;
     }
 }

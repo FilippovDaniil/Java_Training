@@ -11,29 +11,34 @@ class CollectionController02 {
     // --- Коллекция /api/tasks ---
 
     // TODO: @GetMapping → "все задачи"
+    @GetMapping
     public String all() {
-        return null;
+        return "все задачи";
     }
 
     // TODO: @PostMapping → "создать задачу в коллекции"
+    @PostMapping
     public String create() {
-        return null;
+        return "создать задачу в коллекции";
     }
 
     // --- Элемент /api/tasks/{id} ---
 
     // TODO: @GetMapping("/{id}") → "задача " + id
-    public String one(@PathVariable Long id) {
-        return null;
+    @GetMapping("/{id}")
+    public String one(@PathVariable("id") Long id) {
+        return "задача " + id;
     }
 
     // TODO: @PutMapping("/{id}") → "заменить задачу " + id
-    public String replace(@PathVariable Long id) {
-        return null;
+    @PutMapping("/{id}")
+    public String replace(@PathVariable("id") Long id) {
+        return "заменить задачу " + id;
     }
 
     // TODO: @DeleteMapping("/{id}") → "удалить задачу " + id
-    public String delete(@PathVariable Long id) {
-        return null;
+    @DeleteMapping("/{id}")
+    public String delete(@PathVariable("id") Long id) {
+        return "удалить задачу " + id;
     }
 }
