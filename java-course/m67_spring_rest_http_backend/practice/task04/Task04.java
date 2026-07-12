@@ -29,6 +29,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+@SpringBootApplication
 public class Task04 {
     public static void main(String[] args) {
         SpringApplication.run(Task04.class, args);

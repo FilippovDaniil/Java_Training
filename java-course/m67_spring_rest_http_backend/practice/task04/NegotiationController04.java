@@ -9,14 +9,16 @@ import org.springframework.web.bind.annotation.RestController;
 class NegotiationController04 {
 
     // TODO: @GetMapping(value = "/api/task", produces = "application/json")
+    @GetMapping(value = "/api/task", produces = "application/json")
     public TaskInfo04 asJson() {
         // TODO: верните new TaskInfo04("Купить кофе", "NEW")
-        return null;
+        return new TaskInfo04("Купить кофе", "NEW");
     }
 
     // TODO: @GetMapping(value = "/api/task", produces = "text/plain")
+    @GetMapping(value = "/api/task", produces = "text/plain")
     public String asText() {
         // TODO: верните "Задача: Купить кофе [NEW]"
-        return null;
+        return "Задача: Купить кофе [NEW]";
     }
 }

@@ -31,6 +31,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+@SpringBootApplication
 public class Task06 {
     public static void main(String[] args) {
         SpringApplication.run(Task06.class, args);

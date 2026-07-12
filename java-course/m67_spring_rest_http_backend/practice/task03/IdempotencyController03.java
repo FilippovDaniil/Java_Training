@@ -14,12 +14,14 @@ class IdempotencyController03 {
     @PostMapping("/api/counter")
     public int addViaPost() {
         // TODO: увеличьте createdCount и верните новое значение (НЕ идемпотентно)
-        return 0;
+        long id = createdCount.getAndIncrement();
+        return (int) id;
     }
 
     @PutMapping("/api/status")
-    public String setViaPut(/* TODO: @RequestParam */ String value) {
+    public String setViaPut(/* TODO: @RequestParam */ @RequestParam("value") String value) {
         // TODO: this.status = value; верните status (идемпотентно)
-        return null;
+        this.status = value;
+        return status;
     }
 }

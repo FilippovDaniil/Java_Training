@@ -17,35 +17,61 @@ class TrackerController07 {
     private final AtomicLong seq = new AtomicLong(1);
 
     // TODO: @GetMapping → 200 + список (new ArrayList<>(store.values()))
+    @GetMapping
     public List<Task07> list() {
-        return null;
+        return new ArrayList<>(store.values());
     }
 
     // TODO: @GetMapping("/{id}") → 200 либо 404
+    @GetMapping("/{id}")
     public ResponseEntity<Task07> get(@PathVariable Long id) {
-        return null;
+        return Optional.ofNullable(store.get(id))
+                .map(ResponseEntity::ok)
+                .orElse(ResponseEntity.notFound().build());
     }
 
     // TODO: @PostMapping → 201 + Location + тело
-    public ResponseEntity<Task07> create(@RequestParam String title) {
-        // TODO: id = seq.getAndIncrement(); new Task07(id, title, "NEW"); store.put(...)
-        // TODO: ResponseEntity.created(URI.create("/api/tasks/" + id)).body(task)
-        return null;
+    @PostMapping
+    public ResponseEntity<Task07> create(@RequestParam("title") String title) {
+        long id = seq.getAndIncrement();
+        Task07 task = new Task07(id, title, "NEW");
+        store.put(id, task);
+
+        return ResponseEntity
+                .created(URI.create("/api/tasks/" + id))
+                .body(task);
     }
 
     // TODO: @PatchMapping("/{id}") → 200 (обновлённая) либо 404
-    public ResponseEntity<Task07> changeStatus(@PathVariable Long id, @RequestParam String status) {
-        return null;
+    @PatchMapping("/{id}")
+    public ResponseEntity<Task07> changeStatus(
+            @PathVariable("id") Long id,
+            @RequestParam("status") String status) {
+
+        return Optional.ofNullable(store.get(id))
+                .map(task -> {
+                    // Создаем новую задачу с обновленным статусом
+                    Task07 updated = new Task07(task.id(), task.title(), status);
+                    store.put(id, updated);
+                    return ResponseEntity.ok(updated);
+                })
+                .orElse(ResponseEntity.notFound().build());
     }
 
     // TODO: @DeleteMapping("/{id}") → 204 либо 404
-    public ResponseEntity<Void> delete(@PathVariable Long id) {
-        return null;
+    @DeleteMapping("/{id}")
+    public ResponseEntity<Void> delete(@PathVariable("id") Long id) {
+        if (store.containsKey(id)) {
+            store.remove(id);
+            return ResponseEntity.noContent().build();  // 204
+        } else {
+            return ResponseEntity.notFound().build();   // 404
+        }
     }
 
     // TODO: @GetMapping(value = "/summary", produces = "text/plain")
+    @GetMapping(value = "/summary", produces = "text/plain")
     public String summaryText() {
-        // TODO: верните "Всего задач: " + store.size()
-        return null;
+        return "Всего задач: " + store.size();
     }
 }

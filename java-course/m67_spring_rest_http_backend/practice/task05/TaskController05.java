@@ -2,6 +2,7 @@ package m67_spring_rest_http_backend.practice.task05;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import java.net.URI;
@@ -11,27 +12,37 @@ import java.net.URI;
 class TaskController05 {
 
     // TODO: @GetMapping("/{id}") → 200 + "Задача <id>"
-    public ResponseEntity<String> getOne(@PathVariable Long id) {
-        return null;
+    @GetMapping("/{id}")
+    public ResponseEntity<String> getOne(@PathVariable("id") Long id) {
+        return ResponseEntity.ok("Задача: " + id);
     }
 
     // TODO: @PostMapping → 201 + Location + "Создана задача"
+    @PostMapping
     public ResponseEntity<String> create() {
-        return null;
+        URI location = URI.create("/api/tasks/100");
+
+        return ResponseEntity
+                .status(HttpStatus.CREATED)
+                .location(location)
+                .body("Создана задача");
     }
 
     // TODO: @PutMapping("/{id}") → 200 + "Задача <id> заменена"
-    public ResponseEntity<String> replace(@PathVariable Long id) {
-        return null;
+    @PutMapping("/{id}")
+    public ResponseEntity<String> replace(@PathVariable("id") Long id) {
+        return ResponseEntity.ok("Задача <" + id + "> заменена");
     }
 
     // TODO: @PatchMapping("/{id}") → 200 + "Статус задачи <id> изменён"
-    public ResponseEntity<String> patch(@PathVariable Long id) {
-        return null;
+    @PatchMapping("/{id}")
+    public ResponseEntity<String> patch(@PathVariable("id") Long id) {
+        return ResponseEntity.ok("Статус задачи <" + id + "> изменён");
     }
 
     // TODO: @DeleteMapping("/{id}") → 204
-    public ResponseEntity<Void> delete(@PathVariable Long id) {
-        return null;
+    @DeleteMapping("/{id}")
+    public ResponseEntity<Void> delete(@PathVariable("id") Long id) {
+        return ResponseEntity.noContent().build();
     }
 }

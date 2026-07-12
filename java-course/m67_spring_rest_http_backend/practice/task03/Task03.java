@@ -28,6 +28,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.web.bind.annotation.*;
 import java.util.concurrent.atomic.AtomicInteger;
 
+@SpringBootApplication
 public class Task03 {
     public static void main(String[] args) {
         SpringApplication.run(Task03.class, args);

@@ -13,24 +13,24 @@ class StatusController01 {
     @GetMapping("/read")
     public ResponseEntity<String> read() {
         // TODO: 200 OK с телом "данные"
-        return null;
+        return ResponseEntity.ok("данные");
     }
 
     @PostMapping("/create")
     public ResponseEntity<String> created() {
         // TODO: 201 Created с телом "создано"
-        return null;
+        return ResponseEntity.status(HttpStatus.CREATED).body("создано");
     }
 
     @DeleteMapping("/clear")
     public ResponseEntity<Void> noBody() {
         // TODO: 204 No Content
-        return null;
+        return ResponseEntity.noContent().build();
     }
 
     @GetMapping("/missing")
     public ResponseEntity<String> missing() {
         // TODO: 404 Not Found
-        return null;
+        return ResponseEntity.notFound().build();
     }
 }
