@@ -8,21 +8,26 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 // TODO: @RestController + @RequestMapping("/api/tasks")
+@RestController
+@RequestMapping("/api/tasks")
 class MappingController01 {
 
     // TODO: @GetMapping → "все задачи"
+    @GetMapping
     public String all() {
-        return null;
+        return "все задачи";
     }
 
     // TODO: @GetMapping("/{id}") → "задача " + id
-    public String one(@PathVariable Long id) {
-        return null;
+    @GetMapping("/{id}")
+    public String one(@PathVariable("id") Long id) {
+        return "задача " + id;
     }
 
     // TODO: @GetMapping("/{id}/comments/{cid}")
-    public String comment(@PathVariable Long id, @PathVariable Long cid) {
+    @GetMapping("/{id}/comments/{cid}")
+    public String comment(@PathVariable("id") Long id, @PathVariable("cid") Long cid) {
         // TODO: верните "комментарий " + cid + " задачи " + id
-        return null;
+        return "комментарий " + cid + " задачи " + id;
     }
 }

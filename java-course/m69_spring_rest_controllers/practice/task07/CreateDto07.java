@@ -10,4 +10,6 @@ import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.atomic.AtomicLong;
 import java.util.stream.Collectors;
 
-record CreateDto07(String title) {}
+record CreateDto07(String title) {
+
+}

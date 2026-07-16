@@ -11,22 +11,25 @@ import java.util.Optional;
 class ParamController05 {
 
     // TODO: @GetMapping("/by-tags")
-    public String byTags(/* @RequestParam */ List<String> tags) {
+    @GetMapping("/by-tags")
+    public String byTags(/* @RequestParam */ @RequestParam("tags") List<String> tags) {
         // TODO: верните "Тегов: " + tags.size() + " → " + tags
-        return null;
+        return "Тегов: " + tags.size() + " → " + tags;
     }
 
     // TODO: @GetMapping("/filter")
+    @GetMapping("/filter")
     public String withDefaults(
-            /* @RequestParam(defaultValue = "ALL") */ String status,
-            /* @RequestParam(defaultValue = "10") */ int limit) {
+            /* @RequestParam(defaultValue = "ALL") */ @RequestParam(name = "status", defaultValue = "ALL") String status,
+            /* @RequestParam(defaultValue = "10") */ @RequestParam(name = "limit", defaultValue = "10") int limit) {
         // TODO: верните "status=" + status + ", limit=" + limit
-        return null;
+        return "status=" + status + ", limit=" + limit;
     }
 
     // TODO: @GetMapping("/maybe")
-    public String optional(/* @RequestParam */ Optional<String> q) {
+    @GetMapping("/maybe")
+    public String optional(/* @RequestParam */ @RequestParam(name = "q", required = false) Optional<String> q) {
         // TODO: q.isPresent() ? "q задан: " + q.get() : "q не задан"
-        return null;
+        return q.isPresent() ? "q задан: " + q.get() : "q не задан";
     }
 }

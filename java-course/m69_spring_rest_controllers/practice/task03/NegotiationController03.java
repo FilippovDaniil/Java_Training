@@ -9,18 +9,21 @@ import org.springframework.web.bind.annotation.*;
 class NegotiationController03 {
 
     // TODO: @PostMapping(consumes = "application/json", produces = "application/json")
-    public CreateTaskDto createJson(/* @RequestBody */ CreateTaskDto dto) {
+    @PostMapping(consumes = "application/json", produces = "application/json")
+    public CreateTaskDto createJson(/* @RequestBody */ @RequestBody CreateTaskDto dto) {
         // TODO: верните dto
-        return null;
+        return dto;
     }
 
     // TODO: @GetMapping → "все задачи"
+    @GetMapping
     public String listAll() {
-        return null;
+        return "все задачи";
     }
 
     // TODO: @GetMapping(params = "status") → "задачи со статусом " + status
-    public String listByStatus(/* @RequestParam */ String status) {
-        return null;
+    @GetMapping(params = "status")
+    public String listByStatus(/* @RequestParam */ @RequestParam("status") String status) {
+        return "задачи со статусом " + status;
     }
 }

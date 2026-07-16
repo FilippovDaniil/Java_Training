@@ -11,15 +11,20 @@ import java.time.LocalDate;
 class ConversionController06 {
 
     // TODO: @GetMapping("/by-status")
-    public String byStatus(/* @RequestParam */ Status06 status) {
+    @GetMapping("/by-status")
+    public String byStatus(/* @RequestParam */ @RequestParam(name = "status") Status06 status) {
         // TODO: верните "Фильтр по статусу: " + status
-        return null;
+        return "Фильтр по статусу: " + status;
     }
 
     // TODO: @GetMapping("/created-after")
+    @GetMapping("/created-after")
     public String createdAfter(
-            /* @RequestParam @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) */ LocalDate from) {
+            /* @RequestParam @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) */
+            @RequestParam(name = "from")
+            @DateTimeFormat
+                    (iso = DateTimeFormat.ISO.DATE) LocalDate from) {
         // TODO: верните "Создано после: " + from
-        return null;
+        return "Создано после: " + from;
     }
 }

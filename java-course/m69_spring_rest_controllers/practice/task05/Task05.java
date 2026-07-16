@@ -29,6 +29,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 import java.util.Optional;
 
+@SpringBootApplication
 public class Task05 {
     public static void main(String[] args) {
         SpringApplication.run(Task05.class, args);

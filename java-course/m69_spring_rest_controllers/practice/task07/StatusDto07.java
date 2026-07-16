@@ -10,4 +10,6 @@ import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.atomic.AtomicLong;
 import java.util.stream.Collectors;
 
-record StatusDto07(Status07 status) {}
+record StatusDto07(Status07 status) {
+
+}

@@ -9,12 +9,17 @@ import org.springframework.web.bind.annotation.*;
 class MultiSourceController02 {
 
     // TODO: @PostMapping("/{id}")
+    @PostMapping("/{id}")
     public String handle(
-            /* TODO: @PathVariable */ Long id,
-            /* TODO: @RequestParam(defaultValue = "false") */ boolean notify,
-            /* TODO: @RequestHeader(value = "Authorization", required = false) */ String auth,
-            /* TODO: @RequestBody */ CreateTaskDto body) {
+            /* TODO: @PathVariable */@PathVariable("id") Long id,
+            /* TODO: @RequestParam(defaultValue = "false") */
+                                     @RequestParam(name = "notify", defaultValue = "false") boolean notify,
+            /* TODO: @RequestHeader(value = "Authorization", required = false) */
+                                     @RequestHeader(name = "auth", value = "Authorization", required = false) String auth,
+            /* TODO: @RequestBody */ @RequestBody CreateTaskDto body) {
         // TODO: соберите строку "id=..., title=..., notify=..., auth=есть/нет"
-        return null;
+        return "id = " + id + ", title = " + body.title() + ", notify = " + notify +
+                ", auth = " + (auth == null ? "нет" : "да");
+
     }
 }

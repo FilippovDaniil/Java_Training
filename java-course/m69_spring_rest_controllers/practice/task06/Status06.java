@@ -6,4 +6,8 @@ import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.web.bind.annotation.*;
 import java.time.LocalDate;
 
-enum Status06 { NEW, IN_PROGRESS, DONE }
+enum Status06 {
+    NEW,
+    IN_PROGRESS,
+    DONE
+}
