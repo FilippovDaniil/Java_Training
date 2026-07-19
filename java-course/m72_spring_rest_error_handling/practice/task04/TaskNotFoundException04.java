@@ -7,7 +7,15 @@ import org.springframework.http.ProblemDetail;
 import org.springframework.web.bind.annotation.*;
 
 class TaskNotFoundException04 extends RuntimeException {
+
     private final Long taskId;
-    TaskNotFoundException04(Long id) { super("Задача " + id + " не найдена"); this.taskId = id; }
-    public Long getTaskId() { return taskId; }
+
+    TaskNotFoundException04(Long id) {
+        super("Задача " + id + " не найдена");
+        this.taskId = id;
+    }
+
+    public Long getTaskId() {
+        return taskId;
+    }
 }

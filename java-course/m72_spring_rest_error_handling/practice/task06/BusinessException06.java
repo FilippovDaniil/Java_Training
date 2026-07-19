@@ -8,5 +8,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.Map;
 
 class BusinessException06 extends RuntimeException {
-    BusinessException06(String msg) { super(msg); }
+    BusinessException06(String msg) {
+        super(msg);
+    }
 }

@@ -17,7 +17,12 @@ import java.util.Map;
 @RequestMapping("/api/tasks")
 class TaskController05 {
     @PostMapping
-    public String create(@Valid @RequestBody NewTaskDto05 dto) {
+    public String create(
+            @Valid
+            @RequestBody
+            NewTaskDto05 dto
+    )
+    {
         return "OK: " + dto.title();
     }
 }

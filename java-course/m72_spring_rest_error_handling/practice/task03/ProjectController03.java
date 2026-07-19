@@ -11,8 +11,10 @@ import java.util.Map;
 @RequestMapping("/api/projects")
 class ProjectController03 {
     @GetMapping("/{id}")
-    public String get(@PathVariable Long id) {
-        if (id <= 0) throw new TaskNotFoundException03("Проект", id);
+    public String get(@PathVariable("id") Long id) {
+        if (id <= 0) {
+            throw new TaskNotFoundException03("Проект", id);
+        }
         return "Проект " + id;
     }
 }

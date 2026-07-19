@@ -8,5 +8,8 @@ import org.springframework.web.bind.annotation.*;
 import java.util.Map;
 
 class TaskNotFoundException03 extends RuntimeException {
-    TaskNotFoundException03(String what, Long id) { super(what + " " + id + " не найден(а)"); }
+
+    TaskNotFoundException03(String what, Long id) {
+        super(what + " " + id + " не найден(а)");
+    }
 }

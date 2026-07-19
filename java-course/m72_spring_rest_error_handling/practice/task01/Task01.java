@@ -30,6 +30,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.server.ResponseStatusException;
 
+@SpringBootApplication
 public class Task01 {
     public static void main(String[] args) {
         SpringApplication.run(Task01.class, args);

@@ -13,5 +13,8 @@ import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.atomic.AtomicLong;
 
 class DuplicateTaskException07 extends RuntimeException {
-    DuplicateTaskException07(String title) { super("Задача '" + title + "' уже существует"); }
+
+    DuplicateTaskException07(String title) {
+        super("Задача '" + title + "' уже существует");
+    }
 }

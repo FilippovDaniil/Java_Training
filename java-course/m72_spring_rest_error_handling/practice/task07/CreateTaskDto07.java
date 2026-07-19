@@ -12,4 +12,7 @@ import java.util.*;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.atomic.AtomicLong;
 
-record CreateTaskDto07(@NotBlank String title) {}
+record CreateTaskDto07(
+        @NotBlank
+        String title
+) {}

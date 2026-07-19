@@ -12,6 +12,7 @@ import java.util.*;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.atomic.AtomicLong;
 
+// ============ КОНТРОЛЛЕР ============
 @RestController
 @RequestMapping("/api/tasks")
 class TaskController07 {
@@ -20,16 +21,31 @@ class TaskController07 {
     private final AtomicLong seq = new AtomicLong(1);
 
     @GetMapping("/{id}")
-    public String get(@PathVariable Long id) {
+    public String get(@PathVariable("id") Long id) {
         // TODO: если нет в store — throw new TaskNotFoundException07(id); иначе вернуть значение
-        return null;
+        String task = store.get(id);
+        if (task == null) {
+            throw new TaskNotFoundException07(id);
+        }
+        return task;
     }
+
+    @GetMapping()
+    public Collection<String> get() {
+        return store.values();
+    }
+
 
     @PostMapping
     public String create(@Valid @RequestBody CreateTaskDto07 dto) {
         // TODO: если store.containsValue(dto.title()) — throw new DuplicateTaskException07(dto.title())
+        if (store.containsValue(dto.title())) {
+            throw new DuplicateTaskException07(dto.title());
+        }
         // TODO: иначе store.put(seq.getAndIncrement(), dto.title()); вернуть "Создано: " + dto.title()
-        return null;
+        Long id = seq.getAndIncrement();
+        store.put(id, dto.title());
+        return "Создано: " + dto.title();
     }
 
     @GetMapping("/boom")

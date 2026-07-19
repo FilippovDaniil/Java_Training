@@ -13,4 +13,10 @@ import java.time.Instant;
 import java.util.HashMap;
 import java.util.Map;
 
-record NewTaskDto05(@NotBlank @Size(min = 3, max = 100) String title) {}
+record NewTaskDto05(
+        @NotBlank
+        @Size(min = 3, max = 100)
+        String title
+) {
+
+}

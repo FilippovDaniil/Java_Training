@@ -10,8 +10,10 @@ import org.springframework.web.bind.annotation.*;
 @RequestMapping("/api/tasks")
 class TaskController04 {
     @GetMapping("/{id}")
-    public String get(@PathVariable Long id) {
-        if (id <= 0) throw new TaskNotFoundException04(id);
+    public String get(@PathVariable("id") Long id) {
+        if (id <= 0) {
+            throw new TaskNotFoundException04(id);
+        }
         return "Задача " + id;
     }
 }

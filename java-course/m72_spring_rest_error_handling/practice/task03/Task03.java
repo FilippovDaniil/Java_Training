@@ -29,6 +29,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import java.util.Map;
 
+@SpringBootApplication
 public class Task03 {
     public static void main(String[] args) {
         SpringApplication.run(Task03.class, args);

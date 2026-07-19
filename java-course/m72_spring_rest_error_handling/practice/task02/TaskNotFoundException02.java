@@ -7,5 +7,8 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 class TaskNotFoundException02 extends RuntimeException {
-    TaskNotFoundException02(Long id) { super("Задача " + id + " не найдена"); }
+
+    TaskNotFoundException02(Long id) {
+        super("Задача " + id + " не найдена");
+    }
 }

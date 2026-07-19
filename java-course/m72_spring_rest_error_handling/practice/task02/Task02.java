@@ -27,6 +27,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+@SpringBootApplication
 public class Task02 {
     public static void main(String[] args) {
         SpringApplication.run(Task02.class, args);

@@ -7,14 +7,19 @@ import org.springframework.http.ProblemDetail;
 import org.springframework.web.bind.annotation.*;
 
 // TODO: @RestControllerAdvice
+@RestControllerAdvice
 class GlobalHandler04 {
 
     // TODO: @ExceptionHandler(TaskNotFoundException04.class)
+    @ExceptionHandler(TaskNotFoundException04.class)
     public ProblemDetail handle(TaskNotFoundException04 ex) {
         // TODO: ProblemDetail pd = ProblemDetail.forStatusAndDetail(HttpStatus.NOT_FOUND, ex.getMessage());
+        ProblemDetail pd = ProblemDetail.forStatusAndDetail(HttpStatus.NOT_FOUND, ex.getMessage());
         // TODO: pd.setTitle("Задача не найдена");
+        pd.setTitle("Задача не найдена");
         // TODO: pd.setProperty("taskId", ex.getTaskId());
+        pd.setProperty("taskId", ex.getTaskId());
         // TODO: return pd;
-        return null;
+        return pd;
     }
 }

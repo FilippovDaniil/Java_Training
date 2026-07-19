@@ -58,6 +58,7 @@ import java.util.*;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.atomic.AtomicLong;
 
+@SpringBootApplication
 public class Task07 {
     public static void main(String[] args) {
         SpringApplication.run(Task07.class, args);

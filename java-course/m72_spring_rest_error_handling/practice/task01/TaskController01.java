@@ -14,9 +14,13 @@ import org.springframework.web.server.ResponseStatusException;
 class TaskController01 {
 
     @GetMapping("/{id}")
-    public String get(@PathVariable Long id) {
+    public String get(@PathVariable("id") Long id) {
         // TODO: если id <= 0 — throw new ResponseStatusException(HttpStatus.NOT_FOUND, ...)
         // TODO: иначе вернуть "Задача " + id
-        return null;
+        if (id <= 0 ){
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Задача " + id + " не найдена");
+        } else {
+            return "Задача " + id;
+        }
     }
 }

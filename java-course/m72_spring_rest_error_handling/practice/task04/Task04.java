@@ -30,6 +30,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ProblemDetail;
 import org.springframework.web.bind.annotation.*;
 
+@SpringBootApplication
 public class Task04 {
     public static void main(String[] args) {
         SpringApplication.run(Task04.class, args);
