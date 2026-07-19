@@ -15,8 +15,9 @@ import org.springframework.web.bind.annotation.RestController;
 class DtoController01 {
 
     // TODO: @PostMapping
-    public Object create(/* @RequestBody CreateTaskRequest req */ Object req) {
+    @PostMapping
+    public TaskResponse create(/* @RequestBody CreateTaskRequest req */ @RequestBody CreateTaskRequest req) {
         // TODO: верните new TaskResponse(1L, req.title(), req.assignee(), "NEW")
-        return null;
+        return new TaskResponse(1L,req.title(),req.assignee(),"NEW");
     }
 }

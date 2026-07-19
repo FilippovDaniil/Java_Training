@@ -16,21 +16,34 @@ class TaskController07 {
 
     private TaskEntity07 getStub() {
         TaskEntity07 e = new TaskEntity07();
-        e.id = 1L; e.title = "Купить кофе"; e.status = "NEW";
+        e.id = 1L;
+        e.title = "Купить кофе";
+        e.status = "NEW";
         e.createdAt = LocalDateTime.of(2026, 6, 2, 14, 30);
-        e.assigneeId = 7L; e.assigneeName = "Иван";
+        e.assigneeId = 7L;
+        e.assigneeName = "Иван";
         e.internalNote = "СЛУЖЕБНОЕ";
         return e;
     }
 
     // TODO: @GetMapping("/{id}") → ApiResponse07<TaskResponse07>
-    public Object getOne(@PathVariable Long id) {
+    @GetMapping("/{id}")
+    public ApiResponse07<TaskResponse07> getOne(@PathVariable("id") Long id) {
         // TODO: return ApiResponse07.ok(TaskMapper07.toResponse(getStub()));
-        return null;
+        return ApiResponse07.ok(TaskMapper07.toResponse(getStub()));
     }
 
     // TODO: @PostMapping → создать сущность из запроса, смаппить, обернуть
-    public Object create(/* @RequestBody CreateTaskRequest07 req */ Object req) {
-        return null;
+    @PostMapping
+    public ApiResponse07<TaskResponse07> create(/* @RequestBody CreateTaskRequest07 req */ @RequestBody CreateTaskRequest07 req) {
+        TaskEntity07 e = new TaskEntity07();
+        e.id = 1L;
+        e.title = req.title();
+        e.status = "NEW";
+        e.createdAt = LocalDateTime.of(2026, 6, 2, 14, 30);
+        e.assigneeId = req.assigneeId();
+        e.assigneeName = "Иван";
+        e.internalNote = "СЛУЖЕБНОЕ";
+        return ApiResponse07.ok(TaskMapper07.toResponse(e));
     }
 }

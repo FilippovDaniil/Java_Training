@@ -24,4 +24,8 @@ class TaskMapper07 {
     //   соберите AssigneeDto07(e.assigneeId, e.assigneeName),
     //   верните TaskResponse07(... без internalNote ...);
     // }
+    public static TaskResponse07 toResponse(TaskEntity07 e){
+        AssigneeDto07 dto = new AssigneeDto07(e.assigneeId,e.assigneeName);
+        return new TaskResponse07(e.id, e.title, e.status, dto, e.createdAt);
+    }
 }

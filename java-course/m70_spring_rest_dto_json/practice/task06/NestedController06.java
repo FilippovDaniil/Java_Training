@@ -16,9 +16,11 @@ import java.util.List;
 class NestedController06 {
 
     @GetMapping("/{id}")
-    public Object getOne(@PathVariable Long id) {
+    public TaskDetailDto06 getOne(@PathVariable("id") Long id) {
         // TODO: соберите TaskDetailDto06 с вложенным AssigneeDto06(7, "Иван")
         //       и tags = List.of("покупки", "срочно"); верните его
-        return null;
+        AssigneeDto06 dto = new AssigneeDto06(7L,"Ivan");
+        List<String> strings = List.of("покупки", "срочно");
+        return new TaskDetailDto06(id,"Ekaterina",dto,strings);
     }
 }

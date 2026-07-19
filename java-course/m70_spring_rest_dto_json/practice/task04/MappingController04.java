@@ -16,8 +16,8 @@ class MappingController04 {
     }
 
     @GetMapping("/{id}")
-    public Object getOne(@PathVariable Long id) {
+    public Object getOne(@PathVariable("id") Long id) {
         // TODO: верните TaskMapper04.toResponse(getStubEntity())
-        return null;
+        return TaskMapper04.toResponse(getStubEntity());
     }
 }

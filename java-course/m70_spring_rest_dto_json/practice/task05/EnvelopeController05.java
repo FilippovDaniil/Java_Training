@@ -13,14 +13,21 @@ import java.util.List;
 class EnvelopeController05 {
 
     // TODO: @GetMapping("/{id}") → ApiResponse<TaskDto05>
-    public ApiResponse<TaskDto05> getTask(@PathVariable Long id) {
+    @GetMapping("/{id}")
+    public ApiResponse<TaskDto05> getTask(@PathVariable("id") Long id) {
         // TODO: return ApiResponse.ok(new TaskDto05(id, "Купить кофе"));
-        return null;
+        return ApiResponse.ok(new TaskDto05(id, "Купить кофе"));
     }
 
     // TODO: @GetMapping → ApiResponse<List<TaskDto05>>
+    @GetMapping
     public ApiResponse<List<TaskDto05>> getList() {
         // TODO: return ApiResponse.ok(List.of(new TaskDto05(1L, "A"), new TaskDto05(2L, "B")));
-        return null;
+        return ApiResponse.ok(
+                List.of(
+                        new TaskDto05(1L, "A"),
+                        new TaskDto05(2L, "B")
+                )
+        );
     }
 }

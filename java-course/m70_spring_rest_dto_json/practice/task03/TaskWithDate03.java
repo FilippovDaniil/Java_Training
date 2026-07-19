@@ -12,6 +12,6 @@ import java.time.LocalDateTime;
 record TaskWithDate03(
         Long id,
         String title,
-        /* TODO: @JsonFormat(pattern = "dd.MM.yyyy HH:mm") */ LocalDateTime createdAt,
-        /* TODO: @JsonFormat(pattern = "yyyy-MM-dd") */ LocalDate dueDate
+        /* TODO: @JsonFormat(pattern = "dd.MM.yyyy HH:mm") */ @JsonFormat(pattern = "dd.MM.yyyy HH:mm") LocalDateTime createdAt,
+        /* TODO: @JsonFormat(pattern = "yyyy-MM-dd") */ @JsonFormat(pattern = "yyyy-MM-dd") LocalDate dueDate
 ) {}

@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 // «Внутренняя сущность» (как будто из БД) — содержит служебное поле
-class TaskEntity04 {
+public class TaskEntity04 {
     Long id = 1L;
     String title = "Купить кофе";
     String status = "NEW";

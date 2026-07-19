@@ -10,9 +10,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 // TODO: @JsonInclude(JsonInclude.Include.NON_NULL)
+@JsonInclude(JsonInclude.Include.NON_NULL)
 record TaskView02(
         Long id,
-        /* TODO: @JsonProperty("task_title") */ String title,
-        /* TODO: @JsonIgnore */ String secret,
+        /* TODO: @JsonProperty("task_title") */ @JsonProperty("task_title") String title,
+        /* TODO: @JsonIgnore */ @JsonIgnore String secret,
         String assignee
 ) {}

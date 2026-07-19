@@ -8,6 +8,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 // TODO: record TaskResponse04(Long id, String title, String status)
-class TaskMapper04 {
+public class TaskMapper04 {
     // TODO: static TaskResponse04 toResponse(TaskEntity04 e) { ... }
+    public static TaskResponse04 toResponse(TaskEntity04 e) {
+        return new TaskResponse04(e.id,e.title,e.status);
+    }
 }
