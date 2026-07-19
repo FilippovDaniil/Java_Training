@@ -14,6 +14,7 @@ import java.util.Set;
 
 @Documented
 // TODO: @Constraint(validatedBy = PriorityValidator07.class)
+@Constraint(validatedBy = PriorityValidator07.class)
 @Target({ElementType.FIELD, ElementType.PARAMETER, ElementType.RECORD_COMPONENT})
 @Retention(RetentionPolicy.RUNTIME)
 @interface ValidPriority {

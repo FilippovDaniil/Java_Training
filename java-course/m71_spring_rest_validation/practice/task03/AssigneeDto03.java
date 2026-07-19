@@ -11,6 +11,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 record AssigneeDto03(
-        /* TODO: @NotNull */ Long id,
-        /* TODO: @NotBlank */ String name
+        /* TODO: @NotNull */ @NotNull Long id,
+        /* TODO: @NotBlank */ @NotBlank String name
 ) {}

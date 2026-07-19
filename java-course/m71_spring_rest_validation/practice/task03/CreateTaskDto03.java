@@ -12,5 +12,5 @@ import org.springframework.web.bind.annotation.RestController;
 
 record CreateTaskDto03(
         @NotBlank String title,
-        /* TODO: @Valid @NotNull */ AssigneeDto03 assignee
+        /* TODO: @Valid @NotNull */ @Valid @NotNull AssigneeDto03 assignee
 ) {}

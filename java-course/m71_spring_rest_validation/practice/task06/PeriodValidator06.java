@@ -16,6 +16,6 @@ class PeriodValidator06 implements ConstraintValidator<StartBeforeEnd, PeriodDto
     @Override
     public boolean isValid(PeriodDto06 dto, ConstraintValidatorContext context) {
         // TODO: true, если start == null || end == null || !start.isAfter(end)
-        return false;
+        return dto.start() == null || dto.end() == null || !dto.start().isAfter(dto.end()) ? true : false;
     }
 }

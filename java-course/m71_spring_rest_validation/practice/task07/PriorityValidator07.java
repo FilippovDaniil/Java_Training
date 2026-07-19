@@ -15,6 +15,6 @@ import java.util.Set;
 class PriorityValidator07 implements ConstraintValidator<ValidPriority, Integer> {
     @Override public boolean isValid(Integer v, ConstraintValidatorContext c) {
         // TODO: v == null || (v >= 1 && v <= 5)
-        return false;
+        return v == null || (v >= 1 && v <= 5);
     }
 }

@@ -16,8 +16,8 @@ import java.util.Set;
 class CustomValidationController05 {
 
     @PostMapping("/status")
-    public String create(/* TODO: @Valid */ @RequestBody StatusDto05 dto) {
+    public String create(/* TODO: @Valid */ @Valid @RequestBody StatusDto05 dto) {
         // TODO: верните "Статус принят: " + dto.status()
-        return null;
+        return "Статус принят: " + dto.status();
     }
 }

@@ -14,6 +14,7 @@ import java.time.LocalDate;
 // --- Ограничение уровня класса (каркас) ---
 @Documented
 // TODO: @Constraint(validatedBy = PeriodValidator06.class)
+@Constraint(validatedBy = PeriodValidator06.class)
 @Target({ElementType.TYPE})
 @Retention(RetentionPolicy.RUNTIME)
 @interface StartBeforeEnd {

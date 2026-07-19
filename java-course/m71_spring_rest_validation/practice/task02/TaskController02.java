@@ -16,8 +16,8 @@ import org.springframework.web.bind.annotation.RestController;
 class TaskController02 {
 
     @PostMapping
-    public String create(/* TODO: добавьте @Valid */ @RequestBody NewTaskDto dto) {
+    public String create(/* TODO: добавьте @Valid */ @Valid @RequestBody NewTaskDto dto) {
         // TODO: верните "Создана задача: " + dto.title()
-        return null;
+        return "Создана задача: " + dto.title();
     }
 }

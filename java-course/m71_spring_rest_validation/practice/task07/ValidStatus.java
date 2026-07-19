@@ -18,6 +18,7 @@ import java.util.Set;
 
 @Documented
 // TODO: @Constraint(validatedBy = StatusValidator07.class)
+@Constraint(validatedBy = StatusValidator07.class)
 @Target({ElementType.FIELD, ElementType.PARAMETER, ElementType.RECORD_COMPONENT})
 @Retention(RetentionPolicy.RUNTIME)
 @interface ValidStatus {

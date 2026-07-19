@@ -13,15 +13,18 @@ import org.springframework.web.bind.annotation.*;
 class GroupController04 {
 
     @PostMapping
-    public String create(/* TODO: @Validated(OnCreate.class) */ @RequestBody TaskDto04 dto) {
+    public String create(/* TODO: @Validated(OnCreate.class) */
+            @Validated(OnCreate.class) @RequestBody TaskDto04 dto) {
         // TODO: верните "Создано: " + dto.title()
-        return null;
+        return "Создано: " + dto.title();
     }
 
     @PutMapping("/{id}")
-    public String update(@PathVariable Long id,
-                         /* TODO: @Validated(OnUpdate.class) */ @RequestBody TaskDto04 dto) {
+    public String update(@PathVariable("id") Long id,
+                         /* TODO: @Validated(OnUpdate.class) */
+                         @Validated(OnUpdate.class)
+                             @RequestBody TaskDto04 dto) {
         // TODO: верните "Обновлено: " + dto.id()
-        return null;
+        return "Обновлено: " + dto.id();
     }
 }

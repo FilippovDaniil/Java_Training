@@ -13,8 +13,8 @@ import java.util.Map;
 import java.util.Set;
 
 record CreateTaskRequest07(
-        /* TODO: @NotBlank @Size(min = 3, max = 100) */ String title,
-        /* TODO: @ValidStatus */ String status,
-        /* TODO: @ValidPriority */ Integer priority,
-        /* TODO: @Valid @NotNull */ AssigneeDto07 assignee
+        /* TODO: @NotBlank @Size(min = 3, max = 100) */ @NotBlank @Size(min = 3, max = 100) String title,
+        /* TODO: @ValidStatus */ @ValidStatus String status,
+        /* TODO: @ValidPriority */ @ValidPriority Integer priority,
+        /* TODO: @Valid @NotNull */ @Valid @NotNull AssigneeDto07 assignee
 ) {}

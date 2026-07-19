@@ -36,6 +36,7 @@ import org.springframework.web.bind.annotation.*;
 import java.lang.annotation.*;
 import java.time.LocalDate;
 
+@SpringBootApplication
 public class Task06 {
     public static void main(String[] args) {
         SpringApplication.run(Task06.class, args);

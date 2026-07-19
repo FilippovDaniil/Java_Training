@@ -15,8 +15,8 @@ import org.springframework.web.bind.annotation.RestController;
 class NestedValidationController03 {
 
     @PostMapping
-    public String create(/* TODO: @Valid */ @RequestBody CreateTaskDto03 dto) {
+    public String create(/* TODO: @Valid */ @Valid @RequestBody CreateTaskDto03 dto) {
         // TODO: верните "OK: " + dto.assignee().name()
-        return null;
+        return "OK: " + dto.assignee().name();
     }
 }

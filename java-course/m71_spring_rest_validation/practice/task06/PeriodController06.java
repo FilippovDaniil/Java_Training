@@ -16,8 +16,8 @@ import java.time.LocalDate;
 class PeriodController06 {
 
     @PostMapping
-    public String create(/* TODO: @Valid */ @RequestBody PeriodDto06 dto) {
+    public String create(/* TODO: @Valid */ @Valid @RequestBody PeriodDto06 dto) {
         // TODO: верните "Период принят: " + dto.start() + " — " + dto.end()
-        return null;
+        return "Период принят: " + dto.start() + " — " + dto.end();
     }
 }

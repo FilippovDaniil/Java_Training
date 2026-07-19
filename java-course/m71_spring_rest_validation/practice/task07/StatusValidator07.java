@@ -16,6 +16,6 @@ class StatusValidator07 implements ConstraintValidator<ValidStatus, String> {
     private static final Set<String> ALLOWED = Set.of("NEW", "IN_PROGRESS", "DONE");
     @Override public boolean isValid(String v, ConstraintValidatorContext c) {
         // TODO: v == null || ALLOWED.contains(v)
-        return false;
+        return v == null || ALLOWED.contains(v);
     }
 }

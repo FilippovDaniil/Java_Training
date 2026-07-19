@@ -21,8 +21,8 @@ import java.util.Set;
 class TaskController07 {
 
     @PostMapping
-    public String create(/* TODO: @Valid */ @RequestBody CreateTaskRequest07 dto) {
+    public String create(/* TODO: @Valid */ @Valid @RequestBody CreateTaskRequest07 dto) {
         // TODO: верните "OK: " + dto.title()
-        return null;
+        return "OK: " + dto.title();
     }
 }

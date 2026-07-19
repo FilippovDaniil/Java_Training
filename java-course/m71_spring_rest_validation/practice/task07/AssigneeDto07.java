@@ -16,6 +16,6 @@ import java.util.Set;
 // DTO (каркасы)
 // ============================================================
 record AssigneeDto07(
-        /* TODO: @NotNull */ Long id,
-        /* TODO: @NotBlank @Size(max = 50) */ String name
+        /* TODO: @NotNull */ @NotNull Long id,
+        /* TODO: @NotBlank @Size(max = 50) */ @NotBlank @Size(max = 50) String name
 ) {}

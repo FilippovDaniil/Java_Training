@@ -60,6 +60,7 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Set;
 
+@SpringBootApplication
 public class Task07 {
     public static void main(String[] args) {
         SpringApplication.run(Task07.class, args);

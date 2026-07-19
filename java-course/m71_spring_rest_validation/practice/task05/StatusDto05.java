@@ -12,4 +12,4 @@ import java.lang.annotation.*;
 import java.util.Set;
 
 // --- DTO с кастомным ограничением ---
-record StatusDto05(/* TODO: @ValidStatus */ String status) {}
+record StatusDto05(/* TODO: @ValidStatus */ @ValidStatus String status) {}

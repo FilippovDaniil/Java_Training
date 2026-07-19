@@ -30,5 +30,6 @@ public class Task01 {
     public static void main(String[] args) {
         System.out.println("Разметьте CreateTaskRequest01 ограничениями (см. JavaDoc). " +
                 "Проверка сработает в контроллере с @Valid — см. Task02.");
+        System.out.println("Done");
     }
 }

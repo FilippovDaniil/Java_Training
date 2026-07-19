@@ -17,7 +17,19 @@ class StatusValidator05 implements ConstraintValidator<ValidStatus, String> {
 
     @Override
     public boolean isValid(String value, ConstraintValidatorContext context) {
-        // TODO: вернуть value == null || ALLOWED.contains(value)
-        return false;
+        if (value == null) {
+            return true;
+        }
+
+        if (!ALLOWED.contains(value)) {
+            // Кастомное сообщение
+            context.disableDefaultConstraintViolation();
+            context.buildConstraintViolationWithTemplate(
+                    "Недопустимый статус: '" + value + "'. Допустимые: " + ALLOWED
+            ).addConstraintViolation();
+            return false;
+        }
+
+        return true;
     }
 }

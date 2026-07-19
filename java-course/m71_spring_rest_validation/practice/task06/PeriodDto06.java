@@ -13,4 +13,5 @@ import java.time.LocalDate;
 
 // --- DTO периода ---
 // TODO: @StartBeforeEnd
+@StartBeforeEnd
 record PeriodDto06(LocalDate start, LocalDate end) {}

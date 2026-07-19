@@ -17,14 +17,17 @@ import java.util.Set;
 // ============================================================
 
 // TODO: @RestControllerAdvice
+@RestControllerAdvice
 class ValidationHandler07 {
 
     // TODO: @ExceptionHandler(MethodArgumentNotValidException.class)
+    @ExceptionHandler(MethodArgumentNotValidException.class)
     public ResponseEntity<Map<String, Object>> handle(MethodArgumentNotValidException ex) {
         Map<String, String> fields = new HashMap<>();
         // TODO: ex.getBindingResult().getFieldErrors()
         //         .forEach(e -> fields.put(e.getField(), e.getDefaultMessage()));
         // TODO: верните ResponseEntity.badRequest().body(Map.of("status", 400, "fields", fields))
-        return null;
+        ex.getBindingResult().getFieldErrors().forEach(e -> fields.put(e.getField(), e.getDefaultMessage()));
+        return ResponseEntity.badRequest().body(Map.of("status", 400, "fields", fields));
     }
 }

@@ -14,6 +14,7 @@ import java.util.Set;
 // --- Аннотация ограничения (каркас) ---
 @Documented
 // TODO: @Constraint(validatedBy = StatusValidator05.class)
+@Constraint(validatedBy = StatusValidator05.class)
 @Target({ElementType.FIELD, ElementType.PARAMETER, ElementType.RECORD_COMPONENT})
 @Retention(RetentionPolicy.RUNTIME)
 @interface ValidStatus {
