@@ -19,11 +19,17 @@ class PageController02 {
             .toList();
 
     // TODO: @GetMapping
+    @GetMapping
     public List<TaskDto02> page(
-            /* @RequestParam(defaultValue = "0") */ int page,
-            /* @RequestParam(defaultValue = "20") */ int size) {
+            /* @RequestParam(defaultValue = "0") */
+            @RequestParam(name = "page", defaultValue = "0") int page,
+            /* @RequestParam(defaultValue = "20") */
+            @RequestParam(name = "size", defaultValue = "20") int size) {
         // TODO: from = page*size; to = Math.min(from+size, ALL.size());
+        int from = page*size;
+        int to = Math.min(from+size, ALL.size());
         // TODO: if (from >= ALL.size()) return List.of(); else return ALL.subList(from, to);
-        return null;
+        if (from >= ALL.size()) return List.of();
+        else return ALL.subList(from, to);
     }
 }

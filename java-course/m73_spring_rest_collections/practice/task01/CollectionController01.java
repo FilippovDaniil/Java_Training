@@ -17,12 +17,14 @@ class CollectionController01 {
             new TaskDto01(3L, "Отправить письмо", "DONE"));
 
     // TODO: @GetMapping → вернуть seed
+    @GetMapping
     public List<TaskDto01> all() {
-        return null;
+        return seed;
     }
 
     // TODO: @GetMapping("/empty") → вернуть List.of()
+    @GetMapping("/empty")
     public List<TaskDto01> empty() {
-        return null;
+        return List.of();
     }
 }

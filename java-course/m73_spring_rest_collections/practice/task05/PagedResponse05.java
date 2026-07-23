@@ -9,5 +9,13 @@ import org.springframework.web.bind.annotation.RestController;
 import java.util.List;
 import java.util.stream.IntStream;
 
-record PagedResponse05<T>(List<T> content, int page, int size,
-                          long totalElements, int totalPages, boolean hasNext) {}
+record PagedResponse05<T>(
+        List<T> content,
+        int page,
+        int size,
+        long totalElements,
+        int totalPages,
+        boolean hasNext
+) {
+
+}

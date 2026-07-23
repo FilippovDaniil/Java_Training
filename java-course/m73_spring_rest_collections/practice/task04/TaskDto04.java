@@ -9,4 +9,12 @@ import org.springframework.web.bind.annotation.RestController;
 import java.util.List;
 import java.util.stream.Stream;
 
-record TaskDto04(Long id, String title, String status, String assignee, int priority) {}
+record TaskDto04(
+        Long id,
+        String title,
+        String status,
+        String assignee,
+        int priority
+) {
+
+}

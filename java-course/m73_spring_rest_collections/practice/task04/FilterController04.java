@@ -19,11 +19,31 @@ class FilterController04 {
             new TaskDto04(3L, "C", "DONE", "anna", 4));
 
     // TODO: @GetMapping
+    @GetMapping
     public List<TaskDto04> filter(
-            /* @RequestParam(required = false) */ String status,
-            /* @RequestParam(required = false) */ String assignee,
-            /* @RequestParam(required = false) */ Integer priorityMin) {
+            /* @RequestParam(required = false) */
+            @RequestParam(name = "status", required = false) String status,
+            /* @RequestParam(required = false) */
+            @RequestParam(name = "assignee", required = false) String assignee,
+            /* @RequestParam(required = false) */
+            @RequestParam(name = "priorityMin", required = false) Integer priorityMin) {
         // TODO: накопите условия на Stream и верните результат
-        return null;
+        // Начинаем поток
+        Stream<TaskDto04> stream = ALL.stream();
+
+        // Добавляем фильтры по мере необходимости
+        if (status != null && !status.isBlank()) {
+            stream = stream.filter(task -> task.status().equals(status));
+        }
+
+        if (assignee != null && !assignee.isBlank()) {
+            stream = stream.filter(task -> task.assignee().equals(assignee));
+        }
+
+        if (priorityMin != null) {
+            stream = stream.filter(task -> task.priority() >= priorityMin);
+        }
+
+        return stream.toList();
     }
 }

@@ -17,12 +17,36 @@ class PagedController05 {
             .mapToObj(i -> new TaskDto05((long) i, "Задача " + i))
             .toList();
 
-    // TODO: @GetMapping
+    @GetMapping
     public PagedResponse05<TaskDto05> page(
-            /* @RequestParam(defaultValue = "0") */ int page,
-            /* @RequestParam(defaultValue = "20") */ int size) {
-        // TODO: вычислите срез content, totalElements, totalPages, hasNext
-        // TODO: верните new PagedResponse05<>(content, page, size, totalElements, totalPages, hasNext)
-        return null;
+            @RequestParam(name = "page", defaultValue = "0") int page,
+            @RequestParam(name = "size", defaultValue = "20") int size) {
+
+        // 1. Вычисляем индексы
+        int from = page * size;
+        int to = Math.min(from + size, ALL.size());
+
+        // 2. Получаем content
+        List<TaskDto05> content;
+        if (from >= ALL.size()) {
+            content = List.of();
+        } else {
+            content = ALL.subList(from, to);
+        }
+
+        // 3. Вычисляем мета-информацию
+        long totalElements = ALL.size();
+        int totalPages = (int) Math.ceil((double) totalElements / size);
+        boolean hasNext = page < totalPages - 1;
+
+        // 4. Возвращаем ответ
+        return new PagedResponse05<>(
+                content,
+                page,
+                size,
+                totalElements,
+                totalPages,
+                hasNext
+        );
     }
 }

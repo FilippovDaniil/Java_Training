@@ -11,4 +11,12 @@ import java.util.List;
 import java.util.stream.IntStream;
 import java.util.stream.Stream;
 
-record TaskDto07(Long id, String title, String status, String assignee, int priority) {}
+record TaskDto07(
+        Long id,
+        String title,
+        String status,
+        String assignee,
+        int priority
+) {
+
+}

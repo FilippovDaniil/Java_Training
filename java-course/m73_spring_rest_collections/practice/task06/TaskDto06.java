@@ -11,4 +11,9 @@ import org.springframework.web.bind.annotation.RestController;
 import java.util.List;
 import java.util.stream.IntStream;
 
-record TaskDto06(Long id, String title) {}
+record TaskDto06(
+        Long id,
+        String title
+) {
+
+}

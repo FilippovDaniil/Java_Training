@@ -20,11 +20,15 @@ class PageableController06 {
             .toList();
 
     // TODO: @GetMapping
+    @GetMapping
     public Page<TaskDto06> all(Pageable pageable) {
         // TODO: from = pageable.getPageNumber() * pageable.getPageSize();
+        int from = pageable.getPageNumber() * pageable.getPageSize();
         // TODO: to   = Math.min(from + pageable.getPageSize(), ALL.size());
+        int to = Math.min(from + pageable.getPageSize(), ALL.size());
         // TODO: content = (from >= ALL.size()) ? List.of() : ALL.subList(from, to);
+        List<TaskDto06> content = (from >= ALL.size()) ? List.of() : ALL.subList(from, to);
         // TODO: return new PageImpl<>(content, pageable, ALL.size());
-        return null;
+        return new PageImpl<>(content, pageable, ALL.size());
     }
 }

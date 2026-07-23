@@ -10,4 +10,10 @@ import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
 
-record TaskDto03(Long id, String title, int priority) {}
+record TaskDto03(
+        Long id,
+        String title,
+        int priority
+) {
+
+}

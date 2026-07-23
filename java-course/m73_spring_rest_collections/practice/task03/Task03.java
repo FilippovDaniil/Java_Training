@@ -32,6 +32,7 @@ import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
 
+@SpringBootApplication
 public class Task03 {
     public static void main(String[] args) {
         SpringApplication.run(Task03.class, args);

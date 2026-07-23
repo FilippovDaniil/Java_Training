@@ -11,5 +11,13 @@ import java.util.List;
 import java.util.stream.IntStream;
 import java.util.stream.Stream;
 
-record PagedResponse07<T>(List<T> content, int page, int size,
-                          long totalElements, int totalPages, boolean hasNext) {}
+record PagedResponse07<T>(
+        List<T> content,
+        int page,
+        int size,
+        long totalElements,
+        int totalPages,
+        boolean hasNext
+) {
+
+}
