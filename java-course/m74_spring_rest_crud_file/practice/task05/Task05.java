@@ -33,6 +33,7 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 import java.util.Map;
 
+@SpringBootApplication
 public class Task05 {
     public static void main(String[] args) {
         SpringApplication.run(Task05.class, args);

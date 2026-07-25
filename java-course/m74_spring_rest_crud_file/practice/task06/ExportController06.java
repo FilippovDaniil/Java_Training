@@ -15,16 +15,32 @@ class ExportController06 {
             new TaskRow06(1L, "Купить кофе", "NEW"),
             new TaskRow06(2L, "Отчёт", "DONE"));
 
-    // TODO: @PatchMapping("/{id}")
-    public String archive(@PathVariable Long id, /* @RequestBody */ StatusDto06 dto) {
-        // TODO: верните "Задача " + id + " переведена в " + dto.status()
-        return null;
+    // ========== PATCH - обновить статус ==========
+    @PatchMapping("/{id}")
+    public String archive(@PathVariable Long id, @RequestBody StatusDto06 dto) {
+        return "Задача " + id + " переведена в " + dto.status();
     }
 
-    // TODO: @GetMapping(value = "/export", produces = "text/csv")
+    // ========== GET - экспорт в CSV ==========
+    @GetMapping(value = "/export", produces = "text/csv")
     public ResponseEntity<String> exportCsv() {
-        // TODO: соберите CSV (заголовок + строки ALL)
-        // TODO: верните ResponseEntity с Content-Disposition: attachment; filename="tasks.csv"
-        return null;
+        // Строим CSV
+        StringBuilder csv = new StringBuilder();
+
+        // Заголовок
+        csv.append("id,title,status\n");
+
+        // Данные
+        for (TaskRow06 task : ALL) {
+            csv.append(task.id()).append(",")
+                    .append(task.title()).append(",")
+                    .append(task.status()).append("\n");
+        }
+
+        // Возвращаем с заголовком для скачивания
+        return ResponseEntity
+                .ok()
+                .header("Content-Disposition", "attachment; filename=\"tasks.csv\"")
+                .body(csv.toString());
     }
 }
