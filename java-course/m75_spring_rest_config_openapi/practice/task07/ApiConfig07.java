@@ -25,13 +25,20 @@ import java.util.List;
 class ApiConfig07 implements WebMvcConfigurer {
 
     // TODO: @Bean OpenAPI apiInfo() { return new OpenAPI().info(new Info()....); }
+    @Bean
     public OpenAPI apiInfo() {
-        return null;
+        return new OpenAPI().info(new Info()
+                .title("Task Tracker API")
+                .version("1.0.0")
+                .description("API управления задачами"));
     }
 
     @Override
     public void addCorsMappings(CorsRegistry registry) {
         // TODO: registry.addMapping("/api/**").allowedOrigins("https://app.example.com")
         //               .allowedMethods("GET","POST","PUT","PATCH","DELETE");
+        registry.addMapping("/api/**")
+                .allowedOrigins("https://app.example.com")
+                .allowedMethods("GET", "POST", "PUT", "PATCH", "DELETE");
     }
 }

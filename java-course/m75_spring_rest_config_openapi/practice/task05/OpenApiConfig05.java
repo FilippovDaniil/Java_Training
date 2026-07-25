@@ -15,9 +15,16 @@ import org.springframework.web.bind.annotation.RestController;
 @Configuration
 class OpenApiConfig05 {
     // TODO: @Bean
+    @Bean
     public OpenAPI apiInfo() {
         // TODO: return new OpenAPI().info(new Info().title("Task Tracker API")
+        return new OpenAPI()
+                .info(
+                        new Info().title("Task Tracker API")
+                .version("1.0.0")
+                .description("API управления задачами")
+        );
         //              .version("1.0.0").description("API управления задачами"));
-        return null;
+
     }
 }

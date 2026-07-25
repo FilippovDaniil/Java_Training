@@ -9,4 +9,4 @@ import org.springframework.web.bind.annotation.RestController;
 
 // СОВМЕСТИМОЕ: добавлено необязательное поле priority
 // TODO: record TaskV1_06(Long id, String title, Integer priority)
-record TaskV1_06(Long id, String title) {}
+record TaskV1_06(Long id, String title, Integer priority) {}

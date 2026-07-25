@@ -12,14 +12,16 @@ import org.springframework.web.bind.annotation.RestController;
 class HeaderVersionController02 {
 
     // TODO: @GetMapping(value = "/{id}", headers = "X-API-Version=1")
-    public String getV1(@PathVariable Long id) {
+    @GetMapping(value = "/{id}", headers = "X-API-Version=1")
+    public String getV1(@PathVariable("id") Long id) {
         // TODO: верните "v1: задача " + id
-        return null;
+        return "v1: задача " + id;
     }
 
     // TODO: @GetMapping(value = "/{id}", headers = "X-API-Version=2")
-    public String getV2(@PathVariable Long id) {
+    @GetMapping(value = "/{id}", headers = "X-API-Version=2")
+    public String getV2(@PathVariable("id") Long id) {
         // TODO: верните "v2: задача " + id + " [NEW]"
-        return null;
+        return "v2: задача " + id + " [NEW]";
     }
 }

@@ -18,8 +18,11 @@ class DocumentedController04 {
     // TODO: @Operation(summary = "...", description = "...")
     // TODO: @ApiResponse(responseCode = "200", description = "...")
     // TODO: @ApiResponse(responseCode = "404", description = "...")
+    @ApiResponse(responseCode = "200", description = "Возврат кофе")
+    @ApiResponse(responseCode = "404", description = "Кофе не найдено")
+    @Operation(summary = "Купить кофе", description = "Получить кофе или 404")
     @GetMapping("/{id}")
-    public TaskDto04 get(@PathVariable Long id) {
+    public TaskDto04 get(@PathVariable("id") Long id) {
         if (id <= 0) throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Не найдено");
         return new TaskDto04(id, "Купить кофе");
     }

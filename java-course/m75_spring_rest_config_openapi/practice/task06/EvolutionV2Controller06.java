@@ -8,9 +8,12 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 // TODO: @RestController + @RequestMapping("/api/v2/tasks")
+@RestController
+@RequestMapping("/api/v2/tasks")
 class EvolutionV2Controller06 {
     // TODO: @GetMapping("/{id}") → TaskV2_06 (поле name вместо title)
-    public Object get(@PathVariable Long id) {
-        return null;
+    @GetMapping("/{id}")
+    public Object get(@PathVariable("id") Long id) {
+        return new TaskV1_06(id,"title",77);
     }
 }

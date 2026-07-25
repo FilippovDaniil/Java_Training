@@ -21,7 +21,13 @@ import java.util.List;
 // DTO с документацией
 // ============================================================
 record TaskDto07(
-        /* TODO: @Schema(description = "Идентификатор", example = "42") */ Long id,
-        /* TODO: @Schema(description = "Заголовок", example = "Купить кофе") */ String title,
-        /* TODO: @Schema(description = "Статус", example = "NEW") */ String status
+        /* TODO: @Schema(description = "Идентификатор", example = "42") */
+        @Schema(description = "Идентификатор", example = "42")
+        Long id,
+        /* TODO: @Schema(description = "Заголовок", example = "Купить кофе") */
+        @Schema(description = "Заголовок", example = "Купить кофе")
+        String title,
+        /* TODO: @Schema(description = "Статус", example = "NEW") */
+        @Schema(description = "Статус", example = "NEW")
+        String status
 ) {}

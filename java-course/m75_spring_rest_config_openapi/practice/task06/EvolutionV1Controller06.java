@@ -14,8 +14,8 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("/api/v1/tasks")
 class EvolutionV1Controller06 {
     @GetMapping("/{id}")
-    public TaskV1_06 get(@PathVariable Long id) {
+    public TaskV1_06 get(@PathVariable("id") Long id) {
         // TODO: верните задачу с заполненным (или null) priority
-        return null;
+        return new TaskV1_06(id,"title",77);
     }
 }

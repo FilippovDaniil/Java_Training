@@ -13,6 +13,11 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 record TaskDto05(
-        /* TODO: @Schema(description = "Идентификатор", example = "42") */ Long id,
-        /* TODO: @Schema(description = "Заголовок задачи", example = "Купить кофе") */ String title
-) {}
+        /* TODO: @Schema(description = "Идентификатор", example = "42") */
+        @Schema(description = "Идентификатор", example = "42")
+        Long id,
+        /* TODO: @Schema(description = "Заголовок задачи", example = "Купить кофе") */
+        @Schema(description = "Заголовок задачи", example = "Купить кофе")
+        String title
+) {
+}

@@ -11,4 +11,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.server.ResponseStatusException;
 
-record TaskDto04(Long id, String title) {}
+record TaskDto04(
+        Long id,
+        String title
+) {
+
+}

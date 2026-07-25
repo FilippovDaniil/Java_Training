@@ -13,9 +13,11 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 // TODO: @CrossOrigin(origins = "https://app.example.com")
 @RestController
 @RequestMapping("/api/public")
+@CrossOrigin(origins = "https://app.example.com")
 class PublicController03 {
     // TODO: @GetMapping("/ping") → "pong"
+    @GetMapping("/ping")
     public String ping() {
-        return null;
+        return "pong";
     }
 }

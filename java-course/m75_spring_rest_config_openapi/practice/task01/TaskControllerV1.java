@@ -8,9 +8,12 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 // TODO: @RestController + @RequestMapping("/api/v1/tasks")
+@RestController
+@RequestMapping("/api/v1/tasks")
 class TaskControllerV1 {
     // TODO: @GetMapping("/{id}") → new TaskV1(id, "Купить кофе")
-    public TaskV1 get(@PathVariable Long id) {
-        return null;
+    @GetMapping("/{id}")
+    public TaskV1 get(@PathVariable("id") Long id) {
+        return new TaskV1(id, "Купить кофе");
     }
 }

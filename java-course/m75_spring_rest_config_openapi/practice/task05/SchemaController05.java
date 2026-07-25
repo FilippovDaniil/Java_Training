@@ -16,7 +16,7 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("/api/tasks")
 class SchemaController05 {
     @GetMapping("/{id}")
-    public TaskDto05 get(@PathVariable Long id) {
+    public TaskDto05 get(@PathVariable("id") Long id) {
         return new TaskDto05(id, "Купить кофе");
     }
 }
