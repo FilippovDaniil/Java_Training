@@ -27,6 +27,7 @@ package m76_spring_rest_testing.practice.task02;
  */
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import jakarta.annotation.Resource;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
@@ -40,17 +41,28 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 
 // --- ТЕСТ (каркас) ---
 // TODO: @WebMvcTest(TaskController02.class)
+@WebMvcTest(TaskController02.class)
 class CreateTaskTest02 {
 
     // TODO: @Autowired MockMvc mockMvc;
+    @Resource
+    MockMvc mockMvc;
     // TODO: @Autowired ObjectMapper objectMapper;
+    @Resource
+    ObjectMapper objectMapper;
 
     @Test
     void createReturns201() throws Exception {
         // TODO: String json = objectMapper.writeValueAsString(new CreateTaskDto02("Купить кофе"));
+        String json = objectMapper.writeValueAsString(new CreateTaskDto02("Купить кофе"));
         // TODO: mockMvc.perform(post("/api/tasks").contentType(MediaType.APPLICATION_JSON).content(json))
         //              .andExpect(status().isCreated())
         //              .andExpect(header().exists("Location"))
         //              .andExpect(jsonPath("$.title").value("Купить кофе"));
+        mockMvc.perform(post("/api/tasks")
+                        .contentType(MediaType.APPLICATION_JSON).content(json))
+                .andExpect(status().isCreated())
+                .andExpect(header().exists("Location"))
+                .andExpect(jsonPath("$.title").value("Купить кофе"));
     }
 }

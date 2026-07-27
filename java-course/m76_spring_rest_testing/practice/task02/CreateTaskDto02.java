@@ -12,4 +12,8 @@ import java.net.URI;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
-record CreateTaskDto02(String title) {}
+record CreateTaskDto02(
+        String title
+) {
+
+}

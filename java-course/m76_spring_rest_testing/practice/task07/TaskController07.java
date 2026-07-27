@@ -24,14 +24,23 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 @RestController
 @RequestMapping("/api/tasks")
 class TaskController07 {
+
     private final TaskService07 service;
-    TaskController07(TaskService07 service) { this.service = service; }
+
+    @Autowired
+    TaskController07(TaskService07 service) {
+        this.service = service;
+    }
 
     @GetMapping
-    public List<TaskDto07> all() { return service.findAll(); }
+    public List<TaskDto07> all() {
+        return service.findAll();
+    }
 
     @GetMapping("/{id}")
-    public TaskDto07 one(@PathVariable Long id) { return service.find(id); }
+    public TaskDto07 one(@PathVariable("id") Long id) {
+        return service.find(id);
+    }
 
     @PostMapping
     public ResponseEntity<TaskDto07> create(@Valid @RequestBody CreateTaskDto07 dto) {
@@ -40,7 +49,7 @@ class TaskController07 {
     }
 
     @DeleteMapping("/{id}")
-    public ResponseEntity<Void> delete(@PathVariable Long id) {
+    public ResponseEntity<Void> delete(@PathVariable("id") Long id) {
         service.delete(id);
         return ResponseEntity.noContent().build();
     }

@@ -25,6 +25,7 @@ package m76_spring_rest_testing.practice.task03;
  * ПОДСКАЗКА: @MockBean настраивается через Mockito.when(...).thenThrow(...).
  */
 
+import jakarta.annotation.Resource;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
@@ -33,6 +34,7 @@ import org.springframework.context.annotation.Import;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
+import org.springframework.test.context.bean.override.mockito.MockitoBean;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.web.bind.annotation.*;
 import java.util.Map;
@@ -43,14 +45,22 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 // --- ТЕСТ (каркас) ---
 // TODO: @WebMvcTest(TaskController03.class)
 // TODO: @Import(GlobalHandler03.class)
+@WebMvcTest(TaskController03.class)
+@Import(GlobalHandler03.class)
 class NotFoundTest03 {
 
     // TODO: @Autowired MockMvc mockMvc;
+    @Resource
+    MockMvc mockMvc;
     // TODO: @MockBean TaskService03 service;
+    @MockitoBean
+    TaskService03 service;
 
     @Test
     void returns404() throws Exception {
         // TODO: when(service.find(999L)).thenThrow(new TaskNotFoundException03(999L));
+        when(service.find(999L)).thenThrow(new TaskNotFoundException03(999L));
         // TODO: mockMvc.perform(get("/api/tasks/999")).andExpect(status().isNotFound());
+        mockMvc.perform(get("/api/tasks/999")).andExpect(status().isNotFound());
     }
 }

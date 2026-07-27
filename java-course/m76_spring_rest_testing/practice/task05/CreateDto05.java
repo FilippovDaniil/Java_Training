@@ -10,4 +10,8 @@ import org.springframework.web.bind.annotation.*;
 import java.net.URI;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
-record CreateDto05(String title) {}
+record CreateDto05(
+        String title
+) {
+
+}

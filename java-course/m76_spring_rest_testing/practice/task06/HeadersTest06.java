@@ -26,9 +26,11 @@ package m76_spring_rest_testing.practice.task06;
  * ПОДСКАЗКА: import static org.hamcrest.Matchers.hasSize;
  */
 
+import jakarta.annotation.Resource;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.web.bind.annotation.*;
@@ -41,9 +43,12 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 
 // --- ТЕСТ (каркас) ---
 // TODO: @WebMvcTest(TaskController06.class)
+@WebMvcTest(TaskController06.class)
 class HeadersTest06 {
 
     // TODO: @Autowired MockMvc mockMvc;
+    @Resource
+    MockMvc mockMvc;
 
     @Test
     void listReturnsArrayOfThree() throws Exception {
@@ -51,6 +56,11 @@ class HeadersTest06 {
         //              .andExpect(status().isOk())
         //              .andExpect(content().contentType(MediaType.APPLICATION_JSON))
         //              .andExpect(jsonPath("$", hasSize(3)));
+        mockMvc.perform(get("/api/tasks"))
+                .andExpect(status().isOk())
+                .andExpect(content().contentType(MediaType.APPLICATION_JSON))
+                .andExpect(jsonPath("$", hasSize(3)));
+
     }
 
     @Test
@@ -58,5 +68,9 @@ class HeadersTest06 {
         // TODO: mockMvc.perform(post("/api/tasks"))
         //              .andExpect(status().isCreated())
         //              .andExpect(header().string("Location", "/api/tasks/100"));
+        mockMvc.perform(post("/api/tasks"))
+                .andExpect(status().isCreated())
+                .andExpect(header().string("Location", "/api/tasks/100"));
+
     }
 }

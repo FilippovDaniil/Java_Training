@@ -21,4 +21,11 @@ import static org.mockito.Mockito.when;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
-record CreateTaskDto07(@NotBlank @Size(min = 3, max = 100) String title) {}
+record CreateTaskDto07(
+
+        @NotBlank
+        @Size(min = 3, max = 100)
+        String title
+) {
+
+}

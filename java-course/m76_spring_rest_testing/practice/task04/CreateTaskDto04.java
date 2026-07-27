@@ -12,4 +12,10 @@ import org.springframework.web.bind.annotation.*;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
-record CreateTaskDto04(@NotBlank @Size(min = 3) String title) {}
+record CreateTaskDto04(
+        @NotBlank
+        @Size(min = 3)
+        String title
+) {
+
+}

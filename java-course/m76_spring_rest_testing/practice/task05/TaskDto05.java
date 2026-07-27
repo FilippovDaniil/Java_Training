@@ -10,4 +10,9 @@ import org.springframework.web.bind.annotation.*;
 import java.net.URI;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
-record TaskDto05(Long id, String title) {}
+record TaskDto05(
+        Long id,
+        String title
+) {
+
+}

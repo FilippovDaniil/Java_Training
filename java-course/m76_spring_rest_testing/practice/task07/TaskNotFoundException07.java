@@ -22,5 +22,7 @@ import static org.springframework.test.web.servlet.request.MockMvcRequestBuilder
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
 class TaskNotFoundException07 extends RuntimeException {
-    TaskNotFoundException07(Long id) { super("Задача " + id + " не найдена"); }
+    TaskNotFoundException07(Long id) {
+        super("Задача " + id + " не найдена");
+    }
 }

@@ -16,13 +16,20 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 @RestController
 @RequestMapping("/api/tasks")
 class TaskController06 {
+
     @GetMapping
     public List<TaskDto06> all() {
-        return List.of(new TaskDto06(1L, "A"), new TaskDto06(2L, "B"), new TaskDto06(3L, "C"));
+        return List.of(
+                new TaskDto06(1L, "A"),
+                new TaskDto06(2L, "B"),
+                new TaskDto06(3L, "C")
+        );
     }
 
     @PostMapping
     public ResponseEntity<TaskDto06> create() {
-        return ResponseEntity.created(URI.create("/api/tasks/100")).body(new TaskDto06(100L, "Новая"));
+        return ResponseEntity
+                .created(URI.create("/api/tasks/100"))
+                .body(new TaskDto06(100L, "Новая"));
     }
 }

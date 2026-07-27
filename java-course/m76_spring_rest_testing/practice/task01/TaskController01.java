@@ -3,7 +3,6 @@ package m76_spring_rest_testing.practice.task01;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
-import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.stereotype.Service;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.web.bind.annotation.*;
@@ -15,9 +14,15 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 @RestController
 @RequestMapping("/api/tasks")
 class TaskController01 {
+
     private final TaskService01 service;
-    TaskController01(TaskService01 service) { this.service = service; }
+
+    TaskController01(TaskService01 service) {
+        this.service = service;
+    }
 
     @GetMapping("/{id}")
-    public TaskDto01 get(@PathVariable Long id) { return service.find(id); }
+    public TaskDto01 get(@PathVariable("id") Long id) {
+        return service.find(id);
+    }
 }

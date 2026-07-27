@@ -25,11 +25,13 @@ package m76_spring_rest_testing.practice.task01;
  * ПОДСКАЗКА: статические импорты get/status/jsonPath уже добавлены.
  */
 
+import jakarta.annotation.Resource;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
-import org.springframework.boot.test.mock.mockito.MockBean;
+
 import org.springframework.stereotype.Service;
+import org.springframework.test.context.bean.override.mockito.MockitoBean;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.web.bind.annotation.*;
 import static org.mockito.Mockito.when;
@@ -39,17 +41,27 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 
 // --- ТЕСТ (каркас) ---
 // TODO: @WebMvcTest(TaskController01.class)
+@WebMvcTest(TaskController01.class)
 class TaskControllerTest01 {
 
     // TODO: @Autowired MockMvc mockMvc;
+    @Resource
+    MockMvc mockMvc;
     // TODO: @MockBean TaskService01 service;
+    @MockitoBean
+    TaskService01 service;
 
     @Test
     void getReturnsTask() throws Exception {
         // TODO: when(service.find(1L)).thenReturn(new TaskDto01(1L, "Кофе", "NEW"));
+        when(service.find(1L)).thenReturn(new TaskDto01(1L, "Кофе", "NEW"));
         // TODO: mockMvc.perform(get("/api/tasks/1"))
         //              .andExpect(status().isOk())
         //              .andExpect(jsonPath("$.title").value("Кофе"))
         //              .andExpect(jsonPath("$.status").value("NEW"));
+        mockMvc.perform(get("/api/tasks/1"))
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("$.title").value("Кофе"))
+                .andExpect(jsonPath("$.status").value("NEW"));
     }
 }

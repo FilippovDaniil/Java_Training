@@ -15,6 +15,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 @RestController
 @RequestMapping("/api/tasks")
 class TaskController02 {
+
     @PostMapping
     public ResponseEntity<TaskView02> create(@RequestBody CreateTaskDto02 dto) {
         TaskView02 saved = new TaskView02(1L, dto.title());

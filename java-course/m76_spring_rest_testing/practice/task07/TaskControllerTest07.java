@@ -35,6 +35,7 @@ package m76_spring_rest_testing.practice.task07;
  */
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import jakarta.annotation.Resource;
 import jakarta.validation.Valid;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Size;
@@ -44,7 +45,9 @@ import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.context.annotation.Import;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
+import org.springframework.test.context.bean.override.mockito.MockitoBean;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.web.bind.annotation.*;
 import java.net.URI;
@@ -61,43 +64,88 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 
 // TODO: @WebMvcTest(TaskController07.class)
 // TODO: @Import(GlobalHandler07.class)
+@Import(GlobalHandler07.class)
+@WebMvcTest(TaskController07.class)
 class TaskControllerTest07 {
 
     // TODO: @Autowired MockMvc mockMvc;
+    @Resource
+    MockMvc mockMvc;
     // TODO: @Autowired ObjectMapper objectMapper;
+    @Resource
+    ObjectMapper objectMapper;
     // TODO: @MockBean TaskService07 service;
+    @MockitoBean
+    TaskService07 service;
 
     @Test
     void listReturnsAll() throws Exception {
         // TODO: when(service.findAll()).thenReturn(List.of(new TaskDto07(1L,"A","NEW"), new TaskDto07(2L,"B","DONE")));
+        when(service.findAll())
+                .thenReturn(List.of(
+                        new TaskDto07(1L,"A","NEW"),
+                        new TaskDto07(2L,"B","DONE")
+                        )
+                );
         // TODO: GET /api/tasks → status().isOk() + jsonPath("$", hasSize(2))
+        mockMvc.perform(get("/api/tasks"))
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("$", hasSize(2)));
     }
 
     @Test
     void getExistingReturns200() throws Exception {
         // TODO: when(service.find(1L)).thenReturn(new TaskDto07(1L,"Кофе","NEW"));
+        when(service.find(1L))
+                .thenReturn(new TaskDto07(1L,"Кофе","NEW"));
         // TODO: GET /api/tasks/1 → 200 + jsonPath("$.title").value("Кофе")
+        mockMvc.perform(get("/api/tasks/1"))
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("$.title").value("Кофе"))
+                .andExpect(jsonPath("$.status").value("NEW"));
+
     }
 
     @Test
     void getMissingReturns404() throws Exception {
         // TODO: when(service.find(999L)).thenThrow(new TaskNotFoundException07(999L));
+        when(service.find(999L)).thenThrow(new TaskNotFoundException07(999L));
         // TODO: GET /api/tasks/999 → status().isNotFound()
+        mockMvc.perform(get("/api/tasks/999"))
+                .andExpect(status().isNotFound());
     }
 
     @Test
     void createReturns201() throws Exception {
         // TODO: when(service.create("Купить кофе")).thenReturn(new TaskDto07(5L,"Купить кофе","NEW"));
+        when(service.create("Купить кофе")).
+                thenReturn(new TaskDto07(5L,"Купить кофе","NEW"));
         // TODO: POST валидное тело → status().isCreated() + header().exists("Location")
+        TaskDto07 dto = new TaskDto07(5L,"Купить кофе","NEW");
+        mockMvc.perform(post("/api/tasks")
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .content(objectMapper.writeValueAsString(dto)))
+                .andExpect(status().isCreated())
+                .andExpect(header().exists("Location"));
     }
 
     @Test
     void createInvalidReturns400() throws Exception {
         // TODO: POST {"title":""} → status().isBadRequest()
+        when(service.create("Купить кофе")).
+                thenReturn(new TaskDto07(5L,"","NEW"));
+
+        TaskDto07 dto = new TaskDto07(5L,"","NEW");
+        mockMvc.perform(post("/api/tasks")
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .content(objectMapper.writeValueAsString(dto)))
+                .andExpect(status().isBadRequest());
     }
 
     @Test
     void deleteReturns204() throws Exception {
         // TODO: DELETE /api/tasks/1 → status().isNoContent()
+        mockMvc.perform(delete("/api/tasks/1"))
+                .andExpect(status().isNoContent());
     }
 }

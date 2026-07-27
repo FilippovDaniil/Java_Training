@@ -39,4 +39,6 @@ import org.springframework.web.bind.annotation.*;
 import java.net.URI;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
-class IntegrationApp05 {}
+class IntegrationApp05 {
+
+}

@@ -13,11 +13,15 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 @RestController
 @RequestMapping("/api/tasks")
 class TaskController05 {
+
     @GetMapping("/{id}")
-    public TaskDto05 get(@PathVariable Long id) { return new TaskDto05(id, "Кофе"); }
+    public TaskDto05 get(@PathVariable("id") Long id) {
+        return new TaskDto05(id, "Кофе");
+    }
 
     @PostMapping
     public ResponseEntity<TaskDto05> create(@RequestBody CreateDto05 dto) {
-        return ResponseEntity.created(URI.create("/api/tasks/2")).body(new TaskDto05(2L, dto.title()));
+        return ResponseEntity.created(URI.create("/api/tasks/2"))
+                .body(new TaskDto05(2L, dto.title()));
     }
 }

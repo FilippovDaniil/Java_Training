@@ -23,6 +23,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 
 @RestControllerAdvice
 class GlobalHandler07 {
+
     @ExceptionHandler(TaskNotFoundException07.class)
     public ResponseEntity<Map<String, Object>> handle(TaskNotFoundException07 ex) {
         return ResponseEntity.status(HttpStatus.NOT_FOUND).body(Map.of("error", ex.getMessage()));

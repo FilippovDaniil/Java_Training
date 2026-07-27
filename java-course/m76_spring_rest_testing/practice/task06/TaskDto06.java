@@ -13,4 +13,9 @@ import static org.springframework.test.web.servlet.request.MockMvcRequestBuilder
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
-record TaskDto06(Long id, String title) {}
+record TaskDto06(
+        Long id,
+        String title
+) {
+
+}

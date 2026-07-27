@@ -12,4 +12,9 @@ import java.net.URI;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
-record TaskView02(Long id, String title) {}
+record TaskView02(
+        Long id,
+        String title
+) {
+
+}

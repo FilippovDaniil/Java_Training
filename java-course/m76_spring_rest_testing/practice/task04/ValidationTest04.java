@@ -23,6 +23,7 @@ package m76_spring_rest_testing.practice.task04;
  * ПОДСКАЗКА: тело передавайте строкой в .content("{\"title\":\"...\"}").
  */
 
+import jakarta.annotation.Resource;
 import jakarta.validation.Valid;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Size;
@@ -37,15 +38,23 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 
 // --- ТЕСТ (каркас) ---
 // TODO: @WebMvcTest(TaskController04.class)
+@WebMvcTest(TaskController04.class)
 class ValidationTest04 {
 
     // TODO: @Autowired MockMvc mockMvc;
+
+    @Resource
+    MockMvc mockMvc;
 
     @Test
     void validBodyReturns200() throws Exception {
         // TODO: mockMvc.perform(post("/api/tasks").contentType(MediaType.APPLICATION_JSON)
         //              .content("{\"title\":\"Кофе\"}"))
         //              .andExpect(status().isOk());
+        mockMvc.perform(post("/api/tasks")
+                .contentType(MediaType.APPLICATION_JSON)
+                .content("{\"title\":\"Кофе\"}"))
+                .andExpect(status().isOk());
     }
 
     @Test
@@ -53,5 +62,9 @@ class ValidationTest04 {
         // TODO: mockMvc.perform(post("/api/tasks").contentType(MediaType.APPLICATION_JSON)
         //              .content("{\"title\":\"\"}"))
         //              .andExpect(status().isBadRequest());
+        mockMvc.perform(post("/api/tasks")
+                .contentType(MediaType.APPLICATION_JSON)
+                .content("{\"title\":\"\"}"))
+                .andExpect(status().isBadRequest());
     }
 }

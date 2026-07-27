@@ -16,5 +16,8 @@ import static org.springframework.test.web.servlet.request.MockMvcRequestBuilder
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 class TaskNotFoundException03 extends RuntimeException {
-    TaskNotFoundException03(Long id) { super("Задача " + id + " не найдена"); }
+
+    TaskNotFoundException03(Long id) {
+        super("Задача " + id + " не найдена");
+    }
 }
