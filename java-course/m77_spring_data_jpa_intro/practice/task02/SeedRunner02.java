@@ -1,6 +1,7 @@
 package m77_spring_data_jpa_intro.practice.task02;
 
 import jakarta.persistence.*;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -13,11 +14,21 @@ import org.springframework.stereotype.Component;
 class SeedRunner02 implements CommandLineRunner {
 
     // TODO: внедрите ProductRepository02 через конструктор
+    private final ProductRepository02 repo;
+
+    @Autowired
+    public SeedRunner02(ProductRepository02 repository02) {
+        this.repo = repository02;
+    }
 
     @Override
     public void run(String... args) {
         // TODO: repo.save(new Product02("Кофе", 500)); repo.save(new Product02("Чай", 300));
+        repo.save(new Product02("Кофе", 500));
+        repo.save(new Product02("Чай", 300));
         // TODO: System.out.println("Всего товаров: " + repo.count());
+        System.out.println("Всего товаров: " + repo.count());
         // TODO: repo.findAll().forEach(p -> System.out.println(p.getName()));
+        repo.findAll().forEach(p -> System.out.println(p.getName()));
     }
 }

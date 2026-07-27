@@ -33,6 +33,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Component;
 
+@SpringBootApplication
 public class Task02 {
     public static void main(String[] args) {
         SpringApplication.run(Task02.class, args);

@@ -12,14 +12,19 @@ import org.springframework.transaction.annotation.Transactional;
 class ProductDao04 {
 
     // TODO: @PersistenceContext private EntityManager em;
+    @PersistenceContext
+    private EntityManager em;
 
     // TODO: @Transactional
+    @Transactional
     public void save(Product04 p) {
         // TODO: em.persist(p);
+        em.persist(p);
     }
 
+    @Transactional
     public Product04 find(Long id) {
         // TODO: return em.find(Product04.class, id);
-        return null;
+        return em.find(Product04.class, id);
     }
 }

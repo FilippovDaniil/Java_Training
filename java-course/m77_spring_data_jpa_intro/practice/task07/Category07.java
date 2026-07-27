@@ -13,10 +13,19 @@ import org.springframework.stereotype.Service;
 // ============================================================
 
 // TODO: @Entity @Table(name = "categories")
+@Entity
+@Table(name = "categories")
 class Category07 {
     // TODO: @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+
     private String name;
+
     protected Category07() {}
-    public Category07(String name) { this.name = name; }
+
+    public Category07(String name) {
+        this.name = name;
+    }
 }

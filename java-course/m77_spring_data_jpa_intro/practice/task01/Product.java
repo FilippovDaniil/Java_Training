@@ -5,15 +5,19 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 // TODO: @Entity + @Table(name = "products")
+@Entity
+@Table(name = "products")
 class Product {
 
     // TODO: @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     private String name;
     private long price;
 
-    protected Product() {}   // конструктор без аргументов для JPA
+    public Product() {}   // конструктор без аргументов для JPA
 
     public Product(String name, long price) {
         this.name = name;

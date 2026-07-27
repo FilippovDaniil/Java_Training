@@ -11,12 +11,23 @@ import org.springframework.transaction.annotation.Transactional;
 @Entity
 @Table(name = "products")
 class Product04 {
-    @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String name;
 
     protected Product04() {}
-    public Product04(String name) { this.name = name; }
-    public Long getId() { return id; }
-    public String getName() { return name; }
+
+    public Product04(String name) {
+        this.name = name;
+    }
+
+    public Long getId() {
+        return id;
+    }
+
+    public String getName() {
+        return name;
+    }
 }

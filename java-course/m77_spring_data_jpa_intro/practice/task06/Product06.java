@@ -1,6 +1,7 @@
 package m77_spring_data_jpa_intro.practice.task06;
 
 import jakarta.persistence.*;
+import lombok.ToString;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -11,14 +12,26 @@ import java.util.List;
 
 @Entity
 @Table(name = "products")
+@ToString
 class Product06 {
-    @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String name;
     private long price;
 
     protected Product06() {}
-    public Product06(String name, long price) { this.name = name; this.price = price; }
-    public String getName() { return name; }
-    public long getPrice() { return price; }
+
+    public Product06(String name, long price) {
+        this.name = name; this.price = price;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public long getPrice() {
+        return price;
+    }
 }
