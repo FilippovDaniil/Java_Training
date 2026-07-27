@@ -9,11 +9,19 @@ import java.util.Objects;
 @Entity
 @Table(name = "order_items")
 class OrderItem06 {
+
     // TODO: @EmbeddedId
+    @EmbeddedId
     private OrderItemId06 id;
 
     private int quantity;
 
-    protected OrderItem06() {}
-    public OrderItem06(OrderItemId06 id, int quantity) { this.id = id; this.quantity = quantity; }
+    protected OrderItem06() {
+
+    }
+
+    public OrderItem06(OrderItemId06 id, int quantity) {
+        this.id = id;
+        this.quantity = quantity;
+    }
 }

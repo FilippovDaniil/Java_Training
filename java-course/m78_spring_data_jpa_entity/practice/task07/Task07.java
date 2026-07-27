@@ -48,6 +48,7 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Component;
 import java.time.LocalDateTime;
 
+@SpringBootApplication
 public class Task07 {
     public static void main(String[] args) {
         SpringApplication.run(Task07.class, args);

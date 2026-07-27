@@ -13,12 +13,16 @@ class Order03 {
     private Long id;
 
     // TODO: @Enumerated(EnumType.STRING)
+    @Enumerated(EnumType.STRING)
     private OrderStatus03 status;
 
     private LocalDateTime createdAt;   // авто-маппинг → TIMESTAMP
     private LocalDate dueDate;         // авто-маппинг → DATE
 
-    protected Order03() {}
+    protected Order03() {
+
+    }
+
     public Order03(OrderStatus03 status, LocalDate dueDate) {
         this.status = status;
         this.dueDate = dueDate;

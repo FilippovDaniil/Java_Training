@@ -12,8 +12,15 @@ class Product05 {
     private String name;
 
     // TODO: @Embedded
+    @Embedded
     private Money05 price;
 
-    protected Product05() {}
-    public Product05(String name, Money05 price) { this.name = name; this.price = price; }
+    protected Product05() {
+
+    }
+
+    public Product05(String name, Money05 price) {
+        this.name = name;
+        this.price = price;
+    }
 }

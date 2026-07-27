@@ -11,14 +11,22 @@ class Product02 {
     private Long id;
 
     // TODO: @Column(name = "product_name", nullable = false, length = 100)
+    @Column(name = "product_name", nullable = false, length = 100)
     private String name;
 
     // TODO: @Column(nullable = false, unique = true, length = 32)
+    @Column(nullable = false, unique = true, length = 32)
     private String sku;
 
     // TODO: @Column(length = 1000)
+    @Column(length = 1000)
     private String description;
 
-    protected Product02() {}
-    public Product02(String name, String sku) { this.name = name; this.sku = sku; }
+    protected Product02() {
+
+    }
+
+    public Product02(String name, String sku) {
+        this.name = name; this.sku = sku;
+    }
 }

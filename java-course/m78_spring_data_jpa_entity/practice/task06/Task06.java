@@ -27,6 +27,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import java.io.Serializable;
 import java.util.Objects;
 
+@SpringBootApplication
 public class Task06 {
     public static void main(String[] args) {
         SpringApplication.run(Task06.class, args);

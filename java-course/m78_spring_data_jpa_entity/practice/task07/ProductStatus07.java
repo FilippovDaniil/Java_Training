@@ -8,4 +8,8 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Component;
 import java.time.LocalDateTime;
 
-enum ProductStatus07 { DRAFT, ACTIVE, ARCHIVED }
+enum ProductStatus07 {
+    DRAFT,
+    ACTIVE,
+    ARCHIVED
+}
