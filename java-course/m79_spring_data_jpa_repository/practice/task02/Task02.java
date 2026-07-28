@@ -29,6 +29,7 @@ import org.springframework.stereotype.Component;
 import java.util.List;
 import java.util.Optional;
 
+@SpringBootApplication
 public class Task02 {
     public static void main(String[] args) {
         SpringApplication.run(Task02.class, args);

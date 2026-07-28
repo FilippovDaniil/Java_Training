@@ -12,6 +12,9 @@ import java.util.List;
 
 interface ProductRepository04 extends JpaRepository<Product04, Long> {
     // TODO: long countByCategory(String category);
+    long countByCategory(String category);
     // TODO: boolean existsBySku(String sku);
+    boolean existsBySku(String sku);
     // TODO: long deleteByCategory(String category);
+    long deleteByCategory(String category);
 }

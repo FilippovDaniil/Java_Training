@@ -1,6 +1,7 @@
 package m79_spring_data_jpa_repository.practice.task02;
 
 import jakarta.persistence.*;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -11,8 +12,13 @@ import java.util.Optional;
 
 @Component
 class QueryRunner02 implements CommandLineRunner {
+
     private final ProductRepository02 repo;
-    QueryRunner02(ProductRepository02 repo) { this.repo = repo; }
+
+    @Autowired
+    QueryRunner02(ProductRepository02 repo) {
+        this.repo = repo;
+    }
 
     @Override
     public void run(String... args) {
@@ -20,8 +26,12 @@ class QueryRunner02 implements CommandLineRunner {
                 new Product02("Ноутбук", 80000, "Электроника", "SKU-1"),
                 new Product02("Мышь", 900, "Электроника", "SKU-2"),
                 new Product02("Java book", 1500, "Книги", "SKU-3")));
+
         // TODO: выведите repo.findByCategory("Электроника").size()
+        System.out.println(repo.findByCategory("Электроника").size());
         // TODO: выведите дешёвые: repo.findByPriceLessThan(2000)
+        System.out.println("Cheap: " + repo.findByPriceLessThan(2000));
         // TODO: выведите repo.findBySku("SKU-1") (Optional)
+        System.out.println(repo.findBySku("SKU-1"));
     }
 }

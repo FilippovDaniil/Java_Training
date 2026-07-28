@@ -1,6 +1,7 @@
 package m79_spring_data_jpa_repository.practice.task06;
 
 import jakarta.persistence.*;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -15,8 +16,13 @@ import java.util.stream.IntStream;
 
 @Component
 class Runner06 implements CommandLineRunner {
+
     private final ProductRepository06 repo;
-    Runner06(ProductRepository06 repo) { this.repo = repo; }
+
+    @Autowired
+    Runner06(ProductRepository06 repo) {
+        this.repo = repo;
+    }
 
     @Override
     public void run(String... args) {
@@ -24,8 +30,17 @@ class Runner06 implements CommandLineRunner {
                 .mapToObj(i -> new Product06("Товар " + i, i * 1000L, "Электроника"))
                 .toList();
         repo.saveAll(items);
+
         // TODO: Pageable pr = PageRequest.of(0, 3, Sort.by("price").descending());
+        Pageable pr = PageRequest.of(0, 3, Sort.by("price").descending());
+
         // TODO: Page<Product06> page = repo.findByCategory("Электроника", pr);
+        Page<Product06> page = repo.findByCategory("Электроника", pr);
+
         // TODO: выведите size/totalElements/totalPages/hasNext
+        System.out.println(page.getTotalElements());
+        System.out.println(page.getTotalPages());
+        System.out.println(page.hasNext());
+        System.out.println(page.getSize());
     }
 }

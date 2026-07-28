@@ -14,10 +14,23 @@ import java.util.List;
 
 interface ProductRepository07 extends JpaRepository<Product07, Long> {
     // TODO: List<Product07> findByCategory(String category);
+    List<Product07> findByCategory(String category);
+
     // TODO: List<Product07> findByCategoryAndAvailableTrue(String category);
+    List<Product07> findByCategoryAndAvailableTrue(String category);
+
     // TODO: List<Product07> findByPriceBetween(long min, long max);
+    List<Product07> findByPriceBetween(long min, long max);
+
     // TODO: List<Product07> findByNameContainingIgnoreCase(String part);
+    List<Product07> findByNameContainingIgnoreCase(String part);
+
     // TODO: long countByCategory(String category);
+    long countByCategory(String category);
+
     // TODO: Page<Product07> findByAvailableTrue(Pageable pageable);
+    Page<Product07> findByAvailableTrue(Pageable pageable);
+
     // TODO: List<Product07> findTop5ByOrderByPriceDesc();
+    List<Product07> findTop5ByOrderByPriceDesc();
 }

@@ -12,5 +12,7 @@ import java.util.Optional;
 
 interface ProductRepository05 extends JpaRepository<Product05, Long> {
     // TODO: List<Product05> findTop3ByOrderByPriceDesc();
+    List<Product05> findTop3ByOrderByPriceDesc();
     // TODO: Optional<Product05> findFirstByOrderByPriceAsc();
+    Optional<Product05> findFirstByOrderByPriceAsc();
 }

@@ -11,6 +11,9 @@ import java.util.Optional;
 
 interface ProductRepository02 extends JpaRepository<Product02, Long> {
     // TODO: List<Product02> findByCategory(String category);
+    List<Product02> findByCategory(String category);
     // TODO: List<Product02> findByPriceLessThan(long price);
+    List<Product02> findByPriceLessThan(long price);
     // TODO: Optional<Product02> findBySku(String sku);
+    Optional<Product02> findBySku(String sku);
 }

@@ -1,6 +1,7 @@
 package m79_spring_data_jpa_repository.practice.task04;
 
 import jakarta.persistence.*;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -12,9 +13,15 @@ import java.util.List;
 
 @Component
 class Runner04 implements CommandLineRunner {
+
     private final ProductRepository04 repo;
     private final DeleteService04 service;
-    Runner04(ProductRepository04 repo, DeleteService04 service) { this.repo = repo; this.service = service; }
+
+    @Autowired
+    Runner04(ProductRepository04 repo, DeleteService04 service) {
+        this.repo = repo;
+        this.service = service;
+    }
 
     @Override
     public void run(String... args) {
@@ -22,7 +29,12 @@ class Runner04 implements CommandLineRunner {
                 new Product04("Мышь", "Электроника", "SKU-1"),
                 new Product04("Клавиатура", "Электроника", "SKU-2"),
                 new Product04("Java book", "Книги", "SKU-3")));
+
         // TODO: выведите countByCategory("Электроника") и existsBySku("SKU-1")
+        System.out.println(repo.countByCategory("Электроника"));
+        System.out.println(repo.existsBySku("SKU-1"));
         // TODO: вызовите service.purge("Электроника"), затем выведите repo.count()
+        System.out.println(service.purge("Электроника"));
+        System.out.println(repo.count());
     }
 }

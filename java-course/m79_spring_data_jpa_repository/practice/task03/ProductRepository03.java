@@ -10,7 +10,11 @@ import java.util.List;
 
 interface ProductRepository03 extends JpaRepository<Product03, Long> {
     // TODO: List<Product03> findByCategoryAndPriceGreaterThan(String category, long price);
+    List<Product03> findByCategoryAndPriceGreaterThan(String category, long price);
     // TODO: List<Product03> findByPriceBetween(long min, long max);
+    List<Product03> findByPriceBetween(long min, long max);
     // TODO: List<Product03> findByNameContainingIgnoreCase(String part);
+    List<Product03> findByNameContainingIgnoreCase(String part);
     // TODO: List<Product03> findByCategoryOrderByPriceDesc(String category);
+    List<Product03> findByCategoryOrderByPriceDesc(String category);
 }

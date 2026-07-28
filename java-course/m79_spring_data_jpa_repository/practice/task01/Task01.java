@@ -28,6 +28,7 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Component;
 import java.util.List;
 
+@SpringBootApplication
 public class Task01 {
     public static void main(String[] args) {
         SpringApplication.run(Task01.class, args);

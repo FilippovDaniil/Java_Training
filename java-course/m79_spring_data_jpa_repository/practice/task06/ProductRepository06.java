@@ -15,4 +15,5 @@ import java.util.stream.IntStream;
 
 interface ProductRepository06 extends JpaRepository<Product06, Long> {
     // TODO: Page<Product06> findByCategory(String category, Pageable pageable);
+    Page<Product06> findByCategory(String category, Pageable pageable);
 }

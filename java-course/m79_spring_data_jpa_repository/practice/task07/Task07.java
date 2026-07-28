@@ -40,6 +40,7 @@ package m79_spring_data_jpa_repository.practice.task07;
  */
 
 import jakarta.persistence.*;
+import lombok.ToString;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -51,6 +52,7 @@ import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
 import java.util.List;
 
+@SpringBootApplication
 public class Task07 {
     public static void main(String[] args) {
         SpringApplication.run(Task07.class, args);
