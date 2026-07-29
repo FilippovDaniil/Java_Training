@@ -10,4 +10,8 @@ import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Component;
 import java.util.List;
 
-record ProductSummary04(String name, long price) {}
+public record ProductSummary04(
+        String name,
+        long price) {
+
+}

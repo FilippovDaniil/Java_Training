@@ -31,6 +31,7 @@ import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Component;
 import java.util.List;
 
+@SpringBootApplication
 public class Task04 {
     public static void main(String[] args) {
         SpringApplication.run(Task04.class, args);

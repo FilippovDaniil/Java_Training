@@ -15,15 +15,20 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import java.util.List;
 
+// ============ REPOSITORY ============
 interface ProductRepository07 extends JpaRepository<Product07, Long>,
-                                      JpaSpecificationExecutor<Product07> {
+        JpaSpecificationExecutor<Product07> {
 
-    // TODO: @Query JPQL поиск по подстроке без регистра
-    List<Product07> searchByKeyword(/* @Param("kw") */ String kw);
+    // JPQL поиск по подстроке без регистра
+    @Query("SELECT p FROM Product07 p WHERE LOWER(p.name) LIKE LOWER(CONCAT('%', :kw, '%'))")
+    List<Product07> searchByKeyword(@Param("kw") String kw);
 
-    // TODO: @Query DTO-проекция: SELECT new ProductCard07(p.name, p.price, p.category) FROM Product07 p
+    // DTO-проекция
+    @Query("SELECT new m80_spring_data_jpa_advanced.practice.task07.ProductCard07(p.name, p.price, p.category) FROM Product07 p")
     List<ProductCard07> cards();
 
-    // TODO: @Modifying @Query UPDATE цен категории на factor
-    int discount(/* @Param("factor") */ double factor, /* @Param("cat") */ String category);
+    // @Modifying UPDATE цен категории на factor
+    @Modifying
+    @Query("UPDATE Product07 p SET p.price = p.price * :factor WHERE p.category = :category")
+    int discount(@Param("factor") double factor, @Param("category") String category);
 }

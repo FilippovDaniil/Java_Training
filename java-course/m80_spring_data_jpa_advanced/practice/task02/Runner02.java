@@ -17,8 +17,14 @@ class Runner02 implements CommandLineRunner {
 
     @Override
     public void run(String... args) {
-        repo.saveAll(List.of(new Product02("A", 1000), new Product02("B", 3000), new Product02("C", 500)));
+        repo.saveAll(List.of(
+                new Product02("A", 1000),
+                new Product02("B", 3000),
+                new Product02("C", 500))
+        );
         // TODO: выведите repo.nativeExpensive(800)
+        System.out.println(repo.nativeExpensive(800));
         // TODO: выведите repo.averagePrice()
+        System.out.println(repo.averagePrice());
     }
 }

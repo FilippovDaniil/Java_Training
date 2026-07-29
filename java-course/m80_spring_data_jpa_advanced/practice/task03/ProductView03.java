@@ -11,5 +11,7 @@ import java.util.List;
 // TODO: интерфейс-проекция
 interface ProductView03 {
     // TODO: String getName();
+    String getName();
     // TODO: long getPrice();
+    long getPrice();
 }

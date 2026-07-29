@@ -14,10 +14,10 @@ import java.util.List;
 class ProductSpecs06 {
     public static Specification<Product06> hasCategory(String category) {
         // TODO: return (root, query, cb) -> category == null ? null : cb.equal(root.get("category"), category);
-        return null;
+        return (root, query, cb) -> category == null ? null : cb.equal(root.get("category"), category);
     }
     public static Specification<Product06> priceAtLeast(Long min) {
         // TODO: return (root, query, cb) -> min == null ? null : cb.greaterThanOrEqualTo(root.get("price"), min);
-        return null;
+        return (root, query, cb) -> min == null ? null : cb.greaterThanOrEqualTo(root.get("price"), min);
     }
 }

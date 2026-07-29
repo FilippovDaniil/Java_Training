@@ -17,5 +17,7 @@ interface ProductRepository05 extends JpaRepository<Product05, Long> {
 
     // TODO: @Modifying
     // TODO: @Query("UPDATE Product05 p SET p.price = p.price * :factor WHERE p.category = :cat")
-    int raisePrices(/* @Param("factor") */ double factor, /* @Param("cat") */ String category);
+    @Modifying
+    @Query("UPDATE Product05 p SET p.price = p.price * :factor WHERE p.category = :cat")
+    int raisePrices(/* @Param("factor") */ @Param("factor") double factor, /* @Param("cat") */ @Param("cat") String category);
 }

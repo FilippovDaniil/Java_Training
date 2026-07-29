@@ -13,17 +13,36 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import java.util.List;
 
-@Entity @Table(name = "products")
+@Entity
+@Table(name = "products")
 class Product05 {
-    @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+
     private String name;
-    private long price;
+
+    @Column(nullable = false)
+    private double price;
+
     private String category;
-    protected Product05() {}
-    public Product05(String name, long price, String category) {
-        this.name = name; this.price = price; this.category = category;
+
+    protected Product05() {
+
     }
-    public String getName() { return name; }
-    public long getPrice() { return price; }
+
+    public Product05(String name, long price, String category) {
+        this.name = name;
+        this.price = price;
+        this.category = category;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public double getPrice() {
+        return price;
+    }
 }

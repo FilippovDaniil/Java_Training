@@ -36,6 +36,7 @@ import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
 import java.util.List;
 
+@SpringBootApplication
 public class Task06 {
     public static void main(String[] args) {
         SpringApplication.run(Task06.class, args);

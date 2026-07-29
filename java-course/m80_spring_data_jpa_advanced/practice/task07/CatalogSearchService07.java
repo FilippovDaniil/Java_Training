@@ -16,13 +16,37 @@ import org.springframework.transaction.annotation.Transactional;
 import java.util.List;
 
 // TODO: @Service
+@Service
 class CatalogSearchService07 {
 
-    // TODO: внедрите ProductRepository07
+    private final ProductRepository07 repository;
 
-    public List<Product07> search(String kw) { return null; }                  // TODO
-    public List<ProductCard07> cards() { return null; }                        // TODO
-    public List<Product07> filter(String cat, Long min, Long max) { return null; } // TODO: Specification
-    // TODO: @Transactional
-    public int applyDiscount(String cat, double factor) { return 0; }          // TODO
+    public CatalogSearchService07(ProductRepository07 repository) {
+        this.repository = repository;
+    }
+
+    // Поиск по ключевому слову
+    public List<Product07> search(String kw) {
+        return repository.searchByKeyword(kw);
+    }
+
+    // DTO-проекция
+    public List<ProductCard07> cards() {
+        return repository.cards();
+    }
+
+    // Фильтр с Specification
+    public List<Product07> filter(String cat, Long min, Long max) {
+        Specification<Product07> spec = Specification
+                .where(ProductSpecs07.hasCategory(cat))
+                .and(ProductSpecs07.priceBetween(min, max))
+                .and(ProductSpecs07.availableOnly());
+        return repository.findAll(spec);
+    }
+
+    // Применить скидку
+    @Transactional
+    public int applyDiscount(String cat, double factor) {
+        return repository.discount(factor, cat);
+    }
 }

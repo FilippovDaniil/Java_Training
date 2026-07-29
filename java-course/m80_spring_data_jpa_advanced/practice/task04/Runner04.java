@@ -1,6 +1,7 @@
 package m80_spring_data_jpa_advanced.practice.task04;
 
 import jakarta.persistence.*;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -12,12 +13,21 @@ import java.util.List;
 
 @Component
 class Runner04 implements CommandLineRunner {
+
     private final ProductRepository04 repo;
-    Runner04(ProductRepository04 repo) { this.repo = repo; }
+
+    @Autowired
+    Runner04(ProductRepository04 repo) {
+        this.repo = repo; }
 
     @Override
     public void run(String... args) {
-        repo.saveAll(List.of(new Product04("A", 100), new Product04("B", 5000), new Product04("C", 2000)));
+        repo.saveAll(List.of(
+                new Product04("A", 100),
+                new Product04("B", 5000),
+                new Product04("C", 2000))
+        );
         // TODO: repo.summaries(1000).forEach(s -> System.out.println(s.name() + " = " + s.price()));
+        repo.summaries(1000).forEach(s -> System.out.println(s.name() + " = " + s.price()));
     }
 }

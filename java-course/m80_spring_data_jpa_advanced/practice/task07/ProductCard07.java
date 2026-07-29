@@ -15,4 +15,9 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import java.util.List;
 
-record ProductCard07(String name, long price, String category) {}
+record ProductCard07(
+        String name,
+        double price,
+        String category) {
+
+}

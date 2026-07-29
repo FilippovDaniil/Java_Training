@@ -13,5 +13,6 @@ import java.util.List;
 interface ProductRepository04 extends JpaRepository<Product04, Long> {
 
     // TODO: @Query("SELECT new ProductSummary04(p.name, p.price) FROM Product04 p WHERE p.price >= :min")
-    List<ProductSummary04> summaries(/* @Param("min") */ long min);
+    @Query("SELECT new m80_spring_data_jpa_advanced.practice.task04.ProductSummary04(p.name, p.price) FROM Product04 p WHERE p.price >= :min")
+    List<ProductSummary04> summaries(/* @Param("min") */ @Param("min") long min);
 }

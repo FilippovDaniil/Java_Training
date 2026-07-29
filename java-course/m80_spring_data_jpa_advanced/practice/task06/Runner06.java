@@ -1,6 +1,7 @@
 package m80_spring_data_jpa_advanced.practice.task06;
 
 import jakarta.persistence.*;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -13,9 +14,15 @@ import java.util.List;
 
 @Component
 class Runner06 implements CommandLineRunner {
+
     private final ProductRepository06 repo;
     private final SearchService06 service;
-    Runner06(ProductRepository06 repo, SearchService06 service) { this.repo = repo; this.service = service; }
+
+    @Autowired
+    Runner06(ProductRepository06 repo, SearchService06 service) {
+        this.repo = repo;
+        this.service = service;
+    }
 
     @Override
     public void run(String... args) {
@@ -25,5 +32,9 @@ class Runner06 implements CommandLineRunner {
                 new Product06("Java book", 1500, "Книги")));
         // TODO: выведите размеры результатов для search("Электроника", 1000L),
         //       search("Книги", null), search(null, 1000L), search(null, null)
+        System.out.println(service.search("Электроника", 1000L));
+        System.out.println(service.search("Книги", null));
+        System.out.println(service.search(null, 1000L));
+        System.out.println(service.search(null, null));
     }
 }

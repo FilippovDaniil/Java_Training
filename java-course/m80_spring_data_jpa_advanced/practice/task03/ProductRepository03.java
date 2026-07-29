@@ -10,4 +10,5 @@ import java.util.List;
 
 interface ProductRepository03 extends JpaRepository<Product03, Long> {
     // TODO: List<ProductView03> findByCategory(String category);
+    List<ProductView03> findByCategory(String category);
 }

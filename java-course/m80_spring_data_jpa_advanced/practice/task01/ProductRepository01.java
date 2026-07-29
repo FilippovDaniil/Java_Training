@@ -13,8 +13,10 @@ import java.util.List;
 interface ProductRepository01 extends JpaRepository<Product01, Long> {
 
     // TODO: @Query("SELECT p FROM Product01 p WHERE p.price > :min AND p.category = :cat")
-    List<Product01> expensiveInCategory(/* @Param("min") */ long min, /* @Param("cat") */ String category);
+    @Query("SELECT p FROM Product01 p WHERE p.price > :min AND p.category = :cat")
+    List<Product01> expensiveInCategory(/* @Param("min") */ @Param("min") long min, /* @Param("cat") */ @Param("cat") String category);
 
     // TODO: @Query("SELECT p FROM Product01 p WHERE LOWER(p.name) LIKE LOWER(CONCAT('%', :part, '%'))")
-    List<Product01> searchByName(/* @Param("part") */ String part);
+    @Query("SELECT p FROM Product01 p WHERE LOWER(p.name) LIKE LOWER(CONCAT('%', :part, '%'))")
+    List<Product01> searchByName(/* @Param("part") */ @Param("part") String part);
 }

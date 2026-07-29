@@ -10,12 +10,24 @@ import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Component;
 import java.util.List;
 
-@Entity @Table(name = "products")
+@Entity
+@Table(name = "products")
 class Product04 {
-    @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+
     private String name;
+
     private long price;
-    protected Product04() {}
-    public Product04(String name, long price) { this.name = name; this.price = price; }
+
+    protected Product04() {
+
+    }
+
+    public Product04(String name, long price) {
+        this.name = name;
+        this.price = price;
+    }
 }

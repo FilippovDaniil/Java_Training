@@ -13,8 +13,10 @@ import java.util.List;
 interface ProductRepository02 extends JpaRepository<Product02, Long> {
 
     // TODO: @Query(value = "SELECT * FROM products WHERE price > :min", nativeQuery = true)
-    List<Product02> nativeExpensive(/* @Param("min") */ long min);
+    @Query(value = "SELECT * FROM products WHERE price > :min", nativeQuery = true)
+    List<Product02> nativeExpensive(/* @Param("min") */ @Param("min") long min);
 
     // TODO: @Query(value = "SELECT AVG(price) FROM products", nativeQuery = true)
+    @Query(value = "SELECT AVG(price) FROM products", nativeQuery = true)
     Double averagePrice();
 }

@@ -1,6 +1,7 @@
 package m80_spring_data_jpa_advanced.practice.task05;
 
 import jakarta.persistence.*;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -15,12 +16,18 @@ import java.util.List;
 
 @Service
 class PriceService05 {
+
     private final ProductRepository05 repo;
-    PriceService05(ProductRepository05 repo) { this.repo = repo; }
+
+    @Autowired
+    PriceService05(ProductRepository05 repo) {
+        this.repo = repo;
+    }
 
     // TODO: @Transactional
+    @Transactional
     public int raise(String category, double factor) {
         // TODO: return repo.raisePrices(factor, category);
-        return 0;
+        return repo.raisePrices(factor, category);
     }
 }
