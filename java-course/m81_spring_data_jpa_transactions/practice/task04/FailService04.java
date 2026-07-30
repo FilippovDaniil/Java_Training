@@ -1,6 +1,7 @@
 package m81_spring_data_jpa_transactions.practice.task04;
 
 import jakarta.persistence.*;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -11,16 +12,23 @@ import org.springframework.transaction.annotation.Transactional;
 
 @Service
 class FailService04 {
+
     private final ProductRepository04 repo;
-    FailService04(ProductRepository04 repo) { this.repo = repo; }
+
+    @Autowired
+    FailService04(ProductRepository04 repo) {
+        this.repo = repo;
+    }
 
     // TODO: @Transactional
+    @Transactional
     public void saveAndFailUnchecked(String name) {
         repo.save(new Product04(name));
         throw new RuntimeException("сбой (unchecked) — должно откатиться");
     }
 
     // TODO: @Transactional(rollbackFor = Exception.class)  — иначе checked НЕ откатит
+    @Transactional(rollbackFor = Exception.class)
     public void saveAndFailChecked(String name) throws Exception {
         repo.save(new Product04(name));
         throw new Exception("сбой (checked)");

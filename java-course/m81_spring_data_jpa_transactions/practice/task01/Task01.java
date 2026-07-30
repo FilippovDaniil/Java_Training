@@ -29,6 +29,7 @@ import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+@SpringBootApplication
 public class Task01 {
     public static void main(String[] args) {
         SpringApplication.run(Task01.class, args);

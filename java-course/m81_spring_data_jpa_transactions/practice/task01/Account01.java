@@ -9,14 +9,33 @@ import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-@Entity @Table(name = "accounts")
+@Entity
+@Table(name = "accounts")
 class Account01 {
-    @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+
     private long balance;
-    protected Account01() {}
-    public Account01(long balance) { this.balance = balance; }
-    public Long getId() { return id; }
-    public long getBalance() { return balance; }
-    public void setBalance(long b) { this.balance = b; }
+
+    protected Account01() {
+
+    }
+
+    public Account01(long balance) {
+        this.balance = balance;
+    }
+
+    public Long getId() {
+        return id;
+    }
+
+    public long getBalance() {
+        return balance;
+    }
+
+    public void setBalance(long b) {
+        this.balance = b;
+    }
 }

@@ -10,11 +10,21 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
-@Entity @Table(name = "audits")
+@Entity
+@Table(name = "audits")
 class Audit05 {
-    @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+
     private String message;
-    protected Audit05() {}
-    public Audit05(String message) { this.message = message; }
+
+    protected Audit05() {
+
+    }
+
+    public Audit05(String message) {
+        this.message = message;
+    }
 }

@@ -1,6 +1,7 @@
 package m81_spring_data_jpa_transactions.practice.task06;
 
 import jakarta.persistence.*;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -12,8 +13,13 @@ import org.springframework.transaction.annotation.Transactional;
 // --- АНТИ-ПАТТЕРН: self-invocation (для изучения) ---
 @Service
 class BrokenService06 {
+
     private final ProductRepository06 repo;
-    BrokenService06(ProductRepository06 repo) { this.repo = repo; }
+
+    @Autowired
+    BrokenService06(ProductRepository06 repo) {
+        this.repo = repo;
+    }
 
     public void outer(String name) {
         this.inner(name);   // ❌ @Transactional на inner() НЕ сработает (самовызов)

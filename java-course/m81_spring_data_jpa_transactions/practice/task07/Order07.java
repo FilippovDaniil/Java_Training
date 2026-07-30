@@ -10,12 +10,24 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
-@Entity @Table(name = "orders")
+@Entity
+@Table(name = "orders")
 class Order07 {
-    @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+
     private Long productId;
+
     private int qty;
-    protected Order07() {}
-    public Order07(Long productId, int qty) { this.productId = productId; this.qty = qty; }
+
+    protected Order07() {
+
+    }
+
+    public Order07(Long productId, int qty) {
+        this.productId = productId;
+        this.qty = qty;
+    }
 }

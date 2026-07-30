@@ -1,6 +1,7 @@
 package m81_spring_data_jpa_transactions.practice.task07;
 
 import jakarta.persistence.*;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -15,12 +16,20 @@ import org.springframework.transaction.annotation.Transactional;
 // ============================================================
 
 // TODO: @Service
+@Service
 class AuditService07 {
+
     private final AuditRepository07 repo;
-    AuditService07(AuditRepository07 repo) { this.repo = repo; }
+
+    @Autowired
+    AuditService07(AuditRepository07 repo) {
+        this.repo = repo;
+    }
 
     // TODO: @Transactional(propagation = Propagation.REQUIRES_NEW)
+    @Transactional(propagation = Propagation.REQUIRES_NEW)
     public void log(String msg) {
         // TODO: repo.save(new Audit07(msg));
+        repo.save(new Audit07(msg));
     }
 }

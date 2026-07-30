@@ -10,12 +10,25 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import java.util.List;
 
-@Entity @Table(name = "products")
+@Entity
+@Table(name = "products")
 class Product03 {
-    @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+
     private String name;
-    protected Product03() {}
-    public Product03(String name) { this.name = name; }
-    public String getName() { return name; }
+
+    protected Product03() {
+
+    }
+
+    public Product03(String name) {
+        this.name = name;
+    }
+
+    public String getName() {
+        return name;
+    }
 }

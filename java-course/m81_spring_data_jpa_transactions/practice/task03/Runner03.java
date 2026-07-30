@@ -1,6 +1,7 @@
 package m81_spring_data_jpa_transactions.practice.task03;
 
 import jakarta.persistence.*;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -12,13 +13,22 @@ import java.util.List;
 
 @Component
 class Runner03 implements CommandLineRunner {
+
     private final CatalogService03 service;
-    Runner03(CatalogService03 service) { this.service = service; }
+
+    @Autowired
+    Runner03(CatalogService03 service) {
+        this.service = service;
+    }
 
     @Override
     public void run(String... args) {
         // TODO: service.add("Кофе"); service.add("Чай");
+        service.add("Кофе");
+        service.add("Чай");
         // TODO: System.out.println("Всего: " + service.countAll());
+        System.out.println("Всего: " + service.countAll());
         // TODO: service.findAll().forEach(p -> System.out.println(p.getName()));
+        service.findAll().forEach(p -> System.out.println(p.getName()));
     }
 }

@@ -1,6 +1,7 @@
 package m81_spring_data_jpa_transactions.practice.task06;
 
 import jakarta.persistence.*;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -11,11 +12,18 @@ import org.springframework.transaction.annotation.Transactional;
 
 // --- ПРАВИЛЬНО: inner вынесен в отдельный бин ---
 // TODO: @Service
+@Service
 class InnerService06 {
+
     private final ProductRepository06 repo;
-    InnerService06(ProductRepository06 repo) { this.repo = repo; }
+
+    @Autowired
+    InnerService06(ProductRepository06 repo) {
+        this.repo = repo;
+    }
 
     // TODO: @Transactional
+    @Transactional
     public void inner(String name) {
         repo.save(new Product06(name));
     }

@@ -1,6 +1,8 @@
 package m81_spring_data_jpa_transactions.practice.task02;
 
 import jakarta.persistence.*;
+import lombok.Getter;
+import lombok.ToString;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -9,13 +11,31 @@ import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-@Entity @Table(name = "products")
+@Entity
+@Table(name = "products")
+@ToString
+@Getter
 class Product02 {
-    @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+
     private String name;
-    protected Product02() {}
-    public Product02(String name) { this.name = name; }
-    public String getName() { return name; }
-    public void setName(String name) { this.name = name; }
+
+    protected Product02() {
+
+    }
+
+    public Product02(String name) {
+        this.name = name;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
 }

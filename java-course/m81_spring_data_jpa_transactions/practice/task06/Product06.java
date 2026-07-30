@@ -9,11 +9,21 @@ import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-@Entity @Table(name = "products")
+@Entity
+@Table(name = "products")
 class Product06 {
-    @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+
     private String name;
-    protected Product06() {}
-    public Product06(String name) { this.name = name; }
+
+    protected Product06() {
+
+    }
+
+    public Product06(String name) {
+        this.name = name;
+    }
 }
