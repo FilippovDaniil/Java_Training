@@ -15,4 +15,6 @@ import java.util.List;
 interface CategoryRepository05 extends JpaRepository<Category05, Long> {
     // TODO: @EntityGraph(attributePaths = "products")
     // TODO: List<Category05> findByNameContaining(String part);
+    @EntityGraph(attributePaths = "products")
+    List<Category05> findByNameContaining(String part);
 }

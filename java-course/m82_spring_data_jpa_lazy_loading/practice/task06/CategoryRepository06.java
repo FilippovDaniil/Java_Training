@@ -15,4 +15,7 @@ interface CategoryRepository06 extends JpaRepository<Category06, Long> {
     // TODO: @Query("select new CategorySummary06(c.name, count(p)) " +
     // TODO:        "from Category06 c left join c.products p group by c.id, c.name")
     // TODO: List<CategorySummary06> summaries();
+    @Query("select new m82_spring_data_jpa_lazy_loading.practice.task06.CategorySummary06(c.name, count(p)) " +
+            "from Category06 c left join c.products p group by c.id, c.name")
+    List<CategorySummary06> summaries();
 }

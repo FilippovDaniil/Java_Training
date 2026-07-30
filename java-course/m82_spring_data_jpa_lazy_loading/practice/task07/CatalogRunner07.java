@@ -1,6 +1,7 @@
 package m82_spring_data_jpa_lazy_loading.practice.task07;
 
 import jakarta.persistence.*;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -17,10 +18,17 @@ import java.util.List;
 // Runner (каркас)
 // ============================================================
 // TODO: @Component
+@Component
 class CatalogRunner07 implements CommandLineRunner {
+
     private final CategoryRepository07 repo;
     private final CatalogService07 service;
-    CatalogRunner07(CategoryRepository07 repo, CatalogService07 service) { this.repo = repo; this.service = service; }
+
+    @Autowired
+    CatalogRunner07(CategoryRepository07 repo, CatalogService07 service) {
+        this.repo = repo;
+        this.service = service;
+    }
 
     @Override
     public void run(String... args) {
@@ -34,5 +42,8 @@ class CatalogRunner07 implements CommandLineRunner {
         // TODO: service.listWithProducts();
         // TODO: service.search("ни");     // "Книги"
         // TODO: service.overview();       // 4 строки, последняя с 0
+        service.listWithProducts();
+        service.search("ни");
+        service.overview();
     }
 }

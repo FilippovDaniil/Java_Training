@@ -16,4 +16,9 @@ import java.util.List;
 // ============================================================
 // DTO для сводки
 // ============================================================
-record CatalogRow07(String name, long productCount) {}
+record CatalogRow07(
+        String name,
+        long productCount
+) {
+
+}

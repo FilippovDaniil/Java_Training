@@ -1,6 +1,7 @@
 package m82_spring_data_jpa_lazy_loading.practice.task02;
 
 import jakarta.persistence.*;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -13,9 +14,15 @@ import java.util.List;
 
 @Component
 class Runner02 implements CommandLineRunner {
+
     private final CategoryRepository02 repo;
     private final CatalogService02 service;
-    Runner02(CategoryRepository02 repo, CatalogService02 service) { this.repo = repo; this.service = service; }
+
+    @Autowired
+    Runner02(CategoryRepository02 repo, CatalogService02 service) {
+        this.repo = repo;
+        this.service = service;
+    }
 
     @Override
     public void run(String... args) {
@@ -24,5 +31,7 @@ class Runner02 implements CommandLineRunner {
         Long id = repo.save(c).getId();
         // TODO: service.brokenRead(id);            // ожидается "Поймано: LazyInitializationException"
         // TODO: System.out.println("fixed = " + service.fixedRead(id));  // ожидается 2
+        service.brokenRead(id);
+        System.out.println("fixed = " + service.fixedRead(id));
     }
 }

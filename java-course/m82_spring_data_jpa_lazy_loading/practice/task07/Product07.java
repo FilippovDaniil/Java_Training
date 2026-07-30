@@ -13,14 +13,28 @@ import org.springframework.transaction.annotation.Transactional;
 import java.util.ArrayList;
 import java.util.List;
 
-@Entity @Table(name = "products")
+@Entity
+@Table(name = "products")
 class Product07 {
-    @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+
     private String name;
+
     @ManyToOne(fetch = FetchType.LAZY) @JoinColumn(name = "category_id")
     private Category07 category;
-    protected Product07() {}
-    public Product07(String name) { this.name = name; }
-    public void setCategory(Category07 c) { this.category = c; }
+
+    protected Product07() {
+
+    }
+
+    public Product07(String name) {
+        this.name = name;
+    }
+
+    public void setCategory(Category07 c) {
+        this.category = c;
+    }
 }

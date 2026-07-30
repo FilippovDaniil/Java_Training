@@ -15,4 +15,6 @@ import java.util.List;
 interface CategoryRepository04 extends JpaRepository<Category04, Long> {
     // TODO: @Query("select distinct c from Category04 c join fetch c.products")
     // TODO: List<Category04> findAllWithProducts();
+    @Query("select distinct c from Category04 c join fetch c.products")
+    List<Category04> findAllWithProducts();
 }

@@ -1,6 +1,7 @@
 package m82_spring_data_jpa_lazy_loading.practice.task03;
 
 import jakarta.persistence.*;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -13,9 +14,15 @@ import java.util.List;
 
 @Component
 class Runner03 implements CommandLineRunner {
+
     private final CategoryRepository03 repo;
     private final ReportService03 service;
-    Runner03(CategoryRepository03 repo, ReportService03 service) { this.repo = repo; this.service = service; }
+
+    @Autowired
+    Runner03(CategoryRepository03 repo, ReportService03 service) {
+        this.repo = repo;
+        this.service = service;
+    }
 
     @Override
     public void run(String... args) {
@@ -26,5 +33,6 @@ class Runner03 implements CommandLineRunner {
             repo.save(c);
         }
         // TODO: service.reportNaive();   // в логе: 1 + 3 = 4 SELECT'а
+        service.reportNaive();
     }
 }

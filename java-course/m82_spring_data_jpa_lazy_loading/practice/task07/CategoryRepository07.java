@@ -19,11 +19,18 @@ import java.util.List;
 interface CategoryRepository07 extends JpaRepository<Category07, Long> {
     // TODO: @Query("select distinct c from Category07 c join fetch c.products")
     // TODO: List<Category07> findAllWithProducts();
+    @Query("select distinct c from Category07 c join fetch c.products")
+    List<Category07> findAllWithProducts();
 
     // TODO: @EntityGraph(attributePaths = "products")
     // TODO: List<Category07> findByNameContaining(String part);
+    @EntityGraph(attributePaths = "products")
+    List<Category07> findByNameContaining(String part);
 
     // TODO: @Query("select new CatalogRow07(c.name, count(p)) from Category07 c " +
     // TODO:        "left join c.products p group by c.id, c.name")
     // TODO: List<CatalogRow07> overview();
+    @Query("select new m82_spring_data_jpa_lazy_loading.practice.task07.CatalogRow07(c.name, count(p)) from Category07 c " +
+            "left join c.products p group by c.id, c.name")
+    List<CatalogRow07> overview();
 }

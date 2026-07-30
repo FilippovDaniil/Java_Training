@@ -1,6 +1,7 @@
 package m82_spring_data_jpa_lazy_loading.practice.task07;
 
 import jakarta.persistence.*;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -17,24 +18,41 @@ import java.util.List;
 // Сервис (каркас)
 // ============================================================
 // TODO: @Service
+@Service
 class CatalogService07 {
-    private final CategoryRepository07 repo;
-    CatalogService07(CategoryRepository07 repo) { this.repo = repo; }
 
-    // TODO: @Transactional
-    public void listWithProducts() {
-        // TODO: for (Category07 c : repo.findAllWithProducts())
-        // TODO:     System.out.println(c.getName() + ": " + c.getProducts().size());
+    private final CategoryRepository07 repo;
+
+    @Autowired
+    CatalogService07(CategoryRepository07 repo) {
+        this.repo = repo;
     }
 
     // TODO: @Transactional
+    @Transactional
+    public void listWithProducts() {
+        // TODO: for (Category07 c : repo.findAllWithProducts())
+        // TODO:     System.out.println(c.getName() + ": " + c.getProducts().size());
+        for (Category07 c : repo.findAllWithProducts()){
+            System.out.println(c.getName() + ": " + c.getProducts().size());
+        }
+    }
+
+    // TODO: @Transactional
+    @Transactional
     public void search(String part) {
         // TODO: for (Category07 c : repo.findByNameContaining(part))
         // TODO:     System.out.println("найдено: " + c.getName() + " (" + c.getProducts().size() + ")");
+        for (Category07 c : repo.findByNameContaining(part)){
+            System.out.println("найдено: " + c.getName() + " (" + c.getProducts().size() + ")");
+        }
     }
 
     public void overview() {
         // TODO: for (CatalogRow07 r : repo.overview())
         // TODO:     System.out.println(r.name() + " -> " + r.productCount());
+        for (CatalogRow07 r : repo.overview()){
+            System.out.println(r.name() + " -> " + r.productCount());
+        }
     }
 }
