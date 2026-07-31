@@ -90,11 +90,17 @@ dependencies {
     implementation 'io.jsonwebtoken:jjwt-impl:0.12.6'
     implementation 'io.jsonwebtoken:jjwt-jackson:0.12.6'
 
+    // Kafka (modules 119-126): spring-kafka + test support, versions from the Boot BOM.
+    implementation 'org.springframework.kafka:spring-kafka'
+    implementation 'org.springframework.kafka:spring-kafka-test'
+    implementation 'org.awaitility:awaitility'
+
     // Testcontainers
     implementation 'org.springframework.boot:spring-boot-testcontainers'
     implementation 'org.testcontainers:testcontainers'
     implementation 'org.testcontainers:junit-jupiter'
     implementation 'org.testcontainers:postgresql'
+    implementation 'org.testcontainers:kafka'
 
     // OpenAPI / Swagger (not in Boot BOM)
     implementation 'org.springdoc:springdoc-openapi-starter-webmvc-ui:2.7.0'

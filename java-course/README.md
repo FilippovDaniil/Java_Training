@@ -1,15 +1,16 @@
-# Java — Учебный курс (Core Java → Spring Boot → Docker)
+# Java — Учебный курс (Core Java → Spring Boot → Docker → Kafka)
 
-Самодостаточный учебный репозиторий: путь **от основ Java до production-ready микросервиса** на Spring Boot с безопасностью, тестами и контейнеризацией. Построен по принципу **«теория + практика»**: на каждую тему — объяснение (`theory.md`) и **7 задач** с нарастающей сложностью (`Task01 → Task07`, где седьмая — мини-проект).
+Самодостаточный учебный репозиторий: путь **от основ Java до production-ready микросервиса** на Spring Boot с безопасностью, тестами, контейнеризацией и асинхронной интеграцией через Kafka. Построен по принципу **«теория + практика»**: на каждую тему — объяснение (`theory.md`) и **7 задач** с нарастающей сложностью (`Task01 → Task07`, где седьмая — мини-проект).
 
-Курс охватывает **118 модулей** в четырёх частях:
+Курс охватывает **126 модулей** в пяти частях:
 
 - **Часть 1 (01–28)** — Core Java: синтаксис, ООП, коллекции, исключения, потоки.
 - **Часть 2 (29–66)** — инструменты и БД: Maven/Gradle, тесты, SQL, JDBC, Hibernate, Spring Core, Spring Boot.
 - **Часть 3 (67–92)** — углублённый Spring: REST/MVC, Spring Data JPA, Hibernate Deep Dive.
 - **Часть 4 (93–118)** — production-ready: Spring Security, тестирование Spring Boot, Docker.
+- **Часть 5 (119–126)** — асинхронное взаимодействие: Apache Kafka — producer/consumer, контракты событий, надёжность (retry/DLQ/идемпотентность), событийные паттерны (outbox, CQRS, saga), тестирование и эксплуатация.
 
-Сквозные практические проекты: **Task Tracker API** (REST → JWT → тесты → Docker) и **shop-data-jpa** (Data/Hibernate).
+Сквозные практические проекты: **Task Tracker API** (REST → JWT → тесты → Docker → события Kafka), **сервис уведомлений** (потребитель событий) и **shop-data-jpa** (Data/Hibernate).
 
 ---
 
@@ -190,6 +191,19 @@ java TaskNN
 | 117 | JVM под memory/CPU limits, image hygiene, non-root | [`m117_docker_jvm_tuning`](m117_docker_jvm_tuning/theory.md) |
 | 118 | Финальный reusable template, production-ready образ | [`m118_docker_final_template`](m118_docker_final_template/theory.md) |
 
+### Часть 5 — Асинхронное взаимодействие: Apache Kafka (119–126)
+
+| #  | Тема | Каталог |
+|----|------|---------|
+| 119 | Брокеры сообщений, топики/партиции/офсеты, Kafka в Compose, CLI | [`m119_kafka_intro`](m119_kafka_intro/theory.md) |
+| 120 | Producer на Spring: `KafkaTemplate`, сериализация, ключи, `acks` | [`m120_kafka_producer_spring`](m120_kafka_producer_spring/theory.md) |
+| 121 | `@KafkaListener`: группы, коммиты офсетов, concurrency, батчи | [`m121_kafka_consumer_spring`](m121_kafka_consumer_spring/theory.md) |
+| 122 | Контракты событий: конверт, JSON/Avro, Schema Registry, совместимость | [`m122_kafka_serialization_contracts`](m122_kafka_serialization_contracts/theory.md) |
+| 123 | Надёжность: гарантии доставки, идемпотентность, retry, DLQ, транзакции | [`m123_kafka_reliability`](m123_kafka_reliability/theory.md) |
+| 124 | Паттерны: outbox, CDC/Debezium, CQRS-проекции, saga, compaction | [`m124_kafka_event_patterns`](m124_kafka_event_patterns/theory.md) |
+| 125 | Тестирование: моки, `@EmbeddedKafka`, `KafkaTestUtils`, Testcontainers | [`m125_kafka_testing`](m125_kafka_testing/theory.md) |
+| 126 | Прод: Compose/K8s, метрики и lag, SASL/ACL, тюнинг, финальный шаблон | [`m126_kafka_production_final`](m126_kafka_production_final/theory.md) |
+
 ---
 
 ## 🚀 Рекомендации по изучению
@@ -209,7 +223,7 @@ java TaskNN
 | JDK | **21 LTS** (проект пинит toolchain 21; в IDE: Gradle JVM = 21 и Project SDK = 21 — на JDK 25 IntelliJ краснит stdlib) |
 | IDE | IntelliJ IDEA (Community Edition достаточно) |
 | Сборка | Core-задачи запускаются напрямую; для Spring/JPA — Gradle (есть в Spring-проектах) |
-| Docker | для модулей 111–118 — Docker Desktop / Rancher Desktop |
+| Docker | для модулей 111–126 — Docker Desktop / Rancher Desktop (Kafka, Testcontainers) |
 
 ---
 
@@ -221,9 +235,11 @@ java TaskNN
 |-----------|--------|---------------|
 | Терминальные (Git, Maven) | 21, 27, 32 | Команды в терминале; `.java` лишь несёт условие в JavaDoc |
 | SQL-носители | 44–48 | Внутри text-блока `String sql = """ … """;` — пишете SQL, запускаете в H2/любой СУБД |
-| Тесты (JUnit/Mockito) | 28, 34, 76, 83, 101–110 | Тест-классы **без `main`**: запускайте в IDE (▶) или `./gradlew test` |
-| С зависимостями (Spring, Hibernate, Jackson…) | 33, 35, 51–53, 56, 59–110 | В шапке задачи — «ТРЕБУЮТСЯ ЗАВИСИМОСТИ»; запуск в IDE/Gradle (bare-`javac` без classpath не соберёт — это норма) |
+| Тесты (JUnit/Mockito) | 28, 34, 76, 83, 101–110, 125 | Тест-классы **без `main`**: запускайте в IDE (▶) или `./gradlew test` |
+| С зависимостями (Spring, Hibernate, Jackson, Kafka…) | 33, 35, 51–53, 56, 59–110, 120–125 | В шапке задачи — «ТРЕБУЮТСЯ ЗАВИСИМОСТИ»; запуск в IDE/Gradle (bare-`javac` без classpath не соберёт — это норма) |
 | Docker-носители артефактов | 111–118 | Внутри text-блока — `Dockerfile` / `docker-compose.yml` / `application.yml` / CLI-команды; переносите в реальные файлы и выполняйте |
+| Kafka: носители артефактов и аналитика | 119, 122 (05–06), 124 (03), 126 | Внутри text-блока — Compose/K8s-манифесты, CLI-команды, `.avsc`, конфиги метрик/ACL, расчёты и чек-листы; переносите в реальные файлы и выполняйте |
+| Kafka: код с брокером | 120–126 | Нужен **запущенный брокер** (стек из модуля 119, задача 07) — либо `@EmbeddedKafka`/Testcontainers в тестах модуля 125 |
 | Только теория | 31, 36, 37, 39–43 | Папки `practice/` нет — только `theory.md` (с глоссарием и схемами) |
 
 > Задачи со множеством типов оформлены как папка `TaskNN/` — см. [правило выше](#-правило-задачи-со-множеством-типов--в-своей-папке).
@@ -232,4 +248,4 @@ java TaskNN
 
 ## 🧭 Что дальше (вне курса)
 
-Учебный репозиторий доводит до уровня Junior/Middle Java-разработчика. Дальнейшее развитие: оркестрация (Kubernetes/Helm), CI/CD, мониторинг (Prometheus/Grafana/Loki), распределённые системы.
+Учебный репозиторий доводит до уровня Junior/Middle Java-разработчика. Дальнейшее развитие: Kafka Streams/ksqlDB и потоковая аналитика, оркестрация (Kubernetes/Helm, Strimzi), CI/CD, мониторинг (Prometheus/Grafana/Loki), распределённая трассировка (OpenTelemetry).
