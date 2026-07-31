@@ -4,16 +4,17 @@
 
 ### Самодостаточный путь от первой строки кода до архитектора и аналитика систем
 
-**Пять курсов в одном репозитории:** основы Java и backend на Spring → паттерны и архитектура → алгоритмы и структуры данных → системный анализ (middle+, без кода) → system design (middle+ → senior, без кода).
+**Пять курсов в одном репозитории:** основы Java и backend на Spring (+ Docker и Kafka) → паттерны и архитектура → алгоритмы и структуры данных → системный анализ (middle+, без кода) → system design (middle+ → senior, без кода).
 Единая методика: **маленькая тема → короткая теория → задачи без готовых решений → проверяемый результат.**
 
 ![Java](https://img.shields.io/badge/Java-21%20LTS-orange?logo=openjdk&logoColor=white)
 ![Spring Boot](https://img.shields.io/badge/Spring%20Boot-3.x-6DB33F?logo=springboot&logoColor=white)
 ![Build](https://img.shields.io/badge/build-javac%20%2F%20Gradle-blue?logo=gradle&logoColor=white)
 ![Docker](https://img.shields.io/badge/Docker-ready-2496ED?logo=docker&logoColor=white)
+![Kafka](https://img.shields.io/badge/Apache%20Kafka-3.x-231F20?logo=apachekafka&logoColor=white)
 
-![Темы](https://img.shields.io/badge/учебных%20тем-257-success)
-![Задачи](https://img.shields.io/badge/.java%20файлов-2986-informational)
+![Темы](https://img.shields.io/badge/учебных%20тем-265-success)
+![Задачи](https://img.shields.io/badge/.java%20файлов-3147-informational)
 ![Системный анализ](https://img.shields.io/badge/системный%20анализ-470%20.md-blueviolet)
 ![System Design](https://img.shields.io/badge/system%20design-590%20.md-9cf)
 ![Решения](https://img.shields.io/badge/решения-пишешь%20сам-red)
@@ -39,7 +40,7 @@
 
 | Раздел | О чём | Объём | Сквозные проекты |
 |--------|-------|-------|------------------|
-| 🟦 **[java-course](java-course/README.md)** | Core Java → Spring Boot → Docker. От синтаксиса до production-ready микросервиса с безопасностью, тестами и контейнеризацией. | **118 модулей**, ~1925 `.java` | Task Tracker API · shop-data-jpa |
+| 🟦 **[java-course](java-course/README.md)** | Core Java → Spring Boot → Docker → **Kafka**. От синтаксиса до production-ready микросервиса с безопасностью, тестами, контейнеризацией и событийной интеграцией. | **126 модулей**, ~2086 `.java` | Task Tracker API · сервис уведомлений · shop-data-jpa |
 | 🟪 **[patterns-architecture](patterns-architecture/README.md)** | Архитектурное мышление: принципы ООП/SOLID → паттерны GoF → DDD, Hexagonal, CQRS, Saga → рефакторинг legacy. | **26 тем**, 182 задачи, 843 `.java` | OPS (Order Processing) · BAM (Banking) |
 | 🟩 **[algorithms-course](algorithms-course/README.md)** | Алгоритмы и структуры данных: Big O → сортировки/поиск → деревья/хеши/кучи → графы → DP/строки/сжатие. | **25 тем**, 175 задач, 218 `.java` | Data-Cruncher (аналитическая система) |
 | 🟧 **[system-analysis-course](system-analysis-course/README.md)** | Системный анализ middle+ (**без кода**): профессия → требования → моделирование (BPMN/UML) → данные → архитектура → интеграции/API → качество и поставка → capstone. Артефакты `.md`, проверка по критериям приёмки. | **39 модулей**, 390 задач, 470 `.md` | FoodExpress · MedConnect · Умный дом/IoT (capstone) |
@@ -52,9 +53,9 @@
 ## 🧭 Какой раздел выбрать
 
 ```
-                  +---------------------------------------------+
-  Начинаю с нуля  |  java-course  (Core Java → Spring → Docker)   |  Junior → Middle
-                  +-----------------------+---------------------+
+                  +-----------------------------------------------------+
+  Начинаю с нуля  |  java-course (Core Java → Spring → Docker → Kafka)   |  Junior → Middle
+                  +-----------------------+-----------------------------+
                                           |  после ООП/коллекций (≈ модуль 30)
                           +---------------+---------------+
                           ▼                                ▼
@@ -140,7 +141,7 @@ public class TaskNN {
 .\run.ps1 java-course\m05_loops\practice\Task01.java    # или по полному пути
 ```
 
-> ⚙️ **Окружение:** **JDK 21 LTS** — важно: на JDK 25 IntelliJ 2025.2 краснит стандартную библиотеку, поэтому в IDE поставьте **Gradle JVM = 21** и **Project SDK = 21** (проект уже пинит toolchain 21). IntelliJ IDEA (Community достаточно) · Docker — для модулей контейнеризации `java-course`.
+> ⚙️ **Окружение:** **JDK 21 LTS** — важно: на JDK 25 IntelliJ 2025.2 краснит стандартную библиотеку, поэтому в IDE поставьте **Gradle JVM = 21** и **Project SDK = 21** (проект уже пинит toolchain 21). IntelliJ IDEA (Community достаточно) · Docker — для модулей контейнеризации и Kafka в `java-course` (111–126).
 
 > 🟧 **Системный анализ ничего не запускает:** задачи решаются текстом и диаграммами прямо в `.md`, проверка — по критериям приёмки (нотации BPMN/UML, SQL, OpenAPI в [Swagger Editor](https://editor.swagger.io)). JDK/IDE для этого раздела не нужны.
 
@@ -179,7 +180,7 @@ public class TaskNN {
 Java_Training/
 +-- README.md                  ← вы здесь
 +-- LEARNING-METHODOLOGY.md     # методика обучения (переносимая)
-+-- java-course/                # 118 модулей: Core Java → Spring Boot → Docker
++-- java-course/                # 126 модулей: Core Java → Spring Boot → Docker → Kafka
 +-- patterns-architecture/      # 26 тем: ООП/SOLID → GoF → DDD/Hexagonal → legacy
 +-- algorithms-course/          # 25 тем: Big O → структуры → графы → DP/сжатие
 +-- system-analysis-course/     # 39 модулей: требования → моделирование → API → capstone (без кода)
