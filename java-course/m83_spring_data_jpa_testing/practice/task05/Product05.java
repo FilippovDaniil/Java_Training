@@ -13,13 +13,28 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import static org.assertj.core.api.Assertions.assertThat;
 
 // --- класс-под-тестом дан готовым ---
-@Entity @Table(name = "products")
+@Entity
+@Table(name = "products")
 class Product05 {
-    @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+
     private String name;
+
     private int price;
-    protected Product05() {}
-    public Product05(String name, int price) { this.name = name; this.price = price; }
-    public int getPrice() { return price; }
+
+    protected Product05() {
+
+    }
+
+    public Product05(String name, int price) {
+        this.name = name;
+        this.price = price;
+    }
+
+    public int getPrice() {
+        return price;
+    }
 }

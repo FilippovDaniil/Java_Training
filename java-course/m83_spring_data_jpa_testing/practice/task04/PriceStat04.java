@@ -13,4 +13,9 @@ import java.util.List;
 import static org.assertj.core.api.Assertions.assertThat;
 
 // --- DTO для проекции ---
-record PriceStat04(String category, double avgPrice) {}
+record PriceStat04(
+        String category,
+        double avgPrice
+) {
+
+}

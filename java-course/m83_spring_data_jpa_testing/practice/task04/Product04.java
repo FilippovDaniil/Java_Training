@@ -13,16 +13,31 @@ import java.util.List;
 import static org.assertj.core.api.Assertions.assertThat;
 
 // --- класс-под-тестом дан готовым ---
-@Entity @Table(name = "products")
+@Entity
+@Table(name = "products")
 class Product04 {
-    @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+
     private String name;
+
     private String category;
+
     private int price;
-    protected Product04() {}
-    public Product04(String name, String category, int price) {
-        this.name = name; this.category = category; this.price = price;
+
+    protected Product04() {
+
     }
-    public int getPrice() { return price; }
+
+    public Product04(String name, String category, int price) {
+        this.name = name;
+        this.category = category;
+        this.price = price;
+    }
+
+    public int getPrice() {
+        return price;
+    }
 }

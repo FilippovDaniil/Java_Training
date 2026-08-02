@@ -22,27 +22,38 @@ package m83_spring_data_jpa_testing.practice.task01;
  * ПОДСКАЗКА: assertThat(...).isPresent() / .isEmpty() для Optional; AssertJ уже на classpath.
  */
 
-import jakarta.persistence.*;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
-import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.stereotype.Component;
+
 import static org.assertj.core.api.Assertions.assertThat;
 
-class Task01 {
+@DataJpaTest
+@SuppressWarnings("SpringJavaInjectionPointsAutowiringInspection")
+class Task01Test {
 
     // TODO: @Autowired
-    ProductRepository01 repo;
+    private final ProductRepository01 repo;
+
+    @Autowired
+    public Task01Test(ProductRepository01 repo) {
+        this.repo = repo;
+    }
 
     @Test
     void saves_and_finds_by_id() {
         // TODO: Product01 saved = repo.save(new Product01("Молоко"));
         // TODO: assertThat(repo.findById(saved.getId())).isPresent();
         // TODO: assertThat(repo.findById(saved.getId()).get().getName()).isEqualTo("Молоко");
+        Product01 saved = repo.save(new Product01("Молоко"));
+        assertThat(repo.findById(saved.getId())).isPresent();
+        assertThat(repo.findById(saved.getId()).get().getName()).isEqualTo("Молоко");
     }
 
     @Test
     void missing_id_returns_empty() {
         // TODO: assertThat(repo.findById(999L)).isEmpty();
+        assertThat(repo.findById(999L)).isEmpty();
     }
 }

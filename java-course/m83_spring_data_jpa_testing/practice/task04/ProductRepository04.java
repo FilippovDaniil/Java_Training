@@ -17,6 +17,6 @@ interface ProductRepository04 extends JpaRepository<Product04, Long> {
     @Query("select p from Product04 p where p.price between :lo and :hi")
     List<Product04> findInPriceRange(@Param("lo") int lo, @Param("hi") int hi);
 
-    @Query("select new PriceStat04(p.category, avg(p.price)) from Product04 p group by p.category")
+    @Query("select new m83_spring_data_jpa_testing.practice.task04.PriceStat04(p.category, avg(p.price)) from Product04 p group by p.category")
     List<PriceStat04> avgPriceByCategory();
 }

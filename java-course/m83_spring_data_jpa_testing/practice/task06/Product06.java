@@ -9,12 +9,24 @@ import org.springframework.test.context.jdbc.Sql;
 import static org.assertj.core.api.Assertions.assertThat;
 
 // --- класс-под-тестом дан готовым ---
-@Entity @Table(name = "products")
+@Entity
+@Table(name = "products")
 class Product06 {
-    @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+
     private String name;
+
     private int price;
-    protected Product06() {}
-    public Product06(String name, int price) { this.name = name; this.price = price; }
+
+    protected Product06() {
+
+    }
+
+    public Product06(String name, int price) {
+        this.name = name;
+        this.price = price;
+    }
 }

@@ -10,5 +10,7 @@ import java.util.List;
 import static org.assertj.core.api.Assertions.assertThat;
 
 interface ProductRepository02 extends JpaRepository<Product02, Long> {
+
     List<Product02> findByNameContaining(String part);
+
 }
