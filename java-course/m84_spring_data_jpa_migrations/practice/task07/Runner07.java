@@ -1,6 +1,7 @@
 package m84_spring_data_jpa_migrations.practice.task07;
 
 import jakarta.persistence.*;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -24,10 +25,17 @@ import java.util.Optional;
 // Runner (каркас)
 // ============================================================
 // TODO: @Component
+@Component
 class Runner07 implements CommandLineRunner {
+
     private final ProductRepository07 repo;
     private final InventoryService07 service;
-    Runner07(ProductRepository07 repo, InventoryService07 service) { this.repo = repo; this.service = service; }
+
+    @Autowired
+    Runner07(ProductRepository07 repo, InventoryService07 service) {
+        this.repo = repo;
+        this.service = service;
+    }
 
     @Override
     public void run(String... args) {
@@ -38,5 +46,11 @@ class Runner07 implements CommandLineRunner {
         // TODO: System.out.println("createdBy=" + p.getCreatedBy() + " createdAt=" + p.getCreatedAt());
         // TODO: System.out.println("updatedBy=" + p.getUpdatedBy() + " updatedAt=" + p.getUpdatedAt());
         //       Ожидается: stock=9, version=1, createdBy=system, updatedAt заполнен
+        service.purchase(id, 1);
+        Product07 p = repo.findById(id).orElseThrow();
+        System.out.println("stock=" + p.getStock() + " version=" + p.getVersion());
+        System.out.println("createdBy=" + p.getCreatedBy() + " createdAt=" + p.getCreatedAt());
+        System.out.println("updatedBy=" + p.getUpdatedBy() + " updatedAt=" + p.getUpdatedAt());
+
     }
 }

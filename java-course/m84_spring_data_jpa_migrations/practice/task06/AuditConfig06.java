@@ -13,6 +13,7 @@ import org.springframework.data.annotation.LastModifiedDate;
 import org.springframework.data.domain.AuditorAware;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.config.EnableJpaAuditing;
 import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -21,10 +22,12 @@ import java.util.Optional;
 
 @Configuration
 // TODO: @EnableJpaAuditing
+@EnableJpaAuditing
 class AuditConfig06 {
     // TODO: @Bean
+    @Bean
     AuditorAware<String> auditorAware() {
         // TODO: return () -> Optional.of("admin");   // в реале — из SecurityContext
-        return Optional::empty;
+        return () -> Optional.of("admin");
     }
 }

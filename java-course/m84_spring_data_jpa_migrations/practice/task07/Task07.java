@@ -77,6 +77,7 @@ import org.springframework.transaction.annotation.Transactional;
 import java.time.Instant;
 import java.util.Optional;
 
+@SpringBootApplication
 public class Task07 {
     public static void main(String[] args) {
         SpringApplication.run(Task07.class, args);

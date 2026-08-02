@@ -1,4 +1,6 @@
-package m84_spring_data_jpa_migrations.practice;
+package m84_spring_data_jpa_migrations.practice.task03;
+
+import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 /**
  * Задача 03 — Модуль 84: сидинг данных и repeatable-миграция
@@ -30,6 +32,8 @@ package m84_spring_data_jpa_migrations.practice;
  * ПОДСКАЗКА: данные-справочники иногда кладут в V (фиксированный сид), а
  *            переопределяемые объекты (VIEW/FUNCTION) — в R (CREATE OR REPLACE).
  */
+
+@SpringBootApplication
 public class Task03 {
     public static void main(String[] args) {
         String sql = """

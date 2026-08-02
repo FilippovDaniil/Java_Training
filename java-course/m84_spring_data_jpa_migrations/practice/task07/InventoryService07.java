@@ -1,6 +1,7 @@
 package m84_spring_data_jpa_migrations.practice.task07;
 
 import jakarta.persistence.*;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -24,15 +25,27 @@ import java.util.Optional;
 // Сервис (каркас)
 // ============================================================
 // TODO: @Service
+@Service
 class InventoryService07 {
+
     private final ProductRepository07 repo;
-    InventoryService07(ProductRepository07 repo) { this.repo = repo; }
+
+    @Autowired
+    InventoryService07(ProductRepository07 repo) {
+        this.repo = repo;
+    }
 
     // TODO: @Transactional
+    @Transactional
     public void purchase(Long id, int qty) {
         // TODO: Product07 p = repo.findById(id).orElseThrow();
         // TODO: if (p.getStock() < qty) throw new IllegalStateException("Недостаточно на складе");
         // TODO: p.setStock(p.getStock() - qty);   // dirty checking, version++
+        Product07 p = repo.findById(id).orElseThrow();
+        if (p.getStock() < qty) {
+            throw new IllegalStateException("Недостаточно на складе");
+        }
+        p.setStock(p.getStock() - qty);   // dirty checking, version++
     }
 
     public void purchaseWithRetry(Long id, int qty, int attempts) {
@@ -41,5 +54,15 @@ class InventoryService07 {
         // TODO:     catch (OptimisticLockingFailureException e) { /* re-read на след. итерации */ }
         // TODO: }
         // TODO: throw new IllegalStateException("Не удалось после " + attempts + " попыток");
+        for (int i = 0; i < attempts; i++) {
+            try {
+                purchase(id, qty);
+                return;
+            }catch (OptimisticLockingFailureException e) {
+                /* re-read на след. итерации */
+                System.out.println(e.getMessage());
+            }
+        }
+        throw new IllegalStateException("Не удалось после " + attempts + " попыток");
     }
 }

@@ -44,6 +44,7 @@ import org.springframework.transaction.annotation.Transactional;
 import java.time.Instant;
 import java.util.Optional;
 
+@SpringBootApplication
 public class Task06 {
     public static void main(String[] args) {
         SpringApplication.run(Task06.class, args);

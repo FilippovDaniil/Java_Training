@@ -1,6 +1,7 @@
 package m84_spring_data_jpa_migrations.practice.task06;
 
 import jakarta.persistence.*;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -21,17 +22,30 @@ import java.util.Optional;
 
 @Component
 class Runner06 implements CommandLineRunner {
+
     private final ProductRepository06 repo;
     private final ProductService06 service;
-    Runner06(ProductRepository06 repo, ProductService06 service) { this.repo = repo; this.service = service; }
+
+    @Autowired
+    Runner06(ProductRepository06 repo, ProductService06 service) {
+        this.repo = repo;
+        this.service = service;
+    }
 
     @Override
     public void run(String... args) {
         Product06 p = repo.save(new Product06("Клавиатура", 2000));
         Long id = p.getId();
         // TODO: вывести createdAt/createdBy (заполнены), updatedAt
+        System.out.println(repo.findById(id).orElseThrow().getCreatedAt());
+        System.out.println(repo.findById(id).orElseThrow().getCreatedBy());
+        System.out.println(repo.findById(id).orElseThrow().getUpdatedAt());
         // TODO: service.updatePrice(id, 1800);
+        service.updatePrice(id, 1800);
         // TODO: перечитать repo.findById(id) и вывести updatedAt/updatedBy (обновились),
         //       createdAt — прежний
+        System.out.println(repo.findById(id).orElseThrow().getCreatedAt());
+        System.out.println(repo.findById(id).orElseThrow().getCreatedBy());
+        System.out.println(repo.findById(id).orElseThrow().getUpdatedAt());
     }
 }

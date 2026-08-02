@@ -19,21 +19,34 @@ import org.springframework.transaction.annotation.Transactional;
 import java.time.Instant;
 import java.util.Optional;
 
-@Entity @Table(name = "products")
+@Entity
+@Table(name = "products")
 // TODO: @EntityListeners(AuditingEntityListener.class)
+@EntityListeners(AuditingEntityListener.class)
 class Product06 {
-    @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+
     private String name;
+
     private int price;
 
     // TODO: @CreatedDate
+    @CreatedDate
     private Instant createdAt;
+
     // TODO: @LastModifiedDate
+    @LastModifiedDate
     private Instant updatedAt;
+
     // TODO: @CreatedBy
+    @CreatedBy
     private String createdBy;
+
     // TODO: @LastModifiedBy
+    @LastModifiedBy
     private String updatedBy;
 
     protected Product06() {}

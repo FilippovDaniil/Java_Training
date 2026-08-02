@@ -1,4 +1,6 @@
-package m84_spring_data_jpa_migrations.practice;
+package m84_spring_data_jpa_migrations.practice.task02;
+
+import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 /**
  * Задача 02 — Модуль 84: эволюция схемы (V2__add_categories.sql)
@@ -23,14 +25,16 @@ package m84_spring_data_jpa_migrations.practice;
  *
  * ПОДСКАЗКА: ALTER TABLE ... ADD COLUMN и ADD CONSTRAINT — отдельными операторами.
  */
+
+@SpringBootApplication
 public class Task02 {
     public static void main(String[] args) {
         String sql = """
                 -- Файл: src/main/resources/db/migration/V2__add_categories.sql
-                -- TODO 1: CREATE TABLE categories (...);
+                -- TODO 1: CREATE TABLE categories (id BIGINT IDENTITY PK, name VARCHAR(255) NOT NULL UNIQUE);
                 -- TODO 2: ALTER TABLE products ADD COLUMN category_id BIGINT;
                 -- TODO 3: ALTER TABLE products ADD CONSTRAINT fk_products_category
-                --             FOREIGN KEY (category_id) REFERENCES categories(id);
+                -- FOREIGN KEY (category_id) REFERENCES categories(id);
                 """;
         System.out.println(sql);
     }

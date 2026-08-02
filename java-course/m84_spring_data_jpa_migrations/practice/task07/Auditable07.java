@@ -25,14 +25,23 @@ import java.util.Optional;
 // ============================================================
 @MappedSuperclass
 // TODO: @EntityListeners(AuditingEntityListener.class)
+@EntityListeners(AuditingEntityListener.class)
 abstract class Auditable07 {
+
     // TODO: @CreatedDate
+    @CreatedDate
     private Instant createdAt;
+
     // TODO: @LastModifiedDate
+    @LastModifiedDate
     private Instant updatedAt;
+
     // TODO: @CreatedBy
+    @CreatedBy
     private String createdBy;
+
     // TODO: @LastModifiedBy
+    @LastModifiedBy
     private String updatedBy;
 
     public Instant getCreatedAt() { return createdAt; }
