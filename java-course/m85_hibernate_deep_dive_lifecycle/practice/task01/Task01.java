@@ -21,7 +21,9 @@ package m85_hibernate_deep_dive_lifecycle.practice.task01;
  */
 
 import jakarta.persistence.*;
+import org.springframework.boot.autoconfigure.SpringBootApplication;
 
+@SpringBootApplication
 public class Task01 {
     public static void main(String[] args) {
         EntityManagerFactory emf = Persistence.createEntityManagerFactory("shop-pu");
@@ -35,6 +37,12 @@ public class Task01 {
             // TODO: Product01 a = em.find(Product01.class, p.getId());
             // TODO: Product01 b = em.find(Product01.class, p.getId());
             // TODO: System.out.println("a == b ? " + (a == b));   // true
+            System.out.println("до persist contains=" + em.contains(p) + " id=" + p.getId());
+            em.persist(p);
+            System.out.println("после persist contains=" + em.contains(p) + " id=" + p.getId());
+            Product01 a = em.find(Product01.class, p.getId());
+            Product01 b = em.find(Product01.class, p.getId());
+            System.out.println("a == b ? " + (a == b));   // true
             em.getTransaction().commit();
         } finally {
             em.close();

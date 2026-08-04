@@ -25,7 +25,9 @@ package m85_hibernate_deep_dive_lifecycle.practice.task06;
  */
 
 import jakarta.persistence.*;
+import org.springframework.boot.autoconfigure.SpringBootApplication;
 
+@SpringBootApplication
 public class Task06 {
     public static void main(String[] args) {
         EntityManagerFactory emf = Persistence.createEntityManagerFactory("shop-pu");
@@ -46,6 +48,13 @@ public class Task06 {
             // TODO: System.out.println("после refresh = " + managed.getPrice()); // 500
             // TODO: em.getTransaction().commit();
 
+             em.getTransaction().begin();
+             Product06 managed = em.find(Product06.class, id);
+             managed.setPrice(0);              // ошибочное изменение в памяти
+             em.refresh(managed);              // SELECT — вернёт 500
+             System.out.println("после refresh = " + managed.getPrice()); // 500
+             em.getTransaction().commit();
+
             // ЧАСТЬ B
             // TODO: Product06 a = em.find(Product06.class, id);
             // TODO: Product06 b = em.find(Product06.class, id);  // из кэша 1-го уровня
@@ -53,6 +62,14 @@ public class Task06 {
             // TODO: em.clear();
             // TODO: Product06 c = em.find(Product06.class, id);  // новый SELECT
             // TODO: System.out.println("c == a ? " + (c == a)); // false
+
+             Product06 a = em.find(Product06.class, id);
+             Product06 b = em.find(Product06.class, id);  // из кэша 1-го уровня
+             System.out.println("a == b ? " + (a == b)); // true
+             em.clear();
+             Product06 c = em.find(Product06.class, id);  // новый SELECT
+             System.out.println("c == a ? " + (c == a)); // false
+
         } finally {
             em.close();
             emf.close();

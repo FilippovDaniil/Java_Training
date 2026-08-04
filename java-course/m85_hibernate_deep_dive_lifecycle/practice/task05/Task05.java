@@ -22,7 +22,9 @@ package m85_hibernate_deep_dive_lifecycle.practice.task05;
  */
 
 import jakarta.persistence.*;
+import org.springframework.boot.autoconfigure.SpringBootApplication;
 
+@SpringBootApplication
 public class Task05 {
     public static void main(String[] args) {
         EntityManagerFactory emf = Persistence.createEntityManagerFactory("shop-pu");
@@ -34,11 +36,21 @@ public class Task05 {
             // TODO: em.flush();
             // TODO: System.out.println("после flush — INSERT выполнен");
 
+             em.persist(new Product05("A", 1));
+             System.out.println("после persist — INSERT отложен");
+             em.flush();
+             System.out.println("после flush — INSERT выполнен");
+
             // TODO: em.persist(new Product05("B", 2));   // снова отложено
             // TODO: Long count = em.createQuery("select count(p) from Product05 p", Long.class)
             // TODO:                .getSingleResult();   // авто-flush ПЕРЕД запросом
             // TODO: System.out.println("count = " + count); // 2 (оба учтены)
-            em.getTransaction().commit();
+
+             em.persist(new Product05("B", 2));   // снова отложено
+             Long count = em.createQuery("select count(p) from Product05 p", Long.class)
+                     .getSingleResult();   // авто-flush ПЕРЕД запросом
+             System.out.println("count = " + count); // 2 (оба учтены)
+             em.getTransaction().commit();
         } finally {
             em.close();
             emf.close();

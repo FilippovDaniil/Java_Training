@@ -20,7 +20,9 @@ package m85_hibernate_deep_dive_lifecycle.practice.task02;
  */
 
 import jakarta.persistence.*;
+import org.springframework.boot.autoconfigure.SpringBootApplication;
 
+@SpringBootApplication
 public class Task02 {
     public static void main(String[] args) {
         EntityManagerFactory emf = Persistence.createEntityManagerFactory("shop-pu");
@@ -38,9 +40,18 @@ public class Task02 {
             // TODO: managed.setPrice(35);          // НЕ merge/persist
             // TODO: em.getTransaction().commit();  // dirty checking → UPDATE
 
+             em.getTransaction().begin();
+             Product02 managed = em.find(Product02.class, id);
+             managed.setPrice(35);          // НЕ merge/persist
+             em.getTransaction().commit();  // dirty checking → UPDATE
+
             // TODO: проверка:
             // TODO: Product02 reloaded = em.find(Product02.class, id);
             // TODO: System.out.println("цена после dirty checking = " + reloaded.getPrice()); // 35
+
+             //TODO: проверка:
+             Product02 reloaded = em.find(Product02.class, id);
+             System.out.println("цена после dirty checking = " + reloaded.getPrice()); // 35
         } finally {
             em.close();
             emf.close();

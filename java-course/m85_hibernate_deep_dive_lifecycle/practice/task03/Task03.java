@@ -22,7 +22,9 @@ package m85_hibernate_deep_dive_lifecycle.practice.task03;
  */
 
 import jakarta.persistence.*;
+import org.springframework.boot.autoconfigure.SpringBootApplication;
 
+@SpringBootApplication
 public class Task03 {
     public static void main(String[] args) {
         EntityManagerFactory emf = Persistence.createEntityManagerFactory("shop-pu");
@@ -39,13 +41,25 @@ public class Task03 {
             // TODO: p.setPrice(250);
             // TODO: System.out.println("contains(detached) = " + em.contains(p)); // false
 
+             em.detach(p);  // теперь p — detached
+             p.setPrice(250);
+             System.out.println("contains(detached) = " + em.contains(p)); // false
+
             // TODO: em.getTransaction().begin();
             // TODO: System.out.println("в БД пока = " + em.find(Product03.class, id).getPrice()); // 300
             // TODO: Product03 managed = em.merge(p);   // присоединить копию
             // TODO: System.out.println("p == managed ? " + (p == managed)); // false
             // TODO: em.getTransaction().commit();
 
+             em.getTransaction().begin();
+             System.out.println("в БД пока = " + em.find(Product03.class, id).getPrice()); // 300
+             Product03 managed = em.merge(p);   // присоединить копию
+             System.out.println("p == managed ? " + (p == managed)); // false
+             em.getTransaction().commit();
+
             // TODO: System.out.println("после merge = " + em.find(Product03.class, id).getPrice()); // 250
+
+            System.out.println("после merge = " + em.find(Product03.class, id).getPrice()); // 250
         } finally {
             em.close();
             emf.close();

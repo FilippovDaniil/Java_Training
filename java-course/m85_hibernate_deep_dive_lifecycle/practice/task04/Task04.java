@@ -21,7 +21,9 @@ package m85_hibernate_deep_dive_lifecycle.practice.task04;
  */
 
 import jakarta.persistence.*;
+import org.springframework.boot.autoconfigure.SpringBootApplication;
 
+@SpringBootApplication
 public class Task04 {
     public static void main(String[] args) {
         EntityManagerFactory emf = Persistence.createEntityManagerFactory("shop-pu");
@@ -41,9 +43,24 @@ public class Task04 {
             // TODO: em.getTransaction().commit();   // DELETE
             // TODO: System.out.println("после удаления find = " + em.find(Product04.class, id)); // null
 
+             em.getTransaction().begin();
+             Product04 managed = em.find(Product04.class, id);
+             em.remove(managed);
+             System.out.println("contains после remove (до commit) = " + em.contains(managed));
+             em.getTransaction().commit();   // DELETE
+             System.out.println("после удаления find = " + em.find(Product04.class, id)); // null
+
             // TODO (п.5): попытка remove detached:
             // TODO: try { Product04 d = new Product04("x", 1); d ... em.remove(d); }
             // TODO: catch (IllegalArgumentException e) { System.out.println("remove detached → " + e.getClass().getSimpleName()); }
+
+             //TODO (п.5): попытка remove detached:
+             try {
+                 Product04 d = new Product04("x", 1);
+                 em.remove(d);
+             } catch (IllegalArgumentException e) {
+                 System.out.println("remove detached → " + e.getClass().getSimpleName());
+             }
         } finally {
             em.close();
             emf.close();

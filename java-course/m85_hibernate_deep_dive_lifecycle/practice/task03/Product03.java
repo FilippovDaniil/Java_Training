@@ -2,7 +2,8 @@ package m85_hibernate_deep_dive_lifecycle.practice.task03;
 
 import jakarta.persistence.*;
 
-@Entity @Table(name = "products")
+@Entity
+@Table(name = "products")
 class Product03 {
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
