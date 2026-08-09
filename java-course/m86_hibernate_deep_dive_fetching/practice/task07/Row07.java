@@ -6,4 +6,9 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
-record Row07(String name, long count) {}
+record Row07(
+        String name,
+        long count
+) {
+
+}

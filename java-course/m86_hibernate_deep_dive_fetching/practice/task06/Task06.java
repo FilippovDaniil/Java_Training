@@ -29,9 +29,12 @@ package m86_hibernate_deep_dive_fetching.practice.task06;
  */
 
 import jakarta.persistence.*;
+import org.springframework.boot.autoconfigure.SpringBootApplication;
+
 import java.util.ArrayList;
 import java.util.List;
 
+@SpringBootApplication
 public class Task06 {
     public static void main(String[] args) {
         EntityManagerFactory emf = Persistence.createEntityManagerFactory("shop-pu");
@@ -53,6 +56,11 @@ public class Task06 {
             // TODO:     .getResultList();
             // TODO: dtos.forEach(d -> System.out.println(d.name() + " -> " + d.count()));
 
+            List<CategorySummary06> dtos = em.createQuery(
+             "select new m86_hibernate_deep_dive_fetching.practice.task06.CategorySummary06(c.name, count(p)) from Category06 c " +
+              "left join c.products p group by c.id, c.name", CategorySummary06.class).getResultList();
+             TODO: dtos.forEach(d -> System.out.println(d.name() + " -> " + d.count()));
+
             // ЧАСТЬ B — Tuple
             // TODO: List<Tuple> tuples = em.createQuery(
             // TODO:     "select c.name as name, count(p) as cnt from Category06 c " +
@@ -60,6 +68,11 @@ public class Task06 {
             // TODO:     .getResultList();
             // TODO: tuples.forEach(t -> System.out.println(
             // TODO:     t.get("name", String.class) + " -> " + t.get("cnt", Long.class)));
+
+            List<Tuple> tuples = em.createQuery("select c.name as name, count(p) as cnt from Category06 c " +
+                    "left join c.products p group by c.id, c.name", Tuple.class).getResultList();
+             tuples.forEach(t -> System.out.println(t.get("name", String.class) + " -> " + t.get("cnt", Long.class)));
+
         } finally {
             em.close();
             emf.close();

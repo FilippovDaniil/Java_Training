@@ -24,10 +24,13 @@ package m86_hibernate_deep_dive_fetching.practice.task04;
 
 import jakarta.persistence.*;
 import org.hibernate.Hibernate;
+import org.springframework.boot.autoconfigure.SpringBootApplication;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
+@SpringBootApplication
 public class Task04 {
     public static void main(String[] args) {
         EntityManagerFactory emf = Persistence.createEntityManagerFactory("shop-pu");
@@ -49,6 +52,13 @@ public class Task04 {
             // TODO:         Map.of("jakarta.persistence.fetchgraph", g));
             // TODO: System.out.println("products init? " + Hibernate.isInitialized(found.getProducts())); // true
             // TODO: System.out.println("size = " + found.getProducts().size()); // 2
+
+            EntityGraph<Category04> g = em.createEntityGraph(Category04.class);
+            g.addAttributeNodes("products");
+            Category04 found = em.find(Category04.class, id, Map.of("jakarta.persistence.fetchgraph", g));
+            System.out.println("products init? " + Hibernate.isInitialized(found.getProducts())); // true
+            System.out.println("size = " + found.getProducts().size()); // 2
+
         } finally {
             em.close();
             emf.close();

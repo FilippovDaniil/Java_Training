@@ -22,9 +22,12 @@ package m86_hibernate_deep_dive_fetching.practice.task03;
  */
 
 import jakarta.persistence.*;
+import org.springframework.boot.autoconfigure.SpringBootApplication;
+
 import java.util.ArrayList;
 import java.util.List;
 
+@SpringBootApplication
 public class Task03 {
     public static void main(String[] args) {
         EntityManagerFactory emf = Persistence.createEntityManagerFactory("shop-pu");
@@ -45,6 +48,14 @@ public class Task03 {
             // TODO:     .getResultList();   // ОДИН SELECT с JOIN
             // TODO: for (Category03 c : cats)
             // TODO:     System.out.println(c.getName() + ": " + c.getProducts().size());
+
+            List<Category03> cats = em.createQuery(
+                 "select distinct c from Category03 c join fetch c.products", Category03.class)
+                 .getResultList();   // ОДИН SELECT с JOIN
+            for (Category03 c : cats){
+                System.out.println(c.getName() + ": " + c.getProducts().size());
+            }
+
         } finally {
             em.close();
             emf.close();

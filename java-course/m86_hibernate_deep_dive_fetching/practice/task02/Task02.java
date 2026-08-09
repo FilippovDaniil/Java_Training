@@ -20,9 +20,12 @@ package m86_hibernate_deep_dive_fetching.practice.task02;
  */
 
 import jakarta.persistence.*;
+import org.springframework.boot.autoconfigure.SpringBootApplication;
+
 import java.util.ArrayList;
 import java.util.List;
 
+@SpringBootApplication
 public class Task02 {
     public static void main(String[] args) {
         EntityManagerFactory emf = Persistence.createEntityManagerFactory("shop-pu");
@@ -45,6 +48,15 @@ public class Task02 {
             // TODO:     System.out.println(c.getName() + ": " + c.getProducts().size()); // +1 на каждую
             // TODO: em.getTransaction().commit();
             // TODO: System.out.println("В логе show_sql: 1 + 3 = 4 SELECT — это N+1");
+
+            em.getTransaction().begin();
+            List<Category02> cats = em.createQuery("select c from Category02 c", Category02.class)
+                                        .getResultList();          // 1 запрос
+            for (Category02 c : cats){
+                System.out.println(c.getName() + ": " + c.getProducts().size()); // +1 на каждую
+            }
+            em.getTransaction().commit();
+            System.out.println("В логе show_sql: 1 + 3 = 4 SELECT — это N+1");
         } finally {
             em.close();
             emf.close();

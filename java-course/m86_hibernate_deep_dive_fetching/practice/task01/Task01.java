@@ -21,9 +21,12 @@ package m86_hibernate_deep_dive_fetching.practice.task01;
 
 import jakarta.persistence.*;
 import org.hibernate.Hibernate;
+import org.springframework.boot.autoconfigure.SpringBootApplication;
+
 import java.util.ArrayList;
 import java.util.List;
 
+@SpringBootApplication
 public class Task01 {
     public static void main(String[] args) {
         EntityManagerFactory emf = Persistence.createEntityManagerFactory("shop-pu");
@@ -44,6 +47,13 @@ public class Task01 {
             // TODO: Hibernate.initialize(found.getProducts());
             // TODO: System.out.println("init? " + Hibernate.isInitialized(found.getProducts())); // true
             // TODO: System.out.println("size = " + found.getProducts().size()); // 2
+
+            Category01 found = em.find(Category01.class, id);
+            System.out.println("init? " + Hibernate.isInitialized(found.getProducts())); // false
+            Hibernate.initialize(found.getProducts());
+            System.out.println("init? " + Hibernate.isInitialized(found.getProducts())); // true
+            System.out.println("size = " + found.getProducts().size()); // 2
+
         } finally {
             em.close();
             emf.close();

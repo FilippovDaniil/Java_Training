@@ -27,9 +27,12 @@ package m86_hibernate_deep_dive_fetching.practice.task05;
  */
 
 import jakarta.persistence.*;
+import org.springframework.boot.autoconfigure.SpringBootApplication;
+
 import java.util.ArrayList;
 import java.util.List;
 
+@SpringBootApplication
 public class Task05 {
     public static void main(String[] args) {
         EntityManagerFactory emf = Persistence.createEntityManagerFactory("shop-pu");
@@ -51,6 +54,15 @@ public class Task05 {
             // TODO: for (Category05 c : cats) c.getProducts().size();   // догрузка батчем
             // TODO: em.getTransaction().commit();
             // TODO: System.out.println("Сравните число SELECT в логе для BatchSize vs SUBSELECT vs без них");
+
+            em.getTransaction().begin();
+            List<Category05> cats = em.createQuery("select c from Category05 c", Category05.class).getResultList();
+            for (Category05 c : cats) {
+                c.getProducts().size();   // догрузка батчем
+            }
+            em.getTransaction().commit();
+            System.out.println("Сравните число SELECT в логе для BatchSize vs SUBSELECT vs без них");
+
         } finally {
             em.close();
             emf.close();

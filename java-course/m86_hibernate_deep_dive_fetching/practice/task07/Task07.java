@@ -42,10 +42,13 @@ package m86_hibernate_deep_dive_fetching.practice.task07;
 
 import jakarta.persistence.*;
 import org.hibernate.Hibernate;
+import org.springframework.boot.autoconfigure.SpringBootApplication;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
+@SpringBootApplication
 public class Task07 {
     public static void main(String[] args) {
         EntityManagerFactory emf = Persistence.createEntityManagerFactory("shop-pu");
@@ -68,6 +71,10 @@ public class Task07 {
             // TODO:     .getResultList();
             // TODO: withProducts.forEach(c -> System.out.println(c.getName() + ": " + c.getProducts().size()));
 
+            List<Category07> withProducts = em.createQuery(
+            "select distinct c from Category07 c join fetch c.products", Category07.class).getResultList();
+             withProducts.forEach(c -> System.out.println(c.getName() + ": " + c.getProducts().size()));
+
             // 2) EntityGraph hint
             // TODO: Long someId = withProducts.get(0).getId();
             // TODO: em.clear();
@@ -77,11 +84,23 @@ public class Task07 {
             // TODO:         Map.of("jakarta.persistence.fetchgraph", g));
             // TODO: System.out.println("graph init? " + Hibernate.isInitialized(viaGraph.getProducts()));
 
+            Long someId = withProducts.get(0).getId();
+            em.clear();
+            EntityGraph<Category07> g = em.createEntityGraph(Category07.class);
+            g.addAttributeNodes("products");
+            Category07 viaGraph = em.find(Category07.class, someId, Map.of("jakarta.persistence.fetchgraph", g));
+            System.out.println("graph init? " + Hibernate.isInitialized(viaGraph.getProducts()));
+
             // 3) DTO overview
             // TODO: List<Row07> rows = em.createQuery(
             // TODO:     "select new Row07(c.name, count(p)) from Category07 c " +
             // TODO:     "left join c.products p group by c.id, c.name", Row07.class).getResultList();
             // TODO: rows.forEach(r -> System.out.println(r.name() + " -> " + r.count()));
+
+            List<Row07> rows = em.createQuery("select new m86_hibernate_deep_dive_fetching.practice.task07.Row07(c.name, count(p)) from Category07 c " +
+            "left join c.products p group by c.id, c.name", Row07.class).getResultList();
+            rows.forEach(r -> System.out.println(r.name() + " -> " + r.count()));
+
         } finally {
             em.close();
             emf.close();
