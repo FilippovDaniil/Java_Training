@@ -44,19 +44,71 @@ package m89_hibernate_deep_dive_inheritance.practice.task07;
  */
 
 import jakarta.persistence.*;
+import org.springframework.boot.autoconfigure.SpringBootApplication;
+
 import java.util.List;
 
+@SpringBootApplication
 public class Task07 {
     public static void main(String[] args) {
         EntityManagerFactory emf = Persistence.createEntityManagerFactory("shop-pu");
         EntityManager em = emf.createEntityManager();
+
         try {
+            // ===== 1. Сохраняем платежи =====
             em.getTransaction().begin();
-            // TODO: засейте CardPayment07/CashPayment07/OnlinePayment07
+
+            em.persist(new CardPayment07(1500, "1234-5678-9012-3456"));
+            em.persist(new CardPayment07(2500, "9876-5432-1098-7654"));
+            em.persist(new CashPayment07(500, "Иван Петров"));
+            em.persist(new CashPayment07(700, "Мария Смирнова"));
+            em.persist(new OnlinePayment07(3000, "PayPal"));
+            em.persist(new OnlinePayment07(1200, "Stripe"));
+
             em.getTransaction().commit();
             em.clear();
-            // TODO: report(em);
-            // TODO: вывести общую сумму и сумму онлайн-платежей
+
+            // ===== 2. Отчёт =====
+            System.out.println("=== ОТЧЁТ ПО ВСЕМ ПЛАТЕЖАМ ===");
+            report(em);
+
+            // ===== 3. Аналитика =====
+            System.out.println("\n=== АНАЛИТИКА ===");
+
+            Long totalSum = em.createQuery(
+                    "select sum(p.amount) from Payment07 p", Long.class
+            ).getSingleResult();
+            System.out.println("Общая сумма всех платежей: " + totalSum + " ₽");
+
+            Long onlineSum = em.createQuery(
+                    "select sum(p.amount) from OnlinePayment07 p", Long.class
+            ).getSingleResult();
+            System.out.println("Сумма онлайн-платежей: " + onlineSum + " ₽");
+
+            // ===== 4. Статистика по типам (исправленный вариант) =====
+            System.out.println("\n=== СТАТИСТИКА ПО ТИПАМ ===");
+
+            // Вариант А: через type(p) + Class
+            List<Object[]> stats = em.createQuery(
+                    "select type(p), count(p) from Payment07 p group by type(p)", Object[].class
+            ).getResultList();
+
+            for (Object[] row : stats) {
+                Class<?> clazz = (Class<?>) row[0];  // ← это Class
+                Long count = (Long) row[1];
+                String name = clazz.getSimpleName().replace("Payment07", "");
+                System.out.println("  " + name + ": " + count + " шт.");
+            }
+
+            // Альтернативный вариант: отдельные запросы
+            // System.out.println("\n=== (альтернативная статистика) ===");
+            // long cardCount = em.createQuery("select count(p) from CardPayment07 p", Long.class).getSingleResult();
+            // long cashCount = em.createQuery("select count(p) from CashPayment07 p", Long.class).getSingleResult();
+            // long onlineCount = em.createQuery("select count(p) from OnlinePayment07 p", Long.class).getSingleResult();
+            // System.out.println("  CARD: " + cardCount + " шт.");
+            // System.out.println("  CASH: " + cashCount + " шт.");
+            // System.out.println("  ONLINE: " + onlineCount + " шт.");
+
         } finally {
             em.close();
             emf.close();
@@ -64,8 +116,12 @@ public class Task07 {
     }
 
     static void report(EntityManager em) {
-        // TODO: List<Payment07> all = em.createQuery(
-        // TODO:     "select p from Payment07 p order by p.amount desc", Payment07.class).getResultList();
-        // TODO: all.forEach(p -> System.out.println(p.getAmount() + " — " + p.describe()));
+        List<Payment07> all = em.createQuery(
+                "select p from Payment07 p order by p.amount desc", Payment07.class
+        ).getResultList();
+
+        for (Payment07 p : all) {
+            System.out.println(p.getAmount() + " ₽ — " + p.describe());
+        }
     }
 }

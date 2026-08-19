@@ -23,8 +23,11 @@ package m89_hibernate_deep_dive_inheritance.practice.task06;
  */
 
 import jakarta.persistence.*;
+import org.springframework.boot.autoconfigure.SpringBootApplication;
+
 import java.util.List;
 
+@SpringBootApplication
 public class Task06 {
     public static void main(String[] args) {
         EntityManagerFactory emf = Persistence.createEntityManagerFactory("shop-pu");
@@ -42,17 +45,31 @@ public class Task06 {
             // TODO: System.out.println("всего: " + all.size()); // 3
             // TODO: all.forEach(p -> System.out.println(p.getClass().getSimpleName()));
 
+            List<Payment06> all = em.createQuery("select p from Payment06 p", Payment06.class).getResultList();
+            System.out.println("всего: " + all.size()); // 3
+            all.forEach(p -> System.out.println(p.getClass().getSimpleName()));
+
             // 2) фильтр по типу
             // TODO: Long cards = em.createQuery(
             // TODO:     "select count(p) from Payment06 p where type(p) = CardPayment06", Long.class)
             // TODO:     .getSingleResult();
             // TODO: System.out.println("карточных: " + cards); // 2
 
+            Long cards = em.createQuery("select count(p) from Payment06 p where type(p) = CardPayment06", Long.class)
+                    .getSingleResult();
+            System.out.println("карточных: " + cards); // 2
+
             // 3) treat — доступ к полю подкласса
             // TODO: List<Payment06> visa = em.createQuery(
             // TODO:     "select p from Payment06 p where treat(p as CardPayment06).cardNumber like '4%'", Payment06.class)
             // TODO:     .getResultList();
             // TODO: System.out.println("карт на '4...': " + visa.size()); // 1
+
+            List<Payment06> visa = em.createQuery(
+            "select p from Payment06 p where treat(p as CardPayment06).cardNumber like '4%'", Payment06.class)
+                    .getResultList();
+            System.out.println("карт на '4...': " + visa.size()); // 1
+
         } finally {
             em.close();
             emf.close();

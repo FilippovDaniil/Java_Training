@@ -8,10 +8,11 @@
     <persistence-unit name="shop-pu" transaction-type="RESOURCE_LOCAL">
         <provider>org.hibernate.jpa.HibernatePersistenceProvider</provider>
 
-        <class>m88_hibernate_deep_dive_modeling.practice.task07.Money07</class>
-        <class>m88_hibernate_deep_dive_modeling.practice.task07.OrderLine07</class>
-        <class>m88_hibernate_deep_dive_modeling.practice.task07.OrderLineId07</class>
-        <class>m88_hibernate_deep_dive_modeling.practice.task07.Product07</class>
+
+        <class>m89_hibernate_deep_dive_inheritance.practice.task07.CardPayment07</class>
+        <class>m89_hibernate_deep_dive_inheritance.practice.task07.CashPayment07</class>
+        <class>m89_hibernate_deep_dive_inheritance.practice.task07.OnlinePayment07</class>
+        <class>m89_hibernate_deep_dive_inheritance.practice.task07.Payment07</class>
 
 
         <properties>

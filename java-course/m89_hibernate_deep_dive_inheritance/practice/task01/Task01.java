@@ -24,7 +24,9 @@ package m89_hibernate_deep_dive_inheritance.practice.task01;
  */
 
 import jakarta.persistence.*;
+import org.springframework.boot.autoconfigure.SpringBootApplication;
 
+@SpringBootApplication
 public class Task01 {
     public static void main(String[] args) {
         EntityManagerFactory emf = Persistence.createEntityManagerFactory("shop-pu");
@@ -43,6 +45,10 @@ public class Task01 {
 
             // TODO: System.out.println(em.find(Payment01.class, cardId).getClass().getSimpleName()); // CardPayment01
             // TODO: System.out.println(em.find(Payment01.class, cashId).getClass().getSimpleName()); // CashPayment01
+
+            System.out.println(em.find(Payment01.class, cardId).getClass().getSimpleName()); // CardPayment01
+            System.out.println(em.find(Payment01.class, cashId).getClass().getSimpleName()); // CashPayment01
+
         } finally {
             em.close();
             emf.close();

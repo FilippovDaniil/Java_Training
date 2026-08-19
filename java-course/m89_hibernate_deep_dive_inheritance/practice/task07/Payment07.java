@@ -14,4 +14,5 @@ abstract class Payment07 {
     protected Payment07(long amount) { this.amount = amount; }
     public long getAmount() { return amount; }
     // TODO: public abstract String describe();
+    public abstract String describe();
 }

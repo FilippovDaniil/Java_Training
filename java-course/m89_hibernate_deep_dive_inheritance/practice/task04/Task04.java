@@ -26,8 +26,11 @@ package m89_hibernate_deep_dive_inheritance.practice.task04;
  */
 
 import jakarta.persistence.*;
+import org.springframework.boot.autoconfigure.SpringBootApplication;
+
 import java.time.Instant;
 
+@SpringBootApplication
 public class Task04 {
     public static void main(String[] args) {
         EntityManagerFactory emf = Persistence.createEntityManagerFactory("shop-pu");
@@ -47,6 +50,17 @@ public class Task04 {
             // TODO: long products = em.createQuery("select count(p) from Product04 p", Long.class).getSingleResult();
             // TODO: long orders   = em.createQuery("select count(o) from Order04 o", Long.class).getSingleResult();
             // TODO: System.out.println("products=" + products + " orders=" + orders); // 1 и 1
+
+            try {
+                em.createQuery("select b from m89_hibernate_deep_dive_inheritance.practice.task04.BaseEntity04 b", BaseEntity04.class)
+                        .getResultList();
+            } catch (IllegalArgumentException e) {
+                System.out.println("полиморфно по @MappedSuperclass нельзя: " + e.getClass().getSimpleName());
+            }
+            long products = em.createQuery("select count(p) from Product04 p", Long.class).getSingleResult();
+            long orders   = em.createQuery("select count(o) from Order04 o", Long.class).getSingleResult();
+            System.out.println("products=" + products + " orders=" + orders); // 1 и 1
+
         } finally {
             em.close();
             emf.close();

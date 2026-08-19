@@ -4,6 +4,8 @@ import jakarta.persistence.*;
 import java.util.List;
 
 // TODO: @Entity @DiscriminatorValue("CARD")
+@Entity
+@DiscriminatorValue("CARD")
 class CardPayment07 extends Payment07 {
     private String cardNumber;
     protected CardPayment07() {}
@@ -11,4 +13,9 @@ class CardPayment07 extends Payment07 {
     // TODO: @Override public String describe() {
     // TODO:     return "Карта ****" + cardNumber.substring(cardNumber.length() - 4);
     // TODO: }
+
+    @Override
+    public String describe() {
+        return "Карта ****" + cardNumber.substring(cardNumber.length() - 4);
+    }
 }

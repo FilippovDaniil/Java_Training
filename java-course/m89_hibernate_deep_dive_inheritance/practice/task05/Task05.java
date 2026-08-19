@@ -23,7 +23,9 @@ package m89_hibernate_deep_dive_inheritance.practice.task05;
  */
 
 import jakarta.persistence.*;
+import org.springframework.boot.autoconfigure.SpringBootApplication;
 
+@SpringBootApplication
 public class Task05 {
     public static void main(String[] args) {
         EntityManagerFactory emf = Persistence.createEntityManagerFactory("shop-pu");
@@ -43,6 +45,13 @@ public class Task05 {
             // TODO: em.find(WideDynamic05.class, dynamicId).setPrice(222);  // UPDATE только price
             // TODO: em.getTransaction().commit();
             // TODO: System.out.println("Сравните два UPDATE в логе show_sql");
+
+            em.getTransaction().begin();
+            em.find(WideStatic05.class, staticId).setPrice(111);   // UPDATE всех колонок
+            em.find(WideDynamic05.class, dynamicId).setPrice(222);  // UPDATE только price
+            em.getTransaction().commit();
+            System.out.println("Сравните два UPDATE в логе show_sql");
+
         } finally {
             em.close();
             emf.close();

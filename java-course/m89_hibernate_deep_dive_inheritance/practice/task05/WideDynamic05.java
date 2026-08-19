@@ -1,11 +1,14 @@
 package m89_hibernate_deep_dive_inheritance.practice.task05;
 
 import jakarta.persistence.*;
+import org.hibernate.annotations.DynamicUpdate;
 
 @Entity @Table(name = "wide_dynamic")
 // TODO: @DynamicUpdate
+@DynamicUpdate
 class WideDynamic05 {
-    @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String name;
     private int price;

@@ -22,7 +22,9 @@ package m89_hibernate_deep_dive_inheritance.practice.task03;
  */
 
 import jakarta.persistence.*;
+import org.springframework.boot.autoconfigure.SpringBootApplication;
 
+@SpringBootApplication
 public class Task03 {
     public static void main(String[] args) {
         EntityManagerFactory emf = Persistence.createEntityManagerFactory("shop-pu");
@@ -37,6 +39,10 @@ public class Task03 {
             // TODO: long total = em.createQuery("select count(p) from Payment03 p", Long.class)
             // TODO:                 .getSingleResult();   // в логе — UNION двух таблиц
             // TODO: System.out.println("всего платежей (UNION): " + total); // 2
+
+            long total = em.createQuery("select count(p) from Payment03 p", Long.class).getSingleResult();   // в логе — UNION двух таблиц
+            System.out.println("всего платежей (UNION): " + total); // 2
+
         } finally {
             em.close();
             emf.close();
