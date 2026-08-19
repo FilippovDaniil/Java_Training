@@ -25,7 +25,9 @@ package m88_hibernate_deep_dive_modeling.practice.task05;
 import jakarta.persistence.*;
 import org.hibernate.Session;
 import org.hibernate.annotations.NaturalId;
+import org.springframework.boot.autoconfigure.SpringBootApplication;
 
+@SpringBootApplication
 public class Task05 {
     public static void main(String[] args) {
         EntityManagerFactory emf = Persistence.createEntityManagerFactory("shop-pu");
@@ -40,6 +42,11 @@ public class Task05 {
             // TODO: Session session = em.unwrap(Session.class);
             // TODO: Product05 p = session.bySimpleNaturalId(Product05.class).load("SKU-123");
             // TODO: System.out.println("найдено по natural id: " + p.getName()); // Ноутбук
+
+            Session session = em.unwrap(Session.class);
+            Product05 p = session.bySimpleNaturalId(Product05.class).load("SKU-123");
+            System.out.println("найдено по natural id: " + p.getName()); // Ноутбук
+
         } finally {
             em.close();
             emf.close();

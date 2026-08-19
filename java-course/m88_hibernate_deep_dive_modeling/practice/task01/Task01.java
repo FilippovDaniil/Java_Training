@@ -22,10 +22,13 @@ package m88_hibernate_deep_dive_modeling.practice.task01;
  */
 
 import jakarta.persistence.*;
+import org.springframework.boot.autoconfigure.SpringBootApplication;
+
 import java.util.HashSet;
 import java.util.Objects;
 import java.util.Set;
 
+@SpringBootApplication
 public class Task01 {
     public static void main(String[] args) {
         EntityManagerFactory emf = Persistence.createEntityManagerFactory("shop-pu");
@@ -38,6 +41,10 @@ public class Task01 {
             brokenSet.add(b);
             // TODO: em.persist(b);   // id присвоен → hashCode по id изменился
             // TODO: System.out.println("BROKEN contains после persist: " + brokenSet.contains(b)); // false
+
+            em.persist(b);   // id присвоен → hashCode по id изменился
+            System.out.println("BROKEN contains после persist: " + brokenSet.contains(b)); // false
+
             em.getTransaction().commit();
 
             // ЧАСТЬ B
@@ -47,6 +54,10 @@ public class Task01 {
             goodSet.add(g);
             // TODO: em.persist(g);
             // TODO: System.out.println("GOOD contains после persist: " + goodSet.contains(g)); // true
+
+            em.persist(g);
+            System.out.println("GOOD contains после persist: " + goodSet.contains(g)); // true
+
             em.getTransaction().commit();
         } finally {
             em.close();

@@ -4,12 +4,23 @@ import jakarta.persistence.*;
 import java.io.Serializable;
 import java.util.Objects;
 
-@Entity @Table(name = "price_list_lines")
+@Entity
+@Table(name = "price_list_lines")
 class PriceListLine04 {
     // TODO: @EmbeddedId
+    @EmbeddedId
     private PriceListLineId04 id;
+
     private int price;
+
     protected PriceListLine04() {}
-    public PriceListLine04(PriceListLineId04 id, int price) { this.id = id; this.price = price; }
-    public int getPrice() { return price; }
+
+    public PriceListLine04(PriceListLineId04 id, int price) {
+        this.id = id;
+        this.price = price;
+    }
+
+    public int getPrice() {
+        return price;
+    }
 }

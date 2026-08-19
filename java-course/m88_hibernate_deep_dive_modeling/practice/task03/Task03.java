@@ -28,7 +28,9 @@ package m88_hibernate_deep_dive_modeling.practice.task03;
  */
 
 import jakarta.persistence.*;
+import org.springframework.boot.autoconfigure.SpringBootApplication;
 
+@SpringBootApplication
 public class Task03 {
     public static void main(String[] args) {
         EntityManagerFactory emf = Persistence.createEntityManagerFactory("shop-pu");
@@ -47,6 +49,11 @@ public class Task03 {
             // TODO: Customer03 r = em.find(Customer03.class, id);
             // TODO: System.out.println("доставка: " + r.getShipping().getCity() + ", " + r.getShipping().getStreet());
             // TODO: System.out.println("счёт: " + r.getBilling().getCity() + ", " + r.getBilling().getStreet());
+
+            Customer03 r = em.find(Customer03.class, id);
+            System.out.println("доставка: " + r.getShipping().getCity() + ", " + r.getShipping().getStreet());
+            System.out.println("счёт: " + r.getBilling().getCity() + ", " + r.getBilling().getStreet());
+
         } finally {
             em.close();
             emf.close();

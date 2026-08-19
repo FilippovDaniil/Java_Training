@@ -25,8 +25,11 @@ package m88_hibernate_deep_dive_modeling.practice.task06;
  */
 
 import jakarta.persistence.*;
+import org.springframework.boot.autoconfigure.SpringBootApplication;
+
 import java.util.UUID;
 
+@SpringBootApplication
 public class Task06 {
     public static void main(String[] args) {
         EntityManagerFactory emf = Persistence.createEntityManagerFactory("shop-pu");
@@ -35,19 +38,23 @@ public class Task06 {
             em.getTransaction().begin();
             IdentityEntity06 a = new IdentityEntity06("A");
             // TODO: System.out.println("IDENTITY до persist: " + a.getId()); // null
+            System.out.println("IDENTITY до persist: " + a.getId()); // null
             em.persist(a);
             em.flush();
             // TODO: System.out.println("IDENTITY после flush: " + a.getId()); // не null
+            System.out.println("IDENTITY после flush: " + a.getId()); // не null
 
             SequenceEntity06 b = new SequenceEntity06("B");
             em.persist(b);
             em.flush();
             // TODO: System.out.println("SEQUENCE id: " + b.getId());
+            System.out.println("SEQUENCE id: " + b.getId());
 
             UuidEntity06 c = new UuidEntity06("C");
             em.persist(c);
             em.flush();
             // TODO: System.out.println("UUID id: " + c.getId());
+            System.out.println("UUID id: " + c.getId());
             em.getTransaction().commit();
         } finally {
             em.close();

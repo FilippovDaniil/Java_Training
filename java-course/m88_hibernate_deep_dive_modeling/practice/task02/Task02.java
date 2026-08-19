@@ -20,8 +20,11 @@ package m88_hibernate_deep_dive_modeling.practice.task02;
  */
 
 import jakarta.persistence.*;
+import org.springframework.boot.autoconfigure.SpringBootApplication;
+
 import java.util.Objects;
 
+@SpringBootApplication
 public class Task02 {
     public static void main(String[] args) {
         EntityManagerFactory emf = Persistence.createEntityManagerFactory("shop-pu");
@@ -39,6 +42,12 @@ public class Task02 {
             // TODO: System.out.println("цена: " + reloaded.getPrice().getAmount() + " " + reloaded.getPrice().getCurrency());
             // TODO: System.out.println("равны по значению? " +
             // TODO:     new Money02(10000, "RUB").equals(reloaded.getPrice())); // true
+
+            Product02 reloaded = em.find(Product02.class, id);
+            System.out.println("цена: " + reloaded.getPrice().getAmount() + " " + reloaded.getPrice().getCurrency());
+            System.out.println("равны по значению? " + new Money02(10000, "RUB")
+                    .equals(reloaded.getPrice())); // true
+
         } finally {
             em.close();
             emf.close();

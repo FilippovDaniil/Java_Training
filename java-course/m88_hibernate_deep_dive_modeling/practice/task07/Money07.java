@@ -9,6 +9,7 @@ import java.util.Objects;
 import java.util.Set;
 
 // TODO: @Embeddable
+@Embeddable
 class Money07 {
     private long amount;
     private String currency;
@@ -17,4 +18,21 @@ class Money07 {
     public long getAmount() { return amount; }
     public String getCurrency() { return currency; }
     // TODO: equals/hashCode по значению (amount, currency)
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Money07 money = (Money07) o;
+        return amount == money.amount && Objects.equals(currency, money.currency);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(amount, currency);
+    }
+
+    @Override
+    public String toString() {
+        return amount + " " + currency;
+    }
 }

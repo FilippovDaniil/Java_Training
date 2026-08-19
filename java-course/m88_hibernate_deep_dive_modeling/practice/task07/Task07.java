@@ -45,20 +45,67 @@ package m88_hibernate_deep_dive_modeling.practice.task07;
 import jakarta.persistence.*;
 import org.hibernate.Session;
 import org.hibernate.annotations.NaturalId;
+import org.springframework.boot.autoconfigure.SpringBootApplication;
+
 import java.io.Serializable;
 import java.util.HashSet;
 import java.util.Objects;
 import java.util.Set;
 
+@SpringBootApplication
 public class Task07 {
     public static void main(String[] args) {
         EntityManagerFactory emf = Persistence.createEntityManagerFactory("shop-pu");
         EntityManager em = emf.createEntityManager();
+
         try {
-            // TODO: a) сохранить 2 Product07 (SKU-1/SKU-2) с Money07
-            // TODO: b) HashSet<Product07>: size==2, contains(перечитанного по find) == true
-            // TODO: c) session.bySimpleNaturalId(Product07.class).load("SKU-1")
-            // TODO: d) сохранить 2 OrderLine07 с составными ключами; найти одну по new OrderLineId07(...)
+            // ===== a) Сохраняем 2 товара с ценами =====
+            em.getTransaction().begin();
+            Product07 p1 = new Product07("SKU-1", "Ноутбук", new Money07(50000, "RUB"));
+            Product07 p2 = new Product07("SKU-2", "Телефон", new Money07(30000, "RUB"));
+            em.persist(p1);
+            em.persist(p2);
+            em.getTransaction().commit();
+            em.clear();
+
+            System.out.println("=== Товары сохранены ===");
+
+            // ===== b) HashSet<Product07> — equals по sku =====
+            Set<Product07> productSet = new HashSet<>();
+            productSet.add(p1);
+            productSet.add(p2);
+            System.out.println("Set size (после добавления): " + productSet.size()); // 2
+
+            // Перечитываем товары из БД
+            Product07 found1 = em.find(Product07.class, p1.getId());
+            Product07 found2 = em.find(Product07.class, p2.getId());
+
+            System.out.println("Set contains (перечитанный p1): " + productSet.contains(found1)); // true
+            System.out.println("Set contains (перечитанный p2): " + productSet.contains(found2)); // true
+
+            // ===== c) Поиск по @NaturalId =====
+            Session session = em.unwrap(Session.class);
+            Product07 bySku = session.bySimpleNaturalId(Product07.class).load("SKU-1");
+            System.out.println("Поиск по SKU-1: " + bySku);
+
+            // ===== d) Сохраняем OrderLine с составным ключом =====
+            em.getTransaction().begin();
+            OrderLineId07 id1 = new OrderLineId07(1L, p1.getId());
+            OrderLineId07 id2 = new OrderLineId07(1L, p2.getId());
+
+            OrderLine07 ol1 = new OrderLine07(id1, 2, new Money07(100000, "RUB"));
+            OrderLine07 ol2 = new OrderLine07(id2, 1, new Money07(30000, "RUB"));
+
+            em.persist(ol1);
+            em.persist(ol2);
+            em.getTransaction().commit();
+            em.clear();
+
+            // Находим строку заказа по составному ключу
+            OrderLineId07 searchId = new OrderLineId07(1L, p1.getId());
+            OrderLine07 foundOl = em.find(OrderLine07.class, searchId);
+            System.out.println("Найдено OrderLine по составному ключу: " + foundOl);
+
         } finally {
             em.close();
             emf.close();

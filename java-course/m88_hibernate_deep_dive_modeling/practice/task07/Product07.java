@@ -14,6 +14,7 @@ class Product07 {
     private Long id;
 
     // TODO: @NaturalId(mutable = false)
+    @NaturalId(mutable = false)
     @Column(unique = true)
     private String sku;
 
@@ -26,7 +27,27 @@ class Product07 {
     public Product07(String sku, String name, Money07 price) {
         this.sku = sku; this.name = name; this.price = price;
     }
+    public Long getId() { return id; }
+    public String getSku() { return sku; }
     public String getName() { return name; }
     public Money07 getPrice() { return price; }
-    // TODO: equals/hashCode ПО sku
+
+    // equals/hashCode по бизнес-ключу (sku) — стабилен
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Product07 that = (Product07) o;
+        return Objects.equals(sku, that.sku);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(sku);
+    }
+
+    @Override
+    public String toString() {
+        return "Product07{sku='" + sku + "', name='" + name + "', price=" + price + "}";
+    }
 }

@@ -24,9 +24,12 @@ package m88_hibernate_deep_dive_modeling.practice.task04;
  */
 
 import jakarta.persistence.*;
+import org.springframework.boot.autoconfigure.SpringBootApplication;
+
 import java.io.Serializable;
 import java.util.Objects;
 
+@SpringBootApplication
 public class Task04 {
     public static void main(String[] args) {
         EntityManagerFactory emf = Persistence.createEntityManagerFactory("shop-pu");
@@ -40,6 +43,10 @@ public class Task04 {
 
             // TODO: PriceListLine04 line = em.find(PriceListLine04.class, new PriceListLineId04(1L, 10L));
             // TODO: System.out.println("цена строки (1,10) = " + line.getPrice()); // 500
+
+            PriceListLine04 line = em.find(PriceListLine04.class, new PriceListLineId04(1L, 10L));
+            System.out.println("цена строки (1,10) = " + line.getPrice()); // 500
+
         } finally {
             em.close();
             emf.close();

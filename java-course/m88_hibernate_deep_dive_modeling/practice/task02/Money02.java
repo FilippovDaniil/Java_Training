@@ -4,6 +4,7 @@ import jakarta.persistence.*;
 import java.util.Objects;
 
 // TODO: @Embeddable
+@Embeddable
 class Money02 {
     private long amount;
     private String currency;
@@ -15,5 +16,16 @@ class Money02 {
     // TODO: @Override public boolean equals(Object o) {
     // TODO:     return o instanceof Money02 m && amount == m.amount && Objects.equals(currency, m.currency);
     // TODO: }
+
+    @Override
+    public boolean equals(Object o) {
+        return o instanceof Money02 m && amount == m.amount && Objects.equals(currency, m.currency);
+    }
+
     // TODO: @Override public int hashCode() { return Objects.hash(amount, currency); }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(amount, currency);
+    }
 }
