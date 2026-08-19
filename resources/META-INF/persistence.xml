@@ -9,10 +9,7 @@
         <provider>org.hibernate.jpa.HibernatePersistenceProvider</provider>
 
 
-        <class>m89_hibernate_deep_dive_inheritance.practice.task07.CardPayment07</class>
-        <class>m89_hibernate_deep_dive_inheritance.practice.task07.CashPayment07</class>
-        <class>m89_hibernate_deep_dive_inheritance.practice.task07.OnlinePayment07</class>
-        <class>m89_hibernate_deep_dive_inheritance.practice.task07.Payment07</class>
+        <class>m90_hibernate_deep_dive_locking.practice.task06.Product06</class>
 
 
         <properties>
@@ -28,6 +25,13 @@
             <property name="hibernate.show_sql" value="true"/>
             <property name="hibernate.format_sql" value="true"/>
             <property name="hibernate.use_sql_comments" value="true"/>
+
+            <!-- ✅ ВКЛЮЧАЕМ ENVERS -->
+            <property name="hibernate.integration.envers.enabled" value="true"/>
+            <property name="org.hibernate.envers.audit_table_suffix" value="_AUD"/>
+            <property name="org.hibernate.envers.revision_field_name" value="REV"/>
+            <property name="org.hibernate.envers.revision_type_field_name" value="REVTYPE"/>
+
         </properties>
     </persistence-unit>
 

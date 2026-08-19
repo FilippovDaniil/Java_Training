@@ -25,8 +25,13 @@ package m90_hibernate_deep_dive_locking.practice.task06;
  */
 
 import jakarta.persistence.*;
+import org.hibernate.envers.AuditReader;
+import org.hibernate.envers.AuditReaderFactory;
+import org.springframework.boot.autoconfigure.SpringBootApplication;
+
 import java.util.List;
 
+@SpringBootApplication
 public class Task06 {
     public static void main(String[] args) {
         EntityManagerFactory emf = Persistence.createEntityManagerFactory("shop-pu");
@@ -42,12 +47,23 @@ public class Task06 {
             // TODO: em.getTransaction().begin(); em.find(Product06.class, id).setPrice(60); em.getTransaction().commit(); // рев. 2
             // TODO: em.getTransaction().begin(); em.find(Product06.class, id).setPrice(55); em.getTransaction().commit(); // рев. 3
 
+            em.getTransaction().begin(); em.find(Product06.class, id).setPrice(60); em.getTransaction().commit(); // рев. 2
+            em.getTransaction().begin(); em.find(Product06.class, id).setPrice(55); em.getTransaction().commit(); // рев. 3
+
             // TODO: AuditReader reader = AuditReaderFactory.get(em);
             // TODO: List<Number> revs = reader.getRevisions(Product06.class, id);
             // TODO: for (Number rev : revs)
             // TODO:     System.out.println("рев. " + rev + ": price = " +
             // TODO:         reader.find(Product06.class, id, rev).getPrice());
             // TODO: // ожидается: 50, 60, 55
+
+            AuditReader reader = AuditReaderFactory.get(em);
+            List<Number> revs = reader.getRevisions(Product06.class, id);
+            for (Number rev : revs) {
+                System.out.println("рев. " + rev + ": price = " + reader.find(Product06.class, id, rev).getPrice());
+            }
+            // TODO: // ожидается: 50, 60, 55
+
         } finally {
             em.close();
             emf.close();

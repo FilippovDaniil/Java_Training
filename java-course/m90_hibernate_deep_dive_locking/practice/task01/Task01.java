@@ -21,7 +21,9 @@ package m90_hibernate_deep_dive_locking.practice.task01;
  */
 
 import jakarta.persistence.*;
+import org.springframework.boot.autoconfigure.SpringBootApplication;
 
+@SpringBootApplication
 public class Task01 {
     public static void main(String[] args) {
         EntityManagerFactory emf = Persistence.createEntityManagerFactory("shop-pu");
@@ -41,8 +43,14 @@ public class Task01 {
             // TODO: em1.getTransaction().begin(); Product01 a = em1.find(Product01.class, id);
             // TODO: em2.getTransaction().begin(); Product01 b = em2.find(Product01.class, id);
 
+            em1.getTransaction().begin();
+            Product01 a = em1.find(Product01.class, id);
+            em2.getTransaction().begin();
+            Product01 b = em2.find(Product01.class, id);
+
             // em1 фиксирует первым
             // TODO: a.setStock(a.getStock() - 1); em1.getTransaction().commit(); // version → 1
+            a.setStock(a.getStock() - 1); em1.getTransaction().commit(); // version → 1
 
             // em2 фиксирует устаревшую версию → конфликт
             // TODO: try {
@@ -50,6 +58,14 @@ public class Task01 {
             // TODO: } catch (Exception e) {
             // TODO:     System.out.println("Конфликт: " + e.getClass().getSimpleName());
             // TODO: }
+
+            try {
+                b.setStock(b.getStock() - 2);
+                em2.getTransaction().commit();
+            } catch (Exception e) {
+                System.out.println("Конфликт: " + e.getClass().getSimpleName());
+            }
+            
         } finally {
             em1.close();
             em2.close();

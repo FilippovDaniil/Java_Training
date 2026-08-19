@@ -3,9 +3,11 @@ package m90_hibernate_deep_dive_locking.practice.task04;
 import jakarta.persistence.*;
 import java.util.Map;
 
-@Entity @Table(name = "products")
+@Entity
+@Table(name = "products")
 class Product04 {
-    @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String name;
     private int stock;

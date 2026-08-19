@@ -109,6 +109,9 @@ dependencies {
     // Spring REST Docs
     implementation 'org.springframework.restdocs:spring-restdocs-mockmvc'
 
+    //envers
+    implementation 'org.hibernate.orm:hibernate-envers:6.4.0.Final'
+
     // JUnit Platform for the gradle `test` task (kept for completeness)
     testImplementation platform('org.junit:junit-bom:5.10.0')
     testImplementation 'org.junit.jupiter:junit-jupiter'

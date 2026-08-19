@@ -24,7 +24,9 @@ package m90_hibernate_deep_dive_locking.practice.task03;
  */
 
 import jakarta.persistence.*;
+import org.springframework.boot.autoconfigure.SpringBootApplication;
 
+@SpringBootApplication
 public class Task03 {
     public static void main(String[] args) {
         EntityManagerFactory emf = Persistence.createEntityManagerFactory("shop-pu");
@@ -43,6 +45,13 @@ public class Task03 {
             // TODO: locked.setStock(locked.getStock() - 1);   // под FOR UPDATE
             // TODO: em.getTransaction().commit();
             // TODO: System.out.println("остаток = " + em.find(Product03.class, id).getStock()); // 0
+
+            em.getTransaction().begin();
+            Product03 locked = em.find(Product03.class, id, LockModeType.PESSIMISTIC_WRITE);
+            locked.setStock(locked.getStock() - 1);   // под FOR UPDATE
+            em.getTransaction().commit();
+            System.out.println("остаток = " + em.find(Product03.class, id).getStock()); // 0
+
         } finally {
             em.close();
             emf.close();

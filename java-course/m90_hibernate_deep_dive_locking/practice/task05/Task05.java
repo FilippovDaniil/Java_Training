@@ -24,7 +24,9 @@ package m90_hibernate_deep_dive_locking.practice.task05;
  */
 
 import jakarta.persistence.*;
+import org.springframework.boot.autoconfigure.SpringBootApplication;
 
+@SpringBootApplication
 public class Task05 {
     public static void main(String[] args) {
         EntityManagerFactory emf = Persistence.createEntityManagerFactory("shop-pu");
@@ -44,10 +46,21 @@ public class Task05 {
             // TODO: em.getTransaction().commit();
             // TODO: em.clear();
 
+            em.getTransaction().begin();
+            em.remove(em.find(Product05.class, victimId));   // UPDATE deleted=true, не DELETE
+            em.getTransaction().commit();
+            em.clear();
+
             // TODO: long visible = em.createQuery("select count(p) from Product05 p", Long.class).getSingleResult();
             // TODO: System.out.println("видно через JPA: " + visible); // 2 (фильтр deleted=false)
             // TODO: Number physical = (Number) em.createNativeQuery("SELECT count(*) FROM products").getSingleResult();
             // TODO: System.out.println("физически в таблице: " + physical.intValue()); // 3
+
+            long visible = em.createQuery("select count(p) from Product05 p", Long.class).getSingleResult();
+            System.out.println("видно через JPA: " + visible); // 2 (фильтр deleted=false)
+            Number physical = (Number) em.createNativeQuery("SELECT count(*) FROM products").getSingleResult();
+            System.out.println("физически в таблице: " + physical.intValue()); // 3
+
         } finally {
             em.close();
             emf.close();

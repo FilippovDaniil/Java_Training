@@ -22,7 +22,9 @@ package m90_hibernate_deep_dive_locking.practice.task02;
  */
 
 import jakarta.persistence.*;
+import org.springframework.boot.autoconfigure.SpringBootApplication;
 
+@SpringBootApplication
 public class Task02 {
     public static void main(String[] args) {
         EntityManagerFactory emf = Persistence.createEntityManagerFactory("shop-pu");
@@ -42,6 +44,14 @@ public class Task02 {
             // TODO: em.getTransaction().commit();
             // TODO: em.clear();
             // TODO: System.out.println("version = " + em.find(Order02.class, id).getVersion()); // 1
+
+            em.getTransaction().begin();
+            Order02 locked = em.find(Order02.class, id, LockModeType.OPTIMISTIC_FORCE_INCREMENT);
+            // TODO: // даже без изменения locked версия поднимется на commit
+            em.getTransaction().commit();
+            em.clear();
+            System.out.println("version = " + em.find(Order02.class, id).getVersion()); // 1
+
         } finally {
             em.close();
             emf.close();

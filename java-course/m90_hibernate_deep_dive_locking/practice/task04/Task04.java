@@ -23,8 +23,11 @@ package m90_hibernate_deep_dive_locking.practice.task04;
  */
 
 import jakarta.persistence.*;
+import org.springframework.boot.autoconfigure.SpringBootApplication;
+
 import java.util.Map;
 
+@SpringBootApplication
 public class Task04 {
     public static void main(String[] args) {
         EntityManagerFactory emf = Persistence.createEntityManagerFactory("shop-pu");
@@ -44,6 +47,14 @@ public class Task04 {
             // TODO: locked.setStock(locked.getStock() - 1);
             // TODO: em.getTransaction().commit();
             // TODO: System.out.println("остаток = " + em.find(Product04.class, id).getStock()); // 4
+
+            em.getTransaction().begin();
+            Map<String, Object> hints = Map.of("jakarta.persistence.lock.timeout", 2000);
+            Product04 locked = em.find(Product04.class, id, LockModeType.PESSIMISTIC_WRITE, hints);
+            locked.setStock(locked.getStock() - 1);
+            em.getTransaction().commit();
+            System.out.println("остаток = " + em.find(Product04.class, id).getStock()); // 4
+
         } finally {
             em.close();
             emf.close();

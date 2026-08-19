@@ -1,10 +1,14 @@
 package m90_hibernate_deep_dive_locking.practice.task06;
 
 import jakarta.persistence.*;
+import org.hibernate.envers.Audited;
+
 import java.util.List;
 
-@Entity @Table(name = "products")
+@Entity
+@Table(name = "products")
 // TODO: @Audited
+@Audited
 class Product06 {
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
