@@ -24,9 +24,13 @@ package m87_hibernate_deep_dive_querying.practice.task05;
  */
 
 import jakarta.persistence.*;
+import org.springframework.boot.autoconfigure.SpringBootApplication;
+
 import java.util.ArrayList;
 import java.util.List;
 
+
+@SpringBootApplication
 public class Task05 {
     public static void main(String[] args) {
         EntityManagerFactory emf = Persistence.createEntityManagerFactory("shop-pu");
@@ -37,24 +41,28 @@ public class Task05 {
             Category05 cat = new Category05("Электроника");
             Product05 wrong = new Product05("Ноутбук");
             // TODO: cat.getProducts().add(wrong);   // ТОЛЬКО обратная сторона
+            cat.getProducts().add(wrong);   // ТОЛЬКО обратная сторона
             em.persist(cat);
             em.persist(wrong);
             em.getTransaction().commit();
             Long wrongId = wrong.getId();
             em.clear();
             // TODO: System.out.println("FK (ловушка) category = " + em.find(Product05.class, wrongId).getCategory()); // null
+            System.out.println("FK (ловушка) category = " + em.find(Product05.class, wrongId).getCategory()); // null
 
             // ЧАСТЬ B — правильно
             em.getTransaction().begin();
             Category05 cat2 = new Category05("Книги");
             Product05 ok = new Product05("Java");
             // TODO: cat2.addProduct(ok);   // синхронизирует обе стороны
+            cat2.addProduct(ok);   // синхронизирует обе стороны
             em.persist(cat2);
             em.persist(ok);
             em.getTransaction().commit();
             Long okId = ok.getId();
             em.clear();
             // TODO: System.out.println("FK (правильно) category = " + em.find(Product05.class, okId).getCategory()); // не null
+            System.out.println("FK (правильно) category = " + em.find(Product05.class, okId).getCategory()); // не null
         } finally {
             em.close();
             emf.close();

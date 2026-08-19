@@ -35,9 +35,12 @@ package m87_hibernate_deep_dive_querying.practice.task07;
 
 import jakarta.persistence.*;
 import jakarta.persistence.criteria.*;
+import org.springframework.boot.autoconfigure.SpringBootApplication;
+
 import java.util.ArrayList;
 import java.util.List;
 
+@SpringBootApplication
 public class Task07 {
     public static void main(String[] args) {
         EntityManagerFactory emf = Persistence.createEntityManagerFactory("shop-pu");
@@ -59,6 +62,14 @@ public class Task07 {
             // TODO: System.out.println("HQL:");      byHql(em).forEach(p -> System.out.println(p.getName() + " " + p.getPrice()));
             // TODO: System.out.println("Criteria:"); byCriteria(em).forEach(p -> System.out.println(p.getName() + " " + p.getPrice()));
             // TODO: System.out.println("native:");   byNative(em).forEach(p -> System.out.println(p.getName() + " " + p.getPrice()));
+
+            System.out.println("HQL:");
+            byHql(em).forEach(p -> System.out.println(p.getName() + " " + p.getPrice()));
+            System.out.println("Criteria:");
+            byCriteria(em).forEach(p -> System.out.println(p.getName() + " " + p.getPrice()));
+            System.out.println("native:");
+            byNative(em).forEach(p -> System.out.println(p.getName() + " " + p.getPrice()));
+
         } finally {
             em.close();
             emf.close();
@@ -69,7 +80,12 @@ public class Task07 {
         // TODO: return em.createQuery("select p from Product07 p where p.category.name = :c " +
         // TODO:     "and p.price > :min order by p.price desc", Product07.class)
         // TODO:     .setParameter("c", "Еда").setParameter("min", 100).getResultList();
-        return List.of();
+
+        return em.createQuery("select p from Product07 p where p.category.name = :c " +
+                "and p.price > :min order by p.price desc", Product07.class)
+                .setParameter("c", "Еда")
+                .setParameter("min", 100)
+                .getResultList();
     }
 
     static List<Product07> byCriteria(EntityManager em) {
@@ -81,7 +97,13 @@ public class Task07 {
         // TODO:     cb.gt(root.get("price"), 100))
         // TODO:   .orderBy(cb.desc(root.get("price")));
         // TODO: return em.createQuery(cq).getResultList();
-        return List.of();
+
+        CriteriaBuilder cb = em.getCriteriaBuilder();
+        CriteriaQuery<Product07> cq = cb.createQuery(Product07.class);
+        Root<Product07> root = cq.from(Product07.class);
+        cq.select(root).where(cb.equal(root.get("category").get("name"), "Еда"), cb.gt(root.get("price"), 100))
+                .orderBy(cb.desc(root.get("price")));
+        return em.createQuery(cq).getResultList();
     }
 
     @SuppressWarnings("unchecked")
@@ -90,6 +112,11 @@ public class Task07 {
         // TODO:     "SELECT p.* FROM products p JOIN categories c ON p.category_id = c.id " +
         // TODO:     "WHERE c.name = :c AND p.price > :min ORDER BY p.price DESC", Product07.class)
         // TODO:     .setParameter("c", "Еда").setParameter("min", 100).getResultList();
-        return List.of();
+
+        return em.createNativeQuery("SELECT p.* FROM products p JOIN categories c ON p.category_id = c.id " +
+                "WHERE c.name = :c AND p.price > :min ORDER BY p.price DESC", Product07.class)
+                .setParameter("c", "Еда")
+                .setParameter("min", 100)
+                .getResultList();
     }
 }

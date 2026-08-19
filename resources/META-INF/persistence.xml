@@ -8,8 +8,8 @@
     <persistence-unit name="shop-pu" transaction-type="RESOURCE_LOCAL">
         <provider>org.hibernate.jpa.HibernatePersistenceProvider</provider>
 
-        <class>m86_hibernate_deep_dive_fetching.practice.task07.Category07</class>
-        <class>m86_hibernate_deep_dive_fetching.practice.task07.Product07</class>
+        <class>m87_hibernate_deep_dive_querying.practice.task07.Category07</class>
+        <class>m87_hibernate_deep_dive_querying.practice.task07.Product07</class>
 
         <properties>
             <!-- H2 in-memory database -->

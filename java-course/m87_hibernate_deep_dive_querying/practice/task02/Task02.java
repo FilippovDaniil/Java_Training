@@ -21,7 +21,9 @@ package m87_hibernate_deep_dive_querying.practice.task02;
  */
 
 import jakarta.persistence.*;
+import org.springframework.boot.autoconfigure.SpringBootApplication;
 
+@SpringBootApplication
 public class Task02 {
     public static void main(String[] args) {
         EntityManagerFactory emf = Persistence.createEntityManagerFactory("shop-pu");
@@ -47,6 +49,18 @@ public class Task02 {
             // TODO: em.refresh(p);
             // TODO: System.out.println("после refresh = " + p.getPrice()); // 50
             // TODO: em.getTransaction().commit();
+
+            em.getTransaction().begin();
+            Product02 p = em.find(Product02.class, id);
+            System.out.println("до bulk (в контексте) = " + p.getPrice()); // 40
+            int updated = em.createQuery("update Product02 p set p.price = p.price + 10 where p.category = 'Еда'")
+                    .executeUpdate();
+            System.out.println("обновлено строк: " + updated); // 3
+            System.out.println("объект в контексте всё ещё = " + p.getPrice()); // 40 (ловушка!)
+            em.refresh(p);
+            System.out.println("после refresh = " + p.getPrice()); // 50
+            em.getTransaction().commit();
+
         } finally {
             em.close();
             emf.close();

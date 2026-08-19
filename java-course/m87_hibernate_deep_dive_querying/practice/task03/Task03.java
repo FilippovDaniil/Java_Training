@@ -1,46 +1,22 @@
 package m87_hibernate_deep_dive_querying.practice.task03;
 
-/**
- * Задача 03 — Модуль 87: Criteria API — динамический фильтр
- *
- * ТРЕБУЮТСЯ ЗАВИСИМОСТИ:
- *   org.hibernate.orm:hibernate-core, com.h2database:h2 + META-INF/persistence.xml ("shop-pu").
- *
- * ЗАДАНИЕ:
- *   Реализуйте метод search(em, category, minPrice, maxPrice), где ЛЮБОЙ из параметров
- *   может быть null (не задан). Соберите запрос через Criteria API:
- *     1) CriteriaBuilder cb = em.getCriteriaBuilder();
- *        CriteriaQuery<Product03> cq = cb.createQuery(Product03.class);
- *        Root<Product03> root = cq.from(Product03.class);
- *     2) Накапливайте предикаты в List<Predicate> ТОЛЬКО для не-null параметров:
- *        - category != null → cb.equal(root.get("category"), category)
- *        - minPrice != null → cb.ge(root.get("price"), minPrice)
- *        - maxPrice != null → cb.le(root.get("price"), maxPrice)
- *     3) cq.select(root).where(cb.and(filters.toArray(new Predicate[0])))
- *           .orderBy(cb.asc(root.get("name")));
- *     4) Верните em.createQuery(cq).getResultList().
- *
- *   В main вызовите search с разными комбинациями (только категория; диапазон цен; всё null).
- *
- * ЦЕЛЬ: освоить типобезопасный динамический запрос без конкатенации HQL-строк.
- *
- * ПОДСКАЗКА: null-параметр = НЕ добавляем предикат (условие не применяется).
- *            cb.and() от пустого массива = «истина» (вернутся все).
- */
-
 import jakarta.persistence.*;
 import jakarta.persistence.criteria.CriteriaBuilder;
 import jakarta.persistence.criteria.CriteriaQuery;
 import jakarta.persistence.criteria.Predicate;
 import jakarta.persistence.criteria.Root;
+import org.springframework.boot.autoconfigure.SpringBootApplication;
+
 import java.util.ArrayList;
 import java.util.List;
 
+@SpringBootApplication
 public class Task03 {
     public static void main(String[] args) {
         EntityManagerFactory emf = Persistence.createEntityManagerFactory("shop-pu");
         EntityManager em = emf.createEntityManager();
         try {
+            // ===== Подготовка данных =====
             em.getTransaction().begin();
             em.persist(new Product03("Хлеб", "Еда", 40));
             em.persist(new Product03("Сыр", "Еда", 300));
@@ -49,25 +25,62 @@ public class Task03 {
             em.getTransaction().commit();
             em.clear();
 
-            // TODO: System.out.println("только категория:"); search(em, "Еда", null, null).forEach(...);
-            // TODO: System.out.println("диапазон цен:");    search(em, null, 100, 500).forEach(...);
-            // TODO: System.out.println("без фильтров:");     search(em, null, null, null).forEach(...);
+            // ===== Тест 1: только категория =====
+            System.out.println("=== только категория (Еда) ===");
+            search(em, "Еда", null, null).forEach(p ->
+                    System.out.println("  " + p.getName() + " | " + p.getCategory() + " | " + p.getPrice())
+            );
+
+            // ===== Тест 2: диапазон цен =====
+            System.out.println("\n=== диапазон цен (100-500) ===");
+            search(em, null, 100, 500).forEach(p ->
+                    System.out.println("  " + p.getName() + " | " + p.getCategory() + " | " + p.getPrice())
+            );
+
+            // ===== Тест 3: без фильтров (все) =====
+            System.out.println("\n=== без фильтров (все) ===");
+            search(em, null, null, null).forEach(p ->
+                    System.out.println("  " + p.getName() + " | " + p.getCategory() + " | " + p.getPrice())
+            );
+
         } finally {
             em.close();
             emf.close();
         }
     }
 
+    /**
+     * Динамический поиск товаров с фильтрацией через Criteria API.
+     *
+     * @param em        EntityManager
+     * @param category  категория (может быть null)
+     * @param minPrice  минимальная цена (может быть null)
+     * @param maxPrice  максимальная цена (может быть null)
+     * @return список товаров, отсортированный по имени
+     */
     static List<Product03> search(EntityManager em, String category, Integer minPrice, Integer maxPrice) {
-        // TODO: CriteriaBuilder cb = em.getCriteriaBuilder();
-        // TODO: CriteriaQuery<Product03> cq = cb.createQuery(Product03.class);
-        // TODO: Root<Product03> root = cq.from(Product03.class);
-        // TODO: List<Predicate> filters = new ArrayList<>();
-        // TODO: if (category != null) filters.add(cb.equal(root.get("category"), category));
-        // TODO: if (minPrice != null) filters.add(cb.ge(root.get("price"), minPrice));
-        // TODO: if (maxPrice != null) filters.add(cb.le(root.get("price"), maxPrice));
-        // TODO: cq.select(root).where(cb.and(filters.toArray(new Predicate[0]))).orderBy(cb.asc(root.get("name")));
-        // TODO: return em.createQuery(cq).getResultList();
-        return List.of();
+        CriteriaBuilder cb = em.getCriteriaBuilder();
+        CriteriaQuery<Product03> cq = cb.createQuery(Product03.class);
+        Root<Product03> root = cq.from(Product03.class);
+
+        List<Predicate> filters = new ArrayList<>();
+
+        // Добавляем предикаты только для не-null параметров
+        if (category != null) {
+            filters.add(cb.equal(root.get("category"), category));
+        }
+        if (minPrice != null) {
+            filters.add(cb.ge(root.get("price"), minPrice));  // price >= minPrice
+        }
+        if (maxPrice != null) {
+            filters.add(cb.le(root.get("price"), maxPrice));  // price <= maxPrice
+        }
+
+        // Строим запрос
+        cq.select(root)
+                .where(cb.and(filters.toArray(new Predicate[0])))
+                .orderBy(cb.asc(root.get("name")));
+
+        return em.createQuery(cq).getResultList();
     }
 }

@@ -24,9 +24,12 @@ package m87_hibernate_deep_dive_querying.practice.task06;
  */
 
 import jakarta.persistence.*;
+import org.springframework.boot.autoconfigure.SpringBootApplication;
+
 import java.util.ArrayList;
 import java.util.List;
 
+@SpringBootApplication
 public class Task06 {
     public static void main(String[] args) {
         EntityManagerFactory emf = Persistence.createEntityManagerFactory("shop-pu");
@@ -44,6 +47,7 @@ public class Task06 {
             orderId = order.getId();
             em.clear();
             // TODO: System.out.println("строк после persist: " + countLines(em)); // 3
+            System.out.println("строк после persist: " + countLines(em)); // 3
 
             // 2) orphanRemoval
             // TODO: em.getTransaction().begin();
@@ -53,12 +57,26 @@ public class Task06 {
             // TODO: em.clear();
             // TODO: System.out.println("строк после orphanRemoval: " + countLines(em)); // 2
 
+            em.getTransaction().begin();
+            Order06 loaded = em.find(Order06.class, orderId);
+            loaded.getLines().remove(0);   // осиротевшая строка
+            em.getTransaction().commit();
+            em.clear();
+            System.out.println("строк после orphanRemoval: " + countLines(em)); // 2
+
             // 3) cascade remove
             // TODO: em.getTransaction().begin();
             // TODO: em.remove(em.find(Order06.class, orderId));
             // TODO: em.getTransaction().commit();
             // TODO: em.clear();
             // TODO: System.out.println("строк после remove заказа: " + countLines(em)); // 0
+
+            em.getTransaction().begin();
+            em.remove(em.find(Order06.class, orderId));
+            em.getTransaction().commit();
+            em.clear();
+            System.out.println("строк после remove заказа: " + countLines(em)); // 0
+
         } finally {
             em.close();
             emf.close();

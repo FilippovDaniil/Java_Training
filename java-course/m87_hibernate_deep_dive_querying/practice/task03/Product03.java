@@ -5,12 +5,17 @@ import jakarta.persistence.criteria.CriteriaBuilder;
 import jakarta.persistence.criteria.CriteriaQuery;
 import jakarta.persistence.criteria.Predicate;
 import jakarta.persistence.criteria.Root;
+import lombok.Getter;
+
 import java.util.ArrayList;
 import java.util.List;
 
-@Entity @Table(name = "products")
+@Entity
+@Table(name = "products")
+@Getter
 class Product03 {
-    @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String name;
     private String category;
@@ -19,6 +24,4 @@ class Product03 {
     public Product03(String name, String category, int price) {
         this.name = name; this.category = category; this.price = price;
     }
-    public String getName() { return name; }
-    public int getPrice() { return price; }
 }

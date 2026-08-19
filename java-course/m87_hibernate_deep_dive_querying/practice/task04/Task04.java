@@ -26,8 +26,11 @@ package m87_hibernate_deep_dive_querying.practice.task04;
  */
 
 import jakarta.persistence.*;
+import org.springframework.boot.autoconfigure.SpringBootApplication;
+
 import java.util.List;
 
+@SpringBootApplication
 public class Task04 {
     public static void main(String[] args) {
         EntityManagerFactory emf = Persistence.createEntityManagerFactory("shop-pu");
@@ -48,10 +51,21 @@ public class Task04 {
             // TODO:     .setParameter("min", 100).getResultList();
             // TODO: dear.forEach(p -> System.out.println(p.getName() + " " + p.getPrice()));
 
+            @SuppressWarnings("unchecked")
+            List<Product04> dear = em.createNativeQuery("SELECT * FROM products WHERE price > :min", Product04.class)
+                    .setParameter("min", 100)
+                    .getResultList();
+
+            dear.forEach(p -> System.out.println(p.getName() + " " + p.getPrice()));
+
             // 3) скаляр
             // TODO: Number total = (Number) em.createNativeQuery("SELECT count(*) FROM products")
             // TODO:     .getSingleResult();
             // TODO: System.out.println("всего товаров: " + total.intValue());
+
+            Number total = (Number) em.createNativeQuery("SELECT count(*) FROM products").getSingleResult();
+            System.out.println("всего товаров: " + total.intValue());
+
         } finally {
             em.close();
             emf.close();

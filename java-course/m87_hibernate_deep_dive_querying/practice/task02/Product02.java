@@ -2,9 +2,11 @@ package m87_hibernate_deep_dive_querying.practice.task02;
 
 import jakarta.persistence.*;
 
-@Entity @Table(name = "products")
+@Entity
+@Table(name = "products")
 class Product02 {
-    @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String name;
     private String category;

@@ -21,8 +21,11 @@ package m87_hibernate_deep_dive_querying.practice.task01;
  */
 
 import jakarta.persistence.*;
+import org.springframework.boot.autoconfigure.SpringBootApplication;
+
 import java.util.List;
 
+@SpringBootApplication
 public class Task01 {
     public static void main(String[] args) {
         EntityManagerFactory emf = Persistence.createEntityManagerFactory("shop-pu");
@@ -44,15 +47,36 @@ public class Task01 {
             // TODO:     Product01.class).setParameter("cat", "Еда").setParameter("min", 100).getResultList();
             // TODO: food.forEach(p -> System.out.println(p.getName() + " " + p.getPrice()));
 
+            List<Product01> food = em.createQuery(
+            "select p from Product01 p where p.category = :cat and p.price > :min order by p.price desc", Product01.class)
+                    .setParameter("cat", "Еда")
+                    .setParameter("min", 100)
+                    .getResultList();
+
+            food.forEach(p -> System.out.println(p.getName() + " " + p.getPrice()));
+
             // 2) count
             // TODO: Long n = em.createQuery("select count(p) from Product01 p where p.category = :c", Long.class)
             // TODO:           .setParameter("c", "Еда").getSingleResult();
             // TODO: System.out.println("еды: " + n);
 
+            Long n = em.createQuery("select count(p) from Product01 p where p.category = :c", Long.class)
+                    .setParameter("c", "Еда")
+                    .getSingleResult();
+            System.out.println("еды: " + n);
+
             // 3) пагинация
             // TODO: List<Product01> page = em.createQuery("select p from Product01 p order by p.price", Product01.class)
             // TODO:           .setFirstResult(2).setMaxResults(2).getResultList();
             // TODO: page.forEach(p -> System.out.println("стр.2: " + p.getName()));
+
+           List<Product01> page = em.createQuery("select p from Product01 p order by p.price", Product01.class)
+                   .setFirstResult(2)
+                   .setMaxResults(2)
+                   .getResultList();
+
+           page.forEach(p -> System.out.println("стр.2: " + p.getName()));
+
         } finally {
             em.close();
             emf.close();
