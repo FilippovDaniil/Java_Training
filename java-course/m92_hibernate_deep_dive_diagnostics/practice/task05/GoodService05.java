@@ -10,11 +10,37 @@ class GoodService05 {
     GoodService05(EntityManager em) { this.em = em; }
 
     int totalLines() {
-        // TODO: JOIN FETCH (один запрос) ИЛИ агрегат "select sum(size(o.lines)) ..." / count
-        return 0;
+        // Используем агрегатную функцию COUNT в одном запросе
+        // Решение анти-паттерна N+1 и загрузки целых сущностей
+        return em.createQuery(
+                        "select count(l) from OrderLine05 l", Long.class)
+                .getSingleResult()
+                .intValue();
+
+        // Альтернатива с JOIN FETCH (если нужны сами строки):
+        // List<Order05> orders = em.createQuery(
+        //     "select distinct o from Order05 o join fetch o.lines", Order05.class)
+        //     .getResultList();
+        // return orders.stream().mapToInt(o -> o.getLines().size()).sum();
     }
 
     void raiseAll(int delta) {
-        // TODO: bulk "update Order05 o set o.total = o.total + :d" + em.clear()
+        // Используем bulk update - один запрос вместо N
+        // Решение анти-паттернов: построчное обновление + лишний merge
+        em.getTransaction().begin();
+        try {
+            int updated = em.createQuery(
+                            "update Order05 o set o.total = o.total + :delta")
+                    .setParameter("delta", delta)
+                    .executeUpdate();
+            em.getTransaction().commit();
+
+            // Очищаем persistence context после bulk операции
+            // чтобы managed-сущности не имели устаревших данных
+            em.clear();
+        } catch (Exception e) {
+            em.getTransaction().rollback();
+            throw e;
+        }
     }
 }

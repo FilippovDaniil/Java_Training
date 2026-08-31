@@ -1,4 +1,6 @@
-package m92_hibernate_deep_dive_diagnostics.practice;
+package m92_hibernate_deep_dive_diagnostics.practice.task01;
+
+import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 /**
  * Задача 01 — Модуль 92: конфигурация диагностики SQL (носитель конфигурации)
@@ -23,6 +25,8 @@ package m92_hibernate_deep_dive_diagnostics.practice;
  * ПОДСКАЗКА: show_sql печатает SQL с '?'; значения параметров даёт ТОЛЬКО логгер
  *            org.hibernate.orm.jdbc.bind на уровне TRACE.
  */
+
+@SpringBootApplication
 public class Task01 {
     public static void main(String[] args) {
         String persistenceXml = """

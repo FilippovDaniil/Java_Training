@@ -25,9 +25,12 @@ package m92_hibernate_deep_dive_diagnostics.practice.task03;
 import jakarta.persistence.*;
 import org.hibernate.SessionFactory;
 import org.hibernate.stat.Statistics;
+import org.springframework.boot.autoconfigure.SpringBootApplication;
+
 import java.util.ArrayList;
 import java.util.List;
 
+@SpringBootApplication
 public class Task03 {
     public static void main(String[] args) {
         EntityManagerFactory emf = Persistence.createEntityManagerFactory("shop-pu");
@@ -52,6 +55,17 @@ public class Task03 {
             // TODO: long statements = st.getPrepareStatementCount();
             // TODO: System.out.println("SQL-операторов: " + statements);   // 5
             // TODO: System.out.println(statements == 1 + cats.size() ? "N+1 ПОДТВЕРЖДЁН" : "ОК");
+
+            Statistics st = emf.unwrap(SessionFactory.class).getStatistics();
+            st.clear();
+            em.getTransaction().begin();
+            List<Category03> cats = em.createQuery("select c from Category03 c", Category03.class).getResultList();
+            cats.forEach(c -> c.getProducts().size());   // +1 запрос на каждую
+            em.getTransaction().commit();
+            long statements = st.getPrepareStatementCount();
+            System.out.println("SQL-операторов: " + statements);   // 5
+            System.out.println(statements == 1 + cats.size() ? "N+1 ПОДТВЕРЖДЁН" : "ОК");
+
         } finally {
             em.close();
             emf.close();

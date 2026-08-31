@@ -51,21 +51,32 @@ package m92_hibernate_deep_dive_diagnostics.practice.task07;
 import jakarta.persistence.*;
 import org.hibernate.SessionFactory;
 import org.hibernate.stat.Statistics;
+import org.springframework.boot.autoconfigure.SpringBootApplication;
+
 import java.util.ArrayList;
 import java.util.List;
 
+@SpringBootApplication
 public class Task07 {
     public static void main(String[] args) {
         EntityManagerFactory emf = Persistence.createEntityManagerFactory("shop-pu");
         EntityManager em = emf.createEntityManager();
         try {
             // TODO: seed(em);
+            seed(em);
             Statistics st = emf.unwrap(SessionFactory.class).getStatistics();
             // TODO: audit("listBad",  em, st, () -> listBad(em));   // ~11 [N+1]
             // TODO: audit("listGood", em, st, () -> listGood(em));  // 1  [OK]
             // TODO: audit("overview", em, st, () -> overview(em));  // 1  [OK, DTO]
             // TODO: audit("raise",    em, st, () -> raise(em));     // 1  [OK, bulk]
             // TODO: напечатать итоговый чек-лист готовности (см. theory.md)
+
+            audit("listBad",  em, st, () -> listBad(em));   // ~11 [N+1]
+            audit("listGood", em, st, () -> listGood(em));  // 1  [OK]
+            audit("overview", em, st, () -> overview(em));  // 1  [OK, DTO]
+            audit("raise",    em, st, () -> raise(em));     // 1  [OK, bulk]
+            // TODO: напечатать итоговый чек-лист готовности (см. theory.md)
+
         } finally {
             em.close();
             emf.close();
@@ -80,6 +91,15 @@ public class Task07 {
         // TODO:     em.persist(c);
         // TODO: }
         // TODO: em.getTransaction().commit(); em.clear();
+
+        em.getTransaction().begin();
+        for (int i = 1; i <= 10; i++) {
+        Category07 c = new Category07("Кат-" + i);
+        for (int j = 1; j <= 5; j++) c.addProduct(new Product07("Т-" + i + "-" + j, i * 10 + j));
+        em.persist(c);
+        }
+        em.getTransaction().commit(); em.clear();
+
     }
 
     static void audit(String name, EntityManager em, Statistics st, Runnable op) {
@@ -89,25 +109,48 @@ public class Task07 {
         // TODO: em.getTransaction().commit(); em.clear();
         // TODO: System.out.println(name + ": statements=" + st.getPrepareStatementCount()
         // TODO:     + " entityLoads=" + st.getEntityLoadCount());
+
+        st.clear();
+        em.getTransaction().begin();
+        op.run();
+        em.getTransaction().commit(); em.clear();
+        System.out.println(name + ": statements=" + st.getPrepareStatementCount() + " entityLoads=" + st.getEntityLoadCount());
+
     }
 
     static void listBad(EntityManager em) {
         // TODO: em.createQuery("select c from Category07 c", Category07.class)
         // TODO:   .getResultList().forEach(c -> c.getProducts().size());   // N+1
+
+        em.createQuery("select c from Category07 c", Category07.class)
+                .getResultList().forEach(c -> c.getProducts().size());   // N+1
+
     }
 
     static void listGood(EntityManager em) {
         // TODO: em.createQuery("select distinct c from Category07 c join fetch c.products", Category07.class)
         // TODO:   .getResultList().forEach(c -> c.getProducts().size());   // 1 запрос
+
+        em.createQuery("select distinct c from Category07 c join fetch c.products", Category07.class)
+                .getResultList().forEach(c -> c.getProducts().size());   // 1 запрос
+
     }
 
     static void overview(EntityManager em) {
         // TODO: em.createQuery("select new CatRow07(c.name, count(p)) from Category07 c " +
         // TODO:   "left join c.products p group by c.id, c.name", CatRow07.class).getResultList();
+
+        em.createQuery("select new m92_hibernate_deep_dive_diagnostics.practice.task07.CatRow07(c.name, count(p)) from Category07 c " +
+                "left join c.products p group by c.id, c.name", CatRow07.class).getResultList();
+
     }
 
     static void raise(EntityManager em) {
         // TODO: em.createQuery("update Product07 p set p.price = p.price + 1").executeUpdate();
         // TODO: em.clear();
+
+        em.createQuery("update Product07 p set p.price = p.price + 1").executeUpdate();
+        em.clear();
+
     }
 }

@@ -6,9 +6,11 @@ import org.hibernate.stat.Statistics;
 import java.util.ArrayList;
 import java.util.List;
 
-@Entity @Table(name = "products")
+@Entity
+@Table(name = "products")
 class Product03 {
-    @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String name;
     @ManyToOne(fetch = FetchType.LAZY) @JoinColumn(name = "category_id")

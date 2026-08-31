@@ -25,9 +25,12 @@ package m92_hibernate_deep_dive_diagnostics.practice.task04;
 import jakarta.persistence.*;
 import org.hibernate.SessionFactory;
 import org.hibernate.stat.Statistics;
+import org.springframework.boot.autoconfigure.SpringBootApplication;
+
 import java.util.ArrayList;
 import java.util.List;
 
+@SpringBootApplication
 public class Task04 {
     public static void main(String[] args) {
         EntityManagerFactory emf = Persistence.createEntityManagerFactory("shop-pu");
@@ -47,6 +50,12 @@ public class Task04 {
             // TODO: long fetch = countFetch(em, st);    // 1
             // TODO: System.out.println("naive statements = " + naive + ", fetch statements = " + fetch);
             // TODO: System.out.println("JOIN FETCH убрал N+1: " + naive + " → " + fetch);
+
+            long naive = countNaive(em, st);   // 6
+            long fetch = countFetch(em, st);    // 1
+            System.out.println("naive statements = " + naive + ", fetch statements = " + fetch);
+            System.out.println("JOIN FETCH убрал N+1: " + naive + " → " + fetch);
+
         } finally {
             em.close();
             emf.close();
@@ -60,7 +69,13 @@ public class Task04 {
         // TODO:   .getResultList().forEach(c -> c.getProducts().size());
         // TODO: em.getTransaction().commit(); em.clear();
         // TODO: return st.getPrepareStatementCount();
-        return -1;
+
+        st.clear();
+        em.getTransaction().begin();
+        em.createQuery("select c from Category04 c", Category04.class)
+                .getResultList().forEach(c -> c.getProducts().size());
+        em.getTransaction().commit(); em.clear();
+        return st.getPrepareStatementCount();
     }
 
     static long countFetch(EntityManager em, Statistics st) {
@@ -70,6 +85,12 @@ public class Task04 {
         // TODO:   .getResultList().forEach(c -> c.getProducts().size());
         // TODO: em.getTransaction().commit(); em.clear();
         // TODO: return st.getPrepareStatementCount();
-        return -1;
+
+        st.clear();
+        em.getTransaction().begin();
+        em.createQuery("select distinct c from Category04 c join fetch c.products", Category04.class)
+                .getResultList().forEach(c -> c.getProducts().size());
+        em.getTransaction().commit(); em.clear();
+        return st.getPrepareStatementCount();
     }
 }

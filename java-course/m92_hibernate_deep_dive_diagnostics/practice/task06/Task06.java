@@ -52,6 +52,15 @@ public class Task06 {
             // TODO: assertQueryCount(em, st, 1, () ->
             // TODO:     em.createQuery("select c from Category06 c", Category06.class)
             // TODO:       .getResultList().forEach(c -> c.getProducts().size()));   // FAIL (реально 1+3)
+
+            assertQueryCount(em, st, 1, () ->
+                            em.createQuery("select distinct c from Category06 c join fetch c.products", Category06.class)
+                                    .getResultList().forEach(c -> c.getProducts().size()));   // PASS
+
+            assertQueryCount(em, st, 1, () ->
+                            em.createQuery("select c from Category06 c", Category06.class)
+                                    .getResultList().forEach(c -> c.getProducts().size()));   // FAIL (реально 1+3)
+
         } finally {
             em.close();
             emf.close();
@@ -66,5 +75,14 @@ public class Task06 {
         // TODO: long actual = st.getPrepareStatementCount();
         // TODO: System.out.println((actual == expected ? "PASS" : "FAIL") +
         // TODO:                    " (ожидалось " + expected + ", было " + actual + ")");
+
+        st.clear();
+        em.getTransaction().begin();
+        op.run();
+        em.getTransaction().commit(); em.clear();
+        long actual = st.getPrepareStatementCount();
+        System.out.println((actual == expected ? "PASS" : "FAIL") +
+                " (ожидалось " + expected + ", было " + actual + ")");
+
     }
 }

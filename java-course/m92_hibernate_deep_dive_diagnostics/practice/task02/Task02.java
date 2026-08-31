@@ -24,7 +24,9 @@ package m92_hibernate_deep_dive_diagnostics.practice.task02;
 import jakarta.persistence.*;
 import org.hibernate.SessionFactory;
 import org.hibernate.stat.Statistics;
+import org.springframework.boot.autoconfigure.SpringBootApplication;
 
+@SpringBootApplication
 public class Task02 {
     public static void main(String[] args) {
         EntityManagerFactory emf = Persistence.createEntityManagerFactory("shop-pu");
@@ -41,6 +43,14 @@ public class Task02 {
             // TODO: System.out.println("queries = " + st.getQueryExecutionCount());     // 1
             // TODO: System.out.println("entityLoads = " + st.getEntityLoadCount());      // 5
             // TODO: System.out.println("statements = " + st.getPrepareStatementCount()); // 1
+
+            Statistics st = emf.unwrap(SessionFactory.class).getStatistics();
+            st.clear();
+            em.createQuery("select p from Product02 p", Product02.class).getResultList().size();
+            System.out.println("queries = " + st.getQueryExecutionCount());     // 1
+            System.out.println("entityLoads = " + st.getEntityLoadCount());      // 5
+            System.out.println("statements = " + st.getPrepareStatementCount()); // 1
+
         } finally {
             em.close();
             emf.close();

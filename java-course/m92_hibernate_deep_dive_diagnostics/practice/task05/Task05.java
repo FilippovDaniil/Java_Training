@@ -27,15 +27,48 @@ package m92_hibernate_deep_dive_diagnostics.practice.task05;
  */
 
 import jakarta.persistence.*;
+import org.springframework.boot.autoconfigure.SpringBootApplication;
+
 import java.util.ArrayList;
 import java.util.List;
 
+@SpringBootApplication
 public class Task05 {
     public static void main(String[] args) {
         EntityManagerFactory emf = Persistence.createEntityManagerFactory("shop-pu");
         EntityManager em = emf.createEntityManager();
         try {
-            // TODO: засейте несколько Order05 с линиями; вызовите методы Good-версии и сравните
+            em.getTransaction().begin();
+
+            // Создаем тестовые данные
+            Order05 order1 = new Order05(100);
+            order1.addLine(new OrderLine05("Product A"));
+            order1.addLine(new OrderLine05("Product B"));
+
+            Order05 order2 = new Order05(200);
+            order2.addLine(new OrderLine05("Product C"));
+
+            em.persist(order1);
+            em.persist(order2);
+            em.getTransaction().commit();
+
+            // Тестируем GoodService
+            GoodService05 goodService = new GoodService05(em);
+            em.getTransaction().begin();
+
+            System.out.println("Total lines: " + goodService.totalLines()); // Должно быть 3
+
+            goodService.raiseAll(50);
+            em.getTransaction().commit();
+
+            // Проверяем результат
+            em.getTransaction().begin();
+            List<Order05> orders = em.createQuery("select o from Order05 o", Order05.class).getResultList();
+            for (Order05 o : orders) {
+                System.out.println("Order total after raise: " + o.getTotal());
+            }
+            em.getTransaction().commit();
+
         } finally {
             em.close();
             emf.close();

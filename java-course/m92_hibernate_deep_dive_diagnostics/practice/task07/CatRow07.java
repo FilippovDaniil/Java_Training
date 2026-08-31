@@ -6,4 +6,9 @@ import org.hibernate.stat.Statistics;
 import java.util.ArrayList;
 import java.util.List;
 
-record CatRow07(String name, long count) {}
+record CatRow07(
+        String name,
+        long count
+) {
+
+}
