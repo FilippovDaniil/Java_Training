@@ -20,6 +20,9 @@ class SecurityConfig01 {
         // TODO: http.authorizeHttpRequests(auth -> auth.anyRequest().permitAll());
         // TODO: http.csrf(csrf -> csrf.disable());
         // TODO: return http.build();
+
+        http.authorizeHttpRequests(auth -> auth.anyRequest().permitAll());
+        http.csrf(csrf -> csrf.disable());
         return http.build();
     }
 }
