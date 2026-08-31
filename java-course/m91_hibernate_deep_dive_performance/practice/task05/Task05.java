@@ -25,7 +25,9 @@ import jakarta.persistence.*;
 import org.hibernate.SessionFactory;
 import org.hibernate.StatelessSession;
 import org.hibernate.Transaction;
+import org.springframework.boot.autoconfigure.SpringBootApplication;
 
+@SpringBootApplication
 public class Task05 {
     public static void main(String[] args) {
         EntityManagerFactory emf = Persistence.createEntityManagerFactory("shop-pu");
@@ -38,9 +40,20 @@ public class Task05 {
             // TODO:     tx.commit();
             // TODO: }
 
+            try (StatelessSession ss = sf.openStatelessSession()) {
+                Transaction tx = ss.getTransaction();
+                tx.begin();
+                for (int i = 1; i <= 10_000; i++) ss.insert(new Product05("Товар-" + i));
+                tx.commit();
+            }
+
             EntityManager em = emf.createEntityManager();
             // TODO: long n = em.createQuery("select count(p) from Product05 p", Long.class).getSingleResult();
             // TODO: System.out.println("вставлено StatelessSession: " + n); // 10000
+
+            long n = em.createQuery("select count(p) from Product05 p", Long.class).getSingleResult();
+            System.out.println("вставлено StatelessSession: " + n); // 10000
+
             em.close();
         } finally {
             emf.close();

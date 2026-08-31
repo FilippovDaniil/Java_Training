@@ -2,9 +2,12 @@ package m91_hibernate_deep_dive_performance.practice.task06;
 
 import jakarta.persistence.*;
 import org.hibernate.SessionFactory;
+import org.hibernate.annotations.CacheConcurrencyStrategy;
 import org.hibernate.stat.Statistics;
 
-@Entity @Table(name = "categories")
+@Entity
+@Table(name = "categories")
+@Cacheable
 // TODO: @Cacheable
 // TODO: @Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
 class Category06 {

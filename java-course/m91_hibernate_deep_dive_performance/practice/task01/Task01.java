@@ -23,7 +23,9 @@ package m91_hibernate_deep_dive_performance.practice.task01;
  */
 
 import jakarta.persistence.*;
+import org.springframework.boot.autoconfigure.SpringBootApplication;
 
+@SpringBootApplication
 public class Task01 {
     public static void main(String[] args) {
         EntityManagerFactory emf = Persistence.createEntityManagerFactory("shop-pu");
@@ -31,8 +33,10 @@ public class Task01 {
         try {
             em.getTransaction().begin();
             // TODO: for (int i = 1; i <= 200; i++) em.persist(new Product01("Товар-" + i));
+            for (int i = 1; i <= 200; i++) em.persist(new Product01("Товар-" + i));
             em.getTransaction().commit();
             // TODO: System.out.println("200 товаров вставлены пачками по 50 (см. show_sql)");
+            System.out.println("200 товаров вставлены пачками по 50 (см. show_sql)");
         } finally {
             em.close();
             emf.close();

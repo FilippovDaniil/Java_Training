@@ -5,9 +5,11 @@ import org.hibernate.SessionFactory;
 import org.hibernate.stat.Statistics;
 import java.util.List;
 
-@Entity @Table(name = "products")
+@Entity
+@Table(name = "products")
 class Product07 {
-    @Id @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "p7_seq")
+    @Id
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "p7_seq")
     @SequenceGenerator(name = "p7_seq", sequenceName = "p7_seq", allocationSize = 50)
     private Long id;
     private String name;
@@ -17,6 +19,10 @@ class Product07 {
     public Product07(String name, String category, int price) {
         this.name = name; this.category = category; this.price = price;
     }
-    public String getName() { return name; }
-    public int getPrice() { return price; }
+    public String getName() {
+        return name;
+    }
+    public int getPrice() {
+        return price;
+    }
 }

@@ -24,8 +24,11 @@ package m91_hibernate_deep_dive_performance.practice.task04;
  */
 
 import jakarta.persistence.*;
+import org.springframework.boot.autoconfigure.SpringBootApplication;
+
 import java.util.List;
 
+@SpringBootApplication
 public class Task04 {
     public static void main(String[] args) {
         EntityManagerFactory emf = Persistence.createEntityManagerFactory("shop-pu");
@@ -48,6 +51,15 @@ public class Task04 {
             // TODO: em.getTransaction().commit();
             // TODO: em.clear();
             // TODO: System.out.println("цена после read-only правки: " + em.find(Product04.class, id).getPrice()); // 40
+
+            em.getTransaction().begin();
+            List<Product04> list = em.createQuery("select p from Product04 p", Product04.class)
+                    .setHint("org.hibernate.readOnly", true).getResultList();
+            list.get(0).setPrice(99999);   // изменение НЕ будет сохранено
+            em.getTransaction().commit();
+            em.clear();
+            System.out.println("цена после read-only правки: " + em.find(Product04.class, id).getPrice()); // 40
+
         } finally {
             em.close();
             emf.close();

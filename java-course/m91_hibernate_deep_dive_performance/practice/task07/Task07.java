@@ -48,8 +48,11 @@ package m91_hibernate_deep_dive_performance.practice.task07;
 import jakarta.persistence.*;
 import org.hibernate.SessionFactory;
 import org.hibernate.stat.Statistics;
+import org.springframework.boot.autoconfigure.SpringBootApplication;
+
 import java.util.List;
 
+@SpringBootApplication
 public class Task07 {
     public static void main(String[] args) {
         EntityManagerFactory emf = Persistence.createEntityManagerFactory("shop-pu");
@@ -61,6 +64,13 @@ public class Task07 {
             // TODO: Statistics st = emf.unwrap(SessionFactory.class).getStatistics();
             // TODO: System.out.println("inserts=" + st.getEntityInsertCount() +
             // TODO:                    " queries=" + st.getQueryExecutionCount());
+
+            importProducts(em, 1000);
+            int n = raisePrices(em, "Еда", 10); System.out.println("обновлено: " + n);
+            report(em);
+            Statistics st = emf.unwrap(SessionFactory.class).getStatistics();
+            System.out.println("inserts=" + st.getEntityInsertCount() + " queries=" + st.getQueryExecutionCount());
+
         } finally {
             em.close();
             emf.close();
@@ -74,6 +84,16 @@ public class Task07 {
         // TODO:     if (i % 50 == 0) { em.flush(); em.clear(); }
         // TODO: }
         // TODO: em.getTransaction().commit();
+
+        em.getTransaction().begin();
+
+        for (int i = 1; i <= count; i++) {
+            em.persist(new Product07("Товар-" + i, i % 2 == 0 ? "Еда" : "Техника", i));
+            if (i % 50 == 0) { em.flush(); em.clear(); }
+        }
+
+        em.getTransaction().commit();
+
     }
 
     static int raisePrices(EntityManager em, String category, int delta) {
@@ -83,12 +103,23 @@ public class Task07 {
         // TODO: em.getTransaction().commit();
         // TODO: em.clear();
         // TODO: return n;
-        return 0;
+
+        em.getTransaction().begin();
+        int n = em.createQuery("update Product07 p set p.price = p.price + :d where p.category = :c")
+                .setParameter("d", delta).setParameter("c", category).executeUpdate();
+        em.getTransaction().commit();
+        em.clear();
+        return n;
     }
 
     static void report(EntityManager em) {
         // TODO: List<Product07> top = em.createQuery("select p from Product07 p order by p.price desc", Product07.class)
         // TODO:     .setHint("org.hibernate.readOnly", true).setMaxResults(5).getResultList();
         // TODO: top.forEach(p -> System.out.println(p.getName() + " " + p.getPrice()));
+
+        List<Product07> top = em.createQuery("select p from Product07 p order by p.price desc", Product07.class)
+                .setHint("org.hibernate.readOnly", true).setMaxResults(5).getResultList();
+        top.forEach(p -> System.out.println(p.getName() + " " + p.getPrice()));
+
     }
 }

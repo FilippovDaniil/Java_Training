@@ -9,7 +9,7 @@
         <provider>org.hibernate.jpa.HibernatePersistenceProvider</provider>
 
 
-        <class>m90_hibernate_deep_dive_locking.practice.task06.Product06</class>
+        <class>m91_hibernate_deep_dive_performance.practice.task02.Product02</class>
 
 
         <properties>

@@ -29,7 +29,9 @@ package m91_hibernate_deep_dive_performance.practice.task06;
 import jakarta.persistence.*;
 import org.hibernate.SessionFactory;
 import org.hibernate.stat.Statistics;
+import org.springframework.boot.autoconfigure.SpringBootApplication;
 
+@SpringBootApplication
 public class Task06 {
     public static void main(String[] args) {
         EntityManagerFactory emf = Persistence.createEntityManagerFactory("shop-pu");
@@ -53,6 +55,18 @@ public class Task06 {
 
             // TODO: Statistics st = emf.unwrap(SessionFactory.class).getStatistics();
             // TODO: System.out.println("L2 hits = " + st.getSecondLevelCacheHitCount()); // > 0
+
+            EntityManager em1 = emf.createEntityManager();
+            em1.find(Category06.class, id);   // SELECT → положит в L2
+            em1.close();
+
+            EntityManager em2 = emf.createEntityManager();
+            em2.find(Category06.class, id);   // попадание в L2, без SELECT
+            em2.close();
+
+            Statistics st = emf.unwrap(SessionFactory.class).getStatistics();
+            System.out.println("L2 hits = " + st.getSecondLevelCacheHitCount()); // > 0
+
         } finally {
             emf.close();
         }
