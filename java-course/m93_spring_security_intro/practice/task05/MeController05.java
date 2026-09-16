@@ -20,18 +20,18 @@ class MeController05 {
     @GetMapping("/api/me/principal")
     String viaPrincipal(Principal principal) {
         // TODO: return principal.getName();
-        return null;
+        return principal.getName();
     }
 
     @GetMapping("/api/me/auth")
     String viaAuthentication(Authentication auth) {
         // TODO: return auth.getName();
-        return null;
+        return auth.getName();
     }
 
     @GetMapping("/api/me/details")
     String viaPrincipalAnnotation(@AuthenticationPrincipal UserDetails user) {
         // TODO: return user.getUsername();
-        return null;
+        return user.getUsername();
     }
 }

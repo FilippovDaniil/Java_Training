@@ -16,15 +16,21 @@ import org.springframework.web.bind.annotation.RestController;
 
 @Service
 class CurrentUserService04 {
+
     String currentUsername() {
         // TODO: Authentication auth = SecurityContextHolder.getContext().getAuthentication();
         // TODO: return (auth != null && auth.isAuthenticated()) ? auth.getName() : "anonymous";
-        return "?";
+
+        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+        return (auth != null && auth.isAuthenticated()) ? auth.getName() : "anonymous";
+
     }
 
     String currentAuthorities() {
         // TODO: Authentication auth = SecurityContextHolder.getContext().getAuthentication();
         // TODO: return auth == null ? "[]" : auth.getAuthorities().toString();
-        return "[]";
+
+        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+        return auth == null ? "[]" : auth.getAuthorities().toString();
     }
 }

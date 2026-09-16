@@ -29,6 +29,14 @@ class SecurityConfig06 {
         // TODO: http.addFilterBefore(new RequestLogFilter06(), UsernamePasswordAuthenticationFilter.class);
         // TODO: http.httpBasic(Customizer.withDefaults());
         // TODO: http.csrf(csrf -> csrf.disable());
+
+        http.authorizeHttpRequests(auth -> auth
+                        .requestMatchers("/public/**").permitAll()
+                .anyRequest().authenticated());
+        http.addFilterBefore(new RequestLogFilter06(), UsernamePasswordAuthenticationFilter.class);
+        http.httpBasic(Customizer.withDefaults());
+        http.csrf(csrf -> csrf.disable());
+
         return http.build();
     }
 }

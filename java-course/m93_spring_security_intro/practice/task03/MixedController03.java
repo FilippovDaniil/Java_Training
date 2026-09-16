@@ -14,6 +14,7 @@ import java.util.List;
 
 @RestController
 class MixedController03 {
+
     @GetMapping("/public/info")
     String info() { return "Публичная информация — доступна всем"; }
 

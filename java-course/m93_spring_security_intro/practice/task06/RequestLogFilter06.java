@@ -24,6 +24,10 @@ class RequestLogFilter06 extends OncePerRequestFilter {
             throws ServletException, IOException {
         // TODO: System.out.println("[FILTER] " + request.getMethod() + " " + request.getRequestURI());
         // TODO: chain.doFilter(request, response);   // ОБЯЗАТЕЛЬНО — передать дальше
+
+        System.out.println("[FILTER] " + request.getMethod() + " " + request.getRequestURI());
+        chain.doFilter(request, response);   // ОБЯЗАТЕЛЬНО — передать дальше
+
         chain.doFilter(request, response);
     }
 }

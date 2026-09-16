@@ -15,15 +15,16 @@ import java.util.List;
 @RestController
 @RequestMapping("/api/tasks")
 class TaskController07 {
+
     @GetMapping
     String myTasks(Principal principal) {
         // TODO: return principal.getName() + ": " + List.of("Задача 1", "Задача 2");
-        return null;
+        return principal.getName() + ": " + List.of("Задача 1", "Задача 2");
     }
 
     @PostMapping
     String create(@RequestBody String title, Principal principal) {
         // TODO: return "создано пользователем " + principal.getName() + ": " + title;
-        return null;
+        return "создано пользователем " + principal.getName() + ": " + title;
     }
 }

@@ -1,5 +1,6 @@
 package m93_spring_security_intro.practice.task04;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
@@ -16,8 +17,13 @@ import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 class WhoAmIController04 {
+
     private final CurrentUserService04 service;
-    WhoAmIController04(CurrentUserService04 service) { this.service = service; }
+
+    @Autowired
+    WhoAmIController04(CurrentUserService04 service) {
+        this.service = service;
+    }
 
     @GetMapping("/api/whoami")
     String whoami() {
