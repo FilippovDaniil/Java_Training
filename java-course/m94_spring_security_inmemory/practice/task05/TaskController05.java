@@ -20,5 +20,7 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 class TaskController05 {
     @PostMapping("/api/tasks")
-    String create(@RequestBody String title) { return "создано: " + title; }
+    String create(@RequestBody String title) {
+        return "создано: " + title;
+    }
 }

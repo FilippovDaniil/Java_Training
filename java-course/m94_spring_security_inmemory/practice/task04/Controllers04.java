@@ -19,8 +19,12 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 class Controllers04 {
     @GetMapping("/public/home")
-    String home() { return "Публичная главная"; }
+    String home() {
+        return "Публичная главная";
+    }
 
     @GetMapping("/api/tasks")
-    String tasks() { return "Задачи (после входа через форму)"; }
+    String tasks() {
+        return "Задачи (после входа через форму)";
+    }
 }

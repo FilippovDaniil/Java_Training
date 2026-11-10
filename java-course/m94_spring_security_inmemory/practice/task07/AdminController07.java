@@ -21,5 +21,7 @@ import java.util.List;
 @RequestMapping("/api/admin")
 class AdminController07 {
     @GetMapping("/users")
-    String users() { return "alice, admin"; }
+    String users() {
+        return "alice, admin, katya";
+    }
 }

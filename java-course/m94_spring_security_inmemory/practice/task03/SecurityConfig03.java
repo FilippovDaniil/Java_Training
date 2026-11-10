@@ -27,7 +27,18 @@ class SecurityConfig03 {
         // TODO: var alice = User.withUsername("alice").password(enc.encode("password")).roles("USER").build();
         // TODO: var admin = User.withUsername("admin").password(enc.encode("admin")).roles("ADMIN", "USER").build();
         // TODO: return new InMemoryUserDetailsManager(alice, admin);
-        return null;
+
+        var alice = User.withUsername("alice")
+                .password(enc.encode("password"))
+                .roles("USER")
+                .build();
+
+        var admin = User.withUsername("admin")
+                .password(enc.encode("admin"))
+                .roles("ADMIN", "USER")
+                .build();
+
+        return new InMemoryUserDetailsManager(alice, admin);
     }
 
     @Bean
@@ -38,6 +49,15 @@ class SecurityConfig03 {
         // TODO:     .anyRequest().authenticated());
         // TODO: http.httpBasic(Customizer.withDefaults());
         // TODO: http.csrf(csrf -> csrf.disable());
+
+        http.authorizeHttpRequests(auth -> auth
+                .requestMatchers("/api/admin/**").hasRole("ADMIN").requestMatchers("/api/**").authenticated()
+                .anyRequest().authenticated());
+
+        http.httpBasic(Customizer.withDefaults());
+
+        http.csrf(csrf -> csrf.disable());
+
         return http.build();
     }
 }

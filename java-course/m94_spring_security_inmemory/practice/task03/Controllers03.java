@@ -19,8 +19,12 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 class Controllers03 {
     @GetMapping("/api/tasks")
-    String tasks() { return "Список задач (любой вошедший)"; }
+    String tasks() {
+        return "Список задач (любой вошедший)";
+    }
 
     @GetMapping("/api/admin/stats")
-    String stats() { return "Статистика (только ADMIN)"; }
+    String stats() {
+        return "Статистика (только ADMIN)";
+    }
 }

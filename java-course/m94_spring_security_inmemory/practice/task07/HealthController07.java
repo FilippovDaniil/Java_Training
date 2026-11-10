@@ -19,6 +19,8 @@ import java.util.List;
 
 @RestController
 class HealthController07 {
-    @GetMapping("/actuator/health")
-    String health() { return "UP"; }
+    @GetMapping("/actuator/health2")
+    String health() {
+        return "UP";
+    }
 }

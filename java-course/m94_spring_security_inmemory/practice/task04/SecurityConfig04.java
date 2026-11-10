@@ -20,12 +20,17 @@ import org.springframework.web.bind.annotation.RestController;
 @EnableWebSecurity
 class SecurityConfig04 {
     @Bean
-    PasswordEncoder passwordEncoder() { return new BCryptPasswordEncoder(); }
+    PasswordEncoder passwordEncoder() {
+        return new BCryptPasswordEncoder();
+    }
 
     @Bean
     UserDetailsService users(PasswordEncoder enc) {
         return new InMemoryUserDetailsManager(
-                User.withUsername("alice").password(enc.encode("password")).roles("USER").build());
+                User.withUsername("alice")
+                        .password(enc.encode("password"))
+                        .roles("USER")
+                        .build());
     }
 
     @Bean
@@ -35,6 +40,13 @@ class SecurityConfig04 {
         // TODO:     .anyRequest().authenticated());
         // TODO: http.formLogin(form -> form.defaultSuccessUrl("/api/tasks", true));
         // TODO: http.logout(Customizer.withDefaults());
+
+        http.authorizeHttpRequests(auth -> auth
+                        .requestMatchers("/login", "/public/**").permitAll().anyRequest().authenticated());
+
+        http.formLogin(form -> form.defaultSuccessUrl("/api/tasks", true));
+        http.logout(Customizer.withDefaults());
+
         return http.build();
     }
 }

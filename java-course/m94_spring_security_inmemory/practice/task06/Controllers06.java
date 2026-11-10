@@ -19,8 +19,12 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 class Controllers06 {
     @GetMapping("/api/user/area")
-    String userArea() { return "Зона USER"; }
+    String userArea() {
+        return "Зона USER";
+    }
 
     @GetMapping("/api/admin/area")
-    String adminArea() { return "Зона ADMIN"; }
+    String adminArea() {
+        return "Зона ADMIN";
+    }
 }

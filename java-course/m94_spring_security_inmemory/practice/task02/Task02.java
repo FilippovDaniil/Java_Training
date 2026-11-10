@@ -1,4 +1,4 @@
-package m94_spring_security_inmemory.practice;
+package m94_spring_security_inmemory.practice.task02;
 
 /**
  * Задача 02 — Модуль 94: PasswordEncoder — encode и matches
@@ -36,7 +36,7 @@ public class Task02 {
     @Bean
     PasswordEncoder passwordEncoder() {
         // TODO: return new BCryptPasswordEncoder();
-        return null;
+        return new BCryptPasswordEncoder();
     }
 
     @Bean
@@ -50,6 +50,15 @@ public class Task02 {
             // TODO: System.out.println("matches secret/h1? " + encoder.matches("secret", h1)); // true
             // TODO: System.out.println("matches secret/h2? " + encoder.matches("secret", h2)); // true
             // TODO: System.out.println("matches wrong/h1?  " + encoder.matches("wrong", h1));   // false
+
+            String h1 = encoder.encode("secret");
+            String h2 = encoder.encode("secret");
+            System.out.println("h1 = " + h1);
+            System.out.println("h2 = " + h2);
+            System.out.println("h1 == h2 (строки)? " + h1.equals(h2));      // false (разная соль)
+            System.out.println("matches secret/h1? " + encoder.matches("secret", h1)); // true
+            System.out.println("matches secret/h2? " + encoder.matches("secret", h2)); // true
+            System.out.println("matches wrong/h1?  " + encoder.matches("wrong", h1));   // false
         };
     }
 }

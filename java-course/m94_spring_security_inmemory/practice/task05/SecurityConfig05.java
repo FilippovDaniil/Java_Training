@@ -26,19 +26,27 @@ class SecurityConfig05 {
     @Bean
     UserDetailsService users(PasswordEncoder enc) {
         return new InMemoryUserDetailsManager(
-                User.withUsername("alice").password(enc.encode("password")).roles("USER").build());
+                User.withUsername("alice")
+                        .password(enc.encode("password"))
+                        .roles("USER")
+                        .build());
     }
 
     @Bean
     SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
         // TODO: http.authorizeHttpRequests(auth -> auth.anyRequest().authenticated());
+        http.authorizeHttpRequests(auth -> auth.anyRequest().authenticated());
 
         // Вариант A (session-based, CSRF включён):
         // TODO: http.formLogin(Customizer.withDefaults());   // csrf НЕ отключаем
+        http.formLogin(Customizer.withDefaults());
 
         // Вариант B (stateless REST, CSRF отключён осознанно):
         // TODO: http.httpBasic(Customizer.withDefaults());
         // TODO: http.csrf(csrf -> csrf.disable());
+
+        //http.httpBasic(Customizer.withDefaults());
+        //http.csrf(csrf -> csrf.disable());
 
         return http.build();
     }

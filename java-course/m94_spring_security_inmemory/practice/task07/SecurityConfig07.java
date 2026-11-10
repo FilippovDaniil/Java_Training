@@ -23,7 +23,7 @@ class SecurityConfig07 {
     @Bean
     PasswordEncoder passwordEncoder() {
         // TODO: return new BCryptPasswordEncoder();
-        return null;
+        return new BCryptPasswordEncoder();
     }
 
     @Bean
@@ -31,7 +31,23 @@ class SecurityConfig07 {
         // TODO: var alice = User.withUsername("alice").password(enc.encode("password")).roles("USER").build();
         // TODO: var admin = User.withUsername("admin").password(enc.encode("admin")).roles("ADMIN", "USER").build();
         // TODO: return new InMemoryUserDetailsManager(alice, admin);
-        return null;
+
+        var alice = User.withUsername("alice")
+                .password(enc.encode("password"))
+                .roles("USER")
+                .build();
+
+        var admin = User.withUsername("admin")
+                .password(enc.encode("admin"))
+                .roles("ADMIN", "USER")
+                .build();
+
+        var bob = User.withUsername("bob")
+                .password(enc.encode("111"))
+                .roles("Katya")
+                .build();
+
+        return new InMemoryUserDetailsManager(alice, admin, bob);
     }
 
     @Bean
@@ -43,6 +59,15 @@ class SecurityConfig07 {
         // TODO:     .anyRequest().authenticated());
         // TODO: http.httpBasic(Customizer.withDefaults());
         // TODO: http.csrf(csrf -> csrf.disable());
+
+        http.authorizeHttpRequests(auth -> auth.requestMatchers("/actuator/health").permitAll()
+                .requestMatchers("/api/admin/**").hasRole("ADMIN")
+                .requestMatchers("/api/**").hasRole("USER")
+                .anyRequest().authenticated());
+
+        http.httpBasic(Customizer.withDefaults());
+        http.csrf(csrf -> csrf.disable());
+
         return http.build();
     }
 }

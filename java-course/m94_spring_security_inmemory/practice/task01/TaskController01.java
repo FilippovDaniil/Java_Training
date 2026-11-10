@@ -23,5 +23,7 @@ import java.util.List;
 @RequestMapping("/api/tasks")
 class TaskController01 {
     @GetMapping
-    List<String> list() { return List.of("Задача 1", "Задача 2"); }
+    List<String> list() {
+        return List.of("Задача 1", "Задача 2");
+    }
 }

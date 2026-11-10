@@ -25,8 +25,15 @@ class SecurityConfig06 {
     @Bean
     UserDetailsService users(PasswordEncoder enc) {
         return new InMemoryUserDetailsManager(
-                User.withUsername("alice").password(enc.encode("password")).roles("USER").build(),
-                User.withUsername("admin").password(enc.encode("admin")).roles("ADMIN").build());
+                User.withUsername("alice")
+                        .password(enc.encode("password"))
+                        .roles("USER")
+                        .build(),
+
+                User.withUsername("admin")
+                        .password(enc.encode("admin"))
+                        .roles("ADMIN")
+                        .build());
     }
 
     @Bean
@@ -37,6 +44,15 @@ class SecurityConfig06 {
         // TODO:     .anyRequest().authenticated());
         // TODO: http.httpBasic(Customizer.withDefaults());
         // TODO: http.csrf(csrf -> csrf.disable());
+
+        http.authorizeHttpRequests(auth -> auth
+                        .requestMatchers("/api/user/**").hasRole("USER")
+                        .requestMatchers("/api/admin/**").hasAuthority("ROLE_ADMIN")
+                .anyRequest().authenticated());
+
+        http.httpBasic(Customizer.withDefaults());
+        http.csrf(csrf -> csrf.disable());
+
         return http.build();
     }
 }

@@ -25,7 +25,7 @@ class SecurityConfig01 {
     @Bean
     PasswordEncoder passwordEncoder() {
         // TODO: return new BCryptPasswordEncoder();
-        return null;
+        return new BCryptPasswordEncoder();
     }
 
     @Bean
@@ -33,7 +33,13 @@ class SecurityConfig01 {
         // TODO: UserDetails alice = User.withUsername("alice")
         // TODO:     .password(encoder.encode("password")).roles("USER").build();
         // TODO: return new InMemoryUserDetailsManager(alice);
-        return null;
+
+        UserDetails alice = User.withUsername("alice")
+                .password(encoder.encode("password"))
+                .roles("USER")
+                .build();
+        return new InMemoryUserDetailsManager(alice);
+
     }
 
     @Bean
@@ -41,6 +47,10 @@ class SecurityConfig01 {
         // TODO: http.authorizeHttpRequests(auth -> auth.anyRequest().authenticated());
         // TODO: http.httpBasic(Customizer.withDefaults());
         // TODO: http.csrf(csrf -> csrf.disable());
+
+        http.authorizeHttpRequests(auth -> auth.anyRequest().authenticated());
+        http.httpBasic(Customizer.withDefaults());
+        http.csrf(csrf -> csrf.disable());
         return http.build();
     }
 }
