@@ -41,6 +41,7 @@ import java.util.Collection;
 import java.util.Date;
 import java.util.List;
 
+@SpringBootApplication
 public class Task05 {
     public static void main(String[] args) {
         SpringApplication.run(Task05.class, args);
@@ -53,6 +54,12 @@ public class Task05 {
             // TODO: System.out.println("token = " + token);
             // TODO: System.out.println("user  = " + jwt.extractUsername(token));   // alice
             // TODO: System.out.println("valid = " + jwt.isValid(token));            // true
+
+            String token = jwt.generateToken("alice", List.of("ROLE_USER"));
+
+            System.out.println("token = " + token);
+            System.out.println("user  = " + jwt.extractUsername(token));   // alice
+            System.out.println("valid = " + jwt.isValid(token));            // true
         };
     }
 }

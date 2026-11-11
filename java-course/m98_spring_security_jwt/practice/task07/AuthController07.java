@@ -34,8 +34,10 @@ import java.util.List;
 @RestController
 @RequestMapping("/api/auth")
 class AuthController07 {
+
     private final AuthenticationManager authManager;
     private final JwtService07 jwtService;
+
     AuthController07(AuthenticationManager authManager, JwtService07 jwtService) {
         this.authManager = authManager; this.jwtService = jwtService;
     }
@@ -46,6 +48,15 @@ class AuthController07 {
         // TODO:     new UsernamePasswordAuthenticationToken(req.username(), req.password()));
         // TODO: List<String> roles = auth.getAuthorities().stream().map(GrantedAuthority::getAuthority).toList();
         // TODO: return new TokenResponse(jwtService.generateToken(auth.getName(), roles));
-        return null;
+
+        Authentication auth = authManager.authenticate(
+                new UsernamePasswordAuthenticationToken(req.username(), req.password()));
+
+        List<String> roles = auth
+                .getAuthorities()
+                .stream()
+                .map(GrantedAuthority::getAuthority).toList();
+
+        return new TokenResponse(jwtService.generateToken(auth.getName(), roles));
     }
 }

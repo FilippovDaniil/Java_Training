@@ -18,6 +18,7 @@ import java.util.List;
 
 @Service
 class JwtService05 {
+
     private final SecretKey key;
     private final long expirationMs;
 
@@ -33,18 +34,32 @@ class JwtService05 {
         // TODO: return Jwts.builder().subject(username).claim("roles", roles)
         // TODO:     .issuedAt(new Date()).expiration(new Date(System.currentTimeMillis() + expirationMs))
         // TODO:     .signWith(key).compact();
-        return null;
+            return Jwts.builder()
+                    .subject(username)
+                    .claim("roles", roles)
+                    .issuedAt(new Date()).expiration(new Date(System.currentTimeMillis() + expirationMs))
+                    .signWith(key)
+                    .compact();
     }
 
     String extractUsername(String token) {
         // TODO: Claims c = Jwts.parser().verifyWith(key).build().parseSignedClaims(token).getPayload();
         // TODO: return c.getSubject();
-        return null;
+
+        Claims c = Jwts
+                .parser()
+                .verifyWith(key)
+                .build()
+                .parseSignedClaims(token)
+                .getPayload();
+
+        return c.getSubject();
     }
 
     boolean isValid(String token) {
         // TODO: try { Jwts.parser().verifyWith(key).build().parseSignedClaims(token); return true; }
         // TODO: catch (JwtException e) { return false; }
-        return false;
+        try { Jwts.parser().verifyWith(key).build().parseSignedClaims(token); return true; }
+        catch (JwtException e) { return false; }
     }
 }

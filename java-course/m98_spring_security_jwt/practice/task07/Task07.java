@@ -79,6 +79,7 @@ import java.nio.charset.StandardCharsets;
 import java.util.Date;
 import java.util.List;
 
+@SpringBootApplication
 public class Task07 {
     public static void main(String[] args) {
         SpringApplication.run(Task07.class, args);
@@ -91,6 +92,10 @@ public class Task07 {
             // TODO: System.out.println("token = " + token);
             // TODO: System.out.println("user  = " + jwt.extractUsername(token));
             // TODO: System.out.println("valid = " + jwt.isValid(token));
+            String token = jwt.generateToken("alice", List.of("ROLE_USER"));
+            System.out.println("token = " + token);
+            System.out.println("user  = " + jwt.extractUsername(token));
+            System.out.println("valid = " + jwt.isValid(token));
         };
     }
 }

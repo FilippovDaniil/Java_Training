@@ -1,4 +1,4 @@
-package m98_spring_security_jwt.practice;
+package m98_spring_security_jwt.practice.task03;
 
 /**
  * Задача 03 — Модуль 98: разбор и валидация токена (jjwt 0.12.x — parser)
@@ -52,5 +52,15 @@ public class Task03 {
         // TODO: System.out.println("subject = " + claims.getSubject());      // alice
         // TODO: System.out.println("roles   = " + claims.get("roles"));      // [ROLE_USER]
         // TODO: System.out.println("exp     = " + claims.getExpiration());
+
+        Claims claims = Jwts.parser()
+                .verifyWith(KEY)
+                .build()
+                .parseSignedClaims(token)
+                .getPayload();
+
+        System.out.println("subject = " + claims.getSubject());      // alice
+        System.out.println("roles   = " + claims.get("roles"));      // [ROLE_USER]
+        System.out.println("exp     = " + claims.getExpiration());
     }
 }

@@ -1,4 +1,4 @@
-package m98_spring_security_jwt.practice;
+package m98_spring_security_jwt.practice.task01;
 
 /**
  * Задача 01 — Модуль 98: структура JWT — собрать токен и рассмотреть 3 части
@@ -43,10 +43,26 @@ public class Task01 {
         // TODO:     .compact();
         // TODO: System.out.println("token = " + token);
 
+        String token = Jwts.builder()
+                .subject("alice")
+                .claim("roles", List.of("ROLE_USER"))
+                .issuedAt(new Date())
+                .expiration(new Date(System.currentTimeMillis() + 3_600_000))
+                .signWith(key)
+                .compact();
+
+        System.out.println("token = " + token);
+
         // TODO: String[] parts = token.split("\\.");
         // TODO: System.out.println("частей: " + parts.length);   // 3
         // TODO: System.out.println("header:  " + new String(Base64.getUrlDecoder().decode(parts[0])));
         // TODO: System.out.println("payload: " + new String(Base64.getUrlDecoder().decode(parts[1])));
         // TODO: System.out.println("payload читаем без ключа → секреты в JWT не кладём!");
+
+        String[] parts = token.split("\\.");
+        System.out.println("частей: " + parts.length);   // 3
+        System.out.println("header:  " + new String(Base64.getUrlDecoder().decode(parts[0])));
+        System.out.println("payload: " + new String(Base64.getUrlDecoder().decode(parts[1])));
+        System.out.println("payload читаем без ключа → секреты в JWT не кладём!");
     }
 }

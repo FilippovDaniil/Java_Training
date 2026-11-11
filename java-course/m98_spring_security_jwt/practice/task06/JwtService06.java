@@ -36,6 +36,12 @@ class JwtService06 {
         // TODO: return Jwts.builder().subject(username).claim("roles", roles)
         // TODO:     .issuedAt(new Date()).expiration(new Date(System.currentTimeMillis() + 3_600_000))
         // TODO:     .signWith(key).compact();
-        return null;
+        return Jwts.builder()
+                .subject(username)
+                .claim("roles", roles)
+                .issuedAt(new Date())
+                .expiration(new Date(System.currentTimeMillis() + 3_600_000))
+                .signWith(key)
+                .compact();
     }
 }

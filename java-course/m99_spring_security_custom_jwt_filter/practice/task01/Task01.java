@@ -1,4 +1,4 @@
-package m99_spring_security_custom_jwt_filter.practice;
+package m99_spring_security_custom_jwt_filter.practice.task01;
 
 /**
  * Задача 01 — Модуль 99: извлечение Bearer-токена из заголовка Authorization

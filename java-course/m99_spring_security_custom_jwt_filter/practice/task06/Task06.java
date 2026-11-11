@@ -1,4 +1,4 @@
-package m99_spring_security_custom_jwt_filter.practice;
+package m99_spring_security_custom_jwt_filter.practice.task06;
 
 /**
  * Задача 06 — Модуль 99: встроенный resource server (oauth2ResourceServer.jwt) — без своего фильтра
@@ -29,17 +29,10 @@ package m99_spring_security_custom_jwt_filter.practice;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.security.config.Customizer;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
-import org.springframework.security.config.http.SessionCreationPolicy;
-import org.springframework.security.oauth2.jose.jws.MacAlgorithm;
 import org.springframework.security.oauth2.jwt.JwtDecoder;
-import org.springframework.security.oauth2.jwt.NimbusJwtDecoder;
 import org.springframework.security.web.SecurityFilterChain;
-
-import javax.crypto.spec.SecretKeySpec;
-import java.nio.charset.StandardCharsets;
 
 @Configuration
 @EnableWebSecurity

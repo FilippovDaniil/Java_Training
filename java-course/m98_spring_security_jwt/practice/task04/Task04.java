@@ -1,4 +1,4 @@
-package m98_spring_security_jwt.practice;
+package m98_spring_security_jwt.practice.task04;
 
 /**
  * Задача 04 — Модуль 98: обработка невалидных токенов (истёкший, подделанный)
@@ -47,18 +47,24 @@ public class Task04 {
         // TODO: System.out.println("валидный:   " + isValid(valid));     // true
         // TODO: System.out.println("истёкший:   " + isValid(expired));   // false
         // TODO: System.out.println("подделка:   " + isValid(tampered));  // false
+
+        System.out.println("валидный:   " + isValid(valid));     // true
+        System.out.println("истёкший:   " + isValid(expired));   // false
+        System.out.println("подделка:   " + isValid(tampered));  // false
     }
 
     static String build(long ttlMillis) {
         return Jwts.builder().subject("alice").claim("roles", List.of("ROLE_USER"))
                 .issuedAt(new Date(System.currentTimeMillis() - 10_000))
                 .expiration(new Date(System.currentTimeMillis() + ttlMillis))
-                .signWith(KEY).compact();
+                .signWith(KEY)
+                .compact();
     }
 
     static boolean isValid(String token) {
         // TODO: try { Jwts.parser().verifyWith(KEY).build().parseSignedClaims(token); return true; }
         // TODO: catch (JwtException e) { return false; }
-        return false;
+        try { Jwts.parser().verifyWith(KEY).build().parseSignedClaims(token); return true; }
+            catch (JwtException e) { return false; }
     }
 }

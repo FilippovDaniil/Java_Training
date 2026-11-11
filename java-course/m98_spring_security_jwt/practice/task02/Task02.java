@@ -1,4 +1,4 @@
-package m98_spring_security_jwt.practice;
+package m98_spring_security_jwt.practice.task02;
 
 /**
  * Задача 02 — Модуль 98: генерация токена (jjwt 0.12.x — builder)
@@ -31,12 +31,15 @@ import java.util.Date;
 import java.util.List;
 
 public class Task02 {
+
     private static final SecretKey KEY =
             Keys.hmacShaKeyFor("01234567890123456789012345678901".getBytes(StandardCharsets.UTF_8));
 
     public static void main(String[] args) {
         // TODO: String token = generate("alice", List.of("ROLE_USER"), 3_600_000);
         // TODO: System.out.println(token);
+        String token = generate("alice", List.of("ROLE_USER"), 3_600_000);
+        System.out.println(token);
     }
 
     static String generate(String username, List<String> roles, long ttlMillis) {
@@ -47,6 +50,12 @@ public class Task02 {
         // TODO:     .expiration(new Date(System.currentTimeMillis() + ttlMillis))
         // TODO:     .signWith(KEY)
         // TODO:     .compact();
-        return null;
+            return Jwts.builder()
+                    .subject(username)
+                    .claim("roles", roles)
+                    .issuedAt(new Date())
+                    .expiration(new Date(System.currentTimeMillis() + ttlMillis))
+                    .signWith(KEY)
+                    .compact();
     }
 }

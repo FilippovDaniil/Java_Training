@@ -36,5 +36,7 @@ import java.util.List;
 class TaskController07 {
     // Станет доступным по токену после добавления JWT-фильтра в модуле 99.
     @GetMapping
-    List<String> list() { return List.of("Задача 1", "Задача 2"); }
+    List<String> list() { return
+            List.of("Задача 1", "Задача 2");
+    }
 }
