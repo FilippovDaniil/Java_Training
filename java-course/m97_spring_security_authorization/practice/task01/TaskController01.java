@@ -19,7 +19,19 @@ import org.springframework.web.bind.annotation.*;
 @RestController
 @RequestMapping("/api/tasks")
 class TaskController01 {
-    @GetMapping String list() { return "список задач"; }
-    @PostMapping String create(@RequestBody String title) { return "создано: " + title; }
-    @DeleteMapping("/{id}") String delete(@PathVariable Long id) { return "удалено " + id; }
+
+    @GetMapping
+    String list() {
+        return "список задач";
+    }
+
+    @PostMapping
+    String create(@RequestBody String title) {
+        return "создано: " + title;
+    }
+
+    @DeleteMapping("/{id}")
+    String delete(@PathVariable(name = "id") Long id) {
+        return "удалено " + id;
+    }
 }

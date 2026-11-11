@@ -23,14 +23,18 @@ import java.util.concurrent.ConcurrentHashMap;
 @RestController
 @RequestMapping("/api/tasks")
 class TaskController04 {
+
     private final TaskService04 service;
     TaskController04(TaskService04 service) { this.service = service; }
 
     @PutMapping("/{id}")
-    String update(@PathVariable Long id, Authentication auth) {
+    String update(@PathVariable(name = "id") Long id, Authentication auth) {
         // TODO: boolean isAdmin = auth.getAuthorities().stream()
         // TODO:     .anyMatch(a -> a.getAuthority().equals("ROLE_ADMIN"));
         // TODO: return service.updateTask(id, auth.getName(), isAdmin);
-        return null;
+
+        boolean isAdmin = auth.getAuthorities().stream()
+                .anyMatch(a -> a.getAuthority().equals("ROLE_ADMIN"));
+        return service.updateTask(id, auth.getName(), isAdmin);
     }
 }

@@ -24,9 +24,11 @@ import java.util.Map;
 
 @Component("taskSecurity")
 class TaskSecurity07 {
-    static final Map<Long, String> OWNERS = Map.of(1L, "alice", 2L, "bob");
+    static final Map<Long, String> OWNERS = Map.of(1L, "alice", 2L, "bob", 3L, "alice", 4L, "bob"
+    ,5L, "alice", 6L, "bob");
+
     public boolean isOwner(Long taskId, String username) {
         // TODO: return username.equals(OWNERS.get(taskId));
-        return false;
+        return username.equals(OWNERS.get(taskId));
     }
 }

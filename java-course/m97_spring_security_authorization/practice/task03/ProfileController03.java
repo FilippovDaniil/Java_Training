@@ -22,11 +22,14 @@ import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 class ProfileController03 {
+
     private final ProfileService03 service;
-    ProfileController03(ProfileService03 service) { this.service = service; }
+    ProfileController03(ProfileService03 service) {
+        this.service = service;
+    }
 
     @GetMapping("/api/profile/{username}")
-    String profile(@PathVariable String username) {
+    String profile(@PathVariable(name = "username") String username) {
         return service.getProfile(username);
     }
 }

@@ -24,6 +24,7 @@ import java.util.Map;
 
 @Configuration
 @EnableWebSecurity
+@EnableMethodSecurity
 // TODO: @EnableMethodSecurity
 class SecurityConfig07 {
     @Bean
@@ -45,6 +46,15 @@ class SecurityConfig07 {
         // TODO:     .anyRequest().authenticated());
         // TODO: http.httpBasic(Customizer.withDefaults());
         // TODO: http.csrf(csrf -> csrf.disable());
+
+        http.authorizeHttpRequests(auth -> auth
+                        .requestMatchers("/api/admin/**").hasRole("ADMIN")
+                        .requestMatchers("/api/**").authenticated()
+                .anyRequest().authenticated());
+
+        http.httpBasic(Customizer.withDefaults());
+        http.csrf(csrf -> csrf.disable());
+
         return http.build();
     }
 }

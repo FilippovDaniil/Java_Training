@@ -39,6 +39,11 @@ class SecurityConfig04 {
         // TODO: http.authorizeHttpRequests(auth -> auth.anyRequest().authenticated());
         // TODO: http.httpBasic(Customizer.withDefaults());
         // TODO: http.csrf(csrf -> csrf.disable());
+
+        http.authorizeHttpRequests(auth -> auth.anyRequest().authenticated());
+        http.httpBasic(Customizer.withDefaults());
+        http.csrf(csrf -> csrf.disable());
+
         return http.build();
     }
 }

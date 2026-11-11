@@ -22,11 +22,13 @@ import java.util.List;
 @Service
 class TaskService02 {
     // TODO: @PreAuthorize("hasRole('ADMIN')")
+    @PreAuthorize(value = "hasRole('ADMIN')")
     public String deleteTask(Long id) {
         return "удалено " + id;
     }
 
     // TODO: @PreAuthorize("isAuthenticated()")
+    @PreAuthorize(value = "isAuthenticated()")
     public List<String> myTasks() {
         return List.of("Задача 1", "Задача 2");
     }

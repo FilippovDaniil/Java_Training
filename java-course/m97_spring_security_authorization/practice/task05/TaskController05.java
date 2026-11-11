@@ -23,9 +23,15 @@ import java.util.Map;
 @RestController
 @RequestMapping("/api/tasks")
 class TaskController05 {
+
     private final TaskService05 service;
-    TaskController05(TaskService05 service) { this.service = service; }
+
+    TaskController05(TaskService05 service) {
+        this.service = service;
+    }
 
     @DeleteMapping("/{id}")
-    String delete(@PathVariable Long id) { return service.deleteTask(id); }
+    String delete(@PathVariable(name = "id") Long id) {
+        return service.deleteTask(id);
+    }
 }

@@ -27,7 +27,18 @@ class TaskController07 {
     private final TaskService07 service;
     TaskController07(TaskService07 service) { this.service = service; }
 
-    @GetMapping("/api/tasks") List<Task07Dto> list() { return service.findVisible(); }
-    @PutMapping("/api/tasks/{id}") String update(@PathVariable Long id) { return service.update(id); }
-    @GetMapping("/api/admin/purge") String purge() { return service.adminPurge(); }
+    @GetMapping("/api/tasks")
+    List<Task07Dto> list() {
+        return service.findVisible();
+    }
+
+    @PutMapping("/api/tasks/{id}")
+    String update(@PathVariable(name = "id") Long id) {
+        return service.update(id);
+    }
+
+    @GetMapping("/api/admin/purge")
+    String purge() {
+        return service.adminPurge();
+    }
 }

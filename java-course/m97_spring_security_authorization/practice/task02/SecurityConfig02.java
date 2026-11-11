@@ -21,6 +21,7 @@ import java.util.List;
 
 @Configuration
 @EnableWebSecurity
+@EnableMethodSecurity
 // TODO: @EnableMethodSecurity
 class SecurityConfig02 {
     @Bean
@@ -29,8 +30,15 @@ class SecurityConfig02 {
     @Bean
     UserDetailsService users(PasswordEncoder enc) {
         return new InMemoryUserDetailsManager(
-                User.withUsername("alice").password(enc.encode("password")).roles("USER").build(),
-                User.withUsername("admin").password(enc.encode("admin")).roles("ADMIN").build());
+                User.withUsername("alice")
+                        .password(enc.encode("password"))
+                        .roles("USER")
+                        .build(),
+
+                User.withUsername("admin")
+                        .password(enc.encode("admin"))
+                        .roles("ADMIN")
+                        .build());
     }
 
     @Bean
@@ -38,6 +46,11 @@ class SecurityConfig02 {
         // TODO: http.authorizeHttpRequests(auth -> auth.anyRequest().authenticated());
         // TODO: http.httpBasic(Customizer.withDefaults());
         // TODO: http.csrf(csrf -> csrf.disable());
+
+        http.authorizeHttpRequests(auth -> auth.anyRequest().authenticated());
+        http.httpBasic(Customizer.withDefaults());
+        http.csrf(csrf -> csrf.disable());
+
         return http.build();
     }
 }

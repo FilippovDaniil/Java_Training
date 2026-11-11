@@ -22,9 +22,19 @@ import java.util.List;
 @RestController
 @RequestMapping("/api/tasks")
 class TaskController02 {
-    private final TaskService02 service;
-    TaskController02(TaskService02 service) { this.service = service; }
 
-    @GetMapping List<String> list() { return service.myTasks(); }
-    @DeleteMapping("/{id}") String delete(@PathVariable Long id) { return service.deleteTask(id); }
+    private final TaskService02 service;
+    TaskController02(TaskService02 service) {
+        this.service = service;
+    }
+
+    @GetMapping
+    List<String> list() {
+        return service.myTasks();
+    }
+
+    @DeleteMapping("/{id}")
+    String delete(@PathVariable(name = "id") Long id) {
+        return service.deleteTask(id);
+    }
 }

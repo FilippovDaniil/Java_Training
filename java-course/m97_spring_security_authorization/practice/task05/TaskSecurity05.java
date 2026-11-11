@@ -23,8 +23,9 @@ import java.util.Map;
 @Component("taskSecurity")
 class TaskSecurity05 {
     private final Map<Long, String> owners = Map.of(1L, "alice");
+
     public boolean isOwner(Long taskId, String username) {
         // TODO: return username.equals(owners.get(taskId));
-        return false;
+        return username.equals(owners.get(taskId));
     }
 }

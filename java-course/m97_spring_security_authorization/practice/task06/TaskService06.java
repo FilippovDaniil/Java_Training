@@ -23,6 +23,7 @@ import java.util.List;
 @Service
 class TaskService06 {
     // TODO: @PostFilter("filterObject.owner() == authentication.name or hasRole('ADMIN')")
+    @PostFilter("filterObject.owner() == authentication.name or hasRole('ADMIN')")
     public List<Task06Dto> findAll() {
         return List.of(
                 new Task06Dto(1L, "alice", "Задача Алисы"),

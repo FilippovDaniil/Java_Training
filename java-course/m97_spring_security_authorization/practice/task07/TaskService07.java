@@ -10,6 +10,7 @@ import org.springframework.security.config.Customizer;
 import org.springframework.security.config.annotation.method.configuration.EnableMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
+import org.springframework.security.core.parameters.P;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
@@ -25,14 +26,24 @@ import java.util.Map;
 @Service
 class TaskService07 {
     // TODO: @PostFilter("filterObject.owner() == authentication.name or hasRole('ADMIN')")
+    @PostFilter("filterObject.owner() == authentication.name or hasRole('ADMIN')")
     public List<Task07Dto> findVisible() {
         return List.of(new Task07Dto(1L, "alice", "Задача Алисы"),
-                       new Task07Dto(2L, "bob", "Задача Боба"));
+                       new Task07Dto(2L, "bob", "Задача Боба"),
+                new Task07Dto(3L, "alice", "Задача Алисы 333"),
+                new Task07Dto(4L, "bob", "Задача Боба Darina"),
+                new Task07Dto(5L, "alice", "Задача Алисы Begemotik"),
+                new Task07Dto(6L, "bob", "Задача Боба Shokoladochka")
+        );
     }
 
     // TODO: @PreAuthorize("hasRole('ADMIN') or @taskSecurity.isOwner(#id, authentication.name)")
-    public String update(Long id) { return "задача " + id + " обновлена"; }
+    @PreAuthorize("hasRole('ADMIN') or @taskSecurity.isOwner(#id, authentication.name)")
+    public String update(@P("id") Long id) {
+        return "задача " + id + " обновлена";
+    }
 
     // TODO: @PreAuthorize("hasRole('ADMIN')")
+    @PreAuthorize("hasRole('ADMIN')")
     public String adminPurge() { return "все завершённые задачи удалены"; }
 }

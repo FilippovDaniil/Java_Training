@@ -9,6 +9,7 @@ import org.springframework.security.config.Customizer;
 import org.springframework.security.config.annotation.method.configuration.EnableMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
+import org.springframework.security.core.parameters.P;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
@@ -23,7 +24,9 @@ import org.springframework.web.bind.annotation.RestController;
 @Service
 class ProfileService03 {
     // TODO: @PreAuthorize("#username == authentication.name or hasRole('ADMIN')")
-    public String getProfile(String username) {
+    @PreAuthorize(value = """
+            #username == authentication.name or hasRole('ADMIN')""")
+    public String getProfile(@P("username") String username) {
         return "профиль пользователя " + username;
     }
 }

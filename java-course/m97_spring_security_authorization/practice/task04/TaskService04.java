@@ -31,6 +31,10 @@ class TaskService04 {
         // TODO: if (!isAdmin && !owner.equals(currentUser))
         // TODO:     throw new AccessDeniedException("Не ваша задача");
         // TODO: return "задача " + taskId + " обновлена пользователем " + currentUser;
-        return null;
+        String owner = owners.get(taskId);
+        if (owner == null) throw new IllegalArgumentException("Нет задачи " + taskId);
+        if (!isAdmin && !owner.equals(currentUser))
+            throw new AccessDeniedException("Не ваша задача");
+        return "задача " + taskId + " обновлена пользователем " + currentUser;
     }
 }
