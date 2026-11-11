@@ -69,6 +69,7 @@ import java.util.List;
 import java.util.Set;
 import java.util.UUID;
 
+@SpringBootApplication
 public class Task07 {
     public static void main(String[] args) {
         SpringApplication.run(Task07.class, args);

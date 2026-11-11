@@ -20,10 +20,11 @@ import java.util.UUID;
 
 @RestController
 class AttachmentController06 {
+
     private static final Set<String> ALLOWED = Set.of("image/png", "image/jpeg", "application/pdf");
 
     @PostMapping("/api/tasks/{id}/attachments")
-    String upload(@PathVariable Long id, @RequestParam("file") MultipartFile file) {
+    String upload(@PathVariable(name = "id") Long id, @RequestParam("file") MultipartFile file) {
         // TODO: if (file.isEmpty()) throw new IllegalArgumentException("Пустой файл");
         // TODO: if (!ALLOWED.contains(file.getContentType()))
         // TODO:     throw new IllegalArgumentException("Недопустимый тип: " + file.getContentType());
@@ -31,6 +32,14 @@ class AttachmentController06 {
         // TODO: String safeName = UUID.randomUUID() + ext;   // НЕ используем оригинальное имя!
         // TODO: // сохранить file во внешнее хранилище под safeName ...
         // TODO: return "Загружено к задаче " + id + " как " + safeName;
-        return null;
+
+        if (file.isEmpty()) throw new IllegalArgumentException("Пустой файл");
+        if (!ALLOWED.contains(file.getContentType()))
+        throw new IllegalArgumentException("Недопустимый тип: " + file.getContentType());
+        String ext = file.getContentType().equals("application/pdf") ? ".pdf" : ".img";
+        String safeName = UUID.randomUUID() + ext;   // НЕ используем оригинальное имя!
+        // сохранить file во внешнее хранилище под safeName ...
+        return "Загружено к задаче " + id + " как " + safeName;
+
     }
 }

@@ -26,7 +26,10 @@ class SecurityConfig02 {
     @Bean
     UserDetailsService users(PasswordEncoder enc) {
         return new InMemoryUserDetailsManager(
-                User.withUsername("alice").password(enc.encode("password")).roles("USER").build());
+                User.withUsername("alice")
+                        .password(enc.encode("password"))
+                        .roles("USER")
+                        .build());
     }
 
     @Bean
@@ -38,6 +41,17 @@ class SecurityConfig02 {
         // TODO:     .sessionFixation(sf -> sf.changeSessionId())
         // TODO:     .maximumSessions(1)
         // TODO:     .maxSessionsPreventsLogin(false));
+
+        http.authorizeHttpRequests(auth -> auth.anyRequest().authenticated());
+
+        http.formLogin(Customizer.withDefaults());
+
+        http.sessionManagement(sm -> sm
+                        .sessionCreationPolicy(SessionCreationPolicy.IF_REQUIRED)
+                        .sessionFixation(sf -> sf.changeSessionId())
+                        .maximumSessions(1)
+                .maxSessionsPreventsLogin(false));
+
         return http.build();
     }
 }

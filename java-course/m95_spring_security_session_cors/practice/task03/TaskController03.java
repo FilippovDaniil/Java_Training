@@ -23,5 +23,7 @@ import java.util.List;
 @RestController
 class TaskController03 {
     @GetMapping("/api/tasks")
-    String tasks() { return "Задачи (доступно SPA с localhost:3000)"; }
+    String tasks() {
+        return "Задачи (доступно SPA с localhost:3000)";
+    }
 }

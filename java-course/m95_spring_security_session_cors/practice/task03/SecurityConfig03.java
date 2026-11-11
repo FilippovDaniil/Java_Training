@@ -29,7 +29,10 @@ class SecurityConfig03 {
     @Bean
     UserDetailsService users(PasswordEncoder enc) {
         return new InMemoryUserDetailsManager(
-                User.withUsername("alice").password(enc.encode("password")).roles("USER").build());
+                User.withUsername("alice")
+                        .password(enc.encode("password"))
+                        .roles("USER")
+                        .build());
     }
 
     @Bean
@@ -42,7 +45,15 @@ class SecurityConfig03 {
         // TODO: UrlBasedCorsConfigurationSource src = new UrlBasedCorsConfigurationSource();
         // TODO: src.registerCorsConfiguration("/**", cfg);
         // TODO: return src;
-        return null;
+
+        CorsConfiguration cfg = new CorsConfiguration();
+        cfg.setAllowedOrigins(List.of("http://localhost:3000"));
+        cfg.setAllowedMethods(List.of("GET", "POST", "PUT", "DELETE", "OPTIONS"));
+        cfg.setAllowedHeaders(List.of("*"));
+        cfg.setAllowCredentials(true);
+        UrlBasedCorsConfigurationSource src = new UrlBasedCorsConfigurationSource();
+        src.registerCorsConfiguration("/**", cfg);
+        return src;
     }
 
     @Bean
@@ -51,6 +62,12 @@ class SecurityConfig03 {
         // TODO: http.authorizeHttpRequests(auth -> auth.anyRequest().authenticated());
         // TODO: http.httpBasic(Customizer.withDefaults());
         // TODO: http.csrf(csrf -> csrf.disable());
+
+        http.cors(Customizer.withDefaults());
+        http.authorizeHttpRequests(auth -> auth.anyRequest().authenticated());
+        http.httpBasic(Customizer.withDefaults());
+        http.csrf(csrf -> csrf.disable());
+
         return http.build();
     }
 }

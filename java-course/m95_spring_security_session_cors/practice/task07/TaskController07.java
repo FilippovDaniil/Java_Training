@@ -31,7 +31,7 @@ class TaskController07 {
     @GetMapping
     String myTasks(Principal principal) {
         // TODO: return principal.getName() + ": " + List.of("Задача 1", "Задача 2");
-        return null;
+        return principal.getName() + ": " + List.of("Задача 1", "Задача 2");
     }
 
     @PostMapping("/{id}/attachments")
@@ -39,6 +39,8 @@ class TaskController07 {
         // TODO: проверить непустоту + ALLOWED.contains(file.getContentType());
         // TODO: String safeName = UUID.randomUUID() + ".bin";   // не из оригинального имени
         // TODO: return "к задаче " + id + " загружено " + safeName;
-        return null;
+
+        String safeName = UUID.randomUUID() + ".bin";   // не из оригинального имени
+        return "к задаче " + id + " загружено " + safeName;
     }
 }

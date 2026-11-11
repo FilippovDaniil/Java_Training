@@ -37,6 +37,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.provisioning.InMemoryUserDetailsManager;
 import org.springframework.security.web.SecurityFilterChain;
 
+@SpringBootApplication
 public class Task04 {
     public static void main(String[] args) {
         SpringApplication.run(Task04.class, args);

@@ -25,7 +25,10 @@ class SecurityConfig05 {
     @Bean
     UserDetailsService users(PasswordEncoder enc) {
         return new InMemoryUserDetailsManager(
-                User.withUsername("alice").password(enc.encode("password")).roles("USER").build());
+                User.withUsername("alice")
+                        .password(enc.encode("password"))
+                        .roles("USER")
+                        .build());
     }
 
     @Bean
@@ -38,6 +41,17 @@ class SecurityConfig05 {
         // TODO:     .deleteCookies("JSESSIONID")
         // TODO:     .logoutSuccessHandler((req, res, auth) -> res.setStatus(200)));
         // TODO: http.csrf(csrf -> csrf.disable());  // упрощение для теста POST logout
+
+        http.authorizeHttpRequests(auth -> auth.anyRequest().authenticated());
+        http.formLogin(Customizer.withDefaults());
+        http.logout(logout -> logout
+                        .logoutUrl("/api/auth/logout")
+                        .invalidateHttpSession(true)
+                        .deleteCookies("JSESSIONID")
+                .logoutSuccessHandler((req, res, auth) -> res.setStatus(200)));
+
+        http.csrf(csrf -> csrf.disable());  // упрощение для теста POST logout
+
         return http.build();
     }
 }

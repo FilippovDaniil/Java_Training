@@ -43,6 +43,7 @@ import org.springframework.web.multipart.MultipartFile;
 import java.util.Set;
 import java.util.UUID;
 
+@SpringBootApplication
 public class Task06 {
     public static void main(String[] args) {
         SpringApplication.run(Task06.class, args);

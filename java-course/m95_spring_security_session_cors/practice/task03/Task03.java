@@ -46,6 +46,7 @@ import org.springframework.web.cors.CorsConfigurationSource;
 import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
 import java.util.List;
 
+@SpringBootApplication
 public class Task03 {
     public static void main(String[] args) {
         SpringApplication.run(Task03.class, args);

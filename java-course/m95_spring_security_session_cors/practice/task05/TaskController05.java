@@ -19,5 +19,7 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 class TaskController05 {
     @GetMapping("/api/tasks")
-    String tasks() { return "Задачи"; }
+    String tasks() {
+        return "Задачи";
+    }
 }

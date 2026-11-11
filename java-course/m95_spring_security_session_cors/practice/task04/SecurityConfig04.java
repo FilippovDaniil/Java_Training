@@ -24,13 +24,20 @@ class SecurityConfig04 {
     @Bean
     UserDetailsService users(PasswordEncoder enc) {
         return new InMemoryUserDetailsManager(
-                User.withUsername("alice").password(enc.encode("password")).roles("USER").build());
+                User.withUsername("alice")
+                        .password(enc.encode("password"))
+                        .roles("USER")
+                        .build());
     }
 
     @Bean
     SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
         // TODO: http.authorizeHttpRequests(auth -> auth.anyRequest().authenticated());
         // TODO: http.formLogin(Customizer.withDefaults());
+
+        http.authorizeHttpRequests(auth -> auth.anyRequest().authenticated());
+        http.formLogin(Customizer.withDefaults());
+
         return http.build();
     }
 }
