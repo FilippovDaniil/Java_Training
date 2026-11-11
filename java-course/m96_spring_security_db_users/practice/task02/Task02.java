@@ -46,6 +46,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
 import java.util.Optional;
 
+@SpringBootApplication
 public class Task02 {
     public static void main(String[] args) {
         SpringApplication.run(Task02.class, args);

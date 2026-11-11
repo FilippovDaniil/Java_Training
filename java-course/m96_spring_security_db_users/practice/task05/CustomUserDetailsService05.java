@@ -34,6 +34,12 @@ class CustomUserDetailsService05 implements UserDetailsService {
         // TODO:     .map(r -> new SimpleGrantedAuthority(r.getName()))   // имя уже с ROLE_
         // TODO:     .collect(Collectors.toList());
         // TODO: return User.withUsername(u.getUsername()).password(u.getPassword()).authorities(auth).build();
-        return null;
+
+        var auth = u.getRoles().stream()
+                .map(r -> new SimpleGrantedAuthority(r.getName())).collect(Collectors.toList());
+
+        return User.withUsername(u.getUsername()).password(u.getPassword()).authorities(auth).build();
+
+
     }
 }

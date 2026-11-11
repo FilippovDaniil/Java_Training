@@ -39,6 +39,12 @@ class CustomUserDetailsService07 implements UserDetailsService {
         // TODO: var auth = u.getRoles().stream().map(r -> new SimpleGrantedAuthority("ROLE_" + r))
         // TODO:     .collect(Collectors.toList());
         // TODO: return User.withUsername(u.getUsername()).password(u.getPassword()).authorities(auth).build();
-        return null;
+        UserEntity07 u = repo.findByUsername(username)
+                .orElseThrow(() -> new UsernameNotFoundException("Не найден: " + username));
+
+        var auth = u.getRoles().stream().map(r -> new SimpleGrantedAuthority("ROLE_" + r))
+                .collect(Collectors.toList());
+
+        return User.withUsername(u.getUsername()).password(u.getPassword()).authorities(auth).build();
     }
 }

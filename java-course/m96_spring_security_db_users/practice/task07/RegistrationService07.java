@@ -37,6 +37,7 @@ class RegistrationService07 {
     public UserEntity07 register(String username, String rawPassword) {
         // TODO: if (repo.existsByUsername(username)) throw new IllegalStateException("Имя занято: " + username);
         // TODO: return repo.save(new UserEntity07(username, encoder.encode(rawPassword), Set.of("USER")));
-        return null;
+        if (repo.existsByUsername(username)) throw new IllegalStateException("Имя занято: " + username);
+        return repo.save(new UserEntity07(username, encoder.encode(rawPassword), Set.of("USER")));
     }
 }

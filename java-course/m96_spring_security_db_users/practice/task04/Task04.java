@@ -33,6 +33,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import java.util.*;
 
+@SpringBootApplication
 public class Task04 {
     public static void main(String[] args) {
         SpringApplication.run(Task04.class, args);
@@ -48,6 +49,10 @@ public class Task04 {
             // TODO: System.out.println("хеш в БД: " + repo.findByUsername("alice").get().getPassword());
             // TODO: try { service.register("alice", "other"); }
             // TODO: catch (IllegalStateException e) { System.out.println("повтор: " + e.getMessage()); }
+            service.register("alice", "password");
+            System.out.println("хеш в БД: " + repo.findByUsername("alice").get().getPassword());
+            try { service.register("alice", "other"); }
+            catch (IllegalStateException e) { System.out.println("повтор: " + e.getMessage()); }
         };
     }
 }

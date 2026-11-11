@@ -74,6 +74,7 @@ import java.security.Principal;
 import java.util.*;
 import java.util.stream.Collectors;
 
+@SpringBootApplication
 public class Task07 {
     public static void main(String[] args) {
         SpringApplication.run(Task07.class, args);
@@ -84,6 +85,8 @@ public class Task07 {
         return args -> {
             // TODO: if (!repo.existsByUsername("admin"))
             // TODO:     repo.save(new UserEntity07("admin", enc.encode("admin"), Set.of("USER", "ADMIN")));
+            if (!repo.existsByUsername("admin"))
+            repo.save(new UserEntity07("admin", enc.encode("admin"), Set.of("USER", "ADMIN")));
         };
     }
 }

@@ -43,6 +43,7 @@ import org.springframework.web.bind.annotation.RestController;
 import java.util.*;
 import java.util.stream.Collectors;
 
+@SpringBootApplication
 public class Task05 {
     public static void main(String[] args) {
         SpringApplication.run(Task05.class, args);

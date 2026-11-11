@@ -27,15 +27,17 @@ import jakarta.persistence.*;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.context.annotation.Bean;
 import org.springframework.data.jpa.repository.JpaRepository;
 import java.util.Optional;
 
+@SpringBootApplication
 public class Task01 {
     public static void main(String[] args) {
         SpringApplication.run(Task01.class, args);
     }
 
-    @org.springframework.context.annotation.Bean
+    @Bean
     CommandLineRunner demo(UserRepository01 repo) {
         return args -> {
             UserEntity01 u = new UserEntity01("alice", "{hash}");
@@ -43,6 +45,11 @@ public class Task01 {
             // TODO: System.out.println("найден: " + repo.findByUsername("alice").isPresent());   // true
             // TODO: System.out.println("есть alice? " + repo.existsByUsername("alice"));          // true
             // TODO: System.out.println("есть bob? " + repo.existsByUsername("bob"));              // false
+
+            System.out.println("найден: " + repo.findByUsername("alice").isPresent());   // true
+            System.out.println("есть alice? " + repo.existsByUsername("alice"));          // true
+            System.out.println("есть bob? " + repo.existsByUsername("bob"));              // false
+
         };
     }
 }

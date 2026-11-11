@@ -35,6 +35,10 @@ class CustomUserDetailsService03 implements UserDetailsService {
         // TODO:     .map(r -> new SimpleGrantedAuthority("ROLE_" + r.name()))
         // TODO:     .collect(Collectors.toList());
         // TODO: return User.withUsername(u.getUsername()).password(u.getPassword()).authorities(auth).build();
-        return null;
+        List<GrantedAuthority> auth = u.getRoles().stream()
+                .map(r -> new SimpleGrantedAuthority("ROLE_" + r.name()))
+                .collect(Collectors.toList());
+
+        return User.withUsername(u.getUsername()).password(u.getPassword()).authorities(auth).build();
     }
 }

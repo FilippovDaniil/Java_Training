@@ -37,7 +37,10 @@ class AuthController07 {
     ResponseEntity<UserResponse07> register(@Valid @RequestBody RegisterRequest07 req) {
         // TODO: UserEntity07 u = service.register(req.username(), req.password());
         // TODO: return ResponseEntity.status(HttpStatus.CREATED).body(new UserResponse07(u.getId(), u.getUsername()));
-        return null;
+
+        UserEntity07 u = service.register(req.username(), req.password());
+        return ResponseEntity.status(HttpStatus.CREATED).body(new UserResponse07(u.getId(), u.getUsername()));
+
     }
 
     @ExceptionHandler(IllegalStateException.class)

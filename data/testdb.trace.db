@@ -59,3 +59,7 @@ Caused by: org.h2.mvstore.MVStoreException: The file is locked: C:/Users/MaxxPC/
 	at org.h2.mvstore.SingleFileStore.open(SingleFileStore.java:81)
 	at org.h2.mvstore.MVStore.<init>(MVStore.java:286)
 	... 40 more
+2026-11-11 12:38:29.971430+03:00 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Таблица "USERS" не найдена
+Table "USERS" not found; SQL statement:
+insert into users (enabled,password,username,id) values (?,?,?,default) [42102-232]

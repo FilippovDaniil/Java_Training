@@ -31,6 +31,7 @@ class UserEntity03 {
     @Column(nullable = false)
     private String password;
     // TODO: @ElementCollection(fetch = FetchType.EAGER) @Enumerated(EnumType.STRING)
+    @ElementCollection(fetch = FetchType.EAGER) @Enumerated(EnumType.STRING)
     private Set<Role03> roles = new HashSet<>();
     protected UserEntity03() {}
     public UserEntity03(String username, String password, Set<Role03> roles) {

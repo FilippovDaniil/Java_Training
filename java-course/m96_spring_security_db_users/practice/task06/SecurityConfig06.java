@@ -34,6 +34,14 @@ class SecurityConfig06 {
         // TODO:     .requestMatchers("/api/auth/**").permitAll().anyRequest().authenticated());
         // TODO: http.httpBasic(Customizer.withDefaults());
         // TODO: http.csrf(csrf -> csrf.disable());
+
+        http.authorizeHttpRequests(auth -> auth
+                .requestMatchers("/api/auth/**").permitAll()
+                .anyRequest().authenticated());
+
+        http.httpBasic(Customizer.withDefaults());
+        http.csrf(csrf -> csrf.disable());
+
         return http.build();
     }
 }

@@ -23,6 +23,8 @@ class RegistrationService04 {
         // TODO: if (repo.existsByUsername(username)) throw new IllegalStateException("Имя занято: " + username);
         // TODO: UserEntity04 u = new UserEntity04(username, encoder.encode(rawPassword), Set.of("USER"));
         // TODO: return repo.save(u);
-        return null;
+        if (repo.existsByUsername(username)) throw new IllegalStateException("Имя занято: " + username);
+        UserEntity04 u = new UserEntity04(username, encoder.encode(rawPassword), Set.of("USER"));
+        return repo.save(u);
     }
 }

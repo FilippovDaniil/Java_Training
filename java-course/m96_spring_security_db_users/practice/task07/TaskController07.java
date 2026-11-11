@@ -33,6 +33,6 @@ class TaskController07 {
     @GetMapping
     String myTasks(Principal principal) {
         // TODO: return principal.getName() + ": задачи";
-        return null;
+        return principal.getName() + ": задачи";
     }
 }

@@ -36,6 +36,6 @@ class AdminController07 {
     @GetMapping("/users")
     List<String> users() {
         // TODO: return repo.findAll().stream().map(UserEntity07::getUsername).toList();
-        return List.of();
+        return repo.findAll().stream().map(UserEntity07::getUsername).toList();
     }
 }

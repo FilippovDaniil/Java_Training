@@ -33,12 +33,14 @@ class AuthController06 {
         // TODO: UserEntity06 u = service.register(req.username(), req.password());
         // TODO: return ResponseEntity.status(HttpStatus.CREATED)
         // TODO:     .body(new UserResponse06(u.getId(), u.getUsername()));
-        return null;
+        UserEntity06 u = service.register(req.username(), req.password());
+        return ResponseEntity.status(HttpStatus.CREATED)
+                .body(new UserResponse06(u.getId(), u.getUsername()));
     }
 
     @ExceptionHandler(IllegalStateException.class)
     ResponseEntity<String> duplicate(IllegalStateException e) {
         // TODO: return ResponseEntity.status(HttpStatus.CONFLICT).body(e.getMessage());
-        return null;
+        return ResponseEntity.status(HttpStatus.CONFLICT).body(e.getMessage());
     }
 }

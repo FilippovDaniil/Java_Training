@@ -42,6 +42,16 @@ class SecurityConfig07 {
         // TODO:     .anyRequest().authenticated());
         // TODO: http.httpBasic(Customizer.withDefaults());
         // TODO: http.csrf(csrf -> csrf.disable());
+
+        http.authorizeHttpRequests(auth -> auth
+                        .requestMatchers("/api/auth/**").permitAll()
+                        .requestMatchers("/api/admin/**").hasRole("ADMIN")
+                        .requestMatchers("/api/**").authenticated()
+                .anyRequest().authenticated());
+
+        http.httpBasic(Customizer.withDefaults());
+        http.csrf(csrf -> csrf.disable());
+
         return http.build();
     }
 }

@@ -30,6 +30,9 @@ class CustomUserDetailsService02 implements UserDetailsService {
         // TODO:     .orElseThrow(() -> new UsernameNotFoundException("Не найден: " + username));
         // TODO: return User.withUsername(u.getUsername()).password(u.getPassword())
         // TODO:     .authorities("ROLE_USER").disabled(!u.isEnabled()).build();
-        return null;
+        UserEntity02 u = repo.findByUsername(username)
+                .orElseThrow(() -> new UsernameNotFoundException("Не найден: " + username));
+        return User.withUsername(u.getUsername()).password(u.getPassword())
+                .authorities("ROLE_USER").disabled(!u.isEnabled()).build();
     }
 }

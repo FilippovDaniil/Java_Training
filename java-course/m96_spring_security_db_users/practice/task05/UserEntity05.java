@@ -30,6 +30,7 @@ class UserEntity05 {
     @Column(nullable = false)
     private String password;
     // TODO: @ManyToMany(fetch = FetchType.EAGER)
+    @ManyToMany(fetch = FetchType.EAGER)
     private Set<RoleEntity05> roles = new HashSet<>();
     protected UserEntity05() {}
     public UserEntity05(String username, String password, Set<RoleEntity05> roles) {
