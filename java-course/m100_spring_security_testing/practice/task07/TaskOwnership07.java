@@ -24,7 +24,7 @@ import static org.springframework.test.web.servlet.request.MockMvcRequestBuilder
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 // --- ownership-логика (готова): задача 1 → alice, задача 2 → bob ---
-@Component
+@Component("taskOwnership07")
 class TaskOwnership07 {
     private static final Map<Long, String> OWNERS = Map.of(1L, "alice", 2L, "bob");
     public boolean isOwner(Long taskId, String username) {

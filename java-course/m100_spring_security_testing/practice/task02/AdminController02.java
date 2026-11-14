@@ -17,6 +17,8 @@ import org.springframework.web.bind.annotation.RestController;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
+@RestController
+@RequestMapping("/api/admin")
 class AdminController02 {
     @GetMapping("/stats")
     String stats() { return "users=2"; }

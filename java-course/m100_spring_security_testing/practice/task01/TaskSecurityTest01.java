@@ -45,18 +45,25 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 // --- ТЕСТ (каркас) ---
 // TODO: @WebMvcTest(TaskController01.class)
 // TODO: @Import(SecurityConfig01.class)
+@SuppressWarnings("SpringJavaInjectionPointsAutowiringInspection")
+@WebMvcTest(TaskController01.class)
+@Import(SecurityConfig01.class)
 class TaskSecurityTest01 {
 
     // TODO: @Autowired MockMvc mockMvc;
+    @Autowired MockMvc mockMvc;
 
     @Test
     void anonymous_gets_401() throws Exception {
         // TODO: mockMvc.perform(get("/api/tasks")).andExpect(status().isUnauthorized());
+        mockMvc.perform(get("/api/tasks")).andExpect(status().isUnauthorized());
     }
 
     @Test
     // TODO: @WithMockUser
+    @WithMockUser
     void authenticated_gets_200() throws Exception {
         // TODO: mockMvc.perform(get("/api/tasks")).andExpect(status().isOk());
+        mockMvc.perform(get("/api/tasks")).andExpect(status().isOk());
     }
 }

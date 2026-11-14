@@ -50,17 +50,27 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 
 // TODO: @WebMvcTest(PingController06.class)
 // TODO: @Import(SecurityConfig06.class)
+@SuppressWarnings("SpringJavaInjectionPointsAutowiringInspection")
+@WebMvcTest(PingController06.class)
+@Import(SecurityConfig06.class)
 class HardeningTest06 {
 
     // TODO: @Autowired MockMvc mockMvc;
+    @Autowired MockMvc mockMvc;
 
     @Test
     // TODO: @WithMockUser
+    @WithMockUser
     void headers_present() throws Exception {
         // TODO: mockMvc.perform(get("/api/ping"))
         //              .andExpect(status().isOk())
         //              .andExpect(header().string("X-Content-Type-Options", "nosniff"))
         //              .andExpect(header().string("X-Frame-Options", "DENY"))
         //              .andExpect(header().string("Cache-Control", containsString("no-store")));
+        mockMvc.perform(get("/api/ping"))
+                .andExpect(status().isOk())
+                .andExpect(header().string("X-Content-Type-Options", "nosniff"))
+                .andExpect(header().string("X-Frame-Options", "DENY"))
+                .andExpect(header().string("Cache-Control", containsString("no-store")));
     }
 }

@@ -42,24 +42,33 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 
 // TODO: @WebMvcTest(AdminController02.class)
 // TODO: @Import(SecurityConfig02.class)
+@SuppressWarnings("SpringJavaInjectionPointsAutowiringInspection")
+@WebMvcTest(AdminController02.class)
+@Import(SecurityConfig02.class)
 class AdminSecurityTest02 {
 
     // TODO: @Autowired MockMvc mockMvc;
+    @Autowired MockMvc mockMvc;
 
     @Test
     // TODO: @WithMockUser(roles = "ADMIN")
+    @WithMockUser(roles = "ADMIN")
     void admin_gets_200() throws Exception {
         // TODO: mockMvc.perform(get("/api/admin/stats")).andExpect(status().isOk());
+        mockMvc.perform(get("/api/admin/stats")).andExpect(status().isOk());
     }
 
     @Test
     // TODO: @WithMockUser(roles = "USER")
+    @WithMockUser(roles = "USER")
     void user_gets_403() throws Exception {
         // TODO: mockMvc.perform(get("/api/admin/stats")).andExpect(status().isForbidden());
+        mockMvc.perform(get("/api/admin/stats")).andExpect(status().isForbidden());
     }
 
     @Test
     void anonymous_gets_401() throws Exception {
         // TODO: mockMvc.perform(get("/api/admin/stats")).andExpect(status().isUnauthorized());
+        mockMvc.perform(get("/api/admin/stats")).andExpect(status().isUnauthorized());
     }
 }

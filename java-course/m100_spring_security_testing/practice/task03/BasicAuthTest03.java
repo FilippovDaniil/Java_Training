@@ -51,24 +51,34 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 
 // TODO: @WebMvcTest(TaskController03.class)
 // TODO: @Import(SecurityConfig03.class)
+@SuppressWarnings("SpringJavaInjectionPointsAutowiringInspection")
+@WebMvcTest(TaskController03.class)
+@Import(SecurityConfig03.class)
 class BasicAuthTest03 {
 
     // TODO: @Autowired MockMvc mockMvc;
+    @Autowired MockMvc mockMvc;
 
     @Test
     void valid_basic_200() throws Exception {
         // TODO: mockMvc.perform(get("/api/tasks").with(httpBasic("alice", "password")))
         //              .andExpect(status().isOk());
+        mockMvc.perform(get("/api/tasks")
+                        .with(httpBasic("alice", "password")))
+                .andExpect(status().isOk());
     }
 
     @Test
     void wrong_password_401() throws Exception {
         // TODO: mockMvc.perform(get("/api/tasks").with(httpBasic("alice", "WRONG")))
         //              .andExpect(status().isUnauthorized());
+        mockMvc.perform(get("/api/tasks").with(httpBasic("alice", "WRONG")))
+                .andExpect(status().isUnauthorized());
     }
 
     @Test
     void no_credentials_401() throws Exception {
         // TODO: mockMvc.perform(get("/api/tasks")).andExpect(status().isUnauthorized());
+        mockMvc.perform(get("/api/tasks")).andExpect(status().isUnauthorized());
     }
 }

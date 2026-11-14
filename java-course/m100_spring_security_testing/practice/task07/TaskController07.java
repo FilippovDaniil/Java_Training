@@ -32,5 +32,5 @@ class TaskController07 {
     @DeleteMapping("/{id}")
     @ResponseStatus(HttpStatus.NO_CONTENT)
     @PreAuthorize("hasRole('ADMIN') or @taskOwnership07.isOwner(#id, authentication.name)")
-    void delete(@PathVariable Long id) { /* удаление */ }
+    void delete(@PathVariable("id") Long id) { /* удаление */ }
 }

@@ -18,6 +18,8 @@ import java.util.List;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
+@RestController
+@RequestMapping("/api/tasks")
 class TaskController01 {
     @GetMapping
     List<String> list() { return List.of("Задача 1", "Задача 2"); }

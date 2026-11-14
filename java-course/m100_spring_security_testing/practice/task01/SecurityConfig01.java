@@ -6,6 +6,7 @@ import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Import;
+import org.springframework.security.config.Customizer;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.test.context.support.WithMockUser;
@@ -23,8 +24,11 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 class SecurityConfig01 {
     @Bean
     SecurityFilterChain chain(HttpSecurity http) throws Exception {
-        http.authorizeHttpRequests(a -> a.anyRequest().authenticated())
-            .csrf(c -> c.disable());
+        http
+                .authorizeHttpRequests(a -> a.anyRequest().authenticated())
+                .httpBasic(Customizer.withDefaults())     // ← 401 для анонима
+                .formLogin(f -> f.disable())              // ← убираем редирект на /login
+                .csrf(c -> c.disable());
         return http.build();
     }
 }

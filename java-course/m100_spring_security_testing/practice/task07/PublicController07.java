@@ -70,6 +70,8 @@ import static org.springframework.test.web.servlet.request.MockMvcRequestBuilder
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
+@RestController
+@RequestMapping("/api/public")
 class PublicController07 {
     @GetMapping("/health")
     String health() { return "UP"; }

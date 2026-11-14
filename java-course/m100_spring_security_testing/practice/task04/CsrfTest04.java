@@ -51,23 +51,35 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 
 // TODO: @WebMvcTest(TaskController04.class)
 // TODO: @Import(SecurityConfig04.class)
+@SuppressWarnings("SpringJavaInjectionPointsAutowiringInspection")
+@WebMvcTest(TaskController04.class)
+@Import(SecurityConfig04.class)
 class CsrfTest04 {
 
     // TODO: @Autowired MockMvc mockMvc;
+    @Autowired MockMvc mockMvc;
 
     @Test
     // TODO: @WithMockUser
+    @WithMockUser
     void post_without_csrf_403() throws Exception {
         // TODO: mockMvc.perform(post("/api/tasks")
         //              .contentType(MediaType.APPLICATION_JSON).content("{\"title\":\"X\"}"))
         //              .andExpect(status().isForbidden());
+        mockMvc.perform(post("/api/tasks")
+                .contentType(MediaType.APPLICATION_JSON).content("{\"title\":\"X\"}"))
+                .andExpect(status().isForbidden());
     }
 
     @Test
     // TODO: @WithMockUser
+    @WithMockUser
     void post_with_csrf_201() throws Exception {
         // TODO: mockMvc.perform(post("/api/tasks").with(csrf())
         //              .contentType(MediaType.APPLICATION_JSON).content("{\"title\":\"X\"}"))
         //              .andExpect(status().isCreated());
+        mockMvc.perform(post("/api/tasks").with(csrf())
+                .contentType(MediaType.APPLICATION_JSON).content("{\"title\":\"X\"}"))
+                .andExpect(status().isCreated());
     }
 }

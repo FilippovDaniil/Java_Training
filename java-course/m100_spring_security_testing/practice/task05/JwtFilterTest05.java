@@ -67,26 +67,38 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 
 // TODO: @WebMvcTest(TaskController05.class)
 // TODO: @Import({SecurityConfig05.class, JwtService05.class, JwtAuthFilter05.class})
+@SuppressWarnings("SpringJavaInjectionPointsAutowiringInspection")
+@WebMvcTest(TaskController05.class)
+@Import({SecurityConfig05.class, JwtService05.class, JwtAuthFilter05.class})
 class JwtFilterTest05 {
 
     // TODO: @Autowired MockMvc mockMvc;
     // TODO: @Autowired JwtService05 jwt;
+    @Autowired MockMvc mockMvc;
+    @Autowired JwtService05 jwt;
 
     @Test
     void valid_token_200() throws Exception {
         // TODO: String token = jwt.generateToken("alice", List.of("ROLE_USER"));
         // TODO: mockMvc.perform(get("/api/tasks").header("Authorization", "Bearer " + token))
         //              .andExpect(status().isOk());
+        String token = jwt.generateToken("alice", List.of("ROLE_USER"));
+        mockMvc.perform(get("/api/tasks")
+                        .header("Authorization", "Bearer " + token))
+                .andExpect(status().isOk());
     }
 
     @Test
     void no_token_401() throws Exception {
         // TODO: mockMvc.perform(get("/api/tasks")).andExpect(status().isUnauthorized());
+        mockMvc.perform(get("/api/tasks")).andExpect(status().isUnauthorized());
     }
 
     @Test
     void garbage_token_401() throws Exception {
         // TODO: mockMvc.perform(get("/api/tasks").header("Authorization", "Bearer not-a-jwt"))
         //              .andExpect(status().isUnauthorized());
+        mockMvc.perform(get("/api/tasks").header("Authorization", "Bearer not-a-jwt"))
+                .andExpect(status().isUnauthorized());
     }
 }
