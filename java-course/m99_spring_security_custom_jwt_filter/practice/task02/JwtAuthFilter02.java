@@ -48,5 +48,12 @@ class JwtAuthFilter02 extends OncePerRequestFilter {
         // TODO: String token = header.substring(7);
         // TODO: System.out.println("Получен токен длиной " + token.length());
         // TODO: chain.doFilter(request, response);   // ← всегда продолжаем цепочку
+
+        String header = request.getHeader("Authorization");
+        if (header == null || !header.startsWith("Bearer ")) { chain.doFilter(request, response); return; }
+        String token = header.substring(7);
+        System.out.println("Получен токен длиной " + token.length());
+        chain.doFilter(request, response);   // ← всегда продолжаем цепочку
+
     }
 }

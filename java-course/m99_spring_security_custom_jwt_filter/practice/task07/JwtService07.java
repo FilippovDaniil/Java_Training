@@ -54,27 +54,35 @@ class JwtService07 {
         // TODO: return Jwts.builder().subject(username).claim("roles", roles)
         // TODO:     .issuedAt(new Date()).expiration(new Date(System.currentTimeMillis() + expirationMs))
         // TODO:     .signWith(key).compact();
-        return null;
+        return Jwts.builder()
+                .subject(username)
+                .claim("roles", roles)
+                .issuedAt(new Date())
+                .expiration(new Date(System.currentTimeMillis() + expirationMs))
+                .signWith(key)
+                .compact();
     }
 
     String extractUsername(String token) {
         // TODO: return claims(token).getSubject();
-        return null;
+        return claims(token)
+                .getSubject();
     }
 
     @SuppressWarnings("unchecked")
     List<String> extractRoles(String token) {
         // TODO: return (List<String>) claims(token).get("roles");
-        return List.of();
+        return (List<String>) claims(token)
+                .get("roles");
     }
 
     boolean isValid(String token) {
         // TODO: try { claims(token); return true; } catch (JwtException e) { return false; }
-        return false;
+        try { claims(token); return true; } catch (JwtException e) { return false; }
     }
 
     private Claims claims(String token) {
         // TODO: return Jwts.parser().verifyWith(key).build().parseSignedClaims(token).getPayload();
-        return null;
+        return Jwts.parser().verifyWith(key).build().parseSignedClaims(token).getPayload();
     }
 }

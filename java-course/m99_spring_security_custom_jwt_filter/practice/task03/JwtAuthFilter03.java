@@ -61,6 +61,15 @@ class JwtAuthFilter03 extends OncePerRequestFilter {
         // TODO:     var auth = new UsernamePasswordAuthenticationToken(username, null, authorities);
         // TODO:     SecurityContextHolder.getContext().setAuthentication(auth);
         // TODO: }
+
+        if (jwtService.isValid(token)) {
+            String username = jwtService.extractUsername(token);
+            List<String> roles = jwtService.extractRoles(token);
+            var authorities = roles.stream().map(SimpleGrantedAuthority::new).toList();
+            var auth = new UsernamePasswordAuthenticationToken(username, null, authorities);
+            SecurityContextHolder.getContext().setAuthentication(auth);
+        }
+
         chain.doFilter(request, response);
     }
 }

@@ -32,6 +32,7 @@ public class Task01 {
     static String extractBearer(String header) {
         // TODO: if (header == null || !header.startsWith("Bearer ")) return null;
         // TODO: return header.substring(7);
-        return null;
+        if (header == null || !header.startsWith("Bearer ")) return null;
+        return header.substring(7);
     }
 }

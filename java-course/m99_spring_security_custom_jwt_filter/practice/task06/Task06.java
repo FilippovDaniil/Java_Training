@@ -29,10 +29,17 @@ package m99_spring_security_custom_jwt_filter.practice.task06;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.security.config.Customizer;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
+import org.springframework.security.config.http.SessionCreationPolicy;
+import org.springframework.security.oauth2.jose.jws.MacAlgorithm;
 import org.springframework.security.oauth2.jwt.JwtDecoder;
+import org.springframework.security.oauth2.jwt.NimbusJwtDecoder;
 import org.springframework.security.web.SecurityFilterChain;
+
+import javax.crypto.spec.SecretKeySpec;
+import java.nio.charset.StandardCharsets;
 
 @Configuration
 @EnableWebSecurity
@@ -42,7 +49,9 @@ public class Task06 {
     JwtDecoder jwtDecoder(@Value("${jwt.secret:01234567890123456789012345678901}") String secret) {
         // TODO: var key = new SecretKeySpec(secret.getBytes(StandardCharsets.UTF_8), "HmacSHA256");
         // TODO: return NimbusJwtDecoder.withSecretKey(key).macAlgorithm(MacAlgorithm.HS256).build();
-        return null;
+        var key = new SecretKeySpec(secret.getBytes(StandardCharsets.UTF_8), "HmacSHA256");
+        return NimbusJwtDecoder.withSecretKey(key).macAlgorithm(MacAlgorithm.HS256).build();
+
     }
 
     @Bean
@@ -53,6 +62,14 @@ public class Task06 {
         // TODO:     .sessionManagement(sm -> sm.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
         // TODO:     .csrf(csrf -> csrf.disable())
         // TODO:     .oauth2ResourceServer(o -> o.jwt(Customizer.withDefaults()));   // Spring сам читает Bearer
+
+        http.authorizeHttpRequests(auth -> auth
+                        .requestMatchers("/api/auth/**").permitAll()
+                .anyRequest().authenticated())
+                .sessionManagement(sm -> sm.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
+                .csrf(csrf -> csrf.disable())
+                .oauth2ResourceServer(o -> o.jwt(Customizer.withDefaults()));   // Spring сам читает Bearer
+
         return http.build();
     }
 }

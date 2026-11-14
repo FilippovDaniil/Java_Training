@@ -68,6 +68,18 @@ class JwtAuthFilter05 extends OncePerRequestFilter {
         // TODO:     // невалидный токен: контекст не трогаем, исключение НЕ пробрасываем
         // TODO:     System.out.println("Невалидный JWT: " + e.getMessage());
         // TODO: }
+
+        try {
+            String username = jwtService.extractUsername(token);   // бросит JwtException если токен плох
+            List<String> roles = jwtService.extractRoles(token);
+            var authorities = roles.stream().map(SimpleGrantedAuthority::new).toList();
+            var auth = new UsernamePasswordAuthenticationToken(username, null, authorities);
+            SecurityContextHolder.getContext().setAuthentication(auth);
+            } catch (JwtException e) {
+            // невалидный токен: контекст не трогаем, исключение НЕ пробрасываем
+            System.out.println("Невалидный JWT: " + e.getMessage());
+            }
+
         chain.doFilter(request, response);   // всегда
     }
 }

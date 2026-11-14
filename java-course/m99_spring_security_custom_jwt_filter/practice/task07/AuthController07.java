@@ -54,6 +54,11 @@ class AuthController07 {
         // TODO:     new UsernamePasswordAuthenticationToken(req.username(), req.password()));
         // TODO: List<String> roles = auth.getAuthorities().stream().map(GrantedAuthority::getAuthority).toList();
         // TODO: return new TokenResponse(jwtService.generateToken(auth.getName(), roles));
-        return null;
+        Authentication auth = authManager.authenticate(
+                new UsernamePasswordAuthenticationToken(req.username(), req.password()));
+
+        List<String> roles = auth.getAuthorities().stream().map(GrantedAuthority::getAuthority).toList();
+
+        return new TokenResponse(jwtService.generateToken(auth.getName(), roles));
     }
 }

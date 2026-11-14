@@ -66,6 +66,20 @@ class JwtAuthFilter07 extends OncePerRequestFilter {
         // TODO: } catch (JwtException e) {
         // TODO:     System.out.println("Невалидный JWT: " + e.getMessage());
         // TODO: }
+
+        try {
+            if (jwtService.isValid(token)) {
+            String username = jwtService.extractUsername(token);
+            var authorities = jwtService.extractRoles(token).stream()
+                    .map(SimpleGrantedAuthority::new).toList();
+
+            var auth = new UsernamePasswordAuthenticationToken(username, null, authorities);
+            SecurityContextHolder.getContext().setAuthentication(auth);
+            }
+        } catch (JwtException e) {
+            System.out.println("Невалидный JWT: " + e.getMessage());
+        }
         chain.doFilter(request, response);
     }
 }
+
