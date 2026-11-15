@@ -28,6 +28,11 @@ class VerifyTest04 {
         // TODO: service.complete(1L);
         // TODO: verify(repo).save(any());
         // TODO: verify(gateway).notify(1L);
+
+        when(repo.findById(1L)).thenReturn(Optional.of(new Task04(1L, "Кофе")));
+            service.complete(1L);
+            verify(repo).save(any());
+            verify(gateway).notify(1L);
     }
 
     @Test
@@ -35,5 +40,10 @@ class VerifyTest04 {
         // TODO: assertThatThrownBy(() -> service.create("  ")).isInstanceOf(IllegalArgumentException.class);
         // TODO: verifyNoInteractions(repo);
         // TODO: verify(gateway, never()).notify(anyLong());
+
+        assertThatThrownBy(() -> service.create("  ")).isInstanceOf(IllegalArgumentException.class);
+        verifyNoInteractions(repo);
+        verify(gateway, never()).notify(anyLong());
+
     }
 }

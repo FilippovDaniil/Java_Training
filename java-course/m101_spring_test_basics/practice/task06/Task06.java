@@ -1,4 +1,4 @@
-package m101_spring_test_basics.practice;
+package m101_spring_test_basics.practice.task06;
 
 /**
  * Задача 06 — Модуль 101: JSONassert — сравнение JSON-строк
@@ -38,11 +38,14 @@ class JsonAssertTest06 {
     @Test
     void lenient_ignores_order_and_extra() throws Exception {
         // TODO: JSONAssert.assertEquals(EXPECTED, ACTUAL, false);   // false = LENIENT
+        JSONAssert.assertEquals(EXPECTED, ACTUAL, false);   // false = LENIENT
     }
 
     @Test
     void strict_fails_on_extra() {
         // TODO: assertThrows(AssertionError.class,
         // TODO:     () -> JSONAssert.assertEquals(EXPECTED, ACTUAL, true));   // true = STRICT
+        assertThrows(AssertionError.class,
+                () -> JSONAssert.assertEquals(EXPECTED, ACTUAL, true));   // true = STRICT
     }
 }

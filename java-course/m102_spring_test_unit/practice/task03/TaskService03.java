@@ -12,9 +12,22 @@ import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.when;
 
 class TaskService03 {
+
     private final TaskRepository03 repo;
-    TaskService03(TaskRepository03 repo) { this.repo = repo; }
-    Task03 find(Long id) { return repo.findById(id).orElseThrow(); }
-    String findOrDefault(Long id) { return repo.findById(id).map(Task03::title).orElse("(нет)"); }
-    Task03 create(String title) { return repo.save(new Task03(null, title)); }
+
+    TaskService03(TaskRepository03 repo) {
+        this.repo = repo;
+    }
+
+    Task03 find(Long id) {
+        return repo.findById(id).orElseThrow();
+    }
+
+    String findOrDefault(Long id) {
+        return repo.findById(id).map(Task03::title).orElse("(нет)");
+    }
+
+    Task03 create(String title) {
+        return repo.save(new Task03(null, title));
+    }
 }

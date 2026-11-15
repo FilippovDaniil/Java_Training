@@ -14,7 +14,11 @@ import static org.mockito.Mockito.when;
 
 class TaskService06 {
     private final TaskRepository06 repo;
-    TaskService06(TaskRepository06 repo) { this.repo = repo; }
+
+    TaskService06(TaskRepository06 repo) {
+        this.repo = repo;
+    }
+
     Task06 assign(Long id, String assignee) {
         if (assignee == null || assignee.isBlank())
             throw new IllegalArgumentException("assignee пустой");

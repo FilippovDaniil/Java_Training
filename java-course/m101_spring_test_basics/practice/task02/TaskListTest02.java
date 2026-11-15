@@ -38,16 +38,19 @@ class TaskListTest02 {
     @BeforeEach
     void init() {
         // TODO: list = new TaskList02();
+        list = new TaskList02();
     }
 
     @Test
     void starts_empty() {
         // TODO: assertEquals(0, list.size());
+        assertEquals(0, list.size());
     }
 
     @Test
     void add_increases_size() {
         // TODO: list.add("Кофе"); assertEquals(1, list.size());
+        list.add("Кофе"); assertEquals(1, list.size());
     }
 
     @Nested
@@ -55,11 +58,13 @@ class TaskListTest02 {
         @BeforeEach
         void addOne() {
             // TODO: list.add("Кофе");
+            list.add("Кофе");
         }
 
         @Test
         void remove_makes_empty() {
             // TODO: list.remove("Кофе"); assertEquals(0, list.size());
+            list.remove("Кофе"); assertEquals(0, list.size());
         }
     }
 }

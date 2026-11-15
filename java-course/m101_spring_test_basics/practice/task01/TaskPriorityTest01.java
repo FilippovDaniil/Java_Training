@@ -30,17 +30,21 @@ class TaskPriorityTest01 {
 
     @Test
     // TODO: @DisplayName("срочная → HIGH")
+    @DisplayName("срочная → HIGH")
     void high_for_urgent() {
         // TODO: assertEquals("HIGH", TaskPriority01.calc(true, 1));
+        assertEquals("HIGH", TaskPriority01.calc(true, 1));
     }
 
     @Test
     void low_for_normal() {
         // TODO: assertEquals("LOW", TaskPriority01.calc(false, 10));
+        assertEquals("LOW", TaskPriority01.calc(false, 10));
     }
 
     @Test
     void throws_on_negative_days() {
         // TODO: assertThrows(IllegalArgumentException.class, () -> TaskPriority01.calc(false, -1));
+        assertThrows(IllegalArgumentException.class, () -> TaskPriority01.calc(false, -1));
     }
 }

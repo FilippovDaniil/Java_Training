@@ -19,6 +19,7 @@ class CaptorTest05 {
     @Mock TaskRepository05 repo;
     @InjectMocks TaskService05 service;
     // TODO: @Captor ArgumentCaptor<Task05> captor;
+    @Captor ArgumentCaptor<Task05> captor;
 
     @Test
     void saves_with_new_status() {
@@ -28,5 +29,12 @@ class CaptorTest05 {
         // TODO: Task05 saved = captor.getValue();
         // TODO: assertThat(saved.title()).isEqualTo("Кофе");
         // TODO: assertThat(saved.status()).isEqualTo("NEW");
+
+        when(repo.save(any())).thenAnswer(inv -> inv.getArgument(0));
+        service.create("Кофе");
+        verify(repo).save(captor.capture());
+        Task05 saved = captor.getValue();
+        assertThat(saved.title()).isEqualTo("Кофе");
+        assertThat(saved.status()).isEqualTo("NEW");
     }
 }

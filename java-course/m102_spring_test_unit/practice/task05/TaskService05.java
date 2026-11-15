@@ -13,8 +13,13 @@ import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
 class TaskService05 {
+
     private final TaskRepository05 repo;
-    TaskService05(TaskRepository05 repo) { this.repo = repo; }
+
+    TaskService05(TaskRepository05 repo) {
+        this.repo = repo;
+    }
+
     Task05 create(String title) {
         return repo.save(new Task05(null, title, "NEW"));   // логика: новый статус = NEW
     }

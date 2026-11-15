@@ -1,4 +1,4 @@
-package m101_spring_test_basics.practice;
+package m101_spring_test_basics.practice.task05;
 
 /**
  * Задача 05 — Модуль 101: Hamcrest — матчеры
@@ -26,12 +26,7 @@ import org.junit.jupiter.api.Test;
 import java.util.List;
 
 import static org.hamcrest.MatcherAssert.assertThat;
-import static org.hamcrest.Matchers.allOf;
-import static org.hamcrest.Matchers.endsWith;
-import static org.hamcrest.Matchers.hasItem;
-import static org.hamcrest.Matchers.hasSize;
-import static org.hamcrest.Matchers.is;
-import static org.hamcrest.Matchers.startsWith;
+import static org.hamcrest.Matchers.*;
 
 // --- ТЕСТ (каркас) ---
 class HamcrestTest05 {
@@ -39,20 +34,24 @@ class HamcrestTest05 {
     @Test
     void value_is() {
         // TODO: assertThat(2 + 3, is(5));
+        assertThat(2 + 3, is(5));
     }
 
     @Test
     void list_has_item() {
         // TODO: assertThat(List.of("a", "b", "c"), hasItem("b"));
+        assertThat(List.of("a", "b", "c"), hasItem("b"));
     }
 
     @Test
     void list_size() {
         // TODO: assertThat(List.of("a", "b", "c"), hasSize(3));
+        assertThat(List.of("a", "b", "c"), hasSize(3));
     }
 
     @Test
     void combined() {
         // TODO: assertThat("Alice", allOf(startsWith("Al"), endsWith("ce")));
+        assertThat("Alice", allOf(startsWith("Al"), endsWith("ce")));
     }
 }

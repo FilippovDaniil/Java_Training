@@ -18,17 +18,22 @@ import static org.mockito.Mockito.verifyNoInteractions;
 import static org.mockito.Mockito.when;
 
 class TaskService07 {
+
     private final TaskRepository07 repo;
     private final NotificationGateway07 gateway;
+
     TaskService07(TaskRepository07 repo, NotificationGateway07 gateway) {
-        this.repo = repo; this.gateway = gateway;
+        this.repo = repo;
+        this.gateway = gateway;
     }
+
     Task07 create(String title) {
         if (title == null || title.isBlank()) throw new IllegalArgumentException("title пустой");
         Task07 saved = repo.save(new Task07(null, title, "NEW"));
         gateway.created(title);
         return saved;
     }
+
     Task07 complete(Long id) {
         Task07 t = repo.findById(id).orElseThrow(() -> new NotFound07(id));
         Task07 saved = repo.save(new Task07(t.id(), t.title(), "DONE"));

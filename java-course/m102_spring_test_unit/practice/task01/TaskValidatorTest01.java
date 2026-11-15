@@ -31,6 +31,7 @@ class TaskValidatorTest01 {
     @Test
     void valid_title_ok() {
         // TODO: assertThatCode(() -> TaskValidator01.validate("Кофе")).doesNotThrowAnyException();
+        assertThatCode(() -> TaskValidator01.validate("Кофе")).doesNotThrowAnyException();
     }
 
     @Test
@@ -38,11 +39,19 @@ class TaskValidatorTest01 {
         // TODO: assertThatThrownBy(() -> TaskValidator01.validate("  "))
         //              .isInstanceOf(IllegalArgumentException.class)
         //              .hasMessageContaining("пустой");
+
+        assertThatThrownBy(() -> TaskValidator01.validate("  "))
+                .isInstanceOf(IllegalArgumentException.class)
+                .hasMessageContaining("пустой");
+
     }
 
     @Test
     void too_long_rejected() {
         // TODO: assertThatThrownBy(() -> TaskValidator01.validate("a".repeat(300)))
         //              .isInstanceOf(IllegalArgumentException.class);
+
+        assertThatThrownBy(() -> TaskValidator01.validate("a".repeat(300)))
+                .isInstanceOf(IllegalArgumentException.class);
     }
 }

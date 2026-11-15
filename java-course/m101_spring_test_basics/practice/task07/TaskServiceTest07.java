@@ -14,22 +14,34 @@ import static org.mockito.Mockito.when;
 
 // --- ТЕСТ (каркас) ---
 // TODO: @ExtendWith(MockitoExtension.class)
+@ExtendWith(MockitoExtension.class)
 class TaskServiceTest07 {
 
     // TODO: @Mock TaskRepository07 repo;
     // TODO: @InjectMocks TaskService07 service;
+
+    @Mock TaskRepository07 repo;
+    @InjectMocks TaskService07 service;
 
     @Test
     void find_returns_task() {
         // TODO: when(repo.findById(1L)).thenReturn(Optional.of(new Task07(1L, "Кофе")));
         // TODO: assertThat(service.find(1L).title()).isEqualTo("Кофе");
         // TODO: verify(repo).findById(1L);
+
+        when(repo.findById(1L)).thenReturn(Optional.of(new Task07(1L, "Кофе")));
+        assertThat(service.find(1L).title()).isEqualTo("Кофе");
+        verify(repo).findById(1L);
+
     }
 
     @Test
     void find_missing_throws() {
         // TODO: when(repo.findById(99L)).thenReturn(Optional.empty());
         // TODO: assertThatThrownBy(() -> service.find(99L)).isInstanceOf(NotFound07.class);
+
+        when(repo.findById(99L)).thenReturn(Optional.empty());
+        assertThatThrownBy(() -> service.find(99L)).isInstanceOf(NotFound07.class);
     }
 
     @Test
@@ -37,5 +49,9 @@ class TaskServiceTest07 {
         // TODO: when(repo.save(any())).thenAnswer(inv -> inv.getArgument(0));
         // TODO: service.create("Чай");
         // TODO: verify(repo).save(any(Task07.class));
+
+        when(repo.save(any())).thenAnswer(inv -> inv.getArgument(0));
+        service.create("Чай");
+        verify(repo).save(any(Task07.class));
     }
 }

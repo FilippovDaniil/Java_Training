@@ -38,22 +38,25 @@ class TaskStatusTest03 {
     @ValueSource(strings = {"NEW", "IN_PROGRESS"})
     void editable_statuses(String status) {
         // TODO: assertTrue(TaskStatus03.canEdit(status));
+        assertTrue(TaskStatus03.canEdit(status));
     }
 
     @ParameterizedTest
     @CsvSource({"NEW,true", "DONE,false", "CANCELLED,false"})
     void canEdit_matrix(String status, boolean expected) {
         // TODO: assertEquals(expected, TaskStatus03.canEdit(status));
+        assertEquals(expected, TaskStatus03.canEdit(status));
     }
 
     @ParameterizedTest
     @MethodSource("blankTitles")
     void detects_blank(String title) {
         // TODO: assertTrue(title.isBlank());
+        assertTrue(title.isBlank());
     }
 
     static Stream<String> blankTitles() {
         // TODO: return Stream.of("", "  ", "\t");
-        return Stream.of();
+        return Stream.of("", "  ", "\t");
     }
 }

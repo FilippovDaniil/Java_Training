@@ -22,23 +22,35 @@ class StubTest03 {
     void returns() {
         // TODO: when(repo.findById(1L)).thenReturn(Optional.of(new Task03(1L, "Кофе")));
         // TODO: assertThat(service.find(1L).title()).isEqualTo("Кофе");
+
+        when(repo.findById(1L)).thenReturn(Optional.of(new Task03(1L, "Кофе")));
+        assertThat(service.find(1L).title()).isEqualTo("Кофе");
     }
 
     @Test
     void empty_then_default() {
         // TODO: when(repo.findById(99L)).thenReturn(Optional.empty());
         // TODO: assertThat(service.findOrDefault(99L)).isEqualTo("(нет)");
+
+        when(repo.findById(99L)).thenReturn(Optional.empty());
+        assertThat(service.findOrDefault(99L)).isEqualTo("(нет)");
     }
 
     @Test
     void save_throws() {
         // TODO: when(repo.save(any())).thenThrow(new RuntimeException("db down"));
         // TODO: assertThatThrownBy(() -> service.create("X")).hasMessageContaining("db down");
+
+        when(repo.save(any())).thenThrow(new RuntimeException("db down"));
+        assertThatThrownBy(() -> service.create("X")).hasMessageContaining("db down");
     }
 
     @Test
     void save_echoes() {
         // TODO: when(repo.save(any())).thenAnswer(inv -> inv.getArgument(0));
         // TODO: assertThat(service.create("Чай").title()).isEqualTo("Чай");
+
+        when(repo.save(any())).thenAnswer(inv -> inv.getArgument(0));
+        assertThat(service.create("Чай").title()).isEqualTo("Чай");
     }
 }
