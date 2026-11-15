@@ -15,5 +15,7 @@ import static org.mockito.Mockito.when;
 
 @Service
 class TaskService05 {
-    public TaskDto05 find(Long id) { return new TaskDto05(id, "?", "?"); }
+    public TaskDto05 find(Long id) {
+        return new TaskDto05(id, "?", "?");
+    }
 }

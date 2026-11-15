@@ -16,9 +16,15 @@ import static org.mockito.Mockito.when;
 @RestController
 @RequestMapping("/api/tasks")
 class TaskController05 {
+
     private final TaskService05 service;
-    TaskController05(TaskService05 service) { this.service = service; }
+
+    TaskController05(TaskService05 service) {
+        this.service = service;
+    }
 
     @GetMapping("/{id}")
-    public TaskDto05 get(@PathVariable Long id) { return service.find(id); }
+    public TaskDto05 get(@PathVariable(name = "id") Long id) {
+        return service.find(id);
+    }
 }

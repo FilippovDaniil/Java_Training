@@ -26,7 +26,16 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 
 @Service
 class TaskService07 {
-    public List<TaskDto07> all() { return List.of(); }
-    public TaskDto07 find(Long id) { return new TaskDto07(id, "?", "?"); }
-    public TaskDto07 create(CreateTask07 req) { return new TaskDto07(0L, req.title(), "NEW"); }
+
+    public List<TaskDto07> all() {
+        return List.of();
+    }
+
+    public TaskDto07 find(Long id) {
+        return new TaskDto07(id, "?", "?");
+    }
+
+    public TaskDto07 create(CreateTask07 req) {
+        return new TaskDto07(0L, req.title(), "NEW");
+    }
 }

@@ -31,19 +31,30 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 // --- ТЕСТ (каркас) ---
 // TODO: @JsonTest
+@SuppressWarnings("SpringJavaInjectionPointsAutowiringInspection")
+@JsonTest
 class TaskDtoJsonTest06 {
 
     // TODO: @Autowired JacksonTester<TaskDto06> json;
+
+    @Autowired
+    JacksonTester<TaskDto06> json;
 
     @Test
     void serializes() throws Exception {
         // TODO: assertThat(json.write(new TaskDto06(1L, "Кофе", "NEW")))
         //              .extractingJsonPathStringValue("$.title").isEqualTo("Кофе");
+
+        assertThat(json.write(new TaskDto06(1L, "Кофе", "NEW")))
+                .extractingJsonPathStringValue("$.title").isEqualTo("Кофе");
     }
 
     @Test
     void deserializes() throws Exception {
         // TODO: TaskDto06 dto = json.parseObject("{\"id\":1,\"title\":\"Кофе\",\"status\":\"NEW\"}");
         // TODO: assertThat(dto.title()).isEqualTo("Кофе");
+
+        TaskDto06 dto = json.parseObject("{\"id\":1,\"title\":\"Кофе\",\"status\":\"NEW\"}");
+        assertThat(dto.title()).isEqualTo("Кофе");
     }
 }

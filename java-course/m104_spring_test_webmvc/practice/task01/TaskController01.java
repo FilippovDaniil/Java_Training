@@ -18,9 +18,15 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 @RestController
 @RequestMapping("/api/tasks")
 class TaskController01 {
+
     private final TaskService01 service;
-    TaskController01(TaskService01 service) { this.service = service; }
+
+    TaskController01(TaskService01 service) {
+        this.service = service;
+    }
 
     @GetMapping("/{id}")
-    public TaskDto01 get(@PathVariable Long id) { return service.find(id); }
+    public TaskDto01 get(@PathVariable(name = "id") Long id) {
+        return service.find(id);
+    }
 }

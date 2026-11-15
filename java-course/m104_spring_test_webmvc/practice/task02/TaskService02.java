@@ -24,5 +24,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 
 @Service
 class TaskService02 {
-    public TaskDto02 create(CreateTask02 req) { return new TaskDto02(0L, req.title(), "NEW"); }
+    public TaskDto02 create(CreateTask02 req) {
+        return new TaskDto02(0L, req.title(), "NEW");
+    }
 }

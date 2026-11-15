@@ -3,7 +3,6 @@ package m104_spring_test_webmvc.practice.task01;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
-import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.stereotype.Service;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -17,5 +16,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 
 @Service
 class TaskService01 {
-    public TaskDto01 find(Long id) { return new TaskDto01(id, "?", "?"); }
+    public TaskDto01 find(Long id) {
+        return new TaskDto01(id, "?", "?");
+    }
 }

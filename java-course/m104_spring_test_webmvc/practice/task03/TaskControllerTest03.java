@@ -28,10 +28,12 @@ package m104_spring_test_webmvc.practice.task03;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
+import org.springframework.test.context.bean.override.mockito.MockitoBean;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.web.bind.annotation.*;
 import static org.mockito.Mockito.verify;
@@ -43,15 +45,25 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 
 // --- ТЕСТ (каркас) ---
 // TODO: @WebMvcTest(TaskController03.class)
+@SuppressWarnings("SpringJavaInjectionPointsAutowiringInspection")
+@WebMvcTest(TaskController03.class)
+@AutoConfigureMockMvc(addFilters = false)
 class TaskControllerTest03 {
 
     // TODO: @Autowired MockMvc mockMvc;
     // TODO: @MockBean TaskService03 service;
+    @Autowired
+    MockMvc mockMvc;
+
+    @MockitoBean
+    TaskService03 service;
 
     @Test
     void delete_returns_204_and_calls_service() throws Exception {
         // TODO: mockMvc.perform(delete("/api/tasks/5")).andExpect(status().isNoContent());
         // TODO: verify(service).delete(5L);
+        mockMvc.perform(delete("/api/tasks/5")).andExpect(status().isNoContent());
+        verify(service).delete(5L);
     }
 
     @Test
@@ -60,5 +72,10 @@ class TaskControllerTest03 {
         // TODO: mockMvc.perform(get("/api/tasks/count"))
         //              .andExpect(status().isOk())
         //              .andExpect(content().string("42"));
+
+        when(service.count()).thenReturn(42L);
+        mockMvc.perform(get("/api/tasks/count"))
+                .andExpect(status().isOk())
+                .andExpect(content().string("42"));
     }
 }

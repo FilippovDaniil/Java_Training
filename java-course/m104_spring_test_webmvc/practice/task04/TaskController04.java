@@ -19,9 +19,15 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 @RestController
 @RequestMapping("/api/tasks")
 class TaskController04 {
+
     private final TaskService04 service;
-    TaskController04(TaskService04 service) { this.service = service; }
+
+    TaskController04(TaskService04 service) {
+        this.service = service;
+    }
 
     @GetMapping
-    public List<TaskDto04> all() { return service.all(); }
+    public List<TaskDto04> all() {
+        return service.all();
+    }
 }

@@ -18,12 +18,17 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 @RestController
 @RequestMapping("/api/tasks")
 class TaskController03 {
+
     private final TaskService03 service;
-    TaskController03(TaskService03 service) { this.service = service; }
+    TaskController03(TaskService03 service) {
+        this.service = service;
+    }
 
     @DeleteMapping("/{id}")
     @ResponseStatus(HttpStatus.NO_CONTENT)
-    public void delete(@PathVariable Long id) { service.delete(id); }
+    public void delete(@PathVariable(name = "id") Long id) {
+        service.delete(id);
+    }
 
     @GetMapping("/count")
     public long count() { return service.count(); }

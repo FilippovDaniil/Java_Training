@@ -3,6 +3,7 @@ package m104_spring_test_webmvc.practice.task07;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.context.annotation.Import;
@@ -10,6 +11,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ProblemDetail;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
+import org.springframework.test.context.bean.override.mockito.MockitoBean;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.web.bind.annotation.*;
 import java.net.URI;
@@ -27,11 +29,24 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 // --- ТЕСТ (каркас) ---
 // TODO: @WebMvcTest(TaskController07.class)
 // TODO: @Import(TaskAdvice07.class)
+@SuppressWarnings("SpringJavaInjectionPointsAutowiringInspection")
+@WebMvcTest(TaskController07.class)
+@Import(TaskAdvice07.class)
+@AutoConfigureMockMvc(addFilters = false)
 class TaskControllerSliceSuite07 {
 
     // TODO: @Autowired MockMvc mockMvc;
     // TODO: @Autowired ObjectMapper objectMapper;
     // TODO: @MockBean TaskService07 service;
+
+    @Autowired
+    MockMvc mockMvc;
+
+    @Autowired
+    ObjectMapper objectMapper;
+
+    @MockitoBean
+    TaskService07 service;
 
     @Test
     void lists_all() throws Exception {
@@ -40,6 +55,14 @@ class TaskControllerSliceSuite07 {
         //              .andExpect(status().isOk())
         //              .andExpect(jsonPath("$.length()").value(1))
         //              .andExpect(jsonPath("$[0].title").value("Кофе"));
+
+        when(service.all()).thenReturn(List.of(new TaskDto07(1L, "Кофе", "NEW")));
+
+        mockMvc.perform(get("/api/tasks"))
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("$.length()").value(1))
+                .andExpect(jsonPath("$[0].title").value("Кофе"));
+
     }
 
     @Test
@@ -48,12 +71,21 @@ class TaskControllerSliceSuite07 {
         // TODO: mockMvc.perform(get("/api/tasks/1"))
         //              .andExpect(status().isOk())
         //              .andExpect(jsonPath("$.status").value("NEW"));
+
+        when(service.find(1L)).thenReturn(new TaskDto07(1L, "Кофе", "NEW"));
+
+        mockMvc.perform(get("/api/tasks/1"))
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("$.status").value("NEW"));
     }
 
     @Test
     void get_missing_404() throws Exception {
         // TODO: when(service.find(99L)).thenThrow(new NoSuchElementException("нет"));
         // TODO: mockMvc.perform(get("/api/tasks/99")).andExpect(status().isNotFound());
+
+        when(service.find(99L)).thenThrow(new NoSuchElementException("нет"));
+        mockMvc.perform(get("/api/tasks/99")).andExpect(status().isNotFound());
     }
 
     @Test
@@ -64,5 +96,15 @@ class TaskControllerSliceSuite07 {
         //              .andExpect(status().isCreated())
         //              .andExpect(header().string("Location", "/api/tasks/10"))
         //              .andExpect(jsonPath("$.id").value(10));
+
+        when(service.create(any())).thenReturn(new TaskDto07(10L, "Чай", "NEW"));
+
+        String body = objectMapper.writeValueAsString(new CreateTask07("Чай"));
+
+        mockMvc.perform(post("/api/tasks").contentType(APPLICATION_JSON).content(body))
+                .andExpect(status().isCreated())
+                .andExpect(header().string("Location", "/api/tasks/10"))
+                .andExpect(jsonPath("$.id").value(10));
+
     }
 }

@@ -30,9 +30,11 @@ package m104_spring_test_webmvc.practice.task05;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.stereotype.Service;
+import org.springframework.test.context.bean.override.mockito.MockitoBean;
 import org.springframework.test.web.servlet.assertj.MockMvcTester;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -43,10 +45,19 @@ import static org.mockito.Mockito.when;
 
 // --- ТЕСТ (каркас) ---
 // TODO: @WebMvcTest(TaskController05.class)
+@SuppressWarnings("SpringJavaInjectionPointsAutowiringInspection")
+@WebMvcTest(TaskController05.class)
+@AutoConfigureMockMvc(addFilters = false)
 class TaskControllerTesterTest05 {
 
     // TODO: @Autowired MockMvcTester mvc;
     // TODO: @MockBean TaskService05 service;
+
+    @Autowired
+    MockMvcTester mvc;
+
+    @MockitoBean
+    TaskService05 service;
 
     @Test
     void get_ok_fluent() {
@@ -54,5 +65,13 @@ class TaskControllerTesterTest05 {
         // TODO: assertThat(mvc.get().uri("/api/tasks/1"))
         //              .hasStatusOk()
         //              .bodyJson().extractingPath("$.title").isEqualTo("Кофе");
+
+        when(service.find(1L)).thenReturn(new TaskDto05(1L, "Кофе", "NEW"));
+
+        assertThat(mvc.get().uri("/api/tasks/1"))
+                .hasStatusOk()
+                .bodyJson()
+                .extractingPath("$.title")
+                .isEqualTo("Кофе");
     }
 }

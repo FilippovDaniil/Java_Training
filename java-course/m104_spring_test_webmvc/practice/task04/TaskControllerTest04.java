@@ -29,9 +29,11 @@ package m104_spring_test_webmvc.practice.task04;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.stereotype.Service;
+import org.springframework.test.context.bean.override.mockito.MockitoBean;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -45,10 +47,19 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 
 // --- ТЕСТ (каркас) ---
 // TODO: @WebMvcTest(TaskController04.class)
+@SuppressWarnings("SpringJavaInjectionPointsAutowiringInspection")
+@WebMvcTest(TaskController04.class)
+@AutoConfigureMockMvc(addFilters = false)
 class TaskControllerTest04 {
 
     // TODO: @Autowired MockMvc mockMvc;
     // TODO: @MockBean TaskService04 service;
+
+    @Autowired
+    MockMvc mockMvc;
+
+    @MockitoBean
+    TaskService04 service;
 
     @Test
     void list_structure() throws Exception {
@@ -60,5 +71,15 @@ class TaskControllerTest04 {
         //              .andExpect(jsonPath("$[0].title").value("Кофе"))
         //              .andExpect(jsonPath("$[1].id").value(2))
         //              .andExpect(jsonPath("$", hasSize(2)));
+
+        when(service.all()).thenReturn(List.of(new TaskDto04(1L, "Кофе"), new TaskDto04(2L, "Чай")));
+
+        mockMvc.perform(get("/api/tasks"))
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("$").isArray())
+                .andExpect(jsonPath("$.length()").value(2))
+                .andExpect(jsonPath("$[0].title").value("Кофе"))
+                .andExpect(jsonPath("$[1].id").value(2))
+                .andExpect(jsonPath("$", hasSize(2)));
     }
 }

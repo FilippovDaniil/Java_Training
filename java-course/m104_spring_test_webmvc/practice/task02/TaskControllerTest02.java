@@ -29,11 +29,13 @@ package m104_spring_test_webmvc.practice.task02;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
+import org.springframework.test.context.bean.override.mockito.MockitoBean;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -50,11 +52,23 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 
 // --- ТЕСТ (каркас) ---
 // TODO: @WebMvcTest(TaskController02.class)
+@SuppressWarnings("SpringJavaInjectionPointsAutowiringInspection")
+@WebMvcTest(TaskController02.class)
+@AutoConfigureMockMvc(addFilters = false)
 class TaskControllerTest02 {
 
     // TODO: @Autowired MockMvc mockMvc;
     // TODO: @Autowired ObjectMapper objectMapper;
     // TODO: @MockBean TaskService02 service;
+
+    @Autowired
+    MockMvc mockMvc;
+
+    @Autowired
+    ObjectMapper objectMapper;
+
+    @MockitoBean
+    TaskService02 service;
 
     @Test
     void createsTask() throws Exception {
@@ -64,5 +78,14 @@ class TaskControllerTest02 {
         //              .andExpect(status().isCreated())
         //              .andExpect(header().string("Location", "/api/tasks/10"))
         //              .andExpect(jsonPath("$.id").value(10));
+
+
+        when(service.create(any())).thenReturn(new TaskDto02(10L, "Кофе", "NEW"));
+        String body = objectMapper.writeValueAsString(new CreateTask02("Кофе"));
+        mockMvc.perform(post("/api/tasks").contentType(APPLICATION_JSON).content(body))
+                .andExpect(status().isCreated())
+                .andExpect(header().string("Location", "/api/tasks/10"))
+                .andExpect(jsonPath("$.id").value(10));
+
     }
 }

@@ -25,8 +25,12 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 @RestController
 @RequestMapping("/api/tasks")
 class TaskController02 {
+
     private final TaskService02 service;
-    TaskController02(TaskService02 service) { this.service = service; }
+
+    TaskController02(TaskService02 service) {
+        this.service = service;
+    }
 
     @PostMapping
     public ResponseEntity<TaskDto02> create(@RequestBody CreateTask02 req) {
