@@ -13,7 +13,14 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 @Service
 class QuotaService07 {
+
     private final int maxTasks;
-    QuotaService07(@Value("${app.max-tasks:100}") int maxTasks) { this.maxTasks = maxTasks; }
-    boolean canAdd(int currentCount) { return currentCount < maxTasks; }
+
+    QuotaService07(@Value("${app.max-tasks:100}") int maxTasks) {
+        this.maxTasks = maxTasks;
+    }
+
+    boolean canAdd(int currentCount) {
+        return currentCount < maxTasks;
+    }
 }

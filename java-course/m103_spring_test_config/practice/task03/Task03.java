@@ -27,6 +27,7 @@ import org.springframework.stereotype.Component;
 import org.junit.jupiter.api.Test;
 import static org.assertj.core.api.Assertions.assertThat;
 
+@SpringBootApplication
 public class Task03 {
     public static void main(String[] args) { SpringApplication.run(Task03.class, args); }
 }

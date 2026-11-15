@@ -31,6 +31,7 @@ import org.springframework.test.context.DynamicPropertySource;
 import org.junit.jupiter.api.Test;
 import static org.assertj.core.api.Assertions.assertThat;
 
+@SpringBootApplication
 public class Task06 {
     public static void main(String[] args) { SpringApplication.run(Task06.class, args); }
 }

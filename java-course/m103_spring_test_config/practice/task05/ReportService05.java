@@ -1,5 +1,6 @@
 package m103_spring_test_config.practice.task05;
 
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.test.context.TestConfiguration;
@@ -16,6 +17,6 @@ import static org.assertj.core.api.Assertions.assertThat;
 @Service
 class ReportService05 {
     private final Clock clock;
-    ReportService05(Clock clock) { this.clock = clock; }
+    ReportService05(@Qualifier("systemClock") Clock clock) { this.clock = clock; }
     String today() { return LocalDate.now(clock).toString(); }
 }

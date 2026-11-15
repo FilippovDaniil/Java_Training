@@ -4,6 +4,9 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.beans.factory.annotation.Value;
 import org.junit.jupiter.api.Test;
+import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.test.context.TestPropertySource;
+
 import static org.assertj.core.api.Assertions.assertThat;
 
 // --- ТЕСТ (каркас) ---
@@ -12,14 +15,25 @@ import static org.assertj.core.api.Assertions.assertThat;
 // TODO:     "app.max-tasks=10",
 // TODO:     "app.feature.notifications=false"
 // TODO: })
+@SpringBootTest(classes = Task02.class)
+@TestPropertySource(properties = {
+     "app.max-tasks=10",
+     "app.feature.notifications=false"
+})
 class PropertySourceTest02 {
 
     // TODO: @Value("${app.max-tasks}") int maxTasks;
     // TODO: @Value("${app.feature.notifications}") boolean notif;
 
+    @Value("${app.max-tasks}") int maxTasks;
+    @Value("${app.feature.notifications}") boolean notif;
+
     @Test
     void overrides_props() {
         // TODO: assertThat(maxTasks).isEqualTo(10);
         // TODO: assertThat(notif).isFalse();
+
+        assertThat(maxTasks).isEqualTo(10);
+        assertThat(notif).isFalse();
     }
 }

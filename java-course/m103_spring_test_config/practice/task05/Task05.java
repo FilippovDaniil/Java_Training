@@ -36,6 +36,7 @@ import java.time.ZoneId;
 import java.time.ZoneOffset;
 import static org.assertj.core.api.Assertions.assertThat;
 
+@SpringBootApplication
 public class Task05 {
     public static void main(String[] args) { SpringApplication.run(Task05.class, args); }
 

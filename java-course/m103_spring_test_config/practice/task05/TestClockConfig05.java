@@ -4,6 +4,7 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.test.context.TestConfiguration;
 import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Primary;
 import org.springframework.stereotype.Service;
 import org.junit.jupiter.api.Test;
 import java.time.Clock;
@@ -15,10 +16,13 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 // --- ТЕСТ (каркас) ---
 // TODO: @TestConfiguration
+@TestConfiguration
 class TestClockConfig05 {
     // TODO: @Bean
+    @Bean
+    @Primary
     Clock fixedClock() {
         // TODO: return Clock.fixed(Instant.parse("2026-01-01T00:00:00Z"), ZoneOffset.UTC);
-        return null;
+        return Clock.fixed(Instant.parse("2026-01-01T00:00:00Z"), ZoneOffset.UTC);
     }
 }

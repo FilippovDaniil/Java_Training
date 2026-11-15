@@ -13,10 +13,12 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 // --- ТЕСТ (каркас) ---
 // TODO: @TestConfiguration
+@TestConfiguration
 class TestBeans07 {
     // TODO: @Bean
+    @Bean
     NotificationGateway07 gateway() {
         // TODO: return new FakeGateway07();
-        return null;
+        return new FakeGateway07();
     }
 }

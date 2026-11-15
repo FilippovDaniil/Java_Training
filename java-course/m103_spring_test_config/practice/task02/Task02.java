@@ -30,6 +30,7 @@ import org.springframework.beans.factory.annotation.Value;
 import org.junit.jupiter.api.Test;
 import static org.assertj.core.api.Assertions.assertThat;
 
+@SpringBootApplication
 public class Task02 {
     public static void main(String[] args) { SpringApplication.run(Task02.class, args); }
 }

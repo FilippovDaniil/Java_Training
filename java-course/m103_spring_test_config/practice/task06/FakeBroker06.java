@@ -10,5 +10,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 // «Внешний ресурс»: адрес определяется в рантайме (имитация брокера/контейнера).
 class FakeBroker06 {
-    static String url() { return "tcp://localhost:61616"; }
+    static String url() {
+        return "tcp://localhost:61616";
+    }
 }

@@ -14,6 +14,12 @@ import static org.assertj.core.api.Assertions.assertThat;
 // Фейковая реализация шлюза для тестов (вместо реальной отправки).
 class FakeGateway07 implements NotificationGateway07 {
     private final List<String> sent = new ArrayList<>();
-    public void notify(String msg) { sent.add(msg); }
-    List<String> sent() { return sent; }
+
+    public void notify(String msg) {
+        sent.add(msg);
+    }
+
+    List<String> sent() {
+        return sent;
+    }
 }

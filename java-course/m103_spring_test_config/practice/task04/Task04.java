@@ -29,6 +29,8 @@ import org.springframework.boot.context.properties.EnableConfigurationProperties
 import org.junit.jupiter.api.Test;
 import static org.assertj.core.api.Assertions.assertThat;
 
+@SpringBootApplication
+@EnableConfigurationProperties(AppProps04.class)
 public class Task04 {
     public static void main(String[] args) { SpringApplication.run(Task04.class, args); }
 }
