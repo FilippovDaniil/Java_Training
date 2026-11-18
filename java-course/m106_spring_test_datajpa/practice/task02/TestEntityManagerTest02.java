@@ -38,21 +38,34 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 // --- ТЕСТ (каркас) ---
 // TODO: @DataJpaTest
+@SuppressWarnings("SpringJavaInjectionPointsAutowiringInspection")
+@DataJpaTest
 class TestEntityManagerTest02 {
 
     // TODO: @Autowired TestEntityManager em;
     // TODO: @Autowired ProductRepository02 repository;
+
+    @Autowired TestEntityManager em;
+    @Autowired ProductRepository02 repository;
+
 
     @Test
     void persisted_via_em_visible_to_repo() {
         // TODO: Product02 p = em.persistAndFlush(new Product02("Кофе", 100));
         // TODO: assertThat(p.getId()).isNotNull();
         // TODO: assertThat(repository.findById(p.getId())).isPresent();
+
+        Product02 p = em.persistAndFlush(new Product02("Кофе", 100));
+        assertThat(p.getId()).isNotNull();
+        assertThat(repository.findById(p.getId())).isPresent();
     }
 
     @Test
     void find_via_em() {
         // TODO: Product02 p = em.persistAndFlush(new Product02("Чай", 50));
         // TODO: assertThat(em.find(Product02.class, p.getId()).getName()).isEqualTo("Чай");
+
+        Product02 p = em.persistAndFlush(new Product02("Чай", 50));
+        assertThat(em.find(Product02.class, p.getId()).getName()).isEqualTo("Чай");
     }
 }

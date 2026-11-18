@@ -12,8 +12,10 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import java.util.List;
 import static org.assertj.core.api.Assertions.assertThat;
 
+@Entity
 class Product04 {
-    @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String name;
     private int price;

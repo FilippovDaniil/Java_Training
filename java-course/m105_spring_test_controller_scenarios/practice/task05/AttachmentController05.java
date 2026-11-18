@@ -20,12 +20,16 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 @RestController
 @RequestMapping("/api/tasks")
 class AttachmentController05 {
+
     private final AttachmentService05 service;
-    AttachmentController05(AttachmentService05 service) { this.service = service; }
+
+    AttachmentController05(AttachmentService05 service) {
+        this.service = service;
+    }
 
     @PostMapping("/{id}/attachments")
     @ResponseStatus(HttpStatus.CREATED)
-    public Map<String, String> upload(@PathVariable Long id, @RequestParam("file") MultipartFile file) {
+    public Map<String, String> upload(@PathVariable(name = "id") Long id, @RequestParam("file") MultipartFile file) {
         return Map.of("filename", service.store(file));
     }
 }

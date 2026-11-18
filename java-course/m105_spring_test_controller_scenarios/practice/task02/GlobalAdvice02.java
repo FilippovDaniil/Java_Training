@@ -19,6 +19,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 
 @RestControllerAdvice
 class GlobalAdvice02 {
+
     @ExceptionHandler(TaskNotFound02.class)
     @ResponseStatus(HttpStatus.NOT_FOUND)
     ProblemDetail handle(TaskNotFound02 e) {

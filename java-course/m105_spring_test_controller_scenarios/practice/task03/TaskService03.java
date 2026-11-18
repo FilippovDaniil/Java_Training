@@ -22,5 +22,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 
 @Service
 class TaskService03 {
-    public Page<TaskDto03> list(Pageable pageable) { return Page.empty(); }
+    public Page<TaskDto03> list(Pageable pageable) {
+        return Page.empty();
+    }
 }

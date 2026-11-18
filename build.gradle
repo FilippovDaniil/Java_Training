@@ -47,6 +47,10 @@ tasks.withType(JavaCompile).configureEach {
     options.failOnError = false
 }
 
+tasks.withType(JavaCompile).configureEach {
+    options.compilerArgs << "-parameters"
+}
+
 dependencies {
     // Versions are managed by the Spring Boot BOM (mirrors tools/deps).
     implementation platform('org.springframework.boot:spring-boot-dependencies:3.4.1')

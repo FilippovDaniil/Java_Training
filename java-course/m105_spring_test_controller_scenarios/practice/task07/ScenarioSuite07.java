@@ -4,6 +4,7 @@ import jakarta.validation.Valid;
 import jakarta.validation.constraints.NotBlank;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.context.annotation.Import;
@@ -13,7 +14,9 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ProblemDetail;
+import org.springframework.mock.web.MockMultipartFile;
 import org.springframework.stereotype.Service;
+import org.springframework.test.context.bean.override.mockito.MockitoBean;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
@@ -33,16 +36,31 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 // --- ТЕСТ (каркас) ---
 // TODO: @WebMvcTest(TaskController07.class)
 // TODO: @Import(Advice07.class)
+@SuppressWarnings("SpringJavaInjectionPointsAutowiringInspection")
+@WebMvcTest(TaskController07.class)
+@Import(Advice07.class)
+@AutoConfigureMockMvc(addFilters = false)
 class ScenarioSuite07 {
 
     // TODO: @Autowired MockMvc mockMvc;
     // TODO: @MockBean TaskService07 service;
+
+    @Autowired
+    MockMvc mockMvc;
+
+    @MockitoBean
+    TaskService07 service;
 
     @Test
     void create_blank_400() throws Exception {
         // TODO: mockMvc.perform(post("/api/tasks").contentType(APPLICATION_JSON).content("{\"title\":\"\"}"))
         //              .andExpect(status().isBadRequest());
         // TODO: verify(service, never()).create(any());
+
+        mockMvc.perform(post("/api/tasks").contentType(APPLICATION_JSON).content("{\"title\":\"\"}"))
+                .andExpect(status().isBadRequest());
+
+        verify(service, never()).create(any());
     }
 
     @Test
@@ -50,6 +68,10 @@ class ScenarioSuite07 {
         // TODO: when(service.create(any())).thenReturn(1L);
         // TODO: mockMvc.perform(post("/api/tasks").contentType(APPLICATION_JSON).content("{\"title\":\"Кофе\"}"))
         //              .andExpect(status().isCreated());
+
+        when(service.create(any())).thenReturn(1L);
+        mockMvc.perform(post("/api/tasks").contentType(APPLICATION_JSON).content("{\"title\":\"Кофе\"}"))
+                .andExpect(status().isCreated());
     }
 
     @Test
@@ -58,6 +80,11 @@ class ScenarioSuite07 {
         // TODO: mockMvc.perform(get("/api/tasks/99"))
         //              .andExpect(status().isNotFound())
         //              .andExpect(jsonPath("$.status").value(404));
+
+        when(service.find(99L)).thenThrow(new TaskNotFound07(99L));
+        mockMvc.perform(get("/api/tasks/99"))
+                .andExpect(status().isNotFound())
+                .andExpect(jsonPath("$.status").value(404));
     }
 
     @Test
@@ -67,6 +94,11 @@ class ScenarioSuite07 {
         // TODO: mockMvc.perform(get("/api/tasks").param("page", "0").param("size", "10"))
         //              .andExpect(status().isOk())
         //              .andExpect(jsonPath("$.totalElements").value(1));
+
+        when(service.list(any())).thenReturn(new PageImpl<>(List.of(new TaskDto07(1L, "Кофе")), PageRequest.of(0, 10), 1));
+        mockMvc.perform(get("/api/tasks").param("page", "0").param("size", "10"))
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("$.totalElements").value(1));
     }
 
     @Test
@@ -76,5 +108,11 @@ class ScenarioSuite07 {
         // TODO: mockMvc.perform(multipart("/api/tasks/1/attachments").file(file))
         //              .andExpect(status().isCreated())
         //              .andExpect(jsonPath("$.filename").value("n.txt"));
+
+        MockMultipartFile file = new MockMultipartFile("file", "n.txt", "text/plain", "x".getBytes());
+        when(service.store(any())).thenReturn("n.txt");
+        mockMvc.perform(multipart("/api/tasks/1/attachments").file(file))
+                .andExpect(status().isCreated())
+                .andExpect(jsonPath("$.filename").value("n.txt"));
     }
 }

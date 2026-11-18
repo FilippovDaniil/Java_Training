@@ -38,10 +38,15 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 // --- ТЕСТ (каркас) ---
 // TODO: @DataJpaTest
+@SuppressWarnings("SpringJavaInjectionPointsAutowiringInspection")
+@DataJpaTest
 class ColdReadTest03 {
 
     // TODO: @Autowired TestEntityManager em;
     // TODO: @Autowired ProductRepository03 repository;
+
+    @Autowired TestEntityManager em;
+    @Autowired ProductRepository03 repository;
 
     @Test
     void cold_read_after_clear() {
@@ -50,5 +55,11 @@ class ColdReadTest03 {
         // TODO: Product03 fromDb = repository.findById(p.getId()).orElseThrow();
         // TODO: assertThat(fromDb.getName()).isEqualTo("Кофе");
         // TODO: assertThat(fromDb).isNotSameAs(p);
+
+        Product03 p = em.persistAndFlush(new Product03("Кофе", 100));
+        em.clear();
+        Product03 fromDb = repository.findById(p.getId()).orElseThrow();
+        assertThat(fromDb.getName()).isEqualTo("Кофе");
+        assertThat(fromDb).isNotSameAs(p);
     }
 }

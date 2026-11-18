@@ -40,10 +40,15 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 // --- ТЕСТ (каркас) ---
 // TODO: @DataJpaTest
+@SuppressWarnings("SpringJavaInjectionPointsAutowiringInspection")
+@DataJpaTest
 class DerivedQueryTest04 {
 
     // TODO: @Autowired TestEntityManager em;
     // TODO: @Autowired ProductRepository04 repository;
+
+    @Autowired TestEntityManager em;
+    @Autowired ProductRepository04 repository;
 
     @Test
     void finds_by_name_containing() {
@@ -52,6 +57,12 @@ class DerivedQueryTest04 {
         // TODO: em.flush();
         // TODO: List<Product04> found = repository.findByNameContainingIgnoreCase("кофе");
         // TODO: assertThat(found).hasSize(1).extracting(Product04::getName).containsExactly("Кофе арабика");
+
+        em.persist(new Product04("Кофе арабика", 100));
+        em.persist(new Product04("Чай зелёный", 50));
+        em.flush();
+        List<Product04> found = repository.findByNameContainingIgnoreCase("кофе");
+        assertThat(found).hasSize(1).extracting(Product04::getName).containsExactly("Кофе арабика");
     }
 
     @Test
@@ -60,5 +71,10 @@ class DerivedQueryTest04 {
         // TODO: em.persist(new Product04("Дорогой", 1000));
         // TODO: em.flush();
         // TODO: assertThat(repository.findByPriceGreaterThan(60)).hasSize(1);
+
+        em.persist(new Product04("Дешёвый", 10));
+        em.persist(new Product04("Дорогой", 1000));
+        em.flush();
+        assertThat(repository.findByPriceGreaterThan(60)).hasSize(1);
     }
 }

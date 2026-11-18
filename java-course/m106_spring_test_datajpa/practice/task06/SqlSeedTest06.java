@@ -42,14 +42,21 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 // --- ТЕСТ (каркас) ---
 // TODO: @DataJpaTest
+@SuppressWarnings("SpringJavaInjectionPointsAutowiringInspection")
+@DataJpaTest
 class SqlSeedTest06 {
 
     // TODO: @Autowired ProductRepository06 repository;
 
+    @Autowired ProductRepository06 repository;
+
     @Test
     // TODO: @Sql("/seed-products.sql")
+    @Sql("test-data/seed-products.sql")
     void seeded_count() {
         // TODO: assertThat(repository.count()).isEqualTo(2);
         // TODO: assertThat(repository.findByName("Кофе")).isPresent();
+        assertThat(repository.count()).isEqualTo(2);
+        assertThat(repository.findByName("Кофе")).isPresent();
     }
 }

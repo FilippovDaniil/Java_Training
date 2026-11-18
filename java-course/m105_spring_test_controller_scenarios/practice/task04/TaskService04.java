@@ -20,5 +20,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 
 @Service
 class TaskService04 {
-    public List<TaskDto04> search(String status, String sort) { return List.of(); }
+    public List<TaskDto04> search(String status, String sort) {
+        return List.of();
+    }
 }

@@ -23,9 +23,15 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 @RestController
 @RequestMapping("/api/tasks")
 class TaskController03 {
+
     private final TaskService03 service;
-    TaskController03(TaskService03 service) { this.service = service; }
+
+    TaskController03(TaskService03 service) {
+        this.service = service;
+    }
 
     @GetMapping
-    public Page<TaskDto03> list(Pageable pageable) { return service.list(pageable); }
+    public Page<TaskDto03> list(Pageable pageable) {
+        return service.list(pageable);
+    }
 }

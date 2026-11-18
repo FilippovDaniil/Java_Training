@@ -28,12 +28,14 @@ package m105_spring_test_controller_scenarios.practice.task02;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.context.annotation.Import;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ProblemDetail;
 import org.springframework.stereotype.Service;
+import org.springframework.test.context.bean.override.mockito.MockitoBean;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.web.bind.annotation.*;
 import static org.hamcrest.Matchers.containsString;
@@ -46,10 +48,18 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 // --- ТЕСТ (каркас) ---
 // TODO: @WebMvcTest(TaskController02.class)
 // TODO: @Import(GlobalAdvice02.class)
+@SuppressWarnings("SpringJavaInjectionPointsAutowiringInspection")
+@WebMvcTest(TaskController02.class)
+@Import(GlobalAdvice02.class)
+@AutoConfigureMockMvc(addFilters = false)
 class ErrorHandlingTest02 {
 
     // TODO: @Autowired MockMvc mockMvc;
     // TODO: @MockBean TaskService02 service;
+
+    @Autowired MockMvc mockMvc;
+    @MockitoBean
+    TaskService02 service;
 
     @Test
     void not_found_404_problemdetail() throws Exception {
@@ -59,5 +69,14 @@ class ErrorHandlingTest02 {
         //              .andExpect(content().contentType("application/problem+json"))
         //              .andExpect(jsonPath("$.status").value(404))
         //              .andExpect(jsonPath("$.detail", containsString("99")));
+
+        when(service.find(99L)).thenThrow(new TaskNotFound02(99L));
+
+        mockMvc.perform(get("/api/tasks/99"))
+                .andExpect(status().isNotFound())
+                .andExpect(content().contentType("application/problem+json"))
+                .andExpect(jsonPath("$.status").value(404))
+                .andExpect(jsonPath("$.detail", containsString("99")));
+
     }
 }

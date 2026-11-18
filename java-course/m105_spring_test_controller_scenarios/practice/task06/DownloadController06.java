@@ -24,15 +24,22 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 @RestController
 @RequestMapping("/api/tasks")
 class DownloadController06 {
+
     private final AttachmentService06 service;
-    DownloadController06(AttachmentService06 service) { this.service = service; }
+
+    DownloadController06(AttachmentService06 service) {
+        this.service = service;
+    }
 
     @GetMapping("/{id}/attachments/{name}")
-    public ResponseEntity<byte[]> download(@PathVariable Long id, @PathVariable String name) {
+    public ResponseEntity<byte[]> download(@PathVariable(name = "id") Long id, @PathVariable(name = "name") String name) {
         byte[] data = service.load(name);
         return ResponseEntity.ok()
                 .header(HttpHeaders.CONTENT_DISPOSITION,
-                        ContentDisposition.attachment().filename(name).build().toString())
+                        ContentDisposition.attachment()
+                                .filename(name)
+                                .build()
+                                .toString())
                 .body(data);
     }
 }

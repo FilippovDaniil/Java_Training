@@ -18,5 +18,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 class AttachmentService05 {
-    public String store(MultipartFile file) { return file.getOriginalFilename(); }
+    public String store(MultipartFile file) {
+        return file.getOriginalFilename();
+    }
 }

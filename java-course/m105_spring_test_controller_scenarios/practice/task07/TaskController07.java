@@ -33,22 +33,32 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 @RestController
 @RequestMapping("/api/tasks")
 class TaskController07 {
+
     private final TaskService07 service;
-    TaskController07(TaskService07 service) { this.service = service; }
+
+    TaskController07(TaskService07 service) {
+        this.service = service;
+    }
 
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
-    public Long create(@Valid @RequestBody CreateTask07 req) { return service.create(req); }
+    public Long create(@Valid @RequestBody CreateTask07 req) {
+        return service.create(req);
+    }
 
     @GetMapping("/{id}")
-    public TaskDto07 get(@PathVariable Long id) { return service.find(id); }
+    public TaskDto07 get(@PathVariable(name = "id") Long id) {
+        return service.find(id);
+    }
 
     @GetMapping
-    public Page<TaskDto07> list(Pageable pageable) { return service.list(pageable); }
+    public Page<TaskDto07> list(Pageable pageable) {
+        return service.list(pageable);
+    }
 
     @PostMapping("/{id}/attachments")
     @ResponseStatus(HttpStatus.CREATED)
-    public Map<String, String> upload(@PathVariable Long id, @RequestParam("file") MultipartFile file) {
+    public Map<String, String> upload(@PathVariable(name = "id") Long id, @RequestParam("file") MultipartFile file) {
         return Map.of("filename", service.store(file));
     }
 }

@@ -30,10 +30,12 @@ package m105_spring_test_controller_scenarios.practice.task04;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.lang.Nullable;
 import org.springframework.stereotype.Service;
+import org.springframework.test.context.bean.override.mockito.MockitoBean;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -48,10 +50,19 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 
 // --- ТЕСТ (каркас) ---
 // TODO: @WebMvcTest(TaskController04.class)
+@SuppressWarnings("SpringJavaInjectionPointsAutowiringInspection")
+@WebMvcTest(TaskController04.class)
+@AutoConfigureMockMvc(addFilters = false)
 class FilterSortTest04 {
 
     // TODO: @Autowired MockMvc mockMvc;
     // TODO: @MockBean TaskService04 service;
+
+    @Autowired
+    MockMvc mockMvc;
+
+    @MockitoBean
+    TaskService04 service;
 
     @Test
     void filters_by_status() throws Exception {
@@ -61,11 +72,26 @@ class FilterSortTest04 {
         //              .andExpect(jsonPath("$.length()").value(1))
         //              .andExpect(jsonPath("$[0].status").value("NEW"));
         // TODO: verify(service).search("NEW", "title");
+
+        when(service.search("NEW", "title")).thenReturn(List.of(new TaskDto04(1L, "Кофе", "NEW")));
+
+        mockMvc.perform(get("/api/tasks")
+                .param("status", "NEW")
+                .param("sort", "title"))
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("$.length()").value(1))
+                .andExpect(jsonPath("$[0].status").value("NEW"));
+
+        verify(service).search("NEW", "title");
+
     }
 
     @Test
     void default_params() throws Exception {
         // TODO: when(service.search(null, "id")).thenReturn(List.of());
         // TODO: mockMvc.perform(get("/api/tasks")).andExpect(status().isOk());
+
+        when(service.search(null, "id")).thenReturn(List.of());
+        mockMvc.perform(get("/api/tasks")).andExpect(status().isOk());
     }
 }

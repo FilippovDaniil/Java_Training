@@ -29,10 +29,12 @@ import jakarta.validation.Valid;
 import jakarta.validation.constraints.NotBlank;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
+import org.springframework.test.context.bean.override.mockito.MockitoBean;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.web.bind.annotation.*;
 import static org.mockito.ArgumentMatchers.any;
@@ -45,16 +47,32 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 
 // --- ТЕСТ (каркас) ---
 // TODO: @WebMvcTest(TaskController01.class)
+@SuppressWarnings("SpringJavaInjectionPointsAutowiringInspection")
+@WebMvcTest(TaskController01.class)
+@AutoConfigureMockMvc(addFilters = false)
 class ValidationTest01 {
 
     // TODO: @Autowired MockMvc mockMvc;
     // TODO: @MockBean TaskService01 service;
+
+    @Autowired
+    MockMvc mockMvc;
+
+    @MockitoBean
+    TaskService01 service;
 
     @Test
     void blank_title_400() throws Exception {
         // TODO: mockMvc.perform(post("/api/tasks").contentType(APPLICATION_JSON).content("{\"title\":\"\"}"))
         //              .andExpect(status().isBadRequest());
         // TODO: verify(service, never()).create(any());
+
+        mockMvc.perform(post("/api/tasks")
+                        .contentType(APPLICATION_JSON)
+                        .content("{\"title\":\"\"}"))
+                .andExpect(status().isBadRequest());
+
+        verify(service, never()).create(any());
     }
 
     @Test
@@ -62,5 +80,13 @@ class ValidationTest01 {
         // TODO: when(service.create(any())).thenReturn(1L);
         // TODO: mockMvc.perform(post("/api/tasks").contentType(APPLICATION_JSON).content("{\"title\":\"Кофе\"}"))
         //              .andExpect(status().isCreated());
+
+        when(service.create(any())).thenReturn(1L);
+
+        mockMvc.perform(post("/api/tasks")
+                        .contentType(APPLICATION_JSON)
+                        .content("{\"title\":\"Кофе\"}"))
+                .andExpect(status().isCreated());
+
     }
 }

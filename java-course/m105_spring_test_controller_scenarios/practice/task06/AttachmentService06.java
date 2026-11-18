@@ -22,5 +22,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 class AttachmentService06 {
-    public byte[] load(String name) { return new byte[0]; }
+    public byte[] load(String name) {
+        return new byte[0];
+    }
 }

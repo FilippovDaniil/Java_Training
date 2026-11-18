@@ -11,6 +11,7 @@ import org.springframework.boot.test.autoconfigure.orm.jpa.TestEntityManager;
 import org.springframework.data.jpa.repository.JpaRepository;
 import static org.assertj.core.api.Assertions.assertThat;
 
+@Entity
 class Product03 {
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;

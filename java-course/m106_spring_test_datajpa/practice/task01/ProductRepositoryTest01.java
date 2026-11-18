@@ -37,15 +37,24 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 // --- ТЕСТ (каркас) ---
 // TODO: @DataJpaTest
+@SuppressWarnings("SpringJavaInjectionPointsAutowiringInspection")
+@DataJpaTest
 class ProductRepositoryTest01 {
 
     // TODO: @Autowired ProductRepository01 repository;
+
+    @Autowired
+    ProductRepository01 repository;
 
     @Test
     void saves_and_finds() {
         // TODO: Product01 saved = repository.save(new Product01("Кофе", 100));
         // TODO: assertThat(saved.getId()).isNotNull();
         // TODO: assertThat(repository.findById(saved.getId())).isPresent();
+
+        Product01 saved = repository.save(new Product01("Кофе", 100));
+        assertThat(saved.getId()).isNotNull();
+        assertThat(repository.findById(saved.getId())).isPresent();
     }
 
     @Test
@@ -53,5 +62,9 @@ class ProductRepositoryTest01 {
         // TODO: repository.save(new Product01("Кофе", 100));
         // TODO: repository.save(new Product01("Чай", 50));
         // TODO: assertThat(repository.count()).isEqualTo(2);
+
+        repository.save(new Product01("Кофе", 100));
+        repository.save(new Product01("Чай", 50));
+        assertThat(repository.count()).isEqualTo(2);
     }
 }

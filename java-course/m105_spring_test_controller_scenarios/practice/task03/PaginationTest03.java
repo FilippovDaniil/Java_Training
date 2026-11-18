@@ -31,6 +31,7 @@ package m105_spring_test_controller_scenarios.practice.task03;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.data.domain.Page;
@@ -38,6 +39,7 @@ import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
+import org.springframework.test.context.bean.override.mockito.MockitoBean;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -51,10 +53,19 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 
 // --- ТЕСТ (каркас) ---
 // TODO: @WebMvcTest(TaskController03.class)
+@SuppressWarnings("SpringJavaInjectionPointsAutowiringInspection")
+@WebMvcTest(TaskController03.class)
+@AutoConfigureMockMvc(addFilters = false)
 class PaginationTest03 {
 
     // TODO: @Autowired MockMvc mockMvc;
     // TODO: @MockBean TaskService03 service;
+
+    @Autowired
+    MockMvc mockMvc;
+
+    @MockitoBean
+    TaskService03 service;
 
     @Test
     void paginated_response() throws Exception {
@@ -67,5 +78,20 @@ class PaginationTest03 {
         //              .andExpect(jsonPath("$.content.length()").value(1))
         //              .andExpect(jsonPath("$.totalElements").value(1))
         //              .andExpect(jsonPath("$.number").value(0));
+
+        Page<TaskDto03> page = new PageImpl<>(List.of(new TaskDto03(1L, "Кофе")),
+                PageRequest.of(0, 10), 1);
+
+        when(service.list(any(Pageable.class))).thenReturn(page);
+        mockMvc.perform(get("/api/tasks")
+                .param("page", "0")
+                .param("size", "10")
+                .param("sort", "title,asc"))
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("$.content").isArray())
+                .andExpect(jsonPath("$.content.length()").value(1))
+                .andExpect(jsonPath("$.totalElements").value(1))
+                .andExpect(jsonPath("$.number").value(0));
+
     }
 }

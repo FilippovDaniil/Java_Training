@@ -42,10 +42,15 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 // --- ТЕСТ (каркас) ---
 // TODO: @DataJpaTest
+@SuppressWarnings("SpringJavaInjectionPointsAutowiringInspection")
+@DataJpaTest
 class QueryTest05 {
 
     // TODO: @Autowired TestEntityManager em;
     // TODO: @Autowired ProductRepository05 repository;
+
+    @Autowired TestEntityManager em;
+    @Autowired ProductRepository05 repository;
 
     @Test
     void custom_query_filters_by_price() {
@@ -54,6 +59,12 @@ class QueryTest05 {
         // TODO: em.flush();
         // TODO: assertThat(repository.findExpensive(100))
         //              .extracting(Product05::getName).containsExactly("Дорогой");
+
+        em.persist(new Product05("Дешёвый", 10));
+        em.persist(new Product05("Дорогой", 1000));
+        em.flush();
+        assertThat(repository.findExpensive(100))
+                .extracting(Product05::getName).containsExactly("Дорогой");
     }
 
     @Test
@@ -62,5 +73,10 @@ class QueryTest05 {
         // TODO: em.persist(new Product05("Дорогой", 1000));
         // TODO: em.flush();
         // TODO: assertThat(repository.countCheaperThan(100)).isEqualTo(1);
+
+        em.persist(new Product05("Дешёвый", 10));
+        em.persist(new Product05("Дорогой", 1000));
+        em.flush();
+        assertThat(repository.countCheaperThan(100)).isEqualTo(1);
     }
 }

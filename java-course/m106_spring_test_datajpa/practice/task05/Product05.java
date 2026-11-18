@@ -14,6 +14,7 @@ import org.springframework.data.repository.query.Param;
 import java.util.List;
 import static org.assertj.core.api.Assertions.assertThat;
 
+@Entity
 class Product05 {
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;

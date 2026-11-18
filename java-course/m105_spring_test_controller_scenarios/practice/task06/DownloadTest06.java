@@ -26,12 +26,14 @@ package m105_spring_test_controller_scenarios.practice.task06;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.http.ContentDisposition;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
+import org.springframework.test.context.bean.override.mockito.MockitoBean;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -47,10 +49,19 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 
 // --- ТЕСТ (каркас) ---
 // TODO: @WebMvcTest(DownloadController06.class)
+@SuppressWarnings("SpringJavaInjectionPointsAutowiringInspection")
+@WebMvcTest(DownloadController06.class)
+@AutoConfigureMockMvc(addFilters = false)
 class DownloadTest06 {
 
     // TODO: @Autowired MockMvc mockMvc;
     // TODO: @MockBean AttachmentService06 service;
+
+    @Autowired
+    MockMvc mockMvc;
+
+    @MockitoBean
+    AttachmentService06 service;
 
     @Test
     void downloads_file() throws Exception {
@@ -59,5 +70,12 @@ class DownloadTest06 {
         //              .andExpect(status().isOk())
         //              .andExpect(header().string("Content-Disposition", containsString("attachment")))
         //              .andExpect(content().bytes("привет".getBytes(UTF_8)));
+
+        when(service.load("notes.txt")).thenReturn("привет".getBytes(UTF_8));
+        mockMvc.perform(get("/api/tasks/1/attachments/notes.txt"))
+                .andExpect(status().isOk())
+                .andExpect(header().string("Content-Disposition", containsString("attachment")))
+                .andExpect(content().bytes("привет".getBytes(UTF_8)));
+
     }
 }

@@ -19,5 +19,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 
 @Service
 class TaskService02 {
-    public String find(Long id) { return "?"; }
+    public String find(Long id) {
+        return "?";
+    }
 }

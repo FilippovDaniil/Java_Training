@@ -27,10 +27,13 @@ package m105_spring_test_controller_scenarios.practice.task05;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.http.HttpStatus;
+import org.springframework.mock.web.MockMultipartFile;
 import org.springframework.stereotype.Service;
+import org.springframework.test.context.bean.override.mockito.MockitoBean;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
@@ -44,10 +47,19 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 
 // --- ТЕСТ (каркас) ---
 // TODO: @WebMvcTest(AttachmentController05.class)
+@SuppressWarnings("SpringJavaInjectionPointsAutowiringInspection")
+@WebMvcTest(AttachmentController05.class)
+@AutoConfigureMockMvc(addFilters = false)
 class UploadTest05 {
 
     // TODO: @Autowired MockMvc mockMvc;
     // TODO: @MockBean AttachmentService05 service;
+
+    @Autowired
+    MockMvc mockMvc;
+
+    @MockitoBean
+    AttachmentService05 service;
 
     @Test
     void uploads_file() throws Exception {
@@ -57,5 +69,14 @@ class UploadTest05 {
         // TODO: mockMvc.perform(multipart("/api/tasks/1/attachments").file(file))
         //              .andExpect(status().isCreated())
         //              .andExpect(jsonPath("$.filename").value("notes.txt"));
+
+        MockMultipartFile file = new MockMultipartFile("file", "notes.txt", "text/plain", "привет".getBytes(UTF_8));
+
+        when(service.store(any())).thenReturn("notes.txt");
+
+        mockMvc.perform(multipart("/api/tasks/1/attachments").file(file))
+                .andExpect(status().isCreated())
+                .andExpect(jsonPath("$.filename")
+                        .value("notes.txt"));
     }
 }
