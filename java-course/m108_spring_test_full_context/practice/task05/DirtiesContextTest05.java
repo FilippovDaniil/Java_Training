@@ -12,13 +12,21 @@ import static org.assertj.core.api.Assertions.assertThat;
 // TODO: @org.springframework.boot.test.context.SpringBootTest(classes = Task05.class)
 // TODO: @org.springframework.test.annotation.DirtiesContext(
 // TODO:     classMode = org.springframework.test.annotation.DirtiesContext.ClassMode.AFTER_CLASS)
+@SuppressWarnings("SpringJavaInjectionPointsAutowiringInspection")
+@org.springframework.boot.test.context.SpringBootTest(classes = Task05.class)
+@org.springframework.test.annotation.DirtiesContext(
+classMode = org.springframework.test.annotation.DirtiesContext.ClassMode.AFTER_CLASS)
 class DirtiesContextTest05 {
 
     // TODO: @Autowired CounterBean05 counter;
+
+    @Autowired CounterBean05 counter;
 
     @Test
     void mutates_state() {
         // TODO: counter.increment(); counter.increment();
         // TODO: assertThat(counter.value()).isEqualTo(2);
+        counter.increment(); counter.increment();
+        assertThat(counter.value()).isEqualTo(2);
     }
 }

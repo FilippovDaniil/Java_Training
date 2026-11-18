@@ -19,9 +19,15 @@ import static org.assertj.core.api.Assertions.assertThat;
 // TODO: @org.springframework.boot.test.context.SpringBootTest(
 // TODO:     classes = Task03.class,
 // TODO:     webEnvironment = org.springframework.boot.test.context.SpringBootTest.WebEnvironment.RANDOM_PORT)
+@SuppressWarnings("SpringJavaInjectionPointsAutowiringInspection")
+@org.springframework.boot.test.context.SpringBootTest(
+classes = Task03.class,
+webEnvironment = org.springframework.boot.test.context.SpringBootTest.WebEnvironment.RANDOM_PORT)
 class HttpPostTest03 {
 
     // TODO: @Autowired TestRestTemplate restTemplate;
+
+    @Autowired TestRestTemplate restTemplate;
 
     @Test
     void post_creates() {
@@ -29,5 +35,10 @@ class HttpPostTest03 {
         // TODO:         "/api/tasks", new CreateTask03("Кофе"), TaskDto03.class);
         // TODO: assertThat(resp.getStatusCode()).isEqualTo(HttpStatus.CREATED);
         // TODO: assertThat(resp.getBody().title()).isEqualTo("Кофе");
+
+        ResponseEntity<TaskDto03> resp = restTemplate.postForEntity("/api/tasks", new CreateTask03("Кофе"), TaskDto03.class);
+
+        assertThat(resp.getStatusCode()).isEqualTo(HttpStatus.CREATED);
+        assertThat(resp.getBody().title()).isEqualTo("Кофе");
     }
 }

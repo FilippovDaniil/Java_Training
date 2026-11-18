@@ -15,19 +15,30 @@ import static org.assertj.core.api.Assertions.assertThat;
 // TODO: @org.springframework.boot.test.context.SpringBootTest(
 // TODO:     classes = Task04.class,
 // TODO:     webEnvironment = org.springframework.boot.test.context.SpringBootTest.WebEnvironment.RANDOM_PORT)
+@SuppressWarnings("SpringJavaInjectionPointsAutowiringInspection")
+@org.springframework.boot.test.context.SpringBootTest(
+classes = Task04.class,
+webEnvironment = org.springframework.boot.test.context.SpringBootTest.WebEnvironment.RANDOM_PORT)
 class LocalPortTest04 {
 
     // TODO: @LocalServerPort int port;
     // TODO: @Autowired TestRestTemplate restTemplate;
 
+    @LocalServerPort int port;
+    @Autowired TestRestTemplate restTemplate;
+
     @Test
     void port_is_assigned() {
         // TODO: assertThat(port).isGreaterThan(0);
+        assertThat(port).isGreaterThan(0);
     }
 
     @Test
     void absolute_url_works() {
         // TODO: String url = "http://localhost:" + port + "/api/ping";
         // TODO: assertThat(restTemplate.getForObject(url, String.class)).isEqualTo("pong");
+
+        String url = "http://localhost:" + port + "/api/ping";
+        assertThat(restTemplate.getForObject(url, String.class)).isEqualTo("pong");
     }
 }

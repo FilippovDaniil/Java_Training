@@ -32,6 +32,7 @@ import org.springframework.stereotype.Component;
 import java.util.concurrent.atomic.AtomicInteger;
 import static org.assertj.core.api.Assertions.assertThat;
 
+@SpringBootApplication
 public class Task05 {
     public static void main(String[] args) { SpringApplication.run(Task05.class, args); }
 }

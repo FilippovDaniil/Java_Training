@@ -38,6 +38,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import static org.assertj.core.api.Assertions.assertThat;
 
+@SpringBootApplication
 public class Task06 {
     public static void main(String[] args) { SpringApplication.run(Task06.class, args); }
 }

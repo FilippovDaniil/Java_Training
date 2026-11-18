@@ -39,6 +39,7 @@ import java.net.URI;
 import java.util.concurrent.atomic.AtomicLong;
 import static org.assertj.core.api.Assertions.assertThat;
 
+@SpringBootApplication
 public class Task03 {
     public static void main(String[] args) { SpringApplication.run(Task03.class, args); }
 }

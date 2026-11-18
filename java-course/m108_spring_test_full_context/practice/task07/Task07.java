@@ -52,6 +52,7 @@ import java.net.URI;
 import java.util.List;
 import static org.assertj.core.api.Assertions.assertThat;
 
+@SpringBootApplication
 public class Task07 {
     public static void main(String[] args) { SpringApplication.run(Task07.class, args); }
 }

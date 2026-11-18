@@ -22,9 +22,16 @@ import static org.assertj.core.api.Assertions.assertThat;
 // TODO: @org.springframework.boot.test.context.SpringBootTest(
 // TODO:     classes = Task07.class,
 // TODO:     webEnvironment = org.springframework.boot.test.context.SpringBootTest.WebEnvironment.RANDOM_PORT)
+
+@SuppressWarnings("SpringJavaInjectionPointsAutowiringInspection")
+@org.springframework.boot.test.context.SpringBootTest(
+classes = Task07.class,
+webEnvironment = org.springframework.boot.test.context.SpringBootTest.WebEnvironment.RANDOM_PORT)
 class EndToEndTest07 {
 
     // TODO: @Autowired TestRestTemplate rest;
+
+    @Autowired TestRestTemplate rest;
 
     @Test
     void create_then_list_reflects_it() {
@@ -36,5 +43,19 @@ class EndToEndTest07 {
         // TODO: assertThat(list.getStatusCode()).isEqualTo(HttpStatus.OK);
         // TODO: assertThat(list.getBody()).extracting(TaskDto07::id).contains(id);
         // TODO: assertThat(list.getBody()).extracting(TaskDto07::title).contains("Кофе");
+
+        ResponseEntity<TaskDto07> created = rest.postForEntity("/api/tasks", new CreateTask07("Кофе"), TaskDto07.class);
+
+        assertThat(created.getStatusCode()).isEqualTo(HttpStatus.CREATED);
+
+        Long id = created.getBody().id();
+
+        ResponseEntity<TaskDto07[]> list = rest.getForEntity("/api/tasks", TaskDto07[].class);
+
+        assertThat(list.getStatusCode()).isEqualTo(HttpStatus.OK);
+
+        assertThat(list.getBody()).extracting(TaskDto07::id).contains(id);
+
+        assertThat(list.getBody()).extracting(TaskDto07::title).contains("Кофе");
     }
 }
