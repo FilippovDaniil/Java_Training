@@ -39,10 +39,15 @@ import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 // --- ТЕСТ (каркас) ---
 // TODO: @DataJpaTest
+@SuppressWarnings("SpringJavaInjectionPointsAutowiringInspection")
+@DataJpaTest
 class LazyAfterDetachTest02 {
 
     // TODO: @Autowired TestEntityManager em;
     // TODO: @Autowired CategoryRepository02 repo;
+
+    @Autowired TestEntityManager em;
+    @Autowired CategoryRepository02 repo;
 
     @Test
     void lazy_after_detach_fails() {
@@ -52,6 +57,13 @@ class LazyAfterDetachTest02 {
         // TODO: em.detach(loaded);
         // TODO: assertThatThrownBy(() -> loaded.getProducts().size())
         //              .isInstanceOf(LazyInitializationException.class);
+
+        Long id = em.persistAndFlush(categoryWith2()).getId();
+        em.clear();
+        Category02 loaded = repo.findById(id).orElseThrow();
+        em.detach(loaded);
+        assertThatThrownBy(() -> loaded.getProducts().size())
+                .isInstanceOf(LazyInitializationException.class);
     }
 
     private Category02 categoryWith2() {

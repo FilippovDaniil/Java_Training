@@ -42,10 +42,15 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 // --- ТЕСТ (каркас) ---
 // TODO: @DataJpaTest
+@SuppressWarnings("SpringJavaInjectionPointsAutowiringInspection")
+@DataJpaTest
 class JoinFetchTest03 {
 
     // TODO: @Autowired TestEntityManager em;
     // TODO: @Autowired CategoryRepository03 repo;
+
+    @Autowired TestEntityManager em;
+    @Autowired CategoryRepository03 repo;
 
     @Test
     void join_fetch_initializes() {
@@ -55,6 +60,13 @@ class JoinFetchTest03 {
         // TODO: em.detach(loaded);
         // TODO: assertThat(Hibernate.isInitialized(loaded.getProducts())).isTrue();
         // TODO: assertThat(loaded.getProducts()).hasSize(2);
+
+        Long id = em.persistAndFlush(categoryWith2()).getId();
+        em.clear();
+        Category03 loaded = repo.findByIdWithProducts(id).orElseThrow();
+        em.detach(loaded);
+        assertThat(Hibernate.isInitialized(loaded.getProducts())).isTrue();
+        assertThat(loaded.getProducts()).hasSize(2);
     }
 
     private Category03 categoryWith2() {

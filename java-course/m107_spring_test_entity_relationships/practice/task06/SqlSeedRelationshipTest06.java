@@ -38,15 +38,23 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 // --- ТЕСТ (каркас) ---
 // TODO: @DataJpaTest
+@SuppressWarnings("SpringJavaInjectionPointsAutowiringInspection")
+@DataJpaTest
 class SqlSeedRelationshipTest06 {
 
     // TODO: @Autowired CategoryRepository06 catRepo;
     // TODO: @Autowired ProductRepository06 prodRepo;
 
+    @Autowired CategoryRepository06 catRepo;
+    @Autowired ProductRepository06 prodRepo;
+
     @Test
     // TODO: @Sql("/seed-catalog.sql")
+    @Sql("test-data/seed-catalog.sql")
     void seeded_relationship() {
         // TODO: assertThat(prodRepo.count()).isEqualTo(2);
         // TODO: assertThat(catRepo.findById(1L)).isPresent();
+        assertThat(prodRepo.count()).isEqualTo(2);
+        assertThat(catRepo.findById(1L)).isPresent();
     }
 }

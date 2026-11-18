@@ -63,6 +63,7 @@ import java.util.Optional;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
+@Entity
 class Category07 {
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;

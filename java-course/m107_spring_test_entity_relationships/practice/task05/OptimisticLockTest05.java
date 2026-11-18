@@ -42,10 +42,15 @@ import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 // --- ТЕСТ (каркас) ---
 // TODO: @DataJpaTest
+@SuppressWarnings("SpringJavaInjectionPointsAutowiringInspection")
+@DataJpaTest
 class OptimisticLockTest05 {
 
     // TODO: @Autowired TestEntityManager em;
     // TODO: @Autowired ProductRepository05 repo;
+
+    @Autowired TestEntityManager em;
+    @Autowired ProductRepository05 repo;
 
     @Test
     void optimistic_lock_conflict() {
@@ -57,5 +62,21 @@ class OptimisticLockTest05 {
         // TODO: second.setPrice(150);
         // TODO: assertThatThrownBy(() -> repo.saveAndFlush(second))
         //              .isInstanceOf(OptimisticLockingFailureException.class);
+
+        Long id = em.persistAndFlush(new Product05("Кофе", 100)).getId();
+        em.clear();
+
+        Product05 first = repo.findById(id).orElseThrow();
+        em.detach(first);                                  // first → detached, version=0
+
+        Product05 second = repo.findById(id).orElseThrow(); // SELECT, version=0, managed
+        em.detach(second);                                  // second → detached, version=0
+
+        first.setPrice(120);
+        repo.saveAndFlush(first);                           // merge → UPDATE where version=0 → БД version=1
+
+        second.setPrice(150);
+        assertThatThrownBy(() -> repo.saveAndFlush(second))
+                .isInstanceOf(OptimisticLockingFailureException.class);
     }
 }

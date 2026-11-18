@@ -13,6 +13,7 @@ import org.springframework.dao.OptimisticLockingFailureException;
 import org.springframework.data.jpa.repository.JpaRepository;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
+@Entity
 class Product05 {
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;

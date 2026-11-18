@@ -19,11 +19,17 @@ import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 // --- ТЕСТ (каркас) ---
 // TODO: @DataJpaTest
+@SuppressWarnings("SpringJavaInjectionPointsAutowiringInspection")
+@DataJpaTest
 class RelationshipsSuite07 {
 
     // TODO: @Autowired TestEntityManager em;
     // TODO: @Autowired CategoryRepository07 catRepo;
     // TODO: @Autowired ProductRepository07 prodRepo;
+
+    @Autowired TestEntityManager em;
+    @Autowired CategoryRepository07 catRepo;
+    @Autowired ProductRepository07 prodRepo;
 
     @Test
     void cascade_persist() {
@@ -31,6 +37,13 @@ class RelationshipsSuite07 {
         // TODO: c.addProduct(new Product07("Кофе", 100)); c.addProduct(new Product07("Чай", 50));
         // TODO: em.persistAndFlush(c); em.clear();
         // TODO: assertThat(prodRepo.count()).isEqualTo(2);
+
+        Category07 c = new Category07("Напитки");
+        c.addProduct(new Product07("Кофе", 100));
+        c.addProduct(new Product07("Чай", 50));
+        em.persistAndFlush(c);
+        em.clear();
+        assertThat(prodRepo.count()).isEqualTo(2);
     }
 
     @Test
@@ -39,6 +52,13 @@ class RelationshipsSuite07 {
         // TODO: Category07 loaded = catRepo.findById(id).orElseThrow(); em.detach(loaded);
         // TODO: assertThatThrownBy(() -> loaded.getProducts().size())
         //              .isInstanceOf(LazyInitializationException.class);
+
+        Long id = em.persistAndFlush(categoryWith2()).getId();
+        em.clear();
+        Category07 loaded = catRepo.findById(id).orElseThrow();
+        em.detach(loaded);
+        assertThatThrownBy(() -> loaded.getProducts().size())
+                .isInstanceOf(LazyInitializationException.class);
     }
 
     @Test
@@ -46,6 +66,10 @@ class RelationshipsSuite07 {
         // TODO: Long id = em.persistAndFlush(categoryWith2()).getId(); em.clear();
         // TODO: Category07 loaded = catRepo.findByIdWithProducts(id).orElseThrow(); em.detach(loaded);
         // TODO: assertThat(Hibernate.isInitialized(loaded.getProducts())).isTrue();
+
+        Long id = em.persistAndFlush(categoryWith2()).getId(); em.clear();
+        Category07 loaded = catRepo.findByIdWithProducts(id).orElseThrow(); em.detach(loaded);
+        assertThat(Hibernate.isInitialized(loaded.getProducts())).isTrue();
     }
 
     @Test
@@ -57,6 +81,18 @@ class RelationshipsSuite07 {
         // TODO: b.setPrice(30);
         // TODO: assertThatThrownBy(() -> prodRepo.saveAndFlush(b))
         //              .isInstanceOf(OptimisticLockingFailureException.class);
+
+        Long id = em.persistAndFlush(new Product07("X", 10)).getId();
+        em.clear();
+        Product07 a = prodRepo.findById(id).orElseThrow();
+        em.detach(a);
+        Product07 b = prodRepo.findById(id).orElseThrow();
+        em.detach(b);
+        a.setPrice(20);
+        prodRepo.saveAndFlush(a);
+        b.setPrice(30);
+        assertThatThrownBy(() -> prodRepo.saveAndFlush(b))
+                .isInstanceOf(OptimisticLockingFailureException.class);
     }
 
     private Category07 categoryWith2() {

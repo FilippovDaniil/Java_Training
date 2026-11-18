@@ -42,10 +42,16 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 // --- ТЕСТ (каркас) ---
 // TODO: @DataJpaTest
+
+@SuppressWarnings("SpringJavaInjectionPointsAutowiringInspection")
+@DataJpaTest
 class CascadeTest04 {
 
     // TODO: @Autowired TestEntityManager em;
     // TODO: @Autowired ProductRepository04 productRepo;
+
+    @Autowired TestEntityManager em;
+    @Autowired ProductRepository04 productRepo;
 
     @Test
     void cascade_persists_children() {
@@ -54,6 +60,12 @@ class CascadeTest04 {
         // TODO: em.persistAndFlush(c);
         // TODO: em.clear();
         // TODO: assertThat(productRepo.count()).isEqualTo(2);
+
+        Category04 c = new Category04("Напитки");
+        c.addProduct(new Product04("Кофе")); c.addProduct(new Product04("Чай"));
+        em.persistAndFlush(c);
+        em.clear();
+        assertThat(productRepo.count()).isEqualTo(2);
     }
 
     @Test
@@ -63,6 +75,12 @@ class CascadeTest04 {
         // TODO: em.persistAndFlush(c);
         // TODO: em.clear();
         // TODO: assertThat(productRepo.count()).isEqualTo(1);
+
+        Category04 c = em.persistAndFlush(categoryWith2());
+        c.getProducts().remove(0);
+        em.persistAndFlush(c);
+        em.clear();
+        assertThat(productRepo.count()).isEqualTo(1);
     }
 
     private Category04 categoryWith2() {

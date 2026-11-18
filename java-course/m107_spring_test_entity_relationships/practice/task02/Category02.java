@@ -11,6 +11,7 @@ import java.util.ArrayList;
 import java.util.List;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
+@Entity
 class Category02 {
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;

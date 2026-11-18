@@ -38,10 +38,15 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 // --- ТЕСТ (каркас) ---
 // TODO: @DataJpaTest
+@SuppressWarnings("SpringJavaInjectionPointsAutowiringInspection")
+@DataJpaTest
 class LazyInsideTxTest01 {
 
     // TODO: @Autowired TestEntityManager em;
     // TODO: @Autowired CategoryRepository01 repo;
+
+    @Autowired TestEntityManager em;
+    @Autowired CategoryRepository01 repo;
 
     @Test
     void lazy_access_inside_tx_ok() {
@@ -51,5 +56,12 @@ class LazyInsideTxTest01 {
         // TODO: em.clear();
         // TODO: Category01 loaded = repo.findById(id).orElseThrow();
         // TODO: assertThat(loaded.getProducts()).hasSize(2);
+
+        Category01 c = new Category01("Напитки");
+        c.addProduct(new Product01("Кофе")); c.addProduct(new Product01("Чай"));
+        Long id = em.persistAndFlush(c).getId();
+        em.clear();
+        Category01 loaded = repo.findById(id).orElseThrow();
+        assertThat(loaded.getProducts()).hasSize(2);
     }
 }
