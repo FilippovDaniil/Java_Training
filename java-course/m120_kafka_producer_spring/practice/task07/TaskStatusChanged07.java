@@ -7,5 +7,10 @@ import java.time.Instant;
  *
  * TODO: поля record — long id, String oldStatus, String newStatus, Instant occurredAt.
  */
-public record TaskStatusChanged07(long id) {
+public record TaskStatusChanged07(
+        long id,
+        String oldStatus,
+        String newStatus,
+        Instant occurredAt
+) {
 }

@@ -39,6 +39,8 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
 
+import java.time.Instant;
+
 @SpringBootApplication
 public class Task04 {
 
@@ -49,10 +51,29 @@ public class Task04 {
     @Bean
     ApplicationRunner runner(TaskEventPublisher04 publisher) {
         return args -> {
-            // TODO 1: три события задачи 42 (NEW -> IN_PROGRESS -> DONE)
-            // TODO 2: одно событие задачи 7
-            // TODO 3: одно событие с ключом null
-            // TODO 4: вывод — в какие партиции ушли записи и почему
+            // три события одной задачи 42 — должны попасть в одну партицию, порядок сохранён
+            publisher.publish(42L, new TaskStatusChanged04(
+                    42L, "NEW", "IN_PROGRESS", Instant.now()));
+            publisher.publish(42L, new TaskStatusChanged04(
+                    42L, "IN_PROGRESS", "DONE", Instant.now()));
+
+            // событие задачи 7 — другая партиция (другой хеш ключа)
+            publisher.publish(7L, new TaskStatusChanged04(
+                    7L, "NEW", "IN_PROGRESS", Instant.now()));
+
+            // событие без ключа — sticky-партиционер, партиция непредсказуема
+            publisher.publish(null, new TaskStatusChanged04(
+                    99L, "NEW", "DONE", Instant.now()));
+
+            publisher.flush();
+
+            // ВЫВОД:
+            // - Задача 42: оба события ушли в ОДНУ партицию (hash("42") % 6 — детерминированно),
+            //   порядок NEW->IN_PROGRESS->DONE сохранён, потому что Kafka гарантирует порядок
+            //   только внутри партиции.
+            // - Задача 7: другой ключ -> другой хеш -> скорее всего другая партиция.
+            // - Без ключа: sticky-партиционер выбирает партицию для батча; при одном сообщении
+            //   партиция может быть любой. Порядок без ключа не гарантирован.
         };
     }
 }

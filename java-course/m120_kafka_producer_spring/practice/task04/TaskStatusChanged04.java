@@ -14,5 +14,10 @@ import java.time.Instant;
  * ПОДСКАЗКА: события «изменение состояния» полезно публиковать парой (было -> стало):
  *   подписчик может отреагировать только на нужный переход (например, NEW -> DONE).
  */
-public record TaskStatusChanged04(long id) {
+public record TaskStatusChanged04(
+        long id,
+        String oldStatus,
+        String newStatus,
+        Instant occurredAt
+) {
 }

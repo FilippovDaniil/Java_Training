@@ -32,6 +32,7 @@ package m120_kafka_producer_spring.practice.task02;
  */
 
 import org.apache.kafka.clients.admin.NewTopic;
+import org.apache.kafka.common.config.TopicConfig;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
@@ -46,19 +47,27 @@ public class Task02 {
 
     @Bean
     NewTopic taskCreated() {
-        // TODO: task.created — 6 партиций, 1 реплика
-        return TopicBuilder.name("task.created").build();
+        return TopicBuilder.name("task.created")
+                .partitions(6)
+                .replicas(1)
+                .build();
     }
 
     @Bean
     NewTopic taskStatusChanged() {
-        // TODO: task.status.changed — 6 партиций, 1 реплика, retention.ms = 604800000
-        return TopicBuilder.name("task.status.changed").build();
+        return TopicBuilder.name("task.status.changed")
+                .partitions(6)
+                .replicas(1)
+                .config(TopicConfig.RETENTION_MS_CONFIG, "604800000")   // 7 дней
+                .build();
     }
 
     @Bean
     NewTopic taskState() {
-        // TODO: task.state — 3 партиции, 1 реплика, cleanup.policy = compact
-        return TopicBuilder.name("task.state").build();
+        return TopicBuilder.name("task.state")
+                .partitions(3)
+                .replicas(1)
+                .config(TopicConfig.CLEANUP_POLICY_CONFIG, TopicConfig.CLEANUP_POLICY_COMPACT)
+                .build();
     }
 }

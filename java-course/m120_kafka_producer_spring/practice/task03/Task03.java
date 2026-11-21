@@ -34,6 +34,10 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
 import org.springframework.kafka.core.KafkaTemplate;
+import org.springframework.kafka.support.SendResult;
+
+import java.time.Instant;
+import java.util.concurrent.TimeUnit;
 
 @SpringBootApplication
 public class Task03 {
@@ -45,9 +49,25 @@ public class Task03 {
     @Bean
     ApplicationRunner runner(KafkaTemplate<String, Object> kafka) {
         return args -> {
-            // TODO 1: создать два события TaskCreated03 (id 1 и 2, Instant.now())
-            // TODO 2: отправить их в "task.created" с ключом String.valueOf(id)
-            // TODO 3: напечатать partition/offset из RecordMetadata, затем kafka.flush()
+            TaskCreated03 first = new TaskCreated03(
+                    1L, "Написать отчёт", 10L, Instant.now());
+            TaskCreated03 second = new TaskCreated03(
+                    2L, "Проверить почту", 10L, Instant.now());
+
+            send(kafka, first);
+            send(kafka, second);
+
+            kafka.flush();
         };
+    }
+
+    private static void send(KafkaTemplate<String, Object> kafka, TaskCreated03 event) throws Exception {
+        SendResult<String, Object> result = kafka
+                .send("task.created", String.valueOf(event.id()), event)
+                .get(5, TimeUnit.SECONDS);
+
+        var md = result.getRecordMetadata();
+        System.out.printf("отправлено %s -> %s-%d offset %d%n",
+                event.id(), md.topic(), md.partition(), md.offset());
     }
 }

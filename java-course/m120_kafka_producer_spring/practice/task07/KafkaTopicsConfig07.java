@@ -3,6 +3,7 @@ package m120_kafka_producer_spring.practice.task07;
 import org.apache.kafka.clients.admin.NewTopic;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.kafka.config.TopicBuilder;
 
 /**
  * Топики сквозного проекта.
@@ -21,13 +22,17 @@ public class KafkaTopicsConfig07 {
 
     @Bean
     NewTopic taskCreated() {
-        // TODO 1
-        return null;
+        return TopicBuilder.name(TASK_CREATED)
+                .partitions(6)
+                .replicas(1)
+                .build();
     }
 
     @Bean
     NewTopic taskStatusChanged() {
-        // TODO 2
-        return null;
+        return TopicBuilder.name(TASK_STATUS_CHANGED)
+                .partitions(6)
+                .replicas(1)
+                .build();
     }
 }

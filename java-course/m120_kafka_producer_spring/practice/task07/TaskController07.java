@@ -1,5 +1,6 @@
 package m120_kafka_producer_spring.practice.task07;
 
+import java.net.URI;
 import java.util.Map;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PatchMapping;
@@ -32,13 +33,21 @@ public class TaskController07 {
 
     @PostMapping
     ResponseEntity<?> create(@RequestBody Map<String, Object> body) {
-        // TODO 1
-        return ResponseEntity.status(501).build();
+        String title = (String) body.get("title");
+        long authorId = ((Number) body.get("authorId")).longValue();
+
+        long id = service.create(title, authorId);
+
+        return ResponseEntity
+                .created(URI.create("/api/tasks/" + id))
+                .body(Map.of("id", id));
     }
 
     @PatchMapping("/{id}")
-    ResponseEntity<?> changeStatus(@PathVariable long id, @RequestBody Map<String, String> body) {
-        // TODO 2
-        return ResponseEntity.status(501).build();
+    ResponseEntity<?> changeStatus(@PathVariable long id,
+                                   @RequestBody Map<String, String> body) {
+        String status = body.get("status");
+        service.changeStatus(id, status);
+        return ResponseEntity.ok().build();
     }
 }

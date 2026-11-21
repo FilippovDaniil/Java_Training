@@ -1,5 +1,6 @@
 package m120_kafka_producer_spring.practice.task07;
 
+import java.time.Instant;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.atomic.AtomicLong;
@@ -35,11 +36,21 @@ public class TaskService07 {
     }
 
     public long create(String title, long authorId) {
-        // TODO 1
-        return 0L;
+        long id = sequence.incrementAndGet();
+        store.put(id, "NEW");
+
+        publisher.publishCreated(new TaskCreated07(id, title, authorId, Instant.now()));
+        return id;
     }
 
     public void changeStatus(long id, String newStatus) {
-        // TODO 2
+        String oldStatus = store.get(id);
+        if (oldStatus == null) {
+            throw new IllegalArgumentException("Задача не найдена: " + id);
+        }
+        store.put(id, newStatus);
+
+        publisher.publishStatusChanged(new TaskStatusChanged07(
+                id, oldStatus, newStatus, Instant.now()));
     }
 }

@@ -40,6 +40,9 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
 import org.springframework.kafka.core.KafkaTemplate;
 
+import java.time.Instant;
+import java.util.concurrent.TimeUnit;
+
 @SpringBootApplication
 public class Task06 {
 
@@ -51,9 +54,30 @@ public class Task06 {
     ApplicationRunner runner(KafkaTemplate<String, Object> reliableTemplate,
                              KafkaTemplate<String, Object> fastTemplate) {
         return args -> {
-            // TODO 1: отправить TaskCreated06 через reliableTemplate, напечатать partition/offset
-            // TODO 2: отправить то же событие через fastTemplate, напечатать partition/offset
-            // TODO 3: вывод — чем отличается результат и какой шаблон нужен бизнес-событию
+            TaskCreated06 event = new TaskCreated06(1L, "Написать отчёт", Instant.now());
+
+            // 1) надёжная отправка: ждём ack, offset реальный
+            var reliableResult = reliableTemplate
+                    .send("task.created", "task-1", event)
+                    .get(5, TimeUnit.SECONDS);
+            var rmd = reliableResult.getRecordMetadata();
+            System.out.printf("reliable: partition %d offset %d%n",
+                    rmd.partition(), rmd.offset());
+
+            // 2) быстрая отправка: acks=0, offset неизвестен (-1)
+            var fastResult = fastTemplate
+                    .send("task.created", "task-1", event)
+                    .get(5, TimeUnit.SECONDS);
+            var fmd = fastResult.getRecordMetadata();
+            System.out.printf("fast:     partition %d offset %d%n",
+                    fmd.partition(), fmd.offset());
+
+            // ВЫВОД:
+            // - reliable: offset >= 0 — брокер подтвердил запись (acks=all + идемпотентность).
+            //   Такой шаблон нужен для бизнес-событий: «задача создана», «платёж прошёл» и т.п.
+            // - fast: offset = -1 — подтверждения не ждали (acks=0). Сообщение может быть
+            //   потеряно при сбое брокера/сети, дубли возможны при ретраях.
+            //   Подходит для метрик, телеметрии, логов — там потеря допустима.
         };
     }
 }

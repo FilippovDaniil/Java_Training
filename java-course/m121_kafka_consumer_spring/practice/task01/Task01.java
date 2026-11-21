@@ -1,4 +1,4 @@
-package m121_kafka_consumer_spring.practice;
+package m121_kafka_consumer_spring.practice.task01;
 
 /**
  * Задача 01 — Модуль 121: первый @KafkaListener (группа, auto-offset-reset)

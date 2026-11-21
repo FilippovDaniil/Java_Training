@@ -1,10 +1,17 @@
 package m120_kafka_producer_spring.practice.task06;
 
+import com.fasterxml.jackson.databind.JsonSerializer;
+import com.fasterxml.jackson.databind.ser.std.StringSerializer;
+import org.apache.kafka.clients.producer.ProducerConfig;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Primary;
+import org.springframework.kafka.core.DefaultKafkaProducerFactory;
 import org.springframework.kafka.core.KafkaTemplate;
 import org.springframework.kafka.core.ProducerFactory;
+
+import java.util.HashMap;
+import java.util.Map;
 
 /**
  * Ручная конфигурация двух продюсеров с разными гарантиями.
@@ -26,30 +33,44 @@ import org.springframework.kafka.core.ProducerFactory;
 @Configuration
 public class KafkaProducerConfig06 {
 
-    // TODO 1: private Map<String, Object> props() { ... }
+    private Map<String, Object> props() {
+        Map<String, Object> props = new HashMap<>();
+        props.put(ProducerConfig.BOOTSTRAP_SERVERS_CONFIG, "localhost:29092");
+        props.put(ProducerConfig.KEY_SERIALIZER_CLASS_CONFIG, StringSerializer.class);
+        props.put(ProducerConfig.VALUE_SERIALIZER_CLASS_CONFIG, JsonSerializer.class);
+        props.put("spring.json.add.type.headers", false);
+        return props;
+    }
 
     @Bean
     ProducerFactory<String, Object> reliableProducerFactory() {
-        // TODO 2: DefaultKafkaProducerFactory с надёжными настройками
-        return null;
+        Map<String, Object> props = props();
+        props.put(ProducerConfig.ACKS_CONFIG, "all");                           // ждём ack от всех ISR
+        props.put(ProducerConfig.ENABLE_IDEMPOTENCE_CONFIG, true);              // без дублей при ретраях
+        props.put(ProducerConfig.MAX_IN_FLIGHT_REQUESTS_PER_CONNECTION, 5);     // идемпотентность допускает до 5
+        props.put(ProducerConfig.DELIVERY_TIMEOUT_MS_CONFIG, 120_000);
+        props.put(ProducerConfig.COMPRESSION_TYPE_CONFIG, "lz4");               // быстрый и эффективный
+        props.put(ProducerConfig.LINGER_MS_CONFIG, 10);                         // лёгкий батчинг
+        return new DefaultKafkaProducerFactory<>(props);
     }
 
     @Bean
     ProducerFactory<String, Object> fastProducerFactory() {
-        // TODO 3: DefaultKafkaProducerFactory с «быстрыми» настройками
-        return null;
+        Map<String, Object> props = props();
+        props.put(ProducerConfig.ACKS_CONFIG, "0");                             // не ждём ack
+        props.put(ProducerConfig.ENABLE_IDEMPOTENCE_CONFIG, false);             // несовместимо с acks=0
+        props.put(ProducerConfig.LINGER_MS_CONFIG, 0);                          // без задержки
+        return new DefaultKafkaProducerFactory<>(props);
     }
 
     @Bean
     @Primary
     KafkaTemplate<String, Object> reliableTemplate(ProducerFactory<String, Object> reliableProducerFactory) {
-        // TODO 4: new KafkaTemplate<>(reliableProducerFactory)
-        return null;
+        return new KafkaTemplate<>(reliableProducerFactory);
     }
 
     @Bean
     KafkaTemplate<String, Object> fastTemplate(ProducerFactory<String, Object> fastProducerFactory) {
-        // TODO 4: new KafkaTemplate<>(fastProducerFactory)
-        return null;
+        return new KafkaTemplate<>(fastProducerFactory);
     }
 }

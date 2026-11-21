@@ -49,10 +49,18 @@ public class Task05 {
     @Bean
     ApplicationRunner runner(ReliablePublisher05 publisher) {
         return args -> {
-            // TODO 1: publisher.sendAsync("task.created", "task-1", "async");
-            // TODO 2: publisher.sendSync("task.created", "task-2", "sync");
-            // TODO 3: publisher.sendToMissing("no.such.topic", "task-3", "fail");
-            // TODO 4: вывод — в каком порядке пришли строки и почему
+            publisher.sendAsync("task.created", "task-1", "async");
+            publisher.sendSync("task.created", "task-2", "sync");
+            publisher.sendToMissing("no.such.topic", "task-3", "fail");
+
+            // ВЫВОД:
+            // - "async: метод вернулся" печатается СРАЗУ после sendAsync, до подтверждения.
+            // - "sync: подтверждено ..." — после блокирующего .get(...).
+            // - "async: подтверждено ..." может появиться ПОСЛЕ "sync: ..." — потому что
+            //   async callback выполняется в потоке продюсера/IO, а не в main.
+            // - "ошибка отправки в no.such.topic" — из ExecutionException (TimeoutException
+            //   внутри, "Topic no.such.topic not present in metadata after 60000 ms").
+            // Порядок строк НЕ детерминирован — в этом и суть async vs sync.
         };
     }
 }

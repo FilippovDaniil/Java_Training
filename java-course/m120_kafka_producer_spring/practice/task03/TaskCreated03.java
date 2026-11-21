@@ -16,5 +16,10 @@ import java.time.Instant;
  *   - имена полей не переименовываем — это публичный контракт (подробнее в модуле 122);
  *   - occurredAt в UTC (Instant), а не LocalDateTime без зоны.
  */
-public record TaskCreated03(long id) {
+public record TaskCreated03(
+        long id,
+        String title,
+        long authorId,
+        Instant occurredAt
+) {
 }

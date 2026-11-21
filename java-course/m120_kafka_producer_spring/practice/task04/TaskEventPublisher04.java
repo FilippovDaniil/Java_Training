@@ -27,10 +27,24 @@ public class TaskEventPublisher04 {
     }
 
     public void publish(Long taskId, TaskStatusChanged04 event) {
-        // TODO: ключ из taskId + send + whenComplete с печатью метаданных
+        String key = (taskId == null) ? null : String.valueOf(taskId);
+
+        kafka.send(TOPIC, key, event).whenComplete((result, ex) -> {
+            if (ex != null) {
+                System.err.printf("ошибка отправки %s: %s%n", event, ex.getMessage());
+                return;
+            }
+            var md = result.getRecordMetadata();
+            System.out.printf("%s: %s -> %s ушло в partition %d, offset %d%n",
+                    (key == null ? "без ключа" : key),
+                    event.oldStatus(),
+                    event.newStatus(),
+                    md.partition(),
+                    md.offset());
+        });
     }
 
     public void flush() {
-        // TODO: kafka.flush()
+        kafka.flush();
     }
 }
