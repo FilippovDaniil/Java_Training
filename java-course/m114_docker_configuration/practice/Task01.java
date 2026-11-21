@@ -26,6 +26,7 @@ package m114_docker_configuration.practice;
  */
 public class Task01 {
     public static void main(String[] args) {
+
         String commands = """
                 # TODO: запуск с конфигурацией через -e
                 # docker run -d -p 8080:8080 \\
@@ -34,6 +35,7 @@ public class Task01 {
                 #     -e APP_MAX_TASKS=100 \\
                 #     tasktracker:1.0.0
                 """;
+
         System.out.println(commands);
     }
 }

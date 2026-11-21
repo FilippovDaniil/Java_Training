@@ -38,6 +38,7 @@ package m114_docker_configuration.practice;
  */
 public class Task07 {
     public static void main(String[] args) {
+
         String solution = """
                 # TODO: 12-factor запуск Task Tracker
 
@@ -62,6 +63,7 @@ public class Task07 {
 
                 # 4) docker logs -f app   (stdout)
                 """;
+
         System.out.println(solution);
     }
 }

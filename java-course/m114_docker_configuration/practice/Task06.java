@@ -28,6 +28,7 @@ package m114_docker_configuration.practice;
  */
 public class Task06 {
     public static void main(String[] args) {
+
         String commands = """
                 # TODO: bind-mount папки для вложений
                 # mkdir uploads
@@ -39,6 +40,7 @@ public class Task06 {
                 #
                 # → загруженные файлы видны в ./uploads на хосте и переживут контейнер
                 """;
+
         System.out.println(commands);
     }
 }

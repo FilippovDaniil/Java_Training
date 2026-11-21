@@ -32,6 +32,7 @@ package m114_docker_configuration.practice;
  */
 public class Task02 {
     public static void main(String[] args) {
+
         String config = """
                 # TODO: профиль-файлы (в образе) + выбор профиля (env)
                 # application.yml:
@@ -45,6 +46,7 @@ public class Task02 {
                 # docker run -e SPRING_PROFILES_ACTIVE=prod tasktracker:1.0.0
                 # docker run -e SPRING_PROFILES_ACTIVE=dev  tasktracker:1.0.0
                 """;
+
         System.out.println(config);
     }
 }

@@ -25,6 +25,7 @@ package m114_docker_configuration.practice;
  */
 public class Task05 {
     public static void main(String[] args) {
+
         String commands = """
                 # TODO: логи в stdout + уровень через env
                 # docker run -d --name app -p 8080:8080 tasktracker:1.0.0
@@ -33,6 +34,7 @@ public class Task05 {
                 # docker run -d --name app -e LOGGING_LEVEL_ROOT=DEBUG tasktracker:1.0.0
                 # docker run -d --name app -e LOGGING_LEVEL_ORG_SPRINGFRAMEWORK_WEB=DEBUG tasktracker:1.0.0
                 """;
+
         System.out.println(commands);
     }
 }

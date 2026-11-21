@@ -26,6 +26,7 @@ package m114_docker_configuration.practice;
  */
 public class Task04 {
     public static void main(String[] args) {
+
         String commands = """
                 # TODO: запуск postgres с именованным томом
                 # docker run -d --name db -p 5432:5432 \\
@@ -40,6 +41,7 @@ public class Task04 {
                 # docker volume ls
                 # docker volume rm pgdata              # удалить том (данные сотрутся)
                 """;
+
         System.out.println(commands);
     }
 }

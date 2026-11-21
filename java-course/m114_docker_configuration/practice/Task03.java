@@ -25,6 +25,7 @@ package m114_docker_configuration.practice;
  */
 public class Task03 {
     public static void main(String[] args) {
+
         String config = """
                 # Файл: .env.prod (gitignored!)
                 # TODO: перечислите переменные
@@ -38,6 +39,7 @@ public class Task03 {
                 # .gitignore:
                 #   .env*
                 """;
+
         System.out.println(config);
     }
 }
