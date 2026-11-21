@@ -30,6 +30,7 @@ package m112_docker_dockerfile.practice;
  */
 public class Task06 {
     public static void main(String[] args) {
+
         String dockerfile = """
                 # TODO: Dockerfile «только COPY» (jar собран на хосте)
                 # FROM eclipse-temurin:17-jre-alpine
@@ -45,6 +46,7 @@ public class Task06 {
                 # ./gradlew bootJar
                 # docker build --provenance=false -t tasktracker:1.0.0 .
                 """;
+
         System.out.println(dockerfile);
     }
 }

@@ -30,6 +30,7 @@ package m112_docker_dockerfile.practice;
  */
 public class Task03 {
     public static void main(String[] args) {
+
         String dockerfile = """
                 # TODO: Dockerfile с порядком слоёв под кэш
                 # FROM eclipse-temurin:17-jdk
@@ -41,6 +42,7 @@ public class Task03 {
                 # RUN ./gradlew bootJar --no-daemon
                 # ENTRYPOINT ["java", "-jar", "build/libs/app.jar"]
                 """;
+
         System.out.println(dockerfile);
     }
 }

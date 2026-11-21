@@ -26,6 +26,7 @@ package m112_docker_dockerfile.practice;
  */
 public class Task01 {
     public static void main(String[] args) {
+
         String dockerfile = """
                 # Файл: Dockerfile (в корне проекта)
                 # TODO: напишите инструкции образа
@@ -38,6 +39,7 @@ public class Task01 {
                 # Сборка:  docker build -t tasktracker:1.0.0 .
                 # Запуск:  docker run -p 8080:8080 tasktracker:1.0.0
                 """;
+
         System.out.println(dockerfile);
     }
 }

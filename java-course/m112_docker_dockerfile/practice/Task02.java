@@ -29,6 +29,7 @@ package m112_docker_dockerfile.practice;
  */
 public class Task02 {
     public static void main(String[] args) {
+
         String dockerfile = """
                 # TODO: Dockerfile с ENTRYPOINT + CMD
                 # FROM eclipse-temurin:17-jre
@@ -40,6 +41,7 @@ public class Task02 {
                 # docker run tasktracker:1.0.0                                  # профиль prod (CMD)
                 # docker run tasktracker:1.0.0 --spring.profiles.active=dev     # переопределили CMD
                 """;
+
         System.out.println(dockerfile);
     }
 }

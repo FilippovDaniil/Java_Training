@@ -26,6 +26,7 @@ package m112_docker_dockerfile.practice;
  */
 public class Task04 {
     public static void main(String[] args) {
+
         String ignore = """
                 # Файл: .dockerignore (в корне проекта)
                 # TODO: перечислите исключения
@@ -36,6 +37,7 @@ public class Task04 {
                 # build
                 # !build/libs/*.jar      # оговорка, если jar копируется снаружи
                 """;
+
         System.out.println(ignore);
     }
 }

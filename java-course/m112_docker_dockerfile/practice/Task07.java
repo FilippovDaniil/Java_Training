@@ -38,6 +38,7 @@ package m112_docker_dockerfile.practice;
  */
 public class Task07 {
     public static void main(String[] args) {
+
         String dockerfile = """
                 # TODO: production-ready Dockerfile (multi-stage + кэш + JRE-alpine)
                 # ── этап сборки ──
@@ -59,6 +60,8 @@ public class Task07 {
                 # docker build -t tasktracker:1.0.0 .
                 # docker run -p 8080:8080 tasktracker:1.0.0
                 """;
+
         System.out.println(dockerfile);
+
     }
 }

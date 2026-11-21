@@ -31,6 +31,7 @@ package m112_docker_dockerfile.practice;
  */
 public class Task05 {
     public static void main(String[] args) {
+
         String dockerfile = """
                 # TODO: multi-stage Dockerfile
                 # ── этап сборки ──
@@ -45,6 +46,7 @@ public class Task05 {
                 # EXPOSE 8080
                 # ENTRYPOINT ["java", "-jar", "app.jar"]
                 """;
+
         System.out.println(dockerfile);
     }
 }
