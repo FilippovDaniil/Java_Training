@@ -23,6 +23,7 @@ package m117_docker_jvm_tuning.practice;
  */
 public class Task03 {
     public static void main(String[] args) {
+
         String commands = """
                 # TODO: лимиты CPU и проверка видимых процессоров
                 # docker run --cpus="2" -m 1g -p 8080:8080 tasktracker:1.0.0
@@ -32,6 +33,7 @@ public class Task03 {
                 #
                 # В приложении: Runtime.getRuntime().availableProcessors()  → 2
                 """;
+
         System.out.println(commands);
     }
 }

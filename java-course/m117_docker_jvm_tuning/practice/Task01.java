@@ -25,6 +25,7 @@ package m117_docker_jvm_tuning.practice;
  */
 public class Task01 {
     public static void main(String[] args) {
+
         String commands = """
                 # TODO: запуск с лимитом памяти и MaxRAMPercentage
                 # docker run -m 512m -e JAVA_OPTS="-XX:MaxRAMPercentage=75.0" \\
@@ -34,6 +35,7 @@ public class Task01 {
                 # docker run -m 512m eclipse-temurin:17-jre \\
                 #     java -XX:+PrintFlagsFinal -version | grep MaxHeapSize
                 """;
+
         System.out.println(commands);
     }
 }

@@ -27,6 +27,7 @@ package m117_docker_jvm_tuning.practice;
  */
 public class Task05 {
     public static void main(String[] args) {
+
         String dockerfile = """
                 # TODO: Dockerfile с non-root пользователем
                 # FROM eclipse-temurin:17-jre-alpine
@@ -39,6 +40,7 @@ public class Task05 {
                 #
                 # docker run --rm tasktracker:1.0.0 id     # uid/gid != 0
                 """;
+
         System.out.println(dockerfile);
     }
 }

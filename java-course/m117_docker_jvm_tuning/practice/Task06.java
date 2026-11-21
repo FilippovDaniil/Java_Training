@@ -23,6 +23,7 @@ package m117_docker_jvm_tuning.practice;
  */
 public class Task06 {
     public static void main(String[] args) {
+
         String dockerfile = """
                 # TODO: добавьте HEALTHCHECK в Dockerfile
                 # ... (FROM/COPY/ENTRYPOINT как обычно) ...
@@ -31,6 +32,7 @@ public class Task06 {
                 #
                 # docker ps  → STATUS покажет (healthy) / (unhealthy)
                 """;
+
         System.out.println(dockerfile);
     }
 }

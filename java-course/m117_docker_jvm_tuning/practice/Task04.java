@@ -27,6 +27,7 @@ package m117_docker_jvm_tuning.practice;
  */
 public class Task04 {
     public static void main(String[] args) {
+
         String commands = """
                 # TODO: сравнение баз и сканирование
                 # docker images | grep tasktracker
@@ -37,6 +38,7 @@ public class Task04 {
                 #   база → alpine/distroless;
                 #   меньше пакетов → меньше CVE.
                 """;
+
         System.out.println(commands);
     }
 }

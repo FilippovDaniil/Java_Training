@@ -35,6 +35,7 @@ package m117_docker_jvm_tuning.practice;
  */
 public class Task07 {
     public static void main(String[] args) {
+
         String dockerfile = """
                 # TODO: production-hardened Dockerfile
                 # FROM eclipse-temurin:17-jre-alpine
@@ -52,6 +53,7 @@ public class Task07 {
                 #
                 # Чек-лист: JRE-alpine / non-root / MaxRAMPercentage / HEALTHCHECK / лимиты / scout
                 """;
+
         System.out.println(dockerfile);
     }
 }

@@ -26,6 +26,7 @@ package m117_docker_jvm_tuning.practice;
  */
 public class Task02 {
     public static void main(String[] args) {
+
         String dockerfile = """
                 # TODO: Dockerfile с настраиваемыми JAVA_OPTS
                 # FROM eclipse-temurin:17-jre-alpine
@@ -37,6 +38,7 @@ public class Task02 {
                 #
                 # docker run -e JAVA_OPTS="-XX:MaxRAMPercentage=50.0 -XX:+UseG1GC" tasktracker:1.0.0
                 """;
+
         System.out.println(dockerfile);
     }
 }
