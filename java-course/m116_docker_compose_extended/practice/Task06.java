@@ -23,6 +23,7 @@ package m116_docker_compose_extended.practice;
  */
 public class Task06 {
     public static void main(String[] args) {
+
         String commands = """
                 # TODO: команды dev-workflow и диагностики
                 # docker compose up -d --build
@@ -38,6 +39,7 @@ public class Task06 {
                 #   app падает на старте       → depends_on condition: service_healthy;
                 #   rabbitmq healthcheck красный → увеличить retries/timeout.
                 """;
+
         System.out.println(commands);
     }
 }

@@ -30,6 +30,7 @@ package m116_docker_compose_extended.practice;
  */
 public class Task03 {
     public static void main(String[] args) {
+
         String compose = """
                 # TODO: app с несколькими healthy-зависимостями
                 # services:
@@ -45,6 +46,7 @@ public class Task03 {
                 #       SPRING_RABBITMQ_HOST: rabbitmq
                 #     ports: ["8080:8080"]
                 """;
+
         System.out.println(compose);
     }
 }

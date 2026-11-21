@@ -35,6 +35,7 @@ package m116_docker_compose_extended.practice;
  */
 public class Task01 {
     public static void main(String[] args) {
+
         String compose = """
                 # TODO: добавьте сервис redis в docker-compose.yml
                 # services:
@@ -53,6 +54,7 @@ public class Task01 {
                 #       SPRING_DATA_REDIS_HOST: redis
                 #       SPRING_DATA_REDIS_PORT: 6379
                 """;
+
         System.out.println(compose);
     }
 }

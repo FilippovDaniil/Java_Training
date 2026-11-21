@@ -29,6 +29,7 @@ package m116_docker_compose_extended.practice;
  */
 public class Task04 {
     public static void main(String[] args) {
+
         String compose = """
                 # Файл: docker-compose.override.yml (автоматический мерж в dev)
                 # TODO:
@@ -44,6 +45,7 @@ public class Task04 {
                 # docker compose up -d        # база + override
                 # docker compose config       # посмотреть итоговую конфигурацию
                 """;
+
         System.out.println(compose);
     }
 }

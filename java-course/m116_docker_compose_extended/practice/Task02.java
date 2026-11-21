@@ -34,6 +34,7 @@ package m116_docker_compose_extended.practice;
  */
 public class Task02 {
     public static void main(String[] args) {
+
         String compose = """
                 # TODO: добавьте сервис rabbitmq
                 # services:
@@ -54,6 +55,7 @@ public class Task02 {
                 #       SPRING_RABBITMQ_HOST: rabbitmq
                 #       SPRING_RABBITMQ_PORT: 5672
                 """;
+
         System.out.println(compose);
     }
 }

@@ -49,6 +49,7 @@ package m116_docker_compose_extended.practice;
  */
 public class Task07 {
     public static void main(String[] args) {
+
         String compose = """
                 # TODO: полный docker-compose.yml (app + db + redis + rabbitmq)
                 # services:
@@ -84,6 +85,7 @@ public class Task07 {
                 # .env (gitignored): POSTGRES_PASSWORD=secret
                 # docker compose up --build -d
                 """;
+
         System.out.println(compose);
     }
 }

@@ -25,6 +25,7 @@ package m116_docker_compose_extended.practice;
  */
 public class Task05 {
     public static void main(String[] args) {
+
         String compose = """
                 # TODO: сделайте rabbitmq опциональным через profiles
                 # services:
@@ -36,6 +37,7 @@ public class Task05 {
                 # docker compose up -d                       # без rabbitmq
                 # docker compose --profile messaging up -d   # с rabbitmq
                 """;
+
         System.out.println(compose);
     }
 }
