@@ -51,17 +51,32 @@ import static org.assertj.core.api.Assertions.assertThat;
 // TODO: @DataJpaTest
 // TODO: @AutoConfigureTestDatabase(replace = AutoConfigureTestDatabase.Replace.NONE)
 // TODO: @Testcontainers
+
+@SuppressWarnings("SpringJavaInjectionPointsAutowiringInspection")
+@DataJpaTest
+@AutoConfigureTestDatabase(replace = AutoConfigureTestDatabase.Replace.NONE)
+@Testcontainers
 class SeededRegressionTest06 {
 
     // TODO: @Container @ServiceConnection
     // TODO: static PostgreSQLContainer<?> postgres = new PostgreSQLContainer<>("postgres:16-alpine");
 
+    @Container
+    @ServiceConnection
+    static PostgreSQLContainer<?> postgres = new PostgreSQLContainer<>("postgres:16-alpine");
+
     // TODO: @Autowired ProductRepository06 repository;
+
+    @Autowired
+    ProductRepository06 repository;
 
     @Test
     // TODO: @Sql("/seed-pg.sql")
+    @Sql("test-data/seed-pg.sql")
     void seeded_query() {
         // TODO: assertThat(repository.count()).isEqualTo(3);
         // TODO: assertThat(repository.findByPriceGreaterThan(60)).hasSize(2);
+        assertThat(repository.count()).isEqualTo(3);
+        assertThat(repository.findByPriceGreaterThan(60)).hasSize(2);
     }
 }

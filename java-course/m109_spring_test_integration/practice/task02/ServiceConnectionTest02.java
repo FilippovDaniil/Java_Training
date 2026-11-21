@@ -46,17 +46,31 @@ import static org.assertj.core.api.Assertions.assertThat;
 // TODO: @DataJpaTest
 // TODO: @AutoConfigureTestDatabase(replace = AutoConfigureTestDatabase.Replace.NONE)
 // TODO: @Testcontainers
+@SuppressWarnings("SpringJavaInjectionPointsAutowiringInspection")
+@DataJpaTest
+@AutoConfigureTestDatabase(replace = AutoConfigureTestDatabase.Replace.NONE)
+@Testcontainers
 class ServiceConnectionTest02 {
 
     // TODO: @Container
     // TODO: @ServiceConnection
     // TODO: static PostgreSQLContainer<?> postgres = new PostgreSQLContainer<>("postgres:16-alpine");
 
+    @Container
+    @ServiceConnection
+    static PostgreSQLContainer<?> postgres = new PostgreSQLContainer<>("postgres:16-alpine");
+
     // TODO: @Autowired ProductRepository02 repository;
+
+    @Autowired
+    ProductRepository02 repository;
 
     @Test
     void auto_wired_datasource() {
         // TODO: repository.save(new Product02("Чай", 50));
         // TODO: assertThat(repository.count()).isEqualTo(1);
+
+        repository.save(new Product02("Чай", 50));
+        assertThat(repository.count()).isEqualTo(1);
     }
 }

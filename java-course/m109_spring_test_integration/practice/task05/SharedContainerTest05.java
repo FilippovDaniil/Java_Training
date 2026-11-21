@@ -47,26 +47,43 @@ import static org.assertj.core.api.Assertions.assertThat;
 // TODO: @DataJpaTest
 // TODO: @AutoConfigureTestDatabase(replace = AutoConfigureTestDatabase.Replace.NONE)
 // TODO: @Testcontainers
+
+@SuppressWarnings("SpringJavaInjectionPointsAutowiringInspection")
+@DataJpaTest
+@AutoConfigureTestDatabase(replace = AutoConfigureTestDatabase.Replace.NONE)
+@Testcontainers
 class SharedContainerTest05 {
 
     // TODO: @Container @ServiceConnection
     // TODO: static PostgreSQLContainer<?> postgres = new PostgreSQLContainer<>("postgres:16-alpine");
 
+    @Container
+    @ServiceConnection
+    static PostgreSQLContainer<?> postgres = new PostgreSQLContainer<>("postgres:16-alpine");
+
     // TODO: @Autowired ProductRepository05 repository;
+
+    @Autowired
+    ProductRepository05 repository;
 
     @BeforeEach
     void clean() {
         // TODO: repository.deleteAll();
+        repository.deleteAll();
     }
 
     @Test
     void first_test() {
         // TODO: repository.save(new Product05("Кофе"));
         // TODO: assertThat(repository.count()).isEqualTo(1);
+
+        repository.save(new Product05("Кофе"));
+        assertThat(repository.count()).isEqualTo(1);
     }
 
     @Test
     void second_test() {
         // TODO: assertThat(repository.count()).isEqualTo(0);
+        assertThat(repository.count()).isEqualTo(0);
     }
 }

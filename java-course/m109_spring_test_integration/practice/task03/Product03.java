@@ -18,6 +18,7 @@ import org.testcontainers.junit.jupiter.Testcontainers;
 import java.util.List;
 import static org.assertj.core.api.Assertions.assertThat;
 
+@Entity
 class Product03 {
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;

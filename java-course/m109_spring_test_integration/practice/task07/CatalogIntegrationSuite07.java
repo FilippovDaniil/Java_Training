@@ -9,6 +9,7 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.testcontainers.service.connection.ServiceConnection;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Service;
@@ -21,23 +22,41 @@ import static org.assertj.core.api.Assertions.assertThat;
 // --- ТЕСТ (каркас) ---
 // TODO: @org.springframework.boot.test.context.SpringBootTest(classes = Task07.class)
 // TODO: @Testcontainers
+
+@SuppressWarnings("SpringJavaInjectionPointsAutowiringInspection")
+@SpringBootTest(classes = Task07.class)
+@Testcontainers
 class CatalogIntegrationSuite07 {
 
     // TODO: @Container @ServiceConnection
     // TODO: static PostgreSQLContainer<?> postgres = new PostgreSQLContainer<>("postgres:16-alpine");
 
+    @Container
+    @ServiceConnection
+    static PostgreSQLContainer<?> postgres = new PostgreSQLContainer<>("postgres:16-alpine");
+
     // TODO: @Autowired ProductService07 service;
     // TODO: @Autowired ProductRepository07 repo;
+
+    @Autowired
+    ProductService07 service;
+
+    @Autowired
+    ProductRepository07 repo;
 
     @BeforeEach
     void clean() {
         // TODO: repo.deleteAll();
+        repo.deleteAll();
     }
 
     @Test
     void create_and_read() {
         // TODO: service.create("Кофе", 100);
         // TODO: assertThat(service.findByName("Кофе")).isPresent();
+
+        service.create("Кофе", 100);
+        assertThat(service.findByName("Кофе")).isPresent();
     }
 
     @Test
@@ -45,10 +64,15 @@ class CatalogIntegrationSuite07 {
         // TODO: service.create("Дешёвый", 10);
         // TODO: service.create("Дорогой", 1000);
         // TODO: assertThat(service.countExpensive(100)).isEqualTo(1);
+
+        service.create("Дешёвый", 10);
+        service.create("Дорогой", 1000);
+        assertThat(service.countExpensive(100)).isEqualTo(1);
     }
 
     @Test
     void isolation_between_tests() {
         // TODO: assertThat(repo.count()).isEqualTo(0);
+        assertThat(repo.count()).isEqualTo(0);
     }
 }

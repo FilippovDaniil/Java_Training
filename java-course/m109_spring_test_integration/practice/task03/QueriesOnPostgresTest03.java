@@ -51,18 +51,33 @@ import static org.assertj.core.api.Assertions.assertThat;
 // TODO: @DataJpaTest
 // TODO: @AutoConfigureTestDatabase(replace = AutoConfigureTestDatabase.Replace.NONE)
 // TODO: @Testcontainers
+@SuppressWarnings("SpringJavaInjectionPointsAutowiringInspection")
+@DataJpaTest
+@AutoConfigureTestDatabase(replace = AutoConfigureTestDatabase.Replace.NONE)
+@Testcontainers
 class QueriesOnPostgresTest03 {
 
     // TODO: @Container @ServiceConnection
     // TODO: static PostgreSQLContainer<?> postgres = new PostgreSQLContainer<>("postgres:16-alpine");
 
+    @Container
+    @ServiceConnection
+    static PostgreSQLContainer<?> postgres = new PostgreSQLContainer<>("postgres:16-alpine");
+
     // TODO: @Autowired ProductRepository03 repository;
+
+    @Autowired
+    ProductRepository03 repository;
 
     @Test
     void derived_query_on_pg() {
         // TODO: repository.save(new Product03("Кофе арабика", 100));
         // TODO: repository.save(new Product03("Чай", 50));
         // TODO: assertThat(repository.findByNameContainingIgnoreCase("кофе")).hasSize(1);
+
+        repository.save(new Product03("Кофе арабика", 100));
+        repository.save(new Product03("Чай", 50));
+        assertThat(repository.findByNameContainingIgnoreCase("кофе")).hasSize(1);
     }
 
     @Test
@@ -70,5 +85,9 @@ class QueriesOnPostgresTest03 {
         // TODO: repository.save(new Product03("Дешёвый", 10));
         // TODO: repository.save(new Product03("Дорогой", 1000));
         // TODO: assertThat(repository.findExpensive(60)).hasSize(1);
+
+        repository.save(new Product03("Дешёвый", 10));
+        repository.save(new Product03("Дорогой", 1000));
+        assertThat(repository.findExpensive(60)).hasSize(1);
     }
 }

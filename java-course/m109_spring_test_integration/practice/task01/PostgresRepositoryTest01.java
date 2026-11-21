@@ -40,6 +40,7 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabase;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
+import org.springframework.boot.testcontainers.service.connection.ServiceConnection;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.test.context.DynamicPropertyRegistry;
 import org.springframework.test.context.DynamicPropertySource;
@@ -52,6 +53,10 @@ import static org.assertj.core.api.Assertions.assertThat;
 // TODO: @DataJpaTest
 // TODO: @AutoConfigureTestDatabase(replace = AutoConfigureTestDatabase.Replace.NONE)
 // TODO: @Testcontainers
+@SuppressWarnings("SpringJavaInjectionPointsAutowiringInspection")
+@DataJpaTest
+@AutoConfigureTestDatabase(replace = AutoConfigureTestDatabase.Replace.NONE)
+@Testcontainers
 class PostgresRepositoryTest01 {
 
     // TODO: @Container
@@ -64,11 +69,27 @@ class PostgresRepositoryTest01 {
     // TODO:     r.add("spring.datasource.password", postgres::getPassword);
     // TODO: }
 
-    // TODO: @Autowired ProductRepository01 repository;
+    @Container
+    @ServiceConnection
+    static PostgreSQLContainer<?> postgres = new PostgreSQLContainer<>("postgres:16-alpine");
+
+//    @DynamicPropertySource
+//    static void props(DynamicPropertyRegistry r) {
+//        r.add("spring.datasource.url", postgres::getJdbcUrl);
+//        r.add("spring.datasource.username", postgres::getUsername);
+//        r.add("spring.datasource.password", postgres::getPassword);
+//        r.add("spring.datasource.driver-class-name", postgres::getDriverClassName);  // ← добавить
+//    }
+
+    @Autowired
+    ProductRepository01 repository;
 
     @Test
     void runs_on_real_postgres() {
         // TODO: repository.save(new Product01("Кофе", 100));
         // TODO: assertThat(repository.count()).isEqualTo(1);
+
+        repository.save(new Product01("Кофе", 100));
+        assertThat(repository.count()).isEqualTo(1);
     }
 }

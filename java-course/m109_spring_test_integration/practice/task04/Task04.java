@@ -43,6 +43,7 @@ import org.testcontainers.junit.jupiter.Container;
 import org.testcontainers.junit.jupiter.Testcontainers;
 import static org.assertj.core.api.Assertions.assertThat;
 
+@SpringBootApplication
 public class Task04 {
     public static void main(String[] args) { SpringApplication.run(Task04.class, args); }
 }
