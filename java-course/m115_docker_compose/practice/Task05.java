@@ -34,6 +34,7 @@ package m115_docker_compose.practice;
  */
 public class Task05 {
     public static void main(String[] args) {
+
         String config = """
                 # .env (gitignored):
                 # TODO:
@@ -57,6 +58,7 @@ public class Task05 {
                 #
                 # .gitignore: .env
                 """;
+
         System.out.println(config);
     }
 }

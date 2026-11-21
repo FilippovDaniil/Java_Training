@@ -32,6 +32,7 @@ package m115_docker_compose.practice;
  */
 public class Task02 {
     public static void main(String[] args) {
+
         String compose = """
                 # TODO: docker-compose.yml с db + app
                 # services:
@@ -51,6 +52,7 @@ public class Task02 {
                 # docker compose up --build -d
                 # curl http://localhost:8080/actuator/health
                 """;
+
         System.out.println(compose);
     }
 }

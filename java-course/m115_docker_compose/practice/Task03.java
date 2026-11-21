@@ -30,6 +30,7 @@ package m115_docker_compose.practice;
  */
 public class Task03 {
     public static void main(String[] args) {
+
         String compose = """
                 # TODO: docker-compose.yml с томом pgdata
                 # services:
@@ -47,5 +48,6 @@ public class Task03 {
                 # docker compose down -v   # данные удалены (том снесён)
                 """;
         System.out.println(compose);
+
     }
 }

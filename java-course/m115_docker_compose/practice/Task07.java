@@ -51,6 +51,7 @@ package m115_docker_compose.practice;
  */
 public class Task07 {
     public static void main(String[] args) {
+
         String compose = """
                 # TODO: полный docker-compose.yml Task Tracker
                 # services:
@@ -88,6 +89,7 @@ public class Task07 {
                 # curl http://localhost:8080/actuator/health
                 # docker compose down
                 """;
+
         System.out.println(compose);
     }
 }

@@ -22,6 +22,7 @@ package m115_docker_compose.practice;
  */
 public class Task06 {
     public static void main(String[] args) {
+
         String commands = """
                 # TODO: рабочий цикл Compose
                 # docker compose up --build -d
@@ -37,6 +38,7 @@ public class Task06 {
                 #   - app не видит db → адрес = имя сервиса (db:5432), не localhost;
                 #   - app падает на старте → depends_on: condition: service_healthy.
                 """;
+
         System.out.println(commands);
     }
 }

@@ -30,6 +30,7 @@ package m115_docker_compose.practice;
  */
 public class Task01 {
     public static void main(String[] args) {
+
         String compose = """
                 # Файл: docker-compose.yml
                 # TODO: опишите сервис db
@@ -47,6 +48,7 @@ public class Task01 {
                 # docker compose ps
                 # docker compose down
                 """;
+
         System.out.println(compose);
     }
 }

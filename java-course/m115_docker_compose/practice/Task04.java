@@ -33,6 +33,7 @@ package m115_docker_compose.practice;
  */
 public class Task04 {
     public static void main(String[] args) {
+
         String compose = """
                 # TODO: docker-compose.yml с healthcheck и service_healthy
                 # services:
@@ -51,6 +52,7 @@ public class Task04 {
                 #         condition: service_healthy
                 #     ports: ["8080:8080"]
                 """;
+
         System.out.println(compose);
     }
 }
