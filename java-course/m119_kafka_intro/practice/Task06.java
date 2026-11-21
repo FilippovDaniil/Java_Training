@@ -37,6 +37,7 @@ package m119_kafka_intro.practice;
  */
 public class Task06 {
     public static void main(String[] args) {
+
         String commands = """
                 # TODO: retention, compaction, удаление топика
                 # docker compose exec kafka /opt/kafka/bin/kafka-configs.sh --bootstrap-server localhost:9092 \\
@@ -56,6 +57,7 @@ public class Task06 {
                 # после retention.ms=60000 и паузы --from-beginning -> ...
                 # cleanup.policy=compact нужен для: ...
                 """;
+
         System.out.println(commands);
     }
 }

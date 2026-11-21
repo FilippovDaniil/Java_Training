@@ -59,6 +59,7 @@ package m119_kafka_intro.practice;
  */
 public class Task07 {
     public static void main(String[] args) {
+
         String compose = """
                 # TODO: полный dev-стек app + db + kafka + kafka-ui
                 # services:
@@ -98,6 +99,7 @@ public class Task07 {
                 #
                 # топики: task.created (6 партиций), task.status.changed (6 партиций)
                 """;
+
         System.out.println(compose);
     }
 }

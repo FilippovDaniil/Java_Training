@@ -35,6 +35,7 @@ package m119_kafka_intro.practice;
  */
 public class Task05 {
     public static void main(String[] args) {
+
         String commands = """
                 # TODO: работа с consumer group
                 # docker compose exec kafka /opt/kafka/bin/kafka-console-consumer.sh \\
@@ -53,6 +54,7 @@ public class Task05 {
                 # после остановки группы LAG = ...
                 # после reset-offsets -> ...
                 """;
+
         System.out.println(commands);
     }
 }

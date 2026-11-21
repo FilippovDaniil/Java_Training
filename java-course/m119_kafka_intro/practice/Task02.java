@@ -30,6 +30,7 @@ package m119_kafka_intro.practice;
  */
 public class Task02 {
     public static void main(String[] args) {
+
         String commands = """
                 # TODO: команды работы с топиками (K=/opt/kafka/bin)
                 # docker compose exec kafka $K/kafka-topics.sh --bootstrap-server localhost:9092 \\
@@ -44,6 +45,7 @@ public class Task02 {
                 # PartitionCount = ...   ReplicationFactor = ...   Leader = ...   Isr = ...
                 # попытка уменьшить партиции -> ...
                 """;
+
         System.out.println(commands);
     }
 }

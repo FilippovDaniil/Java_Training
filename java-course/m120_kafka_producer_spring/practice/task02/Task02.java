@@ -1,4 +1,4 @@
-package m120_kafka_producer_spring.practice;
+package m120_kafka_producer_spring.practice.task02;
 
 /**
  * Задача 02 — Модуль 120: топики как бины (KafkaAdmin + TopicBuilder)

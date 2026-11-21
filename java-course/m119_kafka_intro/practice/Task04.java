@@ -37,6 +37,7 @@ package m119_kafka_intro.practice;
  */
 public class Task04 {
     public static void main(String[] args) {
+
         String commands = """
                 # TODO: сообщения с ключом и разбор партиций
                 # docker compose exec -it kafka /opt/kafka/bin/kafka-console-producer.sh \\
@@ -52,6 +53,7 @@ public class Task04 {
                 # task-7  -> партиция ...
                 # без ключа порядок -> ...
                 """;
+
         System.out.println(commands);
     }
 }

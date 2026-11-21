@@ -34,6 +34,7 @@ package m119_kafka_intro.practice;
  */
 public class Task03 {
     public static void main(String[] args) {
+
         String commands = """
                 # TODO: producer/consumer через CLI
                 # терминал 1 (consumer):
@@ -50,6 +51,7 @@ public class Task03 {
                 #
                 # НАБЛЮДЕНИЯ: без --from-beginning -> ... ; с --from-beginning -> ...
                 """;
+
         System.out.println(commands);
     }
 }

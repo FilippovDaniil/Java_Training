@@ -1,4 +1,4 @@
-package m120_kafka_producer_spring.practice;
+package m120_kafka_producer_spring.practice.task01;
 
 /**
  * Задача 01 — Модуль 120: первый producer на Spring (KafkaTemplate + application.yml)

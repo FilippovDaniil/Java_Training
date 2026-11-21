@@ -41,6 +41,7 @@ package m119_kafka_intro.practice;
  */
 public class Task01 {
     public static void main(String[] args) {
+
         String compose = """
                 # TODO: docker-compose.yml с одним брокером Kafka (KRaft)
                 # services:
@@ -63,6 +64,7 @@ public class Task01 {
                 # docker compose up -d
                 # docker compose exec kafka /opt/kafka/bin/kafka-broker-api-versions.sh --bootstrap-server localhost:9092
                 """;
+
         System.out.println(compose);
     }
 }
