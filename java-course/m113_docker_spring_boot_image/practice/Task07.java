@@ -37,6 +37,7 @@ package m113_docker_spring_boot_image.practice;
  */
 public class Task07 {
     public static void main(String[] args) {
+
         String solution = """
                 # TODO: оформите выбранный способ упаковки и обоснование
 
@@ -55,6 +56,7 @@ public class Task07 {
                 #   стандартное приложение → Buildpacks (best practices из коробки);
                 #   особые требования к образу → Dockerfile + layered jars.
                 """;
+
         System.out.println(solution);
     }
 }

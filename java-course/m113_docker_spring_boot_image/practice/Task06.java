@@ -24,6 +24,7 @@ package m113_docker_spring_boot_image.practice;
  */
 public class Task06 {
     public static void main(String[] args) {
+
         String gradle = """
                 // Файл: build.gradle (фрагмент, обычно НЕ требуется — дефолт включён)
                 // TODO: при необходимости настройте расслоение
@@ -36,6 +37,7 @@ public class Task06 {
                 // Проверка слоёв:
                 // java -Djarmode=layertools -jar build/libs/app.jar list
                 """;
+
         System.out.println(gradle);
     }
 }

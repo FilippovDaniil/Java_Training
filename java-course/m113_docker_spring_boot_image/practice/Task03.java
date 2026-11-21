@@ -23,6 +23,7 @@ package m113_docker_spring_boot_image.practice;
  */
 public class Task03 {
     public static void main(String[] args) {
+
         String commands = """
                 # TODO: впишите команды сборки образа через Buildpacks
                 # ./gradlew bootBuildImage --imageName=tasktracker:1.0.0
@@ -30,5 +31,6 @@ public class Task03 {
                 # docker run -p 8080:8080 tasktracker:1.0.0
                 """;
         System.out.println(commands);
+
     }
 }

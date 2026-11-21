@@ -22,6 +22,7 @@ package m113_docker_spring_boot_image.practice;
  */
 public class Task05 {
     public static void main(String[] args) {
+
         String commands = """
                 # TODO: соберите 3 варианта и сравните
                 # docker build -t tasktracker:fat .          # один слой (модуль 112)
@@ -34,6 +35,7 @@ public class Task05 {
                 # Вывод: слой dependencies — «толстый», кэшируется;
                 #        слой application (код) — тонкий, пересобирается при правке.
                 """;
+
         System.out.println(commands);
     }
 }

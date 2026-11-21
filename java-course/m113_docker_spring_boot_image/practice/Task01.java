@@ -24,6 +24,7 @@ package m113_docker_spring_boot_image.practice;
  */
 public class Task01 {
     public static void main(String[] args) {
+
         String commands = """
                 # TODO: впишите команды исследования слоёв
                 # ./gradlew bootJar
@@ -32,6 +33,7 @@ public class Task01 {
                 # ls layers/
                 #   dependencies/ spring-boot-loader/ snapshot-dependencies/ application/
                 """;
+
         System.out.println(commands);
     }
 }

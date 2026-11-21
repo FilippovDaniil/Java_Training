@@ -32,6 +32,7 @@ package m113_docker_spring_boot_image.practice;
  */
 public class Task02 {
     public static void main(String[] args) {
+
         String dockerfile = """
                 # TODO: Dockerfile с layered jars
                 # FROM eclipse-temurin:17-jre AS builder
@@ -47,6 +48,7 @@ public class Task02 {
                 # COPY --from=builder /app/application/ ./
                 # ENTRYPOINT ["java", "org.springframework.boot.loader.launch.JarLauncher"]
                 """;
+        
         System.out.println(dockerfile);
     }
 }

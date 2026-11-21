@@ -23,6 +23,7 @@ package m113_docker_spring_boot_image.practice;
  */
 public class Task04 {
     public static void main(String[] args) {
+
         String gradle = """
                 // Файл: build.gradle (фрагмент)
                 // TODO: настройте задачу bootBuildImage
@@ -34,5 +35,6 @@ public class Task04 {
                 // Сборка: ./gradlew bootBuildImage
                 """;
         System.out.println(gradle);
+
     }
 }
