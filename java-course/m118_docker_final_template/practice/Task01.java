@@ -36,6 +36,7 @@ package m118_docker_final_template.practice;
  */
 public class Task01 {
     public static void main(String[] args) {
+
         String dockerfile = """
                 # TODO: финальный production-ready Dockerfile
                 # ── сборка ──
@@ -58,6 +59,7 @@ public class Task01 {
                 #     CMD wget -qO- http://localhost:8080/actuator/health || exit 1
                 # ENTRYPOINT ["sh", "-c", "java $JAVA_OPTS -jar app.jar"]
                 """;
+
         System.out.println(dockerfile);
     }
 }

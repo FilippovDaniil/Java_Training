@@ -36,6 +36,7 @@ package m118_docker_final_template.practice;
  */
 public class Task07 {
     public static void main(String[] args) {
+
         String template = """
                 # TODO: соберите финальный шаблон Task Tracker (итог курса)
 
@@ -57,6 +58,7 @@ public class Task07 {
 
                 # ── КУРС 01–118 ЗАВЕРШЁН: Core Java → production-ready Spring Boot микросервис ──
                 """;
+
         System.out.println(template);
     }
 }

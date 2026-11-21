@@ -28,6 +28,7 @@ package m118_docker_final_template.practice;
  */
 public class Task03 {
     public static void main(String[] args) {
+
         String files = """
                 # Файл: .dockerignore
                 # TODO:
@@ -46,6 +47,7 @@ public class Task03 {
                 #
                 # Новый разработчик: cp .env.example .env  → заполнить реальные значения
                 """;
+
         System.out.println(files);
     }
 }

@@ -35,6 +35,7 @@ package m118_docker_final_template.practice;
  */
 public class Task05 {
     public static void main(String[] args) {
+
         String checklist = """
                 # TODO: отметьте выполненные пункты ([ ] → [x]) по вашему проекту
                 # ОБРАЗ:
@@ -56,6 +57,7 @@ public class Task05 {
                 #   [ ] лимиты памяти/CPU
                 #   [ ] поднимается одной командой
                 """;
+
         System.out.println(checklist);
     }
 }

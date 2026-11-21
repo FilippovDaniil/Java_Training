@@ -23,6 +23,7 @@ package m118_docker_final_template.practice;
  * ПОДСКАЗКА: воспроизводимость «с чистого листа» — ключевой признак production-ready шаблона.
  */
 public class Task04 {
+
     public static void main(String[] args) {
         String commands = """
                 # TODO: проверка стека «с нуля»
@@ -37,5 +38,6 @@ public class Task04 {
                 # docker compose up --build -d
                 """;
         System.out.println(commands);
+
     }
 }

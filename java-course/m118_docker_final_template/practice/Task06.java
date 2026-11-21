@@ -30,6 +30,7 @@ package m118_docker_final_template.practice;
  */
 public class Task06 {
     public static void main(String[] args) {
+
         String solution = """
                 # TODO: вариант через Buildpacks (без Dockerfile)
                 # build.gradle:
@@ -47,6 +48,7 @@ public class Task06 {
                 #       environment: { SPRING_PROFILES_ACTIVE: prod, ... }
                 #       ports: ["8080:8080"]
                 """;
+
         System.out.println(solution);
     }
 }

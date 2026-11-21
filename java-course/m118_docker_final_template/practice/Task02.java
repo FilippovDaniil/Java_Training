@@ -37,6 +37,7 @@ package m118_docker_final_template.practice;
  */
 public class Task02 {
     public static void main(String[] args) {
+
         String compose = """
                 # TODO: финальный docker-compose.yml
                 # services:
@@ -60,6 +61,7 @@ public class Task02 {
                 # volumes:
                 #   pgdata:
                 """;
+
         System.out.println(compose);
     }
 }
