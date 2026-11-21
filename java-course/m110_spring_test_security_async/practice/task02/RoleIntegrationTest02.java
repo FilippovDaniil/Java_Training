@@ -4,6 +4,8 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
+import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.context.annotation.Bean;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
@@ -19,24 +21,36 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 // --- ТЕСТ (каркас) ---
 // TODO: @org.springframework.boot.test.context.SpringBootTest(classes = Task02.class)
 // TODO: @org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc
+
+@SuppressWarnings("SpringJavaInjectionPointsAutowiringInspection")
+@SpringBootTest(classes = Task02.class)
+@AutoConfigureMockMvc
 class RoleIntegrationTest02 {
 
     // TODO: @Autowired MockMvc mockMvc;
 
+    @Autowired
+    MockMvc mockMvc;
+
     @Test
     // TODO: @WithMockUser(roles = "ADMIN")
+    @WithMockUser(roles = "ADMIN")
     void admin_200() throws Exception {
         // TODO: mockMvc.perform(get("/api/admin/stats")).andExpect(status().isOk());
+        mockMvc.perform(get("/api/admin/stats")).andExpect(status().isOk());
     }
 
     @Test
     // TODO: @WithMockUser(roles = "USER")
+    @WithMockUser(roles = "USER")
     void user_403() throws Exception {
         // TODO: mockMvc.perform(get("/api/admin/stats")).andExpect(status().isForbidden());
+        mockMvc.perform(get("/api/admin/stats")).andExpect(status().isForbidden());
     }
 
     @Test
     void anon_401() throws Exception {
         // TODO: mockMvc.perform(get("/api/admin/stats")).andExpect(status().isUnauthorized());
+        mockMvc.perform(get("/api/admin/stats")).andExpect(status().isUnauthorized());
     }
 }

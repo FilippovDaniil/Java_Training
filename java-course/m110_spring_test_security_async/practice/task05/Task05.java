@@ -31,7 +31,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.test.mock.mockito.MockBean;
+import org.springframework.context.annotation.Bean;
 import org.springframework.http.HttpStatus;
+import org.springframework.security.config.Customizer;
+import org.springframework.security.config.annotation.web.builders.HttpSecurity;
+import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.stereotype.Service;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.web.bind.annotation.*;
@@ -42,6 +46,16 @@ import static org.springframework.http.MediaType.APPLICATION_JSON;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
+@SpringBootApplication
 public class Task05 {
     public static void main(String[] args) { SpringApplication.run(Task05.class, args); }
+
+    @Bean
+    SecurityFilterChain chain(HttpSecurity http) throws Exception {
+        http
+                .authorizeHttpRequests(a -> a.anyRequest().authenticated())
+                .httpBasic(Customizer.withDefaults())
+                .csrf(c -> c.disable());   // ← отключить CSRF для API
+        return http.build();
+    }
 }

@@ -34,7 +34,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.restdocs.AutoConfigureRestDocs;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
+import org.springframework.security.test.context.support.WithMockUser;
 import org.springframework.stereotype.Service;
+import org.springframework.test.context.bean.override.mockito.MockitoBean;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -50,10 +52,21 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 // --- ТЕСТ (каркас) ---
 // TODO: @WebMvcTest(TaskController06.class)
 // TODO: @AutoConfigureRestDocs
+
+@SuppressWarnings("SpringJavaInjectionPointsAutowiringInspection")
+@WebMvcTest(TaskController06.class)
+@AutoConfigureRestDocs
+@WithMockUser
 class TaskDocsTest06 {
 
     // TODO: @Autowired MockMvc mockMvc;
     // TODO: @MockBean TaskService06 service;
+
+    @Autowired
+    MockMvc mockMvc;
+
+    @MockitoBean
+    TaskService06 service;
 
     @Test
     void documents_get_task() throws Exception {
@@ -65,5 +78,15 @@ class TaskDocsTest06 {
         //                          fieldWithPath("id").description("Идентификатор"),
         //                          fieldWithPath("title").description("Заголовок"),
         //                          fieldWithPath("status").description("Статус"))));
+
+        when(service.find(1L)).thenReturn(new TaskDto06(1L, "Кофе", "NEW"));
+
+        mockMvc.perform(get("/api/tasks/1"))
+                .andExpect(status().isOk())
+                .andDo(document("get-task",
+                        responseFields(
+                                fieldWithPath("id").description("Идентификатор"),
+                                fieldWithPath("title").description("Заголовок"),
+                                fieldWithPath("status").description("Статус"))));
     }
 }

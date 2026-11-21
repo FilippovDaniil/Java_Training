@@ -25,5 +25,5 @@ class TaskController06 {
     TaskController06(TaskService06 service) { this.service = service; }
 
     @GetMapping("/{id}")
-    public TaskDto06 get(@PathVariable Long id) { return service.find(id); }
+    public TaskDto06 get(@PathVariable(name = "id") Long id) { return service.find(id); }
 }

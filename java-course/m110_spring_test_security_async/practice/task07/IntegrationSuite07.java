@@ -4,6 +4,8 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
+import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.context.annotation.Bean;
 import org.springframework.http.HttpStatus;
@@ -14,6 +16,7 @@ import org.springframework.security.config.annotation.web.configuration.EnableWe
 import org.springframework.security.test.context.support.WithMockUser;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.stereotype.Service;
+import org.springframework.test.context.bean.override.mockito.MockitoBean;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.web.bind.annotation.*;
 import java.util.List;
@@ -31,46 +34,77 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 // --- ТЕСТ (каркас) ---
 // TODO: @org.springframework.boot.test.context.SpringBootTest(classes = Task07.class)
 // TODO: @org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc
+
+@SuppressWarnings("SpringJavaInjectionPointsAutowiringInspection")
+@SpringBootTest(classes = Task07.class)
+@AutoConfigureMockMvc
+//@WithMockUser
 class IntegrationSuite07 {
 
     // TODO: @Autowired MockMvc mockMvc;
     // TODO: @Autowired ReportService07 reports;
     // TODO: @MockBean PaymentGateway07 gateway;
 
+    @Autowired
+    MockMvc mockMvc;
+
+    @Autowired
+    ReportService07 reports;
+
+    @MockitoBean
+    PaymentGateway07 gateway;
+
     @Test
     void orders_require_auth() throws Exception {
         // TODO: mockMvc.perform(get("/api/orders")).andExpect(status().isUnauthorized());
+        mockMvc.perform(get("/api/orders")).andExpect(status().isUnauthorized());
     }
 
     @Test
     // TODO: @WithMockUser
+    @WithMockUser
     void user_can_list_orders() throws Exception {
         // TODO: mockMvc.perform(get("/api/orders")).andExpect(status().isOk());
+        mockMvc.perform(get("/api/orders")).andExpect(status().isOk());
     }
 
     @Test
     // TODO: @WithMockUser(roles = "USER")
+    @WithMockUser(roles = "USER")
     void user_forbidden_on_stats() throws Exception {
         // TODO: mockMvc.perform(get("/api/admin/stats")).andExpect(status().isForbidden());
+        mockMvc.perform(get("/api/admin/stats")).andExpect(status().isForbidden());
     }
 
     @Test
     // TODO: @WithMockUser(roles = "ADMIN")
+    @WithMockUser(roles = "ADMIN")
     void admin_can_see_stats() throws Exception {
         // TODO: mockMvc.perform(get("/api/admin/stats")).andExpect(status().isOk());
+        mockMvc.perform(get("/api/admin/stats")).andExpect(status().isOk());
     }
 
     @Test
     // TODO: @WithMockUser
+    @WithMockUser
     void order_mocks_payment() throws Exception {
         // TODO: when(gateway.charge(anyInt())).thenReturn("OK");
         // TODO: mockMvc.perform(post("/api/orders").contentType(APPLICATION_JSON).content("{\"amount\":100}"))
         //              .andExpect(status().isCreated());
         // TODO: verify(gateway).charge(100);
+
+        when(gateway.charge(anyInt())).thenReturn("OK");
+
+        mockMvc.perform(post("/api/orders").contentType(APPLICATION_JSON).content("{\"amount\":100}"))
+                .andExpect(status().isCreated());
+
+        verify(gateway).charge(100);
+
     }
 
     @Test
     void async_report_ready() throws Exception {
         // TODO: assertThat(reports.generate().get(2, TimeUnit.SECONDS)).isEqualTo("READY");
+        assertThat(reports.generate().get(2, TimeUnit.SECONDS)).isEqualTo("READY");
     }
 }

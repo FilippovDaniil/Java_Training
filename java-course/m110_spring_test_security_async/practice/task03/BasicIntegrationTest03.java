@@ -4,6 +4,8 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
+import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.context.annotation.Bean;
 import org.springframework.security.config.Customizer;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
@@ -26,19 +28,34 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 // --- ТЕСТ (каркас) ---
 // TODO: @org.springframework.boot.test.context.SpringBootTest(classes = Task03.class)
 // TODO: @org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc
+
+@SuppressWarnings("SpringJavaInjectionPointsAutowiringInspection")
+@SpringBootTest(classes = Task03.class)
+@AutoConfigureMockMvc
 class BasicIntegrationTest03 {
 
     // TODO: @Autowired MockMvc mockMvc;
+
+    @Autowired
+    MockMvc mockMvc;
 
     @Test
     void valid_basic_200() throws Exception {
         // TODO: mockMvc.perform(get("/api/tasks").with(httpBasic("alice", "password")))
         //              .andExpect(status().isOk());
+
+        mockMvc.perform(get("/api/tasks")
+                        .with(httpBasic("alice", "password")))
+                .andExpect(status().isOk());
     }
 
     @Test
     void wrong_basic_401() throws Exception {
         // TODO: mockMvc.perform(get("/api/tasks").with(httpBasic("alice", "WRONG")))
         //              .andExpect(status().isUnauthorized());
+
+        mockMvc.perform(get("/api/tasks")
+                        .with(httpBasic("alice", "WRONG")))
+                .andExpect(status().isUnauthorized());
     }
 }

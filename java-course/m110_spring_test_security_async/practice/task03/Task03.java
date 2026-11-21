@@ -45,8 +45,11 @@ import static org.springframework.security.test.web.servlet.request.SecurityMock
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
+@SpringBootApplication
 public class Task03 {
-    public static void main(String[] args) { SpringApplication.run(Task03.class, args); }
+    public static void main(String[] args) {
+        SpringApplication.run(Task03.class, args);
+    }
 
     @Bean PasswordEncoder encoder() { return new BCryptPasswordEncoder(); }
 

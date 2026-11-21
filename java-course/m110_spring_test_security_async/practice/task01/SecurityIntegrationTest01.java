@@ -4,6 +4,8 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
+import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.context.annotation.Bean;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
@@ -20,18 +22,28 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 // --- ТЕСТ (каркас) ---
 // TODO: @org.springframework.boot.test.context.SpringBootTest(classes = Task01.class)
 // TODO: @org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc
+
+@SuppressWarnings("SpringJavaInjectionPointsAutowiringInspection")
+@SpringBootTest(classes = Task01.class)
+@AutoConfigureMockMvc
 class SecurityIntegrationTest01 {
 
     // TODO: @Autowired MockMvc mockMvc;
 
+    @Autowired
+    MockMvc mockMvc;
+
     @Test
     void anonymous_401() throws Exception {
         // TODO: mockMvc.perform(get("/api/tasks")).andExpect(status().isUnauthorized());
+        mockMvc.perform(get("/api/tasks")).andExpect(status().isUnauthorized());
     }
 
     @Test
     // TODO: @WithMockUser
+    @WithMockUser
     void user_200() throws Exception {
         // TODO: mockMvc.perform(get("/api/tasks")).andExpect(status().isOk());
+        mockMvc.perform(get("/api/tasks")).andExpect(status().isOk());
     }
 }

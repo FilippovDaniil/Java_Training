@@ -4,9 +4,13 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
+import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.http.HttpStatus;
+import org.springframework.security.test.context.support.WithMockUser;
 import org.springframework.stereotype.Service;
+import org.springframework.test.context.bean.override.mockito.MockitoBean;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.web.bind.annotation.*;
 import static org.mockito.ArgumentMatchers.anyInt;
@@ -19,10 +23,21 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 // --- ТЕСТ (каркас) ---
 // TODO: @org.springframework.boot.test.context.SpringBootTest(classes = Task05.class)
 // TODO: @org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc
+
+@SuppressWarnings("SpringJavaInjectionPointsAutowiringInspection")
+@SpringBootTest(classes = Task05.class)
+@AutoConfigureMockMvc
+@WithMockUser
 class ExternalIntegrationTest05 {
 
     // TODO: @Autowired MockMvc mockMvc;
     // TODO: @MockBean PaymentGateway05 gateway;
+
+    @Autowired
+    MockMvc mockMvc;
+
+    @MockitoBean
+    PaymentGateway05 gateway;
 
     @Test
     void places_order_without_real_payment() throws Exception {
@@ -30,5 +45,12 @@ class ExternalIntegrationTest05 {
         // TODO: mockMvc.perform(post("/api/orders").contentType(APPLICATION_JSON).content("{\"amount\":100}"))
         //              .andExpect(status().isCreated());
         // TODO: verify(gateway).charge(100);
+
+        when(gateway.charge(anyInt())).thenReturn("OK");
+
+        mockMvc.perform(post("/api/orders").contentType(APPLICATION_JSON).content("{\"amount\":100}"))
+                .andExpect(status().isCreated());
+
+        verify(gateway).charge(100);
     }
 }

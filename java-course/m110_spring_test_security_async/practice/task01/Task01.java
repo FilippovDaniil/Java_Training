@@ -27,6 +27,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
+import org.springframework.security.config.Customizer;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.test.context.support.WithMockUser;
@@ -38,13 +39,19 @@ import org.springframework.web.bind.annotation.RestController;
 import java.util.List;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
+import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 
+@SpringBootApplication
 public class Task01 {
-    public static void main(String[] args) { SpringApplication.run(Task01.class, args); }
+    public static void main(String[] args) {
+        SpringApplication.run(m110_spring_test_security_async.practice.task01.Task01.class, args);
+    }
 
     @Bean
     SecurityFilterChain chain(HttpSecurity http) throws Exception {
-        http.authorizeHttpRequests(a -> a.anyRequest().authenticated()).csrf(c -> c.disable());
+        http.authorizeHttpRequests(a -> a.anyRequest().authenticated())
+                .httpBasic(Customizer.withDefaults())
+                .csrf(c -> c.disable());
         return http.build();
     }
 }

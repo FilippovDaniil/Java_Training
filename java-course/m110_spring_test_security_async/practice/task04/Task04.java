@@ -34,6 +34,7 @@ import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.TimeUnit;
 import static org.assertj.core.api.Assertions.assertThat;
 
+@SpringBootApplication
 public class Task04 {
     public static void main(String[] args) { SpringApplication.run(Task04.class, args); }
 }
