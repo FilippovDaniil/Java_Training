@@ -26,6 +26,7 @@ package m111_docker_basics.practice;
  */
 public class Task06 {
     public static void main(String[] args) {
+
         String commands = """
                 # TODO: впишите команды запуска postgres с env и inspect
                 # docker run -d --name db -p 5432:5432 \\
@@ -38,6 +39,7 @@ public class Task06 {
                 # docker inspect --format '{{.State.Status}}' db
                 # docker exec -it db psql -U app -d tasktracker -c "\\l"
                 """;
+
         System.out.println(commands);
     }
 }

@@ -25,6 +25,7 @@ package m111_docker_basics.practice;
  */
 public class Task04 {
     public static void main(String[] args) {
+
         String commands = """
                 # TODO: впишите команды жизненного цикла
                 # docker stop web
@@ -34,6 +35,7 @@ public class Task04 {
                 # docker rmi nginx        # удалить образ
                 # docker system prune     # очистить остановленные/неиспользуемые
                 """;
+
         System.out.println(commands);
     }
 }

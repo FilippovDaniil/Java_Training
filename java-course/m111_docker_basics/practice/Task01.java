@@ -20,6 +20,7 @@ package m111_docker_basics.practice;
  */
 public class Task01 {
     public static void main(String[] args) {
+
         String commands = """
                 # Файл-памятка: базовые команды первого запуска
                 # TODO: впишите команды
@@ -30,6 +31,7 @@ public class Task01 {
                 # docker images                    # локальные образы
                 # docker ps -a                     # все контейнеры (вкл. остановленные)
                 """;
+
         System.out.println(commands);
     }
 }

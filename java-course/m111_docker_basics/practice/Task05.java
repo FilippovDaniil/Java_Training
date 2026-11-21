@@ -24,6 +24,7 @@ package m111_docker_basics.practice;
  */
 public class Task05 {
     public static void main(String[] args) {
+
         String commands = """
                 # TODO: впишите команды запуска jar в контейнере
                 # ./gradlew bootJar
@@ -32,6 +33,7 @@ public class Task05 {
                 #     eclipse-temurin:17-jre java -jar /app.jar
                 # curl http://localhost:8080/actuator/health
                 """;
+
         System.out.println(commands);
     }
 }

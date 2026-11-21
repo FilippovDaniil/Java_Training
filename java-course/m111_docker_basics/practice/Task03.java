@@ -23,6 +23,7 @@ package m111_docker_basics.practice;
  */
 public class Task03 {
     public static void main(String[] args) {
+
         String commands = """
                 # TODO: впишите команды диагностики контейнера
                 # docker logs web
@@ -32,6 +33,7 @@ public class Task03 {
                 #   exit
                 # docker exec web ls /          # разовая команда без оболочки
                 """;
+
         System.out.println(commands);
     }
 }

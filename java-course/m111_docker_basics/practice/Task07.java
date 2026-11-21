@@ -26,6 +26,7 @@ package m111_docker_basics.practice;
  */
 public class Task07 {
     public static void main(String[] args) {
+
         String script = """
                 # TODO: соберите полный CLI-сценарий поднятия и проверки стека
 
@@ -55,6 +56,7 @@ public class Task07 {
                 # docker stop app db
                 # docker rm app db
                 """;
+
         System.out.println(script);
     }
 }

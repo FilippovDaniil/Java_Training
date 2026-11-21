@@ -22,6 +22,7 @@ package m111_docker_basics.practice;
  */
 public class Task02 {
     public static void main(String[] args) {
+
         String commands = """
                 # TODO: впишите команды фонового запуска с портом
                 # docker run -d --name web -p 8080:80 nginx
@@ -30,6 +31,7 @@ public class Task02 {
                 # docker stop web
                 # docker rm web
                 """;
+
         System.out.println(commands);
     }
 }
