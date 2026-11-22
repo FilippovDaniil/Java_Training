@@ -44,6 +44,7 @@ package m126_kafka_production_final.practice;
 public class Task01 {
     public static void main(String[] args) {
         String compose = """
+                
                 # TODO: прод-приближенный кластер из трёх брокеров
                 # services:
                 #   kafka-1:
@@ -71,6 +72,7 @@ public class Task01 {
                 # остановлен 1    -> Isr = ...  запись: ...
                 # остановлены 2   -> Isr = ...  запись: ...
                 """;
+
         System.out.println(compose);
     }
 }

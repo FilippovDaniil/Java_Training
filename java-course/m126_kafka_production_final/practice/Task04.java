@@ -43,6 +43,7 @@ package m126_kafka_production_final.practice;
  */
 public class Task04 {
     public static void main(String[] args) {
+
         String security = """
                 # TODO 1: application-prod.yml — SASL_SSL + SCRAM-SHA-512 + truststore
                 #
@@ -64,6 +65,7 @@ public class Task04 {
                 # Secret:    ...
                 # ConfigMap: ...
                 """;
+
         System.out.println(security);
     }
 }

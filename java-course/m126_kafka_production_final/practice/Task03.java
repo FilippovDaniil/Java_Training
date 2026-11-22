@@ -41,6 +41,7 @@ package m126_kafka_production_final.practice;
  */
 public class Task03 {
     public static void main(String[] args) {
+
         String observability = """
                 # TODO 1: application.yml (management.endpoints, prometheus, health.mail.enabled=false)
                 #
@@ -71,6 +72,7 @@ public class Task03 {
                 # 1) lag по группам   2) события/с по топикам   3) p50/p95/p99 обработки
                 # 4) ошибки отправки  5) записи в DLT           6) ISR/under-replicated
                 """;
+
         System.out.println(observability);
     }
 }

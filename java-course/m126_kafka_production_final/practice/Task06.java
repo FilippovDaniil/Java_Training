@@ -46,6 +46,7 @@ package m126_kafka_production_final.practice;
  */
 public class Task06 {
     public static void main(String[] args) {
+
         String runbook = """
                 # TODO: RUNBOOK событийного сервиса Task Tracker / notifier
                 #
@@ -68,6 +69,7 @@ public class Task06 {
                 # ## 9. CrashLoopBackOff после деплоя
                 # ## 10. Потребитель ничего не получает при LAG = 0
                 """;
+
         System.out.println(runbook);
     }
 }

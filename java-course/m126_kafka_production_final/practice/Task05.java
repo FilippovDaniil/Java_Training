@@ -47,6 +47,7 @@ package m126_kafka_production_final.practice;
  */
 public class Task05 {
     public static void main(String[] args) {
+
         String answer = """
                 # TODO: расчёты и тюнинг по трём профилям
                 #
@@ -67,6 +68,7 @@ public class Task05 {
                 # B: ...
                 # C: почему blocking retry, а не @RetryableTopic; почему нужен outbox; ...
                 """;
+
         System.out.println(answer);
     }
 }

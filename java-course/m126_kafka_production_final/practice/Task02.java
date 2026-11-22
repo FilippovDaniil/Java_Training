@@ -43,6 +43,7 @@ package m126_kafka_production_final.practice;
  */
 public class Task02 {
     public static void main(String[] args) {
+
         String manifests = """
                 # TODO 1: Deployment app
                 # apiVersion: apps/v1
@@ -75,6 +76,7 @@ public class Task02 {
                 # kubectl get pods -n task-tracker
                 # kubectl logs deployment/app -n task-tracker -f
                 """;
+
         System.out.println(manifests);
     }
 }

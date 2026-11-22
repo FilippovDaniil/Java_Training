@@ -57,6 +57,7 @@ package m126_kafka_production_final.practice;
  */
 public class Task07 {
     public static void main(String[] args) {
+
         String template = """
                 # TODO: production-ready шаблон событийного сервиса
                 #
@@ -99,6 +100,7 @@ public class Task07 {
                 #
                 # 8. ASYNCAPI: каналы task.created / task.status.changed + схемы событий
                 """;
+
         System.out.println(template);
     }
 }
