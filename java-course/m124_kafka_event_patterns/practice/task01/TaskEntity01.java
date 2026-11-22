@@ -22,8 +22,22 @@ public class TaskEntity01 {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    private String title;
+    private long authorId;
+    private String status;
+
     protected TaskEntity01() {
     }
 
-    // TODO
+    public TaskEntity01(String title, long authorId) {
+        this.title = title;
+        this.authorId = authorId;
+        this.status = "NEW";
+    }
+
+    public Long getId() { return id; }
+    public String getTitle() { return title; }
+    public long getAuthorId() { return authorId; }
+    public String getStatus() { return status; }
+    public void setStatus(String status) { this.status = status; }
 }

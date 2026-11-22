@@ -1,9 +1,11 @@
 package m124_kafka_event_patterns.practice.task05;
 
-import java.util.Map;
-import java.util.concurrent.ConcurrentHashMap;
+import org.apache.kafka.clients.consumer.ConsumerRecord;
 import org.springframework.kafka.annotation.KafkaListener;
 import org.springframework.stereotype.Component;
+
+import java.util.Map;
+import java.util.concurrent.ConcurrentHashMap;
 
 /**
  * Загрузка снимка состояния из compacted-топика в память сервиса.
@@ -28,12 +30,22 @@ public class StateBootstrapListener05 {
     private final Map<String, String> state = new ConcurrentHashMap<>();
 
     @KafkaListener(topics = "task.state", groupId = "state-bootstrap")
-    public void on(String value) {
-        // TODO 1-2 (ключ получите через @Header(KafkaHeaders.RECEIVED_KEY) или ConsumerRecord)
+    public void on(ConsumerRecord<String, String> rec) {
+        String key = rec.key();
+        String value = rec.value();
+
+        if (value == null) {
+            state.remove(key);
+            System.out.printf("[bootstrap] tombstone key=%s (размер снимка: %d)%n",
+                    key, state.size());
+        } else {
+            state.put(key, value);
+            System.out.printf("[bootstrap] key=%s -> %s (размер снимка: %d)%n",
+                    key, value, state.size());
+        }
     }
 
     public Map<String, String> snapshot() {
-        // TODO 3
         return Map.copyOf(state);
     }
 }

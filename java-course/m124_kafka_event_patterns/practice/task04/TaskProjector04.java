@@ -1,10 +1,13 @@
 package m124_kafka_event_patterns.practice.task04;
 
+import com.fasterxml.jackson.databind.JsonNode;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.kafka.annotation.KafkaListener;
 import org.springframework.kafka.support.Acknowledgment;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.time.Instant;
 /**
  * Проектор: превращает поток событий в таблицу для чтения.
  *
@@ -29,6 +32,7 @@ import org.springframework.transaction.annotation.Transactional;
 public class TaskProjector04 {
 
     private final TaskViewRepository04 views;
+    private final ObjectMapper objectMapper = new ObjectMapper().findAndRegisterModules();
 
     public TaskProjector04(TaskViewRepository04 views) {
         this.views = views;
@@ -36,13 +40,52 @@ public class TaskProjector04 {
 
     @KafkaListener(topics = "task.created", groupId = "projector")
     @Transactional
-    public void onCreated(String payload, Acknowledgment ack) {
-        // TODO 1
+    public void onCreated(String payload, Acknowledgment ack) throws Exception {
+        JsonNode node = objectMapper.readTree(payload);
+        long taskId = node.get("taskId").asLong();
+        long version = node.has("version") ? node.get("version").asLong() : 1L;
+
+        TaskView04 view = views.findById(taskId).orElseGet(() -> TaskView04.partial(taskId));
+
+        if (version <= view.getLastEventVersion()) {
+            System.out.printf("[projector] created id=%d version=%d уже применён — пропускаем%n",
+                    taskId, version);
+            ack.acknowledge();
+            return;
+        }
+
+        view.setTitle(node.get("title").asText());
+        view.setAuthorId(node.get("authorId").asLong());
+        view.setStatus(node.has("status") ? node.get("status").asText() : "NEW");
+        view.setLastEventVersion(version);
+        view.setUpdatedAt(Instant.now());
+        views.save(view);
+
+        ack.acknowledge();
     }
 
     @KafkaListener(topics = "task.status.changed", groupId = "projector")
     @Transactional
-    public void onStatusChanged(String payload, Acknowledgment ack) {
-        // TODO 2
+    public void onStatusChanged(String payload, Acknowledgment ack) throws Exception {
+        JsonNode node = objectMapper.readTree(payload);
+        long taskId = node.get("taskId").asLong();
+        long version = node.has("version") ? node.get("version").asLong() : 1L;
+
+        // событие могло прийти раньше created — создаём «частичную» запись
+        TaskView04 view = views.findById(taskId).orElseGet(() -> TaskView04.partial(taskId));
+
+        if (version <= view.getLastEventVersion()) {
+            System.out.printf("[projector] status id=%d version=%d уже применён — пропускаем%n",
+                    taskId, version);
+            ack.acknowledge();
+            return;
+        }
+
+        view.setStatus(node.get("newStatus").asText());
+        view.setLastEventVersion(version);
+        view.setUpdatedAt(Instant.now());
+        views.save(view);
+
+        ack.acknowledge();
     }
 }

@@ -1,10 +1,11 @@
 package m124_kafka_event_patterns.practice.task04;
 
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+
+import java.time.Instant;
+import java.util.List;
+import java.util.Map;
 
 /**
  * Сторона чтения (Query) в CQRS: обращается ТОЛЬКО к проекции, не к источнику событий.
@@ -26,13 +27,28 @@ public class DashboardController04 {
 
     @GetMapping("/tasks")
     ResponseEntity<?> byStatus(@RequestParam String status) {
-        // TODO 1
-        return ResponseEntity.status(501).build();
+        List<Map<String, Object>> result = views.findByStatus(status).stream()
+                .map(v -> Map.<String, Object>of(
+                        "taskId", v.getTaskId(),
+                        "title", v.getTitle(),
+                        "authorId", v.getAuthorId(),
+                        "status", v.getStatus(),
+                        "updatedAt", v.getUpdatedAt()))
+                .toList();
+        return ResponseEntity.ok(Map.of(
+                "data", result,
+                "asOf", Instant.now(),
+                "note", "eventually consistent"));
     }
 
     @GetMapping("/stats")
     ResponseEntity<?> stats() {
-        // TODO 2-3
-        return ResponseEntity.status(501).build();
+        List<Map<String, Object>> stats = views.countByStatus().stream()
+                .map(row -> Map.<String, Object>of("status", row[0], "count", row[1]))
+                .toList();
+        return ResponseEntity.ok(Map.of(
+                "stats", stats,
+                "asOf", Instant.now(),
+                "note", "eventually consistent"));
     }
 }

@@ -4,6 +4,8 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.Map;
+
 /**
  * Бизнес-сервис: пишет задачу и событие ОДНОЙ транзакцией.
  *
@@ -36,12 +38,43 @@ public class TaskService01 {
 
     @Transactional
     public long createTask(String title, long authorId) {
-        // TODO 1
-        return 0L;
+        TaskEntity01 task = tasks.save(new TaskEntity01(title, authorId));
+
+        try {
+            String payload = objectMapper.writeValueAsString(Map.of(
+                    "taskId", task.getId(),
+                    "title", title,
+                    "authorId", authorId,
+                    "status", task.getStatus()));
+            outbox.save(OutboxMessage01.of(
+                    "task.created", "task.created", String.valueOf(task.getId()), payload));
+        } catch (Exception e) {
+            throw new RuntimeException("не удалось сериализовать событие", e);
+        }
+
+        // для эксперимента 4: раскомментировать и проверить откат
+        // if (true) throw new RuntimeException("эксперимент: откат обеих вставок");
+
+        return task.getId();
     }
 
     @Transactional
     public void changeStatus(long id, String newStatus) {
-        // TODO 2
+        TaskEntity01 task = tasks.findById(id)
+                .orElseThrow(() -> new IllegalArgumentException("задача не найдена: " + id));
+
+        String oldStatus = task.getStatus();
+        task.setStatus(newStatus);
+
+        try {
+            String payload = objectMapper.writeValueAsString(Map.of(
+                    "taskId", id,
+                    "oldStatus", oldStatus,
+                    "newStatus", newStatus));
+            outbox.save(OutboxMessage01.of(
+                    "task.status.changed", "task.status.changed", String.valueOf(id), payload));
+        } catch (Exception e) {
+            throw new RuntimeException("не удалось сериализовать событие", e);
+        }
     }
 }

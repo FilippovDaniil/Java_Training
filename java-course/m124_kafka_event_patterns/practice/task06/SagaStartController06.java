@@ -1,13 +1,11 @@
 package m124_kafka_event_patterns.practice.task06;
 
-import java.util.Map;
 import org.springframework.http.ResponseEntity;
 import org.springframework.kafka.core.KafkaTemplate;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.Map;
+import java.util.UUID;
 
 /**
  * Запуск саги и наблюдение за её состоянием.
@@ -35,13 +33,20 @@ public class SagaStartController06 {
 
     @PostMapping("/tasks")
     ResponseEntity<?> start(@RequestBody Map<String, Object> body) {
-        // TODO 1
-        return ResponseEntity.status(501).build();
+        String title = (String) body.get("title");
+        long authorId = ((Number) body.get("authorId")).longValue();
+        String sagaId = UUID.randomUUID().toString();
+
+        String payload = String.format(
+                "{\"sagaId\":\"%s\",\"title\":\"%s\",\"authorId\":%d}",
+                sagaId, title, authorId);
+        kafka.send(SagaTopics06.RESERVE_REQUESTED, sagaId, payload);
+
+        return ResponseEntity.accepted().body(Map.of("sagaId", sagaId));
     }
 
     @GetMapping
     ResponseEntity<?> states() {
-        // TODO 2
-        return ResponseEntity.status(501).build();
+        return ResponseEntity.ok(sagas.states());
     }
 }

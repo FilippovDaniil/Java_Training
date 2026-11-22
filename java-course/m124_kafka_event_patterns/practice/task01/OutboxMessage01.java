@@ -1,5 +1,6 @@
 package m124_kafka_event_patterns.practice.task01;
 
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
@@ -32,8 +33,40 @@ public class OutboxMessage01 {
     @Id
     private UUID id;
 
+    private String aggregateId;
+    private String topic;
+    private String type;
+    @Column(columnDefinition = "TEXT")
+    private String payload;
+    private Instant occurredAt;
+    private Instant sentAt;
+    private int attempts;
+
     protected OutboxMessage01() {
     }
 
-    // TODO 1-3
+    public static OutboxMessage01 of(String topic, String type, String aggregateId, String payloadJson) {
+        OutboxMessage01 m = new OutboxMessage01();
+        m.id = UUID.randomUUID();          // id = eventId события
+        m.topic = topic;
+        m.type = type;
+        m.aggregateId = aggregateId;
+        m.payload = payloadJson;
+        m.occurredAt = Instant.now();
+        m.sentAt = null;
+        m.attempts = 0;
+        return m;
+    }
+
+    public void markSent() { this.sentAt = Instant.now(); }
+    public void incrementAttempts() { this.attempts++; }
+
+    public UUID getId() { return id; }
+    public String getAggregateId() { return aggregateId; }
+    public String getTopic() { return topic; }
+    public String getType() { return type; }
+    public String getPayload() { return payload; }
+    public Instant getOccurredAt() { return occurredAt; }
+    public Instant getSentAt() { return sentAt; }
+    public int getAttempts() { return attempts; }
 }

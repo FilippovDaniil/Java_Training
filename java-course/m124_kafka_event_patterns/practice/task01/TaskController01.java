@@ -8,6 +8,10 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.util.List;
+import java.util.Map;
+
+
 /**
  * REST для проверки outbox.
  *
@@ -29,13 +33,27 @@ public class TaskController01 {
 
     @PostMapping("/tasks")
     ResponseEntity<?> create(@RequestBody Map<String, Object> body) {
-        // TODO 1
-        return ResponseEntity.status(501).build();
+        String title = (String) body.get("title");
+        long authorId = ((Number) body.get("authorId")).longValue();
+        long id = service.createTask(title, authorId);
+        return ResponseEntity.status(201).body(Map.of("id", id));
     }
 
     @GetMapping("/outbox")
     ResponseEntity<?> unsent() {
-        // TODO 2-3
-        return ResponseEntity.status(501).build();
+        List<Map<String, Object>> result = outbox.findBySentAtIsNullOrderByOccurredAtAsc().stream()
+                .map(m -> Map.<String, Object>of(
+                        "id", m.getId(),
+                        "topic", m.getTopic(),
+                        "type", m.getType(),
+                        "aggregateId", m.getAggregateId(),
+                        "occurredAt", m.getOccurredAt()))
+                .toList();
+        return ResponseEntity.ok(result);
+    }
+
+    @GetMapping("/outbox/count")
+    ResponseEntity<?> count() {
+        return ResponseEntity.ok(Map.of("count", outbox.findBySentAtIsNullOrderByOccurredAtAsc().size()));
     }
 }

@@ -1,6 +1,9 @@
 package m124_kafka_event_patterns.practice.task06;
 
+import org.apache.kafka.clients.admin.NewTopic;
+import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.kafka.config.TopicBuilder;
 
 /**
  * Топики процесса — «схема» саги в одном месте.
@@ -22,5 +25,19 @@ public class SagaTopics06 {
     public static final String RELEASE_REQUESTED = "quota.release.requested";
     public static final String TASK_CREATED = "task.created";
 
-    // TODO: NewTopic-бины
+    @Bean NewTopic reserveRequested() {
+        return TopicBuilder.name(RESERVE_REQUESTED).partitions(3).replicas(1).build();
+    }
+    @Bean NewTopic reserved() {
+        return TopicBuilder.name(RESERVED).partitions(3).replicas(1).build();
+    }
+    @Bean NewTopic rejected() {
+        return TopicBuilder.name(REJECTED).partitions(3).replicas(1).build();
+    }
+    @Bean NewTopic releaseRequested() {
+        return TopicBuilder.name(RELEASE_REQUESTED).partitions(3).replicas(1).build();
+    }
+    @Bean NewTopic taskCreated() {
+        return TopicBuilder.name(TASK_CREATED).partitions(3).replicas(1).build();
+    }
 }

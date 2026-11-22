@@ -34,8 +34,7 @@ public class TaskApiController07 {
     private final OutboxRepository07 outbox;
     private final OutboxRelay07 relay;
 
-    public TaskApiController07(TaskCommandService07 commands, TaskViewRepository07 views,
-                               OutboxRepository07 outbox, OutboxRelay07 relay) {
+    public TaskApiController07(TaskCommandService07 commands, TaskViewRepository07 views, OutboxRepository07 outbox, OutboxRelay07 relay) {
         this.commands = commands;
         this.views = views;
         this.outbox = outbox;
@@ -44,25 +43,43 @@ public class TaskApiController07 {
 
     @PostMapping("/tasks")
     ResponseEntity<?> create(@RequestBody Map<String, Object> body) {
-        // TODO 1
-        return ResponseEntity.status(501).build();
+        String title = (String) body.get("title");
+        long authorId = ((Number) body.get("authorId")).longValue();
+        long id = commands.create(title, authorId);
+        return ResponseEntity.status(201).body(Map.of("id", id));
     }
 
     @PatchMapping("/tasks/{id}")
     ResponseEntity<?> changeStatus(@PathVariable long id, @RequestBody Map<String, String> body) {
-        // TODO 2
-        return ResponseEntity.status(501).build();
+        commands.changeStatus(id, body.get("status"));
+        return ResponseEntity.ok().build();
     }
 
     @GetMapping("/tasks")
     ResponseEntity<?> byStatus(@RequestParam String status) {
-        // TODO 3
-        return ResponseEntity.status(501).build();
+        var data = views.findByStatus(status).stream()
+                .map(v -> Map.of(
+                        "taskId", v.getTaskId(),
+                        "title", v.getTitle(),
+                        "status", v.getStatus(),
+                        "updatedAt", v.getUpdatedAt()))
+                .toList();
+        return ResponseEntity.ok(Map.of("data", data, "note", "eventually consistent"));
+    }
+
+    @GetMapping("/tasks/stats")
+    ResponseEntity<?> stats() {
+        var stats = views.countByStatus().stream()
+                .map(row -> Map.of("status", row[0], "count", row[1]))
+                .toList();
+        return ResponseEntity.ok(Map.of("stats", stats));
     }
 
     @GetMapping("/ops")
     ResponseEntity<?> ops() {
-        // TODO 5
-        return ResponseEntity.status(501).build();
+        return ResponseEntity.ok(Map.of(
+                "outboxUnsent", outbox.countBySentAtIsNull(),
+                "viewRows", views.count(),
+                "lastRelayRun", relay.lastRun()));
     }
 }

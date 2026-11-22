@@ -1,8 +1,14 @@
 package m124_kafka_event_patterns.practice.task02;
 
-import org.springframework.kafka.core.KafkaTemplate;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.kafka.core.KafkaTemplate;
+
+import java.util.List;
+import java.util.concurrent.TimeUnit;
 
 /**
  * Релэй: единственный компонент, который отправляет события из outbox в Kafka.
@@ -25,6 +31,10 @@ import org.springframework.transaction.annotation.Transactional;
 @Component
 public class OutboxRelay02 {
 
+    private static final Logger log = LoggerFactory.getLogger(OutboxRelay02.class);
+    private static final int BATCH_SIZE = 100;
+    private static final int MAX_ATTEMPTS_WARN = 10;
+
     private final OutboxRepository02 outbox;
     private final KafkaTemplate<String, String> kafka;
 
@@ -33,8 +43,41 @@ public class OutboxRelay02 {
         this.kafka = kafka;
     }
 
+    @Scheduled(fixedDelay = 500)
     @Transactional
     public void publishBatch() {
-        // TODO 1-3
+        List<OutboxMessage02> batch = outbox.findBySentAtIsNullOrderByOccurredAtAsc(
+                org.springframework.data.domain.Limit.of(BATCH_SIZE));
+
+        if (batch.isEmpty()) {
+            return;
+        }
+
+        int sent = 0;
+        int failed = 0;
+
+        for (OutboxMessage02 msg : batch) {
+            if (msg.getAttempts() > MAX_ATTEMPTS_WARN) {
+                log.warn("застрявшее событие id={} attempts={} topic={} aggregateId={} — требует внимания",
+                        msg.getId(), msg.getAttempts(), msg.getTopic(), msg.getAggregateId());
+            }
+
+            try {
+                // синхронно, с таймаутом: markSent только после подтверждения брокером
+                kafka.send(msg.getTopic(), msg.getAggregateId(), msg.getPayload())
+                        .get(5, TimeUnit.SECONDS);
+
+                msg.markSent();
+                sent++;
+            } catch (Exception e) {
+                msg.incrementAttempts();
+                failed++;
+                log.error("ошибка отправки id={} topic={}: {}",
+                        msg.getId(), msg.getTopic(), e.getMessage());
+            }
+        }
+
+        long remaining = outbox.countBySentAtIsNull();
+        log.info("релэй: отправлено {}, сбоев {}, осталось {}", sent, failed, remaining);
     }
 }

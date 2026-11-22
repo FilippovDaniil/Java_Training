@@ -1,7 +1,14 @@
 package m124_kafka_event_patterns.practice.task07;
 
 import java.time.Instant;
+import java.util.List;
+import java.util.concurrent.TimeUnit;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.data.domain.Limit;
 import org.springframework.kafka.core.KafkaTemplate;
+import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -19,6 +26,9 @@ import org.springframework.transaction.annotation.Transactional;
 @Component
 public class OutboxRelay07 {
 
+    private static final Logger log = LoggerFactory.getLogger(OutboxRelay07.class);
+    private static final int BATCH = 100;
+
     private final OutboxRepository07 outbox;
     private final KafkaTemplate<String, String> kafka;
     private volatile Instant lastRun;
@@ -28,9 +38,31 @@ public class OutboxRelay07 {
         this.kafka = kafka;
     }
 
+    @Scheduled(fixedDelay = 500)
     @Transactional
     public void publish() {
-        // TODO 1-3
+        List<OutboxMessage07> batch = outbox.findBySentAtIsNullOrderByOccurredAtAsc(Limit.of(BATCH));
+
+        for (OutboxMessage07 msg : batch) {
+            try {
+                kafka.send(msg.getTopic(), msg.getAggregateId(), msg.getPayload())
+                        .get(5, TimeUnit.SECONDS);
+                msg.markSent();
+            } catch (Exception e) {
+                msg.incrementAttempts();
+                log.error("ошибка отправки id={} attempts={}: {}",
+                        msg.getId(), msg.getAttempts(), e.getMessage());
+            }
+        }
+
+        lastRun = Instant.now();
+
+        if (!batch.isEmpty()) {
+            log.info("релэй: отправлено {}, сбоев {}, осталось {}",
+                    batch.stream().filter(m -> m.getSentAt() != null).count(),
+                    batch.stream().filter(m -> m.getSentAt() == null).count(),
+                    outbox.countBySentAtIsNull());
+        }
     }
 
     public Instant lastRun() {

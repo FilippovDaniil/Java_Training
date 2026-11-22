@@ -1,10 +1,13 @@
 package m124_kafka_event_patterns.practice.task07;
 
+import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.kafka.annotation.KafkaListener;
 import org.springframework.kafka.support.Acknowledgment;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
+
+import java.time.Instant;
 
 /**
  * Read-сторона: строит task_view7 из событий.
@@ -33,13 +36,47 @@ public class TaskProjector07 {
 
     @KafkaListener(topics = "task.created", groupId = "projector")
     @Transactional
-    public void onCreated(String payload, Acknowledgment ack) {
-        // TODO 1 + TODO 4
+    public void onCreated(String payload, Acknowledgment ack) throws Exception {
+        JsonNode node = objectMapper.readTree(payload);
+        long taskId = node.get("taskId").asLong();
+        long version = node.get("version").asLong();
+
+        TaskView07 view = views.findById(taskId).orElseGet(() -> TaskView07.partial(taskId));
+
+        if (version <= view.getVersion()) {
+            ack.acknowledge();
+            return;
+        }
+
+        view.setTitle(node.get("title").asText());
+        view.setAuthorId(node.get("authorId").asLong());
+        view.setStatus(node.get("status").asText());
+        view.setVersion(version);
+        view.setUpdatedAt(Instant.now());
+        views.save(view);
+
+        ack.acknowledge();
     }
 
     @KafkaListener(topics = "task.status.changed", groupId = "projector")
     @Transactional
-    public void onStatusChanged(String payload, Acknowledgment ack) {
-        // TODO 2-4
+    public void onStatusChanged(String payload, Acknowledgment ack) throws Exception {
+        JsonNode node = objectMapper.readTree(payload);
+        long taskId = node.get("taskId").asLong();
+        long version = node.get("version").asLong();
+
+        TaskView07 view = views.findById(taskId).orElseGet(() -> TaskView07.partial(taskId));
+
+        if (version <= view.getVersion()) {
+            ack.acknowledge();
+            return;
+        }
+
+        view.setStatus(node.get("newStatus").asText());
+        view.setVersion(version);
+        view.setUpdatedAt(Instant.now());
+        views.save(view);
+
+        ack.acknowledge();
     }
 }

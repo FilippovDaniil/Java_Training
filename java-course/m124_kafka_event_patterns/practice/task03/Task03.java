@@ -1,4 +1,4 @@
-package m124_kafka_event_patterns.practice;
+package m124_kafka_event_patterns.practice.task03;
 
 /**
  * Задача 03 — Модуль 124: CDC через Debezium (конфигурация коннектора + Outbox Event Router)
@@ -66,6 +66,7 @@ package m124_kafka_event_patterns.practice;
  */
 public class Task03 {
     public static void main(String[] args) {
+
         String artifacts = """
                 # TODO 1: сервисы db (wal_level=logical) и connect (debezium/connect) в docker-compose.yml
                 #
@@ -89,5 +90,6 @@ public class Task03 {
                 # | риски               | ... | забытый слот репликации -> WAL растёт |
                 """;
         System.out.println(artifacts);
+
     }
 }

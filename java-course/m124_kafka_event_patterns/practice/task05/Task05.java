@@ -40,13 +40,27 @@ package m124_kafka_event_patterns.practice.task05;
  *   compacted-топик никогда не уменьшается.
  */
 
+import org.apache.kafka.clients.admin.NewTopic;
+import org.apache.kafka.common.config.TopicConfig;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.context.annotation.Bean;
+import org.springframework.kafka.config.TopicBuilder;
 
 @SpringBootApplication
 public class Task05 {
 
     public static void main(String[] args) {
         SpringApplication.run(Task05.class, args);
+    }
+
+    @Bean
+    NewTopic taskState() {
+        return TopicBuilder.name("task.state")
+                .partitions(3)
+                .replicas(1)
+                .config(TopicConfig.CLEANUP_POLICY_CONFIG, TopicConfig.CLEANUP_POLICY_COMPACT)
+                .config(TopicConfig.MIN_CLEANABLE_DIRTY_RATIO_CONFIG, "0.1")
+                .build();
     }
 }

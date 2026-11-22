@@ -3,6 +3,8 @@ package m124_kafka_event_patterns.practice.task01;
 import java.util.List;
 import java.util.UUID;
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Query;
+import org.springframework.data.repository.query.Param;
 
 /**
  * Репозиторий outbox.
@@ -20,5 +22,10 @@ import org.springframework.data.jpa.repository.JpaRepository;
  */
 public interface OutboxRepository01 extends JpaRepository<OutboxMessage01, UUID> {
 
-    // TODO 1-2
+    List<OutboxMessage01> findBySentAtIsNullOrderByOccurredAtAsc();
+
+    // для релэя (задача 02) — пачка с блокировкой (PostgreSQL)
+    @Query(value = "SELECT * FROM outbox WHERE sent_at IS NULL ORDER BY occurred_at "
+            + "LIMIT :limit FOR UPDATE SKIP LOCKED", nativeQuery = true)
+    List<OutboxMessage01> lockUnsent(@Param("limit") int limit);
 }

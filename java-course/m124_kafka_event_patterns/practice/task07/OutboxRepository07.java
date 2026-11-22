@@ -12,6 +12,6 @@ import org.springframework.data.jpa.repository.JpaRepository;
  * TODO 2: countBySentAtIsNull() — метрика для /api/ops.
  */
 public interface OutboxRepository07 extends JpaRepository<OutboxMessage07, UUID> {
-
-    // TODO 1-2
+    List<OutboxMessage07> findBySentAtIsNullOrderByOccurredAtAsc(Limit limit);
+    long countBySentAtIsNull();
 }

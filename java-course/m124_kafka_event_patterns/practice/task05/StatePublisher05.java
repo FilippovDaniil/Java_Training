@@ -26,10 +26,10 @@ public class StatePublisher05 {
     }
 
     public void publishState(String taskId, String stateJson) {
-        // TODO 1
+        kafka.send(TOPIC, taskId, stateJson);
     }
 
     public void deleteState(String taskId) {
-        // TODO 2
+        kafka.send(TOPIC, taskId, null);   // tombstone
     }
 }

@@ -19,10 +19,36 @@ import java.time.Instant;
 public class TaskView04 {
 
     @Id
-    private Long taskId;
+    private Long taskId;          // ключ из события, НЕ генерируется
+
+    private String title;
+    private long authorId;
+    private String status;
+    private long lastEventVersion;
+    private Instant updatedAt;
 
     protected TaskView04() {
     }
 
-    // TODO
+    public static TaskView04 partial(Long taskId) {
+        TaskView04 v = new TaskView04();
+        v.taskId = taskId;
+        v.status = "UNKNOWN";
+        v.lastEventVersion = -1;
+        v.updatedAt = Instant.now();
+        return v;
+    }
+
+    public Long getTaskId() { return taskId; }
+    public String getTitle() { return title; }
+    public long getAuthorId() { return authorId; }
+    public String getStatus() { return status; }
+    public long getLastEventVersion() { return lastEventVersion; }
+    public Instant getUpdatedAt() { return updatedAt; }
+
+    public void setTitle(String title) { this.title = title; }
+    public void setAuthorId(long authorId) { this.authorId = authorId; }
+    public void setStatus(String status) { this.status = status; }
+    public void setLastEventVersion(long lastEventVersion) { this.lastEventVersion = lastEventVersion; }
+    public void setUpdatedAt(Instant updatedAt) { this.updatedAt = updatedAt; }
 }

@@ -4,6 +4,8 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.Map;
+
 /**
  * Write-сторона: команды меняют состояние и записывают события в outbox одной транзакцией.
  *
@@ -32,12 +34,44 @@ public class TaskCommandService07 {
 
     @Transactional
     public long create(String title, long authorId) {
-        // TODO 1
-        return 0L;
+        TaskEntity07 task = tasks.save(new TaskEntity07(title, authorId));
+
+        try {
+            String payload = objectMapper.writeValueAsString(Map.of(
+                    "taskId", task.getId(),
+                    "title", task.getTitle(),
+                    "authorId", task.getAuthorId(),
+                    "status", task.getStatus(),
+                    "version", task.getVersion()));
+            outbox.save(OutboxMessage07.of(
+                    "task.created", "task.created",
+                    String.valueOf(task.getId()), payload));
+        } catch (Exception e) {
+            throw new RuntimeException("не удалось сериализовать", e);
+        }
+
+        return task.getId();
     }
 
     @Transactional
     public void changeStatus(long id, String newStatus) {
-        // TODO 2
+        TaskEntity07 task = tasks.findById(id)
+                .orElseThrow(() -> new IllegalArgumentException("задача не найдена: " + id));
+
+        String oldStatus = task.getStatus();
+        task.setStatus(newStatus);   // version++
+
+        try {
+            String payload = objectMapper.writeValueAsString(Map.of(
+                    "taskId", id,
+                    "oldStatus", oldStatus,
+                    "newStatus", newStatus,
+                    "version", task.getVersion()));
+            outbox.save(OutboxMessage07.of(
+                    "task.status.changed", "task.status.changed",
+                    String.valueOf(id), payload));
+        } catch (Exception e) {
+            throw new RuntimeException("не удалось сериализовать", e);
+        }
     }
 }

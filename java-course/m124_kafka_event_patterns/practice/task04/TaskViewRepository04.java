@@ -15,5 +15,8 @@ import org.springframework.data.jpa.repository.Query;
  */
 public interface TaskViewRepository04 extends JpaRepository<TaskView04, Long> {
 
-    // TODO 1-2
+    List<TaskView04> findByStatus(String status);
+
+    @Query("select v.status, count(v) from TaskView04 v group by v.status")
+    List<Object[]> countByStatus();
 }
