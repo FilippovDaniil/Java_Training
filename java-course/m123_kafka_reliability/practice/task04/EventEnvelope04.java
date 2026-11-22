@@ -10,5 +10,10 @@ import java.util.UUID;
  *
  * ВАЖНО: eventId генерируется ОДИН РАЗ при создании события (в источнике), а не при отправке.
  */
-public record EventEnvelope04(UUID eventId) {
+public record EventEnvelope04(
+        UUID eventId,
+        String type,
+        Instant occurredAt,
+        String payload
+) {
 }

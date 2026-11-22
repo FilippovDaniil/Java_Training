@@ -26,12 +26,10 @@ public class ProcessedEvents04 {
     private final Set<UUID> processed = ConcurrentHashMap.newKeySet();
 
     public boolean markProcessed(UUID eventId) {
-        // TODO 1
-        return true;
+        return processed.add(eventId);   // true — новый, false — дубль
     }
 
     public int size() {
-        // TODO 2
-        return 0;
+        return processed.size();
     }
 }

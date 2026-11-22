@@ -31,7 +31,30 @@ public class NotificationListener07 {
 
     @KafkaListener(topics = "task.created", groupId = "notifier", id = "notifier-main")
     public void on(EventEnvelope07 event, Acknowledgment ack) {
-        // TODO 1-5
+        // 1) валидация — не-retryable
+        if (event.eventId() == null || event.payload() == null || event.payload().isBlank()) {
+            failures.incrementAndGet();
+            throw new IllegalArgumentException("некорректный конверт: " + event);
+        }
+
+        // 2) дедупликация
+        if (!processedEvents.markProcessed(event.eventId())) {
+            System.out.printf("дубль eventId=%s — пропускаем%n", event.eventId());
+            ack.acknowledge();   // дубль тоже подтверждаем!
+            return;
+        }
+
+        // 3) эффект
+        if (event.payload().contains("smtp-down")) {
+            failures.incrementAndGet();
+            throw new RuntimeException("SMTP недоступен: " + event.payload());
+        }
+
+        System.out.printf("уведомление отправлено для eventId=%s payload=%s%n",
+                event.eventId(), event.payload());
+
+        // 4) ack только после успеха
+        ack.acknowledge();
     }
 
     public int failureCount() {

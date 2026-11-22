@@ -8,5 +8,10 @@ import java.util.UUID;
  *
  * TODO: поля record — UUID eventId, String type, Instant occurredAt, String payload.
  */
-public record EventEnvelope07(UUID eventId) {
+public record EventEnvelope07(
+        UUID eventId,
+        String type,
+        Instant occurredAt,
+        String payload
+) {
 }

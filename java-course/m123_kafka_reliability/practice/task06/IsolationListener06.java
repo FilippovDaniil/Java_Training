@@ -21,12 +21,12 @@ public class IsolationListener06 {
 
     @KafkaListener(topics = "task.created", groupId = "committed-reader")
     public void onCommitted(String value) {
-        // TODO 1
+        System.out.printf("[committed] task.created: %s%n", value);
     }
 
     @KafkaListener(topics = "task.created", groupId = "uncommitted-reader",
             properties = "isolation.level=read_uncommitted")
     public void onUncommitted(String value) {
-        // TODO 2
+        System.out.printf("[uncommitted] task.created: %s%n", value);
     }
 }

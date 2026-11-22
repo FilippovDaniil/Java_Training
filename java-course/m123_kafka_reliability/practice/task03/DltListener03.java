@@ -5,6 +5,8 @@ import org.springframework.kafka.support.KafkaHeaders;
 import org.springframework.messaging.handler.annotation.Header;
 import org.springframework.stereotype.Component;
 
+import java.util.concurrent.atomic.AtomicLong;
+
 /**
  * Слушатель DLT: место разбора инцидентов.
  *
@@ -21,10 +23,17 @@ import org.springframework.stereotype.Component;
 @Component
 public class DltListener03 {
 
+    private final AtomicLong dltCount = new AtomicLong();
+
     @KafkaListener(topics = "task.created.DLT", groupId = "dlt-monitor")
     public void onDlt(String value,
                       @Header(name = KafkaHeaders.DLT_ORIGINAL_TOPIC, required = false) String originalTopic,
+                      @Header(name = KafkaHeaders.DLT_ORIGINAL_PARTITION, required = false) Integer originalPartition,
+                      @Header(name = KafkaHeaders.DLT_ORIGINAL_OFFSET, required = false) Long originalOffset,
+                      @Header(name = KafkaHeaders.DLT_EXCEPTION_FQCN, required = false) String exceptionFqcn,
                       @Header(name = KafkaHeaders.DLT_EXCEPTION_MESSAGE, required = false) String message) {
-        // TODO 1-3
+        long count = dltCount.incrementAndGet();
+        System.out.printf("[DLT] #%d запись из %s-%s offset %s: %s: %s (value=%s)%n",
+                count, originalTopic, originalPartition, originalOffset, exceptionFqcn, message, value);
     }
 }

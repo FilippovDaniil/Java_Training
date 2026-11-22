@@ -14,6 +14,10 @@ public class MainListener03 {
 
     @KafkaListener(topics = "task.created", groupId = "dlq-demo")
     public void on(String value) {
-        // TODO 1-2
+        if (value.contains("bad")) {
+            System.out.printf("[main] обработка %s -> падаю%n", value);
+            throw new RuntimeException("не могу обработать " + value);
+        }
+        System.out.printf("[main] обработано: %s%n", value);
     }
 }

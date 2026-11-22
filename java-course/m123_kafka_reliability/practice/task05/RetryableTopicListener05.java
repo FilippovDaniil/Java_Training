@@ -1,8 +1,12 @@
 package m123_kafka_reliability.practice.task05;
 
+import org.springframework.kafka.annotation.DltHandler;
 import org.springframework.kafka.annotation.KafkaListener;
+import org.springframework.kafka.annotation.RetryableTopic;
+import org.springframework.kafka.retrytopic.DltStrategy;
 import org.springframework.kafka.support.KafkaHeaders;
 import org.springframework.messaging.handler.annotation.Header;
+import org.springframework.retry.annotation.Backoff;
 import org.springframework.stereotype.Component;
 
 /**
@@ -24,11 +28,25 @@ import org.springframework.stereotype.Component;
 @Component
 public class RetryableTopicListener05 {
 
+    @RetryableTopic(
+            attempts = "4",                                 // 1 + 3 повтора
+            backoff = @Backoff(delay = 1000, multiplier = 2.0),   // 1с, 2с, 4с
+            autoCreateTopics = "true",
+            dltStrategy = DltStrategy.FAIL_ON_ERROR)
     @KafkaListener(topics = "task.created", groupId = "retryable-topic-demo")
     public void on(String value,
                    @Header(KafkaHeaders.RECEIVED_TOPIC) String topic) {
-        // TODO 2
+        System.out.printf("[%s] %s%n", topic, value);
+
+        if (value.contains("bad")) {
+            throw new RuntimeException("не могу обработать " + value);
+        }
+        System.out.printf("[%s] %s -> обработано%n", topic, value);
     }
 
-    // TODO 3: @DltHandler public void onDlt(String value, @Header(...) String message) { ... }
+    @DltHandler
+    public void onDlt(String value,
+                      @Header(name = KafkaHeaders.DLT_EXCEPTION_MESSAGE, required = false) String message) {
+        System.out.printf("[DLT] %s: %s%n", value, message);
+    }
 }

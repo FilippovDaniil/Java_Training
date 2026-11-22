@@ -29,6 +29,14 @@ public class IdempotentListener04 {
 
     @KafkaListener(topics = "task.created", groupId = "idempotent-demo")
     public void on(EventEnvelope04 event) {
-        // TODO 1-3
+        if (!processedEvents.markProcessed(event.eventId())) {
+            System.out.printf("дубль eventId=%s — пропускаем%n", event.eventId());
+            return;
+        }
+
+        System.out.printf("письмо отправлено для eventId=%s (эффектов: %d)%n",
+                event.eventId(), effects.incrementAndGet());
+        System.out.printf("всего обработано уникальных eventId: %d%n",
+                processedEvents.size());
     }
 }

@@ -1,9 +1,11 @@
 package m123_kafka_reliability.practice.task07;
 
+import org.springframework.stereotype.Component;
+
 import java.util.Set;
 import java.util.UUID;
 import java.util.concurrent.ConcurrentHashMap;
-import org.springframework.stereotype.Component;
+import java.util.concurrent.atomic.AtomicInteger;
 
 /**
  * Реестр обработанных событий с метриками.
@@ -17,19 +19,21 @@ import org.springframework.stereotype.Component;
 public class ProcessedEvents07 {
 
     private final Set<UUID> processed = ConcurrentHashMap.newKeySet();
+    private final AtomicInteger duplicates = new AtomicInteger();
 
     public boolean markProcessed(UUID eventId) {
-        // TODO 1
-        return true;
+        boolean isNew = processed.add(eventId);
+        if (!isNew) {
+            duplicates.incrementAndGet();
+        }
+        return isNew;
     }
 
     public int processedCount() {
-        // TODO 2
-        return 0;
+        return processed.size();
     }
 
     public int duplicateCount() {
-        // TODO 2
-        return 0;
+        return duplicates.get();
     }
 }

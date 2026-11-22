@@ -41,13 +41,26 @@ package m123_kafka_reliability.practice.task05;
  *   заранее вместе с основным топиком — с тем же числом партиций.
  */
 
+import org.springframework.boot.ApplicationRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.context.annotation.Bean;
+import org.springframework.kafka.core.KafkaTemplate;
 
 @SpringBootApplication
 public class Task05 {
 
     public static void main(String[] args) {
         SpringApplication.run(Task05.class, args);
+    }
+
+    @Bean
+    ApplicationRunner runner(KafkaTemplate<String, Object> kafka) {
+        return args -> {
+            // в одну партицию (один ключ), чтобы проверить порядок
+            kafka.send("task.created", "1", "bad-1");
+            kafka.send("task.created", "1", "good-1");
+            kafka.flush();
+        };
     }
 }

@@ -3,6 +3,12 @@ package m123_kafka_reliability.practice.task02;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.kafka.listener.DefaultErrorHandler;
+import org.apache.kafka.common.KafkaException;
+import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Configuration;
+import org.springframework.kafka.listener.DefaultErrorHandler;
+import org.springframework.kafka.support.ExponentialBackOffWithMaxRetries;
+import org.springframework.util.backoff.ExponentialBackOff;
 
 /**
  * Экспоненциальные повторы + классификация исключений.
@@ -22,7 +28,18 @@ public class BackOffConfig02 {
 
     @Bean
     DefaultErrorHandler errorHandler() {
-        // TODO 1-3
-        return null;
+        ExponentialBackOffWithMaxRetries backOff = new ExponentialBackOffWithMaxRetries(3);
+        backOff.setInitialInterval(1000L);   // 1 сек
+        backOff.setMultiplier(2.0);          // 2x
+        backOff.setMaxInterval(10_000L);     // не больше 10 сек
+
+        DefaultErrorHandler handler = new DefaultErrorHandler(backOff);
+        handler.addNotRetryableExceptions(IllegalArgumentException.class);
+
+        handler.setRetryListeners((record, ex, deliveryAttempt) ->
+                System.out.printf("retry #%d для value=%s причина: %s%n",
+                        deliveryAttempt, record.value(), ex.getMessage()));
+
+        return handler;
     }
 }

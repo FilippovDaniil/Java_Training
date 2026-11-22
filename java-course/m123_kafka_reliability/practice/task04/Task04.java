@@ -39,13 +39,43 @@ package m123_kafka_reliability.practice.task04;
  *   повторной публикации того же факта (миграция топика, двойная публикация из модуля 122).
  */
 
+import org.springframework.boot.ApplicationRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.context.annotation.Bean;
+import org.springframework.kafka.core.KafkaTemplate;
+
+import java.time.Instant;
+import java.util.UUID;
+
 
 @SpringBootApplication
 public class Task04 {
 
     public static void main(String[] args) {
         SpringApplication.run(Task04.class, args);
+    }
+
+    @Bean
+    ApplicationRunner runner(KafkaTemplate<String, Object> kafka) {
+        return args -> {
+            // Эксперимент 1: одно и то же событие 3 раза
+            UUID sameId = UUID.randomUUID();
+            EventEnvelope04 same = new EventEnvelope04(
+                    sameId, "task.created", Instant.now(), "{\"taskId\":1}");
+            kafka.send("task.created", "1", same);
+            kafka.send("task.created", "1", same);
+            kafka.send("task.created", "1", same);
+
+            // Эксперимент 2: одинаковый payload, разные eventId
+            EventEnvelope04 a = new EventEnvelope04(
+                    UUID.randomUUID(), "task.created", Instant.now(), "{\"taskId\":2}");
+            EventEnvelope04 b = new EventEnvelope04(
+                    UUID.randomUUID(), "task.created", Instant.now(), "{\"taskId\":2}");
+            kafka.send("task.created", "2", a);
+            kafka.send("task.created", "2", b);
+
+            kafka.flush();
+        };
     }
 }

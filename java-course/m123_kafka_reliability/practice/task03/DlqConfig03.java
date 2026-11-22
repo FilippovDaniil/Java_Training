@@ -1,10 +1,14 @@
 package m123_kafka_reliability.practice.task03;
 
+import org.apache.kafka.clients.producer.ProducerRecord;
+import org.apache.kafka.common.TopicPartition;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.kafka.core.KafkaTemplate;
 import org.springframework.kafka.listener.DeadLetterPublishingRecoverer;
 import org.springframework.kafka.listener.DefaultErrorHandler;
+import org.springframework.util.backoff.FixedBackOff;
+
 
 /**
  * Конфигурация DLQ.
@@ -26,13 +30,13 @@ public class DlqConfig03 {
 
     @Bean
     DeadLetterPublishingRecoverer recoverer(KafkaTemplate<String, Object> template) {
-        // TODO 1
-        return null;
+        // резолвер: "<исходный топик>.DLT", партиция -1 (выбрать по ключу)
+        return new DeadLetterPublishingRecoverer(template,
+                (record, ex) -> new TopicPartition(record.topic() + ".DLT", -1));
     }
 
     @Bean
     DefaultErrorHandler errorHandler(DeadLetterPublishingRecoverer recoverer) {
-        // TODO 2
-        return null;
+        return new DefaultErrorHandler(recoverer, new FixedBackOff(500L, 2L));
     }
 }

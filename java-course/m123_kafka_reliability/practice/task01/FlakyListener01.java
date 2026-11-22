@@ -25,6 +25,20 @@ public class FlakyListener01 {
 
     @KafkaListener(topics = "task.created", groupId = "retry-demo")
     public void on(String value) {
-        // TODO 1-4
+        int attempt = attempts
+                .computeIfAbsent(value, k -> new AtomicInteger(0))
+                .incrementAndGet();
+
+        if (value.contains("always-bad")) {
+            System.out.printf("попытка %d для %s -> падаю (always-bad)%n", attempt, value);
+            throw new RuntimeException("always-bad: " + value);
+        }
+
+        if (value.contains("flaky") && attempt < 3) {
+            System.out.printf("попытка %d для %s -> падаю%n", attempt, value);
+            throw new RuntimeException("flaky: " + value);
+        }
+
+        System.out.printf("попытка %d для %s -> успех%n", attempt, value);
     }
 }

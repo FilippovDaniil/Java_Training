@@ -39,13 +39,38 @@ package m123_kafka_reliability.practice.task06;
  *   офсеты в топике «прыгают» (не строго +1 на сообщение). Это нормально.
  */
 
+import org.springframework.boot.ApplicationRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.context.annotation.Bean;
 
 @SpringBootApplication
 public class Task06 {
 
     public static void main(String[] args) {
         SpringApplication.run(Task06.class, args);
+    }
+
+    @Bean
+    ApplicationRunner runner(TransactionalPublisher06 publisher) {
+        return args -> {
+            System.out.println("--- publishBoth (commit) ---");
+            publisher.publishBoth("1",
+                    "{\"event\":\"событие 1\"}",
+                    "{\"audit\":\"запись 1\"}");
+
+            Thread.sleep(2000);   // дать консьюмерам прочитать
+
+            System.out.println("--- publishAndRollback (abort) ---");
+            try {
+                publisher.publishAndRollback("2",
+                        "{\"event\":\"событие 2\"}",
+                        "{\"audit\":\"запись 2\"}");
+            } catch (RuntimeException e) {
+                System.out.println("откат: " + e.getMessage());
+            }
+
+            Thread.sleep(2000);
+        };
     }
 }

@@ -1,10 +1,13 @@
 package m123_kafka_reliability.practice.task07;
 
+import org.apache.kafka.common.KafkaException;
+import org.apache.kafka.common.TopicPartition;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.kafka.core.KafkaTemplate;
 import org.springframework.kafka.listener.DeadLetterPublishingRecoverer;
 import org.springframework.kafka.listener.DefaultErrorHandler;
+import org.springframework.kafka.support.ExponentialBackOffWithMaxRetries;
 
 /**
  * Политика надёжности приложения в одном месте.
@@ -23,13 +26,24 @@ public class ReliabilityConfig07 {
 
     @Bean
     DeadLetterPublishingRecoverer recoverer(KafkaTemplate<String, Object> template) {
-        // TODO 1
-        return null;
+        return new DeadLetterPublishingRecoverer(template,
+                (record, ex) -> new TopicPartition(record.topic() + ".DLT", -1));
     }
 
     @Bean
     DefaultErrorHandler errorHandler(DeadLetterPublishingRecoverer recoverer) {
-        // TODO 2-4
-        return null;
+        ExponentialBackOffWithMaxRetries backOff = new ExponentialBackOffWithMaxRetries(3);
+        backOff.setInitialInterval(1000L);
+        backOff.setMultiplier(2.0);
+        backOff.setMaxInterval(10_000L);
+
+        DefaultErrorHandler handler = new DefaultErrorHandler(recoverer, backOff);
+        handler.addNotRetryableExceptions(IllegalArgumentException.class);
+
+        handler.setRetryListeners((record, ex, attempt) ->
+                System.err.printf("retry #%d topic=%s key=%s причина: %s%n",
+                        attempt, record.topic(), record.key(), ex.getMessage()));
+
+        return handler;
     }
 }

@@ -27,10 +27,18 @@ public class TransactionalPublisher06 {
     }
 
     public void publishBoth(String key, Object event, Object audit) {
-        // TODO 1
+        kafka.executeInTransaction(t -> {
+            t.send("task.created", key, event);
+            t.send("task.audit", key, audit);
+            return true;   // true → commit
+        });
     }
 
     public void publishAndRollback(String key, Object event, Object audit) {
-        // TODO 2
+        kafka.executeInTransaction(t -> {
+            t.send("task.created", key, event);
+            t.send("task.audit", key, audit);
+            throw new RuntimeException("эмуляция сбоя — откат транзакции");
+        });
     }
 }

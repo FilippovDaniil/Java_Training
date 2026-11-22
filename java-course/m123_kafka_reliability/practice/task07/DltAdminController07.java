@@ -1,11 +1,20 @@
 package m123_kafka_reliability.practice.task07;
 
+import org.apache.kafka.clients.consumer.ConsumerRecord;
+import org.apache.kafka.clients.consumer.ConsumerRecords;
+import org.apache.kafka.clients.consumer.KafkaConsumer;
+import org.apache.kafka.clients.producer.ProducerRecord;
+import org.apache.kafka.common.header.internals.RecordHeader;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.kafka.core.ConsumerFactory;
 import org.springframework.kafka.core.KafkaTemplate;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+
+import java.nio.charset.StandardCharsets;
+import java.time.Duration;
+import java.util.List;
+import java.util.Map;
 
 /**
  * Эксплуатационный контур DLQ: посмотреть статистику и переиграть сбойные события.
@@ -30,27 +39,62 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("/api/dlt")
 public class DltAdminController07 {
 
+    private static final String DLT_TOPIC = "task.created.DLT";
+    private static final String MAIN_TOPIC = "task.created";
+
     private final KafkaTemplate<String, Object> kafka;
     private final ProcessedEvents07 processedEvents;
     private final NotificationListener07 listener;
+    private final ConsumerFactory<String, Object> consumerFactory;
 
     public DltAdminController07(KafkaTemplate<String, Object> kafka,
                                 ProcessedEvents07 processedEvents,
-                                NotificationListener07 listener) {
+                                NotificationListener07 listener,
+                                ConsumerFactory<String, Object> consumerFactory) {
         this.kafka = kafka;
         this.processedEvents = processedEvents;
         this.listener = listener;
+        this.consumerFactory = consumerFactory;
     }
 
     @GetMapping("/stats")
     ResponseEntity<?> stats() {
-        // TODO 1
-        return ResponseEntity.status(501).build();
+        return ResponseEntity.ok(Map.of(
+                "processed", processedEvents.processedCount(),
+                "duplicates", processedEvents.duplicateCount(),
+                "failures", listener.failureCount(),
+                "dltCount", 0   // в реальном проекте — из Micrometer/DLT-слушателя
+        ));
     }
 
     @PostMapping("/reprocess")
     ResponseEntity<?> reprocess() {
-        // TODO 2-4
-        return ResponseEntity.status(501).build();
+        int reprocessed = 0;
+        int skipped = 0;
+
+        try (KafkaConsumer<String, Object> consumer = (KafkaConsumer<String, Object>) consumerFactory.createConsumer()) {
+            consumer.subscribe(List.of(DLT_TOPIC));
+            consumer.poll(Duration.ofSeconds(1));   // вступить в группу
+            consumer.seekToBeginning(consumer.assignment());
+
+            ConsumerRecords<String, Object> records = consumer.poll(Duration.ofSeconds(2));
+            for (ConsumerRecord<String, Object> rec : records) {
+                var reprocessedHeader = rec.headers().lastHeader("reprocessed");
+                if (reprocessedHeader != null
+                        && "true".equals(new String(reprocessedHeader.value(), StandardCharsets.UTF_8))) {
+                    skipped++;
+                    continue;
+                }
+
+                ProducerRecord<String, Object> out = new ProducerRecord<>(MAIN_TOPIC, rec.key(), rec.value());
+                out.headers().add(new RecordHeader("reprocessed",
+                        "true".getBytes(StandardCharsets.UTF_8)));
+                kafka.send(out);
+                reprocessed++;
+            }
+            kafka.flush();
+        }
+
+        return ResponseEntity.ok(Map.of("reprocessed", reprocessed, "skipped", skipped));
     }
 }

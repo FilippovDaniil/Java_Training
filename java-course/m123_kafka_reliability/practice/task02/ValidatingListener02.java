@@ -21,6 +21,18 @@ public class ValidatingListener02 {
 
     @KafkaListener(topics = "task.created", groupId = "backoff-demo")
     public void on(String value) {
-        // TODO 1-3
+        // 1) валидация — не повторяемая ошибка
+        if (value == null || value.isBlank() || !value.trim().startsWith("{")) {
+            throw new IllegalArgumentException("некорректный payload: " + value);
+        }
+
+        // 2) инфраструктурная ошибка — повторяемая
+        if (value.contains("db-down")) {
+            throw new RuntimeException("БД недоступна");
+        }
+
+        // 3) успех
+        System.out.printf("обработано: %s (в %d)%n",
+                value, System.currentTimeMillis() % 100_000);
     }
 }
