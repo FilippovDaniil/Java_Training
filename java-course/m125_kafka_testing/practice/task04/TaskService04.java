@@ -1,8 +1,13 @@
 package m125_kafka_testing.practice.task04;
 
-import java.util.concurrent.atomic.AtomicLong;
 import org.springframework.kafka.core.KafkaTemplate;
 import org.springframework.stereotype.Service;
+
+import java.util.UUID;
+import java.util.concurrent.atomic.AtomicLong;
+
+import org.apache.kafka.clients.producer.ProducerRecord;
+import org.apache.kafka.common.header.internals.RecordHeader;
 
 /**
  * Сервис под тестом: создаёт задачу и публикует событие.
@@ -18,6 +23,8 @@ import org.springframework.stereotype.Service;
 @Service
 public class TaskService04 {
 
+    private static final String TOPIC = "task.created";
+
     private final AtomicLong sequence = new AtomicLong();
     private final KafkaTemplate<String, String> kafka;
 
@@ -26,7 +33,20 @@ public class TaskService04 {
     }
 
     public long createTask(String title, long authorId) {
-        // TODO 1-2
-        return 0L;
+        // TODO 2: валидация ДО любых побочных эффектов — иначе «фантомное» событие
+        if (title == null || title.isBlank()) {
+            throw new IllegalArgumentException("title must not be blank");
+        }
+
+        long id = sequence.incrementAndGet();
+
+        ProducerRecord<String, String> record =
+                new ProducerRecord<>(TOPIC, String.valueOf(id),
+                        "{\"id\":" + id + ",\"title\":\"" + title + "\",\"authorId\":" + authorId + "}");
+        record.headers().add(new RecordHeader("eventId",
+                UUID.randomUUID().toString().getBytes()));
+
+        kafka.send(record);
+        return id;
     }
 }

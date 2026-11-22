@@ -11,6 +11,6 @@ import org.springframework.stereotype.Service;
 public class NotificationService02 {
 
     public void notify(EventEnvelope02 event) {
-        // TODO
+        // реальная отправка уведомления; в тесте не используется
     }
 }

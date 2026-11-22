@@ -27,26 +27,82 @@ package m125_kafka_testing.practice.task02;
  */
 
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
+import org.mockito.InjectMocks;
+import org.mockito.Mock;
+import org.mockito.junit.jupiter.MockitoExtension;
+import org.springframework.kafka.support.Acknowledgment;
 
+import java.time.Instant;
+import java.util.UUID;
+
+import static org.assertj.core.api.Assertions.assertThatThrownBy;
+import static org.mockito.BDDMockito.then;
+import static org.mockito.BDDMockito.willThrow;
+import static org.mockito.Mockito.never;
+import static org.mockito.Mockito.times;
+
+
+@ExtendWith(MockitoExtension.class)
 class ListenerUnitTest02 {
+
+    @Mock
+    NotificationService02 notificationService;
+
+    @Mock
+    Acknowledgment ack;
+
+    @InjectMocks
+    IdempotentListener02 listener;
+
+    private static EventEnvelope02 event(UUID id, String payload) {
+        return new EventEnvelope02(id, "task.created", Instant.now(), payload);
+    }
 
     @Test
     void processes_event_once() {
-        // TODO 1
+        EventEnvelope02 e = event(UUID.randomUUID(), "{\"id\":42}");
+
+        listener.on(e, ack);
+
+        then(notificationService).should(times(1)).notify(e);
+        then(ack).should(times(1)).acknowledge();
     }
 
     @Test
     void duplicate_event_produces_single_effect() {
-        // TODO 2
+        EventEnvelope02 e = event(UUID.randomUUID(), "{\"id\":42}");
+
+        listener.on(e, ack);   // первая доставка
+        listener.on(e, ack);   // дубль: тот же eventId
+
+        then(notificationService).should(times(1)).notify(e); // эффект ровно один
+        then(ack).should(times(2)).acknowledge();             // но подтверждаем оба раза
     }
 
     @Test
     void different_events_produce_two_effects() {
-        // TODO 3
+        EventEnvelope02 first  = event(UUID.randomUUID(), "{\"id\":42}");
+        EventEnvelope02 second = event(UUID.randomUUID(), "{\"id\":42}"); // тот же payload
+
+        listener.on(first, ack);
+        listener.on(second, ack);
+
+        then(notificationService).should(times(1)).notify(first);
+        then(notificationService).should(times(1)).notify(second);
+        then(ack).should(times(2)).acknowledge();
     }
 
     @Test
     void does_not_acknowledge_on_failure() {
-        // TODO 4
+        EventEnvelope02 e = event(UUID.randomUUID(), "{\"id\":42}");
+        willThrow(new RuntimeException("SMTP недоступен"))
+                .given(notificationService).notify(e);
+
+        assertThatThrownBy(() -> listener.on(e, ack))
+                .isInstanceOf(RuntimeException.class)
+                .hasMessage("SMTP недоступен");
+
+        then(ack).should(never()).acknowledge(); // офсет НЕ подтверждён → событие не потеряно
     }
 }

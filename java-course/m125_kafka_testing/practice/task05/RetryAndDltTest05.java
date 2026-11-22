@@ -34,27 +34,106 @@ package m125_kafka_testing.practice.task05;
  *   состояние, по которому тест делает утверждения без чтения логов.
  */
 
+import org.apache.kafka.clients.consumer.Consumer;
+import org.apache.kafka.clients.consumer.ConsumerConfig;
+import org.apache.kafka.clients.consumer.ConsumerRecord;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.kafka.core.DefaultKafkaConsumerFactory;
+import org.springframework.kafka.core.KafkaTemplate;
+import org.springframework.kafka.test.EmbeddedKafkaBroker;
+import org.springframework.kafka.test.context.EmbeddedKafka;
+import org.springframework.kafka.test.utils.KafkaTestUtils;
 
+import java.time.Duration;
+import java.util.Map;
+
+import static org.assertj.core.api.Assertions.assertThat;
+import static org.awaitility.Awaitility.await;
+
+@SpringBootTest(classes = Task05.class)
+@EmbeddedKafka(topics = {"task.created", "task.created.DLT"}, partitions = 1)
 class RetryAndDltTest05 {
+
+    private static final String TOPIC = "task.created";
+    private static final String DLT = "task.created.DLT";
+
+    @Autowired
+    EmbeddedKafkaBroker broker;
+
+    @Autowired
+    KafkaTemplate<String, Object> kafka;
+
+    @Autowired
+    FailingListener05 listener;
+
+    private Consumer<String, Object> consumer;
+
+    @BeforeEach
+    void setUp() {
+        Map<String, Object> props = KafkaTestUtils.consumerProps("dlt-consumer", "true", broker);
+        props.put(ConsumerConfig.AUTO_OFFSET_RESET_CONFIG, "earliest");
+        consumer = new DefaultKafkaConsumerFactory<String, Object>(props).createConsumer();
+        broker.consumeFromAnEmbeddedTopic(consumer, DLT);
+    }
+
+    @AfterEach
+    void tearDown() {
+        if (consumer != null) {
+            consumer.close();
+        }
+    }
 
     @Test
     void retries_configured_number_of_times() {
-        // TODO 2
+        kafka.send(TOPIC, "bad");
+
+        // 1 первая попытка + 2 повтора = 3 попытки, не 1 и не бесконечность
+        await().atMost(Duration.ofSeconds(10))
+                .untilAsserted(() -> assertThat(listener.attempts()).isEqualTo(3));
     }
 
     @Test
     void failed_event_lands_in_dlt() {
-        // TODO 3
+        kafka.send(TOPIC, "bad");
+
+        ConsumerRecord<String, Object> dltRecord =
+                KafkaTestUtils.getSingleRecord(consumer, DLT, Duration.ofSeconds(10));
+
+        assertThat(dltRecord.value()).isEqualTo("bad");
+        assertThat(new String(dltRecord.headers().lastHeader("kafka_dlt-exception-message").value()))
+                .contains("не могу обработать");
+        assertThat(new String(dltRecord.headers().lastHeader("kafka_dlt-original-topic").value()))
+                .isEqualTo(TOPIC);
     }
 
     @Test
     void not_retryable_exception_goes_straight_to_dlt() {
-        // TODO 4
+        kafka.send(TOPIC, "invalid");
+
+        // не повторяемое исключение → ровно 1 попытка
+        await().atMost(Duration.ofSeconds(10))
+                .untilAsserted(() -> assertThat(listener.attempts()).isEqualTo(1));
+
+        // и запись сразу в DLT
+        ConsumerRecord<String, Object> dltRecord =
+                KafkaTestUtils.getSingleRecord(consumer, DLT, Duration.ofSeconds(10));
+        assertThat(dltRecord.value()).isEqualTo("invalid");
+        assertThat(new String(dltRecord.headers().lastHeader("kafka_dlt-exception-message").value()))
+                .contains("некорректные данные");
     }
 
     @Test
     void successful_event_never_reaches_dlt() {
-        // TODO 5
+        kafka.send(TOPIC, "ok");
+
+        await().atMost(Duration.ofSeconds(10))
+                .untilAsserted(() -> assertThat(listener.processed()).isEqualTo(1));
+
+        // в DLT ничего не должно попасть
+        assertThat(KafkaTestUtils.getRecords(consumer, Duration.ofSeconds(2))).isEmpty();
     }
 }

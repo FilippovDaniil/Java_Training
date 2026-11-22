@@ -40,21 +40,84 @@ package m125_kafka_testing.practice.task06;
  */
 
 import org.junit.jupiter.api.Test;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.kafka.core.KafkaTemplate;
+import org.springframework.test.context.DynamicPropertyRegistry;
+import org.springframework.test.context.DynamicPropertySource;
+import org.testcontainers.containers.KafkaContainer;
+import org.testcontainers.junit.jupiter.Container;
+import org.testcontainers.junit.jupiter.Testcontainers;
+import org.testcontainers.utility.DockerImageName;
 
+import java.time.Duration;
+import java.util.List;
+import java.util.stream.IntStream;
+
+import static org.assertj.core.api.Assertions.assertThat;
+import static org.awaitility.Awaitility.await;
+
+@Testcontainers
+@SpringBootTest(classes = Task06.class)
 class KafkaContainerIntegrationTest06 {
+
+    @Container
+    static final KafkaContainer kafka =
+            new KafkaContainer(DockerImageName.parse("apache/kafka:3.9.0"));
+
+    @DynamicPropertySource
+    static void props(DynamicPropertyRegistry r) {
+        r.add("spring.kafka.bootstrap-servers", kafka::getBootstrapServers);
+        r.add("spring.kafka.consumer.auto-offset-reset", () -> "earliest");
+    }
+
+    @Autowired
+    KafkaTemplate<String, String> template;
+
+    @Autowired
+    OrderListener06 listener;
 
     @Test
     void end_to_end_publish_consume() {
-        // TODO 2
+        template.send("task.created", "k1", "hello-container");
+
+        await().atMost(Duration.ofSeconds(30))
+                .untilAsserted(() -> assertThat(listener.values()).contains("hello-container"));
     }
 
     @Test
     void order_is_preserved_within_key() {
-        // TODO 3
+        String key = "order-42";
+        List<String> sent = IntStream.rangeClosed(1, 20)
+                .mapToObj(i -> "v" + i)
+                .toList();
+
+        sent.forEach(v -> template.send("task.created", key, v));
+
+        await().atMost(Duration.ofSeconds(30))
+                .untilAsserted(() -> assertThat(listener.values()).containsAll(sent));
+
+        // все 20 с одним ключом пришли в исходном порядке
+        assertThat(listener.values()).containsSubsequence(sent.toArray(String[]::new));
     }
 
     @Test
     void survives_broker_restart() {
-        // TODO 4
+        template.send("task.created", "k1", "before-restart");
+
+        await().atMost(Duration.ofSeconds(30))
+                .untilAsserted(() -> assertThat(listener.values()).contains("before-restart"));
+
+        // перезапуск контейнера: Testcontainers сам поднимет его на том же порту
+        kafka.stop();
+        kafka.start();
+
+        template.send("task.created", "k1", "after-restart");
+
+        await().atMost(Duration.ofSeconds(60))
+                .untilAsserted(() -> assertThat(listener.values()).contains("after-restart"));
+
+        // события, накопленные до рестарта, не потеряны
+        assertThat(listener.values()).contains("before-restart", "after-restart");
     }
 }

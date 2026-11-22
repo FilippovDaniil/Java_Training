@@ -21,7 +21,13 @@ public class FailingListener05 {
 
     @KafkaListener(topics = "task.created", groupId = "retry-test")
     public void on(String value) {
-        // TODO 1-4
+        attempts.incrementAndGet();          // TODO 1: считаем каждую попытку
+
+        switch (value) {
+            case "bad" -> throw new RuntimeException("не могу обработать");         // TODO 2
+            case "invalid" -> throw new IllegalArgumentException("некорректные данные"); // TODO 3
+            default -> processed.incrementAndGet();                                  // TODO 4
+        }
     }
 
     public int attempts() {

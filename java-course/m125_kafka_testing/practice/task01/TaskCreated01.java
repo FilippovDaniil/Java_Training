@@ -7,5 +7,5 @@ import java.time.Instant;
  *
  * TODO: поля record — long id, String title, long authorId, Instant occurredAt.
  */
-public record TaskCreated01(long id) {
+public record TaskCreated01(long id, String title, long authorId, Instant occurredAt) {
 }

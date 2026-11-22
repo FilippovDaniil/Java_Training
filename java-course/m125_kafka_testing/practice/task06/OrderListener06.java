@@ -21,7 +21,7 @@ public class OrderListener06 {
 
     @KafkaListener(topics = "task.created", id = "order-listener", groupId = "container-test")
     public void on(String value) {
-        // TODO 1
+        received.add(value);
     }
 
     public List<String> values() {

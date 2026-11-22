@@ -29,6 +29,11 @@ public class IdempotentListener02 {
 
     @KafkaListener(topics = "task.created", groupId = "notifier")
     public void on(EventEnvelope02 event, Acknowledgment ack) {
-        // TODO 1-3
+        // TODO 1: идемпотентность — эффект только для нового eventId
+        if (processed.add(event.eventId())) {           // add() атомарен: true = первый раз
+            notificationService.notify(event);          // эффект ДО подтверждения
+        }
+        // TODO 2-3: дубль тоже подтверждаем — иначе он будет перечитан бесконечно
+        ack.acknowledge();
     }
 }

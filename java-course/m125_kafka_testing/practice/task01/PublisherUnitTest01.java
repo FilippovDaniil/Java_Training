@@ -34,21 +34,88 @@ package m125_kafka_testing.practice.task01;
  */
 
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
+import org.mockito.ArgumentCaptor;
+import org.mockito.InjectMocks;
+import org.mockito.Mock;
+import org.mockito.junit.jupiter.MockitoExtension;
+import org.springframework.kafka.core.KafkaTemplate;
 
+import java.time.Instant;
+import java.util.concurrent.CompletableFuture;
+
+import static org.assertj.core.api.Assertions.assertThat;
+import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.BDDMockito.given;
+import static org.mockito.Mockito.verify;
+
+@ExtendWith(MockitoExtension.class)
 class PublisherUnitTest01 {
+
+    @Mock
+    KafkaTemplate<String, Object> kafka;
+
+    @InjectMocks
+    TaskEventPublisher01 publisher;
 
     @Test
     void publishes_to_correct_topic_with_task_id_as_key() {
-        // TODO 2
+        // given: мок send возвращает завершённый future (иначе NPE на whenComplete)
+        given(kafka.send(any(), any(), any()))
+                .willReturn(CompletableFuture.completedFuture(null));
+
+        TaskCreated01 event = new TaskCreated01(42, "Отчёт", 10, Instant.now());
+
+        // when
+        publisher.publishCreated(event);
+
+        // then: проверяем контракт — топик, ключ, содержимое
+        ArgumentCaptor<String> topicCaptor = ArgumentCaptor.forClass(String.class);
+        ArgumentCaptor<String> keyCaptor = ArgumentCaptor.forClass(String.class);
+        ArgumentCaptor<Object> valueCaptor = ArgumentCaptor.forClass(Object.class);
+
+        verify(kafka).send(topicCaptor.capture(), keyCaptor.capture(), valueCaptor.capture());
+
+        assertThat(topicCaptor.getValue()).isEqualTo("task.created");
+        assertThat(keyCaptor.getValue()).isEqualTo("42");
+        assertThat(valueCaptor.getValue()).isInstanceOf(TaskCreated01.class);
+        assertThat(((TaskCreated01) valueCaptor.getValue()).title()).isEqualTo("Отчёт");
     }
 
     @Test
     void does_not_swallow_send_failure() {
-        // TODO 3
+        // given: брокер недоступен — future завершается ошибкой
+        given(kafka.send(any(), any(), any()))
+                .willReturn(CompletableFuture.failedFuture(
+                        new RuntimeException("брокер недоступен")));
+
+        // when
+        publisher.publishCreated(new TaskCreated01(42, "Отчёт", 10, Instant.now()));
+
+        // then: сбой зафиксирован, а не проглочен
+        assertThat(publisher.failures()).isEqualTo(1);
     }
 
     @Test
     void uses_null_key_when_order_not_required() {
-        // TODO 4
+        // given
+        given(kafka.send(any(), any(), any()))
+                .willReturn(CompletableFuture.completedFuture(null));
+
+        Object metric = new Object();
+
+        // when
+        publisher.publishMetric(metric);
+
+        // then: топик app.metrics, ключ null
+        ArgumentCaptor<String> topicCaptor = ArgumentCaptor.forClass(String.class);
+        ArgumentCaptor<String> keyCaptor = ArgumentCaptor.forClass(String.class);
+        ArgumentCaptor<Object> valueCaptor = ArgumentCaptor.forClass(Object.class);
+
+        verify(kafka).send(topicCaptor.capture(), keyCaptor.capture(), valueCaptor.capture());
+
+        assertThat(topicCaptor.getValue()).isEqualTo("app.metrics");
+        assertThat(keyCaptor.getValue()).isNull();
+        assertThat(valueCaptor.getValue()).isSameAs(metric);
     }
 }

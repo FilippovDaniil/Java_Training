@@ -53,17 +53,111 @@ package m125_kafka_testing.practice.task07;
  *   отправлены до назначения партиций слушателю. Лечение: earliest + waitForAssignment.
  */
 
+import org.apache.kafka.clients.consumer.Consumer;
+import org.apache.kafka.clients.consumer.ConsumerConfig;
+import org.apache.kafka.clients.consumer.ConsumerRecord;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.kafka.config.KafkaListenerEndpointRegistry;
+import org.springframework.kafka.core.DefaultKafkaConsumerFactory;
+import org.springframework.kafka.test.EmbeddedKafkaBroker;
+import org.springframework.kafka.test.context.EmbeddedKafka;
+import org.springframework.kafka.test.utils.ContainerTestUtils;
+import org.springframework.kafka.test.utils.KafkaTestUtils;
+import org.springframework.test.context.TestPropertySource;
 
+import java.time.Duration;
+import java.util.Map;
+
+import static org.assertj.core.api.Assertions.assertThat;
+import static org.awaitility.Awaitility.await;
+
+@SpringBootTest(classes = Task07.class)
+@EmbeddedKafka(topics = {"task.created"}, partitions = 3)
+@TestPropertySource(properties = {
+        "spring.kafka.bootstrap-servers=${spring.embedded.kafka.brokers}",
+        "spring.kafka.consumer.auto-offset-reset=earliest",
+        "app.outbox.relay.delay=100"})
 class EventFlowTestSuite07 {
+
+    private static final String TOPIC = "task.created";
+
+    @Autowired CreateTaskCommand command;
+    @Autowired OutboxRepository outbox;
+    @Autowired TaskProjectionRepository projection;
+    @Autowired KafkaListenerEndpointRegistry registry;
+    @Autowired EmbeddedKafkaBroker broker;
+
+    private Consumer<String, String> consumer;
+
+    @BeforeEach
+    void setUp() {
+        // ждём назначения партиций — иначе «мигающие» падения
+        ContainerTestUtils.waitForAssignment(
+                registry.getListenerContainer("task-projection-listener"), 3);
+
+        Map<String, Object> props = KafkaTestUtils.consumerProps("e2e-consumer", "true", broker);
+        props.put(ConsumerConfig.AUTO_OFFSET_RESET_CONFIG, "earliest");
+        consumer = new DefaultKafkaConsumerFactory<String, String>(props).createConsumer();
+        broker.consumeFromAnEmbeddedTopic(consumer, TOPIC);
+    }
+
+    @AfterEach
+    void tearDown() {
+        if (consumer != null) consumer.close();
+    }
 
     @Test
     void command_to_projection_end_to_end() {
-        // TODO 1
+        long id = command.create("Отчёт", 10);
+
+        // 1) релэй отправил всё из outbox
+        await().atMost(Duration.ofSeconds(10))
+                .untilAsserted(() -> assertThat(outbox.countBySentAtIsNull()).isZero());
+
+        // 2) проекция получила строку с нужным статусом — проверяем ЭФФЕКТ, не вызов
+        await().atMost(Duration.ofSeconds(10))
+                .untilAsserted(() -> {
+                    var p = projection.findById(id);
+                    assertThat(p).isPresent();
+                    assertThat(p.get().getStatus()).isEqualTo("CREATED");
+                });
+
+        // 3) событие в топике имеет ключ = id задачи
+        ConsumerRecord<String, String> record =
+                KafkaTestUtils.getSingleRecord(consumer, TOPIC, Duration.ofSeconds(10));
+        assertThat(record.key()).isEqualTo(String.valueOf(id));
     }
 
     @Test
     void duplicate_delivery_does_not_change_projection() {
-        // TODO 4
+        long id = command.create("Отчёт", 10);
+
+        await().atMost(Duration.ofSeconds(10))
+                .untilAsserted(() -> assertThat(projection.findById(id)).isPresent());
+
+        var before = projection.findById(id).orElseThrow();
+
+        // повторная доставка того же события — проектор идемпотентен
+        ConsumerRecord<String, String> record =
+                KafkaTestUtils.getSingleRecord(consumer, TOPIC, Duration.ofSeconds(10));
+        // отправляем то же событие ещё раз вручную
+        // (в реальности это сделал бы брокер при at-least-once)
+        var kafka = new org.springframework.kafka.core.KafkaTemplate<String, String>(
+                new org.springframework.kafka.core.DefaultKafkaProducerFactory<>(
+                        KafkaTestUtils.producerProps(broker)));
+        kafka.send(TOPIC, record.key(), record.value());
+
+        // ждём «тишины» и проверяем, что проекция не изменилась
+        await().during(Duration.ofSeconds(2))
+                .atMost(Duration.ofSeconds(5))
+                .untilAsserted(() -> {
+                    var after = projection.findById(id).orElseThrow();
+                    assertThat(after.getStatus()).isEqualTo(before.getStatus());
+                    assertThat(projection.count()).isEqualTo(1); // нет второй строки
+                });
     }
 }

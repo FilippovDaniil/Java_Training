@@ -23,11 +23,10 @@ public class TaskListener03 {
 
     @KafkaListener(topics = "task.created", id = "task-listener", groupId = "test-group")
     public void on(String value) {
-        // TODO 1
+        values.add(value);
     }
 
     public int received() {
-        // TODO 2
         return values.size();
     }
 
