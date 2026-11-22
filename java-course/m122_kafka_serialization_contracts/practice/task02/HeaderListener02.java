@@ -22,7 +22,10 @@ public class HeaderListener02 {
     @KafkaListener(topics = "task.created", groupId = "headers-demo")
     public void on(String value,
                    @Header(name = "eventId", required = false) String eventId,
-                   @Header(name = "eventType", required = false) String eventType) {
-        // TODO 1-2
+                   @Header(name = "eventType", required = false) String eventType,
+                   @Header(name = "version", required = false) String version,
+                   @Header(name = "traceId", required = false) String traceId) {
+        System.out.printf("получено eventId=%s eventType=%s version=%s traceId=%s value=%s%n",
+                eventId, eventType, version, traceId, value);
     }
 }

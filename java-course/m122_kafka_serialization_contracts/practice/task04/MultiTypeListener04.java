@@ -24,13 +24,17 @@ public class MultiTypeListener04 {
 
     @KafkaHandler
     public void onCreated(TaskCreated04 event) {
-        // TODO 1
+        System.out.printf("создана задача %d: %s%n", event.taskId(), event.title());
     }
 
     @KafkaHandler
     public void onStatusChanged(TaskStatusChanged04 event) {
-        // TODO 2
+        System.out.printf("задача %d: %s -> %s%n",
+                event.taskId(), event.oldStatus(), event.newStatus());
     }
 
-    // TODO 3: @KafkaHandler(isDefault = true) public void onUnknown(Object payload) { ... }
+    @KafkaHandler(isDefault = true)
+    public void onUnknown(Object payload) {
+        System.out.println("неизвестный тип события: " + payload);
+    }
 }

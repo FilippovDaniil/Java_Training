@@ -8,5 +8,9 @@ package m122_kafka_serialization_contracts.practice.task03;
  * ПРАВИЛО: этот файл после релиза не меняют. Новая версия — отдельный тип (V2), а не правка V1;
  *   иначе невозможно проверить совместимость и откатиться.
  */
-public record TaskCreatedV103(long taskId) {
+public record TaskCreatedV103(
+        long taskId,
+        String title,
+        long authorId
+) {
 }

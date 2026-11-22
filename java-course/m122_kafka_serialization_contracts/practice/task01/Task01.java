@@ -40,6 +40,11 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
 import org.springframework.kafka.core.KafkaTemplate;
+import org.springframework.kafka.support.SendResult;
+
+import java.time.Instant;
+import java.util.UUID;
+import java.util.concurrent.TimeUnit;
 
 @SpringBootApplication
 public class Task01 {
@@ -51,9 +56,44 @@ public class Task01 {
     @Bean
     ApplicationRunner runner(KafkaTemplate<String, Object> kafka) {
         return args -> {
-            // TODO 1: собрать два EventEnvelope01<TaskCreatedPayload01>
-            // TODO 2: отправить в "task.created" с ключом = taskId
-            // TODO 3: kafka.flush() и печать метаданных отправки
+            TaskCreatedPayload01 first = new TaskCreatedPayload01(
+                    42L, "Написать отчёт", 10L, "NEW");
+            TaskCreatedPayload01 second = new TaskCreatedPayload01(
+                    43L, "Проверить почту", 11L, "NEW");
+
+            EventEnvelope01<TaskCreatedPayload01> env1 = new EventEnvelope01<>(
+                    UUID.randomUUID(),           // eventId — один раз на событие
+                    "task.created",
+                    1,
+                    Instant.now(),
+                    "trace-1",
+                    "task-tracker",
+                    first);
+
+            EventEnvelope01<TaskCreatedPayload01> env2 = new EventEnvelope01<>(
+                    UUID.randomUUID(),
+                    "task.created",
+                    1,
+                    Instant.now(),
+                    "trace-2",
+                    "task-tracker",
+                    second);
+
+            send(kafka, env1);
+            send(kafka, env2);
+
+            kafka.flush();
         };
+    }
+
+    private static void send(KafkaTemplate<String, Object> kafka,
+                             EventEnvelope01<TaskCreatedPayload01> env) throws Exception {
+        SendResult<String, Object> result = kafka
+                .send("task.created", String.valueOf(env.payload().taskId()), env)
+                .get(5, TimeUnit.SECONDS);
+
+        var md = result.getRecordMetadata();
+        System.out.printf("отправлено eventId=%s -> %s-%d offset %d%n",
+                env.eventId(), md.topic(), md.partition(), md.offset());
     }
 }

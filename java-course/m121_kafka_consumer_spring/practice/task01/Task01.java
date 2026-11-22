@@ -47,6 +47,6 @@ public class Task01 {
 
     @KafkaListener(topics = "task.created", groupId = "notifier")
     public void onTaskCreated(String value) {
-        // TODO: напечатать полученное сообщение
+        System.out.println("получено: " + value);
     }
 }

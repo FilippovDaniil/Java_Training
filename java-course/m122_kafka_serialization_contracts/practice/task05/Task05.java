@@ -1,4 +1,4 @@
-package m122_kafka_serialization_contracts.practice;
+package m122_kafka_serialization_contracts.practice.task05;
 
 /**
  * Задача 05 — Модуль 122: Avro + Schema Registry (схема, Compose, конфигурация клиентов)
@@ -58,6 +58,7 @@ package m122_kafka_serialization_contracts.practice;
  */
 public class Task05 {
     public static void main(String[] args) {
+
         String artifact = """
                 # TODO 1: src/main/avro/TaskCreated.avsc
                 # {
@@ -84,6 +85,7 @@ public class Task05 {
                 # curl -X PUT -H "Content-Type: application/json" --data '{"compatibility":"BACKWARD"}' \\
                 #      http://localhost:8085/config/task.created-value
                 """;
+
         System.out.println(artifact);
     }
 }

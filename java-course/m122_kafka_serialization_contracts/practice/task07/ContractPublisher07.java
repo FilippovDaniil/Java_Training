@@ -2,6 +2,14 @@ package m122_kafka_serialization_contracts.practice.task07;
 
 import org.springframework.kafka.core.KafkaTemplate;
 import org.springframework.stereotype.Service;
+import org.apache.kafka.clients.producer.ProducerRecord;
+import org.springframework.kafka.core.KafkaTemplate;
+import org.springframework.stereotype.Service;
+
+import java.nio.charset.StandardCharsets;
+import java.time.Instant;
+import java.util.UUID;
+
 
 /**
  * Публикация событий в трёх режимах: v1, совместимая v2, ломающая v2 с двойной публикацией.
@@ -22,7 +30,7 @@ public class ContractPublisher07 {
 
     static final String TOPIC_V1 = "task.created";
     static final String TOPIC_V2 = "task.created.v2";
-    static final boolean DUAL_PUBLISH = true;   // TODO 4: false, когда миграция завершена
+    static final boolean DUAL_PUBLISH = true;   // false, когда миграция завершена
 
     private final KafkaTemplate<String, Object> kafka;
 
@@ -31,14 +39,51 @@ public class ContractPublisher07 {
     }
 
     public void publishV1(TaskCreatedV107 payload) {
-        // TODO 1
+        EventEnvelope07 env = new EventEnvelope07(
+                UUID.randomUUID(), "task.created", 1, Instant.now(),
+                "trace-v1", "task-tracker", payload);
+        send(TOPIC_V1, String.valueOf(payload.taskId()), env);
     }
 
     public void publishV2(TaskCreatedV207 payload) {
-        // TODO 2
+        EventEnvelope07 env = new EventEnvelope07(
+                UUID.randomUUID(), "task.created", 2, Instant.now(),
+                "trace-v2", "task-tracker", payload);
+        send(TOPIC_V1, String.valueOf(payload.taskId()), env);   // тот же топик — совместимо
     }
 
     public void publishBreakingV2(TaskCreatedV207 payload) {
-        // TODO 3 (+ учесть DUAL_PUBLISH)
+        EventEnvelope07 envV2 = new EventEnvelope07(
+                UUID.randomUUID(), "task.created.v2", 2, Instant.now(),
+                "trace-breaking", "task-tracker", payload);
+        send(TOPIC_V2, String.valueOf(payload.taskId()), envV2);
+
+        if (DUAL_PUBLISH) {
+            // на время миграции дублируем в старый топик в v1-совместимом виде
+            TaskCreatedV107 legacy = new TaskCreatedV107(
+                    payload.taskId(), payload.title(), payload.authorId());
+            EventEnvelope07 legacyEnv = new EventEnvelope07(
+                    UUID.randomUUID(), "task.created", 1, Instant.now(),
+                    "trace-breaking", "task-tracker", legacy);
+            send(TOPIC_V1, String.valueOf(payload.taskId()), legacyEnv);
+        }
+    }
+
+    private void send(String topic, String key, EventEnvelope07 env) {
+        ProducerRecord<String, Object> record = new ProducerRecord<>(topic, key, env);
+        record.headers().add("eventId", env.eventId().toString().getBytes(StandardCharsets.UTF_8));
+        record.headers().add("eventType", env.type().getBytes(StandardCharsets.UTF_8));
+        record.headers().add("version", String.valueOf(env.version()).getBytes(StandardCharsets.UTF_8));
+        record.headers().add("traceId", env.traceId().getBytes(StandardCharsets.UTF_8));
+
+        kafka.send(record).whenComplete((result, ex) -> {
+            if (ex != null) {
+                System.err.println("ошибка отправки: " + ex.getMessage());
+                return;
+            }
+            var md = result.getRecordMetadata();
+            System.out.printf("отправлено v%d -> %s-%d offset %d%n",
+                    env.version(), md.topic(), md.partition(), md.offset());
+        });
     }
 }

@@ -23,10 +23,26 @@ public class NotificationService07 {
     private final Set<String> processed = ConcurrentHashMap.newKeySet();
 
     public void notifyCreated(TaskCreated07 event) {
-        // TODO 1 + TODO 3
+        String key = "created:" + event.id();
+        if (!processed.add(key)) {
+            System.out.printf("[skip] повторное событие created id=%d%n", event.id());
+            return;
+        }
+        System.out.printf("письмо автору %d: задача %d создана — %s%n",
+                event.authorId(), event.id(), event.title());
     }
 
     public void notifyStatusChanged(TaskStatusChanged07 event) {
-        // TODO 2 + TODO 3
+        if (!"DONE".equals(event.newStatus())) {
+            return;   // уведомляем только о завершении
+        }
+        String key = "status:" + event.id() + ":" + event.newStatus();
+        if (!processed.add(key)) {
+            System.out.printf("[skip] повторное событие status id=%d newStatus=%s%n",
+                    event.id(), event.newStatus());
+            return;
+        }
+        System.out.printf("письмо: задача %d перешла %s -> %s%n",
+                event.id(), event.oldStatus(), event.newStatus());
     }
 }

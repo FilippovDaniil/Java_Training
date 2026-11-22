@@ -22,5 +22,13 @@ import java.util.UUID;
  *   У потребителя используют конкретный тип (EventEnvelope01<TaskCreatedPayload01>) через
  *   JavaType/TypeReference либо разбирают payload вторым шагом по полю type.
  */
-public record EventEnvelope01(UUID eventId) {
+public record EventEnvelope01<T>(
+        UUID eventId,
+        String type,
+        int version,
+        Instant occurredAt,
+        String traceId,
+        String source,
+        T payload
+) {
 }

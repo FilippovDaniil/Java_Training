@@ -13,5 +13,14 @@ import java.time.Instant;
  * ПОДСКАЗКА: дефолт для record удобно задать компактным конструктором:
  *   public TaskCreatedV203 { if (priority == null) priority = "NORMAL"; }
  */
-public record TaskCreatedV203(long taskId) {
+public record TaskCreatedV203(
+        long taskId,
+        String title,       // ← при эксперименте 4 временно переименовать в name
+        long authorId,
+        String priority,
+        Instant deadline
+) {
+    public TaskCreatedV203 {
+        if (priority == null) priority = "NORMAL";   // дефолт для backward-совместимости
+    }
 }

@@ -1,11 +1,15 @@
 package m121_kafka_consumer_spring.practice.task07;
 
 import org.springframework.http.ResponseEntity;
-import org.springframework.kafka.config.KafkaListenerEndpointRegistry;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.kafka.config.KafkaListenerEndpointRegistry;
+import org.springframework.kafka.listener.MessageListenerContainer;
+import org.springframework.web.bind.annotation.*;
+import java.util.Map;
+
 
 /**
  * Управление слушателями в рантайме: техническая пауза без остановки приложения.
@@ -31,13 +35,28 @@ public class ListenerAdminController07 {
 
     @PostMapping("/{id}/pause")
     ResponseEntity<?> pause(@PathVariable String id) {
-        // TODO 1 + TODO 3
-        return ResponseEntity.status(501).build();
+        MessageListenerContainer container = registry.getListenerContainer(id);
+        if (container == null) {
+            return ResponseEntity.notFound().build();
+        }
+        container.pause();
+        return ResponseEntity.ok(state(container));
     }
 
     @PostMapping("/{id}/resume")
     ResponseEntity<?> resume(@PathVariable String id) {
-        // TODO 2 + TODO 3
-        return ResponseEntity.status(501).build();
+        MessageListenerContainer container = registry.getListenerContainer(id);
+        if (container == null) {
+            return ResponseEntity.notFound().build();
+        }
+        container.resume();
+        return ResponseEntity.ok(state(container));
+    }
+
+    private Map<String, Object> state(MessageListenerContainer c) {
+        return Map.of(
+                "id", c.getListenerId(),
+                "running", c.isRunning(),
+                "pauseRequested", c.isPauseRequested());
     }
 }

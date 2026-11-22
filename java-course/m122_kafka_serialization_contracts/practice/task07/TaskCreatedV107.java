@@ -5,5 +5,9 @@ package m122_kafka_serialization_contracts.practice.task07;
  *
  * TODO: поля record — long taskId, String title, long authorId.
  */
-public record TaskCreatedV107(long taskId) {
+public record TaskCreatedV107(
+        long taskId,
+        String title,
+        long authorId
+) {
 }

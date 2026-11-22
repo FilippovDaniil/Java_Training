@@ -18,6 +18,7 @@ public class NotificationListener03 {
 
     @KafkaListener(topics = "task.created", groupId = "notifier-json")
     public void onTaskCreated(TaskCreated03 event) {
-        // TODO
+        System.out.printf("уведомление автору %d: создана задача %d — %s%n",
+                event.authorId(), event.id(), event.title());
     }
 }

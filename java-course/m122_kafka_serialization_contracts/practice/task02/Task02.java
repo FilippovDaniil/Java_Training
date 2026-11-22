@@ -50,7 +50,9 @@ public class Task02 {
     @Bean
     ApplicationRunner runner(HeaderPublisher02 publisher) {
         return args -> {
-            // TODO: отправить два события с заголовками (разные eventId, один traceId)
+            publisher.publish("42", "{\"taskId\":42,\"title\":\"Отчёт\"}", "trace-7");
+            publisher.publish("43", "{\"taskId\":43,\"title\":\"Почта\"}", "trace-7");
+            // kafka.flush() уже внутри publish()
         };
     }
 }

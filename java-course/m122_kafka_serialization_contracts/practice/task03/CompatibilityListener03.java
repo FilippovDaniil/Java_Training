@@ -20,11 +20,14 @@ public class CompatibilityListener03 {
 
     @KafkaListener(topics = "task.created", groupId = "consumer-v1")
     public void onV1(TaskCreatedV103 event) {
-        // TODO 1
+        System.out.printf("[v1] taskId=%d title=%s authorId=%d%n",
+                event.taskId(), event.title(), event.authorId());
     }
 
     @KafkaListener(topics = "task.created", groupId = "consumer-v2")
     public void onV2(TaskCreatedV203 event) {
-        // TODO 2
+        System.out.printf("[v2] taskId=%d title=%s authorId=%d priority=%s deadline=%s%n",
+                event.taskId(), event.title(), event.authorId(),
+                event.priority(), event.deadline());
     }
 }

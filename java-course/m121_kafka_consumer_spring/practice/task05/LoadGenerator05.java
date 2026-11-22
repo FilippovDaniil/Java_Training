@@ -22,9 +22,17 @@ public class LoadGenerator05 {
     @Bean
     ApplicationRunner generate(KafkaTemplate<String, String> kafka) {
         return args -> {
-            // TODO 1: 10 событий с ключом task-42
-            // TODO 2: 10 событий с ключами task-1..task-10
-            // TODO 3: flush
+            // 10 сообщений с одним ключом "task-42" — все в одну партицию
+            for (int i = 1; i <= 10; i++) {
+                kafka.send("task.created", "task-42", "42: шаг " + i);
+            }
+
+            // 10 сообщений с разными ключами — распределятся по партициям
+            for (int i = 1; i <= 10; i++) {
+                kafka.send("task.created", "task-" + i, i + ": обычная задача");
+            }
+
+            kafka.flush();   // дождаться отправки всех сообщений
         };
     }
 }

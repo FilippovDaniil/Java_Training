@@ -36,13 +36,33 @@ package m122_kafka_serialization_contracts.practice.task04;
  *   через ObjectMapper; так делают, когда потребители на разных языках.
  */
 
+import org.springframework.boot.ApplicationRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.context.annotation.Bean;
+import org.springframework.kafka.core.KafkaTemplate;
 
 @SpringBootApplication
 public class Task04 {
 
     public static void main(String[] args) {
         SpringApplication.run(Task04.class, args);
+    }
+
+    @Bean
+    ApplicationRunner runner(KafkaTemplate<String, Object> kafka) {
+        return args -> {
+            kafka.send("task.events", "42",
+                    new TaskCreated04(42L, "Написать отчёт", 10L));
+
+            kafka.send("task.events", "42",
+                    new TaskStatusChanged04(42L, "NEW", "DONE"));
+
+            // произвольный JSON для проверки default-обработчика
+            kafka.send("task.events", "99",
+                    "{\"unknown\":\"произвольный JSON без __TypeId__\"}");
+
+            kafka.flush();
+        };
     }
 }

@@ -1,4 +1,4 @@
-package m122_kafka_serialization_contracts.practice;
+package m122_kafka_serialization_contracts.practice.task06;
 
 /**
  * Задача 06 — Модуль 122: разбор совместимости — восемь изменений схемы
@@ -40,6 +40,7 @@ package m122_kafka_serialization_contracts.practice;
  */
 public class Task06 {
     public static void main(String[] args) {
+
         String answer = """
                 # TODO: заполните таблицу разбора совместимости
                 # | # | Изменение                                | BACKWARD | FORWARD | Как выпускать безопасно |
@@ -56,6 +57,7 @@ public class Task06 {
                 # ВЫВОД (2-3 строки): какие изменения делать нельзя никогда и почему пункт 8
                 # опаснее пункта 4.
                 """;
+
         System.out.println(answer);
     }
 }

@@ -12,5 +12,10 @@ import java.time.Instant;
  *   игнорировать (Jackson: FAIL_ON_UNKNOWN_PROPERTIES = false), иначе новое поле в событии
  *   сломает всех подписчиков (совместимость схем — модуль 122).
  */
-public record TaskCreated03(long id) {
+public record TaskCreated03(
+        long id,
+        String title,
+        long authorId,
+        Instant occurredAt
+) {
 }

@@ -5,5 +5,9 @@ package m122_kafka_serialization_contracts.practice.task04;
  *
  * TODO: поля record — long taskId, String oldStatus, String newStatus.
  */
-public record TaskStatusChanged04(long taskId) {
+public record TaskStatusChanged04(
+        long taskId,
+        String oldStatus,
+        String newStatus
+) {
 }

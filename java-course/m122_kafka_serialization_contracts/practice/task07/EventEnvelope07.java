@@ -13,5 +13,13 @@ import java.util.UUID;
  *   У потребителя payload разбирают в конкретный тип по паре (type, version) — либо через
  *   generic-конверт с JavaType, либо вторым шагом через ObjectMapper.convertValue.
  */
-public record EventEnvelope07(UUID eventId) {
+public record EventEnvelope07(
+        UUID eventId,
+        String type,
+        int version,
+        Instant occurredAt,
+        String traceId,
+        String source,
+        Object payload
+) {
 }

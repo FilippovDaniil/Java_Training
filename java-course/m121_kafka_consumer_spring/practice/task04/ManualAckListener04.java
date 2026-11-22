@@ -22,8 +22,15 @@ public class ManualAckListener04 {
 
     @KafkaListener(topics = "task.created", groupId = "manual-ack")
     public void onTaskCreated(ConsumerRecord<String, String> rec, Acknowledgment ack) {
-        // TODO 1: печать метаданных
-        // TODO 2: имитация сбоя на "boom"
-        // TODO 3: подтверждение офсета
+        System.out.printf("получено %s-%d offset %d: %s%n",
+                rec.topic(), rec.partition(), rec.offset(), rec.value());
+
+        // TODO 2: имитация сбоя
+        if (rec.value() != null && rec.value().contains("boom")) {
+            throw new RuntimeException("сломанное событие: " + rec.value());
+        }
+
+        // TODO 3: подтверждение — ПОСЛЕ успешной обработки
+        ack.acknowledge();
     }
 }

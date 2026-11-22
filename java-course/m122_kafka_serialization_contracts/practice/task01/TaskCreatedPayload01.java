@@ -8,5 +8,10 @@ package m122_kafka_serialization_contracts.practice.task01;
  * ПРАВИЛО: payload содержит ровно те поля, которые нужны подписчикам, и ни одного лишнего.
  *   Каждое поле — обязательство поддерживать его совместимо в будущих версиях.
  */
-public record TaskCreatedPayload01(long taskId) {
+public record TaskCreatedPayload01(
+        long taskId,
+        String title,
+        long authorId,
+        String status
+) {
 }

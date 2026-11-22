@@ -18,8 +18,14 @@ import org.springframework.stereotype.Component;
 @Component
 public class ParallelListener05 {
 
-    @KafkaListener(topics = "task.created", groupId = "parallel")
-    public void onTaskCreated(ConsumerRecord<String, String> rec) {
-        // TODO 2 + TODO 3
+    @KafkaListener(topics = "task.created", groupId = "parallel", concurrency = "3")
+    public void onTaskCreated(ConsumerRecord<String, String> rec) throws InterruptedException {
+        System.out.printf("[%s] p%d key=%s value=%s%n",
+                Thread.currentThread().getName(),
+                rec.partition(),
+                rec.key(),
+                rec.value());
+
+        Thread.sleep(100);   // чтобы распределение по потокам было видно
     }
 }

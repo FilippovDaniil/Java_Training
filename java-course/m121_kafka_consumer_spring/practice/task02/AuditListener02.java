@@ -23,13 +23,20 @@ public class AuditListener02 {
 
     @KafkaListener(topics = {"task.created", "task.status.changed"}, groupId = "audit")
     public void onRecord(ConsumerRecord<String, String> rec) {
-        // TODO 1
+        System.out.printf("[audit] %s-%d offset %d key=%s ts=%d value=%s%n",
+                rec.topic(),
+                rec.partition(),
+                rec.offset(),
+                rec.key(),
+                rec.timestamp(),
+                rec.value());
     }
 
     @KafkaListener(topics = "task.created", groupId = "audit-headers")
     public void onWithHeaders(String value,
                               @Header(KafkaHeaders.RECEIVED_KEY) String key,
                               @Header(KafkaHeaders.RECEIVED_PARTITION) int partition) {
-        // TODO 2
+        System.out.printf("[audit-headers] key=%s partition=%d value=%s%n",
+                key, partition, value);
     }
 }

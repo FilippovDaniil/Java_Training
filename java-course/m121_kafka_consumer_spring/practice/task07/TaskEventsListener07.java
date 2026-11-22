@@ -28,13 +28,22 @@ public class TaskEventsListener07 {
         this.service = service;
     }
 
-    @KafkaListener(topics = "task.created", groupId = "notifier", id = "notifier-created")
+    @KafkaListener(
+            topics = "task.created",
+            groupId = "notifier",
+            id = "notifier-created",
+            concurrency = "3")
     public void onTaskCreated(TaskCreated07 event, Acknowledgment ack) {
-        // TODO 1
+        service.notifyCreated(event);   // если бросит — ack не вызовется, событие перечитается
+        ack.acknowledge();
     }
 
-    @KafkaListener(topics = "task.status.changed", groupId = "notifier", id = "notifier-status")
+    @KafkaListener(
+            topics = "task.status.changed",
+            groupId = "notifier",
+            id = "notifier-status")
     public void onStatusChanged(TaskStatusChanged07 event, Acknowledgment ack) {
-        // TODO 2
+        service.notifyStatusChanged(event);
+        ack.acknowledge();
     }
 }
